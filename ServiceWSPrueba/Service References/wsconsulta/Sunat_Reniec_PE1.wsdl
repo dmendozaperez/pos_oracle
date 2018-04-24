@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://bataperu.com.pe/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://bataperu.com.pe/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://bataperu.com.pe/">
+      <s:element name="ws_persona_reniec">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="nro_dni" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_persona_reniecResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ws_persona_reniecResult" type="tns:DataReniec" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="DataReniec">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Valida_Reniec" type="tns:ReniecValida" />
+          <s:element minOccurs="0" maxOccurs="1" name="Dni" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Nombres" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ApePat" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ApeMat" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Estado" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ReniecValida">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Estado" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Descripcion" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="validateLogin" type="tns:validateLogin" />
+      <s:complexType name="validateLogin">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+        </s:sequence>
+        <s:anyAttribute />
+      </s:complexType>
+      <s:element name="ws_persona_sunat">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="nro_ruc" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_persona_sunatResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ws_persona_sunatResult" type="tns:DataSunat" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="DataSunat">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Valida_Sunat" type="tns:SunatValida" />
+          <s:element minOccurs="0" maxOccurs="1" name="Ruc" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Razon_Social" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Direccion" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Telefono" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Estado" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SunatValida">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Estado" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Descripcion" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="ws_persona_reniecSoapIn">
+    <wsdl:part name="parameters" element="tns:ws_persona_reniec" />
+  </wsdl:message>
+  <wsdl:message name="ws_persona_reniecSoapOut">
+    <wsdl:part name="parameters" element="tns:ws_persona_reniecResponse" />
+  </wsdl:message>
+  <wsdl:message name="ws_persona_reniecvalidateLogin">
+    <wsdl:part name="validateLogin" element="tns:validateLogin" />
+  </wsdl:message>
+  <wsdl:message name="ws_persona_sunatSoapIn">
+    <wsdl:part name="parameters" element="tns:ws_persona_sunat" />
+  </wsdl:message>
+  <wsdl:message name="ws_persona_sunatSoapOut">
+    <wsdl:part name="parameters" element="tns:ws_persona_sunatResponse" />
+  </wsdl:message>
+  <wsdl:message name="ws_persona_sunatvalidateLogin">
+    <wsdl:part name="validateLogin" element="tns:validateLogin" />
+  </wsdl:message>
+  <wsdl:portType name="Sunat_Reniec_PESoap">
+    <wsdl:operation name="ws_persona_reniec">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Consulta Data Reniec</wsdl:documentation>
+      <wsdl:input message="tns:ws_persona_reniecSoapIn" />
+      <wsdl:output message="tns:ws_persona_reniecSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ws_persona_sunat">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Consulta Data Sunat</wsdl:documentation>
+      <wsdl:input message="tns:ws_persona_sunatSoapIn" />
+      <wsdl:output message="tns:ws_persona_sunatSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="Sunat_Reniec_PESoap" type="tns:Sunat_Reniec_PESoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ws_persona_reniec">
+      <soap:operation soapAction="http://bataperu.com.pe/ws_persona_reniec" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ws_persona_reniecvalidateLogin" part="validateLogin" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_persona_sunat">
+      <soap:operation soapAction="http://bataperu.com.pe/ws_persona_sunat" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ws_persona_sunatvalidateLogin" part="validateLogin" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="Sunat_Reniec_PESoap12" type="tns:Sunat_Reniec_PESoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ws_persona_reniec">
+      <soap12:operation soapAction="http://bataperu.com.pe/ws_persona_reniec" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ws_persona_reniecvalidateLogin" part="validateLogin" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_persona_sunat">
+      <soap12:operation soapAction="http://bataperu.com.pe/ws_persona_sunat" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ws_persona_sunatvalidateLogin" part="validateLogin" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Sunat_Reniec_PE">
+    <wsdl:port name="Sunat_Reniec_PESoap" binding="tns:Sunat_Reniec_PESoap">
+      <soap:address location="http://ws.peru.bgr.pe/Ws_ConsutaSunatReniec/Sunat_Reniec_PE.asmx" />
+    </wsdl:port>
+    <wsdl:port name="Sunat_Reniec_PESoap12" binding="tns:Sunat_Reniec_PESoap12">
+      <soap12:address location="http://ws.peru.bgr.pe/Ws_ConsutaSunatReniec/Sunat_Reniec_PE.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

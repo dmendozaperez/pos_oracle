@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
+  <contractRef ref="http://localhost:54509/Sunat_Reniec_PE.asmx?wsdl" docRef="http://localhost:54509/Sunat_Reniec_PE.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="http://localhost:54509/Sunat_Reniec_PE.asmx" xmlns:q1="http://bataperu.com.pe/" binding="q1:Sunat_Reniec_PESoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="http://localhost:54509/Sunat_Reniec_PE.asmx" xmlns:q2="http://bataperu.com.pe/" binding="q2:Sunat_Reniec_PESoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+</discovery>

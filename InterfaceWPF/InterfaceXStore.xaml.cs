@@ -1,5 +1,7 @@
 ﻿using CapaDato;
+using CapaDato.Interfaces;
 using CapaEntidad;
+using CapaEntidad.Util;
 using InterfaceWPF.Bll;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
@@ -297,17 +299,31 @@ namespace InterfaceWPF
                         if (dt.Rows.Count > 0)
                         {
                             str = new StringBuilder();
-                            for (Int32 i = 0; i < dt.Rows.Count; ++i)
+                            Decimal i = 0;
+                            foreach(DataRow fila in dt.Rows)
                             {
-                                str.Append(dt.Rows[i]["ITEM"].ToString());
-
+                              
+                                str.Append(fila["ITEM"].ToString());
                                 if (i < dt.Rows.Count - 1)
                                 {
                                     str.Append("\r\n");
 
                                 }
+                                i += 1;
 
                             }
+
+                            //for (Int32 i = 0; i < dt.Rows.Count; ++i)
+                            //{
+                            //    str.Append(dt.Rows[i]["ITEM"].ToString());
+
+                            //    if (i < dt.Rows.Count - 1)
+                            //    {
+                            //        str.Append("\r\n");
+
+                            //    }
+
+                            //}
                             str_cadena = str.ToString();
 
 
@@ -420,9 +436,9 @@ namespace InterfaceWPF
                     }
                 }
                 #endregion
-                //Boolean envio = await Task.Run(() => basico.sendftp_file_mnt());
+                Boolean envio = await Task.Run(() => basico.sendftp_file_mnt());
 
-                //if (envio) await metroWindow.ShowMessageAsync(Ent_Msg.msginfomacion, "Se enviaron al ftp", MessageDialogStyle.Affirmative, metroWindow.MetroDialogOptions);
+                if (envio) await metroWindow.ShowMessageAsync(Ent_Msg.msginfomacion, "Se enviaron al ftp", MessageDialogStyle.Affirmative, metroWindow.MetroDialogOptions);
                 if (ProgressAlert.IsOpen)
                     await ProgressAlert.CloseAsync();
 

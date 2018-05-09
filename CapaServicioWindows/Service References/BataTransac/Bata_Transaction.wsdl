@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://bataperu.com.pe/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://bataperu.com.pe/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://bataperu.com.pe/">
+      <s:element name="HelloWorld">
+        <s:complexType />
+      </s:element>
+      <s:element name="HelloWorldResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HelloWorldResult" type="tns:Ent_MsgTransac" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Ent_MsgTransac">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="codigo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="descripcion" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ValidateAcceso" type="tns:ValidateAcceso" />
+      <s:complexType name="ValidateAcceso">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+        </s:sequence>
+        <s:anyAttribute />
+      </s:complexType>
+      <s:element name="fvdespc">
+        <s:complexType />
+      </s:element>
+      <s:element name="fvdespcResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="fvdespcResult" type="tns:Ent_Fvdespc" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Ent_Fvdespc">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="DESC_ALMAC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DESC_GUDIS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DESC_NDESP" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DESC_TDES" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DESC_FECHA" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="DESC_FDESP" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="DESC_ESTAD" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DESC_TIPO" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DESC_TORI" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DESC_FEMI" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="DESC_SEMI" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DESC_FTRA" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="DESC_NUME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DESC_CONCE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DESC_NMOVC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DESC_EMPRE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DESC_SECCI" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DESC_CANAL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DESC_CADEN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DESC_FTX" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DESC_TXPOS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DT_FVDESPD">
+            <s:complexType>
+              <s:sequence>
+                <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+              </s:sequence>
+            </s:complexType>
+          </s:element>
+          <s:element minOccurs="0" maxOccurs="1" name="DT_FVDESPD_TREGMEDIDA">
+            <s:complexType>
+              <s:sequence>
+                <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+              </s:sequence>
+            </s:complexType>
+          </s:element>
+        </s:sequence>
+      </s:complexType>
+      <s:element name="scdddes">
+        <s:complexType />
+      </s:element>
+      <s:element name="scdddesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="scdddesResult" type="tns:Ent_Scdddes" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Ent_Scdddes">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="DDES_TIPO" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DDES_ALMAC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DDES_GUIRE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DDES_NDESP" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DDES_MFDES" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DDES_DESTI" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DDES_N_INI" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DDES_N_FIN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DDES_CPAGO" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DDES_FEMBA" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="DDES_FECHA" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="DDES_FDESP" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="DDES_ESTAD" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DDES_GGUIA" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DDES_CCOND" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DDES_CALZ" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="DDES_NCALZ" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="DDES_TOCAJ" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="DDES_IMPRE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DDES_GVALO" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DDES_SUBGR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DDES_RUCTC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DDES_TRANS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DDES_TRAN2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DDES_OBSER" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DDES_NOMTC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DDES_NGUIA" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DDES_NRLIQ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DDES_LIMPR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DDES_EMPRE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DDES_CANAL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DDES_CADEN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DDES_SECCI" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DDES_FTX" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DDES_FTXTD" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="pathdbf">
+        <s:complexType />
+      </s:element>
+      <s:element name="pathdbfResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="pathdbfResult" type="tns:Ent_PathDBF" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Ent_PathDBF">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="rutloc_namedbf" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="rutloc_location" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ws_update_transaction_guias">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="fvdespc" type="tns:Ent_Fvdespc" />
+            <s:element minOccurs="0" maxOccurs="1" name="scdddes" type="tns:Ent_Scdddes" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_update_transaction_guiasResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ws_update_transaction_guiasResult" type="tns:Ent_MsgTransac" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_errores_transaction">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="tip_error" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="msg" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_errores_transactionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ws_errores_transactionResult" type="tns:Ent_MsgTransac" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_get_location_dbf">
+        <s:complexType />
+      </s:element>
+      <s:element name="ws_get_location_dbfResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ws_get_location_dbfResult" type="tns:ArrayOfEnt_PathDBF" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfEnt_PathDBF">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Ent_PathDBF" nillable="true" type="tns:Ent_PathDBF" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="HelloWorldSoapIn">
+    <wsdl:part name="parameters" element="tns:HelloWorld" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldSoapOut">
+    <wsdl:part name="parameters" element="tns:HelloWorldResponse" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldValidateAcceso">
+    <wsdl:part name="ValidateAcceso" element="tns:ValidateAcceso" />
+  </wsdl:message>
+  <wsdl:message name="fvdespcSoapIn">
+    <wsdl:part name="parameters" element="tns:fvdespc" />
+  </wsdl:message>
+  <wsdl:message name="fvdespcSoapOut">
+    <wsdl:part name="parameters" element="tns:fvdespcResponse" />
+  </wsdl:message>
+  <wsdl:message name="scdddesSoapIn">
+    <wsdl:part name="parameters" element="tns:scdddes" />
+  </wsdl:message>
+  <wsdl:message name="scdddesSoapOut">
+    <wsdl:part name="parameters" element="tns:scdddesResponse" />
+  </wsdl:message>
+  <wsdl:message name="pathdbfSoapIn">
+    <wsdl:part name="parameters" element="tns:pathdbf" />
+  </wsdl:message>
+  <wsdl:message name="pathdbfSoapOut">
+    <wsdl:part name="parameters" element="tns:pathdbfResponse" />
+  </wsdl:message>
+  <wsdl:message name="ws_update_transaction_guiasSoapIn">
+    <wsdl:part name="parameters" element="tns:ws_update_transaction_guias" />
+  </wsdl:message>
+  <wsdl:message name="ws_update_transaction_guiasSoapOut">
+    <wsdl:part name="parameters" element="tns:ws_update_transaction_guiasResponse" />
+  </wsdl:message>
+  <wsdl:message name="ws_update_transaction_guiasValidateAcceso">
+    <wsdl:part name="ValidateAcceso" element="tns:ValidateAcceso" />
+  </wsdl:message>
+  <wsdl:message name="ws_errores_transactionSoapIn">
+    <wsdl:part name="parameters" element="tns:ws_errores_transaction" />
+  </wsdl:message>
+  <wsdl:message name="ws_errores_transactionSoapOut">
+    <wsdl:part name="parameters" element="tns:ws_errores_transactionResponse" />
+  </wsdl:message>
+  <wsdl:message name="ws_errores_transactionValidateAcceso">
+    <wsdl:part name="ValidateAcceso" element="tns:ValidateAcceso" />
+  </wsdl:message>
+  <wsdl:message name="ws_get_location_dbfSoapIn">
+    <wsdl:part name="parameters" element="tns:ws_get_location_dbf" />
+  </wsdl:message>
+  <wsdl:message name="ws_get_location_dbfSoapOut">
+    <wsdl:part name="parameters" element="tns:ws_get_location_dbfResponse" />
+  </wsdl:message>
+  <wsdl:message name="ws_get_location_dbfValidateAcceso">
+    <wsdl:part name="ValidateAcceso" element="tns:ValidateAcceso" />
+  </wsdl:message>
+  <wsdl:portType name="Bata_TransactionSoap">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Consula de bienvenida</wsdl:documentation>
+      <wsdl:input message="tns:HelloWorldSoapIn" />
+      <wsdl:output message="tns:HelloWorldSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="fvdespc">
+      <wsdl:input message="tns:fvdespcSoapIn" />
+      <wsdl:output message="tns:fvdespcSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="scdddes">
+      <wsdl:input message="tns:scdddesSoapIn" />
+      <wsdl:output message="tns:scdddesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="pathdbf">
+      <wsdl:input message="tns:pathdbfSoapIn" />
+      <wsdl:output message="tns:pathdbfSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ws_update_transaction_guias">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Update de transaccion de guias</wsdl:documentation>
+      <wsdl:input message="tns:ws_update_transaction_guiasSoapIn" />
+      <wsdl:output message="tns:ws_update_transaction_guiasSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ws_errores_transaction">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Control de Errores de Transacciones</wsdl:documentation>
+      <wsdl:input message="tns:ws_errores_transactionSoapIn" />
+      <wsdl:output message="tns:ws_errores_transactionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ws_get_location_dbf">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Location DBF</wsdl:documentation>
+      <wsdl:input message="tns:ws_get_location_dbfSoapIn" />
+      <wsdl:output message="tns:ws_get_location_dbfSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="Bata_TransactionSoap" type="tns:Bata_TransactionSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap:operation soapAction="http://bataperu.com.pe/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:HelloWorldValidateAcceso" part="ValidateAcceso" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="fvdespc">
+      <soap:operation soapAction="http://bataperu.com.pe/fvdespc" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="scdddes">
+      <soap:operation soapAction="http://bataperu.com.pe/scdddes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="pathdbf">
+      <soap:operation soapAction="http://bataperu.com.pe/pathdbf" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_update_transaction_guias">
+      <soap:operation soapAction="http://bataperu.com.pe/ws_update_transaction_guias" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ws_update_transaction_guiasValidateAcceso" part="ValidateAcceso" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_errores_transaction">
+      <soap:operation soapAction="http://bataperu.com.pe/ws_errores_transaction" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ws_errores_transactionValidateAcceso" part="ValidateAcceso" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_get_location_dbf">
+      <soap:operation soapAction="http://bataperu.com.pe/ws_get_location_dbf" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ws_get_location_dbfValidateAcceso" part="ValidateAcceso" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="Bata_TransactionSoap12" type="tns:Bata_TransactionSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap12:operation soapAction="http://bataperu.com.pe/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:HelloWorldValidateAcceso" part="ValidateAcceso" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="fvdespc">
+      <soap12:operation soapAction="http://bataperu.com.pe/fvdespc" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="scdddes">
+      <soap12:operation soapAction="http://bataperu.com.pe/scdddes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="pathdbf">
+      <soap12:operation soapAction="http://bataperu.com.pe/pathdbf" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_update_transaction_guias">
+      <soap12:operation soapAction="http://bataperu.com.pe/ws_update_transaction_guias" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ws_update_transaction_guiasValidateAcceso" part="ValidateAcceso" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_errores_transaction">
+      <soap12:operation soapAction="http://bataperu.com.pe/ws_errores_transaction" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ws_errores_transactionValidateAcceso" part="ValidateAcceso" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_get_location_dbf">
+      <soap12:operation soapAction="http://bataperu.com.pe/ws_get_location_dbf" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ws_get_location_dbfValidateAcceso" part="ValidateAcceso" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Bata_Transaction">
+    <wsdl:port name="Bata_TransactionSoap" binding="tns:Bata_TransactionSoap">
+      <soap:address location="http://localhost:49470/Bata_Transaction.asmx" />
+    </wsdl:port>
+    <wsdl:port name="Bata_TransactionSoap12" binding="tns:Bata_TransactionSoap12">
+      <soap12:address location="http://localhost:49470/Bata_Transaction.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

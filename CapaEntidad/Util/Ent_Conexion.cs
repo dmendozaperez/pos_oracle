@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CapaEntidad
+namespace CapaEntidad.Util
 {
     public class Ent_Conexion
     {
@@ -19,8 +19,17 @@ namespace CapaEntidad
         #region<CONEXION DE BASE DE DATOS>
         public static string conexion
         {           
-            get { return "Server=10.10.10.208;Database=BdTienda;User ID=sa;Password=Bata2013;Trusted_Connection=False;"; }
+            //get { return "Server=10.10.10.208;Database=BdTienda;User ID=sa;Password=Bata2013;Trusted_Connection=False;"; }
+            get { return "Server=posperu.bgr.pe;Database=BDPOS;User ID=pos_oracle;Password=Bata2018**;Trusted_Connection=False;"; }
         }
         #endregion
+
+        #region<CONEXION DE BASE DE DATOS NUBE POS PERU>
+        public static string conexion_posperu
+        {
+            get { return "Server=posperu.bgr.pe;Database=BDPOS;User ID=pos_oracle;Password=Bata2018**;Trusted_Connection=False;"; }
+        }
+        #endregion
+
     }
 }

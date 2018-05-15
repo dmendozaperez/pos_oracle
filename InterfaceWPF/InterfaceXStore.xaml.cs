@@ -1,6 +1,8 @@
 ﻿using CapaDato;
 using CapaDato.Interfaces;
+using CapaDato.Logistica;
 using CapaEntidad;
+using CapaEntidad.Logistica;
 using CapaEntidad.Util;
 using InterfaceWPF.Bll;
 using MahApps.Metro.Controls;
@@ -71,6 +73,14 @@ namespace InterfaceWPF
             dwtiendatrans.SelectedIndex = -1;
             dwtiendatrans.Focus();
 
+            /*transpaso de almacen a tienda*/
+            dwtiendatrans1.ItemsSource = _tienda.get_tienda(true);
+            dwtiendatrans1.DisplayMember = "des_entid";
+            dwtiendatrans1.ValueMember = "cod_entid";
+            dwtiendatrans1.SelectedIndex = 0;
+            dwtiendatrans1.Focus();
+            dtpdesde.Text = DateTime.Today.ToString();
+            dtphasta.Text = DateTime.Today.ToString();
 
             dtpfecha.Text = DateTime.Today.ToString();
         }
@@ -581,9 +591,9 @@ namespace InterfaceWPF
             try
             {
 
-                Boolean Senvio = await Task.Run(() => basico.sendftp_file_mnt());
+                //Boolean Senvio = await Task.Run(() => basico.sendftp_file_mnt());
 
-                return;
+                //return;
                 if (await valida_inv_valid_destinations()) return;
                 ProgressAlert = await this.ShowProgressAsync(Ent_Msg.msgcargando, "Enviando X FTP Interface: RETAIL LOCATION");  //show message
                 ProgressAlert.SetIndeterminate();
@@ -674,6 +684,247 @@ namespace InterfaceWPF
         private void btntrans_Click(object sender, RoutedEventArgs e)
         {
             generainter_inv_valid_destinations();
+        }
+        #endregion
+        #region<REGION LOGITICA DE GUIAS DE TRASPASO>
+        private async void  consultar_guias()
+        {
+            var metroWindow = this;
+            metroWindow.MetroDialogOptions.ColorScheme = MetroDialogOptions.ColorScheme;
+            ProgressDialogController ProgressAlert = null;
+            Dat_GuiasDespacho con_guia = null;
+            try
+            {
+                ProgressAlert = await this.ShowProgressAsync(Ent_Msg.msgcargando, "Consultando Guias de Transpasos");  //show message
+                ProgressAlert.SetIndeterminate();
+                string _cod_tda = dwtiendatrans1.EditValue.ToString();
+                DateTime _fec_ini =Convert.ToDateTime(dtpdesde.Text);
+                DateTime _fec_fin = Convert.ToDateTime(dtphasta.Text);
+                con_guia = new Dat_GuiasDespacho();                
+                dg_guia.ItemsSource=await Task.Run(()=>con_guia.get_guias_tda_cab(_fec_ini, _fec_fin, _cod_tda));
+                if (ProgressAlert.IsOpen)
+                    await ProgressAlert.CloseAsync();
+            }
+            catch(Exception exc)
+            {
+                if (ProgressAlert != null) await ProgressAlert.CloseAsync();
+                await metroWindow.ShowMessageAsync(Ent_Msg.msginfomacion, exc.Message, MessageDialogStyle.Affirmative, metroWindow.MetroDialogOptions);
+            }
+        }
+
+       
+
+        private void btnconsultag_Click(object sender, RoutedEventArgs e)
+        {
+            consultar_guias();
+        }
+
+        private async void btndetalle_Click(object sender, RoutedEventArgs e)
+        {
+            var metroWindow = this;
+            metroWindow.MetroDialogOptions.ColorScheme = MetroDialogOptions.ColorScheme;
+            ProgressDialogController ProgressAlert = null;
+            try
+            {
+                var button = sender as Button;
+
+                if (button != null)
+                {
+                    var task = button.DataContext as Ent_GuiasDespacho_Cab;
+
+                    if (task != null)
+                    {
+                        ProgressAlert = await this.ShowProgressAsync(Ent_Msg.msgcargando, "Espere un momento");  //show message
+                        ProgressAlert.SetIndeterminate();
+                        string cod_alm = task.cod_alm; string nro_guia = task.nro_guia;
+                        Dat_GuiasDespacho cons_guia = new Dat_GuiasDespacho();
+                        List<Ent_Guias_Articulo> list_guias_art= await Task.Run(() => cons_guia.get_guia_articulo_pares(cod_alm, nro_guia));
+
+                        lbltg.Content=list_guias_art.Sum(s => s.total_pares).ToString();
+
+                        string des_tda = task.des_tda;
+
+                       
+                        metroWindow.MetroDialogOptions.ColorScheme = MetroDialogOptions.ColorScheme;
+                        metroWindow.LeftWindowCommandsOverlayBehavior = MahApps.Metro.Controls.WindowCommandsOverlayBehavior.Never;
+                        metroWindow.RightWindowCommandsOverlayBehavior = MahApps.Metro.Controls.WindowCommandsOverlayBehavior.Never;
+                        metroWindow.WindowButtonCommandsOverlayBehavior = MahApps.Metro.Controls.WindowCommandsOverlayBehavior.Never;
+                        metroWindow.IconOverlayBehavior = MahApps.Metro.Controls.WindowCommandsOverlayBehavior.Never;
+
+                        dg_guiadet.ItemsSource = list_guias_art;
+
+                        this.ToggleFlyout(0, "Det. de Guia; Tienda:" + des_tda + ",N° de Guia:" + nro_guia);
+                        if (ProgressAlert.IsOpen)
+                            await ProgressAlert.CloseAsync();
+                    }
+                }
+            }
+            catch (Exception exc)
+            {
+
+                if (ProgressAlert != null) await ProgressAlert.CloseAsync();
+                await metroWindow.ShowMessageAsync(Ent_Msg.msginfomacion, exc.Message, MessageDialogStyle.Affirmative, metroWindow.MetroDialogOptions);
+            }
+            
+        }
+        private void ToggleFlyout(int index, string _header)
+        {
+            var flyout = this.Flyouts.Items[index] as Flyout;
+            if (flyout == null)
+            {
+                return;
+            }
+            flyout.Header = _header;
+            flyout.IsOpen = !flyout.IsOpen;
+        }
+       
+
+        private void btnenviotraspaso_Click(object sender, RoutedEventArgs e)
+        {
+            var button = sender as Button;
+
+            if (button != null)
+            {
+                var task = button.DataContext as Ent_GuiasDespacho_Cab;
+
+                if (task != null)
+                {
+                    generainter_inv_doc(task.cod_alm, task.nro_guia, task.cod_tda);
+                }
+            }
+        }
+        private async void generainter_inv_doc(string cod_alm,string nro_guia,string cod_tda)
+        {
+            var metroWindow = this;
+            metroWindow.MetroDialogOptions.ColorScheme = MetroDialogOptions.ColorScheme;
+            ProgressDialogController ProgressAlert = null;
+            try
+            {
+                              
+                ProgressAlert = await this.ShowProgressAsync(Ent_Msg.msgcargando, "Enviando X FTP Interface: IN_DOC,INV_DOC_LINE_ITEM,CARTON");  //show message
+                ProgressAlert.SetIndeterminate();
+
+                string ruta_interface = basico.ruta_temp_interface;
+
+                if (!Directory.Exists(@ruta_interface)) Directory.CreateDirectory(@ruta_interface);
+
+               
+                /*DATOS DE INTERFACE INV DOC */
+                /*Se recorre los datos del dataset y convertir a mnt el final del codigo y envia por un metodo en basico de envio
+                 por ftp*/
+                DataSet ds = await Task.Run(() => dat_interface.get_inv_doc(cod_alm,nro_guia));
+                StringBuilder str = null;
+                string str_cadena = "";
+                if (ds != null)
+                {
+                    string name_inv_doc = ""; string name_inv_doc_line_item = "";
+                    string name_carton="" ; string in_inv_doc = "";
+
+                    DataTable dt_inv = null;DataTable dt_inv_doc_line_item = null;DataTable dt_carton = null;
+
+                    if (ds.Tables.Count>0)
+                    {
+                        dt_inv = ds.Tables[0];
+                        dt_inv_doc_line_item = ds.Tables[1];
+                        dt_carton = ds.Tables[2];
+                    }
+
+                    /*INV_DOC*/
+                    if (dt_inv.Rows.Count > 0)
+                    {
+                        str = new StringBuilder();
+                        for (Int32 i = 0; i < dt_inv.Rows.Count; ++i)
+                        {
+                            str.Append(dt_inv.Rows[i]["INV_DOC"].ToString());
+
+                            if (i < dt_inv.Rows.Count - 1)
+                            {
+                                str.Append("\r\n");
+
+                            }
+
+                        }
+                        str_cadena = str.ToString();
+
+
+
+                        name_inv_doc = "INV_DOC_" + cod_tda + "_" + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
+                        in_inv_doc = ruta_interface + "\\" + name_inv_doc;
+
+                        if (File.Exists(@in_inv_doc)) File.Delete(@in_inv_doc);
+                        File.WriteAllText(@in_inv_doc, str_cadena);
+
+
+                    }
+
+                    /*INV_DOC_LINE_ITEM*/
+                    if (dt_inv_doc_line_item.Rows.Count > 0)
+                    {
+                        str = new StringBuilder();
+                        for (Int32 i = 0; i < dt_inv_doc_line_item.Rows.Count; ++i)
+                        {
+                            str.Append(dt_inv_doc_line_item.Rows[i]["INV_DOC_LINE_ITEM"].ToString());
+
+                            if (i < dt_inv_doc_line_item.Rows.Count - 1)
+                            {
+                                str.Append("\r\n");
+
+                            }
+
+                        }
+                        str_cadena = str.ToString();
+
+
+
+                        name_inv_doc_line_item= "INV_DOC_LINE_ITEM_" + cod_tda + "_" + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
+                        in_inv_doc = ruta_interface + "\\" + name_inv_doc_line_item;
+
+                        if (File.Exists(@in_inv_doc)) File.Delete(@in_inv_doc);
+                        File.WriteAllText(@in_inv_doc, str_cadena);
+
+                    }
+
+                    /*CARTON*/
+                    if (dt_carton.Rows.Count > 0)
+                    {
+                        str = new StringBuilder();
+                        for (Int32 i = 0; i < dt_carton.Rows.Count; ++i)
+                        {
+                            str.Append(dt_carton.Rows[i]["CARTON"].ToString());
+
+                            if (i < dt_carton.Rows.Count - 1)
+                            {
+                                str.Append("\r\n");
+
+                            }
+
+                        }
+                        str_cadena = str.ToString();
+
+
+
+                        name_carton= "CARTON_" + cod_tda + "_" + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
+                        in_inv_doc = ruta_interface + "\\" + name_carton;
+
+                        if (File.Exists(@in_inv_doc)) File.Delete(@in_inv_doc);
+                        File.WriteAllText(@in_inv_doc, str_cadena);
+
+                    }
+
+                }
+
+                Boolean envio = await Task.Run(() => basico.sendftp_file_mnt());
+
+                if (envio) await metroWindow.ShowMessageAsync(Ent_Msg.msginfomacion, "Se enviaron al ftp", MessageDialogStyle.Affirmative, metroWindow.MetroDialogOptions);
+
+                if (ProgressAlert.IsOpen)
+                    await ProgressAlert.CloseAsync();
+            }
+            catch (Exception exc)
+            {
+                if (ProgressAlert != null) await ProgressAlert.CloseAsync();
+                await metroWindow.ShowMessageAsync(Ent_Msg.msginfomacion, exc.Message, MessageDialogStyle.Affirmative, metroWindow.MetroDialogOptions);
+            }
         }
         #endregion
     }

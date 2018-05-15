@@ -46,6 +46,7 @@
     <Compile Include="Control\Dat_Error_Transac.cs" />
     <Compile Include="Interfaces\Dat_Interface.cs" />
     <Compile Include="Interfaces\Dat_RecepcionGuias.cs" />
+    <Compile Include="Logistica\Dat_GuiasDespacho.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Transac\Dat_PosLog.cs" />
   </ItemGroup>

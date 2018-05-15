@@ -12,7 +12,7 @@ namespace CapaServicioWindows.Modular
 {
     public class Basico
     {
-        private DateTime fecha_despacho = DateTime.Today.AddDays(-1);
+        private DateTime fecha_despacho = DateTime.Today.AddDays(-7);
         /// <summary>
         /// verificar las guias cerradas
         /// </summary>
@@ -26,7 +26,7 @@ namespace CapaServicioWindows.Modular
                                       "[DDES_GGUIA],[DDES_CCOND],[DDES_CALZ],[DDES_NCALZ],[DDES_TOCAJ],[DDES_IMPRE],[DDES_GVALO]," +
                                       "[DDES_SUBGR],[DDES_RUCTC],[DDES_TRANS],[DDES_TRAN2],[DDES_OBSER],[DDES_NOMTC],[DDES_NGUIA]," +
                                       "[DDES_NRLIQ],[DDES_LIMPR],[DDES_EMPRE],[DDES_CANAL],[DDES_CADEN],[DDES_SECCI],[DDES_FTX],[DDES_FTXTD]" +
-                                      "FROM [SCDDDES] WHERE DDES_FDESP>=? and DDES_ESTAD='C' and (DDES_FTXTD IS NULL OR LEN(DDES_FTXTD)=0)";            
+                                      "FROM [SCDDDES] WHERE DDES_FDESP>=? and DDES_TIPO='DES' and DDES_ESTAD<>'A' and (DDES_FTXTD IS NULL OR LEN(DDES_FTXTD)=0) AND (DDES_CADEN IS NOT NULL OR LEN(DDES_CADEN)>0)";            
             try
             {
                 //Util dd = new Util();
@@ -100,7 +100,7 @@ namespace CapaServicioWindows.Modular
         /// </summary>
         /// <param name="nroguia"></param>
         /// <returns></returns>
-        private BataTransac.Ent_Fvdespc get_fvdespc(string codalm, string nroguia,string _path, ref string error)
+        private BataTransac.Ent_Fvdespc get_fvdespc(string codalm, string nroguia,string _path, ref string error,ref Boolean fila_existe)
         {
             BataTransac.Ent_Fvdespc fvdespc = null;
             String sqlquery_fvdespc = "SELECT [DESC_ALMAC],[DESC_GUDIS],[DESC_NDESP],[DESC_TDES],[DESC_FECHA],[DESC_FDESP]," +
@@ -126,14 +126,14 @@ namespace CapaServicioWindows.Modular
                                            DESC_GUDIS = dr["DESC_GUDIS"].ToString(),
                                            DESC_NDESP = dr["DESC_NDESP"].ToString(),
                                            DESC_TDES = dr["DESC_TDES"].ToString(),
-                                           DESC_FECHA = Convert.ToDateTime(dr["DESC_FECHA"]),
-                                           DESC_FDESP = Convert.ToDateTime(dr["DESC_FDESP"]),// se supone que es la fecha despacho
+                                          // DESC_FECHA = Convert.ToDateTime(dr["DESC_FECHA"]),se comenta pq viene vacio
+                                          // DESC_FDESP = Convert.ToDateTime(dr["DESC_FDESP"]),se supone que es la fecha despacho/*
                                            DESC_ESTAD = dr["DESC_ESTAD"].ToString(),
                                            DESC_TIPO = dr["DESC_TIPO"].ToString(),
                                            DESC_TORI = dr["DESC_TORI"].ToString(),
                                            DESC_FEMI = Convert.ToDateTime(dr["DESC_FEMI"]),
                                            DESC_SEMI = dr["DESC_SEMI"].ToString(),
-                                           DESC_FTRA = Convert.ToDateTime(dr["DESC_FTRA"]),
+                                          // DESC_FTRA = Convert.ToDateTime(dr["DESC_FTRA"]),
                                            DESC_NUME = dr["DESC_NUME"].ToString(),
                                            DESC_CONCE = dr["DESC_CONCE"].ToString(),
                                            DESC_NMOVC = dr["DESC_NMOVC"].ToString(),
@@ -146,7 +146,15 @@ namespace CapaServicioWindows.Modular
                                        }).ToList();
 
 
-                            fvdespc = list_fvdespc[0];
+                            if (list_fvdespc.Count == 0)
+                            {
+                                fila_existe = false;
+                            }
+                            else
+                            {
+                                fila_existe = true;
+                                fvdespc = list_fvdespc[0];
+                            }
                         }
                     }
                 }
@@ -234,76 +242,91 @@ namespace CapaServicioWindows.Modular
                
                 if (_lista_guiasC!=null)
                 {
-                    foreach(BataTransac.Ent_Scdddes filaC in _lista_guiasC)
+                    foreach (BataTransac.Ent_Scdddes filaC in _lista_guiasC)
                     {
                         _error = "";
                         name_dbf = "FVDESPC";
+
+                        /*verificar si  existe la guias en la tabla cab fv*/
+                        Boolean existe_data = false;
+
                         var _location_fvdespc = listar_location_dbf.Where(x => x.rutloc_namedbf == name_dbf).FirstOrDefault();
-                        BataTransac.Ent_Fvdespc fvdespc= get_fvdespc(filaC.DDES_ALMAC,filaC.DDES_GUIRE, _location_fvdespc.rutloc_location, ref _error);
+                        BataTransac.Ent_Fvdespc fvdespc = get_fvdespc(filaC.DDES_ALMAC, filaC.DDES_GUIRE, _location_fvdespc.rutloc_location, ref _error, ref existe_data);
 
-                        /*VERIFICAR SI HAY ERROR*/
-                        if (_error.Length > 0)
-                        {
-                            _error += " ==>TABLA [FVDESPC]";
-                            Util ws_error_transac = new Util();
-                            /*si hay un error entonces 03 error de lectura dbf*/
-                            ws_error_transac.control_errores_transac("03", _error);
-                        }
-                        /**/
-
-                        /*captura la cebecera de la guia*/
-                        if (fvdespc!=null)
-                        {
-                            _error = "";
-                            name_dbf = "FVDESPD";
-                            var _location_fvdespd = listar_location_dbf.Where(x => x.rutloc_namedbf == name_dbf).FirstOrDefault();
-                            DataTable fvdespd = get_fvdespd(filaC.DDES_ALMAC,filaC.DDES_GUIRE, _location_fvdespd.rutloc_location,ref _error);
+                        /*si existe data entonces entra a la condicion*/
+                        if (existe_data)
+                        {                       
+                            /*validando fechas de despacho*/
+                            if (fvdespc != null)
+                            {
+                                fvdespc.DESC_FDESP = filaC.DDES_FDESP;
+                                fvdespc.DESC_FECHA = filaC.DDES_FECHA;
+                                fvdespc.DESC_FTRA = filaC.DDES_FECHA;
+                            }
 
                             /*VERIFICAR SI HAY ERROR*/
                             if (_error.Length > 0)
                             {
-                                _error += " ==>TABLA [FVDESPD]";
+                                _error += " ==>TABLA [FVDESPC]";
                                 Util ws_error_transac = new Util();
                                 /*si hay un error entonces 03 error de lectura dbf*/
                                 ws_error_transac.control_errores_transac("03", _error);
                             }
                             /**/
 
-                            /*verifica que el detalle de la guia tenga filas*/
-                            /*si la guias tiene detalle se envia por ws*/
-
-                            if (fvdespd!=null)
+                            /*captura la cebecera de la guia*/
+                            if (fvdespc != null)
                             {
-                                if (fvdespd.Rows.Count>0)
+                                _error = "";
+                                name_dbf = "FVDESPD";
+                                var _location_fvdespd = listar_location_dbf.Where(x => x.rutloc_namedbf == name_dbf).FirstOrDefault();
+                                DataTable fvdespd = get_fvdespd(filaC.DDES_ALMAC, filaC.DDES_GUIRE, _location_fvdespd.rutloc_location, ref _error);
+
+                                /*VERIFICAR SI HAY ERROR*/
+                                if (_error.Length > 0)
                                 {
-                                    /*enviar el datatable*/
-                                    fvdespc.DT_FVDESPD_TREGMEDIDA = fvdespd;
+                                    _error += " ==>TABLA [FVDESPD]";
+                                    Util ws_error_transac = new Util();
+                                    /*si hay un error entonces 03 error de lectura dbf*/
+                                    ws_error_transac.control_errores_transac("03", _error);
+                                }
+                                /**/
 
-                                    BataTransac.Ent_Scdddes scdddes = new BataTransac.Ent_Scdddes();
-                                    scdddes = filaC;
+                                /*verifica que el detalle de la guia tenga filas*/
+                                /*si la guias tiene detalle se envia por ws*/
 
-                                    /***********************************/
-                                    Envio_Guias ws_envio = new Envio_Guias();
-                                    string envio_guias_ws = ws_envio.envio_ws_guias(fvdespc, scdddes);
-                                    //si return es true entonces validamos los dbf
-                                    if (envio_guias_ws.Length==0)
+                                if (fvdespd != null)
+                                {
+                                    if (fvdespd.Rows.Count > 0)
                                     {
-                                        name_dbf = "SCDDDES";
-                                        var _locatio_scdddes_edit = listar_location_dbf.Where(x => x.rutloc_namedbf == name_dbf).FirstOrDefault();
-                                        /*si es que las guias se grabaron correctamente entonces vamos a setear el valor en el dbf*/
-                                        edit_scdddes(fvdespc.DESC_ALMAC, fvdespc.DESC_GUDIS, _locatio_scdddes_edit.rutloc_location);                                           
-                                    }
-                                    else
-                                    {
-                                        Util ws_error_transac = new Util();
-                                        /*si hay un error entonces 02 error de transaction*/
-                                        ws_error_transac.control_errores_transac("02", envio_guias_ws);
+                                        /*enviar el datatable*/
+                                        fvdespc.DT_FVDESPD_TREGMEDIDA = fvdespd;
+
+                                        BataTransac.Ent_Scdddes scdddes = new BataTransac.Ent_Scdddes();
+                                        scdddes = filaC;
+
+                                        /***********************************/
+                                        Envio_Guias ws_envio = new Envio_Guias();
+                                        string envio_guias_ws = ws_envio.envio_ws_guias(fvdespc, scdddes);
+                                        //si return es true entonces validamos los dbf
+                                        if (envio_guias_ws.Length == 0)
+                                        {
+                                            name_dbf = "SCDDDES";
+                                            var _locatio_scdddes_edit = listar_location_dbf.Where(x => x.rutloc_namedbf == name_dbf).FirstOrDefault();
+                                            /*si es que las guias se grabaron correctamente entonces vamos a setear el valor en el dbf*/
+                                            edit_scdddes(fvdespc.DESC_ALMAC, fvdespc.DESC_GUDIS, _locatio_scdddes_edit.rutloc_location);
+                                        }
+                                        else
+                                        {
+                                            Util ws_error_transac = new Util();
+                                            /*si hay un error entonces 02 error de transaction*/
+                                            ws_error_transac.control_errores_transac("02", envio_guias_ws);
+                                        }
                                     }
                                 }
+
                             }
-
-                        }
-
+                       }
                         
                     }
                 }

@@ -5,10 +5,89 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InterfaceWPF"
-        xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" x:Class="InterfaceWPF.InterfaceXStore"
+        xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol" x:Class="InterfaceWPF.InterfaceXStore"
         mc:Ignorable="d"
-        Title="Interface del Xstore"  Height="350" Width="825"  WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" Loaded="MetroWindow_Loaded">
-    <Window.Resources>
+        Title="Interface del Xstore"  Height="580" Width="950"  WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" Loaded="MetroWindow_Loaded" Icon="Design/Images/bata.ico">
+    <Controls:MetroWindow.Flyouts>
+        <Controls:FlyoutsControl x:Name="flyoutsControl">
+            <Controls:Flyout Header="Modal"
+                             Position="Right"
+                              IsPinned="False" Width="710" Theme="Adapt">
+                <StackPanel Height="420"
+                            Margin="0,0,0,0"
+                            Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0" Margin="0,-100,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="140"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="Total de Articulos" VerticalAlignment="Center"  Grid.Column="0" FontSize="15" FontWeight="Bold"></Label>
+                            <Label Name="lbltg" Content="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="15" FontWeight="Bold"></Label>
+                        </Grid>
+                        <Grid Grid.Row="1" Margin="0,-50,0,0" Grid.Column="0" >
+                            <DataGrid x:Name="dg_guiadet" Width="600"  Height="auto" HorizontalAlignment="Left" AutoGenerateColumns="False" CanUserAddRows="False"  CanUserDeleteRows="False"   IsReadOnly="True"   GridLinesVisibility="All" SelectionUnit="CellOrRowHeader"   >
+                                <DataGrid.Effect>
+                                    <DropShadowEffect/>
+                                </DataGrid.Effect>
+                                <DataGrid.Columns>
+                                    <DataGridTemplateColumn Visibility="Collapsed">
+                                    </DataGridTemplateColumn>
+                                    <DataGridTextColumn Binding="{Binding articulo}" ClipboardContentBinding="{x:Null}" Header="Articulo"/>
+                                    <DataGridTemplateColumn  Header="Tallas - Cantidades" Width="SizeToCells" >
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <ListBox KeyboardNavigation.TabNavigation="Local" ItemsSource="{Binding list_tallas}" BorderBrush="White">
+                                                    <ListBox.ItemsPanel>
+                                                        <ItemsPanelTemplate>
+                                                            <StackPanel Orientation="Horizontal"/>
+                                                        </ItemsPanelTemplate>
+                                                    </ListBox.ItemsPanel>
+                                                    <ListBox.ItemTemplate>
+                                                        <DataTemplate>
+                                                            <StackPanel HorizontalAlignment="Center" 
+                                                                FlowDirection="LeftToRight" 
+                                                                Orientation="Vertical">
+                                                                <TextBlock Text="{Binding talla}" 
+                                                                       TextAlignment="Center"  
+                                                                       Width="35" VerticalAlignment="Top" 
+                                                                       ToolTip="Talla" FontWeight="Bold" Foreground="White"  Background="#FF799C6F" />
+                                                                <TextBlock Text="{Binding pares}" 
+                                                                       TextAlignment="Center" 
+                                                                       Width="35" VerticalAlignment="Top" FontWeight="Bold" 
+                                                                       ToolTip="Talla"/>
+                                                            </StackPanel>
+                                                        </DataTemplate>
+                                                    </ListBox.ItemTemplate>
+                                                </ListBox>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTextColumn Binding="{Binding total_pares}" ClipboardContentBinding="{x:Null}"  FontWeight="Bold" FontSize="16" Header="Total">
+                                        <DataGridTextColumn.ElementStyle>
+                                            <Style TargetType="{x:Type TextBlock}">
+                                                <Setter Property="TextAlignment" Value="Center"/>
+                                                <Setter Property="Background" Value="#FFE24242"/>
+                                                <Setter Property="Foreground" Value="White" />
+                                            </Style>
+                                        </DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Grid>
+                    </Grid>
+                </StackPanel>
+            </Controls:Flyout>
+        </Controls:FlyoutsControl>
+    </Controls:MetroWindow.Flyouts>
+    <Controls:MetroWindow.Resources>
         <Style x:Key="chevronTabItemStyle" TargetType="{x:Type TabItem}">
             <Setter Property="Template">
                 <Setter.Value>
@@ -17,7 +96,7 @@
                             <Path Data="M0,0 10,0 10,30 0,30 10,15" Fill="{TemplateBinding Background}"/>
                             <Grid >
                                 <Rectangle Fill="{TemplateBinding Background}" />
-                                <TextBlock Name="HeaderArrow" Text="{TemplateBinding Header}" Margin="15,5" VerticalAlignment="Center" Foreground="White" />
+                                <TextBlock x:Name="HeaderArrow" Text="{TemplateBinding Header}" Margin="15,5" VerticalAlignment="Center" Foreground="White" />
                             </Grid>
                             <Path Data="M0,0 10,15 0,30" Fill="{TemplateBinding Background}" />
                         </StackPanel>
@@ -34,7 +113,8 @@
                 </Setter.Value>
             </Setter>
         </Style>
-    </Window.Resources>
+    </Controls:MetroWindow.Resources>
+   
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
@@ -43,8 +123,10 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Grid Grid.Column="0" Background="Khaki"></Grid>
+        <Grid Grid.Column="0" Background="Khaki"/>
         <Label Grid.Column="0" Content="GENERACION DE INTERFACE XSTORE" Foreground="Brown" HorizontalAlignment="Center" FontWeight="Bold"/>
+
+        <!--</StackPanel>-->
         <!--<StackPanel Grid.Row="1" Grid.Column="0"  >-->
         <TabControl Grid.Row="1" x:Name="tabprincipal"  HorizontalAlignment="Left"  VerticalAlignment="Top" ItemContainerStyle="{StaticResource chevronTabItemStyle}">
             <!--Diseño del Interface de Retail_Location y Retail_location_Promerty-->
@@ -53,131 +135,13 @@
                     <Border.Effect>
                         <DropShadowEffect BlurRadius="20"/>
                     </Border.Effect>
-                    <Grid Margin="0,0,0,0" Width="815" Height="250" Background="AliceBlue">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="800"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                    <Grid Grid.Row="1">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="300"/>
-                            <ColumnDefinition Width="500"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="40"/>
-                            <RowDefinition Height="40"/>
-                            <RowDefinition Height="40"/>
-                            <RowDefinition Height="40"/>
-                        </Grid.RowDefinitions>
-                        <Label HorizontalAlignment="Right" Content="Seleccione Tienda" FontSize="14" FontWeight="Bold"></Label>
-                        <dxe:ComboBoxEdit  Name="dwtienda" ValidateOnTextInput="False"  Width="370" Height="28" Grid.Row="0" Cursor="Hand" Grid.Column="1" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" AutoComplete="True"/>
-                        <CheckBox Grid.Row="1" IsEnabled="False" IsChecked="True" Cursor="Hand" Grid.Column="1"  x:Name="chk_retail_location" HorizontalAlignment="Left" VerticalAlignment="Center" Content="RETAIL LOCATION"/>
-                        <CheckBox Grid.Row="2" IsEnabled="False" IsChecked="True" Cursor="Hand" Grid.Column="1"  x:Name="chk_retail_location_property" HorizontalAlignment="Left" VerticalAlignment="Center" Content="RETAIL LOCATION PROPERTY"/>
-                        <Button Cursor="Hand" Grid.Column="1" Content="Genera Interface Tienda" Width="150" Grid.Row="3" HorizontalAlignment="Left" Name="btntienda" Click="btntienda_Click" ></Button>
-                    </Grid>
-
-
-                </Grid>
-                </Border>
-            </TabItem>
-            <!--Diseño del Interface de Maestros-->
-            <TabItem Header="Maestros" Background="DarkCyan">
-                <Border CornerRadius="2">
-                    <Border.Effect>
-                        <DropShadowEffect BlurRadius="20"/>
-                    </Border.Effect>
-                <Grid Margin="0,0,0,0" Background="AliceBlue" Width="815" Height="250">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="800"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                    <Grid Grid.Row="1">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="300"/>
-                            <ColumnDefinition Width="300"/>
-                            <ColumnDefinition Width="300"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="40"/>
-                            <RowDefinition Height="40"/>
-                            <RowDefinition Height="40"/>
-                            <RowDefinition Height="40"/>
-                        </Grid.RowDefinitions>
-                        <!--<Label HorizontalAlignment="Right" Content="Seleccione Tienda" FontSize="14" FontWeight="Bold"></Label>
-                        <dxe:ComboBoxEdit  Name="dwtienda1" ValidateOnTextInput="False"  Width="370" Height="28" Grid.Row="0" Cursor="Hand" Grid.Column="1" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" AutoComplete="True"/>-->
-                        <CheckBox Grid.Row="0" Margin="10,0,0,0" ToolTip="DIMENSION DE TALLA" IsChecked="False" Cursor="Hand" Grid.Column="0"  x:Name="chk_item_dimension_type" HorizontalAlignment="Left" VerticalAlignment="Center" Content="ITEM__DIMENSION__TYPE"/>
-                        <CheckBox Grid.Row="1" Margin="10,0,0,0" ToolTip="TALLA" IsChecked="False" Cursor="Hand" Grid.Column="0"  x:Name="chk_item_dimension_value" HorizontalAlignment="Left" VerticalAlignment="Center" Content="ITEM__DIMENSION__VALUE"/>
-                        <CheckBox Grid.Row="0" Margin="10,0,0,0" ToolTip="ARTICULO" IsChecked="False" Cursor="Hand" Grid.Column="1"  x:Name="chk_item" HorizontalAlignment="Left" VerticalAlignment="Center" Content="ITEM"/>
-                        <CheckBox Grid.Row="1" Margin="10,0,0,0" ToolTip="PRECIO" IsChecked="False" Cursor="Hand" Grid.Column="1"  x:Name="chk_price_update" HorizontalAlignment="Left" VerticalAlignment="Center" Content="PRICE__UPDATE__2"/>
-                        <CheckBox Grid.Row="0" Margin="10,0,0,0" ToolTip="IMAGEN" IsChecked="False" Cursor="Hand" Grid.Column="2"  x:Name="chk_item_images" HorizontalAlignment="Left" VerticalAlignment="Center" Content="ITEM__IMAGES"/>
-                        <CheckBox Grid.Row="1" Margin="10,0,0,0" ToolTip="CODIGO DE BARRA" IsChecked="False" Cursor="Hand" Grid.Column="2"  x:Name="chk_item_xref" HorizontalAlignment="Left" VerticalAlignment="Center" Content="ITEM__XREF"/>
-                        <CheckBox Grid.Row="2" Visibility="Hidden" Margin="10,0,0,0" ToolTip="LINE-CATERIA-SUB-RIMS" IsChecked="False" Cursor="Hand" Grid.Column="1"  x:Name="chk_merch_hier" HorizontalAlignment="Left" VerticalAlignment="Center" Content="MERCH__HIER"/>
-                        <Button Cursor="Hand" Grid.Column="1" Content="Genera Interface Maestros" Width="170" Grid.Row="3" HorizontalAlignment="Left" Name="btnmaestros" Click="btnmaestros_Click" ></Button>
-                    </Grid>
-
-
-                </Grid>
-                </Border>
-            </TabItem>
-            <!--Diseño de stock pod dia y tienda-->
-            <TabItem Header="Stock" Background="SteelBlue">
-                <Border CornerRadius="2">
-                    <Border.Effect>
-                        <DropShadowEffect BlurRadius="20"/>
-                    </Border.Effect>
-                <Grid Margin="0,0,0,0" Background="AliceBlue" Width="815" Height="250">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="800"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                    <Grid Grid.Row="1">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="300"/>
-                            <ColumnDefinition Width="500"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="40"/>
-                            <RowDefinition Height="40"/>
-                            <RowDefinition Height="40"/>
-                            <RowDefinition Height="40"/>
-                        </Grid.RowDefinitions>
-                        <Label HorizontalAlignment="Right" Content="Seleccione Tienda" FontSize="14" FontWeight="Bold"></Label>
-                        <Label HorizontalAlignment="Right" Grid.Row="1" Content="Fecha" FontSize="14" FontWeight="Bold"></Label>
-                        <dxe:ComboBoxEdit  Name="dwtiendastk" ValidateOnTextInput="False"  Width="370" Height="28" Grid.Row="0" Cursor="Hand" Grid.Column="1" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" AutoComplete="True"/>
-                        <DatePicker Name="dtpfecha" HorizontalAlignment="Left" Width="180" Cursor="Hand" FontSize="14" Height="25" Grid.Column="2" Grid.Row="1"></DatePicker>
-                        <CheckBox Grid.Row="2" IsEnabled="False" IsChecked="True" Cursor="Hand" Grid.Column="1"  x:Name="chk_stock_ledger" HorizontalAlignment="Left" VerticalAlignment="Center" Content="STOCK LEDGER"/>
-                        <Button Cursor="Hand" Grid.Column="1" Content="Genera Interface Stock" Width="150" Grid.Row="3" HorizontalAlignment="Left" Name="btnstock" Click="btnstock_Click"  ></Button>
-                    </Grid>
-
-
-                </Grid>
-                </Border>
-            </TabItem>
-            <!--Diseño de Transferencias de tiendas-->
-            <TabItem Header="Transferencia" Background="DarkSlateBlue" BorderThickness="1" >
-                <Border CornerRadius="2">
-                    <Border.Effect>
-                        <DropShadowEffect BlurRadius="20"/>
-                    </Border.Effect>
-                    <Grid Margin="0,0,0,0" Width="815" Height="250" Background="AliceBlue">
+                    <Grid Margin="0,0,0,0" Width="930" Height="475" Background="AliceBlue">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="800"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="70"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
                         <Grid Grid.Row="1">
@@ -191,11 +155,241 @@
                                 <RowDefinition Height="40"/>
                                 <RowDefinition Height="40"/>
                             </Grid.RowDefinitions>
-                            <Label HorizontalAlignment="Right" Content="Seleccione Tienda" FontSize="14" FontWeight="Bold"></Label>
-                            <dxe:ComboBoxEdit  Name="dwtiendatrans" ValidateOnTextInput="False"  Width="370" Height="28" Grid.Row="0" Cursor="Hand" Grid.Column="1" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" AutoComplete="True"/>
+                            <Label HorizontalAlignment="Right" Content="Seleccione Tienda" FontSize="14" FontWeight="Bold"/>
+                            <dxe:ComboBoxEdit  x:Name="dwtienda" ValidateOnTextInput="False"  Width="370" Height="28" Grid.Row="0" Cursor="Hand" Grid.Column="1" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" AutoComplete="True"/>
+                            <CheckBox Grid.Row="1" IsEnabled="False" IsChecked="True" Cursor="Hand" Grid.Column="1"  x:Name="chk_retail_location" HorizontalAlignment="Left" VerticalAlignment="Center" Content="RETAIL LOCATION"/>
+                            <CheckBox Grid.Row="2" IsEnabled="False" IsChecked="True" Cursor="Hand" Grid.Column="1"  x:Name="chk_retail_location_property" HorizontalAlignment="Left" VerticalAlignment="Center" Content="RETAIL LOCATION PROPERTY"/>
+                            <Button Cursor="Hand" Grid.Column="1" Content="Genera Interface Tienda" Width="150" Grid.Row="3" HorizontalAlignment="Left" x:Name="btntienda" Click="btntienda_Click" />
+                        </Grid>
+
+
+                    </Grid>
+                </Border>
+            </TabItem>
+            <!--Diseño del Interface de Maestros-->
+            <TabItem Header="Maestros" Background="DarkCyan">
+                <Border CornerRadius="2">
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="20"/>
+                    </Border.Effect>
+                    <Grid Margin="0,0,0,0" Background="AliceBlue" Width="930" Height="475">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="216"/>
+                            <ColumnDefinition Width="584"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="70"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="1" Grid.ColumnSpan="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="300"/>
+                                <ColumnDefinition Width="300"/>
+                                <ColumnDefinition Width="300"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="40"/>
+                            </Grid.RowDefinitions>
+                            <!--<Label HorizontalAlignment="Right" Content="Seleccione Tienda" FontSize="14" FontWeight="Bold"></Label>
+                        <dxe:ComboBoxEdit  Name="dwtienda1" ValidateOnTextInput="False"  Width="370" Height="28" Grid.Row="0" Cursor="Hand" Grid.Column="1" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" AutoComplete="True"/>-->
+                            <CheckBox Grid.Row="0" Margin="10,0,0,0" ToolTip="DIMENSION DE TALLA" IsChecked="False" Cursor="Hand" Grid.Column="0"  x:Name="chk_item_dimension_type" HorizontalAlignment="Left" VerticalAlignment="Center" Content="ITEM__DIMENSION__TYPE"/>
+                            <CheckBox Grid.Row="1" Margin="10,0,0,0" ToolTip="TALLA" IsChecked="False" Cursor="Hand" Grid.Column="0"  x:Name="chk_item_dimension_value" HorizontalAlignment="Left" VerticalAlignment="Center" Content="ITEM__DIMENSION__VALUE"/>
+                            <CheckBox Grid.Row="0" Margin="10,0,0,0" ToolTip="ARTICULO" IsChecked="False" Cursor="Hand" Grid.Column="1"  x:Name="chk_item" HorizontalAlignment="Left" VerticalAlignment="Center" Content="ITEM"/>
+                            <CheckBox Grid.Row="1" Margin="10,0,0,0" ToolTip="PRECIO" IsChecked="False" Cursor="Hand" Grid.Column="1"  x:Name="chk_price_update" HorizontalAlignment="Left" VerticalAlignment="Center" Content="PRICE__UPDATE__2"/>
+                            <CheckBox Grid.Row="0" Margin="10,0,0,0" ToolTip="IMAGEN" IsChecked="False" Cursor="Hand" Grid.Column="2"  x:Name="chk_item_images" HorizontalAlignment="Left" VerticalAlignment="Center" Content="ITEM__IMAGES"/>
+                            <CheckBox Grid.Row="1" Margin="10,0,0,0" ToolTip="CODIGO DE BARRA" IsChecked="False" Cursor="Hand" Grid.Column="2"  x:Name="chk_item_xref" HorizontalAlignment="Left" VerticalAlignment="Center" Content="ITEM__XREF"/>
+                            <CheckBox Grid.Row="2" Visibility="Hidden" Margin="10,0,0,0" ToolTip="LINE-CATERIA-SUB-RIMS" IsChecked="False" Cursor="Hand" Grid.Column="1"  x:Name="chk_merch_hier" HorizontalAlignment="Left" VerticalAlignment="Center" Content="MERCH__HIER"/>
+                            <Button Cursor="Hand" Grid.Column="1" Content="Genera Interface Maestros" Width="170" Grid.Row="3" HorizontalAlignment="Left" x:Name="btnmaestros" Click="btnmaestros_Click" />
+                        </Grid>
+
+
+                    </Grid>
+                </Border>
+            </TabItem>
+            <!--Diseño de stock pod dia y tienda-->
+            <TabItem Header="Stock" Background="SteelBlue">
+                <Border CornerRadius="2">
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="20"/>
+                    </Border.Effect>
+                    <Grid Margin="0,0,0,0" Background="AliceBlue" Width="930" Height="475">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="800"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="70"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="300"/>
+                                <ColumnDefinition Width="500"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="40"/>
+                            </Grid.RowDefinitions>
+                            <Label HorizontalAlignment="Right" Content="Seleccione Tienda" FontSize="14" FontWeight="Bold"/>
+                            <Label HorizontalAlignment="Right" Grid.Row="1" Content="Fecha" FontSize="14" FontWeight="Bold"/>
+                            <dxe:ComboBoxEdit  x:Name="dwtiendastk" ValidateOnTextInput="False"  Width="370" Height="28" Grid.Row="0" Cursor="Hand" Grid.Column="1" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" AutoComplete="True"/>
+                            <DatePicker x:Name="dtpfecha" HorizontalAlignment="Left" Width="180" Cursor="Hand" FontSize="14" Height="25" Grid.Column="2" Grid.Row="1"/>
+                            <CheckBox Grid.Row="2" IsEnabled="False" IsChecked="True" Cursor="Hand" Grid.Column="1"  x:Name="chk_stock_ledger" HorizontalAlignment="Left" VerticalAlignment="Center" Content="STOCK LEDGER"/>
+                            <Button Cursor="Hand" Grid.Column="1" Content="Genera Interface Stock" Width="150" Grid.Row="3" HorizontalAlignment="Left" x:Name="btnstock" Click="btnstock_Click"  />
+                        </Grid>
+
+
+                    </Grid>
+                </Border>
+            </TabItem>
+            <!--Diseño de Transferencias de tiendas-->
+            <TabItem Header="Tiendas Shipping" Background="#FF79787E" BorderThickness="1" >
+                <Border CornerRadius="2">
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="20"/>
+                    </Border.Effect>
+                    <Grid Margin="0,0,0,0" Width="930" Height="475" Background="AliceBlue">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="800"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="70"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="300"/>
+                                <ColumnDefinition Width="500"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="40"/>
+                            </Grid.RowDefinitions>
+                            <Label HorizontalAlignment="Right" Content="Seleccione Tienda" FontSize="14" FontWeight="Bold"/>
+                            <dxe:ComboBoxEdit  x:Name="dwtiendatrans" ValidateOnTextInput="False"  Width="370" Height="28" Grid.Row="0" Cursor="Hand" Grid.Column="1" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" AutoComplete="True"/>
                             <CheckBox Grid.Row="1" IsEnabled="False" IsChecked="True" Cursor="Hand" Grid.Column="1"  x:Name="chk_inv_valid_destinations" HorizontalAlignment="Left" VerticalAlignment="Center" Content="INV VALID DESTINATIONS"/>
                             <!--<CheckBox Grid.Row="2" IsEnabled="False" IsChecked="True" Cursor="Hand" Grid.Column="1"  x:Name="chk_retail_location_property" HorizontalAlignment="Left" VerticalAlignment="Center" Content="RETAIL LOCATION PROPERTY"/>-->
-                            <Button Cursor="Hand" Grid.Column="1" Content="Genera Interface Transferencia" Width="150" Grid.Row="3" HorizontalAlignment="Left" Name="btntrans" Click="btntrans_Click"  />
+                            <Button Cursor="Hand" Grid.Column="1" Content="Genera Interface Transferencia" Width="190" Grid.Row="3" HorizontalAlignment="Left" x:Name="btntrans" Click="btntrans_Click"  />
+                        </Grid>
+
+
+                    </Grid>
+                </Border>
+            </TabItem>
+            <TabItem Header="Despacho Tienda" Background="#FFB63B62" BorderThickness="1" >
+                <Border CornerRadius="2">
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="20"/>
+                    </Border.Effect>
+                    <Grid Margin="0,0,0,0" Width="930" Height="475" Background="AliceBlue">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="720"/>
+                            <!--<ColumnDefinition Width="*"/>-->
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="1" Margin="0,5,-206,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0" Grid.Column="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="200"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="40"/>
+                                </Grid.RowDefinitions>
+                                <Label HorizontalAlignment="Center"  Grid.Column="0" Grid.Row="0" Content="Seleccione Tienda" FontSize="14" FontWeight="Bold"/>
+                                <dxe:ComboBoxEdit  x:Name="dwtiendatrans1" ValidateOnTextInput="False"  Width="300" Height="28" Grid.Row="0" Cursor="Hand" Grid.Column="1" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" AutoComplete="True"/>
+                            </Grid>
+                            <Grid Grid.Row="1" Grid.Column="0" >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="200"/>
+                                    <ColumnDefinition Width="190"/>
+                                    <ColumnDefinition Width="50"/>
+                                    <ColumnDefinition Width="200"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label HorizontalAlignment="Right" Grid.Column="0" VerticalAlignment="Center" Content="Desde" FontSize="14" FontWeight="Bold"/>
+                                <Label HorizontalAlignment="Right" Grid.Column="2" VerticalAlignment="Center" Content="Hasta" FontSize="14" FontWeight="Bold"/>
+                                <DatePicker x:Name="dtpdesde" HorizontalAlignment="Left" VerticalAlignment="Center" Width="180" Cursor="Hand" FontSize="14" Height="25" Grid.Column="1" Grid.Row="0"/>
+                                <DatePicker x:Name="dtphasta" HorizontalAlignment="Left" VerticalAlignment="Center" Width="180" Cursor="Hand" FontSize="14" Height="25" Grid.Column="3" Grid.Row="0"/>
+                                <Button Cursor="Hand" Grid.Column="4" Content="Consultar" Width="100" Height="30" Grid.Row="0" HorizontalAlignment="Left" x:Name="btnconsultag" Click="btnconsultag_Click"/>
+                            </Grid>
+                            <Grid Grid.Row="2" Background="#FFE5E5E5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="223*"/>
+                                    <ColumnDefinition Width="86*"/>
+                                </Grid.ColumnDefinitions>
+                                <DataGrid x:Name="dg_guia" Margin="0,5,0,0" HorizontalAlignment="Left"  Width="925" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False"   IsReadOnly="True"   GridLinesVisibility="All" SelectionUnit="CellOrRowHeader" AlternatingRowBackground="#EEF6FF" Grid.ColumnSpan="2"  >
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="" Width="25" 
+                                                           Binding="{Binding key}" IsReadOnly="True" />
+
+                                        <DataGridTextColumn Binding="{Binding nro_guia}" ClipboardContentBinding="{x:Null}" Header="NROGUIA"/>
+                                        <DataGridTextColumn Binding="{Binding nro_despacho}" ClipboardContentBinding="{x:Null}" Header="NDESPACHO"/>
+                                        <DataGridTextColumn Binding="{Binding cod_tda}" ClipboardContentBinding="{x:Null}" Header="COD_TDA"/>
+                                        <DataGridTextColumn Binding="{Binding des_tda}" ClipboardContentBinding="{x:Null}" Header="DES_TDA"/>
+                                        <DataGridTextColumn Binding="{Binding fec_des, StringFormat=\{0:dd/MM/yyyy\}}" ClipboardContentBinding="{x:Null}" Header="FECHA_DESP"/>
+                                        <DataGridTemplateColumn>
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                        <Button x:Name="btndetalle" Cursor="Hand"
+                                                        Background="Transparent" Foreground="Transparent" 
+                                                        BorderBrush="Transparent" BorderThickness="0" ToolTip="Detalle de Guia"
+                                                    CommandParameter="{Binding _articulo}" Click="btndetalle_Click"  >
+                                                            <Image Source="Design/Images/lupa.jpg"
+                                                       Height="16" Width="16" 
+                                                       VerticalAlignment="Bottom"
+                                                       Grid.RowSpan="2" />
+                                                        </Button>
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTemplateColumn>
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                        <Button x:Name="btnenviotraspaso" Cursor="Hand"
+                                                        Background="Transparent" Foreground="Transparent" 
+                                                        BorderBrush="Transparent" BorderThickness="0" ToolTip="Envio de Guia XStore"
+                                                    CommandParameter="{Binding _articulo}" Click="btnenviotraspaso_Click"  >
+                                                            <Image Source="Design/Images/b_app.png"
+                                                       Height="16" Width="16" 
+                                                       VerticalAlignment="Bottom"
+                                                       Grid.RowSpan="2" />
+                                                        </Button>
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </Grid>
+                            <!--<Grid.RowDefinitions>
+                                <RowDefinition Height="40"/>
+                            </Grid.RowDefinitions>
+                            <Label HorizontalAlignment="Right" Content="Seleccione Tienda" FontSize="14" FontWeight="Bold"></Label>
+                            <dxe:ComboBoxEdit  Name="dwtiendatrans1" ValidateOnTextInput="False"  Width="370" Height="28" Grid.Row="0" Cursor="Hand" Grid.Column="1" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" AutoComplete="True"/>-->
                         </Grid>
 
 
@@ -204,6 +398,5 @@
             </TabItem>
         </TabControl>
 
-        <!--</StackPanel>-->
     </Grid>
 </Controls:MetroWindow>

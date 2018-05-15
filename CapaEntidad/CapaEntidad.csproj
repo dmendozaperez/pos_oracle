@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Interfaces\Ent_Fvdespc.cs" />
     <Compile Include="Interfaces\Ent_Scdddes.cs" />
+    <Compile Include="Logistica\Ent_GuiasDespacho.cs" />
     <Compile Include="Util\Ent_Conexion.cs" />
     <Compile Include="Util\Ent_Msg.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

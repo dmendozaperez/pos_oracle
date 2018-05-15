@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="QH1U2BiDaqdZ3u60AmQ8YM8kfiM=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="rZWA3ba1zsaLUbuujpSZdad5RUs=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="basicHttpBinding" name="Bata_TransactionSoap">
       <properties>
@@ -112,10 +112,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="Bata_TransactionSoap" contract="BataTransac.Bata_TransactionSoap" bindingType="basicHttpBinding" address="http://localhost:49470/Bata_Transaction.asmx" bindingConfiguration="Bata_TransactionSoap">
+    <endpoint name="Bata_TransactionSoap" contract="BataTransac.Bata_TransactionSoap" bindingType="basicHttpBinding" address="http://posperu.bgr.pe/ws_batapos/Bata_Transaction.asmx" bindingConfiguration="Bata_TransactionSoap">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>http://localhost:49470/Bata_Transaction.asmx</serializedValue>
+          <serializedValue>http://posperu.bgr.pe/ws_batapos/Bata_Transaction.asmx</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

@@ -4,16 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{371B33AD-399F-448E-9C58-FB07A742A61E}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{E3D2FCE3-B7EC-425D-B563-AC271BFA8C2F}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CapaServicioWindows</RootNamespace>
-    <AssemblyName>CapaServicioWindows</AssemblyName>
+    <RootNamespace>ServiceWinTransaction</RootNamespace>
+    <AssemblyName>ServiceWinTransaction</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -21,64 +22,75 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
+    <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Conexion\ConexionDBF.cs" />
-    <Compile Include="Conexion\ConexionWS.cs" />
-    <Compile Include="Entidad\SCDDDES.cs" />
-    <Compile Include="Envio_Ws\Envio_Guias.cs" />
-    <Compile Include="Entidad\FVDESPC.cs" />
-    <Compile Include="Modular\Basico.cs" />
-    <Compile Include="Modular\Util.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Install_Transaction.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Install_Transaction.Designer.cs">
+      <DependentUpon>Install_Transaction.cs</DependentUpon>
+    </Compile>
     <Compile Include="Service References\BataTransac\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Service_Transaction.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Service_Transaction.Designer.cs">
+      <DependentUpon>Service_Transaction.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Service References\BataTransac\Bata_Transaction.wsdl" />
+    <None Include="Service References\BataTransac\ServiceWinTransaction.BataTransac.Ent_Fvdespc.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\BataTransac\ServiceWinTransaction.BataTransac.Ent_MsgTransac.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\BataTransac\ServiceWinTransaction.BataTransac.Ent_PathDBF.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\BataTransac\ServiceWinTransaction.BataTransac.Ent_Scdddes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
-    <None Include="Service References\BataTransac\Bata_Transaction1.wsdl" />
-    <None Include="Service References\BataTransac\CapaServicioWindows.BataTransac.Ent_Fvdespc.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\BataTransac\CapaServicioWindows.BataTransac.Ent_MsgTransac.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\BataTransac\CapaServicioWindows.BataTransac.Ent_PathDBF.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\BataTransac\CapaServicioWindows.BataTransac.Ent_Scdddes.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
+    <WCFMetadataStorage Include="Service References\BataTransac\" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Service References\BataTransac\" />
+    <None Include="Service References\BataTransac\Bata_Transaction.disco" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\BataTransac\configuration91.svcinfo" />
@@ -93,7 +105,15 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\BataTransac\Bata_Transaction1.disco" />
+    <EmbeddedResource Include="Install_Transaction.resx">
+      <DependentUpon>Install_Transaction.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CapaServicioWindows\CapaServicioWindows.csproj">
+      <Project>{371b33ad-399f-448e-9c58-fb07a742a61e}</Project>
+      <Name>CapaServicioWindows</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

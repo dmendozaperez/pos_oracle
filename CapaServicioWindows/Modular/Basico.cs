@@ -12,7 +12,7 @@ namespace CapaServicioWindows.Modular
 {
     public class Basico
     {
-        private DateTime fecha_despacho = DateTime.Today.AddDays(-7);
+        private DateTime fecha_despacho = DateTime.Today.AddDays(-2);
         /// <summary>
         /// verificar las guias cerradas
         /// </summary>
@@ -209,9 +209,9 @@ namespace CapaServicioWindows.Modular
         ///ejecutar proceso de envios de guias
         /// </summary>
         /// <returns></returns>
-        public string eje_envio_guias()
+        public void  eje_envio_guias()
         {
-            string _envio_guias ="";
+            string _error_transac ="";
             List<BataTransac.Ent_Scdddes> _lista_guiasC = null;
 
             List<BataTransac.Ent_PathDBF> listar_location_dbf = null;
@@ -332,15 +332,19 @@ namespace CapaServicioWindows.Modular
                 }
 
             }
-            catch (Exception)
+            catch (Exception exc)
             {
-                _envio_guias = "";
+                _error_transac = exc.Message;
+                //_envio_guias = "";
             }
-            return _envio_guias;
+            //return _error_transac;
         }
 
-
-        public void edit_scdddes(string cod_alm,string nroguia,string _path)
+        public static string retornar()
+        {
+            return "xxxx";
+        }
+        private void edit_scdddes(string cod_alm,string nroguia,string _path)
         {
             string sqlquery = "UPDATE SCDDDES SET DDES_FTXTD='X' WHERE DDES_ALMAC='" + cod_alm + "' AND DDES_GUIRE='" + nroguia + "'";
             try

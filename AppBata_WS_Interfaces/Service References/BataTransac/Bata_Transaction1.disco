@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
-  <contractRef ref="http://posperu.bgr.pe/ws_batapos/Bata_Transaction.asmx?wsdl" docRef="http://posperu.bgr.pe/ws_batapos/Bata_Transaction.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
-  <soap address="http://posperu.bgr.pe/ws_batapos/Bata_Transaction.asmx" xmlns:q1="http://bataperu.com.pe/" binding="q1:Bata_TransactionSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
-  <soap address="http://posperu.bgr.pe/ws_batapos/Bata_Transaction.asmx" xmlns:q2="http://bataperu.com.pe/" binding="q2:Bata_TransactionSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
-</discovery>

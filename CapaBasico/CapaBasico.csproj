@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Util\Ba_DownloadFile.cs" />
     <Compile Include="Util\Ba_WsConexion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -47,6 +48,10 @@
     <ProjectReference Include="..\CapaDato\CapaDato.csproj">
       <Project>{d7d144b0-89b5-41e1-ae1e-340da4c00141}</Project>
       <Name>CapaDato</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CapaEntidad\CapaEntidad.csproj">
+      <Project>{c24d20c9-781b-4fd8-b956-dbb16280e929}</Project>
+      <Name>CapaEntidad</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

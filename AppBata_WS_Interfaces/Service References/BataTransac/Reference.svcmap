@@ -18,11 +18,11 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://posperu.bgr.pe/ws_batapos/Bata_Transaction.asmx" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://localhost:49470/Bata_Transaction.asmx" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="Bata_Transaction1.wsdl" MetadataType="Wsdl" ID="e1a70c1c-6026-46a4-9812-ee8cab22a60b" SourceId="1" SourceUrl="http://posperu.bgr.pe/ws_batapos/Bata_Transaction.asmx?wsdl" />
-    <MetadataFile FileName="Bata_Transaction1.disco" MetadataType="Disco" ID="8a11a63a-8b09-48c4-ba1b-0d3786b9d2cd" SourceId="1" SourceUrl="http://posperu.bgr.pe/ws_batapos/Bata_Transaction.asmx?disco" />
+    <MetadataFile FileName="Bata_Transaction.wsdl" MetadataType="Wsdl" ID="c33e3b0f-579a-49c8-ad69-be2d9b401ea4" SourceId="1" SourceUrl="http://localhost:49470/Bata_Transaction.asmx?wsdl" />
+    <MetadataFile FileName="Bata_Transaction.disco" MetadataType="Disco" ID="c507c750-e393-4c04-a5c3-e69796e7bba3" SourceId="1" SourceUrl="http://localhost:49470/Bata_Transaction.asmx?disco" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

@@ -32,6 +32,7 @@
             this.btn_ws_update_transaction_guias = new System.Windows.Forms.Button();
             this.btnenvio = new System.Windows.Forms.Button();
             this.btn_servicewin = new System.Windows.Forms.Button();
+            this.btnupload = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnhel
@@ -67,7 +68,7 @@
             // btn_servicewin
             // 
             this.btn_servicewin.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_servicewin.Location = new System.Drawing.Point(84, 258);
+            this.btn_servicewin.Location = new System.Drawing.Point(98, 180);
             this.btn_servicewin.Name = "btn_servicewin";
             this.btn_servicewin.Size = new System.Drawing.Size(392, 51);
             this.btn_servicewin.TabIndex = 3;
@@ -75,11 +76,23 @@
             this.btn_servicewin.UseVisualStyleBackColor = true;
             this.btn_servicewin.Click += new System.EventHandler(this.btn_servicewin_Click);
             // 
+            // btnupload
+            // 
+            this.btnupload.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnupload.Location = new System.Drawing.Point(149, 265);
+            this.btnupload.Name = "btnupload";
+            this.btnupload.Size = new System.Drawing.Size(320, 41);
+            this.btnupload.TabIndex = 4;
+            this.btnupload.Text = "UPLOAD FILE";
+            this.btnupload.UseVisualStyleBackColor = true;
+            this.btnupload.Click += new System.EventHandler(this.btnupload_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(619, 357);
+            this.Controls.Add(this.btnupload);
             this.Controls.Add(this.btn_servicewin);
             this.Controls.Add(this.btnenvio);
             this.Controls.Add(this.btn_ws_update_transaction_guias);
@@ -97,6 +110,7 @@
         private System.Windows.Forms.Button btn_ws_update_transaction_guias;
         private System.Windows.Forms.Button btnenvio;
         private System.Windows.Forms.Button btn_servicewin;
+        private System.Windows.Forms.Button btnupload;
     }
 }
 

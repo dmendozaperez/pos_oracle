@@ -44,6 +44,7 @@
     <Compile Include="Interfaces\Ent_Scdddes.cs" />
     <Compile Include="Logistica\Ent_GuiasDespacho.cs" />
     <Compile Include="Util\Ent_Conexion.cs" />
+    <Compile Include="Util\Ent_File.cs" />
     <Compile Include="Util\Ent_Msg.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\Ent_MsgTransac.cs" />

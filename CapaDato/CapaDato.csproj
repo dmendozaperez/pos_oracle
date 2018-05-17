@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Basico\Dat_File.cs" />
     <Compile Include="Basico\Dat_Util.cs" />
     <Compile Include="Control\Dat_Acceso.cs" />
     <Compile Include="Control\Dat_Error_Transac.cs" />

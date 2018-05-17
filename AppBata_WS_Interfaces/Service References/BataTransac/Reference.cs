@@ -33,6 +33,10 @@ namespace AppBata_WS_Interfaces.BataTransac {
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         AppBata_WS_Interfaces.BataTransac.Ent_PathDBF pathdbf();
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://bataperu.com.pe/list_file", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        AppBata_WS_Interfaces.BataTransac.Ent_File list_file();
+        
         // CODEGEN: Se está generando un contrato de mensaje, ya que el mensaje ws_update_transaction_guiasRequest tiene encabezados.
         [System.ServiceModel.OperationContractAttribute(Action="http://bataperu.com.pe/ws_update_transaction_guias", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -47,6 +51,21 @@ namespace AppBata_WS_Interfaces.BataTransac {
         [System.ServiceModel.OperationContractAttribute(Action="http://bataperu.com.pe/ws_get_location_dbf", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         AppBata_WS_Interfaces.BataTransac.ws_get_location_dbfResponse ws_get_location_dbf(AppBata_WS_Interfaces.BataTransac.ws_get_location_dbfRequest request);
+        
+        // CODEGEN: Se está generando un contrato de mensaje, ya que el mensaje ws_get_file_uploadRequest tiene encabezados.
+        [System.ServiceModel.OperationContractAttribute(Action="http://bataperu.com.pe/ws_get_file_upload", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        AppBata_WS_Interfaces.BataTransac.ws_get_file_uploadResponse ws_get_file_upload(AppBata_WS_Interfaces.BataTransac.ws_get_file_uploadRequest request);
+        
+        // CODEGEN: Se está generando un contrato de mensaje, ya que el mensaje ws_get_file_pathRequest tiene encabezados.
+        [System.ServiceModel.OperationContractAttribute(Action="http://bataperu.com.pe/ws_get_file_path", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        AppBata_WS_Interfaces.BataTransac.ws_get_file_pathResponse ws_get_file_path(AppBata_WS_Interfaces.BataTransac.ws_get_file_pathRequest request);
+        
+        // CODEGEN: Se está generando un contrato de mensaje, ya que el mensaje ws_download_fileRequest tiene encabezados.
+        [System.ServiceModel.OperationContractAttribute(Action="http://bataperu.com.pe/ws_download_file", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        AppBata_WS_Interfaces.BataTransac.ws_download_fileResponse ws_download_file(AppBata_WS_Interfaces.BataTransac.ws_download_fileRequest request);
     }
     
     /// <remarks/>
@@ -96,6 +115,116 @@ namespace AppBata_WS_Interfaces.BataTransac {
             set {
                 this.anyAttrField = value;
                 this.RaisePropertyChanged("AnyAttr");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://bataperu.com.pe/")]
+    public partial class Ent_File_Ruta : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string file_origenField;
+        
+        private string file_destinoField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public string file_origen {
+            get {
+                return this.file_origenField;
+            }
+            set {
+                this.file_origenField = value;
+                this.RaisePropertyChanged("file_origen");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public string file_destino {
+            get {
+                return this.file_destinoField;
+            }
+            set {
+                this.file_destinoField = value;
+                this.RaisePropertyChanged("file_destino");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://bataperu.com.pe/")]
+    public partial class Ent_Lista_File : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private Ent_File[] lista_file_nameField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(Order=0)]
+        public Ent_File[] lista_file_name {
+            get {
+                return this.lista_file_nameField;
+            }
+            set {
+                this.lista_file_nameField = value;
+                this.RaisePropertyChanged("lista_file_name");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://bataperu.com.pe/")]
+    public partial class Ent_File : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string file_nameField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public string file_name {
+            get {
+                return this.file_nameField;
+            }
+            set {
+                this.file_nameField = value;
+                this.RaisePropertyChanged("file_name");
             }
         }
         
@@ -1201,6 +1330,126 @@ namespace AppBata_WS_Interfaces.BataTransac {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="ws_get_file_upload", WrapperNamespace="http://bataperu.com.pe/", IsWrapped=true)]
+    public partial class ws_get_file_uploadRequest {
+        
+        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://bataperu.com.pe/")]
+        public AppBata_WS_Interfaces.BataTransac.ValidateAcceso ValidateAcceso;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=0)]
+        public string tipofile_cod;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=1)]
+        public AppBata_WS_Interfaces.BataTransac.Ent_Lista_File lista_in;
+        
+        public ws_get_file_uploadRequest() {
+        }
+        
+        public ws_get_file_uploadRequest(AppBata_WS_Interfaces.BataTransac.ValidateAcceso ValidateAcceso, string tipofile_cod, AppBata_WS_Interfaces.BataTransac.Ent_Lista_File lista_in) {
+            this.ValidateAcceso = ValidateAcceso;
+            this.tipofile_cod = tipofile_cod;
+            this.lista_in = lista_in;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="ws_get_file_uploadResponse", WrapperNamespace="http://bataperu.com.pe/", IsWrapped=true)]
+    public partial class ws_get_file_uploadResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=0)]
+        public AppBata_WS_Interfaces.BataTransac.Ent_File[] ws_get_file_uploadResult;
+        
+        public ws_get_file_uploadResponse() {
+        }
+        
+        public ws_get_file_uploadResponse(AppBata_WS_Interfaces.BataTransac.Ent_File[] ws_get_file_uploadResult) {
+            this.ws_get_file_uploadResult = ws_get_file_uploadResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="ws_get_file_path", WrapperNamespace="http://bataperu.com.pe/", IsWrapped=true)]
+    public partial class ws_get_file_pathRequest {
+        
+        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://bataperu.com.pe/")]
+        public AppBata_WS_Interfaces.BataTransac.ValidateAcceso ValidateAcceso;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=0)]
+        public string tipo_file_cod;
+        
+        public ws_get_file_pathRequest() {
+        }
+        
+        public ws_get_file_pathRequest(AppBata_WS_Interfaces.BataTransac.ValidateAcceso ValidateAcceso, string tipo_file_cod) {
+            this.ValidateAcceso = ValidateAcceso;
+            this.tipo_file_cod = tipo_file_cod;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="ws_get_file_pathResponse", WrapperNamespace="http://bataperu.com.pe/", IsWrapped=true)]
+    public partial class ws_get_file_pathResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=0)]
+        public AppBata_WS_Interfaces.BataTransac.Ent_File_Ruta ws_get_file_pathResult;
+        
+        public ws_get_file_pathResponse() {
+        }
+        
+        public ws_get_file_pathResponse(AppBata_WS_Interfaces.BataTransac.Ent_File_Ruta ws_get_file_pathResult) {
+            this.ws_get_file_pathResult = ws_get_file_pathResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="ws_download_file", WrapperNamespace="http://bataperu.com.pe/", IsWrapped=true)]
+    public partial class ws_download_fileRequest {
+        
+        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://bataperu.com.pe/")]
+        public AppBata_WS_Interfaces.BataTransac.ValidateAcceso ValidateAcceso;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")]
+        public byte[] file;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=1)]
+        public string file_name;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=2)]
+        public string file_tipo;
+        
+        public ws_download_fileRequest() {
+        }
+        
+        public ws_download_fileRequest(AppBata_WS_Interfaces.BataTransac.ValidateAcceso ValidateAcceso, byte[] file, string file_name, string file_tipo) {
+            this.ValidateAcceso = ValidateAcceso;
+            this.file = file;
+            this.file_name = file_name;
+            this.file_tipo = file_tipo;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="ws_download_fileResponse", WrapperNamespace="http://bataperu.com.pe/", IsWrapped=true)]
+    public partial class ws_download_fileResponse {
+        
+        public ws_download_fileResponse() {
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface Bata_TransactionSoapChannel : AppBata_WS_Interfaces.BataTransac.Bata_TransactionSoap, System.ServiceModel.IClientChannel {
     }
@@ -1252,6 +1501,10 @@ namespace AppBata_WS_Interfaces.BataTransac {
             return base.Channel.pathdbf();
         }
         
+        public AppBata_WS_Interfaces.BataTransac.Ent_File list_file() {
+            return base.Channel.list_file();
+        }
+        
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         AppBata_WS_Interfaces.BataTransac.ws_update_transaction_guiasResponse AppBata_WS_Interfaces.BataTransac.Bata_TransactionSoap.ws_update_transaction_guias(AppBata_WS_Interfaces.BataTransac.ws_update_transaction_guiasRequest request) {
             return base.Channel.ws_update_transaction_guias(request);
@@ -1290,6 +1543,47 @@ namespace AppBata_WS_Interfaces.BataTransac {
             inValue.ValidateAcceso = ValidateAcceso;
             AppBata_WS_Interfaces.BataTransac.ws_get_location_dbfResponse retVal = ((AppBata_WS_Interfaces.BataTransac.Bata_TransactionSoap)(this)).ws_get_location_dbf(inValue);
             return retVal.ws_get_location_dbfResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        AppBata_WS_Interfaces.BataTransac.ws_get_file_uploadResponse AppBata_WS_Interfaces.BataTransac.Bata_TransactionSoap.ws_get_file_upload(AppBata_WS_Interfaces.BataTransac.ws_get_file_uploadRequest request) {
+            return base.Channel.ws_get_file_upload(request);
+        }
+        
+        public AppBata_WS_Interfaces.BataTransac.Ent_File[] ws_get_file_upload(AppBata_WS_Interfaces.BataTransac.ValidateAcceso ValidateAcceso, string tipofile_cod, AppBata_WS_Interfaces.BataTransac.Ent_Lista_File lista_in) {
+            AppBata_WS_Interfaces.BataTransac.ws_get_file_uploadRequest inValue = new AppBata_WS_Interfaces.BataTransac.ws_get_file_uploadRequest();
+            inValue.ValidateAcceso = ValidateAcceso;
+            inValue.tipofile_cod = tipofile_cod;
+            inValue.lista_in = lista_in;
+            AppBata_WS_Interfaces.BataTransac.ws_get_file_uploadResponse retVal = ((AppBata_WS_Interfaces.BataTransac.Bata_TransactionSoap)(this)).ws_get_file_upload(inValue);
+            return retVal.ws_get_file_uploadResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        AppBata_WS_Interfaces.BataTransac.ws_get_file_pathResponse AppBata_WS_Interfaces.BataTransac.Bata_TransactionSoap.ws_get_file_path(AppBata_WS_Interfaces.BataTransac.ws_get_file_pathRequest request) {
+            return base.Channel.ws_get_file_path(request);
+        }
+        
+        public AppBata_WS_Interfaces.BataTransac.Ent_File_Ruta ws_get_file_path(AppBata_WS_Interfaces.BataTransac.ValidateAcceso ValidateAcceso, string tipo_file_cod) {
+            AppBata_WS_Interfaces.BataTransac.ws_get_file_pathRequest inValue = new AppBata_WS_Interfaces.BataTransac.ws_get_file_pathRequest();
+            inValue.ValidateAcceso = ValidateAcceso;
+            inValue.tipo_file_cod = tipo_file_cod;
+            AppBata_WS_Interfaces.BataTransac.ws_get_file_pathResponse retVal = ((AppBata_WS_Interfaces.BataTransac.Bata_TransactionSoap)(this)).ws_get_file_path(inValue);
+            return retVal.ws_get_file_pathResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        AppBata_WS_Interfaces.BataTransac.ws_download_fileResponse AppBata_WS_Interfaces.BataTransac.Bata_TransactionSoap.ws_download_file(AppBata_WS_Interfaces.BataTransac.ws_download_fileRequest request) {
+            return base.Channel.ws_download_file(request);
+        }
+        
+        public void ws_download_file(AppBata_WS_Interfaces.BataTransac.ValidateAcceso ValidateAcceso, byte[] file, string file_name, string file_tipo) {
+            AppBata_WS_Interfaces.BataTransac.ws_download_fileRequest inValue = new AppBata_WS_Interfaces.BataTransac.ws_download_fileRequest();
+            inValue.ValidateAcceso = ValidateAcceso;
+            inValue.file = file;
+            inValue.file_name = file_name;
+            inValue.file_tipo = file_tipo;
+            AppBata_WS_Interfaces.BataTransac.ws_download_fileResponse retVal = ((AppBata_WS_Interfaces.BataTransac.Bata_TransactionSoap)(this)).ws_download_file(inValue);
         }
     }
 }

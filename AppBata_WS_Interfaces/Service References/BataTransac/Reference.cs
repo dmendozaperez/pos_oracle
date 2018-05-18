@@ -844,6 +844,18 @@ namespace AppBata_WS_Interfaces.BataTransac {
         
         private System.Data.DataTable dT_FVDESPDField;
         
+        private decimal dESC_UNCAField;
+        
+        private decimal dESC_UNNCField;
+        
+        private decimal dESC_CAJAField;
+        
+        private decimal dESC_VACAField;
+        
+        private decimal dESC_VANCField;
+        
+        private decimal dESC_VCAJField;
+        
         private System.Data.DataTable dT_FVDESPD_TREGMEDIDAField;
         
         /// <remarks/>
@@ -1112,6 +1124,78 @@ namespace AppBata_WS_Interfaces.BataTransac {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=22)]
+        public decimal DESC_UNCA {
+            get {
+                return this.dESC_UNCAField;
+            }
+            set {
+                this.dESC_UNCAField = value;
+                this.RaisePropertyChanged("DESC_UNCA");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=23)]
+        public decimal DESC_UNNC {
+            get {
+                return this.dESC_UNNCField;
+            }
+            set {
+                this.dESC_UNNCField = value;
+                this.RaisePropertyChanged("DESC_UNNC");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=24)]
+        public decimal DESC_CAJA {
+            get {
+                return this.dESC_CAJAField;
+            }
+            set {
+                this.dESC_CAJAField = value;
+                this.RaisePropertyChanged("DESC_CAJA");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=25)]
+        public decimal DESC_VACA {
+            get {
+                return this.dESC_VACAField;
+            }
+            set {
+                this.dESC_VACAField = value;
+                this.RaisePropertyChanged("DESC_VACA");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=26)]
+        public decimal DESC_VANC {
+            get {
+                return this.dESC_VANCField;
+            }
+            set {
+                this.dESC_VANCField = value;
+                this.RaisePropertyChanged("DESC_VANC");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=27)]
+        public decimal DESC_VCAJ {
+            get {
+                return this.dESC_VCAJField;
+            }
+            set {
+                this.dESC_VCAJField = value;
+                this.RaisePropertyChanged("DESC_VCAJ");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=28)]
         public System.Data.DataTable DT_FVDESPD_TREGMEDIDA {
             get {
                 return this.dT_FVDESPD_TREGMEDIDAField;

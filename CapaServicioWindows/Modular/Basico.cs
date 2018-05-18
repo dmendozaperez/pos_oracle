@@ -12,7 +12,7 @@ namespace CapaServicioWindows.Modular
 {
     public class Basico
     {
-        private DateTime fecha_despacho = DateTime.Today.AddDays(-2);
+        private DateTime fecha_despacho = DateTime.Today.AddDays(-3);
         /// <summary>
         /// verificar las guias cerradas
         /// </summary>
@@ -26,7 +26,7 @@ namespace CapaServicioWindows.Modular
                                       "[DDES_GGUIA],[DDES_CCOND],[DDES_CALZ],[DDES_NCALZ],[DDES_TOCAJ],[DDES_IMPRE],[DDES_GVALO]," +
                                       "[DDES_SUBGR],[DDES_RUCTC],[DDES_TRANS],[DDES_TRAN2],[DDES_OBSER],[DDES_NOMTC],[DDES_NGUIA]," +
                                       "[DDES_NRLIQ],[DDES_LIMPR],[DDES_EMPRE],[DDES_CANAL],[DDES_CADEN],[DDES_SECCI],[DDES_FTX],[DDES_FTXTD]" +
-                                      "FROM [SCDDDES] WHERE DDES_FDESP>=? and DDES_TIPO='DES' and DDES_ESTAD<>'A' and (DDES_FTXTD IS NULL OR LEN(DDES_FTXTD)=0) AND (DDES_CADEN IS NOT NULL OR LEN(DDES_CADEN)>0)";            
+                                      "FROM [SCDDDES] WHERE DDES_FDESP>=? and DDES_TIPO='DES' and DDES_ESTAD<>'A' and (DDES_FTXTD IS NULL OR LEN(DDES_FTXTD)=0) AND (DDES_CADEN IS NOT NULL OR LEN(DDES_CADEN)>0) ";            
             try
             {
                 //Util dd = new Util();
@@ -106,7 +106,8 @@ namespace CapaServicioWindows.Modular
             String sqlquery_fvdespc = "SELECT [DESC_ALMAC],[DESC_GUDIS],[DESC_NDESP],[DESC_TDES],[DESC_FECHA],[DESC_FDESP]," +
                                       "[DESC_ESTAD],[DESC_TIPO],[DESC_TORI],[DESC_FEMI],[DESC_SEMI],[DESC_FTRA],[DESC_NUME]," +
                                       "[DESC_CONCE],[DESC_NMOVC],[DESC_EMPRE],[DESC_SECCI],[DESC_CANAL],[DESC_CADEN],[DESC_FTX]," +
-                                      "[DESC_TXPOS] FROM [FVDESPC] WHERE DESC_GUDIS='" + nroguia + "' AND DESC_ALMAC='" + codalm +"'";
+                                      "[DESC_TXPOS],[DESC_UNCA],[DESC_UNNC],[DESC_CAJA],[DESC_VACA],[DESC_VANC],[DESC_VCAJ]" +
+                                      "FROM [FVDESPC] WHERE DESC_GUDIS='" + nroguia + "' AND DESC_ALMAC='" + codalm +"'";
             try
             {
                 using (OleDbConnection cn = new OleDbConnection(ConexionDBF._conexion_fvdes_oledb(_path)))
@@ -143,6 +144,12 @@ namespace CapaServicioWindows.Modular
                                            DESC_CADEN = dr["DESC_CADEN"].ToString(),
                                            DESC_FTX = dr["DESC_FTX"].ToString(),
                                            DESC_TXPOS = dr["DESC_TXPOS"].ToString(),
+                                           DESC_UNCA =Convert.ToDecimal(dr["DESC_UNCA"]),
+                                           DESC_UNNC =Convert.ToDecimal(dr["DESC_UNNC"]),
+                                           DESC_CAJA =Convert.ToDecimal(dr["DESC_CAJA"]),
+                                           DESC_VACA =Convert.ToDecimal(dr["DESC_VACA"]),
+                                           DESC_VANC =Convert.ToDecimal(dr["DESC_VANC"]),
+                                           DESC_VCAJ =Convert.ToDecimal(dr["DESC_VCAJ"]),
                                        }).ToList();
 
 

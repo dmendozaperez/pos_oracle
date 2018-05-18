@@ -54,6 +54,14 @@ namespace CapaDato.Interfaces
                             cmd.Parameters.AddWithValue("@DESC_CADEN", guias.DESC_CADEN);
                             cmd.Parameters.AddWithValue("@DESC_FTX", guias.DESC_FTX);
                             cmd.Parameters.AddWithValue("@DESC_TXPOS", guias.DESC_TXPOS);
+                            cmd.Parameters.AddWithValue("@DESC_UNCA", guias.DESC_UNCA);
+                            cmd.Parameters.AddWithValue("@DESC_UNNC", guias.DESC_UNNC);
+                            cmd.Parameters.AddWithValue("@DESC_CAJA", guias.DESC_CAJA);
+                            cmd.Parameters.AddWithValue("@DESC_VACA", guias.DESC_VACA);
+                            cmd.Parameters.AddWithValue("@DESC_VANC", guias.DESC_VANC);
+                            cmd.Parameters.AddWithValue("@DESC_VCAJ", guias.DESC_VCAJ);
+                            
+
                             /*PARAMETRO PARA LA TABLA SCDDDES*/
                             cmd.Parameters.AddWithValue("@DDES_TIPO", g_cerrada.DDES_TIPO);
                             cmd.Parameters.AddWithValue("@DDES_ALMAC", g_cerrada.DDES_ALMAC);

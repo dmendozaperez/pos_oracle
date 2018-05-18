@@ -64,6 +64,12 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="Service References\BataTransac\Bata_Transaction1.wsdl" />
+    <None Include="Service References\BataTransac\CapaServicioWindows.BataTransac.Ent_File.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\BataTransac\CapaServicioWindows.BataTransac.Ent_File_Ruta.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\BataTransac\CapaServicioWindows.BataTransac.Ent_Fvdespc.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

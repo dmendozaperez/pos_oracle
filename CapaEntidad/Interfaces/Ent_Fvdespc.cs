@@ -33,6 +33,13 @@ namespace CapaEntidad.Interfaces
         public string DESC_FTX { get; set; }
         public string DESC_TXPOS { get; set; }
         public DataTable DT_FVDESPD { get; set; }
+        public Decimal DESC_UNCA { get; set; }
+        public Decimal DESC_UNNC { get; set; }
+        public Decimal DESC_CAJA { get; set; }
+        public Decimal DESC_VACA { get; set; }
+        public Decimal DESC_VANC { get; set; }
+        public Decimal DESC_VCAJ { get; set; }
+
         /// con todas las reglas de medida horizontal
         /// </summary>
         public DataTable DT_FVDESPD_TREGMEDIDA { get; set; }

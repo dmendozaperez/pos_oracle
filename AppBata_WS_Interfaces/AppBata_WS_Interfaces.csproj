@@ -119,7 +119,7 @@
     <WCFMetadataStorage Include="Service References\BataTransac\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\BataTransac\Bata_Transaction.wsdl" />
+    <None Include="Service References\BataTransac\Bata_Transaction1.wsdl" />
     <None Include="Service References\BataTransac\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>
@@ -132,7 +132,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\BataTransac\Bata_Transaction.disco" />
+    <None Include="Service References\BataTransac\Bata_Transaction1.disco" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

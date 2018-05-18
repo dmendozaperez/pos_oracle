@@ -71,17 +71,7 @@ namespace AppBata_WS_Interfaces
             header_user.Password = "566FDFF1-5311-4FE2-B3FC-0346923FE4B4";
 
             List<BataTransac.Ent_File> file = new List<BataTransac.Ent_File>();
-
-            // BataTransac.Ent_File ad = new BataTransac.Ent_File();
-            //ad.file_name = "xxxx";     
-            //file.Add(ad);
-
-            //ad = new BataTransac.Ent_File();
-            //ad.file_name = "yyyy";
-            //file.Add(ad);
-
-            //var array = new BataTransac.Ent_Lista_File();
-            //array.lista_file_name = file.ToArray();
+         
 
             BataTransac.Bata_TransactionSoapClient get_met = new BataTransac.Bata_TransactionSoapClient();
 

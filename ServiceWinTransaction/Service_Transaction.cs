@@ -21,7 +21,8 @@ namespace ServiceWinTransaction
         public Service_Transaction()
         {
             InitializeComponent();
-            tmservicio = new Timer(5000);
+            //5000=5 segundos
+            tmservicio = new Timer(20000);
             tmservicio.Elapsed += new ElapsedEventHandler(tmpServicio_Elapsed);
         }
         void tmpServicio_Elapsed(object sender, ElapsedEventArgs e)

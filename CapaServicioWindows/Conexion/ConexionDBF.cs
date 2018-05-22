@@ -20,7 +20,8 @@ namespace CapaServicioWindows.Conexion
         }
         public static string _conexion_fvdes_oledb(string _path)
         {
-            return "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + _path + ";Extended Properties=dBASE IV;";
+            return "Provider=VFPOLEDB;Data Source=" + _path + ";Exclusive=No"; 
+            //return "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + _path_default + ";Extended Properties=dBASE IV;";
         }
     }
 }

@@ -7,12 +7,30 @@ using System.Data.OleDb;
 using System.Data;
 using CapaServicioWindows.Conexion;
 using CapaServicioWindows.Envio_Ws;
+using System.IO;
 
 namespace CapaServicioWindows.Modular
 {
     public class Basico
     {
         private DateTime fecha_despacho = DateTime.Today.AddDays(-3);
+
+        /// <summary>
+        /// tiempo de espera a ejecutar
+        /// </summary>
+        /// <param name="_segundos"></param>
+        private  void _espera_ejecuta(Int32 _segundos)
+        {
+            try
+            {
+                _segundos = _segundos * 1000;
+                System.Threading.Thread.Sleep(_segundos);
+            }
+            catch
+            {
+
+            }
+        }
         /// <summary>
         /// verificar las guias cerradas
         /// </summary>
@@ -21,12 +39,12 @@ namespace CapaServicioWindows.Modular
         {
             /*fecha para traer los pedido cerrados desde una fecha*/
             List<BataTransac.Ent_Scdddes> _lista_scdddes = null;
-            String sqlquery_scdddes = "SELECT [DDES_TIPO],[DDES_ALMAC],[DDES_GUIRE],[DDES_NDESP],[DDES_MFDES],[DDES_DESTI]," +
-                                      "[DDES_N_INI],[DDES_N_FIN],[DDES_CPAGO],[DDES_FEMBA],[DDES_FECHA],[DDES_FDESP],[DDES_ESTAD]," +
-                                      "[DDES_GGUIA],[DDES_CCOND],[DDES_CALZ],[DDES_NCALZ],[DDES_TOCAJ],[DDES_IMPRE],[DDES_GVALO]," +
-                                      "[DDES_SUBGR],[DDES_RUCTC],[DDES_TRANS],[DDES_TRAN2],[DDES_OBSER],[DDES_NOMTC],[DDES_NGUIA]," +
-                                      "[DDES_NRLIQ],[DDES_LIMPR],[DDES_EMPRE],[DDES_CANAL],[DDES_CADEN],[DDES_SECCI],[DDES_FTX],[DDES_FTXTD]" +
-                                      "FROM [SCDDDES] WHERE DDES_FDESP>=? and DDES_TIPO='DES' and DDES_ESTAD<>'A' and (DDES_FTXTD IS NULL OR LEN(DDES_FTXTD)=0) AND (DDES_CADEN IS NOT NULL OR LEN(DDES_CADEN)>0) ";            
+            String sqlquery_scdddes = "SELECT DDES_TIPO,DDES_ALMAC,DDES_GUIRE,DDES_NDESP,DDES_MFDES,DDES_DESTI," +
+                                      "DDES_N_INI,DDES_N_FIN,DDES_CPAGO,DDES_FEMBA,DDES_FECHA,DDES_FDESP,DDES_ESTAD," +
+                                      "DDES_GGUIA,DDES_CCOND,DDES_CALZ,DDES_NCALZ,DDES_TOCAJ,DDES_IMPRE,DDES_GVALO," +
+                                      "DDES_SUBGR,DDES_RUCTC,DDES_TRANS,DDES_TRAN2,DDES_OBSER,DDES_NOMTC,DDES_NGUIA," +
+                                      "DDES_NRLIQ,DDES_LIMPR,DDES_EMPRE,DDES_CANAL,DDES_CADEN,DDES_SECCI,DDES_FTX,DDES_FTXTD " +
+                                      "FROM SCDDDES WHERE DDES_FDESP>=CTOD('" + fecha_despacho.ToString("MM/dd/yy")  + "') and DDES_TIPO='DES' and DDES_ESTAD<>'A' AND EMPTY(DDES_FTXTD) AND (NOT EMPTY(DDES_CADEN)) ";            
             try
             {
                 //Util dd = new Util();
@@ -37,7 +55,7 @@ namespace CapaServicioWindows.Modular
                     using (OleDbCommand cmd = new OleDbCommand(sqlquery_scdddes, cn))
                     {
                         cmd.CommandTimeout = 0;
-                        cmd.Parameters.Add("DATE", OleDbType.Date).Value = fecha_despacho;
+                        //cmd.Parameters.Add("DATE", OleDbType.Date).Value = fecha_despacho;
                         using (OleDbDataAdapter da = new OleDbDataAdapter(cmd))
                         {
                             DataTable dt = new DataTable();
@@ -103,11 +121,11 @@ namespace CapaServicioWindows.Modular
         private BataTransac.Ent_Fvdespc get_fvdespc(string codalm, string nroguia,string _path, ref string error,ref Boolean fila_existe)
         {
             BataTransac.Ent_Fvdespc fvdespc = null;
-            String sqlquery_fvdespc = "SELECT [DESC_ALMAC],[DESC_GUDIS],[DESC_NDESP],[DESC_TDES],[DESC_FECHA],[DESC_FDESP]," +
-                                      "[DESC_ESTAD],[DESC_TIPO],[DESC_TORI],[DESC_FEMI],[DESC_SEMI],[DESC_FTRA],[DESC_NUME]," +
-                                      "[DESC_CONCE],[DESC_NMOVC],[DESC_EMPRE],[DESC_SECCI],[DESC_CANAL],[DESC_CADEN],[DESC_FTX]," +
-                                      "[DESC_TXPOS],[DESC_UNCA],[DESC_UNNC],[DESC_CAJA],[DESC_VACA],[DESC_VANC],[DESC_VCAJ]" +
-                                      "FROM [FVDESPC] WHERE DESC_GUDIS='" + nroguia + "' AND DESC_ALMAC='" + codalm +"'";
+            String sqlquery_fvdespc = "SELECT DESC_ALMAC,DESC_GUDIS,DESC_NDESP,DESC_TDES,DESC_FECHA,DESC_FDESP," +
+                                      "DESC_ESTAD,DESC_TIPO,DESC_TORI,DESC_FEMI,DESC_SEMI,DESC_FTRA,DESC_NUME," +
+                                      "DESC_CONCE,DESC_NMOVC,DESC_EMPRE,DESC_SECCI,DESC_CANAL,DESC_CADEN,DESC_FTX," +
+                                      "DESC_TXPOS,DESC_UNCA,DESC_UNNC,DESC_CAJA,DESC_VACA,DESC_VANC,DESC_VCAJ " +
+                                      "FROM FVDESPC WHERE DESC_GUDIS='" + nroguia + "' AND DESC_ALMAC='" + codalm +"'";
             try
             {
                 using (OleDbConnection cn = new OleDbConnection(ConexionDBF._conexion_fvdes_oledb(_path)))
@@ -181,12 +199,12 @@ namespace CapaServicioWindows.Modular
         private DataTable get_fvdespd(string codalm,string nroguia, string _path, ref string error)
         {
             DataTable fvdespd = null;
-            string sqlquery_fvdespd = "SELECT [DESD_TIPO],[DESD_GUDIS],[DESD_NDESP],[DESD_ALMAC],[DESD_ARTIC],[DESD_CALID]," +
+            string sqlquery_fvdespd = "SELECT DESD_TIPO,DESD_GUDIS,DESD_NDESP,DESD_ALMAC,DESD_ARTIC,DESD_CALID," +
                                        "DESD_ME00,DESD_ME01,DESD_ME02,DESD_ME03,DESD_ME04,DESD_ME05,DESD_ME06,DESD_ME07,DESD_ME08," + 
-                                       "DESD_ME09,DESD_ME10,DESD_ME11,[DESD_CLASE],[DESD_MERC],[DESD_CATEG],[DESD_SUBCA]," + 
-                                       "[DESD_MARCA],[DESD_MERC3],[DESD_CATE3],[DESD_SUBC3],[DESD_MARC3],[DESD_CNDME]," + 
-                                       "[DESD_EMPRE],[DESD_SECCI],[DESD_CANAL]," +
-                                       "[DESD_CADEN],[DESD_GGUIA],[DESD_ESTAD] FROM [FVDESPD] WHERE DESD_GUDIS='" + nroguia + "'" +
+                                       "DESD_ME09,DESD_ME10,DESD_ME11,DESD_CLASE,DESD_MERC,DESD_CATEG,DESD_SUBCA," + 
+                                       "DESD_MARCA,DESD_MERC3,DESD_CATE3,DESD_SUBC3,DESD_MARC3,DESD_CNDME," + 
+                                       "DESD_EMPRE,DESD_SECCI,DESD_CANAL," +
+                                       "DESD_CADEN,DESD_GGUIA,DESD_ESTAD FROM FVDESPD WHERE DESD_GUDIS='" + nroguia + "'" +
                                        " AND DESD_ALMAC='" + codalm + "'";
             try
             {
@@ -225,16 +243,40 @@ namespace CapaServicioWindows.Modular
 
             try
             {
+
+
                 #region<CAPTURAR EL PATH DE LOS DBF>
                 Util locationdbf = new Util();
                 listar_location_dbf= locationdbf.get_location_dbf();
                 #endregion
 
+                /*VALIDACION DE EJECUCION */
+                #region<VALIDA ARCHIVO SI EXISTE PARA NO REALIZAR NINGUNA ACCCION POR SEGURIDAD DE REINDEXACION DEL FOX>
+                string name_txt = "NOPOS";
+                var _locatio_noservicio = listar_location_dbf.Where(x => x.rutloc_namedbf == name_txt).FirstOrDefault();
+
+                //Boolean valida_exists_txt = false;
+                string ruta_validacion = "";
+                if (_locatio_noservicio!=null)
+                {
+                     ruta_validacion = _locatio_noservicio.rutloc_location + "\\" + _locatio_noservicio.rutloc_namedbf + ".txt";
+
+                   /* if (File.Exists(@ruta_validacion)) return;*/ //valida_exists_txt = true;
+
+                }
+
+                #endregion
+
+                //if (valida_exists_txt) return;
+
+
                 string name_dbf = "SCDDDES";
                 var _locatio_scdddes = listar_location_dbf.Where(x => x.rutloc_namedbf==name_dbf).FirstOrDefault();
 
                 string _error = "";
-
+                /*ya no entra a consultar*/
+                if (File.Exists(@ruta_validacion)) return;
+                /**/
                 _lista_guiasC = get_scdddes(_locatio_scdddes.rutloc_location,ref _error);
 
                 /*VERIFICAR SI HAY ERROR*/
@@ -251,6 +293,11 @@ namespace CapaServicioWindows.Modular
                 {
                     foreach (BataTransac.Ent_Scdddes filaC in _lista_guiasC)
                     {
+                        //if (filaC.DDES_GUIRE == "1914315")
+                        //{
+
+                     
+
                         _error = "";
                         name_dbf = "FVDESPC";
 
@@ -258,11 +305,16 @@ namespace CapaServicioWindows.Modular
                         Boolean existe_data = false;
 
                         var _location_fvdespc = listar_location_dbf.Where(x => x.rutloc_namedbf == name_dbf).FirstOrDefault();
+
+                        /*ya no entra a consultar*/
+                        if (File.Exists(@ruta_validacion)) return;
+                        /**/
+
                         BataTransac.Ent_Fvdespc fvdespc = get_fvdespc(filaC.DDES_ALMAC, filaC.DDES_GUIRE, _location_fvdespc.rutloc_location, ref _error, ref existe_data);
 
                         /*si existe data entonces entra a la condicion*/
                         if (existe_data)
-                        {                       
+                        {
                             /*validando fechas de despacho*/
                             if (fvdespc != null)
                             {
@@ -287,6 +339,11 @@ namespace CapaServicioWindows.Modular
                                 _error = "";
                                 name_dbf = "FVDESPD";
                                 var _location_fvdespd = listar_location_dbf.Where(x => x.rutloc_namedbf == name_dbf).FirstOrDefault();
+
+                                /*ya no entra a consultar*/
+                                if (File.Exists(@ruta_validacion)) return;
+                                /**/
+
                                 DataTable fvdespd = get_fvdespd(filaC.DDES_ALMAC, filaC.DDES_GUIRE, _location_fvdespd.rutloc_location, ref _error);
 
                                 /*VERIFICAR SI HAY ERROR*/
@@ -321,6 +378,11 @@ namespace CapaServicioWindows.Modular
                                             name_dbf = "SCDDDES";
                                             var _locatio_scdddes_edit = listar_location_dbf.Where(x => x.rutloc_namedbf == name_dbf).FirstOrDefault();
                                             /*si es que las guias se grabaron correctamente entonces vamos a setear el valor en el dbf*/
+
+                                            /*ya no entra a consultar*/
+                                            if (File.Exists(@ruta_validacion)) return;
+                                            /**/
+
                                             edit_scdddes(fvdespc.DESC_ALMAC, fvdespc.DESC_GUDIS, _locatio_scdddes_edit.rutloc_location);
                                         }
                                         else
@@ -333,8 +395,8 @@ namespace CapaServicioWindows.Modular
                                 }
 
                             }
-                       }
-                        
+                        }
+                    //}
                     }
                 }
 

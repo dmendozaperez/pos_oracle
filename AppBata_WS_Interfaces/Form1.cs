@@ -58,8 +58,9 @@ namespace AppBata_WS_Interfaces
             tw.Close();
             tw.Dispose();
             Cursor.Current = Cursors.WaitCursor;
+            string _erro = "";
             Basico cc = new Basico();
-            cc.eje_envio_guias();
+            cc.eje_envio_guias(ref _erro);
             MessageBox.Show("termino");
             Cursor.Current = Cursors.Default;
         }

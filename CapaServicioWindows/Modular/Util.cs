@@ -8,7 +8,7 @@ namespace CapaServicioWindows.Modular
 {
     public class Util
     {
-        public  List<BataTransac.Ent_PathDBF> get_location_dbf()
+        public  List<BataTransac.Ent_PathDBF> get_location_dbf(ref string _error_ws)
         {
             List<BataTransac.Ent_PathDBF> list = null;
             try
@@ -34,13 +34,14 @@ namespace CapaServicioWindows.Modular
                 }
 
             }
-            catch (Exception)
+            catch (Exception exc)
             {
+                _error_ws = exc.Message;
                 list = null;                
             }
             return list;
         }
-        public void control_errores_transac(string cod_tipo, string error_des)
+        public void control_errores_transac(string cod_tipo, string error_des,ref string _error_ws)
         {
             try
             {
@@ -53,9 +54,9 @@ namespace CapaServicioWindows.Modular
                 BataTransac.Bata_TransactionSoapClient bata_trans = new BataTransac.Bata_TransactionSoapClient();
                 bata_trans.ws_errores_transaction(header_user, cod_tipo, error_des);
             }
-            catch (Exception)
+            catch (Exception exc)
             {
-
+                _error_ws = exc.Message;
 
             }
         }

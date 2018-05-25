@@ -204,7 +204,7 @@ namespace CapaServicioWindows.Modular
                                        "DESD_ME09,DESD_ME10,DESD_ME11,DESD_CLASE,DESD_MERC,DESD_CATEG,DESD_SUBCA," + 
                                        "DESD_MARCA,DESD_MERC3,DESD_CATE3,DESD_SUBC3,DESD_MARC3,DESD_CNDME," + 
                                        "DESD_EMPRE,DESD_SECCI,DESD_CANAL," +
-                                       "DESD_CADEN,DESD_GGUIA,DESD_ESTAD FROM FVDESPD WHERE DESD_GUDIS='" + nroguia + "'" +
+                                       "DESD_CADEN,DESD_GGUIA,DESD_ESTAD,DESD_PRVTA,DESD_COSTO FROM FVDESPD WHERE DESD_GUDIS='" + nroguia + "'" +
                                        " AND DESD_ALMAC='" + codalm + "'";
             try
             {
@@ -234,7 +234,7 @@ namespace CapaServicioWindows.Modular
         ///ejecutar proceso de envios de guias
         /// </summary>
         /// <returns></returns>
-        public void  eje_envio_guias()
+        public void  eje_envio_guias(ref string _error_ws)
         {
             string _error_transac ="";
             List<BataTransac.Ent_Scdddes> _lista_guiasC = null;
@@ -243,12 +243,16 @@ namespace CapaServicioWindows.Modular
 
             try
             {
-
+                /*segundos para ejecutar*/
+                _espera_ejecuta(20);
+                /***********************/
 
                 #region<CAPTURAR EL PATH DE LOS DBF>
                 Util locationdbf = new Util();
-                listar_location_dbf= locationdbf.get_location_dbf();
+                listar_location_dbf= locationdbf.get_location_dbf(ref _error_ws);
                 #endregion
+
+                if (listar_location_dbf == null) return;
 
                 /*VALIDACION DE EJECUCION */
                 #region<VALIDA ARCHIVO SI EXISTE PARA NO REALIZAR NINGUNA ACCCION POR SEGURIDAD DE REINDEXACION DEL FOX>
@@ -285,7 +289,7 @@ namespace CapaServicioWindows.Modular
                     _error += " ==>TABLA [SCDDDES]";
                     Util ws_error_transac = new Util();
                     /*si hay un error entonces 03 error de lectura dbf*/
-                    ws_error_transac.control_errores_transac("03", _error);
+                    ws_error_transac.control_errores_transac("03", _error,ref _error_ws);
                 }
                 /**/
                
@@ -329,7 +333,7 @@ namespace CapaServicioWindows.Modular
                                 _error += " ==>TABLA [FVDESPC]";
                                 Util ws_error_transac = new Util();
                                 /*si hay un error entonces 03 error de lectura dbf*/
-                                ws_error_transac.control_errores_transac("03", _error);
+                                ws_error_transac.control_errores_transac("03", _error,ref _error_ws);
                             }
                             /**/
 
@@ -352,7 +356,7 @@ namespace CapaServicioWindows.Modular
                                     _error += " ==>TABLA [FVDESPD]";
                                     Util ws_error_transac = new Util();
                                     /*si hay un error entonces 03 error de lectura dbf*/
-                                    ws_error_transac.control_errores_transac("03", _error);
+                                    ws_error_transac.control_errores_transac("03", _error,ref _error_ws);
                                 }
                                 /**/
 
@@ -388,8 +392,9 @@ namespace CapaServicioWindows.Modular
                                         else
                                         {
                                             Util ws_error_transac = new Util();
+                                            _error_ws = envio_guias_ws.ToString();
                                             /*si hay un error entonces 02 error de transaction*/
-                                            ws_error_transac.control_errores_transac("02", envio_guias_ws);
+                                            ws_error_transac.control_errores_transac("02", envio_guias_ws,ref _error_ws);
                                         }
                                     }
                                 }
@@ -403,6 +408,7 @@ namespace CapaServicioWindows.Modular
             }
             catch (Exception exc)
             {
+                _error_ws = exc.Message;
                 _error_transac = exc.Message;
                 //_envio_guias = "";
             }

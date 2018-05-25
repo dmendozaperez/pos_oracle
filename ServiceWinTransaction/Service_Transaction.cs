@@ -22,7 +22,7 @@ namespace ServiceWinTransaction
         {
             InitializeComponent();
             //5000=5 segundos
-            tmservicio = new Timer(20000);
+            tmservicio = new Timer(5000);
             tmservicio.Elapsed += new ElapsedEventHandler(tmpServicio_Elapsed);
         }
         void tmpServicio_Elapsed(object sender, ElapsedEventArgs e)
@@ -30,6 +30,7 @@ namespace ServiceWinTransaction
             //string varchivov = "c://valida_hash.txt";
             Int32 _valor = 0;
             Basico ejecuta_procesos = null;
+            string _ruta_erro_file = @"D:\BataTransaction\ERROR_WS.txt";
             try
             {
                 //string _error = "ing";
@@ -50,12 +51,21 @@ namespace ServiceWinTransaction
                     //tw.Flush();
                     //tw.Close();
                     //tw.Dispose();
-
+                    string _error_ws = "";
                     //_error = CapaServicioWindows.Modular.Basico.retornar();
                     ejecuta_procesos = new Basico();
-                    ejecuta_procesos.eje_envio_guias();
+                    ejecuta_procesos.eje_envio_guias(ref _error_ws);
 
                     _valida_service = 0;
+
+                    if (_error_ws.Length>0)
+                    {
+                        TextWriter tw = new StreamWriter(_ruta_erro_file, true);
+                        tw.WriteLine(_error_ws);
+                        tw.Flush();
+                        tw.Close();
+                        tw.Dispose();
+                    }
 
                     //if (_error.Length > 0)
                     //{
@@ -70,6 +80,11 @@ namespace ServiceWinTransaction
             }
             catch(Exception exc)
             {
+                TextWriter tw = new StreamWriter(_ruta_erro_file, true);
+                tw.WriteLine(exc.Message);
+                tw.Flush();
+                tw.Close();
+                tw.Dispose();
                 //TextWriter tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
                 //tw.WriteLine(exc.Message);
                 //tw.Flush();

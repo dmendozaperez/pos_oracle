@@ -22,6 +22,9 @@ namespace InterfaceWPF.Bll
             Boolean valida = false;
             try
             {
+
+               // return false;
+
                 string[] _archivos_mnt = Directory.GetFiles(@ruta_temp_interface, "*.MNT");
 
                 for (Int32 a = 0; a < _archivos_mnt.Length; ++a)

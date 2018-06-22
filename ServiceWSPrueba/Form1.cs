@@ -24,7 +24,7 @@ namespace ServiceWSPrueba
             la.Password = "Bata2018**.";
 
             wsconsulta_des.Sunat_Reniec_PESoapClient c = new wsconsulta_des.Sunat_Reniec_PESoapClient();
-            var r = c.ws_persona_reniec(la, "41149120");
+            var r = c.ws_persona_reniec(la, "41149125");
 
             //wsconsulta.Cons_ClienteSoapClient c = new wsconsulta.Cons_ClienteSoapClient();
             //DataTable r = c.ws_persona_reniec("41149120");

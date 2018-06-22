@@ -59,22 +59,22 @@ namespace Ws_ConsultReniecSunat
                     string filePath = new Uri(System.Reflection.Assembly.GetExecutingAssembly().CodeBase).LocalPath;
                     string _tessdata = Path.GetDirectoryName(filePath) + "\\tessdata";
 
-                    myInfo = new PersonaReniec();
+                    myInfo = new PersonaReniec(true);
 
-                    _codigo_captcha = myInfo.UseTesseract(_tessdata);
+                    //_codigo_captcha = myInfo.UseTesseract(_tessdata);
                     myInfo.GetInfo(nro_dni, _codigo_captcha);
 
-                    if (myInfo.Nombres == null)
-                    {
-                        _codigo_captcha = myInfo.UseTesseract( _tessdata);
-                        myInfo.GetInfo(nro_dni, _codigo_captcha);
-                    }
+                    //if (myInfo.Nombres == null)
+                    //{
+                    //    _codigo_captcha = myInfo.UseTesseract( _tessdata);
+                    //    myInfo.GetInfo(nro_dni, _codigo_captcha);
+                    //}
 
-                    if (myInfo.Nombres == null)
-                    {
-                        _codigo_captcha = myInfo.UseTesseract( _tessdata);
-                        myInfo.GetInfo(nro_dni, _codigo_captcha);
-                    }
+                    //if (myInfo.Nombres == null)
+                    //{
+                    //    _codigo_captcha = myInfo.UseTesseract( _tessdata);
+                    //    myInfo.GetInfo(nro_dni, _codigo_captcha);
+                    //}
 
                     if (myInfo.estado=="error")
                     {
@@ -154,25 +154,25 @@ namespace Ws_ConsultReniecSunat
 
                     string filePath = new Uri(System.Reflection.Assembly.GetExecutingAssembly().CodeBase).LocalPath;
                     string _tessdata = Path.GetDirectoryName(filePath) + "\\tessdata";
-                    myInfo = new PersonaSunat();
-                    _codigo_captcha = myInfo.UseTesseract(_tessdata);
+                    myInfo = new PersonaSunat(true);
+                    //_codigo_captcha = myInfo.UseTesseract(_tessdata);
                     myInfo.GetInfo(nro_ruc, _codigo_captcha);
 
-                    if (myInfo.Nombres == "Error!")
-                    {
-                        _codigo_captcha = myInfo.UseTesseract(_tessdata);
-                        myInfo.GetInfo(nro_ruc, _codigo_captcha);
-                    }
-                    if (myInfo.Nombres == "Error!")
-                    {
-                        _codigo_captcha = myInfo.UseTesseract(_tessdata);
-                        myInfo.GetInfo(nro_ruc, _codigo_captcha);
-                    }
-                    if (myInfo.Nombres == "Error!")
-                    {
-                        _codigo_captcha = myInfo.UseTesseract(_tessdata);
-                        myInfo.GetInfo(nro_ruc, _codigo_captcha);
-                    }
+                    //if (myInfo.Nombres == "Error!")
+                    //{
+                    //    _codigo_captcha = myInfo.UseTesseract(_tessdata);
+                    //    myInfo.GetInfo(nro_ruc, _codigo_captcha);
+                    //}
+                    //if (myInfo.Nombres == "Error!")
+                    //{
+                    //    _codigo_captcha = myInfo.UseTesseract(_tessdata);
+                    //    myInfo.GetInfo(nro_ruc, _codigo_captcha);
+                    //}
+                    //if (myInfo.Nombres == "Error!")
+                    //{
+                    //    _codigo_captcha = myInfo.UseTesseract(_tessdata);
+                    //    myInfo.GetInfo(nro_ruc, _codigo_captcha);
+                    //}
 
 
                     if (myInfo.Nombres == "Error!")

@@ -66,6 +66,16 @@ namespace AppBata_WS_Interfaces.BataTransac {
         [System.ServiceModel.OperationContractAttribute(Action="http://bataperu.com.pe/ws_download_file", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         AppBata_WS_Interfaces.BataTransac.ws_download_fileResponse ws_download_file(AppBata_WS_Interfaces.BataTransac.ws_download_fileRequest request);
+        
+        // CODEGEN: Se está generando un contrato de mensaje, ya que el mensaje ws_get_time_servicetransRequest tiene encabezados.
+        [System.ServiceModel.OperationContractAttribute(Action="http://bataperu.com.pe/ws_get_time_servicetrans", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        AppBata_WS_Interfaces.BataTransac.ws_get_time_servicetransResponse ws_get_time_servicetrans(AppBata_WS_Interfaces.BataTransac.ws_get_time_servicetransRequest request);
+        
+        // CODEGEN: Se está generando un contrato de mensaje, ya que el mensaje ws_envia_stock_tdaRequest tiene encabezados.
+        [System.ServiceModel.OperationContractAttribute(Action="http://bataperu.com.pe/ws_envia_stock_tda", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        AppBata_WS_Interfaces.BataTransac.ws_envia_stock_tdaResponse ws_envia_stock_tda(AppBata_WS_Interfaces.BataTransac.ws_envia_stock_tdaRequest request);
     }
     
     /// <remarks/>
@@ -115,6 +125,298 @@ namespace AppBata_WS_Interfaces.BataTransac {
             set {
                 this.anyAttrField = value;
                 this.RaisePropertyChanged("AnyAttr");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://bataperu.com.pe/")]
+    public partial class Ent_Stock : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string cod_tdaField;
+        
+        private string art_codField;
+        
+        private string art_calField;
+        
+        private string _0Field;
+        
+        private string _1Field;
+        
+        private string _2Field;
+        
+        private string _3Field;
+        
+        private string _4Field;
+        
+        private string _5Field;
+        
+        private string _6Field;
+        
+        private string _7Field;
+        
+        private string _8Field;
+        
+        private string _9Field;
+        
+        private string _10Field;
+        
+        private string _11Field;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public string cod_tda {
+            get {
+                return this.cod_tdaField;
+            }
+            set {
+                this.cod_tdaField = value;
+                this.RaisePropertyChanged("cod_tda");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public string art_cod {
+            get {
+                return this.art_codField;
+            }
+            set {
+                this.art_codField = value;
+                this.RaisePropertyChanged("art_cod");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
+        public string art_cal {
+            get {
+                return this.art_calField;
+            }
+            set {
+                this.art_calField = value;
+                this.RaisePropertyChanged("art_cal");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
+        public string _0 {
+            get {
+                return this._0Field;
+            }
+            set {
+                this._0Field = value;
+                this.RaisePropertyChanged("_0");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
+        public string _1 {
+            get {
+                return this._1Field;
+            }
+            set {
+                this._1Field = value;
+                this.RaisePropertyChanged("_1");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
+        public string _2 {
+            get {
+                return this._2Field;
+            }
+            set {
+                this._2Field = value;
+                this.RaisePropertyChanged("_2");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
+        public string _3 {
+            get {
+                return this._3Field;
+            }
+            set {
+                this._3Field = value;
+                this.RaisePropertyChanged("_3");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=7)]
+        public string _4 {
+            get {
+                return this._4Field;
+            }
+            set {
+                this._4Field = value;
+                this.RaisePropertyChanged("_4");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=8)]
+        public string _5 {
+            get {
+                return this._5Field;
+            }
+            set {
+                this._5Field = value;
+                this.RaisePropertyChanged("_5");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=9)]
+        public string _6 {
+            get {
+                return this._6Field;
+            }
+            set {
+                this._6Field = value;
+                this.RaisePropertyChanged("_6");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=10)]
+        public string _7 {
+            get {
+                return this._7Field;
+            }
+            set {
+                this._7Field = value;
+                this.RaisePropertyChanged("_7");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=11)]
+        public string _8 {
+            get {
+                return this._8Field;
+            }
+            set {
+                this._8Field = value;
+                this.RaisePropertyChanged("_8");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=12)]
+        public string _9 {
+            get {
+                return this._9Field;
+            }
+            set {
+                this._9Field = value;
+                this.RaisePropertyChanged("_9");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=13)]
+        public string _10 {
+            get {
+                return this._10Field;
+            }
+            set {
+                this._10Field = value;
+                this.RaisePropertyChanged("_10");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=14)]
+        public string _11 {
+            get {
+                return this._11Field;
+            }
+            set {
+                this._11Field = value;
+                this.RaisePropertyChanged("_11");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://bataperu.com.pe/")]
+    public partial class Ent_Lista_Stock : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private Ent_Stock[] lista_stockField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(Order=0)]
+        public Ent_Stock[] lista_stock {
+            get {
+                return this.lista_stockField;
+            }
+            set {
+                this.lista_stockField = value;
+                this.RaisePropertyChanged("lista_stock");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://bataperu.com.pe/")]
+    public partial class Ent_Config_Service : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private int cser_minField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public int cser_min {
+            get {
+                return this.cser_minField;
+            }
+            set {
+                this.cser_minField = value;
+                this.RaisePropertyChanged("cser_min");
             }
         }
         
@@ -1271,11 +1573,15 @@ namespace AppBata_WS_Interfaces.BataTransac {
         [System.ServiceModel.MessageHeaderAttribute(Namespace="http://bataperu.com.pe/")]
         public AppBata_WS_Interfaces.BataTransac.ValidateAcceso ValidateAcceso;
         
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=0)]
+        public string cod_tda;
+        
         public HelloWorldRequest() {
         }
         
-        public HelloWorldRequest(AppBata_WS_Interfaces.BataTransac.ValidateAcceso ValidateAcceso) {
+        public HelloWorldRequest(AppBata_WS_Interfaces.BataTransac.ValidateAcceso ValidateAcceso, string cod_tda) {
             this.ValidateAcceso = ValidateAcceso;
+            this.cod_tda = cod_tda;
         }
     }
     
@@ -1534,6 +1840,82 @@ namespace AppBata_WS_Interfaces.BataTransac {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="ws_get_time_servicetrans", WrapperNamespace="http://bataperu.com.pe/", IsWrapped=true)]
+    public partial class ws_get_time_servicetransRequest {
+        
+        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://bataperu.com.pe/")]
+        public AppBata_WS_Interfaces.BataTransac.ValidateAcceso ValidateAcceso;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=0)]
+        public string cser_cod;
+        
+        public ws_get_time_servicetransRequest() {
+        }
+        
+        public ws_get_time_servicetransRequest(AppBata_WS_Interfaces.BataTransac.ValidateAcceso ValidateAcceso, string cser_cod) {
+            this.ValidateAcceso = ValidateAcceso;
+            this.cser_cod = cser_cod;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="ws_get_time_servicetransResponse", WrapperNamespace="http://bataperu.com.pe/", IsWrapped=true)]
+    public partial class ws_get_time_servicetransResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=0)]
+        public AppBata_WS_Interfaces.BataTransac.Ent_Config_Service ws_get_time_servicetransResult;
+        
+        public ws_get_time_servicetransResponse() {
+        }
+        
+        public ws_get_time_servicetransResponse(AppBata_WS_Interfaces.BataTransac.Ent_Config_Service ws_get_time_servicetransResult) {
+            this.ws_get_time_servicetransResult = ws_get_time_servicetransResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="ws_envia_stock_tda", WrapperNamespace="http://bataperu.com.pe/", IsWrapped=true)]
+    public partial class ws_envia_stock_tdaRequest {
+        
+        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://bataperu.com.pe/")]
+        public AppBata_WS_Interfaces.BataTransac.ValidateAcceso ValidateAcceso;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=0)]
+        public AppBata_WS_Interfaces.BataTransac.Ent_Lista_Stock lista_stk;
+        
+        public ws_envia_stock_tdaRequest() {
+        }
+        
+        public ws_envia_stock_tdaRequest(AppBata_WS_Interfaces.BataTransac.ValidateAcceso ValidateAcceso, AppBata_WS_Interfaces.BataTransac.Ent_Lista_Stock lista_stk) {
+            this.ValidateAcceso = ValidateAcceso;
+            this.lista_stk = lista_stk;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="ws_envia_stock_tdaResponse", WrapperNamespace="http://bataperu.com.pe/", IsWrapped=true)]
+    public partial class ws_envia_stock_tdaResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=0)]
+        public AppBata_WS_Interfaces.BataTransac.Ent_MsgTransac ws_envia_stock_tdaResult;
+        
+        public ws_envia_stock_tdaResponse() {
+        }
+        
+        public ws_envia_stock_tdaResponse(AppBata_WS_Interfaces.BataTransac.Ent_MsgTransac ws_envia_stock_tdaResult) {
+            this.ws_envia_stock_tdaResult = ws_envia_stock_tdaResult;
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface Bata_TransactionSoapChannel : AppBata_WS_Interfaces.BataTransac.Bata_TransactionSoap, System.ServiceModel.IClientChannel {
     }
@@ -1566,9 +1948,10 @@ namespace AppBata_WS_Interfaces.BataTransac {
             return base.Channel.HelloWorld(request);
         }
         
-        public AppBata_WS_Interfaces.BataTransac.Ent_MsgTransac HelloWorld(AppBata_WS_Interfaces.BataTransac.ValidateAcceso ValidateAcceso) {
+        public AppBata_WS_Interfaces.BataTransac.Ent_MsgTransac HelloWorld(AppBata_WS_Interfaces.BataTransac.ValidateAcceso ValidateAcceso, string cod_tda) {
             AppBata_WS_Interfaces.BataTransac.HelloWorldRequest inValue = new AppBata_WS_Interfaces.BataTransac.HelloWorldRequest();
             inValue.ValidateAcceso = ValidateAcceso;
+            inValue.cod_tda = cod_tda;
             AppBata_WS_Interfaces.BataTransac.HelloWorldResponse retVal = ((AppBata_WS_Interfaces.BataTransac.Bata_TransactionSoap)(this)).HelloWorld(inValue);
             return retVal.HelloWorldResult;
         }
@@ -1668,6 +2051,32 @@ namespace AppBata_WS_Interfaces.BataTransac {
             inValue.file_name = file_name;
             inValue.file_tipo = file_tipo;
             AppBata_WS_Interfaces.BataTransac.ws_download_fileResponse retVal = ((AppBata_WS_Interfaces.BataTransac.Bata_TransactionSoap)(this)).ws_download_file(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        AppBata_WS_Interfaces.BataTransac.ws_get_time_servicetransResponse AppBata_WS_Interfaces.BataTransac.Bata_TransactionSoap.ws_get_time_servicetrans(AppBata_WS_Interfaces.BataTransac.ws_get_time_servicetransRequest request) {
+            return base.Channel.ws_get_time_servicetrans(request);
+        }
+        
+        public AppBata_WS_Interfaces.BataTransac.Ent_Config_Service ws_get_time_servicetrans(AppBata_WS_Interfaces.BataTransac.ValidateAcceso ValidateAcceso, string cser_cod) {
+            AppBata_WS_Interfaces.BataTransac.ws_get_time_servicetransRequest inValue = new AppBata_WS_Interfaces.BataTransac.ws_get_time_servicetransRequest();
+            inValue.ValidateAcceso = ValidateAcceso;
+            inValue.cser_cod = cser_cod;
+            AppBata_WS_Interfaces.BataTransac.ws_get_time_servicetransResponse retVal = ((AppBata_WS_Interfaces.BataTransac.Bata_TransactionSoap)(this)).ws_get_time_servicetrans(inValue);
+            return retVal.ws_get_time_servicetransResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        AppBata_WS_Interfaces.BataTransac.ws_envia_stock_tdaResponse AppBata_WS_Interfaces.BataTransac.Bata_TransactionSoap.ws_envia_stock_tda(AppBata_WS_Interfaces.BataTransac.ws_envia_stock_tdaRequest request) {
+            return base.Channel.ws_envia_stock_tda(request);
+        }
+        
+        public AppBata_WS_Interfaces.BataTransac.Ent_MsgTransac ws_envia_stock_tda(AppBata_WS_Interfaces.BataTransac.ValidateAcceso ValidateAcceso, AppBata_WS_Interfaces.BataTransac.Ent_Lista_Stock lista_stk) {
+            AppBata_WS_Interfaces.BataTransac.ws_envia_stock_tdaRequest inValue = new AppBata_WS_Interfaces.BataTransac.ws_envia_stock_tdaRequest();
+            inValue.ValidateAcceso = ValidateAcceso;
+            inValue.lista_stk = lista_stk;
+            AppBata_WS_Interfaces.BataTransac.ws_envia_stock_tdaResponse retVal = ((AppBata_WS_Interfaces.BataTransac.Bata_TransactionSoap)(this)).ws_envia_stock_tda(inValue);
+            return retVal.ws_envia_stock_tdaResult;
         }
     }
 }

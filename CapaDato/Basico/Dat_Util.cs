@@ -62,5 +62,49 @@ namespace CapaDato.Basico
             }
             return list;
         }
+        /// <summary>
+        /// tiempo de ejecucion de transmision
+        /// </summary>
+        /// <param name="codigo de transmision"></param>
+        /// <returns></returns>
+        public Ent_Config_Service get_config_service(string cser_cod)
+        {
+            Ent_Config_Service config = null;
+            string sqlquery = "USP_CONFIG_SERTIVIO_TIENDA";
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(Ent_Conexion.conexion_posperu))
+                {
+                    try
+                    {
+                        if (cn.State == 0) cn.Open();
+                        using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                        {
+                            cmd.CommandTimeout = 0;
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.Parameters.AddWithValue("@CSER_COD", cser_cod);
+
+                            cmd.Parameters.Add("@CSER_MIN", SqlDbType.Int);
+                            cmd.Parameters["@CSER_MIN"].Direction = ParameterDirection.Output;
+                            cmd.ExecuteNonQuery();
+
+                            config = new Ent_Config_Service();
+                            config.cser_min =Convert.ToInt32(cmd.Parameters["@CSER_MIN"].Value);
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        config = null;
+                    }
+                    if (cn != null)
+                        if (cn.State == ConnectionState.Open) cn.Close();
+                }
+            }
+            catch 
+            {
+                config = null;
+            }
+            return config;
+        }
     }
 }

@@ -3,7 +3,11 @@
   <wsdl:types>
     <s:schema elementFormDefault="qualified" targetNamespace="http://bataperu.com.pe/">
       <s:element name="HelloWorld">
-        <s:complexType />
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="cod_tda" type="s:string" />
+          </s:sequence>
+        </s:complexType>
       </s:element>
       <s:element name="HelloWorldResponse">
         <s:complexType>
@@ -265,6 +269,68 @@
       <s:element name="ws_download_fileResponse">
         <s:complexType />
       </s:element>
+      <s:element name="ws_get_time_servicetrans">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="cser_cod" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_get_time_servicetransResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ws_get_time_servicetransResult" type="tns:Ent_Config_Service" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Ent_Config_Service">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="cser_min" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ws_envia_stock_tda">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="lista_stk" type="tns:Ent_Lista_Stock" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Ent_Lista_Stock">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="lista_stock" type="tns:ArrayOfEnt_Stock" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfEnt_Stock">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Ent_Stock" nillable="true" type="tns:Ent_Stock" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Ent_Stock">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="cod_tda" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="art_cod" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="art_cal" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="_0" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="_1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="_2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="_3" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="_4" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="_5" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="_6" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="_7" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="_8" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="_9" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="_10" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="_11" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ws_envia_stock_tdaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ws_envia_stock_tdaResult" type="tns:Ent_MsgTransac" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="HelloWorldSoapIn">
@@ -354,6 +420,24 @@
   <wsdl:message name="ws_download_fileValidateAcceso">
     <wsdl:part name="ValidateAcceso" element="tns:ValidateAcceso" />
   </wsdl:message>
+  <wsdl:message name="ws_get_time_servicetransSoapIn">
+    <wsdl:part name="parameters" element="tns:ws_get_time_servicetrans" />
+  </wsdl:message>
+  <wsdl:message name="ws_get_time_servicetransSoapOut">
+    <wsdl:part name="parameters" element="tns:ws_get_time_servicetransResponse" />
+  </wsdl:message>
+  <wsdl:message name="ws_get_time_servicetransValidateAcceso">
+    <wsdl:part name="ValidateAcceso" element="tns:ValidateAcceso" />
+  </wsdl:message>
+  <wsdl:message name="ws_envia_stock_tdaSoapIn">
+    <wsdl:part name="parameters" element="tns:ws_envia_stock_tda" />
+  </wsdl:message>
+  <wsdl:message name="ws_envia_stock_tdaSoapOut">
+    <wsdl:part name="parameters" element="tns:ws_envia_stock_tdaResponse" />
+  </wsdl:message>
+  <wsdl:message name="ws_envia_stock_tdaValidateAcceso">
+    <wsdl:part name="ValidateAcceso" element="tns:ValidateAcceso" />
+  </wsdl:message>
   <wsdl:portType name="Bata_TransactionSoap">
     <wsdl:operation name="HelloWorld">
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Consula de bienvenida</wsdl:documentation>
@@ -405,6 +489,16 @@
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Subir archivos al server</wsdl:documentation>
       <wsdl:input message="tns:ws_download_fileSoapIn" />
       <wsdl:output message="tns:ws_download_fileSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ws_get_time_servicetrans">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get de tiempo de ejecucion del servicio transmision net stock de tiendas</wsdl:documentation>
+      <wsdl:input message="tns:ws_get_time_servicetransSoapIn" />
+      <wsdl:output message="tns:ws_get_time_servicetransSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ws_envia_stock_tda">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Enviar Stock de tienda servicio transmision net</wsdl:documentation>
+      <wsdl:input message="tns:ws_envia_stock_tdaSoapIn" />
+      <wsdl:output message="tns:ws_envia_stock_tdaSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="Bata_TransactionSoap" type="tns:Bata_TransactionSoap">
@@ -515,6 +609,26 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="ws_get_time_servicetrans">
+      <soap:operation soapAction="http://bataperu.com.pe/ws_get_time_servicetrans" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ws_get_time_servicetransValidateAcceso" part="ValidateAcceso" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_envia_stock_tda">
+      <soap:operation soapAction="http://bataperu.com.pe/ws_envia_stock_tda" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ws_envia_stock_tdaValidateAcceso" part="ValidateAcceso" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="Bata_TransactionSoap12" type="tns:Bata_TransactionSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -619,6 +733,26 @@
       <wsdl:input>
         <soap12:body use="literal" />
         <soap12:header message="tns:ws_download_fileValidateAcceso" part="ValidateAcceso" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_get_time_servicetrans">
+      <soap12:operation soapAction="http://bataperu.com.pe/ws_get_time_servicetrans" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ws_get_time_servicetransValidateAcceso" part="ValidateAcceso" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_envia_stock_tda">
+      <soap12:operation soapAction="http://bataperu.com.pe/ws_envia_stock_tda" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ws_envia_stock_tdaValidateAcceso" part="ValidateAcceso" use="literal" />
       </wsdl:input>
       <wsdl:output>
         <soap12:body use="literal" />

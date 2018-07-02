@@ -144,7 +144,7 @@ namespace CapaDato.Basico
             catch (Exception)
             {
 
-                ;
+                
             }
         }
     }

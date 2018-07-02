@@ -27,7 +27,7 @@ namespace AppBata_WS_Interfaces
             header_user.Username = "3D4F4673-98EB-4EB5-A468-4B7FAEC0C721";
             header_user.Password = "566FDFF1-5311-4FE2-B3FC-0346923FE4B4";
 
-            var dd = batatran.HelloWorld(header_user);
+            var dd = batatran.HelloWorld(header_user,"50123");
         }
 
         private void btn_ws_update_transaction_guias_Click(object sender, EventArgs e)
@@ -132,6 +132,96 @@ namespace AppBata_WS_Interfaces
            //} 
 
 
+        }
+
+        private void ws_get_time_servicetrans_Click(object sender, EventArgs e)
+        {
+            try
+            { 
+            BataTransac.ValidateAcceso header_user = new BataTransac.ValidateAcceso();
+            header_user.Username = "3D4F4673-98EB-4EB5-A468-4B7FAEC0C721";
+            header_user.Password = "566FDFF1-5311-4FE2-B3FC-0346923FE4B4";
+                
+
+
+            BataTransac.Bata_TransactionSoapClient batatran = new BataTransac.Bata_TransactionSoapClient();
+
+            var config = batatran.ws_get_time_servicetrans(header_user, "01");
+            }
+            catch
+            {
+
+            }
+        }
+
+        private void ws_envia_stock_tda_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                /*user y password*/
+                BataTransac.ValidateAcceso header_user = new BataTransac.ValidateAcceso();
+                header_user.Username = "3D4F4673-98EB-4EB5-A468-4B7FAEC0C721";
+                header_user.Password = "566FDFF1-5311-4FE2-B3FC-0346923FE4B4";
+
+
+                BataTransac.Bata_TransactionSoapClient batatran = new BataTransac.Bata_TransactionSoapClient();
+                
+                /*list*/
+                List<BataTransac.Ent_Stock> result = new List<BataTransac.Ent_Stock>();
+
+                using (StreamReader sr = new StreamReader(@"D:\FSTKG.TXT"))
+                {
+                    string linea;
+                    while ((linea = sr.ReadLine()) != null)
+                    {
+                        BataTransac.Ent_Stock stk = new BataTransac.Ent_Stock();
+                        string[] Array_lista = linea.Split(Convert.ToChar(","));
+                        Array_lista[0]= Array_lista[0].Replace("\"","").Trim().TrimEnd();
+                        Array_lista[1] = Array_lista[1].Replace("\"", "").Trim().TrimEnd();
+
+                        stk.cod_tda = "50" + Array_lista[0].ToString();
+                        stk.art_cod = Array_lista[1].Substring(0, 7);
+                        stk.art_cal = Array_lista[1].Substring(7, 1);
+
+                        stk._0 = Array_lista[3].ToString();
+                        stk._1 = Array_lista[4].ToString();
+                        stk._2 = Array_lista[5].ToString();
+                        stk._3 = Array_lista[6].ToString();
+                        stk._4 = Array_lista[7].ToString();
+                        stk._5 = Array_lista[8].ToString();
+                        stk._6 = Array_lista[9].ToString();
+                        stk._7 = Array_lista[10].ToString();
+                        stk._8 = Array_lista[11].ToString();
+                        stk._9 = Array_lista[12].ToString();
+                        stk._10 = Array_lista[13].ToString();
+                        stk._11 = Array_lista[14].ToString();
+
+                        result.Add(stk);
+                    }
+                  
+                }
+                              
+
+                var array = new BataTransac.Ent_Lista_Stock();
+                array.lista_stock = result.ToArray();
+               
+                BataTransac.Ent_MsgTransac msg = batatran.ws_envia_stock_tda(header_user, array);
+
+                /*Nota*/
+                //msg.codigo = "0";
+                //msg.descripcion = "Se actualizo correctamente";
+                
+                //msg.codigo = "1";
+                //msg.descripcion = "descripcion de error";
+
+                MessageBox.Show(msg.descripcion);
+
+            }
+            catch (Exception exc)
+            {
+
+                MessageBox.Show(exc.Message);
+            }
         }
     }
 }

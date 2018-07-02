@@ -33,6 +33,8 @@
             this.btnenvio = new System.Windows.Forms.Button();
             this.btn_servicewin = new System.Windows.Forms.Button();
             this.btnupload = new System.Windows.Forms.Button();
+            this.ws_get_time_servicetrans = new System.Windows.Forms.Button();
+            this.ws_envia_stock_tda = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnhel
@@ -57,7 +59,7 @@
             // 
             // btnenvio
             // 
-            this.btnenvio.Location = new System.Drawing.Point(182, 72);
+            this.btnenvio.Location = new System.Drawing.Point(291, 72);
             this.btnenvio.Name = "btnenvio";
             this.btnenvio.Size = new System.Drawing.Size(308, 75);
             this.btnenvio.TabIndex = 2;
@@ -68,7 +70,7 @@
             // btn_servicewin
             // 
             this.btn_servicewin.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_servicewin.Location = new System.Drawing.Point(98, 180);
+            this.btn_servicewin.Location = new System.Drawing.Point(48, 153);
             this.btn_servicewin.Name = "btn_servicewin";
             this.btn_servicewin.Size = new System.Drawing.Size(392, 51);
             this.btn_servicewin.TabIndex = 3;
@@ -79,7 +81,7 @@
             // btnupload
             // 
             this.btnupload.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnupload.Location = new System.Drawing.Point(149, 265);
+            this.btnupload.Location = new System.Drawing.Point(12, 254);
             this.btnupload.Name = "btnupload";
             this.btnupload.Size = new System.Drawing.Size(320, 41);
             this.btnupload.TabIndex = 4;
@@ -87,11 +89,34 @@
             this.btnupload.UseVisualStyleBackColor = true;
             this.btnupload.Click += new System.EventHandler(this.btnupload_Click);
             // 
+            // ws_get_time_servicetrans
+            // 
+            this.ws_get_time_servicetrans.Location = new System.Drawing.Point(12, 96);
+            this.ws_get_time_servicetrans.Name = "ws_get_time_servicetrans";
+            this.ws_get_time_servicetrans.Size = new System.Drawing.Size(187, 26);
+            this.ws_get_time_servicetrans.TabIndex = 5;
+            this.ws_get_time_servicetrans.Text = "ws_get_time_servicetrans";
+            this.ws_get_time_servicetrans.UseVisualStyleBackColor = true;
+            this.ws_get_time_servicetrans.Click += new System.EventHandler(this.ws_get_time_servicetrans_Click);
+            // 
+            // ws_envia_stock_tda
+            // 
+            this.ws_envia_stock_tda.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ws_envia_stock_tda.Location = new System.Drawing.Point(393, 263);
+            this.ws_envia_stock_tda.Name = "ws_envia_stock_tda";
+            this.ws_envia_stock_tda.Size = new System.Drawing.Size(191, 32);
+            this.ws_envia_stock_tda.TabIndex = 6;
+            this.ws_envia_stock_tda.Text = "ws_envia_stock_tda";
+            this.ws_envia_stock_tda.UseVisualStyleBackColor = true;
+            this.ws_envia_stock_tda.Click += new System.EventHandler(this.ws_envia_stock_tda_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(619, 357);
+            this.Controls.Add(this.ws_envia_stock_tda);
+            this.Controls.Add(this.ws_get_time_servicetrans);
             this.Controls.Add(this.btnupload);
             this.Controls.Add(this.btn_servicewin);
             this.Controls.Add(this.btnenvio);
@@ -111,6 +136,8 @@
         private System.Windows.Forms.Button btnenvio;
         private System.Windows.Forms.Button btn_servicewin;
         private System.Windows.Forms.Button btnupload;
+        private System.Windows.Forms.Button ws_get_time_servicetrans;
+        private System.Windows.Forms.Button ws_envia_stock_tda;
     }
 }
 

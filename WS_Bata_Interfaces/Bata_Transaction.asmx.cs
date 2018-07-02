@@ -2,7 +2,9 @@
 using CapaDato.Basico;
 using CapaDato.Control;
 using CapaDato.Interfaces;
+using CapaDato.Logistica;
 using CapaEntidad.Interfaces;
+using CapaEntidad.Logistica;
 using CapaEntidad.Util;
 using System;
 using System.Collections.Generic;
@@ -30,10 +32,11 @@ namespace WS_Bata_Interfaces
         Ba_WsConexion autentication_ws;
         [SoapHeader("Authentication", Required = true)]
         [WebMethod(Description = "Consula de bienvenida")]
-        public Ent_MsgTransac HelloWorld()
+        public Ent_MsgTransac HelloWorld(string cod_tda)
         {
             Ent_MsgTransac msg_transac = null;
             autentication_ws = new Ba_WsConexion();
+            Dat_Acceso conexion_tda = null;
             try
             {
                 msg_transac = new Ent_MsgTransac();
@@ -43,6 +46,9 @@ namespace WS_Bata_Interfaces
                 {
                     msg_transac.codigo = "0";
                     msg_transac.descripcion = "Conexión exitosa";
+
+                    conexion_tda = new Dat_Acceso();
+                    conexion_tda._conexion_tda(cod_tda, msg_transac.descripcion);
                 }
                 else
                 {
@@ -276,6 +282,75 @@ namespace WS_Bata_Interfaces
             }
         }
 
+        /// <summary>
+        /// Get de tiempo de ejecucion (Intervalo) del servicio transmision net stock de tiendas
+        /// </summary>
+        /// <param name="cser_cod"></param>
+        /// <returns></returns>
+        [SoapHeader("Authentication", Required = true)]
+        [WebMethod(Description = "Get de tiempo de ejecucion del servicio transmision net stock de tiendas")]
+        public Ent_Config_Service ws_get_time_servicetrans(string cser_cod)
+        {
+            Ent_Config_Service config = null;
+            autentication_ws = new Ba_WsConexion();
+            Dat_Util dat_service = null;
+            try
+            {
+                /*valida acceso a web service*/
+                Boolean valida_ws = autentication_ws.ckeckAuthentication_ws("01", Authentication.Username, Authentication.Password);
+                if (valida_ws)
+                {
+                    dat_service = new Dat_Util();
+                    config = new Ent_Config_Service();
+                    config = dat_service.get_config_service(cser_cod);
+                }
+            }
+            catch 
+            {
+                config = null;
+            }
+            return config;
+        }
+        /// <summary>
+        /// enviar stock de tiendas
+        /// </summary>
+        /// <param name="lista_stk"></param>
+        /// <returns></returns>
+        [SoapHeader("Authentication", Required = true)]
+        [WebMethod(Description = "Enviar Stock de tienda servicio transmision net")]
+        public Ent_MsgTransac ws_envia_stock_tda(Ent_Lista_Stock lista_stk)
+        {
+            Ent_MsgTransac msg_transac = null;
+            autentication_ws = new Ba_WsConexion();
+            Dat_Stock update_stock = null;            
+            try
+            {
+                msg_transac = new Ent_MsgTransac();
+                /*valida acceso a web service*/
+                Boolean valida_ws = autentication_ws.ckeckAuthentication_ws("01", Authentication.Username, Authentication.Password);
+                if (valida_ws)
+                {
+                    /*en esta validaion entonce sya verifico y va aconsumir la base de datos 
+                     para la inyeccion el stock*/
+                    update_stock = new Dat_Stock();
+                    msg_transac = update_stock.insertar_stock_tda(lista_stk);
+                    /*********************************************************/
+                }
+                else
+                {
+                    msg_transac.codigo = "1";
+                    msg_transac.descripcion = "Conexión sin exito";
+                }
+
+            }
+            catch (Exception exc)
+            {
+
+                msg_transac.codigo = "1";
+                msg_transac.descripcion = exc.Message;
+            }
+            return msg_transac;
+        }
     }
 
     public class ValidateAcceso:SoapHeader

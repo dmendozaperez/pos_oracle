@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://bata.ecommerce.pe/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://bata.ecommerce.pe/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://bata.ecommerce.pe/">
+      <s:element name="ws_get_stk_tda">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="cod_art" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="talla" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="cod_ubigeo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_get_stk_tdaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ws_get_stk_tdaResult" type="tns:Ent_Stock_Lista" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Ent_Stock_Lista">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="valida" type="tns:Ent_Stock_Tienda_Acceso" />
+          <s:element minOccurs="0" maxOccurs="1" name="lista_stk_tda" type="tns:ArrayOfEnt_Stock_Tienda" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Ent_Stock_Tienda_Acceso">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="estado" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="descripcion" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfEnt_Stock_Tienda">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Ent_Stock_Tienda" nillable="true" type="tns:Ent_Stock_Tienda" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Ent_Stock_Tienda">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="cod_tda" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="des_tda" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ubigeo_tda" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="direccion_tda" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="cod_art" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="talla" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="cantidad" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ValidateAcceso" type="tns:ValidateAcceso" />
+      <s:complexType name="ValidateAcceso">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+        </s:sequence>
+        <s:anyAttribute />
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="ws_get_stk_tdaSoapIn">
+    <wsdl:part name="parameters" element="tns:ws_get_stk_tda" />
+  </wsdl:message>
+  <wsdl:message name="ws_get_stk_tdaSoapOut">
+    <wsdl:part name="parameters" element="tns:ws_get_stk_tdaResponse" />
+  </wsdl:message>
+  <wsdl:message name="ws_get_stk_tdaValidateAcceso">
+    <wsdl:part name="ValidateAcceso" element="tns:ValidateAcceso" />
+  </wsdl:message>
+  <wsdl:portType name="BataEcommerceSoap">
+    <wsdl:operation name="ws_get_stk_tda">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Enviar Stock de tienda servicio transmision net</wsdl:documentation>
+      <wsdl:input message="tns:ws_get_stk_tdaSoapIn" />
+      <wsdl:output message="tns:ws_get_stk_tdaSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BataEcommerceSoap" type="tns:BataEcommerceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ws_get_stk_tda">
+      <soap:operation soapAction="http://bata.ecommerce.pe/ws_get_stk_tda" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ws_get_stk_tdaValidateAcceso" part="ValidateAcceso" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BataEcommerceSoap12" type="tns:BataEcommerceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ws_get_stk_tda">
+      <soap12:operation soapAction="http://bata.ecommerce.pe/ws_get_stk_tda" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ws_get_stk_tdaValidateAcceso" part="ValidateAcceso" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="BataEcommerce">
+    <wsdl:port name="BataEcommerceSoap" binding="tns:BataEcommerceSoap">
+      <soap:address location="http://ecommerce.bgr.pe/Ws_EC/BataEcommerce.asmx" />
+    </wsdl:port>
+    <wsdl:port name="BataEcommerceSoap12" binding="tns:BataEcommerceSoap12">
+      <soap12:address location="http://ecommerce.bgr.pe/Ws_EC/BataEcommerce.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

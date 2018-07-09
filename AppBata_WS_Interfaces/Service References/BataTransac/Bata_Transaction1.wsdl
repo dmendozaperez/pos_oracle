@@ -310,18 +310,8 @@
           <s:element minOccurs="0" maxOccurs="1" name="cod_tda" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="art_cod" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="art_cal" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="_0" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="_1" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="_2" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="_3" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="_4" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="_5" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="_6" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="_7" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="_8" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="_9" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="_10" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="_11" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="art_talla" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="art_pares" type="s:int" />
         </s:sequence>
       </s:complexType>
       <s:element name="ws_envia_stock_tdaResponse">

@@ -35,6 +35,9 @@
             this.btnupload = new System.Windows.Forms.Button();
             this.ws_get_time_servicetrans = new System.Windows.Forms.Button();
             this.ws_envia_stock_tda = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.ws_get_stk_tda = new System.Windows.Forms.Button();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnhel
@@ -59,7 +62,7 @@
             // 
             // btnenvio
             // 
-            this.btnenvio.Location = new System.Drawing.Point(291, 72);
+            this.btnenvio.Location = new System.Drawing.Point(299, 51);
             this.btnenvio.Name = "btnenvio";
             this.btnenvio.Size = new System.Drawing.Size(308, 75);
             this.btnenvio.TabIndex = 2;
@@ -70,7 +73,7 @@
             // btn_servicewin
             // 
             this.btn_servicewin.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_servicewin.Location = new System.Drawing.Point(48, 153);
+            this.btn_servicewin.Location = new System.Drawing.Point(-4, 132);
             this.btn_servicewin.Name = "btn_servicewin";
             this.btn_servicewin.Size = new System.Drawing.Size(392, 51);
             this.btn_servicewin.TabIndex = 3;
@@ -81,7 +84,7 @@
             // btnupload
             // 
             this.btnupload.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnupload.Location = new System.Drawing.Point(12, 254);
+            this.btnupload.Location = new System.Drawing.Point(12, 211);
             this.btnupload.Name = "btnupload";
             this.btnupload.Size = new System.Drawing.Size(320, 41);
             this.btnupload.TabIndex = 4;
@@ -91,7 +94,7 @@
             // 
             // ws_get_time_servicetrans
             // 
-            this.ws_get_time_servicetrans.Location = new System.Drawing.Point(12, 96);
+            this.ws_get_time_servicetrans.Location = new System.Drawing.Point(12, 62);
             this.ws_get_time_servicetrans.Name = "ws_get_time_servicetrans";
             this.ws_get_time_servicetrans.Size = new System.Drawing.Size(187, 26);
             this.ws_get_time_servicetrans.TabIndex = 5;
@@ -102,7 +105,7 @@
             // ws_envia_stock_tda
             // 
             this.ws_envia_stock_tda.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ws_envia_stock_tda.Location = new System.Drawing.Point(393, 263);
+            this.ws_envia_stock_tda.Location = new System.Drawing.Point(416, 161);
             this.ws_envia_stock_tda.Name = "ws_envia_stock_tda";
             this.ws_envia_stock_tda.Size = new System.Drawing.Size(191, 32);
             this.ws_envia_stock_tda.TabIndex = 6;
@@ -110,11 +113,34 @@
             this.ws_envia_stock_tda.UseVisualStyleBackColor = true;
             this.ws_envia_stock_tda.Click += new System.EventHandler(this.ws_envia_stock_tda_Click);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.BackColor = System.Drawing.Color.Khaki;
+            this.groupBox1.Controls.Add(this.ws_get_stk_tda);
+            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.Location = new System.Drawing.Point(13, 269);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(518, 84);
+            this.groupBox1.TabIndex = 7;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "WEB SERVICE ECCOMERCE";
+            // 
+            // ws_get_stk_tda
+            // 
+            this.ws_get_stk_tda.Location = new System.Drawing.Point(55, 37);
+            this.ws_get_stk_tda.Name = "ws_get_stk_tda";
+            this.ws_get_stk_tda.Size = new System.Drawing.Size(131, 23);
+            this.ws_get_stk_tda.TabIndex = 0;
+            this.ws_get_stk_tda.Text = "ws_get_stk_tda";
+            this.ws_get_stk_tda.UseVisualStyleBackColor = true;
+            this.ws_get_stk_tda.Click += new System.EventHandler(this.ws_get_stk_tda_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(619, 357);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.ws_envia_stock_tda);
             this.Controls.Add(this.ws_get_time_servicetrans);
             this.Controls.Add(this.btnupload);
@@ -125,6 +151,7 @@
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "WS BATA INTERFACES";
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -138,6 +165,8 @@
         private System.Windows.Forms.Button btnupload;
         private System.Windows.Forms.Button ws_get_time_servicetrans;
         private System.Windows.Forms.Button ws_envia_stock_tda;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button ws_get_stk_tda;
     }
 }
 

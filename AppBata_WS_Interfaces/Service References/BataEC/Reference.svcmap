@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="b43ace61-4880-4e1b-be7b-d1f33f8a9c4c" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="f9b496e9-3420-4130-abcc-9ca7f6e0d964" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <EnableDataBinding>true</EnableDataBinding>
@@ -18,11 +18,11 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://posperu.bgr.pe/ws_batapos/Bata_Transaction.asmx" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://ecommerce.bgr.pe/Ws_EC/BataEcommerce.asmx" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="Bata_Transaction1.wsdl" MetadataType="Wsdl" ID="463f383c-50f6-44c1-aa1f-09b5dd3f571c" SourceId="1" SourceUrl="http://posperu.bgr.pe/ws_batapos/Bata_Transaction.asmx?wsdl" />
-    <MetadataFile FileName="Bata_Transaction1.disco" MetadataType="Disco" ID="3942c663-4e60-4e73-8356-b01dcceebc62" SourceId="1" SourceUrl="http://posperu.bgr.pe/ws_batapos/Bata_Transaction.asmx?disco" />
+    <MetadataFile FileName="BataEcommerce1.wsdl" MetadataType="Wsdl" ID="da4e4509-20de-4d4d-a6aa-198bb11c47b5" SourceId="1" SourceUrl="http://ecommerce.bgr.pe/Ws_EC/BataEcommerce.asmx?wsdl" />
+    <MetadataFile FileName="BataEcommerce1.disco" MetadataType="Disco" ID="7c168558-ae6e-4223-976c-64f043acef61" SourceId="1" SourceUrl="http://ecommerce.bgr.pe/Ws_EC/BataEcommerce.asmx?disco" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

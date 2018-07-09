@@ -152,29 +152,9 @@ namespace AppBata_WS_Interfaces.BataTransac {
         
         private string art_calField;
         
-        private string _0Field;
+        private string art_tallaField;
         
-        private string _1Field;
-        
-        private string _2Field;
-        
-        private string _3Field;
-        
-        private string _4Field;
-        
-        private string _5Field;
-        
-        private string _6Field;
-        
-        private string _7Field;
-        
-        private string _8Field;
-        
-        private string _9Field;
-        
-        private string _10Field;
-        
-        private string _11Field;
+        private int art_paresField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
@@ -214,145 +194,25 @@ namespace AppBata_WS_Interfaces.BataTransac {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-        public string _0 {
+        public string art_talla {
             get {
-                return this._0Field;
+                return this.art_tallaField;
             }
             set {
-                this._0Field = value;
-                this.RaisePropertyChanged("_0");
+                this.art_tallaField = value;
+                this.RaisePropertyChanged("art_talla");
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=4)]
-        public string _1 {
+        public int art_pares {
             get {
-                return this._1Field;
+                return this.art_paresField;
             }
             set {
-                this._1Field = value;
-                this.RaisePropertyChanged("_1");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
-        public string _2 {
-            get {
-                return this._2Field;
-            }
-            set {
-                this._2Field = value;
-                this.RaisePropertyChanged("_2");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
-        public string _3 {
-            get {
-                return this._3Field;
-            }
-            set {
-                this._3Field = value;
-                this.RaisePropertyChanged("_3");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=7)]
-        public string _4 {
-            get {
-                return this._4Field;
-            }
-            set {
-                this._4Field = value;
-                this.RaisePropertyChanged("_4");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=8)]
-        public string _5 {
-            get {
-                return this._5Field;
-            }
-            set {
-                this._5Field = value;
-                this.RaisePropertyChanged("_5");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=9)]
-        public string _6 {
-            get {
-                return this._6Field;
-            }
-            set {
-                this._6Field = value;
-                this.RaisePropertyChanged("_6");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=10)]
-        public string _7 {
-            get {
-                return this._7Field;
-            }
-            set {
-                this._7Field = value;
-                this.RaisePropertyChanged("_7");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=11)]
-        public string _8 {
-            get {
-                return this._8Field;
-            }
-            set {
-                this._8Field = value;
-                this.RaisePropertyChanged("_8");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=12)]
-        public string _9 {
-            get {
-                return this._9Field;
-            }
-            set {
-                this._9Field = value;
-                this.RaisePropertyChanged("_9");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=13)]
-        public string _10 {
-            get {
-                return this._10Field;
-            }
-            set {
-                this._10Field = value;
-                this.RaisePropertyChanged("_10");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=14)]
-        public string _11 {
-            get {
-                return this._11Field;
-            }
-            set {
-                this._11Field = value;
-                this.RaisePropertyChanged("_11");
+                this.art_paresField = value;
+                this.RaisePropertyChanged("art_pares");
             }
         }
         

@@ -25,6 +25,7 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppBata_WS_Interfaces", "AppBata_WS_Interfaces\AppBata_WS_Interfaces.csproj", "{C783CF63-D017-4A95-AA71-62638E960A36}"
 	ProjectSection(ProjectDependencies) = postProject
 		{9C787199-FBAD-4BEA-8332-73B204FC84E9} = {9C787199-FBAD-4BEA-8332-73B204FC84E9}
+		{B12A5DEB-4436-42E5-9015-0AEB6ED9DE52} = {B12A5DEB-4436-42E5-9015-0AEB6ED9DE52}
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CapaServicioWindows", "CapaServicioWindows\CapaServicioWindows.csproj", "{371B33AD-399F-448E-9C58-FB07A742A61E}"
@@ -40,6 +41,8 @@ Project("{6141683F-8A12-4E36-9623-2EB02B2C2303}") = "InstaladorTransaction", "In
 	ProjectSection(ProjectDependencies) = postProject
 		{E3D2FCE3-B7EC-425D-B563-AC271BFA8C2F} = {E3D2FCE3-B7EC-425D-B563-AC271BFA8C2F}
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WS_Ecommerce", "WS_Ecommerce\WS_Ecommerce.csproj", "{B12A5DEB-4436-42E5-9015-0AEB6ED9DE52}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -207,6 +210,18 @@ Global
 		{78FFFC3C-C624-4DF0-BCB0-3F6ED3286AD4}.Release|Any CPU.Build.0 = SingleImage
 		{78FFFC3C-C624-4DF0-BCB0-3F6ED3286AD4}.SingleImage|Any CPU.ActiveCfg = SingleImage
 		{78FFFC3C-C624-4DF0-BCB0-3F6ED3286AD4}.SingleImage|Any CPU.Build.0 = SingleImage
+		{B12A5DEB-4436-42E5-9015-0AEB6ED9DE52}.CD_ROM|Any CPU.ActiveCfg = Release|Any CPU
+		{B12A5DEB-4436-42E5-9015-0AEB6ED9DE52}.CD_ROM|Any CPU.Build.0 = Release|Any CPU
+		{B12A5DEB-4436-42E5-9015-0AEB6ED9DE52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B12A5DEB-4436-42E5-9015-0AEB6ED9DE52}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B12A5DEB-4436-42E5-9015-0AEB6ED9DE52}.Development|Any CPU.ActiveCfg = Debug|Any CPU
+		{B12A5DEB-4436-42E5-9015-0AEB6ED9DE52}.Development|Any CPU.Build.0 = Debug|Any CPU
+		{B12A5DEB-4436-42E5-9015-0AEB6ED9DE52}.DVD-5|Any CPU.ActiveCfg = Debug|Any CPU
+		{B12A5DEB-4436-42E5-9015-0AEB6ED9DE52}.DVD-5|Any CPU.Build.0 = Debug|Any CPU
+		{B12A5DEB-4436-42E5-9015-0AEB6ED9DE52}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B12A5DEB-4436-42E5-9015-0AEB6ED9DE52}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B12A5DEB-4436-42E5-9015-0AEB6ED9DE52}.SingleImage|Any CPU.ActiveCfg = Release|Any CPU
+		{B12A5DEB-4436-42E5-9015-0AEB6ED9DE52}.SingleImage|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

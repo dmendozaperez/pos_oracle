@@ -45,6 +45,7 @@
     <Compile Include="Basico\Dat_Util.cs" />
     <Compile Include="Control\Dat_Acceso.cs" />
     <Compile Include="Control\Dat_Error_Transac.cs" />
+    <Compile Include="Ecommerce\Dat_Stock_Tienda.cs" />
     <Compile Include="Interfaces\Dat_Interface.cs" />
     <Compile Include="Interfaces\Dat_RecepcionGuias.cs" />
     <Compile Include="Logistica\Dat_GuiasDespacho.cs" />
@@ -58,6 +59,7 @@
       <Name>CapaEntidad</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

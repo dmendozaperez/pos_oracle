@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
+  <contractRef ref="http://ecommerce.bgr.pe/Ws_EC/BataEcommerce.asmx?wsdl" docRef="http://ecommerce.bgr.pe/Ws_EC/BataEcommerce.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="http://ecommerce.bgr.pe/Ws_EC/BataEcommerce.asmx" xmlns:q1="http://bata.ecommerce.pe/" binding="q1:BataEcommerceSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="http://ecommerce.bgr.pe/Ws_EC/BataEcommerce.asmx" xmlns:q2="http://bata.ecommerce.pe/" binding="q2:BataEcommerceSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+</discovery>

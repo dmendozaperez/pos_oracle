@@ -76,24 +76,27 @@ namespace CapaDato.Logistica
                 table.Columns.Add("cod_tda", typeof(string));
                 table.Columns.Add("cod_art", typeof(string));
                 table.Columns.Add("calidad", typeof(string));
-                table.Columns.Add("00", typeof(string));
-                table.Columns.Add("01", typeof(string));
-                table.Columns.Add("02", typeof(string));
-                table.Columns.Add("03", typeof(string));
-                table.Columns.Add("04", typeof(string));
-                table.Columns.Add("05", typeof(string));
-                table.Columns.Add("06", typeof(string));
-                table.Columns.Add("07", typeof(string));
-                table.Columns.Add("08", typeof(string));
-                table.Columns.Add("09", typeof(string));
-                table.Columns.Add("10", typeof(string));
-                table.Columns.Add("11", typeof(string));                                
+                table.Columns.Add("talla", typeof(string));
+                table.Columns.Add("pares", typeof(Int32));
+                //table.Columns.Add("02", typeof(string));
+                //table.Columns.Add("03", typeof(string));
+                //table.Columns.Add("04", typeof(string));
+                //table.Columns.Add("05", typeof(string));
+                //table.Columns.Add("06", typeof(string));
+                //table.Columns.Add("07", typeof(string));
+                //table.Columns.Add("08", typeof(string));
+                //table.Columns.Add("09", typeof(string));
+                //table.Columns.Add("10", typeof(string));
+                //table.Columns.Add("11", typeof(string));                                
 
                 foreach(var item in list.lista_stock)
                 {
+                    //table.Rows.Add(item.cod_tda, item.art_cod, item.art_cal,
+                    //               item._0, item._1, item._2, item._3, item._4, item._5,
+                    //               item._6, item._7, item._8, item._9, item._10, item._11);
+
                     table.Rows.Add(item.cod_tda, item.art_cod, item.art_cal,
-                                   item._0, item._1, item._2, item._3, item._4, item._5,
-                                   item._6, item._7, item._8, item._9, item._10, item._11);
+                                   item.art_talla, item.art_pares);
                 }
             }
             catch (Exception)

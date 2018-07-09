@@ -169,38 +169,44 @@ namespace AppBata_WS_Interfaces
                 /*list*/
                 List<BataTransac.Ent_Stock> result = new List<BataTransac.Ent_Stock>();
 
-                using (StreamReader sr = new StreamReader(@"D:\FSTKG.TXT"))
-                {
-                    string linea;
-                    while ((linea = sr.ReadLine()) != null)
-                    {
-                        BataTransac.Ent_Stock stk = new BataTransac.Ent_Stock();
-                        string[] Array_lista = linea.Split(Convert.ToChar(","));
-                        Array_lista[0]= Array_lista[0].Replace("\"","").Trim().TrimEnd();
-                        Array_lista[1] = Array_lista[1].Replace("\"", "").Trim().TrimEnd();
+                //using (StreamReader sr = new StreamReader(@"D:\FSTKG.TXT"))
+                //{
+                //    string linea;
+                //    while ((linea = sr.ReadLine()) != null)
+                //    {
+                //        BataTransac.Ent_Stock stk = new BataTransac.Ent_Stock();
+                //        string[] Array_lista = linea.Split(Convert.ToChar(","));
+                //        Array_lista[0]= Array_lista[0].Replace("\"","").Trim().TrimEnd();
+                //        Array_lista[1] = Array_lista[1].Replace("\"", "").Trim().TrimEnd();
 
-                        stk.cod_tda = "50" + Array_lista[0].ToString();
-                        stk.art_cod = Array_lista[1].Substring(0, 7);
-                        stk.art_cal = Array_lista[1].Substring(7, 1);
+                //        stk.cod_tda = "50" + Array_lista[0].ToString();
+                //        stk.art_cod = Array_lista[1].Substring(0, 7);
+                //        stk.art_cal = Array_lista[1].Substring(7, 1);
 
-                        stk._0 = Array_lista[3].ToString();
-                        stk._1 = Array_lista[4].ToString();
-                        stk._2 = Array_lista[5].ToString();
-                        stk._3 = Array_lista[6].ToString();
-                        stk._4 = Array_lista[7].ToString();
-                        stk._5 = Array_lista[8].ToString();
-                        stk._6 = Array_lista[9].ToString();
-                        stk._7 = Array_lista[10].ToString();
-                        stk._8 = Array_lista[11].ToString();
-                        stk._9 = Array_lista[12].ToString();
-                        stk._10 = Array_lista[13].ToString();
-                        stk._11 = Array_lista[14].ToString();
+                //        stk._0 = Array_lista[3].ToString();
+                //        stk._1 = Array_lista[4].ToString();
+                //        stk._2 = Array_lista[5].ToString();
+                //        stk._3 = Array_lista[6].ToString();
+                //        stk._4 = Array_lista[7].ToString();
+                //        stk._5 = Array_lista[8].ToString();
+                //        stk._6 = Array_lista[9].ToString();
+                //        stk._7 = Array_lista[10].ToString();
+                //        stk._8 = Array_lista[11].ToString();
+                //        stk._9 = Array_lista[12].ToString();
+                //        stk._10 = Array_lista[13].ToString();
+                //        stk._11 = Array_lista[14].ToString();
 
-                        result.Add(stk);
-                    }
-                  
-                }
-                              
+                //        result.Add(stk);
+                //    }
+
+                //}
+                BataTransac.Ent_Stock stk = new BataTransac.Ent_Stock();
+                stk.cod_tda = "50140";
+                stk.art_cod = "0018623";
+                stk.art_cal = "1";
+                stk.art_talla = "20";
+                stk.art_pares = 20;
+                result.Add(stk);
 
                 var array = new BataTransac.Ent_Lista_Stock();
                 array.lista_stock = result.ToArray();
@@ -222,6 +228,20 @@ namespace AppBata_WS_Interfaces
 
                 MessageBox.Show(exc.Message);
             }
+        }
+
+        private void ws_get_stk_tda_Click(object sender, EventArgs e)
+        {
+            /*user y password*/
+            BataEC.ValidateAcceso header_user = new BataEC.ValidateAcceso();
+            header_user.Username = "EA646294-11F4-4836-8C6E-F5D9B5F681FC";
+            header_user.Password = "DB959DFE-E49A-4F9B-8CD5-97364EE31FBA";
+
+
+            BataEC.BataEcommerceSoapClient batatran = new BataEC.BataEcommerceSoapClient();
+
+            var result = batatran.ws_get_stk_tda(header_user, "5533806", "40", "150101");
+
         }
     }
 }

@@ -44,7 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CapaDato\Venta\Dat_Venta.cs" />
     <Compile Include="Conexion\ConexionDBF.cs" />
+    <Compile Include="Conexion\ConexionSQL.cs" />
     <Compile Include="Conexion\ConexionWS.cs" />
     <Compile Include="Entidad\SCDDDES.cs" />
     <Compile Include="Envio_Ws\Envio_Guias.cs" />

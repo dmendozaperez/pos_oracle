@@ -158,21 +158,21 @@ namespace Ws_ConsultReniecSunat
                     //_codigo_captcha = myInfo.UseTesseract(_tessdata);
                     myInfo.GetInfo(nro_ruc, _codigo_captcha);
 
-                    //if (myInfo.Nombres == "Error!")
-                    //{
-                    //    _codigo_captcha = myInfo.UseTesseract(_tessdata);
-                    //    myInfo.GetInfo(nro_ruc, _codigo_captcha);
-                    //}
-                    //if (myInfo.Nombres == "Error!")
-                    //{
-                    //    _codigo_captcha = myInfo.UseTesseract(_tessdata);
-                    //    myInfo.GetInfo(nro_ruc, _codigo_captcha);
-                    //}
-                    //if (myInfo.Nombres == "Error!")
-                    //{
-                    //    _codigo_captcha = myInfo.UseTesseract(_tessdata);
-                    //    myInfo.GetInfo(nro_ruc, _codigo_captcha);
-                    //}
+                    if (myInfo.Nombres == "Error!")
+                    {
+                        _codigo_captcha = myInfo.UseTesseract(_tessdata);
+                        myInfo.GetInfo(nro_ruc, _codigo_captcha);
+                    }
+                    if (myInfo.Nombres == "Error!")
+                    {
+                        _codigo_captcha = myInfo.UseTesseract(_tessdata);
+                        myInfo.GetInfo(nro_ruc, _codigo_captcha);
+                    }
+                    if (myInfo.Nombres == "Error!")
+                    {
+                        _codigo_captcha = myInfo.UseTesseract(_tessdata);
+                        myInfo.GetInfo(nro_ruc, _codigo_captcha);
+                    }
 
 
                     if (myInfo.Nombres == "Error!")

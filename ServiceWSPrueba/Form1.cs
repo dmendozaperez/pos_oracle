@@ -19,12 +19,12 @@ namespace ServiceWSPrueba
 
         private void button1_Click(object sender, EventArgs e)
         {
-            wsconsulta_des.validateLogin la = new wsconsulta_des.validateLogin();
+            wsconsulta.validateLogin la = new wsconsulta.validateLogin();
             la.Username = "BataPeru";
             la.Password = "Bata2018**.";
 
-            wsconsulta_des.Sunat_Reniec_PESoapClient c = new wsconsulta_des.Sunat_Reniec_PESoapClient();
-            var r = c.ws_persona_reniec(la, "41149125");
+            wsconsulta.Sunat_Reniec_PESoapClient c = new wsconsulta.Sunat_Reniec_PESoapClient();
+            var r = c.ws_persona_sunat(la, "20101951872");
 
             //wsconsulta.Cons_ClienteSoapClient c = new wsconsulta.Cons_ClienteSoapClient();
             //DataTable r = c.ws_persona_reniec("41149120");

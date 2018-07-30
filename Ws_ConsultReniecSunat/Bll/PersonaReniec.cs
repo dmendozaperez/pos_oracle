@@ -91,9 +91,10 @@ namespace Ws_ConsultReniecSunat.Bll
         {
             try
             {
-                if (win_cli) return;
                 myCookie = null;
                 myCookie = new CookieContainer();
+                if (win_cli) return;
+               
 
                 //Permitir SSL
                 ServicePointManager.Expect100Continue = true;

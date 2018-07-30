@@ -3,11 +3,13 @@ using CapaDato.Basico;
 using CapaDato.Control;
 using CapaDato.Interfaces;
 using CapaDato.Logistica;
+using CapaDato.Venta;
 using CapaEntidad.Interfaces;
 using CapaEntidad.Logistica;
 using CapaEntidad.Util;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Services;
@@ -346,6 +348,45 @@ namespace WS_Bata_Interfaces
             catch (Exception exc)
             {
 
+                msg_transac.codigo = "1";
+                msg_transac.descripcion = exc.Message;
+            }
+            return msg_transac;
+        }
+
+        [SoapHeader("Authentication", Required = true)]
+        [WebMethod(Description = "Enviar Ventas de tienda")]
+        public Ent_MsgTransac ws_envia_venta_tda(string cod_tda, DataSet ds_transac_tda)
+        {
+            Ent_MsgTransac msg_transac = null;
+            autentication_ws = new Ba_WsConexion();
+            Dat_Venta  update_venta = null;
+            try
+            {
+                msg_transac = new Ent_MsgTransac();
+                Boolean valida_ws = autentication_ws.ckeckAuthentication_ws("01", Authentication.Username, Authentication.Password);
+                if (valida_ws)
+                {
+                    update_venta = new Dat_Venta();
+                    msg_transac = update_venta.inserta_venta(cod_tda, ds_transac_tda);
+
+                    if (msg_transac.codigo!="0")
+                    { 
+                        /*transaccione de tiendas*/
+                        String tip_error = "04";
+                        Dat_Error_Transac error_transac = new Dat_Error_Transac();
+                        error_transac.insertar_errores_transac(tip_error, msg_transac.descripcion);
+                    }
+                }
+                else
+                {
+                    msg_transac.codigo = "1";
+                    msg_transac.descripcion = "Conexión sin exito";
+                }
+
+            }
+            catch (Exception exc)
+            {
                 msg_transac.codigo = "1";
                 msg_transac.descripcion = exc.Message;
             }

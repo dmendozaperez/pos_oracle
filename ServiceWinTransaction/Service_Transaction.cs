@@ -1,4 +1,5 @@
 ﻿//using CapaServicioWindows.Modular;
+using CapaServicioWindows.CapaDato.Venta;
 using CapaServicioWindows.Modular;
 using System;
 using System.Collections.Generic;
@@ -29,8 +30,10 @@ namespace ServiceWinTransaction
         {
             //string varchivov = "c://valida_hash.txt";
             Int32 _valor = 0;
-            Basico ejecuta_procesos = null;
+           
             string _ruta_erro_file = @"D:\BataTransaction\ERROR_WS.txt";
+            string _valida_proc_venta = @"D:\venta.txt";
+            Boolean proceso_venta = false;
             try
             {
                 //string _error = "ing";
@@ -39,6 +42,9 @@ namespace ServiceWinTransaction
                 //tw.Flush();
                 //tw.Close();
                 //tw.Dispose();
+
+                /*si el archivo existe entonces ejecutar procesos de venta*/
+                if (File.Exists(@_valida_proc_venta)) proceso_venta = true;
 
                 if (_valida_service == 0)
                 {
@@ -53,8 +59,25 @@ namespace ServiceWinTransaction
                     //tw.Dispose();
                     string _error_ws = "";
                     //_error = CapaServicioWindows.Modular.Basico.retornar();
-                    ejecuta_procesos = new Basico();
-                    ejecuta_procesos.eje_envio_guias(ref _error_ws);
+
+                    #region<SOLO PARA ALMACEN HABILITAR ESTE PROCESO>
+                    if (!proceso_venta)
+                    { 
+                        Basico ejecuta_procesos = null;
+                        ejecuta_procesos = new Basico();
+                        ejecuta_procesos.eje_envio_guias(ref _error_ws);
+                    }
+                    #endregion
+
+
+                    #region <PROCESAMIENTO DE VENTAS DE TIENDA>
+                    if (proceso_venta)
+                    { 
+                        Dat_Venta ejecuta_proc_venta = null;
+                        ejecuta_proc_venta = new Dat_Venta();
+                        ejecuta_proc_venta.procesar_ventas_SQL(ref _error_ws);
+                    }
+                    #endregion
 
                     _valida_service = 0;
 

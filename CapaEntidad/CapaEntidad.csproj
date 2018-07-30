@@ -45,6 +45,8 @@
     <Compile Include="Interfaces\Ent_Scdddes.cs" />
     <Compile Include="Logistica\Ent_GuiasDespacho.cs" />
     <Compile Include="Logistica\Ent_Stock.cs" />
+    <Compile Include="SCDREMB\Ent_SCDREMB.cs" />
+    <Compile Include="SCDREMB\List_Scdrem.cs" />
     <Compile Include="Util\Ent_Conexion.cs" />
     <Compile Include="Util\Ent_Config_Service.cs" />
     <Compile Include="Util\Ent_File.cs" />

@@ -44,6 +44,8 @@ Project("{6141683F-8A12-4E36-9623-2EB02B2C2303}") = "InstaladorTransaction", "In
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WS_Ecommerce", "WS_Ecommerce\WS_Ecommerce.csproj", "{B12A5DEB-4436-42E5-9015-0AEB6ED9DE52}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WS_PosPeru", "WS_PosPeru\WS_PosPeru.csproj", "{50B14D96-501D-4141-96EC-4200D37E5D11}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		CD_ROM|Any CPU = CD_ROM|Any CPU
@@ -222,6 +224,18 @@ Global
 		{B12A5DEB-4436-42E5-9015-0AEB6ED9DE52}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B12A5DEB-4436-42E5-9015-0AEB6ED9DE52}.SingleImage|Any CPU.ActiveCfg = Release|Any CPU
 		{B12A5DEB-4436-42E5-9015-0AEB6ED9DE52}.SingleImage|Any CPU.Build.0 = Release|Any CPU
+		{50B14D96-501D-4141-96EC-4200D37E5D11}.CD_ROM|Any CPU.ActiveCfg = Release|Any CPU
+		{50B14D96-501D-4141-96EC-4200D37E5D11}.CD_ROM|Any CPU.Build.0 = Release|Any CPU
+		{50B14D96-501D-4141-96EC-4200D37E5D11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50B14D96-501D-4141-96EC-4200D37E5D11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50B14D96-501D-4141-96EC-4200D37E5D11}.Development|Any CPU.ActiveCfg = Debug|Any CPU
+		{50B14D96-501D-4141-96EC-4200D37E5D11}.Development|Any CPU.Build.0 = Debug|Any CPU
+		{50B14D96-501D-4141-96EC-4200D37E5D11}.DVD-5|Any CPU.ActiveCfg = Debug|Any CPU
+		{50B14D96-501D-4141-96EC-4200D37E5D11}.DVD-5|Any CPU.Build.0 = Debug|Any CPU
+		{50B14D96-501D-4141-96EC-4200D37E5D11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50B14D96-501D-4141-96EC-4200D37E5D11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50B14D96-501D-4141-96EC-4200D37E5D11}.SingleImage|Any CPU.ActiveCfg = Release|Any CPU
+		{50B14D96-501D-4141-96EC-4200D37E5D11}.SingleImage|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

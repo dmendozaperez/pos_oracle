@@ -52,14 +52,14 @@ namespace InterfaceWPF
 
             Dat_Interface _tienda = new Dat_Interface();
             /*maestros de tienda*/
-            dwtienda.ItemsSource = _tienda.get_tienda();
+            dwtienda.ItemsSource = _tienda.get_tienda("PE");
             dwtienda.DisplayMember = "des_entid";
             dwtienda.ValueMember = "cod_entid";
             dwtienda.SelectedIndex = -1;
             dwtienda.Focus();
 
             /*stock de tienda*/
-            dwtiendastk.ItemsSource = _tienda.get_tienda();
+            dwtiendastk.ItemsSource = _tienda.get_tienda("PE");
             dwtiendastk.DisplayMember = "des_entid";
             dwtiendastk.ValueMember = "cod_entid";
             dwtiendastk.SelectedIndex = -1;
@@ -67,14 +67,14 @@ namespace InterfaceWPF
 
 
             /*transferencia de tienda invalid*/
-            dwtiendatrans.ItemsSource = _tienda.get_tienda();
+            dwtiendatrans.ItemsSource = _tienda.get_tienda("PE");
             dwtiendatrans.DisplayMember = "des_entid";
             dwtiendatrans.ValueMember = "cod_entid";
             dwtiendatrans.SelectedIndex = -1;
             dwtiendatrans.Focus();
 
             /*transpaso de almacen a tienda*/
-            dwtiendatrans1.ItemsSource = _tienda.get_tienda(true);
+            dwtiendatrans1.ItemsSource = _tienda.get_tienda("PE",true);
             dwtiendatrans1.DisplayMember = "des_entid";
             dwtiendatrans1.ValueMember = "cod_entid";
             dwtiendatrans1.SelectedIndex = 0;
@@ -90,26 +90,126 @@ namespace InterfaceWPF
         {
             generainter_retail_location();
         }
+
+        private void llenarTiendaTda(object sender, RoutedEventArgs e)
+        {            
+            try
+            {
+                Dat_Interface _tienda = new Dat_Interface();
+                string c =e.OriginalSource.ToString();
+                string Pais = "";
+                
+                if (c.Contains("Peru"))
+                    Pais = "PE";
+
+                if (c.Contains("Ecuador"))
+                    Pais = "EC";
+
+                dwtienda.Items.Clear();
+
+                dwtienda.ItemsSource = _tienda.get_tienda(Pais);
+                dwtienda.DisplayMember = "des_entid";
+                dwtienda.ValueMember = "cod_entid";
+             
+                dwtienda.SelectedIndex = -1;
+                dwtienda.Focus();
+            }
+            catch (Exception ex) {
+            }
+        }
+
+        private void llenarTiendaStk(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Dat_Interface _tienda = new Dat_Interface();
+                string Pais = "";
+                string c = e.OriginalSource.ToString();
+
+                if (c.Contains("Peru"))
+                    Pais = "PE";
+
+                if (c.Contains("Ecuador"))
+                    Pais = "EC";
+
+                dwtiendastk.ItemsSource = _tienda.get_tienda(Pais);
+                dwtiendastk.DisplayMember = "des_entid";
+                dwtiendastk.ValueMember = "cod_entid";
+                dwtiendastk.SelectedIndex = -1;
+                dwtiendastk.Focus();
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+
+        private void llenarTiendaShp(object sender, RoutedEventArgs e)
+        {
+
+            try
+            {
+                Dat_Interface _tienda = new Dat_Interface();
+                string Pais = "";
+                string c = e.OriginalSource.ToString();
+
+                if (c.Contains("Peru"))
+                    Pais = "PE";
+
+                if (c.Contains("Ecuador"))
+                    Pais = "EC";
+
+                /*transferencia de tienda invalid*/
+                dwtiendatrans.ItemsSource = _tienda.get_tienda(Pais);
+                dwtiendatrans.DisplayMember = "des_entid";
+                dwtiendatrans.ValueMember = "cod_entid";
+                dwtiendatrans.SelectedIndex = -1;
+                dwtiendatrans.Focus();
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+
         private async void generainter_retail_location()
         {
             var metroWindow = this;
-            metroWindow.MetroDialogOptions.ColorScheme = MetroDialogOptions.ColorScheme;
+            
+           metroWindow.MetroDialogOptions.ColorScheme = MetroDialogOptions.ColorScheme;
             ProgressDialogController ProgressAlert = null;
             try
             {
+                Boolean envio = false;
+                string pais = "";
+                string EnviarFTP = "N";
+                string mensaje = "";
+                string mensajeEspera = "Generando Interface";
+
+                if (chk_ftp_Tda.IsChecked == true)
+                {
+                    EnviarFTP = "S";
+                    mensajeEspera = "Enviando X FTP Interface: RETAIL LOCATION";
+                }
+
+                if (rbtPe_Tda.IsChecked == true)
+                    pais = "PE";
+
+                if (rbtEc_Tda.IsChecked == true)
+                    pais = "EC";
+
                 if (await valida_retail_location()) return;
-                ProgressAlert = await this.ShowProgressAsync(Ent_Msg.msgcargando, "Enviando X FTP Interface: RETAIL LOCATION");  //show message
+                ProgressAlert = await this.ShowProgressAsync(Ent_Msg.msgcargando, mensajeEspera);  //show message
                 ProgressAlert.SetIndeterminate();
 
                 string ruta_interface = basico.ruta_temp_interface;
 
                 if (!Directory.Exists(@ruta_interface)) Directory.CreateDirectory(@ruta_interface);
+                             
 
                 string codtda = dwtienda.EditValue.ToString();
                 /*DATOS DE INTERFACE RETAIL_LOCATION Y RETAIL_LOCATION_PROMERY*/
                 /*Se recorre los datos del dataset y convertir a mnt el final del codigo y envia por un metodo en basico de envio
                  por ftp*/
-                DataSet ds =await Task.Run(()=> dat_interface.get_retail_location(codtda));
+                DataSet ds =await Task.Run(()=> dat_interface.get_retail_location(codtda, pais));
                 StringBuilder str = null;
                 string str_cadena = "";
                 if (ds!=null)
@@ -162,14 +262,18 @@ namespace InterfaceWPF
 
                         if (File.Exists(@in_retail_location)) File.Delete(@in_retail_location);
                         File.WriteAllText(@in_retail_location, str_cadena);
-                     
+                        envio = true;
+                        mensaje = "Se creo en la ruta : "+ in_retail_location;
                     }
 
                 }
 
-                Boolean envio= await Task.Run(() => basico.sendftp_file_mnt());
+                if (EnviarFTP.Equals("S")) {
+                    mensaje = "Se enviaron al ftp";
+                    envio = await Task.Run(() => basico.sendftp_file_mnt());
+                }
 
-                if (envio) await metroWindow.ShowMessageAsync(Ent_Msg.msginfomacion, "Se enviaron al ftp", MessageDialogStyle.Affirmative, metroWindow.MetroDialogOptions);
+                if (envio) await metroWindow.ShowMessageAsync(Ent_Msg.msginfomacion, mensaje, MessageDialogStyle.Affirmative, metroWindow.MetroDialogOptions);
 
                 if (ProgressAlert.IsOpen)
                     await ProgressAlert.CloseAsync();
@@ -221,9 +325,27 @@ namespace InterfaceWPF
             ProgressDialogController ProgressAlert = null;
             try
             {
+                string pais = "";
+                string EnviarFTP = "N";
+                string mensaje = "";
+                string mensajeEspera = "Generando Interface";
+                Boolean envio = false;
+
+                if (chk_ftp_M.IsChecked == true)
+                {
+                    EnviarFTP = "S";
+                    mensajeEspera = "Enviando X FTP Interface: Seleccionadas";
+                }
+
+                if (rbtPe_M.IsChecked == true)
+                    pais = "PE";
+
+                if (rbtEcu_M.IsChecked == true)
+                    pais = "EC";
+
                 //Boolean envio = await Task.Run(() => basico.sendftp_file_mnt());
                 if (await valida_maestros()) return;
-                ProgressAlert = await this.ShowProgressAsync(Ent_Msg.msgcargando, "Enviando X FTP Interface: Seleccionadas");  //show message
+                ProgressAlert = await this.ShowProgressAsync(Ent_Msg.msgcargando, mensajeEspera);  //show message
                 ProgressAlert.SetIndeterminate();
 
                 string ruta_interface = basico.ruta_temp_interface;
@@ -237,7 +359,7 @@ namespace InterfaceWPF
                 #region<DIMENSION TYPE>
                 if (chk_item_dimension_type.IsChecked==true)
                 {
-                    DataTable  dt = await Task.Run(() => dat_interface.get_item_dimension_type());
+                    DataTable  dt = await Task.Run(() => dat_interface.get_item_dimension_type(pais));
                     if (dt!=null)
                     {
                         if (dt.Rows.Count > 0)
@@ -270,7 +392,7 @@ namespace InterfaceWPF
                 #region<DIMENSION VALUE>
                 if (chk_item_dimension_value.IsChecked == true)
                 {
-                    DataTable dt = await Task.Run(() => dat_interface.get_item_dimension_value());
+                    DataTable dt = await Task.Run(() => dat_interface.get_item_dimension_value(pais));
                     if (dt != null)
                     {
                         if (dt.Rows.Count > 0)
@@ -303,7 +425,7 @@ namespace InterfaceWPF
                 #region<ITEM>
                 if (chk_item.IsChecked == true)
                 {
-                    DataTable dt = await Task.Run(() => dat_interface.get_item());
+                    DataTable dt = await Task.Run(() => dat_interface.get_item(pais));
                     if (dt != null)
                     {
                         if (dt.Rows.Count > 0)
@@ -350,7 +472,7 @@ namespace InterfaceWPF
                 #region<PRICE UPDATE 2>
                 if (chk_price_update.IsChecked == true)
                 {
-                    DataTable dt = await Task.Run(() => dat_interface.get_price_update_2());
+                    DataTable dt = await Task.Run(() => dat_interface.get_price_update_2(pais));
                     if (dt != null)
                     {
                         if (dt.Rows.Count > 0)
@@ -383,7 +505,7 @@ namespace InterfaceWPF
                 #region<ITEM IMAGES>
                 if (chk_item_images.IsChecked == true)
                 {
-                    DataTable dt = await Task.Run(() => dat_interface.get_item_images());
+                    DataTable dt = await Task.Run(() => dat_interface.get_item_images(pais));
                     if (dt != null)
                     {
                         if (dt.Rows.Count > 0)
@@ -416,7 +538,7 @@ namespace InterfaceWPF
                 #region<ITEM XREF>
                 if (chk_item_xref.IsChecked == true)
                 {
-                    DataTable dt = await Task.Run(() => dat_interface.get_item_xref());
+                    DataTable dt = await Task.Run(() => dat_interface.get_item_xref(pais));
                     if (dt != null)
                     {
                         if (dt.Rows.Count > 0)
@@ -446,9 +568,18 @@ namespace InterfaceWPF
                     }
                 }
                 #endregion
-                Boolean envio = await Task.Run(() => basico.sendftp_file_mnt());
+                envio = true;
 
-                if (envio) await metroWindow.ShowMessageAsync(Ent_Msg.msginfomacion, "Se enviaron al ftp", MessageDialogStyle.Affirmative, metroWindow.MetroDialogOptions);
+                if (EnviarFTP.Equals("S"))
+                {
+                    mensaje = "Se enviaron al ftp";
+                    envio = await Task.Run(() => basico.sendftp_file_mnt());
+                }
+                else {
+                    mensaje = "Se creo en la ruta : " + ruta_interface;
+                }
+
+                if (envio) await metroWindow.ShowMessageAsync(Ent_Msg.msginfomacion, mensaje, MessageDialogStyle.Affirmative, metroWindow.MetroDialogOptions);
                 if (ProgressAlert.IsOpen)
                     await ProgressAlert.CloseAsync();
 
@@ -493,8 +624,28 @@ namespace InterfaceWPF
             ProgressDialogController ProgressAlert = null;
             try
             {
+                Boolean envio = false;
+                string pais = "";
+                string EnviarFTP = "N";
+                string mensaje = "";
+                string mensajeEspera = "Generando Interface";
+
+                if (chk_ftp_stk.IsChecked == true)
+                {
+                    EnviarFTP = "S";
+                    mensajeEspera = "Enviando X FTP Interface: STOCK LEDGER";
+                }
+
+                if (rbtPe_stk.IsChecked == true)
+                    pais = "PE";
+
+                if (rbtEcu_stk.IsChecked == true)
+                    pais = "EC";
+
+
+
                 if (await valida_stock_ledger()) return;
-                ProgressAlert = await this.ShowProgressAsync(Ent_Msg.msgcargando, "Enviando X FTP Interface: STOCK LEDGER");  //show message
+                ProgressAlert = await this.ShowProgressAsync(Ent_Msg.msgcargando, mensajeEspera);  //show message
                 ProgressAlert.SetIndeterminate();
 
                 string ruta_interface = basico.ruta_temp_interface;
@@ -506,7 +657,7 @@ namespace InterfaceWPF
                 
                 /*Se recorre los datos del dataset y convertir a mnt el final del codigo y envia por un metodo en basico de envio
                  por ftp*/
-                DataTable dt = await Task.Run(() => dat_interface.get_stock_ledger(fecha,codtda));
+                DataTable dt = await Task.Run(() => dat_interface.get_stock_ledger(fecha,codtda,pais));
                 StringBuilder str = null;
                 string str_cadena = "";
                 if (dt != null)
@@ -535,13 +686,19 @@ namespace InterfaceWPF
 
                         if (File.Exists(@in_stock_ledger)) File.Delete(@in_stock_ledger);
                         File.WriteAllText(@in_stock_ledger, str_cadena);
+
+                        mensaje = "Se creo en la ruta : " + in_stock_ledger;
                     }                   
 
                 }
 
-                Boolean envio = await Task.Run(() => basico.sendftp_file_mnt());
+                if (EnviarFTP.Equals("S"))
+                {
+                    mensaje = "Se enviaron al ftp";
+                    envio = await Task.Run(() => basico.sendftp_file_mnt());
+                }
 
-                if (envio) await metroWindow.ShowMessageAsync(Ent_Msg.msginfomacion, "Se enviaron al ftp", MessageDialogStyle.Affirmative, metroWindow.MetroDialogOptions);
+                if (envio) await metroWindow.ShowMessageAsync(Ent_Msg.msginfomacion, mensaje, MessageDialogStyle.Affirmative, metroWindow.MetroDialogOptions);
 
                 if (ProgressAlert.IsOpen)
                     await ProgressAlert.CloseAsync();
@@ -591,11 +748,29 @@ namespace InterfaceWPF
             try
             {
 
+                string pais = "";
+                Boolean envio = false;
+                string EnviarFTP = "N";
+                string mensaje = "";
+                string mensajeEspera = "Generando Interface";
+
+                if (chk_ftp_sh.IsChecked == true)
+                {
+                    EnviarFTP = "S";
+                    mensajeEspera = "Enviando X FTP Interface: SHIPPING";
+                }
+
+                if (rbtPe_sh.IsChecked == true)
+                    pais = "PE";
+
+                if (rbtEcu_sh.IsChecked == true)
+                    pais = "EC";
+
                 //Boolean Senvio = await Task.Run(() => basico.sendftp_file_mnt());
 
                 //return;
                 if (await valida_inv_valid_destinations()) return;
-                ProgressAlert = await this.ShowProgressAsync(Ent_Msg.msgcargando, "Enviando X FTP Interface: RETAIL LOCATION");  //show message
+                ProgressAlert = await this.ShowProgressAsync(Ent_Msg.msgcargando, mensajeEspera);  //show message
                 ProgressAlert.SetIndeterminate();
 
                 string ruta_interface = basico.ruta_temp_interface;
@@ -606,7 +781,7 @@ namespace InterfaceWPF
                 /*DATOS DE INTERFACE INVALID */
                 /*Se recorre los datos del dataset y convertir a mnt el final del codigo y envia por un metodo en basico de envio
                  por ftp*/
-                DataTable dt = await Task.Run(() => dat_interface.get_inv_valid_destinations(codtda));
+                DataTable dt = await Task.Run(() => dat_interface.get_inv_valid_destinations(codtda, pais));
                 StringBuilder str = null;
                 string str_cadena = "";
                 if (dt != null)
@@ -635,13 +810,20 @@ namespace InterfaceWPF
 
                         if (File.Exists(@in_inv_valid)) File.Delete(@in_inv_valid);
                         File.WriteAllText(@in_inv_valid, str_cadena);
+
+                        envio = true;
+                        mensaje = "Se creo en la ruta : " + ruta_interface + "\\" + name_inv_valid;
                     }                   
 
                 }
 
-                Boolean envio = await Task.Run(() => basico.sendftp_file_mnt());
+                if (EnviarFTP.Equals("S"))
+                {
+                    mensaje = "Se enviaron al ftp";
+                    envio = await Task.Run(() => basico.sendftp_file_mnt());
+                }
 
-                if (envio) await metroWindow.ShowMessageAsync(Ent_Msg.msginfomacion, "Se enviaron al ftp", MessageDialogStyle.Affirmative, metroWindow.MetroDialogOptions);
+                if (envio) await metroWindow.ShowMessageAsync(Ent_Msg.msginfomacion, mensaje, MessageDialogStyle.Affirmative, metroWindow.MetroDialogOptions);
 
                 if (ProgressAlert.IsOpen)
                     await ProgressAlert.CloseAsync();

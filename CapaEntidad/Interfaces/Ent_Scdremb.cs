@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CapaEntidad.SCDREMB
+namespace CapaEntidad.Interfaces
 {
     public class Ent_SCDREMB
     {
@@ -38,4 +38,10 @@ namespace CapaEntidad.SCDREMB
         public string remb_log { get; set; }
         public string remb_ftx { get; set; }
     }
+
+    public class Ent_List_Scdrem
+    {
+        public Ent_SCDREMB[] lista_scdremb { get; set; }
+    }
+
 }

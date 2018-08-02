@@ -43,10 +43,9 @@
     <Compile Include="Ecommerce\Ent_Stock_Tienda.cs" />
     <Compile Include="Interfaces\Ent_Fvdespc.cs" />
     <Compile Include="Interfaces\Ent_Scdddes.cs" />
+    <Compile Include="Interfaces\Ent_Scdremb.cs" />
     <Compile Include="Logistica\Ent_GuiasDespacho.cs" />
     <Compile Include="Logistica\Ent_Stock.cs" />
-    <Compile Include="CDREMB\Ent_Scdremb.cs" />
-    <Compile Include="CDREMB\List_Scdrem.cs" />
     <Compile Include="Util\Ent_Conexion.cs" />
     <Compile Include="Util\Ent_Config_Service.cs" />
     <Compile Include="Util\Ent_File.cs" />

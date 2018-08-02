@@ -4,9 +4,10 @@ using System.Linq;
 using System.Web;
 using CapaEntidad.Util;
 using System.Web.Services;
-using CapaEntidad.SCDREMB;
+using CapaEntidad.Interfaces;
 using CapaBasico.Util;
-using CapaDato.SCDREMB;
+using CapaDato.Interfaces;
+using System.Web.Services.Protocols;
 
 namespace WS_PosPeru
 {
@@ -18,15 +19,12 @@ namespace WS_PosPeru
     // [System.Web.Script.Services.ScriptService]
     public class PosPeru : System.Web.Services.WebService
     {
+        public ValidateAcceso Authentication;
         Ba_WsConexion autentication_ws;
+     
+        [SoapHeader("Authentication", Required = true)]
         [WebMethod]
-        public string HelloWorld()
-        {
-            return "Hola a todos";
-        }
-
-        [WebMethod]
-        public Ent_MsgTransac Insertar_scdremb(List_Scdrem list_scdrem)
+        public Ent_MsgTransac Insertar_scdremb(Ent_List_Scdrem list_scdrem)
         {
             Ent_MsgTransac msg_transac = null;
             autentication_ws = new Ba_WsConexion();
@@ -35,9 +33,9 @@ namespace WS_PosPeru
             try
             {
                 msg_transac = new Ent_MsgTransac();
-                
-                //Boolean valida_ws = autentication_ws.ckeckAuthentication_ws("01", Authentication.Username, Authentication.Password);
-                Boolean valida_ws = true;
+
+                Boolean valida_ws = autentication_ws.ckeckAuthentication_ws("01", Authentication.Username, Authentication.Password);
+                //Boolean valida_ws = true;
                 if (valida_ws)
                 {
                    
@@ -61,7 +59,11 @@ namespace WS_PosPeru
             return msg_transac;
         }
 
-        
+        public class ValidateAcceso : SoapHeader
+        {
+            public string Username;
+            public string Password;
+        }
 
 
     }

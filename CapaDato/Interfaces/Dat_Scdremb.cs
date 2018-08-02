@@ -1,5 +1,5 @@
 ﻿using CapaEntidad.Util;
-using CapaEntidad.SCDREMB;
+using CapaEntidad.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace CapaDato.SCDREMB
+namespace CapaDato.Interfaces
 {
    public class Dat_Scdremb
     {
-        public Ent_MsgTransac insertar_Scdrem(List_Scdrem lista_scdrem)
+        public Ent_MsgTransac insertar_Scdrem(Ent_List_Scdrem lista_scdrem)
         {
             string sqlquery = "[USP_INSERTAR_SCDREM]";
             Ent_MsgTransac msg = null;
@@ -59,7 +59,7 @@ namespace CapaDato.SCDREMB
 
 
 
-        private DataTable ConvertListToDataTable(List_Scdrem list)
+        private DataTable ConvertListToDataTable(Ent_List_Scdrem list)
         {
             // New table.
             DataTable table = null;

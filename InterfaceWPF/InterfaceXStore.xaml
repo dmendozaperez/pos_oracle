@@ -269,6 +269,57 @@
                     </Grid>
                 </Border>
             </TabItem>
+
+            <TabItem Header="GET BCL" Background="DarkSlateBlue" BorderThickness="1" >
+                <Border CornerRadius="2">
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="20"/>
+                    </Border.Effect>
+                    <Grid Margin="0,0,0,0" Width="930" Height="475" Background="AliceBlue">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="800"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="70"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="300"/>
+                                <ColumnDefinition Width="500"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="40"/>
+                            </Grid.RowDefinitions>
+                            <Label HorizontalAlignment="Right" Content="Seleccione Tienda" FontSize="14" FontWeight="Bold"/>
+                            <dxe:ComboBoxEdit  x:Name="dwtienda_bcl" ValidateOnTextInput="False"  Width="370" Height="28" Grid.Row="0" Cursor="Hand" Grid.Column="1" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" AutoComplete="True"/>
+                            <RadioButton  Grid.Row="1" IsEnabled="true" Checked="llenarTiendaBCL"  IsChecked="True" Cursor="Hand" Grid.Column="1"  Name="rbtPe_bcl" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Peru"  />
+                            <RadioButton  Grid.Row="1" IsEnabled="true" Checked="llenarTiendaBCL" IsChecked="False" Cursor="Hand" Grid.Column="1"  Name="rbtEcu_bcl" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Ecuador" Margin="108,12,0,11"  />
+                            <CheckBox Grid.Row="2" IsEnabled="true" IsChecked="True" Cursor="Hand" Grid.Column="1"  x:Name="chk_ftp_BCL" HorizontalAlignment="Left" VerticalAlignment="Center" Content="ENVIAR FTP"/>
+                            <CheckBox Grid.Row="3" IsEnabled="true" IsChecked="True" Cursor="Hand" Grid.Column="2"  x:Name="chk_bcl_county_city" HorizontalAlignment="Left" VerticalAlignment="Center" Content="COUNTY CITY"/>
+                            <CheckBox Grid.Row="4" IsEnabled="true" IsChecked="True" Cursor="Hand" Grid.Column="2"  x:Name="chk_bcl_electronic" HorizontalAlignment="Left" VerticalAlignment="Center" Content="ELECTRONIC CORRELATIVES"/>
+                            <CheckBox Grid.Row="5" IsEnabled="true" IsChecked="True" Cursor="Hand" Grid.Column="2"  x:Name="chk_bcl_manual" HorizontalAlignment="Left" VerticalAlignment="Center" Content="MANUAL CORRELATIVES"/>
+                            <CheckBox Grid.Row="6" IsEnabled="true" IsChecked="True" Cursor="Hand" Grid.Column="2"  x:Name="chk_bcl_state" HorizontalAlignment="Left" VerticalAlignment="Center" Content="STATE COUNTY"/>
+                            <CheckBox Grid.Row="7" IsEnabled="true" IsChecked="True" Cursor="Hand" Grid.Column="2"  x:Name="chk_bcl_variacion" HorizontalAlignment="Left" VerticalAlignment="Center" Content="VARIACION PRECIOS"/>
+                            <Button Cursor="Hand" Grid.Column="1" Content="Genera Interface BCL" Width="190" Grid.Row="8" HorizontalAlignment="Left" x:Name="btnBCL" Click="btnBCL_Click"  />
+                        </Grid>
+
+
+                    </Grid>
+                </Border>
+            </TabItem>
+            
             <!--Diseño de Transferencias de tiendas-->
             <TabItem Header="Tiendas Shipping" Background="#FF79787E" BorderThickness="1" >
                 <Border CornerRadius="2">

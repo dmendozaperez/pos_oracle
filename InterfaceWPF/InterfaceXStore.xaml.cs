@@ -83,6 +83,15 @@ namespace InterfaceWPF
             dtphasta.Text = DateTime.Today.ToString();
 
             dtpfecha.Text = DateTime.Today.ToString();
+
+            /* tiendas BCL*/
+            dwtienda_bcl.ItemsSource = _tienda.get_tienda("PE");
+            dwtienda_bcl.DisplayMember = "des_entid";
+            dwtienda_bcl.ValueMember = "cod_entid";
+            dwtienda_bcl.SelectedIndex = -1;
+            dwtienda_bcl.Focus();
+
+            
         }
 
 
@@ -164,6 +173,33 @@ namespace InterfaceWPF
                 dwtiendatrans.ValueMember = "cod_entid";
                 dwtiendatrans.SelectedIndex = -1;
                 dwtiendatrans.Focus();
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+
+        private void llenarTiendaBCL(object sender, RoutedEventArgs e)
+        {
+
+            try
+            {
+                Dat_Interface _tienda = new Dat_Interface();
+                string Pais = "";
+                string c = e.OriginalSource.ToString();
+
+                if (c.Contains("Peru"))
+                    Pais = "PE";
+
+                if (c.Contains("Ecuador"))
+                    Pais = "EC";
+
+                /*transferencia de tienda invalid*/
+                dwtienda_bcl.ItemsSource = _tienda.get_tienda(Pais);
+                dwtienda_bcl.DisplayMember = "des_entid";
+                dwtienda_bcl.ValueMember = "cod_entid";
+                dwtienda_bcl.SelectedIndex = -1;
+                dwtienda_bcl.Focus();
             }
             catch (Exception ex)
             {
@@ -1109,5 +1145,290 @@ namespace InterfaceWPF
             }
         }
         #endregion
+
+
+        private void btnBCL_Click(object sender, RoutedEventArgs e)
+        {
+            genera_bcl();
+        }
+        private async void genera_bcl()
+        {
+            var metroWindow = this;
+            metroWindow.MetroDialogOptions.ColorScheme = MetroDialogOptions.ColorScheme;
+           
+            ProgressDialogController ProgressAlert = null;
+            try
+            {
+
+                if (await valida_BCL()) return;
+
+                string codtda = dwtienda_bcl.EditValue.ToString();
+                string pais = "";
+                string EnviarFTP = "N";
+                string mensaje = "";
+                string mensajeEspera = "Generando Interface";
+                Boolean envio = false;
+
+                if (chk_ftp_BCL.IsChecked == true)
+                {
+                    EnviarFTP = "S";
+                    mensajeEspera = "Enviando X FTP Interface: Seleccionadas";
+                }
+
+                if (rbtPe_bcl.IsChecked == true)
+                    pais = "PE";
+
+                if (rbtEcu_bcl.IsChecked == true)
+                    pais = "EC";
+
+              
+                //if (await valida_maestros()) return;
+                ProgressAlert = await this.ShowProgressAsync(Ent_Msg.msgcargando, mensajeEspera);  //show message
+                ProgressAlert.SetIndeterminate();
+
+                string ruta_interface = basico.ruta_temp_interface;
+
+                if (!Directory.Exists(@ruta_interface)) Directory.CreateDirectory(@ruta_interface);
+
+
+                StringBuilder str = null;
+                string str_cadena = "";
+                string name_maestros = ""; string in_maestros = "";
+                #region<COUNTY_CITY>
+                if (chk_bcl_county_city.IsChecked == true)
+                {
+                    DataTable dt = await Task.Run(() => dat_interface.get_county_city(codtda,pais));
+                    if (dt != null)
+                    {
+                        if (dt.Rows.Count > 0)
+                        {
+                            str = new StringBuilder();
+                            for (Int32 i = 0; i < dt.Rows.Count; ++i)
+                            {
+                                str.Append(dt.Rows[i]["BCL_COUNTY_CITY"].ToString());
+
+                                if (i < dt.Rows.Count - 1)
+                                {
+                                    str.Append("\r\n");
+
+                                }
+
+                            }
+                            str_cadena = str.ToString();
+
+
+
+                            name_maestros = "BCL_COUNTY_CITY_" + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
+                            in_maestros = ruta_interface + "\\" + name_maestros;
+
+                            if (File.Exists(@in_maestros)) File.Delete(@in_maestros);
+                            File.WriteAllText(@in_maestros, str_cadena);
+                        }
+                    }
+                }
+                #endregion
+                #region<ELECTRONIC_CORRELATIVES>
+                if (chk_bcl_electronic.IsChecked == true)
+                {
+                    DataTable dt = await Task.Run(() => dat_interface.get_electronic_correlatives(codtda,pais));
+                    if (dt != null)
+                    {
+                        if (dt.Rows.Count > 0)
+                        {
+                            str = new StringBuilder();
+                            for (Int32 i = 0; i < dt.Rows.Count; ++i)
+                            {
+                                str.Append(dt.Rows[i]["BCL_ELECTRONIC_CORRELATIVES"].ToString());
+
+                                if (i < dt.Rows.Count - 1)
+                                {
+                                    str.Append("\r\n");
+
+                                }
+
+                            }
+                            str_cadena = str.ToString();
+
+
+
+                            name_maestros = "BCL_ELECTRONIC_CORRELATIVES_" + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
+                            in_maestros = ruta_interface + "\\" + name_maestros;
+
+                            if (File.Exists(@in_maestros)) File.Delete(@in_maestros);
+                            File.WriteAllText(@in_maestros, str_cadena);
+                        }
+                    }
+                }
+                #endregion
+                #region<MANUAL_CORRELATIVES>
+                if (chk_bcl_manual.IsChecked == true)
+                {
+                    DataTable dt = await Task.Run(() => dat_interface.get_manual_correlatives(codtda,pais));
+                    if (dt != null)
+                    {
+                        if (dt.Rows.Count > 0)
+                        {
+                            str = new StringBuilder();
+                            Decimal i = 0;
+                            foreach (DataRow fila in dt.Rows)
+                            {
+
+                                str.Append(fila["BCL_MANUAL_CORRELATIVES"].ToString());
+                                if (i < dt.Rows.Count - 1)
+                                {
+                                    str.Append("\r\n");
+
+                                }
+                                i += 1;
+
+                            }
+
+                            //for (Int32 i = 0; i < dt.Rows.Count; ++i)
+                            //{
+                            //    str.Append(dt.Rows[i]["ITEM"].ToString());
+
+                            //    if (i < dt.Rows.Count - 1)
+                            //    {
+                            //        str.Append("\r\n");
+
+                            //    }
+
+                            //}
+                            str_cadena = str.ToString();
+
+
+
+                            name_maestros = "BCL_MANUAL_CORRELATIVES_" + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
+                            in_maestros = ruta_interface + "\\" + name_maestros;
+
+                            if (File.Exists(@in_maestros)) File.Delete(@in_maestros);
+                            File.WriteAllText(@in_maestros, str_cadena);
+                        }
+                    }
+                }
+                #endregion
+                #region<STATE COUNTY>
+                if (chk_bcl_state.IsChecked == true)
+                {
+                    DataTable dt = await Task.Run(() => dat_interface.get_state_county(codtda,pais));
+                    if (dt != null)
+                    {
+                        if (dt.Rows.Count > 0)
+                        {
+                            str = new StringBuilder();
+                            for (Int32 i = 0; i < dt.Rows.Count; ++i)
+                            {
+                                str.Append(dt.Rows[i]["BCL_STATE_COUNTY"].ToString());
+
+                                if (i < dt.Rows.Count - 1)
+                                {
+                                    str.Append("\r\n");
+
+                                }
+
+                            }
+                            str_cadena = str.ToString();
+
+
+
+                            name_maestros = "BCL_STATE_COUNTY_" + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
+                            in_maestros = ruta_interface + "\\" + name_maestros;
+
+                            if (File.Exists(@in_maestros)) File.Delete(@in_maestros);
+                            File.WriteAllText(@in_maestros, str_cadena);
+                        }
+                    }
+                }
+                #endregion
+                #region<VARIACION_PRECIOS>
+                if (chk_bcl_variacion.IsChecked == true)
+                {
+                    DataTable dt = await Task.Run(() => dat_interface.get_variacion_precio(codtda,pais));
+                    if (dt != null)
+                    {
+                        if (dt.Rows.Count > 0)
+                        {
+                            str = new StringBuilder();
+                            for (Int32 i = 0; i < dt.Rows.Count; ++i)
+                            {
+                                str.Append(dt.Rows[i]["BCL_VARIACION_PRECIOS"].ToString());
+
+                                if (i < dt.Rows.Count - 1)
+                                {
+                                    str.Append("\r\n");
+
+                                }
+
+                            }
+                            str_cadena = str.ToString();
+
+
+
+                            name_maestros = "BCL_VARIACION_PRECIOS_" + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
+                            in_maestros = ruta_interface + "\\" + name_maestros;
+
+                            if (File.Exists(@in_maestros)) File.Delete(@in_maestros);
+                            File.WriteAllText(@in_maestros, str_cadena);
+                        }
+                    }
+                }
+                #endregion
+             
+                envio = true;
+
+                if (EnviarFTP.Equals("S"))
+                {
+                    mensaje = "Se enviaron al ftp";
+                    envio = await Task.Run(() => basico.sendftp_file_mnt());
+                }
+                else
+                {
+                    mensaje = "Se creo en la ruta : " + ruta_interface;
+                }
+
+                if (envio) await metroWindow.ShowMessageAsync(Ent_Msg.msginfomacion, mensaje, MessageDialogStyle.Affirmative, metroWindow.MetroDialogOptions);
+                if (ProgressAlert.IsOpen)
+                    await ProgressAlert.CloseAsync();
+
+
+
+            }
+            catch (Exception exc)
+            {
+                if (ProgressAlert != null) await ProgressAlert.CloseAsync();
+                await metroWindow.ShowMessageAsync(Ent_Msg.msginfomacion, exc.Message, MessageDialogStyle.Affirmative, metroWindow.MetroDialogOptions);
+            }
+        }
+
+        private async Task<Boolean> valida_BCL()
+        {
+            var metroWindow = this;
+            Boolean valida = false;
+            metroWindow.MetroDialogOptions.ColorScheme = MetroDialogOptions.ColorScheme;
+            string _cod_tda_select = "";
+            if (dwtienda_bcl.EditValue != null)
+            {
+                _cod_tda_select = dwtienda_bcl.EditValue.ToString();
+            }
+            if (_cod_tda_select.Length == 0)
+            {
+                await metroWindow.ShowMessageAsync(Ent_Msg.msginfomacion, "Seleccion la Tienda.", MessageDialogStyle.Affirmative, metroWindow.MetroDialogOptions);
+                dwtienda_bcl.Focus();
+                valida = true;
+                return valida;
+            }
+
+            if ((chk_bcl_variacion.IsChecked == false) && (chk_bcl_state.IsChecked == false)
+               && (chk_bcl_manual.IsChecked == false) && (chk_bcl_electronic.IsChecked == false)
+               && (chk_bcl_county_city.IsChecked == false) )
+            {
+                await metroWindow.ShowMessageAsync(Ent_Msg.msginfomacion, "Seleccione al menos una interface.", MessageDialogStyle.Affirmative, metroWindow.MetroDialogOptions);
+
+                valida = true;
+                return valida;
+            }
+
+            return valida;
+        }
     }
 }

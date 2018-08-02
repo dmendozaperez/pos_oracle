@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CapaEntidad.Interfaces
 {
-    public class Ent_SCDREMB
+    public class Ent_Scdremb
     {
         public string remb_guiac { get; set; }
         public string remb_artic { get; set; }
@@ -41,7 +41,7 @@ namespace CapaEntidad.Interfaces
 
     public class Ent_List_Scdrem
     {
-        public Ent_SCDREMB[] lista_scdremb { get; set; }
+        public Ent_Scdremb[] lista_scdremb { get; set; }
     }
 
 }

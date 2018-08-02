@@ -29,6 +29,10 @@ namespace CapaEntidad.Util
         {
             get { return "Server=posperu.bgr.pe;Database=BDPOS;User ID=pos_oracle;Password=Bata2018**;Trusted_Connection=False;"; }
         }
+        public static string conexion_208
+        {
+            get { return "Server=www.bgr.pe;Database=BdTienda;User ID=dmendoza;Password=Bata2013;Trusted_Connection=False;"; }
+        }
         #endregion
 
     }

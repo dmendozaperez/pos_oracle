@@ -7,6 +7,7 @@ using CapaDato.Venta;
 using CapaEntidad.Interfaces;
 using CapaEntidad.Logistica;
 using CapaEntidad.Util;
+using CapaEntidad.Venta;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -370,6 +371,8 @@ namespace WS_Bata_Interfaces
                     update_venta = new Dat_Venta();
                     msg_transac = update_venta.inserta_venta(cod_tda, ds_transac_tda);
 
+                    //update_venta.inserta_venta_208(cod_tda, ds_transac_tda);
+
                     if (msg_transac.codigo!="0")
                     { 
                         /*transaccione de tiendas*/
@@ -392,6 +395,88 @@ namespace WS_Bata_Interfaces
             }
             return msg_transac;
         }
+
+        [SoapHeader("Authentication", Required = true)]
+        [WebMethod(Description = "Enviar Ventas de tienda")]
+        public Ent_MsgTransac ws_envia_venta_tda_list(string cod_tda, Ent_Venta_List listaventa)
+        {
+            Ent_MsgTransac msg_transac = null;
+            autentication_ws = new Ba_WsConexion();
+            Dat_Venta update_venta = null;
+            try
+            {
+                msg_transac = new Ent_MsgTransac();
+                Boolean valida_ws = autentication_ws.ckeckAuthentication_ws("01", Authentication.Username, Authentication.Password);
+                if (valida_ws)
+                {
+                    update_venta = new Dat_Venta();
+                    //msg_transac = update_venta.inserta_venta(cod_tda, ds_transac_tda);
+
+                    update_venta.inserta_venta_list(cod_tda, listaventa);
+
+                    if (msg_transac.codigo != "0")
+                    {
+                        /*transaccione de tiendas*/
+                        String tip_error = "04";
+                        Dat_Error_Transac error_transac = new Dat_Error_Transac();
+                        error_transac.insertar_errores_transac(tip_error, msg_transac.descripcion);
+                    }
+                }
+                else
+                {
+                    msg_transac.codigo = "1";
+                    msg_transac.descripcion = "Conexión sin exito";
+                }
+
+            }
+            catch (Exception exc)
+            {
+                msg_transac.codigo = "1";
+                msg_transac.descripcion = exc.Message;
+            }
+            return msg_transac;
+        }
+
+        [SoapHeader("Authentication", Required = true)]
+        [WebMethod(Description = "Enviar Ventas de tienda Lista")]
+        public Ent_MsgTransac ws_envia_venta_tda_lista(string cod_tda,Ent_List_Ffactc ffactc,Ent_List_Ffactd ffactd,Ent_List_Fnotaa fnotaa)
+        {
+            Ent_MsgTransac msg_transac = null;
+            autentication_ws = new Ba_WsConexion();
+            Dat_Venta update_venta = null;
+            try
+            {
+                msg_transac = new Ent_MsgTransac();
+                Boolean valida_ws = autentication_ws.ckeckAuthentication_ws("01", Authentication.Username, Authentication.Password);
+                if (valida_ws)
+                {
+                    update_venta = new Dat_Venta();
+                    msg_transac = update_venta.inserta_venta_lista(cod_tda, ffactc, ffactd, fnotaa);
+                  
+
+                    if (msg_transac.codigo != "0")
+                    {
+                        /*transaccione de tiendas*/
+                        String tip_error = "04";
+                        Dat_Error_Transac error_transac = new Dat_Error_Transac();
+                        error_transac.insertar_errores_transac(tip_error, msg_transac.descripcion);
+                    }
+                }
+                else
+                {
+                    msg_transac.codigo = "1";
+                    msg_transac.descripcion = "Conexión sin exito";
+                }
+
+            }
+            catch (Exception exc)
+            {
+                msg_transac.codigo = "1";
+                msg_transac.descripcion = exc.Message;
+            }
+            return msg_transac;
+        }
+
     }
 
     public class ValidateAcceso:SoapHeader

@@ -54,6 +54,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\Ent_MsgTransac.cs" />
     <Compile Include="Util\Ent_PathDBF.cs" />
+    <Compile Include="Venta\Ent_Ffactc.cs" />
+    <Compile Include="Venta\Ent_Ffactd.cs" />
+    <Compile Include="Venta\Ent_Fnotaa.cs" />
+    <Compile Include="Venta\Ent_Venta.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -459,7 +459,7 @@ namespace WS_Bata_Interfaces
                         /*transaccione de tiendas*/
                         String tip_error = "04";
                         Dat_Error_Transac error_transac = new Dat_Error_Transac();
-                        error_transac.insertar_errores_transac(tip_error, msg_transac.descripcion);
+                        error_transac.insertar_errores_transac(tip_error, msg_transac.descripcion, cod_tda);
                     }
                 }
                 else

@@ -1,8 +1,10 @@
 ﻿using CapaDato;
 using CapaDato.Interfaces;
 using CapaDato.Logistica;
+using CapaDato.Poslog;
 using CapaEntidad;
 using CapaEntidad.Logistica;
+using CapaEntidad.Poslog;
 using CapaEntidad.Util;
 using InterfaceWPF.Bll;
 using MahApps.Metro.Controls;
@@ -23,6 +25,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Xml.Linq;
 
 namespace InterfaceWPF
 {
@@ -97,6 +100,14 @@ namespace InterfaceWPF
 
         private void btntienda_Click(object sender, RoutedEventArgs e)
         {
+            Dat_PosLog poslog = new Dat_PosLog();
+            List<Ent_PosLog> lista_poslog = poslog.get_poslog();
+
+            foreach(var item in lista_poslog)
+            {
+                var doc = XDocument.Parse(item.pos_log);
+            }
+
             generainter_retail_location();
         }
 

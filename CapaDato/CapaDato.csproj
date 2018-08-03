@@ -51,6 +51,7 @@
     <Compile Include="Interfaces\Dat_Scdremb.cs" />
     <Compile Include="Logistica\Dat_GuiasDespacho.cs" />
     <Compile Include="Logistica\Dat_Stock.cs" />
+    <Compile Include="Poslog\Dat_PosLog.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Transac\Dat_PosLog.cs" />
     <Compile Include="Venta\Dat_Venta.cs" />

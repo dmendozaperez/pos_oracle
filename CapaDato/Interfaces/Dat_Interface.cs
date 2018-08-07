@@ -552,6 +552,66 @@ namespace CapaDato.Interfaces
             return dt;
         }
 
+        public DataTable get_tender_repository(string codtda, string pais)
+        {
+            DataTable dt = null;
+            string sqlquery = "USP_XSTORE_GET_TENDER_REPOSITORY";
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(Ent_Conexion.conexion_posperu))
+                {
+                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@cod_tda", codtda);
+                        cmd.Parameters.AddWithValue("@PAIS", pais);
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            dt = new DataTable();
+                            da.Fill(dt);
+                        }
+
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+            return dt;
+        }
+
+        public DataTable get_tender_repository_property(string codtda, string pais)
+        {
+            DataTable dt = null;
+            string sqlquery = "USP_XSTORE_GET_TENDER_REPOSITORY_PROPERTY";
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(Ent_Conexion.conexion_posperu))
+                {
+                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@cod_tda", codtda);
+                        cmd.Parameters.AddWithValue("@PAIS", pais);
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            dt = new DataTable();
+                            da.Fill(dt);
+                        }
+
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+            return dt;
+        }
+
 
 
         #endregion

@@ -29,6 +29,12 @@ namespace CapaEntidad.Util
         {
             get { return "Server=posperu.bgr.pe;Database=BDPOS;User ID=pos_oracle;Password=Bata2018**;Trusted_Connection=False;"; }
         }
+
+        public static string conexion_DBF_POS
+        {
+            //get { return "Provider=VFPOLEDB.1;Data Source=" + _path_default + ";Exclusive=No"; }
+            get { return "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=XXXX;Extended Properties=dBASE IV;"; }
+        }
         public static string conexion_posperu_DES
         {
             get { return "Server=posperu.bgr.pe;Database=BDPOS_DES;User ID=pos_oracle;Password=Bata2018**;Trusted_Connection=False;"; }

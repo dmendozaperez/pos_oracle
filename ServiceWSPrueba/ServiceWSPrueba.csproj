@@ -185,6 +185,24 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CapaBasico\CapaBasico.csproj">
+      <Project>{fb033d1a-36a5-4989-87ba-9b53abbe55be}</Project>
+      <Name>CapaBasico</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CapaDato\CapaDato.csproj">
+      <Project>{d7d144b0-89b5-41e1-ae1e-340da4c00141}</Project>
+      <Name>CapaDato</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ICSharpCode.SharpZLib\ICSharpCode.SharpZLib.csproj">
+      <Project>{a219098e-4077-470f-a709-f5f0142845be}</Project>
+      <Name>ICSharpCode.SharpZLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ServiceWinTransaction\ServiceWinTransaction.csproj">
+      <Project>{e3d2fce3-b7ec-425d-b563-ac271bfa8c2f}</Project>
+      <Name>ServiceWinTransaction</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

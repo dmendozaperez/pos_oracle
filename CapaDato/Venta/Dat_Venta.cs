@@ -107,7 +107,7 @@ namespace CapaDato.Venta
                             if (cn.State == 0) cn.Open();
                             using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
                             {
-                                cmd.CommandTimeout = 0;
+                                cmd.CommandTimeout = 120;
                                 cmd.CommandType = CommandType.StoredProcedure;
                                 cmd.Parameters.AddWithValue("@COD_TDA", cod_tda);
                                 cmd.Parameters.AddWithValue("@TMP_FFC", dt_ffc);

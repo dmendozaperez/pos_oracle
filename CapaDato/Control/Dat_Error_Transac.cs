@@ -11,12 +11,31 @@ namespace CapaDato.Control
 {
     public class Dat_Error_Transac
     {
-        public void insertar_errores_transac(string tip_error,string tip_des,string cod_tda="")
+        public void insertar_errores_transac(string tip_error,string tip_des,string cod_tda="",string ambiente_bd="PROD")
         {
             string sqlquery = "USP_INSERTAR_ERRORES_PROCESOS";
             try
             {
-                using (SqlConnection cn = new SqlConnection(Ent_Conexion.conexion_posperu))
+                /*ambiente_bd*/
+                /*PROD=PRODUCCION*/
+                /*DES=DESARROLLO*/
+                /*QA=QA*/
+                string conexion_sql = "";
+
+                switch(ambiente_bd)
+                {
+                    case "PROD":
+                        conexion_sql = Ent_Conexion.conexion_posperu;
+                        break;
+                    case "DES":
+                        conexion_sql = Ent_Conexion.conexion_posperu_DES;
+                        break;
+                    case "QA":
+                        conexion_sql = Ent_Conexion.conexion_posperu_QA;
+                        break;
+                }
+
+                using (SqlConnection cn = new SqlConnection(conexion_sql))
                 {
                     if (cn.State == 0) cn.Open();
                     try

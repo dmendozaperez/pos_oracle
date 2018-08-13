@@ -106,6 +106,7 @@ namespace InterfaceWPF
             foreach(var item in lista_poslog)
             {
                 var doc = XDocument.Parse(item.pos_log);
+
             }
 
             generainter_retail_location();

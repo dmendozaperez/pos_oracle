@@ -243,5 +243,25 @@ namespace AppBata_WS_Interfaces
             var result = batatran.ws_get_stk_tda(header_user, "5533806", "40", "150101");
 
         }
+
+        private void ws_transmision_ingreso_nube_Click(object sender, EventArgs e)
+        {
+            BataTransac.ValidateAcceso header_user = new BataTransac.ValidateAcceso();
+            header_user.Username = "emcomer";
+            header_user.Password = "Bata2013";
+
+            BataTransac.Bata_TransactionSoapClient batatran = new BataTransac.Bata_TransactionSoapClient();
+
+            string pathFileIn = @"D:\TD180811.143";
+
+
+
+            byte[] _archivo_bytes = File.ReadAllBytes(pathFileIn);
+
+            String[] _mensaje = batatran.ws_transmision_ingreso_nube(header_user, _archivo_bytes, "TD180811.143");
+
+
+
+        }
     }
 }

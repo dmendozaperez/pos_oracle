@@ -106,5 +106,62 @@ namespace CapaDato.Basico
             }
             return config;
         }
+        /// <summary>
+        /// ruta de paquete de venta 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public string get_ruta_locationProcesa_dbf(string name)
+        {
+            string ruta = "";
+            string sqlquery = "USP_GET_LOCATION_DBF";
+            List<Ent_PathDBF> list = null;
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(Ent_Conexion.conexion_posperu))
+                {
+                    try
+                    {
+                        if (cn.State == 0) cn.Open();
+                        using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                        {
+                            cmd.CommandTimeout = 0;
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.Parameters.AddWithValue("@location_dbf", name);
+                            SqlDataReader dr = cmd.ExecuteReader();
+
+
+
+                            if (dr.HasRows)
+                            {
+                                list = new List<Ent_PathDBF>();
+                                while (dr.Read())
+                                {
+                                    Ent_PathDBF dbf = new Ent_PathDBF();
+                                    dbf.rutloc_namedbf = dr["RUTLOC_NAMEDBF"].ToString();
+                                    dbf.rutloc_location = dr["RUTLOC_LOCATION"].ToString();
+                                    list.Add(dbf);
+                                }
+                            }
+
+
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        list = null;
+                    }
+                    if (cn != null)
+                        if (cn.State == ConnectionState.Open) cn.Close();
+                }
+
+                ruta = list[0].rutloc_location;
+            }
+            catch (Exception)
+            {
+                list = null;
+            }
+            return ruta;
+        }
     }
 }

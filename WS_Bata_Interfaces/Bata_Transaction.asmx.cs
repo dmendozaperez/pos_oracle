@@ -477,6 +477,55 @@ namespace WS_Bata_Interfaces
             return msg_transac;
         }
 
+        [SoapHeader("Authentication", Required = true)]
+        [WebMethod(Description = "Enviar Ventas Paquetes")]
+        public string[] ws_transmision_ingreso_nube(Byte[] _archivo_zip, string _name)
+        {
+            string valida = "";
+            Ent_MsgTransac msg_transac = null;
+            autentication_ws = new Ba_WsConexion();
+            Ba_Modular ba_modular = null;
+            try
+            {
+                msg_transac = new Ent_MsgTransac();
+                Boolean valida_ws = autentication_ws.ckeckAuthentication_ws("04", Authentication.Username, Authentication.Password);
+
+                if (valida_ws)
+                {
+                    ba_modular = new Ba_Modular();
+                    valida = ba_modular.copiar_archivo_tienda_server(_archivo_zip, _name);
+
+                }
+                else
+                {
+                    valida = "usuario y/o contraseña no valida";
+                }
+            }
+            catch (Exception exc)
+            {
+                valida = exc.Message;
+            }
+
+            String[] _respuesta = new String[] { "codigo", "descripcion" };
+            string _error_codigo = "";
+            string _mensaje = "";            
+            if (valida.Length == 0)
+            {
+                _error_codigo = "1";
+                _mensaje = "transmision exitosa";              
+                _respuesta[0] = _error_codigo.ToString();
+                _respuesta[1] = _mensaje.ToString();
+            }
+            else
+            {                
+                _error_codigo = "0";
+                _mensaje = valida;
+                _respuesta[0] = _error_codigo.ToString();
+                _respuesta[1] = _mensaje.ToString();
+            }         
+            return _respuesta;
+        }
+
     }
 
     public class ValidateAcceso:SoapHeader

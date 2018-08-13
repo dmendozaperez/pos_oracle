@@ -68,6 +68,8 @@
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Properties\PublishProfiles\WS_POSLOG.pubxml" />
+    <None Include="Properties\PublishProfiles\WS_POSLOG_DES.pubxml" />
+    <None Include="Properties\PublishProfiles\WS_POSLOG_QA.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

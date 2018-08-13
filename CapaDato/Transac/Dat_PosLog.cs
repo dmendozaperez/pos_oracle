@@ -11,13 +11,32 @@ namespace CapaDato.Transac
 {
     public class Dat_PosLog
     {
-        public string InsertarTransac_Poslog(string entrada_poslog)
+        public string InsertarTransac_Poslog(string entrada_poslog,string ambiente_bd)
         {
             string sqlquery = "USP_INSERTAR_POS_LOG";
             string _valida = "";
             try
             {
-                using (SqlConnection cn = new SqlConnection(Ent_Conexion.conexion_posperu))
+                /*ambiente_bd*/
+                /*PROD=PRODUCCION*/
+                /*DES=DESARROLLO*/
+                /*QA=QA*/
+                string conexion_sql = "";
+
+                switch (ambiente_bd)
+                {
+                    case "PROD":
+                        conexion_sql = Ent_Conexion.conexion_posperu;
+                        break;
+                    case "DES":
+                        conexion_sql = Ent_Conexion.conexion_posperu_DES;
+                        break;
+                    case "QA":
+                        conexion_sql = Ent_Conexion.conexion_posperu_QA;
+                        break;
+                }
+
+                using (SqlConnection cn = new SqlConnection(conexion_sql))
                 {
                     try
                     {

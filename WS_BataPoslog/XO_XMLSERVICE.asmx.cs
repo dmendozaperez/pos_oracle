@@ -29,15 +29,24 @@ namespace WS_BataPoslog
             Dat_PosLog insert_bd = null;
             try
             {
+                /*ambiente_bd*/
+                /*PROD=PRODUCCION*/
+                /*DES=DESARROLLO*/
+                /*QA=QA*/
+
+                string ambiente_bd = "QA";
+
+
+
                 insert_bd = new Dat_PosLog();
-                string _valida_error=insert_bd.InsertarTransac_Poslog(rawPoslogString);
+                string _valida_error=insert_bd.InsertarTransac_Poslog(rawPoslogString, ambiente_bd);
                 /*en este proceso quiere decir que paso un error en la transacion del pos log
                  CODIGO DE ERROR 01*/
                 if (_valida_error.Length>0)
                 {
                     Dat_Error_Transac error_transac = new Dat_Error_Transac();
                     string tipo_error = "01";
-                    error_transac.insertar_errores_transac(tipo_error, _valida_error);
+                    error_transac.insertar_errores_transac(tipo_error, _valida_error, ambiente_bd);
                 }
 
                 

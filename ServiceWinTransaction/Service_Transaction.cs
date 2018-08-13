@@ -1,5 +1,7 @@
 ﻿//using CapaServicioWindows.Modular;
 using CapaServicioWindows.CapaDato.Venta;
+using CapaDato.Basico;
+using CapaDato.Tienda;
 using CapaServicioWindows.Modular;
 using System;
 using System.Collections.Generic;
@@ -12,19 +14,25 @@ using System.ServiceProcess;
 using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
+using ICSharpCode.SharpZipLib.Zip;
 
 namespace ServiceWinTransaction
 {
     public partial class Service_Transaction : ServiceBase
     {
         Timer tmservicio = null;
+        Timer tmservicioDBF = null;
         private Int32 _valida_service = 0;
+
         public Service_Transaction()
         {
             InitializeComponent();
             //5000=5 segundos
             tmservicio = new Timer(5000);
             tmservicio.Elapsed += new ElapsedEventHandler(tmpServicio_Elapsed);
+
+            tmservicioDBF = new Timer(5000);
+            tmservicioDBF.Elapsed += new ElapsedEventHandler(tmpServicioDBF_Elapsed);
         }
         void tmpServicio_Elapsed(object sender, ElapsedEventArgs e)
         {
@@ -123,6 +131,89 @@ namespace ServiceWinTransaction
 
 
         }
+
+        void tmpServicioDBF_Elapsed(object sender, ElapsedEventArgs e)
+        {
+
+            CapaServicioWindows.Modular.Util util = new CapaServicioWindows.Modular.Util();
+            Dat_Util datUtil = new Dat_Util();
+            string carpetatienda = datUtil.get_Ruta_locationProcesa_dbf("VENTA");
+            string carpetadbf = carpetatienda + "\\DBF";
+            string _valida_proc_dbf = carpetatienda + "\\dbf.txt";
+            Boolean proceso_insertDBF = false;
+
+            try
+            {
+
+                if (!File.Exists(_valida_proc_dbf)) proceso_insertDBF = true;
+
+                if (proceso_insertDBF)
+                {
+                    string strCodTienda = "";
+                                     
+                    #region <PROCESAMIENTO DBF DE VENTAS DE TIENDA>
+                         if ((Directory.Exists(carpetatienda)))
+                        {
+                            string[] filesborrar;
+                            string verror = "";
+                            filesborrar = System.IO.Directory.GetFiles(@carpetatienda, "*.*");
+
+                            if (!(Directory.Exists(@carpetadbf)))
+                            {
+                                System.IO.Directory.CreateDirectory(@carpetadbf);
+                            }
+
+                            string[] filePaths = Directory.GetFiles(@carpetadbf);
+                            foreach (string filePath in filePaths)
+                                File.Delete(filePath);
+
+                            for (Int32 iborrar = 0; iborrar < filesborrar.Length; ++iborrar)
+                            {
+
+                                String value = filesborrar[iborrar].ToString();
+                                Char delimiter = '.';
+                                String[] substrings = value.Split(delimiter);
+                                strCodTienda = substrings[1].ToString();
+
+                                verror = descomprimir(filesborrar[iborrar].ToString(), @carpetadbf);
+
+                                if (verror.Length == 0)
+                                {
+                                    string strRespuesta = datUtil.LeerDataDBF_TemporalVenta(strCodTienda, @carpetadbf);
+
+                                    if (strRespuesta == "S")
+                                    {
+                                        System.IO.File.Delete(@filesborrar[iborrar].ToString());
+                                    }
+                                    else {
+                                        string errSw2 = "";
+                                        util.control_errores_transac("06", strRespuesta , ref errSw2);
+                                    }
+
+                                }
+                                else {
+                                    
+                                    string errSw = "";
+                                    util.control_errores_transac("06", verror+"==>50"+ strCodTienda, ref errSw);                                   
+                                }
+                            }
+
+                        }
+
+                    #endregion
+                }
+                //****************************************************************************
+            }
+            catch (Exception exc)
+            {
+                string errSwc = "";
+                util.control_errores_transac("06", exc.Message, ref errSwc);
+
+            }
+
+
+        }
+
         protected override void OnStart(string[] args)
         {
             tmservicio.Start();
@@ -131,6 +222,22 @@ namespace ServiceWinTransaction
         protected override void OnStop()
         {
             tmservicio.Stop();
+        }       
+
+        private static string descomprimir(string _rutazip, string _destino)
+        {
+            string _error = "";
+            try
+            {
+                FastZip fZip = new FastZip();
+                fZip.ExtractZip(@_rutazip, @_destino, "");
+            }
+            catch (Exception exc)
+            {
+                _error = exc.Message + " ==> El Archivo esta dañado";
+            }
+            return _error;
         }
+
     }
 }

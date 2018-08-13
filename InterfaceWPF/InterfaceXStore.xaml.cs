@@ -1263,7 +1263,7 @@ namespace InterfaceWPF
 
 
 
-                            name_maestros = "BCL_ELECTRONIC_CORRELATIVES_" + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
+                            name_maestros = "BCL_ELECTRONIC_CORRELATIVES_"+ codtda+"_" + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
                             in_maestros = ruta_interface + "\\" + name_maestros;
 
                             if (File.Exists(@in_maestros)) File.Delete(@in_maestros);
@@ -1310,7 +1310,7 @@ namespace InterfaceWPF
 
 
 
-                            name_maestros = "BCL_MANUAL_CORRELATIVES_" + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
+                            name_maestros = "BCL_MANUAL_CORRELATIVES_" + codtda + "_" + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
                             in_maestros = ruta_interface + "\\" + name_maestros;
 
                             if (File.Exists(@in_maestros)) File.Delete(@in_maestros);

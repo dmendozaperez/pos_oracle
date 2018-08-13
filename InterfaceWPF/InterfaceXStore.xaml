@@ -130,7 +130,7 @@
         <!--<StackPanel Grid.Row="1" Grid.Column="0"  >-->
         <TabControl Grid.Row="1" x:Name="tabprincipal"  HorizontalAlignment="Left"  VerticalAlignment="Top" ItemContainerStyle="{StaticResource chevronTabItemStyle}">
             <!--Diseño del Interface de Retail_Location y Retail_location_Promerty-->
-            <TabItem Header="Tienda" Background="DarkSlateBlue" BorderThickness="1" >
+            <TabItem Header="Tienda" Background="DarkSlateBlue" BorderThickness="1" Height="30" VerticalAlignment="Bottom" >
                 <Border CornerRadius="2">
                     <Border.Effect>
                         <DropShadowEffect BlurRadius="20"/>
@@ -262,7 +262,7 @@
                             <RadioButton  Grid.Row="4" IsEnabled="true"  Checked="llenarTiendaStk"  IsChecked="True" Cursor="Hand" Grid.Column="1"  Name="rbtPe_stk" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Peru"  />
                             <RadioButton  Grid.Row="4" IsEnabled="true" Checked="llenarTiendaStk"  IsChecked="False" Cursor="Hand" Grid.Column="1"  Name="rbtEcu_stk" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Ecuador" Margin="108,12,0,11"  />
 
-                            <Button Cursor="Hand" Grid.Column="1" Content="Genera Interface Stock" Width="150" Grid.Row="6" HorizontalAlignment="Left" x:Name="btnstock" Click="btnstock_Click"  />
+                            <Button Cursor="Hand" Grid.Column="1" Content="Genera Interface Stock" Width="150" Grid.Row="6" HorizontalAlignment="Left" x:Name="btnstock" Click="btnstock_Click" Height="41" VerticalAlignment="Bottom"  />
                         </Grid>
 
 

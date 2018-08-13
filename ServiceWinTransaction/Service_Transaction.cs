@@ -18,13 +18,18 @@ namespace ServiceWinTransaction
     public partial class Service_Transaction : ServiceBase
     {
         Timer tmservicio = null;
+        Timer tmservicioDBF = null;
         private Int32 _valida_service = 0;
+
         public Service_Transaction()
         {
             InitializeComponent();
             //5000=5 segundos
             tmservicio = new Timer(5000);
             tmservicio.Elapsed += new ElapsedEventHandler(tmpServicio_Elapsed);
+
+            tmservicioDBF = new Timer(5000);
+            tmservicioDBF.Elapsed += new ElapsedEventHandler(tmpServicioDBF_Elapsed);
         }
         void tmpServicio_Elapsed(object sender, ElapsedEventArgs e)
         {
@@ -123,6 +128,82 @@ namespace ServiceWinTransaction
 
 
         }
+
+        void tmpServicioDBF_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            //string varchivov = "c://valida_hash.txt";
+            Int32 _valor = 0;
+
+            string _ruta_erro_file = @"D:\TiendaPaq\ERROR_DBF.txt";
+            string _valida_proc_dbf = @"D:\dbf.txt";
+            Boolean proceso_insertDBF = false;
+            try
+            {
+                //string _error = "ing";
+                //TextWriter tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                //tw.WriteLine(_error);
+                //tw.Flush();
+                //tw.Close();
+                //tw.Dispose();
+
+                /*si el archivo existe entonces ejecutar procesos de venta*/
+                if (File.Exists(_valida_proc_dbf)) proceso_insertDBF = true;
+
+                if (_valida_service == 0)
+                {
+                    //string _error = "ing";
+                    _valor = 1;
+                    _valida_service = 1;
+                    
+                    string _error_ws = "";
+                    
+                    #region <PROCESAMIENTO DBF DE VENTAS DE TIENDA>
+                    if (proceso_insertDBF)
+                    {
+                        Dat_Venta ejecuta_proc_venta = null;
+                        ejecuta_proc_venta = new Dat_Venta();
+                        ejecuta_proc_venta.procesar_ventas_SQL(ref _error_ws);
+                    }
+                    #endregion
+
+                    _valida_service = 0;
+
+                    if (_error_ws.Length > 0)
+                    {
+                        TextWriter tw = new StreamWriter(_ruta_erro_file, true);
+                        tw.WriteLine(_error_ws);
+                        tw.Flush();
+                        tw.Close();
+                        tw.Dispose();
+                    }
+
+                   
+                }
+                //****************************************************************************
+            }
+            catch (Exception exc)
+            {
+                TextWriter tw = new StreamWriter(_ruta_erro_file, true);
+                tw.WriteLine(exc.Message);
+                tw.Flush();
+                tw.Close();
+                tw.Dispose();
+                //TextWriter tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                //tw.WriteLine(exc.Message);
+                //tw.Flush();
+                //tw.Close();
+                //tw.Dispose();
+                _valida_service = 0;
+            }
+
+            if (_valor == 1)
+            {
+                _valida_service = 0;
+            }
+
+
+        }
+
         protected override void OnStart(string[] args)
         {
             tmservicio.Start();

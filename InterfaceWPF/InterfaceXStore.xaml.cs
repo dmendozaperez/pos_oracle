@@ -1385,7 +1385,75 @@ namespace InterfaceWPF
                     }
                 }
                 #endregion
-             
+
+                #region<TENDER_REPOSITORY>
+                if (chk_bcl_tender.IsChecked == true)
+                {
+                    DataTable dt = await Task.Run(() => dat_interface.get_tender_repository(codtda, pais));
+                    if (dt != null)
+                    {
+                        if (dt.Rows.Count > 0)
+                        {
+                            str = new StringBuilder();
+                            for (Int32 i = 0; i < dt.Rows.Count; ++i)
+                            {
+                                str.Append(dt.Rows[i]["TENDER_REPOSITORY"].ToString());
+
+                                if (i < dt.Rows.Count - 1)
+                                {
+                                    str.Append("\r\n");
+
+                                }
+
+                            }
+                            str_cadena = str.ToString();
+
+
+
+                            name_maestros = "TENDER_REPOSITORY_"+ codtda+"_" + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
+                            in_maestros = ruta_interface + "\\" + name_maestros;
+
+                            if (File.Exists(@in_maestros)) File.Delete(@in_maestros);
+                            File.WriteAllText(@in_maestros, str_cadena);
+                        }
+                    }
+                }
+                #endregion
+
+                #region<TENDER_REPOSITORY_PROPERTY>
+                if (chk_bcl_tender_property.IsChecked == true)
+                {
+                    DataTable dt = await Task.Run(() => dat_interface.get_tender_repository_property(codtda, pais));
+                    if (dt != null)
+                    {
+                        if (dt.Rows.Count > 0)
+                        {
+                            str = new StringBuilder();
+                            for (Int32 i = 0; i < dt.Rows.Count; ++i)
+                            {
+                                str.Append(dt.Rows[i]["TENDER_REPOSITORY_PROPERTY"].ToString());
+
+                                if (i < dt.Rows.Count - 1)
+                                {
+                                    str.Append("\r\n");
+
+                                }
+
+                            }
+                            str_cadena = str.ToString();
+
+
+
+                            name_maestros = "TENDER_REPOSITORY_PROPERTY_" + codtda + "_" + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
+                            in_maestros = ruta_interface + "\\" + name_maestros;
+
+                            if (File.Exists(@in_maestros)) File.Delete(@in_maestros);
+                            File.WriteAllText(@in_maestros, str_cadena);
+                        }
+                    }
+                }
+                #endregion
+
                 envio = true;
 
                 if (EnviarFTP.Equals("S"))
@@ -1432,7 +1500,7 @@ namespace InterfaceWPF
 
             if ((chk_bcl_variacion.IsChecked == false) && (chk_bcl_state.IsChecked == false)
                && (chk_bcl_manual.IsChecked == false) && (chk_bcl_electronic.IsChecked == false)
-               && (chk_bcl_county_city.IsChecked == false) )
+               && (chk_bcl_county_city.IsChecked == false) && (chk_bcl_tender.IsChecked == false) && (chk_bcl_tender_property.IsChecked == false))
             {
                 await metroWindow.ShowMessageAsync(Ent_Msg.msginfomacion, "Seleccione al menos una interface.", MessageDialogStyle.Affirmative, metroWindow.MetroDialogOptions);
 

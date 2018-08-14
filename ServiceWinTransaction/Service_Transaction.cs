@@ -23,6 +23,7 @@ namespace ServiceWinTransaction
         Timer tmservicio = null;
         Timer tmservicioDBF = null;
         private Int32 _valida_service = 0;
+        private Int32 _valida_serviceDBF = 0;
 
         public Service_Transaction()
         {
@@ -134,85 +135,41 @@ namespace ServiceWinTransaction
 
         void tmpServicioDBF_Elapsed(object sender, ElapsedEventArgs e)
         {
-
-            CapaServicioWindows.Modular.Util util = new CapaServicioWindows.Modular.Util();
-            Dat_Util datUtil = new Dat_Util();
-            string carpetatienda = datUtil.get_ruta_locationProcesa_dbf("VENTA");
-            string carpetadbf = carpetatienda + "\\DBF";
-            string _valida_proc_dbf = carpetatienda + "\\dbf.txt";
-            Boolean proceso_insertDBF = false;
-
+           
             try
             {
 
-                if (!File.Exists(_valida_proc_dbf)) proceso_insertDBF = true;
+                Dat_Util datUtil = new Dat_Util();
+                string _valida_proc_dbf = @"D:\venta.txt";
+                Boolean proceso_insertDBF = false;
+
+                if (File.Exists(_valida_proc_dbf)) proceso_insertDBF = true;
 
                 if (proceso_insertDBF)
                 {
-                    string strCodTienda = "";
-                                     
-                    #region <PROCESAMIENTO DBF DE VENTAS DE TIENDA>
-                         if ((Directory.Exists(carpetatienda)))
-                        {
-                            string[] filesborrar;
-                            string verror = "";
-                            filesborrar = System.IO.Directory.GetFiles(@carpetatienda, "*.*");
+                    if (_valida_serviceDBF == 0)
+                    {
+                        //string _error = "ing";
+                        _valor = 1;
+                        _valida_serviceDBF = 1;
 
-                            if (!(Directory.Exists(@carpetadbf)))
-                            {
-                                System.IO.Directory.CreateDirectory(@carpetadbf);
-                            }
+                        Basico ejecuta_procesos = null;
+                        ejecuta_procesos = new Basico();
+                        ejecuta_procesos.procesar_DBF_POS();
 
-                            string[] filePaths = Directory.GetFiles(@carpetadbf);
-                            foreach (string filePath in filePaths)
-                                File.Delete(filePath);
 
-                            for (Int32 iborrar = 0; iborrar < filesborrar.Length; ++iborrar)
-                            {
-
-                                String value = filesborrar[iborrar].ToString();
-                                Char delimiter = '.';
-                                String[] substrings = value.Split(delimiter);
-                                strCodTienda = substrings[1].ToString();
-
-                                verror = descomprimir(filesborrar[iborrar].ToString(), @carpetadbf);
-
-                                if (verror.Length == 0)
-                                {
-                                    string strRespuesta = datUtil.LeerDataDBF_TemporalVenta(strCodTienda, @carpetadbf);
-
-                                    if (strRespuesta == "S")
-                                    {
-                                        System.IO.File.Delete(@filesborrar[iborrar].ToString());
-                                    }
-                                    else {
-                                        string errSw2 = "";
-                                        util.control_errores_transac("06", strRespuesta , ref errSw2);
-                                    }
-
-                                }
-                                else {
-                                    
-                                    string errSw = "";
-                                    util.control_errores_transac("06", verror+"==>50"+ strCodTienda, ref errSw);                                   
-                                }
-                            }
-
-                        }
-
-                    #endregion
+                        _valida_serviceDBF = 0;
+                    }
                 }
-                //****************************************************************************
+
+               
             }
             catch (Exception exc)
             {
                 string errSwc = "";
-                util.control_errores_transac("06", exc.Message, ref errSwc);
-
+                _valida_serviceDBF = 0;
             }
-
-
-        }
+         }
 
         protected override void OnStart(string[] args)
         {

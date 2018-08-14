@@ -2,12 +2,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using CapaDato.Basico;
 using System.Text;
 using System.Data.OleDb;
 using System.Data;
 using CapaServicioWindows.Conexion;
 using CapaServicioWindows.Envio_Ws;
 using System.IO;
+using ICSharpCode.SharpZipLib.Zip;
 
 namespace CapaServicioWindows.Modular
 {
@@ -451,6 +453,100 @@ namespace CapaServicioWindows.Modular
             {
                                
             }
+        }
+
+        public void procesar_DBF_POS() {
+
+            CapaServicioWindows.Modular.Util util = new CapaServicioWindows.Modular.Util();
+
+            try
+            {
+               
+                Dat_Util datUtil = new Dat_Util();
+                string carpetatienda = datUtil.get_Ruta_locationProcesa_dbf("VENTA");
+                string carpetadbf = carpetatienda + "\\DBF";
+                string strCodTienda = "";
+
+                    #region <PROCESAMIENTO DBF DE VENTAS DE TIENDA>
+                    if ((Directory.Exists(carpetatienda)))
+                    {
+                        string[] filesborrar;
+                        string verror = "";
+                        filesborrar = System.IO.Directory.GetFiles(@carpetatienda, "*.*");
+
+                        if (!(Directory.Exists(@carpetadbf)))
+                        {
+                            System.IO.Directory.CreateDirectory(@carpetadbf);
+                        }
+
+                        string[] filePaths = Directory.GetFiles(@carpetadbf);
+                        foreach (string filePath in filePaths)
+                            File.Delete(filePath);
+
+                        for (Int32 iborrar = 0; iborrar < filesborrar.Length; ++iborrar)
+                        {
+
+                            String value = filesborrar[iborrar].ToString();
+                            Char delimiter = '.';
+                            String[] substrings = value.Split(delimiter);
+                            strCodTienda = substrings[1].ToString();
+
+                            verror = descomprimir(filesborrar[iborrar].ToString(), @carpetadbf);
+
+                            if (verror.Length == 0)
+                            {
+                                string strRespuesta = datUtil.LeerDataDBF_TemporalVenta(strCodTienda, @carpetadbf);
+
+                                if (strRespuesta == "S")
+                                {
+                                    System.IO.File.Delete(@filesborrar[iborrar].ToString());
+                                }
+                                else
+                                {
+                                    string errSw2 = "";
+                                    util.control_errores_transac("06", strRespuesta, ref errSw2);
+                                }
+
+                            }
+                            else
+                            {
+
+                                string errSw = "";
+                                util.control_errores_transac("06", verror + "==>50" + strCodTienda, ref errSw);
+                            }
+                        }
+
+                    }
+
+                    #endregion
+               
+                //****************************************************************************
+            }
+            catch (Exception exc)
+            {
+                string errSwc = "";
+               
+                util.control_errores_transac("06", exc.Message, ref errSwc);
+
+            }
+
+
+
+        }
+
+        private static string descomprimir(string _rutazip, string _destino)
+        {
+            string _error = "";
+            try
+            {
+                FastZip fZip = new FastZip();
+                fZip.ExtractZip(@_rutazip, @_destino, "");
+            }
+            catch (Exception exc)
+            {
+                _error = exc.Message + " ==> El Archivo esta dañado";
+            }
+            return _error;
         }
     }
 }

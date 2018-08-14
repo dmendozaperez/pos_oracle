@@ -37,6 +37,7 @@
             this.ws_envia_stock_tda = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.ws_get_stk_tda = new System.Windows.Forms.Button();
+            this.ws_transmision_ingreso_nube = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -135,11 +136,23 @@
             this.ws_get_stk_tda.UseVisualStyleBackColor = true;
             this.ws_get_stk_tda.Click += new System.EventHandler(this.ws_get_stk_tda_Click);
             // 
+            // ws_transmision_ingreso_nube
+            // 
+            this.ws_transmision_ingreso_nube.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ws_transmision_ingreso_nube.Location = new System.Drawing.Point(369, 217);
+            this.ws_transmision_ingreso_nube.Name = "ws_transmision_ingreso_nube";
+            this.ws_transmision_ingreso_nube.Size = new System.Drawing.Size(238, 31);
+            this.ws_transmision_ingreso_nube.TabIndex = 8;
+            this.ws_transmision_ingreso_nube.Text = "ws_transmision_ingreso_nube";
+            this.ws_transmision_ingreso_nube.UseVisualStyleBackColor = true;
+            this.ws_transmision_ingreso_nube.Click += new System.EventHandler(this.ws_transmision_ingreso_nube_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(619, 357);
+            this.Controls.Add(this.ws_transmision_ingreso_nube);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.ws_envia_stock_tda);
             this.Controls.Add(this.ws_get_time_servicetrans);
@@ -167,6 +180,7 @@
         private System.Windows.Forms.Button ws_envia_stock_tda;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button ws_get_stk_tda;
+        private System.Windows.Forms.Button ws_transmision_ingreso_nube;
     }
 }
 

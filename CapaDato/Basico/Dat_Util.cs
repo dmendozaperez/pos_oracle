@@ -1,9 +1,7 @@
 ﻿using CapaEntidad.Util;
 using System;
-using CapaDato.Venta;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.OleDb;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -64,59 +62,6 @@ namespace CapaDato.Basico
             }
             return list;
         }
-
-        public string get_Ruta_locationProcesa_dbf(string name)
-        {
-            string ruta = "";
-            string sqlquery = "USP_GET_LOCATION_DBF";
-            List<Ent_PathDBF> list = null;
-            try
-            {
-                using (SqlConnection cn = new SqlConnection(Ent_Conexion.conexion_posperu))
-                {
-                    try
-                    {
-                        if (cn.State == 0) cn.Open();
-                        using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
-                        {
-                            cmd.CommandTimeout = 0;
-                            cmd.CommandType = CommandType.StoredProcedure;
-                            cmd.Parameters.AddWithValue("@location_dbf", name);
-                            SqlDataReader dr = cmd.ExecuteReader();
-
-                            
-
-                            if (dr.HasRows)
-                            {
-                                list = new List<Ent_PathDBF>();
-                                while (dr.Read())
-                                {
-                                    Ent_PathDBF dbf = new Ent_PathDBF();
-                                    dbf.rutloc_namedbf = dr["RUTLOC_NAMEDBF"].ToString();
-                                    dbf.rutloc_location = dr["RUTLOC_LOCATION"].ToString();
-                                    list.Add(dbf);
-                                }
-                            }
-
-
-                        }
-                    }
-                    catch (Exception)
-                    {
-                        list = null;
-                    }
-                    if (cn != null)
-                        if (cn.State == ConnectionState.Open) cn.Close();
-                }
-
-                ruta = list[0].rutloc_location;
-            }
-            catch (Exception)
-            {
-                list = null;
-            }
-            return ruta;
-        }
         /// <summary>
         /// tiempo de ejecucion de transmision
         /// </summary>
@@ -161,93 +106,62 @@ namespace CapaDato.Basico
             }
             return config;
         }
-        
-        
-
-        public string LeerDataDBF_TemporalVenta(string codTienda,string carpeta)
+        /// <summary>
+        /// ruta de paquete de venta 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public string get_ruta_locationProcesa_dbf(string name)
         {
-            OleDbConnection cn = null;
-            OleDbCommand cmd = null;
-            OleDbDataAdapter da = null;
-            DataTable dt_cab = null;
-            DataTable dt_det = null;
-            DataTable dt_pago = null;
-            DataSet ds_transac_tda = new DataSet();
-            string _venta_cab = "FFACTC";
-            string _venta_det = "FFACTD";
-            string _venta_pago = "FNOTAA";
-            string strRespuesta = "S";
-            string sqlquery = "";
-
+            string ruta = "";
+            string sqlquery = "USP_GET_LOCATION_DBF";
+            List<Ent_PathDBF> list = null;
             try
             {
-
-                string cadena = Ent_Conexion.conexion_DBF_POS;
-                cadena = cadena.Replace("XXXX", carpeta);
-                cn = new OleDbConnection(cadena);
-
-                sqlquery = "select * from " + _venta_cab;
-
-                cmd = new OleDbCommand(sqlquery, cn);
-                cmd.CommandTimeout = 0;
-                da = new OleDbDataAdapter(cmd);
-                dt_cab = new DataTable();
-                da.Fill(dt_cab);
-
-                if (dt_cab.Rows.Count > 0)
+                using (SqlConnection cn = new SqlConnection(Ent_Conexion.conexion_posperu))
                 {
-
-                    sqlquery = "select * from " + _venta_det;
-                    cmd = new OleDbCommand(sqlquery, cn);
-                    cmd.CommandTimeout = 0;
-                    da = new OleDbDataAdapter(cmd);
-                    dt_det = new DataTable();
-                    da.Fill(dt_det);
-
-                    sqlquery = "select * from " + _venta_pago;
-                    cmd = new OleDbCommand(sqlquery, cn);
-                    cmd.CommandTimeout = 0;
-                    da = new OleDbDataAdapter(cmd);
-                    dt_pago = new DataTable();
-                    da.Fill(dt_pago);
+                    try
+                    {
+                        if (cn.State == 0) cn.Open();
+                        using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                        {
+                            cmd.CommandTimeout = 0;
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.Parameters.AddWithValue("@location_dbf", name);
+                            SqlDataReader dr = cmd.ExecuteReader();
 
 
-                    ds_transac_tda.Tables.Add(dt_cab);
-                    ds_transac_tda.Tables.Add(dt_det);
-                    ds_transac_tda.Tables.Add(dt_pago);
 
-                    Dat_Venta update_venta = new Dat_Venta();
-                    codTienda = "50" + codTienda;
-                    Ent_MsgTransac msg_transac = null;
+                            if (dr.HasRows)
+                            {
+                                list = new List<Ent_PathDBF>();
+                                while (dr.Read())
+                                {
+                                    Ent_PathDBF dbf = new Ent_PathDBF();
+                                    dbf.rutloc_namedbf = dr["RUTLOC_NAMEDBF"].ToString();
+                                    dbf.rutloc_location = dr["RUTLOC_LOCATION"].ToString();
+                                    list.Add(dbf);
+                                }
+                            }
 
-                    msg_transac = update_venta.inserta_venta(codTienda, ds_transac_tda);
 
-                    if (msg_transac.codigo == "01") {
-                        strRespuesta = "error del archivo dbf ==>" + carpeta + "<==>" + "50" + codTienda + "<==>.Detalle" + msg_transac.descripcion;
-
+                        }
                     }
+                    catch (Exception)
+                    {
+                        list = null;
+                    }
+                    if (cn != null)
+                        if (cn.State == ConnectionState.Open) cn.Close();
                 }
-               
+
+                ruta = list[0].rutloc_location;
             }
-            catch (Exception ex) {
-
-                strRespuesta = "N";
-                strRespuesta = "error del archivo dbf ==>" + carpeta + "<==>" + "50" + codTienda + "<==>.Detalle" + ex.Message;
-               
+            catch (Exception)
+            {
+                list = null;
             }
-
-            return strRespuesta;
-
+            return ruta;
         }
-
-        public static string Left(string param, int length)
-        {
-            //we start at 0 since we want to get the characters starting from the
-            //left and with the specified lenght and assign it to a variable
-            string result = param.Substring(0, length);
-            //return the result of the operation
-            return result;
-        }
-
     }
 }

@@ -100,14 +100,14 @@ namespace InterfaceWPF
 
         private void btntienda_Click(object sender, RoutedEventArgs e)
         {
-            Dat_PosLog poslog = new Dat_PosLog();
-            List<Ent_PosLog> lista_poslog = poslog.get_poslog();
+            //Dat_PosLog poslog = new Dat_PosLog();
+            //List<Ent_PosLog> lista_poslog = poslog.get_poslog();
 
-            foreach(var item in lista_poslog)
-            {
-                var doc = XDocument.Parse(item.pos_log);
+            //foreach(var item in lista_poslog)
+            //{
+            //    var doc = XDocument.Parse(item.pos_log);
 
-            }
+            //}
 
             generainter_retail_location();
         }

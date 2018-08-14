@@ -34,7 +34,7 @@ namespace CapaDato.Venta
                     dt_ffd = ds_venta.Tables[1];
                     dt_not = ds_venta.Tables[2];
 
-                    using (SqlConnection cn = new SqlConnection(Ent_Conexion.conexion_posperu_DES))
+                    using (SqlConnection cn = new SqlConnection(Ent_Conexion.conexion_posperu))
                     {
                         try
                         {

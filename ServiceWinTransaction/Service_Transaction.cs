@@ -137,7 +137,7 @@ namespace ServiceWinTransaction
 
             CapaServicioWindows.Modular.Util util = new CapaServicioWindows.Modular.Util();
             Dat_Util datUtil = new Dat_Util();
-            string carpetatienda = datUtil.get_Ruta_locationProcesa_dbf("VENTA");
+            string carpetatienda = datUtil.get_ruta_locationProcesa_dbf("VENTA");
             string carpetadbf = carpetatienda + "\\DBF";
             string _valida_proc_dbf = carpetatienda + "\\dbf.txt";
             Boolean proceso_insertDBF = false;

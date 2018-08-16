@@ -42,102 +42,102 @@ namespace ServiceWSPrueba
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Int32 _valor = 0;
-            Dat_Util datUtil = new Dat_Util();
-            string carpetatienda = datUtil.get_Ruta_locationProcesa_dbf("VENTA");
-             string carpetadbf = carpetatienda + "\\DBF";
-            string _ruta_erro_file = carpetatienda + "\\ERROR_DBF.txt";
-            string _valida_proc_dbf = carpetatienda + "\\dbf.txt";
-            Boolean proceso_insertDBF = false;
+            //Int32 _valor = 0;
+            //Dat_Util datUtil = new Dat_Util();
+            //string carpetatienda = datUtil.get_Ruta_locationProcesa_dbf("VENTA");
+            // string carpetadbf = carpetatienda + "\\DBF";
+            //string _ruta_erro_file = carpetatienda + "\\ERROR_DBF.txt";
+            //string _valida_proc_dbf = carpetatienda + "\\dbf.txt";
+            //Boolean proceso_insertDBF = false;
         
-            int _valida_service = 0;
+            //int _valida_service = 0;
 
-            try
-            {
+            //try
+            //{
 
-                if (!File.Exists(_valida_proc_dbf)) proceso_insertDBF = true;
+            //    if (!File.Exists(_valida_proc_dbf)) proceso_insertDBF = true;
              
-                if (_valida_service == 0)
-                {
-                    string strCodTienda = "";
-                    _valor = 1;
-                    _valida_service = 1;
-                    string _error_ws = "";
+            //    if (_valida_service == 0)
+            //    {
+            //        string strCodTienda = "";
+            //        _valor = 1;
+            //        _valida_service = 1;
+            //        string _error_ws = "";
 
-                    #region <PROCESAMIENTO DBF DE VENTAS DE TIENDA>
+            //        #region <PROCESAMIENTO DBF DE VENTAS DE TIENDA>
 
-                    if (proceso_insertDBF)
-                    {
-                        if ((Directory.Exists(carpetatienda)))
-                        {
-                            string[] filesborrar;
-                            string verror = "";
-                            filesborrar = System.IO.Directory.GetFiles(@carpetatienda, "*.*");
+            //        if (proceso_insertDBF)
+            //        {
+            //            if ((Directory.Exists(carpetatienda)))
+            //            {
+            //                string[] filesborrar;
+            //                string verror = "";
+            //                filesborrar = System.IO.Directory.GetFiles(@carpetatienda, "*.*");
 
-                            if (!(Directory.Exists(@carpetadbf)))
-                            {
-                                System.IO.Directory.CreateDirectory(@carpetadbf);
-                            }
+            //                if (!(Directory.Exists(@carpetadbf)))
+            //                {
+            //                    System.IO.Directory.CreateDirectory(@carpetadbf);
+            //                }
 
-                            string[] filePaths = Directory.GetFiles(@carpetadbf);
-                            foreach (string filePath in filePaths)
-                                File.Delete(filePath);
+            //                string[] filePaths = Directory.GetFiles(@carpetadbf);
+            //                foreach (string filePath in filePaths)
+            //                    File.Delete(filePath);
 
-                            for (Int32 iborrar = 0; iborrar < filesborrar.Length; ++iborrar)
-                            {
+            //                for (Int32 iborrar = 0; iborrar < filesborrar.Length; ++iborrar)
+            //                {
 
-                                String value = filesborrar[iborrar].ToString();
-                                Char delimiter = '.';
-                                String[] substrings = value.Split(delimiter);
-                                strCodTienda = substrings[1].ToString();
+            //                    String value = filesborrar[iborrar].ToString();
+            //                    Char delimiter = '.';
+            //                    String[] substrings = value.Split(delimiter);
+            //                    strCodTienda = substrings[1].ToString();
                                 
-                                verror = descomprimir(filesborrar[iborrar].ToString(), @carpetadbf);
+            //                    verror = descomprimir(filesborrar[iborrar].ToString(), @carpetadbf);
 
-                                if (verror.Length == 0)
-                                {
-                                    string strRespuesta = datUtil.LeerDataDBF_TemporalVenta(strCodTienda, @carpetadbf);
-                                    if (strRespuesta == "S")
-                                    {
-                                        System.IO.File.Delete(@filesborrar[iborrar].ToString());
-                                    }
+            //                    if (verror.Length == 0)
+            //                    {
+            //                        string strRespuesta = datUtil.LeerDataDBF_TemporalVenta(strCodTienda, @carpetadbf);
+            //                        if (strRespuesta == "S")
+            //                        {
+            //                            System.IO.File.Delete(@filesborrar[iborrar].ToString());
+            //                        }
 
-                                }
+            //                    }
                                                                                               
-                            }
+            //                }
 
-                        }
+            //            }
                         
-                    }
-                    #endregion
+            //        }
+            //        #endregion
 
-                    _valida_service = 0;
+            //        _valida_service = 0;
 
-                    if (_error_ws.Length > 0)
-                    {
-                        TextWriter tw = new StreamWriter(_ruta_erro_file, true);
-                        tw.WriteLine(_error_ws);
-                        tw.Flush();
-                        tw.Close();
-                        tw.Dispose();
-                    }
+            //        if (_error_ws.Length > 0)
+            //        {
+            //            TextWriter tw = new StreamWriter(_ruta_erro_file, true);
+            //            tw.WriteLine(_error_ws);
+            //            tw.Flush();
+            //            tw.Close();
+            //            tw.Dispose();
+            //        }
 
-                }
-                //****************************************************************************
-            }
-            catch (Exception exc)
-            {
-                TextWriter tw = new StreamWriter(_ruta_erro_file, true);
-                tw.WriteLine(exc.Message);
-                tw.Flush();
-                tw.Close();
-                tw.Dispose();
-                _valida_service = 0;
-            }
+            //    }
+            //    //****************************************************************************
+            //}
+            //catch (Exception exc)
+            //{
+            //    TextWriter tw = new StreamWriter(_ruta_erro_file, true);
+            //    tw.WriteLine(exc.Message);
+            //    tw.Flush();
+            //    tw.Close();
+            //    tw.Dispose();
+            //    _valida_service = 0;
+            //}
 
-            if (_valor == 1)
-            {
-                _valida_service = 0;
-            }
+            //if (_valor == 1)
+            //{
+            //    _valida_service = 0;
+            //}
 
         }
 

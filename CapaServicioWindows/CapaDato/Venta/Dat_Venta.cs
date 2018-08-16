@@ -47,7 +47,53 @@ namespace CapaServicioWindows.CapaDato.Venta
         
         }
 
+        public string inserta_venta(string cod_tda,DataSet dsventa)
+        {
+            string sqlquery = "[USP_INSERTAR_VENTAS_TDA]";
+            string error = "";      
+            try
+            {                
 
+                if (dsventa.Tables.Count > 0)
+                {
+                    DataTable dt_ffc = dsventa.Tables[0];
+                    DataTable dt_ffd = dsventa.Tables[1];
+                    DataTable dt_not = dsventa.Tables[2];
+
+
+
+                    using (SqlConnection cn = new SqlConnection(ConexionSQL.conexion))
+                    {
+                        try
+                        {
+                            if (cn.State == 0) cn.Open();
+                            using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                            {
+                                cmd.CommandTimeout = 120;
+                                cmd.CommandType = CommandType.StoredProcedure;
+                                cmd.Parameters.AddWithValue("@COD_TDA", cod_tda);
+                                cmd.Parameters.AddWithValue("@TMP_FFC", dt_ffc);
+                                cmd.Parameters.AddWithValue("@TMP_FFD", dt_ffd);
+                                cmd.Parameters.AddWithValue("@TMP_NOT", dt_not);
+                                cmd.ExecuteNonQuery();
+                              
+                            }
+                        }
+                        catch (Exception exc)
+                        {
+                            error = exc.Message;                            
+                        }
+                        if (cn != null)
+                            if (cn.State == ConnectionState.Open) cn.Close();
+                    }
+                }               
+            }
+            catch (Exception exc)
+            {
+                error = exc.Message;
+            }
+            return error;
+        }
 
     }
 }

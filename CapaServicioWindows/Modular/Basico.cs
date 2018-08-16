@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using CapaDato.Basico;
+//using CapaDato.Basico;
 using System.Text;
 using System.Data.OleDb;
 using System.Data;
@@ -10,6 +10,7 @@ using CapaServicioWindows.Conexion;
 using CapaServicioWindows.Envio_Ws;
 using System.IO;
 using ICSharpCode.SharpZipLib.Zip;
+using CapaServicioWindows.CapaDato.Venta;
 
 namespace CapaServicioWindows.Modular
 {
@@ -455,80 +456,152 @@ namespace CapaServicioWindows.Modular
             }
         }
 
-        public void procesar_DBF_POS() {
-
-            CapaServicioWindows.Modular.Util util = new CapaServicioWindows.Modular.Util();
-
+        public void procesar_dbf_pos(ref string _error_procesos)
+        {
+            Util datUtil = null;
+            Dat_Venta venta_ing = null;
+            string _error = "";            
             try
             {
-               
-                Dat_Util datUtil = new Dat_Util();
-                string carpetatienda = datUtil.get_Ruta_locationProcesa_dbf("VENTA");
+                datUtil = new Util();
+                string carpetatienda = datUtil.get_ruta_locationProcesa_dbf("VENTA");
                 string carpetadbf = carpetatienda + "\\DBF";
                 string strCodTienda = "";
+                if (!Directory.Exists(@carpetatienda)) Directory.CreateDirectory(@carpetatienda);
+                if (!Directory.Exists(@carpetadbf)) Directory.CreateDirectory(@carpetadbf);
+                string[] filesborrar= Directory.GetFiles(@carpetadbf, "*.*");
+                string[] filespaquete= Directory.GetFiles(@carpetatienda, "*.*");
 
-                    #region <PROCESAMIENTO DBF DE VENTAS DE TIENDA>
-                    if ((Directory.Exists(carpetatienda)))
+                foreach (string filedetele in filesborrar)
+                    File.Delete(filedetele);
+
+                for (Int32 i = 0; i < filespaquete.Length; ++i)
+                {
+                    String value = filespaquete[i].ToString();
+                    Char delimiter = '.';
+                    String[] substrings = value.Split(delimiter);
+                    strCodTienda = substrings[1].ToString();
+                    strCodTienda = "50" + strCodTienda;
+                    _error = descomprimir(filespaquete[i].ToString(), @carpetadbf);
+                    if (_error.Length == 0)
                     {
-                        string[] filesborrar;
-                        string verror = "";
-                        filesborrar = System.IO.Directory.GetFiles(@carpetatienda, "*.*");
+                        DataSet ds_ventas= datUtil.get_ds_venta(@carpetadbf,ref _error);
 
-                        if (!(Directory.Exists(@carpetadbf)))
-                        {
-                            System.IO.Directory.CreateDirectory(@carpetadbf);
-                        }
-
-                        string[] filePaths = Directory.GetFiles(@carpetadbf);
-                        foreach (string filePath in filePaths)
-                            File.Delete(filePath);
-
-                        for (Int32 iborrar = 0; iborrar < filesborrar.Length; ++iborrar)
+                        if (_error.Length==0)
                         {
 
-                            String value = filesborrar[iborrar].ToString();
-                            Char delimiter = '.';
-                            String[] substrings = value.Split(delimiter);
-                            strCodTienda = substrings[1].ToString();
+                            venta_ing = new Dat_Venta();
+                            _error= venta_ing.inserta_venta(strCodTienda, ds_ventas);
 
-                            verror = descomprimir(filesborrar[iborrar].ToString(), @carpetadbf);
-
-                            if (verror.Length == 0)
+                            if (_error.Length==0)
                             {
-                                string strRespuesta = datUtil.LeerDataDBF_TemporalVenta(strCodTienda, @carpetadbf);
-
-                                if (strRespuesta == "S")
-                                {
-                                    System.IO.File.Delete(@filesborrar[iborrar].ToString());
-                                }
-                                else
-                                {
-                                    string errSw2 = "";
-                                    util.control_errores_transac("06", strRespuesta, ref errSw2);
-                                }
-
+                                /*borramos paquete*/
+                                if (File.Exists(@value))
+                                    File.Delete(@value);
                             }
                             else
                             {
-
-                                string errSw = "";
-                                util.control_errores_transac("06", verror + "==>50" + strCodTienda, ref errSw);
+                                /*error de sql*/
+                                datUtil.control_errores_transac("06", _error, ref _error);
                             }
+
+
+                        }
+                        else
+                        {
+                            /*error dbf */
+                            datUtil.control_errores_transac("06", _error, ref _error);
                         }
 
                     }
+                    else
+                    {
+                        /*eror de archivo*/
+                        datUtil.control_errores_transac("06", _error,ref _error);
+                    }
 
-                    #endregion
-               
-                //****************************************************************************
+                }
+
+
+
+
             }
-            catch (Exception exc)
+            catch (Exception)
             {
-                string errSwc = "";
-               
-                util.control_errores_transac("06", exc.Message, ref errSwc);
 
+               
             }
+
+            //Dat_Util datUtil = null;
+            //try
+            //{
+            //    datUtil = new Dat_Util();  
+            //    string carpetatienda = datUtil.get_ruta_locationProcesa_dbf("VENTA");
+            //    string carpetadbf = carpetatienda + "\\DBF";
+            //    string strCodTienda = "";
+
+            //        #region <PROCESAMIENTO DBF DE VENTAS DE TIENDA>
+            //        if ((Directory.Exists(carpetatienda)))
+            //        {
+            //            string[] filesborrar;
+            //            string verror = "";
+            //            filesborrar = System.IO.Directory.GetFiles(@carpetatienda, "*.*");
+
+            //            if (!(Directory.Exists(@carpetadbf)))
+            //            {
+            //                System.IO.Directory.CreateDirectory(@carpetadbf);
+            //            }
+
+            //            string[] filePaths = Directory.GetFiles(@carpetadbf);
+            //            foreach (string filePath in filePaths)
+            //                File.Delete(filePath);
+
+            //            for (Int32 iborrar = 0; iborrar < filesborrar.Length; ++iborrar)
+            //            {
+
+            //                String value = filesborrar[iborrar].ToString();
+            //                Char delimiter = '.';
+            //                String[] substrings = value.Split(delimiter);
+            //                strCodTienda = substrings[1].ToString();
+
+            //                verror = descomprimir(filesborrar[iborrar].ToString(), @carpetadbf);
+
+            //                //if (verror.Length == 0)
+            //                //{
+            //                //    string strRespuesta = datUtil.LeerDataDBF_TemporalVenta(strCodTienda, @carpetadbf);
+
+            //                //    if (strRespuesta == "S")
+            //                //    {
+            //                //        System.IO.File.Delete(@filesborrar[iborrar].ToString());
+            //                //    }
+            //                //    else
+            //                //    {
+            //                //        string errSw2 = "";
+            //                //        util.control_errores_transac("06", strRespuesta, ref errSw2);
+            //                //    }
+
+            //                //}
+            //                //else
+            //                //{
+
+            //                //    string errSw = "";
+            //                //    util.control_errores_transac("06", verror + "==>50" + strCodTienda, ref errSw);
+            //                //}
+            //            }
+
+            //        }
+
+            //        #endregion
+               
+            //    //****************************************************************************
+            //}
+            //catch (Exception exc)
+            //{
+            //    string errSwc = "";
+               
+            //    //util.control_errores_transac("06", exc.Message, ref errSwc);
+
+            //}
 
 
 

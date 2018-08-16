@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using CapaServicioWindows.Modular;
+//using CapaServicioWindows.Modular;
 using System.IO;
 
 namespace AppBata_WS_Interfaces
@@ -51,18 +51,19 @@ namespace AppBata_WS_Interfaces
 
         private void btn_servicewin_Click(object sender, EventArgs e)
         {
-            string _error = "ing";
-            TextWriter tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
-            tw.WriteLine(_error);
-            tw.Flush();
-            tw.Close();
-            tw.Dispose();
-            Cursor.Current = Cursors.WaitCursor;
-            string _erro = "";
-            Basico cc = new Basico();
-            cc.eje_envio_guias(ref _erro);
-            MessageBox.Show("termino");
-            Cursor.Current = Cursors.Default;
+            //string _error = "ing";
+            //TextWriter tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+            //tw.WriteLine(_error);
+            //tw.Flush();
+            //tw.Close();
+            //tw.Dispose();
+            //Cursor.Current = Cursors.WaitCursor;
+            //string _erro = "";
+            //Basico cc = new Basico();
+            //cc.procesar_dbf_pos(ref _erro);
+            //cc.eje_envio_guias(ref _erro);
+            //MessageBox.Show("termino");
+            //Cursor.Current = Cursors.Default;
         }
 
         private void btnupload_Click(object sender, EventArgs e)

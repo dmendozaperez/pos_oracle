@@ -1,7 +1,5 @@
 ﻿//using CapaServicioWindows.Modular;
 using CapaServicioWindows.CapaDato.Venta;
-using CapaDato.Basico;
-using CapaDato.Tienda;
 using CapaServicioWindows.Modular;
 using System;
 using System.Collections.Generic;
@@ -134,39 +132,31 @@ namespace ServiceWinTransaction
         }
 
         void tmpServicioDBF_Elapsed(object sender, ElapsedEventArgs e)
-        {
-           
+        {           
             try
             {
+                if (_valida_serviceDBF == 0)
+                { 
+                    string _valida_proc_dbf = @"D:\venta.txt";
+                    Boolean proceso_insertDBF = false;
 
-                Dat_Util datUtil = new Dat_Util();
-                string _valida_proc_dbf = @"D:\venta.txt";
-                Boolean proceso_insertDBF = false;
+                    if (File.Exists(_valida_proc_dbf)) proceso_insertDBF = true;
 
-                if (File.Exists(_valida_proc_dbf)) proceso_insertDBF = true;
-
-                if (proceso_insertDBF)
-                {
-                    if (_valida_serviceDBF == 0)
-                    {
-                        //string _error = "ing";
-                        _valor = 1;
-                        _valida_serviceDBF = 1;
-
-                        Basico ejecuta_procesos = null;
-                        ejecuta_procesos = new Basico();
-                        ejecuta_procesos.procesar_DBF_POS();
-
-
-                        _valida_serviceDBF = 0;
+                    if (proceso_insertDBF)
+                    {                                       
+                            string _error = "";                      
+                            _valida_serviceDBF = 1;                        
+                            Basico ejecuta_procesos =new Basico();                     
+                            ejecuta_procesos.procesar_dbf_pos(ref _error);                        
+                            _valida_serviceDBF = 0;
+                   
                     }
-                }
+               }
 
-               
             }
             catch (Exception exc)
             {
-                string errSwc = "";
+                //string errSwc = "";
                 _valida_serviceDBF = 0;
             }
          }
@@ -174,27 +164,16 @@ namespace ServiceWinTransaction
         protected override void OnStart(string[] args)
         {
             tmservicio.Start();
+            tmservicioDBF.Start();
         }
 
         protected override void OnStop()
         {
             tmservicio.Stop();
+            tmservicioDBF.Stop();
         }       
 
-        private static string descomprimir(string _rutazip, string _destino)
-        {
-            string _error = "";
-            try
-            {
-                FastZip fZip = new FastZip();
-                fZip.ExtractZip(@_rutazip, @_destino, "");
-            }
-            catch (Exception exc)
-            {
-                _error = exc.Message + " ==> El Archivo esta dañado";
-            }
-            return _error;
-        }
+       
 
     }
 }

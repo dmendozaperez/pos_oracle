@@ -106,7 +106,7 @@
             // ws_envia_stock_tda
             // 
             this.ws_envia_stock_tda.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ws_envia_stock_tda.Location = new System.Drawing.Point(416, 161);
+            this.ws_envia_stock_tda.Location = new System.Drawing.Point(654, 22);
             this.ws_envia_stock_tda.Name = "ws_envia_stock_tda";
             this.ws_envia_stock_tda.Size = new System.Drawing.Size(191, 32);
             this.ws_envia_stock_tda.TabIndex = 6;
@@ -151,7 +151,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(619, 357);
+            this.ClientSize = new System.Drawing.Size(888, 357);
             this.Controls.Add(this.ws_transmision_ingreso_nube);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.ws_envia_stock_tda);

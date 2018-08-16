@@ -104,10 +104,6 @@
     <None Include="Service References\BataTransac\Bata_Transaction1.disco" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CapaDato\CapaDato.csproj">
-      <Project>{d7d144b0-89b5-41e1-ae1e-340da4c00141}</Project>
-      <Name>CapaDato</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ICSharpCode.SharpZLib\ICSharpCode.SharpZLib.csproj">
       <Project>{a219098e-4077-470f-a709-f5f0142845be}</Project>
       <Name>ICSharpCode.SharpZLib</Name>

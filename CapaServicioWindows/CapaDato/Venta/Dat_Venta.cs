@@ -95,5 +95,42 @@ namespace CapaServicioWindows.CapaDato.Venta
             return error;
         }
 
+        public string inserta_venta_dbf(string cod_tda)
+        {
+            string sqlquery = "[USP_INSERTAR_VENTAS_DBF]";
+            string error = "";
+            try
+            {
+               
+                    using (SqlConnection cn = new SqlConnection(ConexionSQL.conexion))
+                    {
+                        try
+                        {
+                            if (cn.State == 0) cn.Open();
+                            using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                            {
+                                cmd.CommandTimeout = 120;
+                                cmd.CommandType = CommandType.StoredProcedure;
+                                cmd.Parameters.AddWithValue("@COD_TDA", cod_tda);                              
+                                cmd.ExecuteNonQuery();
+
+                            }
+                        }
+                        catch (Exception exc)
+                        {
+                            error = exc.Message;
+                        }
+                        if (cn != null)
+                            if (cn.State == ConnectionState.Open) cn.Close();
+                    }
+              
+            }
+            catch (Exception exc)
+            {
+                error = exc.Message;
+            }
+            return error;
+        }
+
     }
 }

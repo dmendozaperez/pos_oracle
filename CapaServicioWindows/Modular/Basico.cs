@@ -471,12 +471,14 @@ namespace CapaServicioWindows.Modular
                 if (!Directory.Exists(@carpetadbf)) Directory.CreateDirectory(@carpetadbf);
                 string[] filesborrar= Directory.GetFiles(@carpetadbf, "*.*");
                 string[] filespaquete= Directory.GetFiles(@carpetatienda, "*.*");
-
-                foreach (string filedetele in filesborrar)
-                    File.Delete(filedetele);
+               
 
                 for (Int32 i = 0; i < filespaquete.Length; ++i)
                 {
+                    strCodTienda = "";
+                    foreach (string filedetele in filesborrar)
+                        File.Delete(filedetele);
+
                     String value = filespaquete[i].ToString();
                     Char delimiter = '.';
                     String[] substrings = value.Split(delimiter);
@@ -485,13 +487,13 @@ namespace CapaServicioWindows.Modular
                     _error = descomprimir(filespaquete[i].ToString(), @carpetadbf);
                     if (_error.Length == 0)
                     {
-                        DataSet ds_ventas= datUtil.get_ds_venta(@carpetadbf,ref _error);
+                        //DataSet ds_ventas= datUtil.get_ds_venta(@carpetadbf,ref _error);
 
                         if (_error.Length==0)
                         {
 
                             venta_ing = new Dat_Venta();
-                            _error= venta_ing.inserta_venta(strCodTienda, ds_ventas);
+                            _error= venta_ing.inserta_venta_dbf(strCodTienda);
 
                             if (_error.Length==0)
                             {

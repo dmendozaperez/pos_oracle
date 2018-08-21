@@ -48,6 +48,7 @@
     <Compile Include="Ecommerce\Dat_Stock_Tienda.cs" />
     <Compile Include="Interfaces\Dat_Interface.cs" />
     <Compile Include="Interfaces\Dat_RecepcionGuias.cs" />
+    <Compile Include="Interfaces\Dat_Scactco.cs" />
     <Compile Include="Interfaces\Dat_Scdremb.cs" />
     <Compile Include="Logistica\Dat_GuiasDespacho.cs" />
     <Compile Include="Logistica\Dat_Stock.cs" />

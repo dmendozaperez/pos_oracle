@@ -526,6 +526,45 @@ namespace WS_Bata_Interfaces
             return _respuesta;
         }
 
+
+        [SoapHeader("Authentication", Required = true)]
+        [WebMethod(Description = "Enviar Scactco")]
+        public Ent_MsgTransac ws_envia_Scactco_list(Ent_List_Scactco listscactco)
+        {
+            Ent_MsgTransac msg_transac = null;
+            autentication_ws = new Ba_WsConexion();
+            Dat_Scactco datScactco = null;
+            try
+            {
+                msg_transac = new Ent_MsgTransac();
+                Boolean valida_ws = autentication_ws.ckeckAuthentication_ws("01", Authentication.Username, Authentication.Password);
+                if (valida_ws)
+                {
+                    datScactco = new Dat_Scactco();
+                    msg_transac = datScactco.insertar_Scactco(listscactco);
+
+                    if (msg_transac.codigo != "0")
+                    {
+                        String tip_error = "07";
+                        Dat_Error_Transac error_transac = new Dat_Error_Transac();
+                        error_transac.insertar_errores_transac(tip_error, msg_transac.descripcion);
+                    }
+                }
+                else
+                {
+                    msg_transac.codigo = "1";
+                    msg_transac.descripcion = "Conexión sin exito";
+                }
+
+            }
+            catch (Exception exc)
+            {
+                msg_transac.codigo = "1";
+                msg_transac.descripcion = exc.Message;
+            }
+            return msg_transac;
+        }
+        
     }
 
     public class ValidateAcceso:SoapHeader

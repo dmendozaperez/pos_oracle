@@ -43,6 +43,7 @@
     <Compile Include="Ecommerce\Ent_Stock_Tienda.cs" />
     <Compile Include="Interfaces\Ent_Fvdespc.cs" />
     <Compile Include="Interfaces\Ent_Scdddes.cs" />
+    <Compile Include="Interfaces\Ent_Scactco.cs" />
     <Compile Include="Interfaces\Ent_Scdremb.cs" />
     <Compile Include="Logistica\Ent_GuiasDespacho.cs" />
     <Compile Include="Logistica\Ent_Stock.cs" />

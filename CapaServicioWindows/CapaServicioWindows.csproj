@@ -49,6 +49,7 @@
     <Compile Include="Conexion\ConexionSQL.cs" />
     <Compile Include="Conexion\ConexionWS.cs" />
     <Compile Include="Entidad\SCDDDES.cs" />
+    <Compile Include="Envio_Ws\Envio_Scactco.cs" />
     <Compile Include="Envio_Ws\Envio_Guias.cs" />
     <Compile Include="Entidad\FVDESPC.cs" />
     <Compile Include="Modular\Basico.cs" />
@@ -65,7 +66,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="Service References\BataTransac\Bata_Transaction1.wsdl" />
+    <None Include="Service References\BataTransac\Bata_Transaction.wsdl" />
+    <None Include="Service References\BataTransac\CapaServicioWindows.BataTransac.Ent_Config_Service.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\BataTransac\CapaServicioWindows.BataTransac.Ent_File.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -86,7 +90,16 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ICSharpCode.SharpZLib\ICSharpCode.SharpZLib.csproj">
+      <Project>{a219098e-4077-470f-a709-f5f0142845be}</Project>
+      <Name>ICSharpCode.SharpZLib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <WCFMetadataStorage Include="Service References\BataTransac\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\BataTransac\Bata_Transaction.disco" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\BataTransac\configuration91.svcinfo" />
@@ -99,15 +112,6 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\BataTransac\Bata_Transaction1.disco" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ICSharpCode.SharpZLib\ICSharpCode.SharpZLib.csproj">
-      <Project>{a219098e-4077-470f-a709-f5f0142845be}</Project>
-      <Name>ICSharpCode.SharpZLib</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

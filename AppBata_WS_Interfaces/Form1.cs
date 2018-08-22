@@ -46,6 +46,8 @@ namespace AppBata_WS_Interfaces
 
         private void btnenvio_Click(object sender, EventArgs e)
         {
+            List<BataTransac.Ent_Scactco> _lista_scactco = new List<BataTransac.Ent_Scactco>();
+            BataTransac.Bata_TransactionSoapClient c = new BataTransac.Bata_TransactionSoapClient(); 
 
         }
 

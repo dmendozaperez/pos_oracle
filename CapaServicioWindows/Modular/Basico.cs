@@ -116,6 +116,72 @@ namespace CapaServicioWindows.Modular
             }
             return _lista_scdddes;
         }
+
+
+        private List<BataTransac.Ent_Scactco> get_scactco(string _path, ref string error)
+        {
+            List<BataTransac.Ent_Scactco> _lista_scactco = null;
+
+            string sqlquery_scactco = "SELECT Ctco_talpr,Ctco_plaoc,Ctco_artic,Ctco_calid,Ctco_plpr,Ctco_impr," +
+                                         "Ctco_med00,Ctco_med01,Ctco_med02,Ctco_med03,Ctco_med04,Ctco_med05," +
+                                         "Ctco_med06,Ctco_med07,Ctco_med08,Ctco_med09,Ctco_med10,Ctco_med11," +
+                                         "Ctco_orige,Ctco_fecha,Ctco_usern ,Ctco_empre,Ctco_ftx,Ctco_txpos FROM " +
+                                         "SCACTCO order by Ctco_fecha";
+           try
+            {
+            
+                using (OleDbConnection cn = new OleDbConnection(ConexionDBF._conexion_fvdes_oledb(_path)))
+                {
+                    using (OleDbCommand cmd = new OleDbCommand(sqlquery_scactco, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                      
+                        using (OleDbDataAdapter da = new OleDbDataAdapter(cmd))
+                        {
+                            DataTable dt = new DataTable();
+                            da.Fill(dt);
+                            _lista_scactco = new List<BataTransac.Ent_Scactco>();
+                            _lista_scactco = (from DataRow dr in dt.Rows
+                                              select new BataTransac.Ent_Scactco()
+                                              {
+                                                  ctco_talpr = dr["Ctco_talpr"].ToString(),
+                                                  ctco_plaoc = dr["Ctco_plaoc"].ToString(),
+                                                  ctco_artic = dr["Ctco_artic"].ToString(),
+                                                  ctco_calid = dr["Ctco_calid"].ToString(),
+                                                  ctco_plpr = dr["Ctco_plpr"].ToString(),
+                                                  ctco_impr = dr["Ctco_impr"].ToString(),
+                                                  ctco_med00 = dr["Ctco_med00"].ToString(),
+                                                  ctco_med01 = dr["Ctco_med01"].ToString(),
+                                                  ctco_med02 = dr["Ctco_med02"].ToString(),
+                                                  ctco_med03 = dr["Ctco_med03"].ToString(),
+                                                  ctco_med04 = dr["Ctco_med04"].ToString(),
+                                                  ctco_med05 = dr["Ctco_med05"].ToString(),
+                                                  ctco_med06 = dr["Ctco_med06"].ToString(),
+                                                  ctco_med07 = dr["Ctco_med07"].ToString(),
+                                                  ctco_med08 = dr["Ctco_med08"].ToString(),
+                                                  ctco_med09 = dr["Ctco_med09"].ToString(),
+                                                  ctco_med10 = dr["Ctco_med10"].ToString(),
+                                                  ctco_med11 = dr["Ctco_med11"].ToString(),
+                                                  ctco_orige = dr["Ctco_orige"].ToString(),
+                                                  ctco_fecha = DateTime.Parse(dr["Ctco_fecha"].ToString()),
+                                                  ctco_usern = dr["Ctco_usern"].ToString(),
+                                                  ctco_empre = dr["Ctco_empre"].ToString(),
+                                                  ctco_ftx = dr["Ctco_ftx"].ToString(),
+                                                  ctco_txpos = dr["Ctco_txpos"].ToString(),
+                                              }).ToList();
+                        }
+                    }
+
+                }
+
+            }
+            catch (Exception exc)
+            {
+                error = exc.Message;
+                _lista_scactco = null;
+            }
+            return _lista_scactco;
+        }
         /// <summary>
         /// cebezera de guias para enviar
         /// </summary>
@@ -608,6 +674,93 @@ namespace CapaServicioWindows.Modular
 
 
 
+        }
+
+        public void enviar_scactco(ref string _error_ws)
+        {
+            //BataTransac.Ent_Fvdespc fvdespc = new BataTransac.Ent_Fvdespc();
+            //BataTransac.Ent_Scdddes scdddes = new BataTransac.Ent_Scdddes();
+            //Envio_Guias ws_envio = new Envio_Guias();
+            BataTransac.Bata_TransactionSoapClient bata_trans = new BataTransac.Bata_TransactionSoapClient();
+            //string envio_guias_ws = ws_envio.envio_ws_guias(fvdespc, scdddes);
+            string _error_transac = "";
+            List<BataTransac.Ent_Scactco> _lista_scactco = new List<BataTransac.Ent_Scactco>();
+
+            
+            
+            BataTransac.Ent_List_Scactco listArray = new BataTransac.Ent_List_Scactco();
+            string _error = "";
+           
+            try
+            {
+                /*segundos para ejecutar*/
+                _espera_ejecuta(20);
+                /***********************/
+
+                #region<CAPTURAR EL PATH DE LOS DBF>
+
+                Util locationdbf = new Util();
+                string rutloc_location = locationdbf.get_ruta_locationProcesa_dbf("SCACTCO");
+                
+                #endregion
+
+                if (rutloc_location == null) return;
+
+                /*VALIDACION DE EJECUCION */
+                #region<VALIDA ARCHIVO SI EXISTE PARA NO REALIZAR NINGUNA ACCCION POR SEGURIDAD DE REINDEXACION DEL FOX>
+
+                string name_txt = "SCACTCO";
+               
+                //Boolean valida_exists_txt = false;
+                string ruta_validacion = "";
+                if (rutloc_location != null)
+                {
+                    ruta_validacion = rutloc_location + "\\"+ name_txt + ".txt";
+                }
+
+                #endregion
+                               
+                /*ya no entra a consultar*/
+                if (File.Exists(@ruta_validacion)) return;
+                /**/
+
+                _lista_scactco = get_scactco(rutloc_location, ref _error);
+
+                /*VERIFICAR SI HAY ERROR*/
+                if (_error.Length > 0)
+                {
+                    _error += " ==>TABLA SCACTCO]";
+                    Util ws_error_transac = new Util();
+                    /*si hay un error entonces 07 error de lectura dbf*/
+                    ws_error_transac.control_errores_transac("07", _error, ref _error_ws);
+                }
+                /**/
+
+                if (_lista_scactco != null)
+                {
+                    listArray.lista_scactco = _lista_scactco.ToArray();
+                    Envio_Scactco ws_envio = new Envio_Scactco();
+                   
+                    string envio_scactco_ws = ws_envio.envio_ws_Scactco(listArray);
+                 
+                    if (envio_scactco_ws.Length > 0)
+                    {
+                        Util ws_error_transac = new Util();
+                        _error_ws = envio_scactco_ws.ToString();
+                        /*si hay un error entonces 02 error de transaction*/
+                        ws_error_transac.control_errores_transac("07", envio_scactco_ws, ref _error_ws);
+                    }                    
+
+                }
+
+            }
+            catch (Exception exc)
+            {
+                _error_ws = exc.Message;
+                _error_transac = exc.Message;
+                //_envio_guias = "";
+            }
+            //return _error_transac;
         }
 
         private static string descomprimir(string _rutazip, string _destino)

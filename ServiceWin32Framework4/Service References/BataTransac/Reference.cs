@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ServiceWinTransaction.BataTransac {
+namespace ServiceWin32Framework4.BataTransac {
     using System.Data;
     
     
@@ -19,88 +19,88 @@ namespace ServiceWinTransaction.BataTransac {
         // CODEGEN: Se está generando un contrato de mensaje, ya que el mensaje HelloWorldRequest tiene encabezados.
         [System.ServiceModel.OperationContractAttribute(Action="http://bataperu.com.pe/HelloWorld", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        ServiceWinTransaction.BataTransac.HelloWorldResponse HelloWorld(ServiceWinTransaction.BataTransac.HelloWorldRequest request);
+        ServiceWin32Framework4.BataTransac.HelloWorldResponse HelloWorld(ServiceWin32Framework4.BataTransac.HelloWorldRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://bataperu.com.pe/fvdespc", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        ServiceWinTransaction.BataTransac.Ent_Fvdespc fvdespc();
+        ServiceWin32Framework4.BataTransac.Ent_Fvdespc fvdespc();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://bataperu.com.pe/scdddes", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        ServiceWinTransaction.BataTransac.Ent_Scdddes scdddes();
+        ServiceWin32Framework4.BataTransac.Ent_Scdddes scdddes();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://bataperu.com.pe/pathdbf", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        ServiceWinTransaction.BataTransac.Ent_PathDBF pathdbf();
+        ServiceWin32Framework4.BataTransac.Ent_PathDBF pathdbf();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://bataperu.com.pe/list_file", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        ServiceWinTransaction.BataTransac.Ent_File list_file();
+        ServiceWin32Framework4.BataTransac.Ent_File list_file();
         
         // CODEGEN: Se está generando un contrato de mensaje, ya que el mensaje ws_update_transaction_guiasRequest tiene encabezados.
         [System.ServiceModel.OperationContractAttribute(Action="http://bataperu.com.pe/ws_update_transaction_guias", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        ServiceWinTransaction.BataTransac.ws_update_transaction_guiasResponse ws_update_transaction_guias(ServiceWinTransaction.BataTransac.ws_update_transaction_guiasRequest request);
+        ServiceWin32Framework4.BataTransac.ws_update_transaction_guiasResponse ws_update_transaction_guias(ServiceWin32Framework4.BataTransac.ws_update_transaction_guiasRequest request);
         
         // CODEGEN: Se está generando un contrato de mensaje, ya que el mensaje ws_errores_transactionRequest tiene encabezados.
         [System.ServiceModel.OperationContractAttribute(Action="http://bataperu.com.pe/ws_errores_transaction", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        ServiceWinTransaction.BataTransac.ws_errores_transactionResponse ws_errores_transaction(ServiceWinTransaction.BataTransac.ws_errores_transactionRequest request);
+        ServiceWin32Framework4.BataTransac.ws_errores_transactionResponse ws_errores_transaction(ServiceWin32Framework4.BataTransac.ws_errores_transactionRequest request);
         
         // CODEGEN: Se está generando un contrato de mensaje, ya que el mensaje ws_get_location_dbfRequest tiene encabezados.
         [System.ServiceModel.OperationContractAttribute(Action="http://bataperu.com.pe/ws_get_location_dbf", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        ServiceWinTransaction.BataTransac.ws_get_location_dbfResponse ws_get_location_dbf(ServiceWinTransaction.BataTransac.ws_get_location_dbfRequest request);
+        ServiceWin32Framework4.BataTransac.ws_get_location_dbfResponse ws_get_location_dbf(ServiceWin32Framework4.BataTransac.ws_get_location_dbfRequest request);
         
         // CODEGEN: Se está generando un contrato de mensaje, ya que el mensaje ws_get_file_uploadRequest tiene encabezados.
         [System.ServiceModel.OperationContractAttribute(Action="http://bataperu.com.pe/ws_get_file_upload", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        ServiceWinTransaction.BataTransac.ws_get_file_uploadResponse ws_get_file_upload(ServiceWinTransaction.BataTransac.ws_get_file_uploadRequest request);
+        ServiceWin32Framework4.BataTransac.ws_get_file_uploadResponse ws_get_file_upload(ServiceWin32Framework4.BataTransac.ws_get_file_uploadRequest request);
         
         // CODEGEN: Se está generando un contrato de mensaje, ya que el mensaje ws_get_file_pathRequest tiene encabezados.
         [System.ServiceModel.OperationContractAttribute(Action="http://bataperu.com.pe/ws_get_file_path", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        ServiceWinTransaction.BataTransac.ws_get_file_pathResponse ws_get_file_path(ServiceWinTransaction.BataTransac.ws_get_file_pathRequest request);
+        ServiceWin32Framework4.BataTransac.ws_get_file_pathResponse ws_get_file_path(ServiceWin32Framework4.BataTransac.ws_get_file_pathRequest request);
         
         // CODEGEN: Se está generando un contrato de mensaje, ya que el mensaje ws_download_fileRequest tiene encabezados.
         [System.ServiceModel.OperationContractAttribute(Action="http://bataperu.com.pe/ws_download_file", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        ServiceWinTransaction.BataTransac.ws_download_fileResponse ws_download_file(ServiceWinTransaction.BataTransac.ws_download_fileRequest request);
+        ServiceWin32Framework4.BataTransac.ws_download_fileResponse ws_download_file(ServiceWin32Framework4.BataTransac.ws_download_fileRequest request);
         
         // CODEGEN: Se está generando un contrato de mensaje, ya que el mensaje ws_get_time_servicetransRequest tiene encabezados.
         [System.ServiceModel.OperationContractAttribute(Action="http://bataperu.com.pe/ws_get_time_servicetrans", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        ServiceWinTransaction.BataTransac.ws_get_time_servicetransResponse ws_get_time_servicetrans(ServiceWinTransaction.BataTransac.ws_get_time_servicetransRequest request);
+        ServiceWin32Framework4.BataTransac.ws_get_time_servicetransResponse ws_get_time_servicetrans(ServiceWin32Framework4.BataTransac.ws_get_time_servicetransRequest request);
         
         // CODEGEN: Se está generando un contrato de mensaje, ya que el mensaje ws_envia_stock_tdaRequest tiene encabezados.
         [System.ServiceModel.OperationContractAttribute(Action="http://bataperu.com.pe/ws_envia_stock_tda", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        ServiceWinTransaction.BataTransac.ws_envia_stock_tdaResponse ws_envia_stock_tda(ServiceWinTransaction.BataTransac.ws_envia_stock_tdaRequest request);
+        ServiceWin32Framework4.BataTransac.ws_envia_stock_tdaResponse ws_envia_stock_tda(ServiceWin32Framework4.BataTransac.ws_envia_stock_tdaRequest request);
         
         // CODEGEN: Se está generando un contrato de mensaje, ya que el mensaje ws_envia_venta_tdaRequest tiene encabezados.
         [System.ServiceModel.OperationContractAttribute(Action="http://bataperu.com.pe/ws_envia_venta_tda", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        ServiceWinTransaction.BataTransac.ws_envia_venta_tdaResponse ws_envia_venta_tda(ServiceWinTransaction.BataTransac.ws_envia_venta_tdaRequest request);
+        ServiceWin32Framework4.BataTransac.ws_envia_venta_tdaResponse ws_envia_venta_tda(ServiceWin32Framework4.BataTransac.ws_envia_venta_tdaRequest request);
         
         // CODEGEN: Se está generando un contrato de mensaje, ya que el mensaje ws_envia_venta_tda_listRequest tiene encabezados.
         [System.ServiceModel.OperationContractAttribute(Action="http://bataperu.com.pe/ws_envia_venta_tda_list", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        ServiceWinTransaction.BataTransac.ws_envia_venta_tda_listResponse ws_envia_venta_tda_list(ServiceWinTransaction.BataTransac.ws_envia_venta_tda_listRequest request);
+        ServiceWin32Framework4.BataTransac.ws_envia_venta_tda_listResponse ws_envia_venta_tda_list(ServiceWin32Framework4.BataTransac.ws_envia_venta_tda_listRequest request);
         
         // CODEGEN: Se está generando un contrato de mensaje, ya que el mensaje ws_envia_venta_tda_listaRequest tiene encabezados.
         [System.ServiceModel.OperationContractAttribute(Action="http://bataperu.com.pe/ws_envia_venta_tda_lista", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        ServiceWinTransaction.BataTransac.ws_envia_venta_tda_listaResponse ws_envia_venta_tda_lista(ServiceWinTransaction.BataTransac.ws_envia_venta_tda_listaRequest request);
+        ServiceWin32Framework4.BataTransac.ws_envia_venta_tda_listaResponse ws_envia_venta_tda_lista(ServiceWin32Framework4.BataTransac.ws_envia_venta_tda_listaRequest request);
         
         // CODEGEN: Se está generando un contrato de mensaje, ya que el mensaje ws_transmision_ingreso_nubeRequest tiene encabezados.
         [System.ServiceModel.OperationContractAttribute(Action="http://bataperu.com.pe/ws_transmision_ingreso_nube", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        ServiceWinTransaction.BataTransac.ws_transmision_ingreso_nubeResponse ws_transmision_ingreso_nube(ServiceWinTransaction.BataTransac.ws_transmision_ingreso_nubeRequest request);
+        ServiceWin32Framework4.BataTransac.ws_transmision_ingreso_nubeResponse ws_transmision_ingreso_nube(ServiceWin32Framework4.BataTransac.ws_transmision_ingreso_nubeRequest request);
         
         // CODEGEN: Se está generando un contrato de mensaje, ya que el mensaje ws_envia_Scactco_listRequest tiene encabezados.
         [System.ServiceModel.OperationContractAttribute(Action="http://bataperu.com.pe/ws_envia_Scactco_list", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        ServiceWinTransaction.BataTransac.ws_envia_Scactco_listResponse ws_envia_Scactco_list(ServiceWinTransaction.BataTransac.ws_envia_Scactco_listRequest request);
+        ServiceWin32Framework4.BataTransac.ws_envia_Scactco_listResponse ws_envia_Scactco_list(ServiceWin32Framework4.BataTransac.ws_envia_Scactco_listRequest request);
     }
     
     /// <remarks/>
@@ -3820,7 +3820,7 @@ namespace ServiceWinTransaction.BataTransac {
     public partial class HelloWorldRequest {
         
         [System.ServiceModel.MessageHeaderAttribute(Namespace="http://bataperu.com.pe/")]
-        public ServiceWinTransaction.BataTransac.ValidateAcceso ValidateAcceso;
+        public ServiceWin32Framework4.BataTransac.ValidateAcceso ValidateAcceso;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=0)]
         public string cod_tda;
@@ -3828,7 +3828,7 @@ namespace ServiceWinTransaction.BataTransac {
         public HelloWorldRequest() {
         }
         
-        public HelloWorldRequest(ServiceWinTransaction.BataTransac.ValidateAcceso ValidateAcceso, string cod_tda) {
+        public HelloWorldRequest(ServiceWin32Framework4.BataTransac.ValidateAcceso ValidateAcceso, string cod_tda) {
             this.ValidateAcceso = ValidateAcceso;
             this.cod_tda = cod_tda;
         }
@@ -3841,12 +3841,12 @@ namespace ServiceWinTransaction.BataTransac {
     public partial class HelloWorldResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=0)]
-        public ServiceWinTransaction.BataTransac.Ent_MsgTransac HelloWorldResult;
+        public ServiceWin32Framework4.BataTransac.Ent_MsgTransac HelloWorldResult;
         
         public HelloWorldResponse() {
         }
         
-        public HelloWorldResponse(ServiceWinTransaction.BataTransac.Ent_MsgTransac HelloWorldResult) {
+        public HelloWorldResponse(ServiceWin32Framework4.BataTransac.Ent_MsgTransac HelloWorldResult) {
             this.HelloWorldResult = HelloWorldResult;
         }
     }
@@ -3858,18 +3858,18 @@ namespace ServiceWinTransaction.BataTransac {
     public partial class ws_update_transaction_guiasRequest {
         
         [System.ServiceModel.MessageHeaderAttribute(Namespace="http://bataperu.com.pe/")]
-        public ServiceWinTransaction.BataTransac.ValidateAcceso ValidateAcceso;
+        public ServiceWin32Framework4.BataTransac.ValidateAcceso ValidateAcceso;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=0)]
-        public ServiceWinTransaction.BataTransac.Ent_Fvdespc fvdespc;
+        public ServiceWin32Framework4.BataTransac.Ent_Fvdespc fvdespc;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=1)]
-        public ServiceWinTransaction.BataTransac.Ent_Scdddes scdddes;
+        public ServiceWin32Framework4.BataTransac.Ent_Scdddes scdddes;
         
         public ws_update_transaction_guiasRequest() {
         }
         
-        public ws_update_transaction_guiasRequest(ServiceWinTransaction.BataTransac.ValidateAcceso ValidateAcceso, ServiceWinTransaction.BataTransac.Ent_Fvdespc fvdespc, ServiceWinTransaction.BataTransac.Ent_Scdddes scdddes) {
+        public ws_update_transaction_guiasRequest(ServiceWin32Framework4.BataTransac.ValidateAcceso ValidateAcceso, ServiceWin32Framework4.BataTransac.Ent_Fvdespc fvdespc, ServiceWin32Framework4.BataTransac.Ent_Scdddes scdddes) {
             this.ValidateAcceso = ValidateAcceso;
             this.fvdespc = fvdespc;
             this.scdddes = scdddes;
@@ -3883,12 +3883,12 @@ namespace ServiceWinTransaction.BataTransac {
     public partial class ws_update_transaction_guiasResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=0)]
-        public ServiceWinTransaction.BataTransac.Ent_MsgTransac ws_update_transaction_guiasResult;
+        public ServiceWin32Framework4.BataTransac.Ent_MsgTransac ws_update_transaction_guiasResult;
         
         public ws_update_transaction_guiasResponse() {
         }
         
-        public ws_update_transaction_guiasResponse(ServiceWinTransaction.BataTransac.Ent_MsgTransac ws_update_transaction_guiasResult) {
+        public ws_update_transaction_guiasResponse(ServiceWin32Framework4.BataTransac.Ent_MsgTransac ws_update_transaction_guiasResult) {
             this.ws_update_transaction_guiasResult = ws_update_transaction_guiasResult;
         }
     }
@@ -3900,7 +3900,7 @@ namespace ServiceWinTransaction.BataTransac {
     public partial class ws_errores_transactionRequest {
         
         [System.ServiceModel.MessageHeaderAttribute(Namespace="http://bataperu.com.pe/")]
-        public ServiceWinTransaction.BataTransac.ValidateAcceso ValidateAcceso;
+        public ServiceWin32Framework4.BataTransac.ValidateAcceso ValidateAcceso;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=0)]
         public string tip_error;
@@ -3911,7 +3911,7 @@ namespace ServiceWinTransaction.BataTransac {
         public ws_errores_transactionRequest() {
         }
         
-        public ws_errores_transactionRequest(ServiceWinTransaction.BataTransac.ValidateAcceso ValidateAcceso, string tip_error, string msg) {
+        public ws_errores_transactionRequest(ServiceWin32Framework4.BataTransac.ValidateAcceso ValidateAcceso, string tip_error, string msg) {
             this.ValidateAcceso = ValidateAcceso;
             this.tip_error = tip_error;
             this.msg = msg;
@@ -3925,12 +3925,12 @@ namespace ServiceWinTransaction.BataTransac {
     public partial class ws_errores_transactionResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=0)]
-        public ServiceWinTransaction.BataTransac.Ent_MsgTransac ws_errores_transactionResult;
+        public ServiceWin32Framework4.BataTransac.Ent_MsgTransac ws_errores_transactionResult;
         
         public ws_errores_transactionResponse() {
         }
         
-        public ws_errores_transactionResponse(ServiceWinTransaction.BataTransac.Ent_MsgTransac ws_errores_transactionResult) {
+        public ws_errores_transactionResponse(ServiceWin32Framework4.BataTransac.Ent_MsgTransac ws_errores_transactionResult) {
             this.ws_errores_transactionResult = ws_errores_transactionResult;
         }
     }
@@ -3942,12 +3942,12 @@ namespace ServiceWinTransaction.BataTransac {
     public partial class ws_get_location_dbfRequest {
         
         [System.ServiceModel.MessageHeaderAttribute(Namespace="http://bataperu.com.pe/")]
-        public ServiceWinTransaction.BataTransac.ValidateAcceso ValidateAcceso;
+        public ServiceWin32Framework4.BataTransac.ValidateAcceso ValidateAcceso;
         
         public ws_get_location_dbfRequest() {
         }
         
-        public ws_get_location_dbfRequest(ServiceWinTransaction.BataTransac.ValidateAcceso ValidateAcceso) {
+        public ws_get_location_dbfRequest(ServiceWin32Framework4.BataTransac.ValidateAcceso ValidateAcceso) {
             this.ValidateAcceso = ValidateAcceso;
         }
     }
@@ -3959,12 +3959,12 @@ namespace ServiceWinTransaction.BataTransac {
     public partial class ws_get_location_dbfResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=0)]
-        public ServiceWinTransaction.BataTransac.Ent_PathDBF[] ws_get_location_dbfResult;
+        public ServiceWin32Framework4.BataTransac.Ent_PathDBF[] ws_get_location_dbfResult;
         
         public ws_get_location_dbfResponse() {
         }
         
-        public ws_get_location_dbfResponse(ServiceWinTransaction.BataTransac.Ent_PathDBF[] ws_get_location_dbfResult) {
+        public ws_get_location_dbfResponse(ServiceWin32Framework4.BataTransac.Ent_PathDBF[] ws_get_location_dbfResult) {
             this.ws_get_location_dbfResult = ws_get_location_dbfResult;
         }
     }
@@ -3976,18 +3976,18 @@ namespace ServiceWinTransaction.BataTransac {
     public partial class ws_get_file_uploadRequest {
         
         [System.ServiceModel.MessageHeaderAttribute(Namespace="http://bataperu.com.pe/")]
-        public ServiceWinTransaction.BataTransac.ValidateAcceso ValidateAcceso;
+        public ServiceWin32Framework4.BataTransac.ValidateAcceso ValidateAcceso;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=0)]
         public string tipofile_cod;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=1)]
-        public ServiceWinTransaction.BataTransac.Ent_Lista_File lista_in;
+        public ServiceWin32Framework4.BataTransac.Ent_Lista_File lista_in;
         
         public ws_get_file_uploadRequest() {
         }
         
-        public ws_get_file_uploadRequest(ServiceWinTransaction.BataTransac.ValidateAcceso ValidateAcceso, string tipofile_cod, ServiceWinTransaction.BataTransac.Ent_Lista_File lista_in) {
+        public ws_get_file_uploadRequest(ServiceWin32Framework4.BataTransac.ValidateAcceso ValidateAcceso, string tipofile_cod, ServiceWin32Framework4.BataTransac.Ent_Lista_File lista_in) {
             this.ValidateAcceso = ValidateAcceso;
             this.tipofile_cod = tipofile_cod;
             this.lista_in = lista_in;
@@ -4001,12 +4001,12 @@ namespace ServiceWinTransaction.BataTransac {
     public partial class ws_get_file_uploadResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=0)]
-        public ServiceWinTransaction.BataTransac.Ent_File[] ws_get_file_uploadResult;
+        public ServiceWin32Framework4.BataTransac.Ent_File[] ws_get_file_uploadResult;
         
         public ws_get_file_uploadResponse() {
         }
         
-        public ws_get_file_uploadResponse(ServiceWinTransaction.BataTransac.Ent_File[] ws_get_file_uploadResult) {
+        public ws_get_file_uploadResponse(ServiceWin32Framework4.BataTransac.Ent_File[] ws_get_file_uploadResult) {
             this.ws_get_file_uploadResult = ws_get_file_uploadResult;
         }
     }
@@ -4018,7 +4018,7 @@ namespace ServiceWinTransaction.BataTransac {
     public partial class ws_get_file_pathRequest {
         
         [System.ServiceModel.MessageHeaderAttribute(Namespace="http://bataperu.com.pe/")]
-        public ServiceWinTransaction.BataTransac.ValidateAcceso ValidateAcceso;
+        public ServiceWin32Framework4.BataTransac.ValidateAcceso ValidateAcceso;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=0)]
         public string tipo_file_cod;
@@ -4026,7 +4026,7 @@ namespace ServiceWinTransaction.BataTransac {
         public ws_get_file_pathRequest() {
         }
         
-        public ws_get_file_pathRequest(ServiceWinTransaction.BataTransac.ValidateAcceso ValidateAcceso, string tipo_file_cod) {
+        public ws_get_file_pathRequest(ServiceWin32Framework4.BataTransac.ValidateAcceso ValidateAcceso, string tipo_file_cod) {
             this.ValidateAcceso = ValidateAcceso;
             this.tipo_file_cod = tipo_file_cod;
         }
@@ -4039,12 +4039,12 @@ namespace ServiceWinTransaction.BataTransac {
     public partial class ws_get_file_pathResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=0)]
-        public ServiceWinTransaction.BataTransac.Ent_File_Ruta ws_get_file_pathResult;
+        public ServiceWin32Framework4.BataTransac.Ent_File_Ruta ws_get_file_pathResult;
         
         public ws_get_file_pathResponse() {
         }
         
-        public ws_get_file_pathResponse(ServiceWinTransaction.BataTransac.Ent_File_Ruta ws_get_file_pathResult) {
+        public ws_get_file_pathResponse(ServiceWin32Framework4.BataTransac.Ent_File_Ruta ws_get_file_pathResult) {
             this.ws_get_file_pathResult = ws_get_file_pathResult;
         }
     }
@@ -4056,7 +4056,7 @@ namespace ServiceWinTransaction.BataTransac {
     public partial class ws_download_fileRequest {
         
         [System.ServiceModel.MessageHeaderAttribute(Namespace="http://bataperu.com.pe/")]
-        public ServiceWinTransaction.BataTransac.ValidateAcceso ValidateAcceso;
+        public ServiceWin32Framework4.BataTransac.ValidateAcceso ValidateAcceso;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")]
@@ -4071,7 +4071,7 @@ namespace ServiceWinTransaction.BataTransac {
         public ws_download_fileRequest() {
         }
         
-        public ws_download_fileRequest(ServiceWinTransaction.BataTransac.ValidateAcceso ValidateAcceso, byte[] file, string file_name, string file_tipo) {
+        public ws_download_fileRequest(ServiceWin32Framework4.BataTransac.ValidateAcceso ValidateAcceso, byte[] file, string file_name, string file_tipo) {
             this.ValidateAcceso = ValidateAcceso;
             this.file = file;
             this.file_name = file_name;
@@ -4096,7 +4096,7 @@ namespace ServiceWinTransaction.BataTransac {
     public partial class ws_get_time_servicetransRequest {
         
         [System.ServiceModel.MessageHeaderAttribute(Namespace="http://bataperu.com.pe/")]
-        public ServiceWinTransaction.BataTransac.ValidateAcceso ValidateAcceso;
+        public ServiceWin32Framework4.BataTransac.ValidateAcceso ValidateAcceso;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=0)]
         public string cser_cod;
@@ -4104,7 +4104,7 @@ namespace ServiceWinTransaction.BataTransac {
         public ws_get_time_servicetransRequest() {
         }
         
-        public ws_get_time_servicetransRequest(ServiceWinTransaction.BataTransac.ValidateAcceso ValidateAcceso, string cser_cod) {
+        public ws_get_time_servicetransRequest(ServiceWin32Framework4.BataTransac.ValidateAcceso ValidateAcceso, string cser_cod) {
             this.ValidateAcceso = ValidateAcceso;
             this.cser_cod = cser_cod;
         }
@@ -4117,12 +4117,12 @@ namespace ServiceWinTransaction.BataTransac {
     public partial class ws_get_time_servicetransResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=0)]
-        public ServiceWinTransaction.BataTransac.Ent_Config_Service ws_get_time_servicetransResult;
+        public ServiceWin32Framework4.BataTransac.Ent_Config_Service ws_get_time_servicetransResult;
         
         public ws_get_time_servicetransResponse() {
         }
         
-        public ws_get_time_servicetransResponse(ServiceWinTransaction.BataTransac.Ent_Config_Service ws_get_time_servicetransResult) {
+        public ws_get_time_servicetransResponse(ServiceWin32Framework4.BataTransac.Ent_Config_Service ws_get_time_servicetransResult) {
             this.ws_get_time_servicetransResult = ws_get_time_servicetransResult;
         }
     }
@@ -4134,15 +4134,15 @@ namespace ServiceWinTransaction.BataTransac {
     public partial class ws_envia_stock_tdaRequest {
         
         [System.ServiceModel.MessageHeaderAttribute(Namespace="http://bataperu.com.pe/")]
-        public ServiceWinTransaction.BataTransac.ValidateAcceso ValidateAcceso;
+        public ServiceWin32Framework4.BataTransac.ValidateAcceso ValidateAcceso;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=0)]
-        public ServiceWinTransaction.BataTransac.Ent_Lista_Stock lista_stk;
+        public ServiceWin32Framework4.BataTransac.Ent_Lista_Stock lista_stk;
         
         public ws_envia_stock_tdaRequest() {
         }
         
-        public ws_envia_stock_tdaRequest(ServiceWinTransaction.BataTransac.ValidateAcceso ValidateAcceso, ServiceWinTransaction.BataTransac.Ent_Lista_Stock lista_stk) {
+        public ws_envia_stock_tdaRequest(ServiceWin32Framework4.BataTransac.ValidateAcceso ValidateAcceso, ServiceWin32Framework4.BataTransac.Ent_Lista_Stock lista_stk) {
             this.ValidateAcceso = ValidateAcceso;
             this.lista_stk = lista_stk;
         }
@@ -4155,12 +4155,12 @@ namespace ServiceWinTransaction.BataTransac {
     public partial class ws_envia_stock_tdaResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=0)]
-        public ServiceWinTransaction.BataTransac.Ent_MsgTransac ws_envia_stock_tdaResult;
+        public ServiceWin32Framework4.BataTransac.Ent_MsgTransac ws_envia_stock_tdaResult;
         
         public ws_envia_stock_tdaResponse() {
         }
         
-        public ws_envia_stock_tdaResponse(ServiceWinTransaction.BataTransac.Ent_MsgTransac ws_envia_stock_tdaResult) {
+        public ws_envia_stock_tdaResponse(ServiceWin32Framework4.BataTransac.Ent_MsgTransac ws_envia_stock_tdaResult) {
             this.ws_envia_stock_tdaResult = ws_envia_stock_tdaResult;
         }
     }
@@ -4172,7 +4172,7 @@ namespace ServiceWinTransaction.BataTransac {
     public partial class ws_envia_venta_tdaRequest {
         
         [System.ServiceModel.MessageHeaderAttribute(Namespace="http://bataperu.com.pe/")]
-        public ServiceWinTransaction.BataTransac.ValidateAcceso ValidateAcceso;
+        public ServiceWin32Framework4.BataTransac.ValidateAcceso ValidateAcceso;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=0)]
         public string cod_tda;
@@ -4183,7 +4183,7 @@ namespace ServiceWinTransaction.BataTransac {
         public ws_envia_venta_tdaRequest() {
         }
         
-        public ws_envia_venta_tdaRequest(ServiceWinTransaction.BataTransac.ValidateAcceso ValidateAcceso, string cod_tda, System.Data.DataSet ds_transac_tda) {
+        public ws_envia_venta_tdaRequest(ServiceWin32Framework4.BataTransac.ValidateAcceso ValidateAcceso, string cod_tda, System.Data.DataSet ds_transac_tda) {
             this.ValidateAcceso = ValidateAcceso;
             this.cod_tda = cod_tda;
             this.ds_transac_tda = ds_transac_tda;
@@ -4197,12 +4197,12 @@ namespace ServiceWinTransaction.BataTransac {
     public partial class ws_envia_venta_tdaResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=0)]
-        public ServiceWinTransaction.BataTransac.Ent_MsgTransac ws_envia_venta_tdaResult;
+        public ServiceWin32Framework4.BataTransac.Ent_MsgTransac ws_envia_venta_tdaResult;
         
         public ws_envia_venta_tdaResponse() {
         }
         
-        public ws_envia_venta_tdaResponse(ServiceWinTransaction.BataTransac.Ent_MsgTransac ws_envia_venta_tdaResult) {
+        public ws_envia_venta_tdaResponse(ServiceWin32Framework4.BataTransac.Ent_MsgTransac ws_envia_venta_tdaResult) {
             this.ws_envia_venta_tdaResult = ws_envia_venta_tdaResult;
         }
     }
@@ -4214,18 +4214,18 @@ namespace ServiceWinTransaction.BataTransac {
     public partial class ws_envia_venta_tda_listRequest {
         
         [System.ServiceModel.MessageHeaderAttribute(Namespace="http://bataperu.com.pe/")]
-        public ServiceWinTransaction.BataTransac.ValidateAcceso ValidateAcceso;
+        public ServiceWin32Framework4.BataTransac.ValidateAcceso ValidateAcceso;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=0)]
         public string cod_tda;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=1)]
-        public ServiceWinTransaction.BataTransac.Ent_Venta_List listaventa;
+        public ServiceWin32Framework4.BataTransac.Ent_Venta_List listaventa;
         
         public ws_envia_venta_tda_listRequest() {
         }
         
-        public ws_envia_venta_tda_listRequest(ServiceWinTransaction.BataTransac.ValidateAcceso ValidateAcceso, string cod_tda, ServiceWinTransaction.BataTransac.Ent_Venta_List listaventa) {
+        public ws_envia_venta_tda_listRequest(ServiceWin32Framework4.BataTransac.ValidateAcceso ValidateAcceso, string cod_tda, ServiceWin32Framework4.BataTransac.Ent_Venta_List listaventa) {
             this.ValidateAcceso = ValidateAcceso;
             this.cod_tda = cod_tda;
             this.listaventa = listaventa;
@@ -4239,12 +4239,12 @@ namespace ServiceWinTransaction.BataTransac {
     public partial class ws_envia_venta_tda_listResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=0)]
-        public ServiceWinTransaction.BataTransac.Ent_MsgTransac ws_envia_venta_tda_listResult;
+        public ServiceWin32Framework4.BataTransac.Ent_MsgTransac ws_envia_venta_tda_listResult;
         
         public ws_envia_venta_tda_listResponse() {
         }
         
-        public ws_envia_venta_tda_listResponse(ServiceWinTransaction.BataTransac.Ent_MsgTransac ws_envia_venta_tda_listResult) {
+        public ws_envia_venta_tda_listResponse(ServiceWin32Framework4.BataTransac.Ent_MsgTransac ws_envia_venta_tda_listResult) {
             this.ws_envia_venta_tda_listResult = ws_envia_venta_tda_listResult;
         }
     }
@@ -4256,24 +4256,24 @@ namespace ServiceWinTransaction.BataTransac {
     public partial class ws_envia_venta_tda_listaRequest {
         
         [System.ServiceModel.MessageHeaderAttribute(Namespace="http://bataperu.com.pe/")]
-        public ServiceWinTransaction.BataTransac.ValidateAcceso ValidateAcceso;
+        public ServiceWin32Framework4.BataTransac.ValidateAcceso ValidateAcceso;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=0)]
         public string cod_tda;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=1)]
-        public ServiceWinTransaction.BataTransac.Ent_List_Ffactc ffactc;
+        public ServiceWin32Framework4.BataTransac.Ent_List_Ffactc ffactc;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=2)]
-        public ServiceWinTransaction.BataTransac.Ent_List_Ffactd ffactd;
+        public ServiceWin32Framework4.BataTransac.Ent_List_Ffactd ffactd;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=3)]
-        public ServiceWinTransaction.BataTransac.Ent_List_Fnotaa fnotaa;
+        public ServiceWin32Framework4.BataTransac.Ent_List_Fnotaa fnotaa;
         
         public ws_envia_venta_tda_listaRequest() {
         }
         
-        public ws_envia_venta_tda_listaRequest(ServiceWinTransaction.BataTransac.ValidateAcceso ValidateAcceso, string cod_tda, ServiceWinTransaction.BataTransac.Ent_List_Ffactc ffactc, ServiceWinTransaction.BataTransac.Ent_List_Ffactd ffactd, ServiceWinTransaction.BataTransac.Ent_List_Fnotaa fnotaa) {
+        public ws_envia_venta_tda_listaRequest(ServiceWin32Framework4.BataTransac.ValidateAcceso ValidateAcceso, string cod_tda, ServiceWin32Framework4.BataTransac.Ent_List_Ffactc ffactc, ServiceWin32Framework4.BataTransac.Ent_List_Ffactd ffactd, ServiceWin32Framework4.BataTransac.Ent_List_Fnotaa fnotaa) {
             this.ValidateAcceso = ValidateAcceso;
             this.cod_tda = cod_tda;
             this.ffactc = ffactc;
@@ -4289,12 +4289,12 @@ namespace ServiceWinTransaction.BataTransac {
     public partial class ws_envia_venta_tda_listaResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=0)]
-        public ServiceWinTransaction.BataTransac.Ent_MsgTransac ws_envia_venta_tda_listaResult;
+        public ServiceWin32Framework4.BataTransac.Ent_MsgTransac ws_envia_venta_tda_listaResult;
         
         public ws_envia_venta_tda_listaResponse() {
         }
         
-        public ws_envia_venta_tda_listaResponse(ServiceWinTransaction.BataTransac.Ent_MsgTransac ws_envia_venta_tda_listaResult) {
+        public ws_envia_venta_tda_listaResponse(ServiceWin32Framework4.BataTransac.Ent_MsgTransac ws_envia_venta_tda_listaResult) {
             this.ws_envia_venta_tda_listaResult = ws_envia_venta_tda_listaResult;
         }
     }
@@ -4306,7 +4306,7 @@ namespace ServiceWinTransaction.BataTransac {
     public partial class ws_transmision_ingreso_nubeRequest {
         
         [System.ServiceModel.MessageHeaderAttribute(Namespace="http://bataperu.com.pe/")]
-        public ServiceWinTransaction.BataTransac.ValidateAcceso ValidateAcceso;
+        public ServiceWin32Framework4.BataTransac.ValidateAcceso ValidateAcceso;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")]
@@ -4318,7 +4318,7 @@ namespace ServiceWinTransaction.BataTransac {
         public ws_transmision_ingreso_nubeRequest() {
         }
         
-        public ws_transmision_ingreso_nubeRequest(ServiceWinTransaction.BataTransac.ValidateAcceso ValidateAcceso, byte[] _archivo_zip, string _name) {
+        public ws_transmision_ingreso_nubeRequest(ServiceWin32Framework4.BataTransac.ValidateAcceso ValidateAcceso, byte[] _archivo_zip, string _name) {
             this.ValidateAcceso = ValidateAcceso;
             this._archivo_zip = _archivo_zip;
             this._name = _name;
@@ -4349,15 +4349,15 @@ namespace ServiceWinTransaction.BataTransac {
     public partial class ws_envia_Scactco_listRequest {
         
         [System.ServiceModel.MessageHeaderAttribute(Namespace="http://bataperu.com.pe/")]
-        public ServiceWinTransaction.BataTransac.ValidateAcceso ValidateAcceso;
+        public ServiceWin32Framework4.BataTransac.ValidateAcceso ValidateAcceso;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=0)]
-        public ServiceWinTransaction.BataTransac.Ent_List_Scactco listscactco;
+        public ServiceWin32Framework4.BataTransac.Ent_List_Scactco listscactco;
         
         public ws_envia_Scactco_listRequest() {
         }
         
-        public ws_envia_Scactco_listRequest(ServiceWinTransaction.BataTransac.ValidateAcceso ValidateAcceso, ServiceWinTransaction.BataTransac.Ent_List_Scactco listscactco) {
+        public ws_envia_Scactco_listRequest(ServiceWin32Framework4.BataTransac.ValidateAcceso ValidateAcceso, ServiceWin32Framework4.BataTransac.Ent_List_Scactco listscactco) {
             this.ValidateAcceso = ValidateAcceso;
             this.listscactco = listscactco;
         }
@@ -4370,23 +4370,23 @@ namespace ServiceWinTransaction.BataTransac {
     public partial class ws_envia_Scactco_listResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=0)]
-        public ServiceWinTransaction.BataTransac.Ent_MsgTransac ws_envia_Scactco_listResult;
+        public ServiceWin32Framework4.BataTransac.Ent_MsgTransac ws_envia_Scactco_listResult;
         
         public ws_envia_Scactco_listResponse() {
         }
         
-        public ws_envia_Scactco_listResponse(ServiceWinTransaction.BataTransac.Ent_MsgTransac ws_envia_Scactco_listResult) {
+        public ws_envia_Scactco_listResponse(ServiceWin32Framework4.BataTransac.Ent_MsgTransac ws_envia_Scactco_listResult) {
             this.ws_envia_Scactco_listResult = ws_envia_Scactco_listResult;
         }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface Bata_TransactionSoapChannel : ServiceWinTransaction.BataTransac.Bata_TransactionSoap, System.ServiceModel.IClientChannel {
+    public interface Bata_TransactionSoapChannel : ServiceWin32Framework4.BataTransac.Bata_TransactionSoap, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class Bata_TransactionSoapClient : System.ServiceModel.ClientBase<ServiceWinTransaction.BataTransac.Bata_TransactionSoap>, ServiceWinTransaction.BataTransac.Bata_TransactionSoap {
+    public partial class Bata_TransactionSoapClient : System.ServiceModel.ClientBase<ServiceWin32Framework4.BataTransac.Bata_TransactionSoap>, ServiceWin32Framework4.BataTransac.Bata_TransactionSoap {
         
         public Bata_TransactionSoapClient() {
         }
@@ -4408,209 +4408,209 @@ namespace ServiceWinTransaction.BataTransac {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        ServiceWinTransaction.BataTransac.HelloWorldResponse ServiceWinTransaction.BataTransac.Bata_TransactionSoap.HelloWorld(ServiceWinTransaction.BataTransac.HelloWorldRequest request) {
+        ServiceWin32Framework4.BataTransac.HelloWorldResponse ServiceWin32Framework4.BataTransac.Bata_TransactionSoap.HelloWorld(ServiceWin32Framework4.BataTransac.HelloWorldRequest request) {
             return base.Channel.HelloWorld(request);
         }
         
-        public ServiceWinTransaction.BataTransac.Ent_MsgTransac HelloWorld(ServiceWinTransaction.BataTransac.ValidateAcceso ValidateAcceso, string cod_tda) {
-            ServiceWinTransaction.BataTransac.HelloWorldRequest inValue = new ServiceWinTransaction.BataTransac.HelloWorldRequest();
+        public ServiceWin32Framework4.BataTransac.Ent_MsgTransac HelloWorld(ServiceWin32Framework4.BataTransac.ValidateAcceso ValidateAcceso, string cod_tda) {
+            ServiceWin32Framework4.BataTransac.HelloWorldRequest inValue = new ServiceWin32Framework4.BataTransac.HelloWorldRequest();
             inValue.ValidateAcceso = ValidateAcceso;
             inValue.cod_tda = cod_tda;
-            ServiceWinTransaction.BataTransac.HelloWorldResponse retVal = ((ServiceWinTransaction.BataTransac.Bata_TransactionSoap)(this)).HelloWorld(inValue);
+            ServiceWin32Framework4.BataTransac.HelloWorldResponse retVal = ((ServiceWin32Framework4.BataTransac.Bata_TransactionSoap)(this)).HelloWorld(inValue);
             return retVal.HelloWorldResult;
         }
         
-        public ServiceWinTransaction.BataTransac.Ent_Fvdespc fvdespc() {
+        public ServiceWin32Framework4.BataTransac.Ent_Fvdespc fvdespc() {
             return base.Channel.fvdespc();
         }
         
-        public ServiceWinTransaction.BataTransac.Ent_Scdddes scdddes() {
+        public ServiceWin32Framework4.BataTransac.Ent_Scdddes scdddes() {
             return base.Channel.scdddes();
         }
         
-        public ServiceWinTransaction.BataTransac.Ent_PathDBF pathdbf() {
+        public ServiceWin32Framework4.BataTransac.Ent_PathDBF pathdbf() {
             return base.Channel.pathdbf();
         }
         
-        public ServiceWinTransaction.BataTransac.Ent_File list_file() {
+        public ServiceWin32Framework4.BataTransac.Ent_File list_file() {
             return base.Channel.list_file();
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        ServiceWinTransaction.BataTransac.ws_update_transaction_guiasResponse ServiceWinTransaction.BataTransac.Bata_TransactionSoap.ws_update_transaction_guias(ServiceWinTransaction.BataTransac.ws_update_transaction_guiasRequest request) {
+        ServiceWin32Framework4.BataTransac.ws_update_transaction_guiasResponse ServiceWin32Framework4.BataTransac.Bata_TransactionSoap.ws_update_transaction_guias(ServiceWin32Framework4.BataTransac.ws_update_transaction_guiasRequest request) {
             return base.Channel.ws_update_transaction_guias(request);
         }
         
-        public ServiceWinTransaction.BataTransac.Ent_MsgTransac ws_update_transaction_guias(ServiceWinTransaction.BataTransac.ValidateAcceso ValidateAcceso, ServiceWinTransaction.BataTransac.Ent_Fvdespc fvdespc, ServiceWinTransaction.BataTransac.Ent_Scdddes scdddes) {
-            ServiceWinTransaction.BataTransac.ws_update_transaction_guiasRequest inValue = new ServiceWinTransaction.BataTransac.ws_update_transaction_guiasRequest();
+        public ServiceWin32Framework4.BataTransac.Ent_MsgTransac ws_update_transaction_guias(ServiceWin32Framework4.BataTransac.ValidateAcceso ValidateAcceso, ServiceWin32Framework4.BataTransac.Ent_Fvdespc fvdespc, ServiceWin32Framework4.BataTransac.Ent_Scdddes scdddes) {
+            ServiceWin32Framework4.BataTransac.ws_update_transaction_guiasRequest inValue = new ServiceWin32Framework4.BataTransac.ws_update_transaction_guiasRequest();
             inValue.ValidateAcceso = ValidateAcceso;
             inValue.fvdespc = fvdespc;
             inValue.scdddes = scdddes;
-            ServiceWinTransaction.BataTransac.ws_update_transaction_guiasResponse retVal = ((ServiceWinTransaction.BataTransac.Bata_TransactionSoap)(this)).ws_update_transaction_guias(inValue);
+            ServiceWin32Framework4.BataTransac.ws_update_transaction_guiasResponse retVal = ((ServiceWin32Framework4.BataTransac.Bata_TransactionSoap)(this)).ws_update_transaction_guias(inValue);
             return retVal.ws_update_transaction_guiasResult;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        ServiceWinTransaction.BataTransac.ws_errores_transactionResponse ServiceWinTransaction.BataTransac.Bata_TransactionSoap.ws_errores_transaction(ServiceWinTransaction.BataTransac.ws_errores_transactionRequest request) {
+        ServiceWin32Framework4.BataTransac.ws_errores_transactionResponse ServiceWin32Framework4.BataTransac.Bata_TransactionSoap.ws_errores_transaction(ServiceWin32Framework4.BataTransac.ws_errores_transactionRequest request) {
             return base.Channel.ws_errores_transaction(request);
         }
         
-        public ServiceWinTransaction.BataTransac.Ent_MsgTransac ws_errores_transaction(ServiceWinTransaction.BataTransac.ValidateAcceso ValidateAcceso, string tip_error, string msg) {
-            ServiceWinTransaction.BataTransac.ws_errores_transactionRequest inValue = new ServiceWinTransaction.BataTransac.ws_errores_transactionRequest();
+        public ServiceWin32Framework4.BataTransac.Ent_MsgTransac ws_errores_transaction(ServiceWin32Framework4.BataTransac.ValidateAcceso ValidateAcceso, string tip_error, string msg) {
+            ServiceWin32Framework4.BataTransac.ws_errores_transactionRequest inValue = new ServiceWin32Framework4.BataTransac.ws_errores_transactionRequest();
             inValue.ValidateAcceso = ValidateAcceso;
             inValue.tip_error = tip_error;
             inValue.msg = msg;
-            ServiceWinTransaction.BataTransac.ws_errores_transactionResponse retVal = ((ServiceWinTransaction.BataTransac.Bata_TransactionSoap)(this)).ws_errores_transaction(inValue);
+            ServiceWin32Framework4.BataTransac.ws_errores_transactionResponse retVal = ((ServiceWin32Framework4.BataTransac.Bata_TransactionSoap)(this)).ws_errores_transaction(inValue);
             return retVal.ws_errores_transactionResult;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        ServiceWinTransaction.BataTransac.ws_get_location_dbfResponse ServiceWinTransaction.BataTransac.Bata_TransactionSoap.ws_get_location_dbf(ServiceWinTransaction.BataTransac.ws_get_location_dbfRequest request) {
+        ServiceWin32Framework4.BataTransac.ws_get_location_dbfResponse ServiceWin32Framework4.BataTransac.Bata_TransactionSoap.ws_get_location_dbf(ServiceWin32Framework4.BataTransac.ws_get_location_dbfRequest request) {
             return base.Channel.ws_get_location_dbf(request);
         }
         
-        public ServiceWinTransaction.BataTransac.Ent_PathDBF[] ws_get_location_dbf(ServiceWinTransaction.BataTransac.ValidateAcceso ValidateAcceso) {
-            ServiceWinTransaction.BataTransac.ws_get_location_dbfRequest inValue = new ServiceWinTransaction.BataTransac.ws_get_location_dbfRequest();
+        public ServiceWin32Framework4.BataTransac.Ent_PathDBF[] ws_get_location_dbf(ServiceWin32Framework4.BataTransac.ValidateAcceso ValidateAcceso) {
+            ServiceWin32Framework4.BataTransac.ws_get_location_dbfRequest inValue = new ServiceWin32Framework4.BataTransac.ws_get_location_dbfRequest();
             inValue.ValidateAcceso = ValidateAcceso;
-            ServiceWinTransaction.BataTransac.ws_get_location_dbfResponse retVal = ((ServiceWinTransaction.BataTransac.Bata_TransactionSoap)(this)).ws_get_location_dbf(inValue);
+            ServiceWin32Framework4.BataTransac.ws_get_location_dbfResponse retVal = ((ServiceWin32Framework4.BataTransac.Bata_TransactionSoap)(this)).ws_get_location_dbf(inValue);
             return retVal.ws_get_location_dbfResult;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        ServiceWinTransaction.BataTransac.ws_get_file_uploadResponse ServiceWinTransaction.BataTransac.Bata_TransactionSoap.ws_get_file_upload(ServiceWinTransaction.BataTransac.ws_get_file_uploadRequest request) {
+        ServiceWin32Framework4.BataTransac.ws_get_file_uploadResponse ServiceWin32Framework4.BataTransac.Bata_TransactionSoap.ws_get_file_upload(ServiceWin32Framework4.BataTransac.ws_get_file_uploadRequest request) {
             return base.Channel.ws_get_file_upload(request);
         }
         
-        public ServiceWinTransaction.BataTransac.Ent_File[] ws_get_file_upload(ServiceWinTransaction.BataTransac.ValidateAcceso ValidateAcceso, string tipofile_cod, ServiceWinTransaction.BataTransac.Ent_Lista_File lista_in) {
-            ServiceWinTransaction.BataTransac.ws_get_file_uploadRequest inValue = new ServiceWinTransaction.BataTransac.ws_get_file_uploadRequest();
+        public ServiceWin32Framework4.BataTransac.Ent_File[] ws_get_file_upload(ServiceWin32Framework4.BataTransac.ValidateAcceso ValidateAcceso, string tipofile_cod, ServiceWin32Framework4.BataTransac.Ent_Lista_File lista_in) {
+            ServiceWin32Framework4.BataTransac.ws_get_file_uploadRequest inValue = new ServiceWin32Framework4.BataTransac.ws_get_file_uploadRequest();
             inValue.ValidateAcceso = ValidateAcceso;
             inValue.tipofile_cod = tipofile_cod;
             inValue.lista_in = lista_in;
-            ServiceWinTransaction.BataTransac.ws_get_file_uploadResponse retVal = ((ServiceWinTransaction.BataTransac.Bata_TransactionSoap)(this)).ws_get_file_upload(inValue);
+            ServiceWin32Framework4.BataTransac.ws_get_file_uploadResponse retVal = ((ServiceWin32Framework4.BataTransac.Bata_TransactionSoap)(this)).ws_get_file_upload(inValue);
             return retVal.ws_get_file_uploadResult;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        ServiceWinTransaction.BataTransac.ws_get_file_pathResponse ServiceWinTransaction.BataTransac.Bata_TransactionSoap.ws_get_file_path(ServiceWinTransaction.BataTransac.ws_get_file_pathRequest request) {
+        ServiceWin32Framework4.BataTransac.ws_get_file_pathResponse ServiceWin32Framework4.BataTransac.Bata_TransactionSoap.ws_get_file_path(ServiceWin32Framework4.BataTransac.ws_get_file_pathRequest request) {
             return base.Channel.ws_get_file_path(request);
         }
         
-        public ServiceWinTransaction.BataTransac.Ent_File_Ruta ws_get_file_path(ServiceWinTransaction.BataTransac.ValidateAcceso ValidateAcceso, string tipo_file_cod) {
-            ServiceWinTransaction.BataTransac.ws_get_file_pathRequest inValue = new ServiceWinTransaction.BataTransac.ws_get_file_pathRequest();
+        public ServiceWin32Framework4.BataTransac.Ent_File_Ruta ws_get_file_path(ServiceWin32Framework4.BataTransac.ValidateAcceso ValidateAcceso, string tipo_file_cod) {
+            ServiceWin32Framework4.BataTransac.ws_get_file_pathRequest inValue = new ServiceWin32Framework4.BataTransac.ws_get_file_pathRequest();
             inValue.ValidateAcceso = ValidateAcceso;
             inValue.tipo_file_cod = tipo_file_cod;
-            ServiceWinTransaction.BataTransac.ws_get_file_pathResponse retVal = ((ServiceWinTransaction.BataTransac.Bata_TransactionSoap)(this)).ws_get_file_path(inValue);
+            ServiceWin32Framework4.BataTransac.ws_get_file_pathResponse retVal = ((ServiceWin32Framework4.BataTransac.Bata_TransactionSoap)(this)).ws_get_file_path(inValue);
             return retVal.ws_get_file_pathResult;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        ServiceWinTransaction.BataTransac.ws_download_fileResponse ServiceWinTransaction.BataTransac.Bata_TransactionSoap.ws_download_file(ServiceWinTransaction.BataTransac.ws_download_fileRequest request) {
+        ServiceWin32Framework4.BataTransac.ws_download_fileResponse ServiceWin32Framework4.BataTransac.Bata_TransactionSoap.ws_download_file(ServiceWin32Framework4.BataTransac.ws_download_fileRequest request) {
             return base.Channel.ws_download_file(request);
         }
         
-        public void ws_download_file(ServiceWinTransaction.BataTransac.ValidateAcceso ValidateAcceso, byte[] file, string file_name, string file_tipo) {
-            ServiceWinTransaction.BataTransac.ws_download_fileRequest inValue = new ServiceWinTransaction.BataTransac.ws_download_fileRequest();
+        public void ws_download_file(ServiceWin32Framework4.BataTransac.ValidateAcceso ValidateAcceso, byte[] file, string file_name, string file_tipo) {
+            ServiceWin32Framework4.BataTransac.ws_download_fileRequest inValue = new ServiceWin32Framework4.BataTransac.ws_download_fileRequest();
             inValue.ValidateAcceso = ValidateAcceso;
             inValue.file = file;
             inValue.file_name = file_name;
             inValue.file_tipo = file_tipo;
-            ServiceWinTransaction.BataTransac.ws_download_fileResponse retVal = ((ServiceWinTransaction.BataTransac.Bata_TransactionSoap)(this)).ws_download_file(inValue);
+            ServiceWin32Framework4.BataTransac.ws_download_fileResponse retVal = ((ServiceWin32Framework4.BataTransac.Bata_TransactionSoap)(this)).ws_download_file(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        ServiceWinTransaction.BataTransac.ws_get_time_servicetransResponse ServiceWinTransaction.BataTransac.Bata_TransactionSoap.ws_get_time_servicetrans(ServiceWinTransaction.BataTransac.ws_get_time_servicetransRequest request) {
+        ServiceWin32Framework4.BataTransac.ws_get_time_servicetransResponse ServiceWin32Framework4.BataTransac.Bata_TransactionSoap.ws_get_time_servicetrans(ServiceWin32Framework4.BataTransac.ws_get_time_servicetransRequest request) {
             return base.Channel.ws_get_time_servicetrans(request);
         }
         
-        public ServiceWinTransaction.BataTransac.Ent_Config_Service ws_get_time_servicetrans(ServiceWinTransaction.BataTransac.ValidateAcceso ValidateAcceso, string cser_cod) {
-            ServiceWinTransaction.BataTransac.ws_get_time_servicetransRequest inValue = new ServiceWinTransaction.BataTransac.ws_get_time_servicetransRequest();
+        public ServiceWin32Framework4.BataTransac.Ent_Config_Service ws_get_time_servicetrans(ServiceWin32Framework4.BataTransac.ValidateAcceso ValidateAcceso, string cser_cod) {
+            ServiceWin32Framework4.BataTransac.ws_get_time_servicetransRequest inValue = new ServiceWin32Framework4.BataTransac.ws_get_time_servicetransRequest();
             inValue.ValidateAcceso = ValidateAcceso;
             inValue.cser_cod = cser_cod;
-            ServiceWinTransaction.BataTransac.ws_get_time_servicetransResponse retVal = ((ServiceWinTransaction.BataTransac.Bata_TransactionSoap)(this)).ws_get_time_servicetrans(inValue);
+            ServiceWin32Framework4.BataTransac.ws_get_time_servicetransResponse retVal = ((ServiceWin32Framework4.BataTransac.Bata_TransactionSoap)(this)).ws_get_time_servicetrans(inValue);
             return retVal.ws_get_time_servicetransResult;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        ServiceWinTransaction.BataTransac.ws_envia_stock_tdaResponse ServiceWinTransaction.BataTransac.Bata_TransactionSoap.ws_envia_stock_tda(ServiceWinTransaction.BataTransac.ws_envia_stock_tdaRequest request) {
+        ServiceWin32Framework4.BataTransac.ws_envia_stock_tdaResponse ServiceWin32Framework4.BataTransac.Bata_TransactionSoap.ws_envia_stock_tda(ServiceWin32Framework4.BataTransac.ws_envia_stock_tdaRequest request) {
             return base.Channel.ws_envia_stock_tda(request);
         }
         
-        public ServiceWinTransaction.BataTransac.Ent_MsgTransac ws_envia_stock_tda(ServiceWinTransaction.BataTransac.ValidateAcceso ValidateAcceso, ServiceWinTransaction.BataTransac.Ent_Lista_Stock lista_stk) {
-            ServiceWinTransaction.BataTransac.ws_envia_stock_tdaRequest inValue = new ServiceWinTransaction.BataTransac.ws_envia_stock_tdaRequest();
+        public ServiceWin32Framework4.BataTransac.Ent_MsgTransac ws_envia_stock_tda(ServiceWin32Framework4.BataTransac.ValidateAcceso ValidateAcceso, ServiceWin32Framework4.BataTransac.Ent_Lista_Stock lista_stk) {
+            ServiceWin32Framework4.BataTransac.ws_envia_stock_tdaRequest inValue = new ServiceWin32Framework4.BataTransac.ws_envia_stock_tdaRequest();
             inValue.ValidateAcceso = ValidateAcceso;
             inValue.lista_stk = lista_stk;
-            ServiceWinTransaction.BataTransac.ws_envia_stock_tdaResponse retVal = ((ServiceWinTransaction.BataTransac.Bata_TransactionSoap)(this)).ws_envia_stock_tda(inValue);
+            ServiceWin32Framework4.BataTransac.ws_envia_stock_tdaResponse retVal = ((ServiceWin32Framework4.BataTransac.Bata_TransactionSoap)(this)).ws_envia_stock_tda(inValue);
             return retVal.ws_envia_stock_tdaResult;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        ServiceWinTransaction.BataTransac.ws_envia_venta_tdaResponse ServiceWinTransaction.BataTransac.Bata_TransactionSoap.ws_envia_venta_tda(ServiceWinTransaction.BataTransac.ws_envia_venta_tdaRequest request) {
+        ServiceWin32Framework4.BataTransac.ws_envia_venta_tdaResponse ServiceWin32Framework4.BataTransac.Bata_TransactionSoap.ws_envia_venta_tda(ServiceWin32Framework4.BataTransac.ws_envia_venta_tdaRequest request) {
             return base.Channel.ws_envia_venta_tda(request);
         }
         
-        public ServiceWinTransaction.BataTransac.Ent_MsgTransac ws_envia_venta_tda(ServiceWinTransaction.BataTransac.ValidateAcceso ValidateAcceso, string cod_tda, System.Data.DataSet ds_transac_tda) {
-            ServiceWinTransaction.BataTransac.ws_envia_venta_tdaRequest inValue = new ServiceWinTransaction.BataTransac.ws_envia_venta_tdaRequest();
+        public ServiceWin32Framework4.BataTransac.Ent_MsgTransac ws_envia_venta_tda(ServiceWin32Framework4.BataTransac.ValidateAcceso ValidateAcceso, string cod_tda, System.Data.DataSet ds_transac_tda) {
+            ServiceWin32Framework4.BataTransac.ws_envia_venta_tdaRequest inValue = new ServiceWin32Framework4.BataTransac.ws_envia_venta_tdaRequest();
             inValue.ValidateAcceso = ValidateAcceso;
             inValue.cod_tda = cod_tda;
             inValue.ds_transac_tda = ds_transac_tda;
-            ServiceWinTransaction.BataTransac.ws_envia_venta_tdaResponse retVal = ((ServiceWinTransaction.BataTransac.Bata_TransactionSoap)(this)).ws_envia_venta_tda(inValue);
+            ServiceWin32Framework4.BataTransac.ws_envia_venta_tdaResponse retVal = ((ServiceWin32Framework4.BataTransac.Bata_TransactionSoap)(this)).ws_envia_venta_tda(inValue);
             return retVal.ws_envia_venta_tdaResult;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        ServiceWinTransaction.BataTransac.ws_envia_venta_tda_listResponse ServiceWinTransaction.BataTransac.Bata_TransactionSoap.ws_envia_venta_tda_list(ServiceWinTransaction.BataTransac.ws_envia_venta_tda_listRequest request) {
+        ServiceWin32Framework4.BataTransac.ws_envia_venta_tda_listResponse ServiceWin32Framework4.BataTransac.Bata_TransactionSoap.ws_envia_venta_tda_list(ServiceWin32Framework4.BataTransac.ws_envia_venta_tda_listRequest request) {
             return base.Channel.ws_envia_venta_tda_list(request);
         }
         
-        public ServiceWinTransaction.BataTransac.Ent_MsgTransac ws_envia_venta_tda_list(ServiceWinTransaction.BataTransac.ValidateAcceso ValidateAcceso, string cod_tda, ServiceWinTransaction.BataTransac.Ent_Venta_List listaventa) {
-            ServiceWinTransaction.BataTransac.ws_envia_venta_tda_listRequest inValue = new ServiceWinTransaction.BataTransac.ws_envia_venta_tda_listRequest();
+        public ServiceWin32Framework4.BataTransac.Ent_MsgTransac ws_envia_venta_tda_list(ServiceWin32Framework4.BataTransac.ValidateAcceso ValidateAcceso, string cod_tda, ServiceWin32Framework4.BataTransac.Ent_Venta_List listaventa) {
+            ServiceWin32Framework4.BataTransac.ws_envia_venta_tda_listRequest inValue = new ServiceWin32Framework4.BataTransac.ws_envia_venta_tda_listRequest();
             inValue.ValidateAcceso = ValidateAcceso;
             inValue.cod_tda = cod_tda;
             inValue.listaventa = listaventa;
-            ServiceWinTransaction.BataTransac.ws_envia_venta_tda_listResponse retVal = ((ServiceWinTransaction.BataTransac.Bata_TransactionSoap)(this)).ws_envia_venta_tda_list(inValue);
+            ServiceWin32Framework4.BataTransac.ws_envia_venta_tda_listResponse retVal = ((ServiceWin32Framework4.BataTransac.Bata_TransactionSoap)(this)).ws_envia_venta_tda_list(inValue);
             return retVal.ws_envia_venta_tda_listResult;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        ServiceWinTransaction.BataTransac.ws_envia_venta_tda_listaResponse ServiceWinTransaction.BataTransac.Bata_TransactionSoap.ws_envia_venta_tda_lista(ServiceWinTransaction.BataTransac.ws_envia_venta_tda_listaRequest request) {
+        ServiceWin32Framework4.BataTransac.ws_envia_venta_tda_listaResponse ServiceWin32Framework4.BataTransac.Bata_TransactionSoap.ws_envia_venta_tda_lista(ServiceWin32Framework4.BataTransac.ws_envia_venta_tda_listaRequest request) {
             return base.Channel.ws_envia_venta_tda_lista(request);
         }
         
-        public ServiceWinTransaction.BataTransac.Ent_MsgTransac ws_envia_venta_tda_lista(ServiceWinTransaction.BataTransac.ValidateAcceso ValidateAcceso, string cod_tda, ServiceWinTransaction.BataTransac.Ent_List_Ffactc ffactc, ServiceWinTransaction.BataTransac.Ent_List_Ffactd ffactd, ServiceWinTransaction.BataTransac.Ent_List_Fnotaa fnotaa) {
-            ServiceWinTransaction.BataTransac.ws_envia_venta_tda_listaRequest inValue = new ServiceWinTransaction.BataTransac.ws_envia_venta_tda_listaRequest();
+        public ServiceWin32Framework4.BataTransac.Ent_MsgTransac ws_envia_venta_tda_lista(ServiceWin32Framework4.BataTransac.ValidateAcceso ValidateAcceso, string cod_tda, ServiceWin32Framework4.BataTransac.Ent_List_Ffactc ffactc, ServiceWin32Framework4.BataTransac.Ent_List_Ffactd ffactd, ServiceWin32Framework4.BataTransac.Ent_List_Fnotaa fnotaa) {
+            ServiceWin32Framework4.BataTransac.ws_envia_venta_tda_listaRequest inValue = new ServiceWin32Framework4.BataTransac.ws_envia_venta_tda_listaRequest();
             inValue.ValidateAcceso = ValidateAcceso;
             inValue.cod_tda = cod_tda;
             inValue.ffactc = ffactc;
             inValue.ffactd = ffactd;
             inValue.fnotaa = fnotaa;
-            ServiceWinTransaction.BataTransac.ws_envia_venta_tda_listaResponse retVal = ((ServiceWinTransaction.BataTransac.Bata_TransactionSoap)(this)).ws_envia_venta_tda_lista(inValue);
+            ServiceWin32Framework4.BataTransac.ws_envia_venta_tda_listaResponse retVal = ((ServiceWin32Framework4.BataTransac.Bata_TransactionSoap)(this)).ws_envia_venta_tda_lista(inValue);
             return retVal.ws_envia_venta_tda_listaResult;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        ServiceWinTransaction.BataTransac.ws_transmision_ingreso_nubeResponse ServiceWinTransaction.BataTransac.Bata_TransactionSoap.ws_transmision_ingreso_nube(ServiceWinTransaction.BataTransac.ws_transmision_ingreso_nubeRequest request) {
+        ServiceWin32Framework4.BataTransac.ws_transmision_ingreso_nubeResponse ServiceWin32Framework4.BataTransac.Bata_TransactionSoap.ws_transmision_ingreso_nube(ServiceWin32Framework4.BataTransac.ws_transmision_ingreso_nubeRequest request) {
             return base.Channel.ws_transmision_ingreso_nube(request);
         }
         
-        public string[] ws_transmision_ingreso_nube(ServiceWinTransaction.BataTransac.ValidateAcceso ValidateAcceso, byte[] _archivo_zip, string _name) {
-            ServiceWinTransaction.BataTransac.ws_transmision_ingreso_nubeRequest inValue = new ServiceWinTransaction.BataTransac.ws_transmision_ingreso_nubeRequest();
+        public string[] ws_transmision_ingreso_nube(ServiceWin32Framework4.BataTransac.ValidateAcceso ValidateAcceso, byte[] _archivo_zip, string _name) {
+            ServiceWin32Framework4.BataTransac.ws_transmision_ingreso_nubeRequest inValue = new ServiceWin32Framework4.BataTransac.ws_transmision_ingreso_nubeRequest();
             inValue.ValidateAcceso = ValidateAcceso;
             inValue._archivo_zip = _archivo_zip;
             inValue._name = _name;
-            ServiceWinTransaction.BataTransac.ws_transmision_ingreso_nubeResponse retVal = ((ServiceWinTransaction.BataTransac.Bata_TransactionSoap)(this)).ws_transmision_ingreso_nube(inValue);
+            ServiceWin32Framework4.BataTransac.ws_transmision_ingreso_nubeResponse retVal = ((ServiceWin32Framework4.BataTransac.Bata_TransactionSoap)(this)).ws_transmision_ingreso_nube(inValue);
             return retVal.ws_transmision_ingreso_nubeResult;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        ServiceWinTransaction.BataTransac.ws_envia_Scactco_listResponse ServiceWinTransaction.BataTransac.Bata_TransactionSoap.ws_envia_Scactco_list(ServiceWinTransaction.BataTransac.ws_envia_Scactco_listRequest request) {
+        ServiceWin32Framework4.BataTransac.ws_envia_Scactco_listResponse ServiceWin32Framework4.BataTransac.Bata_TransactionSoap.ws_envia_Scactco_list(ServiceWin32Framework4.BataTransac.ws_envia_Scactco_listRequest request) {
             return base.Channel.ws_envia_Scactco_list(request);
         }
         
-        public ServiceWinTransaction.BataTransac.Ent_MsgTransac ws_envia_Scactco_list(ServiceWinTransaction.BataTransac.ValidateAcceso ValidateAcceso, ServiceWinTransaction.BataTransac.Ent_List_Scactco listscactco) {
-            ServiceWinTransaction.BataTransac.ws_envia_Scactco_listRequest inValue = new ServiceWinTransaction.BataTransac.ws_envia_Scactco_listRequest();
+        public ServiceWin32Framework4.BataTransac.Ent_MsgTransac ws_envia_Scactco_list(ServiceWin32Framework4.BataTransac.ValidateAcceso ValidateAcceso, ServiceWin32Framework4.BataTransac.Ent_List_Scactco listscactco) {
+            ServiceWin32Framework4.BataTransac.ws_envia_Scactco_listRequest inValue = new ServiceWin32Framework4.BataTransac.ws_envia_Scactco_listRequest();
             inValue.ValidateAcceso = ValidateAcceso;
             inValue.listscactco = listscactco;
-            ServiceWinTransaction.BataTransac.ws_envia_Scactco_listResponse retVal = ((ServiceWinTransaction.BataTransac.Bata_TransactionSoap)(this)).ws_envia_Scactco_list(inValue);
+            ServiceWin32Framework4.BataTransac.ws_envia_Scactco_listResponse retVal = ((ServiceWin32Framework4.BataTransac.Bata_TransactionSoap)(this)).ws_envia_Scactco_list(inValue);
             return retVal.ws_envia_Scactco_listResult;
         }
     }

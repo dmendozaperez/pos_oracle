@@ -3,7 +3,11 @@
   <wsdl:types>
     <s:schema elementFormDefault="qualified" targetNamespace="http://bataperu.com.pe/">
       <s:element name="HelloWorld">
-        <s:complexType />
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="cod_tda" type="s:string" />
+          </s:sequence>
+        </s:complexType>
       </s:element>
       <s:element name="HelloWorldResponse">
         <s:complexType>
@@ -265,6 +269,367 @@
       <s:element name="ws_download_fileResponse">
         <s:complexType />
       </s:element>
+      <s:element name="ws_get_time_servicetrans">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="cser_cod" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_get_time_servicetransResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ws_get_time_servicetransResult" type="tns:Ent_Config_Service" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Ent_Config_Service">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="cser_min" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ws_envia_stock_tda">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="lista_stk" type="tns:Ent_Lista_Stock" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Ent_Lista_Stock">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="lista_stock" type="tns:ArrayOfEnt_Stock" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfEnt_Stock">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Ent_Stock" nillable="true" type="tns:Ent_Stock" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Ent_Stock">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="cod_tda" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="art_cod" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="art_cal" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="art_talla" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="art_pares" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ws_envia_stock_tdaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ws_envia_stock_tdaResult" type="tns:Ent_MsgTransac" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_envia_venta_tda">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="cod_tda" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ds_transac_tda">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_envia_venta_tdaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ws_envia_venta_tdaResult" type="tns:Ent_MsgTransac" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_envia_venta_tda_list">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="cod_tda" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="listaventa" type="tns:Ent_Venta_List" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Ent_Venta_List">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="lista_venta" type="tns:ArrayOfEnt_Venta" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfEnt_Venta">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Ent_Venta" nillable="true" type="tns:Ent_Venta" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Ent_Venta">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="fecha" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="cod_tda" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fc_suna" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fc_sfac" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fc_nfac" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fc_nint" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="fecha2" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ws_envia_venta_tda_listResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ws_envia_venta_tda_listResult" type="tns:Ent_MsgTransac" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_envia_venta_tda_lista">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="cod_tda" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ffactc" type="tns:Ent_List_Ffactc" />
+            <s:element minOccurs="0" maxOccurs="1" name="ffactd" type="tns:Ent_List_Ffactd" />
+            <s:element minOccurs="0" maxOccurs="1" name="fnotaa" type="tns:Ent_List_Fnotaa" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Ent_List_Ffactc">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="lista_ffactc" type="tns:ArrayOfEnt_Ffactc" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfEnt_Ffactc">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Ent_Ffactc" nillable="true" type="tns:Ent_Ffactc" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Ent_Ffactc">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="fc_nint" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fc_nnot" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fc_codi" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fc_suna" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fc_sfac" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fc_nfac" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="fc_ffac" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="fc_nord" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fc_cref" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fc_sref" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fc_nref" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fc_pvta" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fc_csuc" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fc_gvta" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fc_zona" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fc_clie" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fc_ncli" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fc_nomb" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fc_apep" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fc_apem" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fc_dcli" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fc_cubi" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fc_ruc" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fc_vuse" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fc_vend" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fc_ipre" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fc_tint" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="fc_pint" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="fc_lcsg" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fc_ncon" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fc_dcon" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fc_lcon" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fc_lruc" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fc_agen" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fc_mone" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="fc_tasa" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="fc_fpag" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="fc_nlet" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="fc_qtot" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="fc_pref" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="fc_dref" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="fc_brut" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="fc_vimp1" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="fc_vimp2" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="fc_vdct1" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="fc_vdct4" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="fc_pdc2" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="fc_pdc3" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="fc_vdc23" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="fc_vvta" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="fc_vimp3" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="fc_pimp4" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="fc_vimp4" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="fc_total" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="fc_esta" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fc_tdoc" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fc_cuse" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fc_muse" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="fc_fcre" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="fc_fmod" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="fc_hora" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fc_auto" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fc_ftx" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fc_estc" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fc_sexo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fc_mpub" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fc_edad" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fc_regv" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Ent_List_Ffactd">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="lista_ffactd" type="tns:ArrayOfEnt_Ffactd" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfEnt_Ffactd">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Ent_Ffactd" nillable="true" type="tns:Ent_Ffactd" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Ent_Ffactd">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="fd_nint" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fd_tipo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fd_arti" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fd_regl" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fd_colo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fd_item" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fd_icmb" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="fd_qfac" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="fd_lpre" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fd_calm" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="fd_pref" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="fd_dref" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="fd_prec" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="fd_brut" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="fd_pimp1" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="fd_vimp1" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="fd_subt1" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="fd_pimp2" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="fd_vimp2" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="fd_subt2" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="fd_pdct1" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="fd_vdct1" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="fd_subt3" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="fd_vdct4" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="fd_vdc23" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="fd_vvta" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="fd_pimp3" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="fd_vimp3" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="fd_pimp4" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="fd_vimp4" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="fd_total" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="fd_cuse" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fd_muse" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="fd_fcre" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="fd_fmod" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="fd_auto" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="fd_dre2" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="fd_asoc" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Ent_List_Fnotaa">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="lista_fnotaa" type="tns:ArrayOfEnt_Fnotaa" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfEnt_Fnotaa">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Ent_Fnotaa" nillable="true" type="tns:Ent_Fnotaa" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Ent_Fnotaa">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="na_nota" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="na_item" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="na_mone" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="na_tpag" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="na_tasa" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="na_cref" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="na_sref" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="na_nref" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="na_vref" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="na_vpag" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="na_esta" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="na_cier" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="na_fcre" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="na_fmod" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ws_envia_venta_tda_listaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ws_envia_venta_tda_listaResult" type="tns:Ent_MsgTransac" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_transmision_ingreso_nube">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="_archivo_zip" type="s:base64Binary" />
+            <s:element minOccurs="0" maxOccurs="1" name="_name" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_transmision_ingreso_nubeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ws_transmision_ingreso_nubeResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ws_envia_Scactco_list">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="listscactco" type="tns:Ent_List_Scactco" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Ent_List_Scactco">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="lista_scactco" type="tns:ArrayOfEnt_Scactco" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfEnt_Scactco">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Ent_Scactco" nillable="true" type="tns:Ent_Scactco" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Ent_Scactco">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ctco_talpr" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ctco_plaoc" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ctco_artic" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ctco_calid" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ctco_plpr" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ctco_impr" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ctco_med00" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ctco_med01" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ctco_med02" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ctco_med03" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ctco_med04" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ctco_med05" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ctco_med06" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ctco_med07" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ctco_med08" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ctco_med09" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ctco_med10" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ctco_med11" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ctco_orige" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ctco_fecha" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="ctco_usern" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ctco_empre" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ctco_ftx" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ctco_txpos" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ws_envia_Scactco_listResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ws_envia_Scactco_listResult" type="tns:Ent_MsgTransac" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="HelloWorldSoapIn">
@@ -354,6 +719,69 @@
   <wsdl:message name="ws_download_fileValidateAcceso">
     <wsdl:part name="ValidateAcceso" element="tns:ValidateAcceso" />
   </wsdl:message>
+  <wsdl:message name="ws_get_time_servicetransSoapIn">
+    <wsdl:part name="parameters" element="tns:ws_get_time_servicetrans" />
+  </wsdl:message>
+  <wsdl:message name="ws_get_time_servicetransSoapOut">
+    <wsdl:part name="parameters" element="tns:ws_get_time_servicetransResponse" />
+  </wsdl:message>
+  <wsdl:message name="ws_get_time_servicetransValidateAcceso">
+    <wsdl:part name="ValidateAcceso" element="tns:ValidateAcceso" />
+  </wsdl:message>
+  <wsdl:message name="ws_envia_stock_tdaSoapIn">
+    <wsdl:part name="parameters" element="tns:ws_envia_stock_tda" />
+  </wsdl:message>
+  <wsdl:message name="ws_envia_stock_tdaSoapOut">
+    <wsdl:part name="parameters" element="tns:ws_envia_stock_tdaResponse" />
+  </wsdl:message>
+  <wsdl:message name="ws_envia_stock_tdaValidateAcceso">
+    <wsdl:part name="ValidateAcceso" element="tns:ValidateAcceso" />
+  </wsdl:message>
+  <wsdl:message name="ws_envia_venta_tdaSoapIn">
+    <wsdl:part name="parameters" element="tns:ws_envia_venta_tda" />
+  </wsdl:message>
+  <wsdl:message name="ws_envia_venta_tdaSoapOut">
+    <wsdl:part name="parameters" element="tns:ws_envia_venta_tdaResponse" />
+  </wsdl:message>
+  <wsdl:message name="ws_envia_venta_tdaValidateAcceso">
+    <wsdl:part name="ValidateAcceso" element="tns:ValidateAcceso" />
+  </wsdl:message>
+  <wsdl:message name="ws_envia_venta_tda_listSoapIn">
+    <wsdl:part name="parameters" element="tns:ws_envia_venta_tda_list" />
+  </wsdl:message>
+  <wsdl:message name="ws_envia_venta_tda_listSoapOut">
+    <wsdl:part name="parameters" element="tns:ws_envia_venta_tda_listResponse" />
+  </wsdl:message>
+  <wsdl:message name="ws_envia_venta_tda_listValidateAcceso">
+    <wsdl:part name="ValidateAcceso" element="tns:ValidateAcceso" />
+  </wsdl:message>
+  <wsdl:message name="ws_envia_venta_tda_listaSoapIn">
+    <wsdl:part name="parameters" element="tns:ws_envia_venta_tda_lista" />
+  </wsdl:message>
+  <wsdl:message name="ws_envia_venta_tda_listaSoapOut">
+    <wsdl:part name="parameters" element="tns:ws_envia_venta_tda_listaResponse" />
+  </wsdl:message>
+  <wsdl:message name="ws_envia_venta_tda_listaValidateAcceso">
+    <wsdl:part name="ValidateAcceso" element="tns:ValidateAcceso" />
+  </wsdl:message>
+  <wsdl:message name="ws_transmision_ingreso_nubeSoapIn">
+    <wsdl:part name="parameters" element="tns:ws_transmision_ingreso_nube" />
+  </wsdl:message>
+  <wsdl:message name="ws_transmision_ingreso_nubeSoapOut">
+    <wsdl:part name="parameters" element="tns:ws_transmision_ingreso_nubeResponse" />
+  </wsdl:message>
+  <wsdl:message name="ws_transmision_ingreso_nubeValidateAcceso">
+    <wsdl:part name="ValidateAcceso" element="tns:ValidateAcceso" />
+  </wsdl:message>
+  <wsdl:message name="ws_envia_Scactco_listSoapIn">
+    <wsdl:part name="parameters" element="tns:ws_envia_Scactco_list" />
+  </wsdl:message>
+  <wsdl:message name="ws_envia_Scactco_listSoapOut">
+    <wsdl:part name="parameters" element="tns:ws_envia_Scactco_listResponse" />
+  </wsdl:message>
+  <wsdl:message name="ws_envia_Scactco_listValidateAcceso">
+    <wsdl:part name="ValidateAcceso" element="tns:ValidateAcceso" />
+  </wsdl:message>
   <wsdl:portType name="Bata_TransactionSoap">
     <wsdl:operation name="HelloWorld">
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Consula de bienvenida</wsdl:documentation>
@@ -405,6 +833,41 @@
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Subir archivos al server</wsdl:documentation>
       <wsdl:input message="tns:ws_download_fileSoapIn" />
       <wsdl:output message="tns:ws_download_fileSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ws_get_time_servicetrans">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get de tiempo de ejecucion del servicio transmision net stock de tiendas</wsdl:documentation>
+      <wsdl:input message="tns:ws_get_time_servicetransSoapIn" />
+      <wsdl:output message="tns:ws_get_time_servicetransSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ws_envia_stock_tda">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Enviar Stock de tienda servicio transmision net</wsdl:documentation>
+      <wsdl:input message="tns:ws_envia_stock_tdaSoapIn" />
+      <wsdl:output message="tns:ws_envia_stock_tdaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ws_envia_venta_tda">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Enviar Ventas de tienda</wsdl:documentation>
+      <wsdl:input message="tns:ws_envia_venta_tdaSoapIn" />
+      <wsdl:output message="tns:ws_envia_venta_tdaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ws_envia_venta_tda_list">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Enviar Ventas de tienda</wsdl:documentation>
+      <wsdl:input message="tns:ws_envia_venta_tda_listSoapIn" />
+      <wsdl:output message="tns:ws_envia_venta_tda_listSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ws_envia_venta_tda_lista">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Enviar Ventas de tienda Lista</wsdl:documentation>
+      <wsdl:input message="tns:ws_envia_venta_tda_listaSoapIn" />
+      <wsdl:output message="tns:ws_envia_venta_tda_listaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ws_transmision_ingreso_nube">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Enviar Ventas Paquetes</wsdl:documentation>
+      <wsdl:input message="tns:ws_transmision_ingreso_nubeSoapIn" />
+      <wsdl:output message="tns:ws_transmision_ingreso_nubeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ws_envia_Scactco_list">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Enviar Scactco</wsdl:documentation>
+      <wsdl:input message="tns:ws_envia_Scactco_listSoapIn" />
+      <wsdl:output message="tns:ws_envia_Scactco_listSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="Bata_TransactionSoap" type="tns:Bata_TransactionSoap">
@@ -515,6 +978,76 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="ws_get_time_servicetrans">
+      <soap:operation soapAction="http://bataperu.com.pe/ws_get_time_servicetrans" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ws_get_time_servicetransValidateAcceso" part="ValidateAcceso" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_envia_stock_tda">
+      <soap:operation soapAction="http://bataperu.com.pe/ws_envia_stock_tda" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ws_envia_stock_tdaValidateAcceso" part="ValidateAcceso" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_envia_venta_tda">
+      <soap:operation soapAction="http://bataperu.com.pe/ws_envia_venta_tda" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ws_envia_venta_tdaValidateAcceso" part="ValidateAcceso" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_envia_venta_tda_list">
+      <soap:operation soapAction="http://bataperu.com.pe/ws_envia_venta_tda_list" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ws_envia_venta_tda_listValidateAcceso" part="ValidateAcceso" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_envia_venta_tda_lista">
+      <soap:operation soapAction="http://bataperu.com.pe/ws_envia_venta_tda_lista" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ws_envia_venta_tda_listaValidateAcceso" part="ValidateAcceso" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_transmision_ingreso_nube">
+      <soap:operation soapAction="http://bataperu.com.pe/ws_transmision_ingreso_nube" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ws_transmision_ingreso_nubeValidateAcceso" part="ValidateAcceso" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_envia_Scactco_list">
+      <soap:operation soapAction="http://bataperu.com.pe/ws_envia_Scactco_list" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ws_envia_Scactco_listValidateAcceso" part="ValidateAcceso" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="Bata_TransactionSoap12" type="tns:Bata_TransactionSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -619,6 +1152,76 @@
       <wsdl:input>
         <soap12:body use="literal" />
         <soap12:header message="tns:ws_download_fileValidateAcceso" part="ValidateAcceso" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_get_time_servicetrans">
+      <soap12:operation soapAction="http://bataperu.com.pe/ws_get_time_servicetrans" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ws_get_time_servicetransValidateAcceso" part="ValidateAcceso" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_envia_stock_tda">
+      <soap12:operation soapAction="http://bataperu.com.pe/ws_envia_stock_tda" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ws_envia_stock_tdaValidateAcceso" part="ValidateAcceso" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_envia_venta_tda">
+      <soap12:operation soapAction="http://bataperu.com.pe/ws_envia_venta_tda" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ws_envia_venta_tdaValidateAcceso" part="ValidateAcceso" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_envia_venta_tda_list">
+      <soap12:operation soapAction="http://bataperu.com.pe/ws_envia_venta_tda_list" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ws_envia_venta_tda_listValidateAcceso" part="ValidateAcceso" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_envia_venta_tda_lista">
+      <soap12:operation soapAction="http://bataperu.com.pe/ws_envia_venta_tda_lista" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ws_envia_venta_tda_listaValidateAcceso" part="ValidateAcceso" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_transmision_ingreso_nube">
+      <soap12:operation soapAction="http://bataperu.com.pe/ws_transmision_ingreso_nube" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ws_transmision_ingreso_nubeValidateAcceso" part="ValidateAcceso" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_envia_Scactco_list">
+      <soap12:operation soapAction="http://bataperu.com.pe/ws_envia_Scactco_list" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ws_envia_Scactco_listValidateAcceso" part="ValidateAcceso" use="literal" />
       </wsdl:input>
       <wsdl:output>
         <soap12:body use="literal" />

@@ -96,6 +96,11 @@ namespace AppBata_WS_Interfaces.BataTransac {
         [System.ServiceModel.OperationContractAttribute(Action="http://bataperu.com.pe/ws_transmision_ingreso_nube", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         AppBata_WS_Interfaces.BataTransac.ws_transmision_ingreso_nubeResponse ws_transmision_ingreso_nube(AppBata_WS_Interfaces.BataTransac.ws_transmision_ingreso_nubeRequest request);
+        
+        // CODEGEN: Se está generando un contrato de mensaje, ya que el mensaje ws_envia_Scactco_listRequest tiene encabezados.
+        [System.ServiceModel.OperationContractAttribute(Action="http://bataperu.com.pe/ws_envia_Scactco_list", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        AppBata_WS_Interfaces.BataTransac.ws_envia_Scactco_listResponse ws_envia_Scactco_list(AppBata_WS_Interfaces.BataTransac.ws_envia_Scactco_listRequest request);
     }
     
     /// <remarks/>
@@ -145,6 +150,392 @@ namespace AppBata_WS_Interfaces.BataTransac {
             set {
                 this.anyAttrField = value;
                 this.RaisePropertyChanged("AnyAttr");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://bataperu.com.pe/")]
+    public partial class Ent_Scactco : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string ctco_talprField;
+        
+        private string ctco_plaocField;
+        
+        private string ctco_articField;
+        
+        private string ctco_calidField;
+        
+        private string ctco_plprField;
+        
+        private string ctco_imprField;
+        
+        private string ctco_med00Field;
+        
+        private string ctco_med01Field;
+        
+        private string ctco_med02Field;
+        
+        private string ctco_med03Field;
+        
+        private string ctco_med04Field;
+        
+        private string ctco_med05Field;
+        
+        private string ctco_med06Field;
+        
+        private string ctco_med07Field;
+        
+        private string ctco_med08Field;
+        
+        private string ctco_med09Field;
+        
+        private string ctco_med10Field;
+        
+        private string ctco_med11Field;
+        
+        private string ctco_origeField;
+        
+        private System.DateTime ctco_fechaField;
+        
+        private string ctco_usernField;
+        
+        private string ctco_empreField;
+        
+        private string ctco_ftxField;
+        
+        private string ctco_txposField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public string ctco_talpr {
+            get {
+                return this.ctco_talprField;
+            }
+            set {
+                this.ctco_talprField = value;
+                this.RaisePropertyChanged("ctco_talpr");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public string ctco_plaoc {
+            get {
+                return this.ctco_plaocField;
+            }
+            set {
+                this.ctco_plaocField = value;
+                this.RaisePropertyChanged("ctco_plaoc");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
+        public string ctco_artic {
+            get {
+                return this.ctco_articField;
+            }
+            set {
+                this.ctco_articField = value;
+                this.RaisePropertyChanged("ctco_artic");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
+        public string ctco_calid {
+            get {
+                return this.ctco_calidField;
+            }
+            set {
+                this.ctco_calidField = value;
+                this.RaisePropertyChanged("ctco_calid");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
+        public string ctco_plpr {
+            get {
+                return this.ctco_plprField;
+            }
+            set {
+                this.ctco_plprField = value;
+                this.RaisePropertyChanged("ctco_plpr");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
+        public string ctco_impr {
+            get {
+                return this.ctco_imprField;
+            }
+            set {
+                this.ctco_imprField = value;
+                this.RaisePropertyChanged("ctco_impr");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
+        public string ctco_med00 {
+            get {
+                return this.ctco_med00Field;
+            }
+            set {
+                this.ctco_med00Field = value;
+                this.RaisePropertyChanged("ctco_med00");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=7)]
+        public string ctco_med01 {
+            get {
+                return this.ctco_med01Field;
+            }
+            set {
+                this.ctco_med01Field = value;
+                this.RaisePropertyChanged("ctco_med01");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=8)]
+        public string ctco_med02 {
+            get {
+                return this.ctco_med02Field;
+            }
+            set {
+                this.ctco_med02Field = value;
+                this.RaisePropertyChanged("ctco_med02");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=9)]
+        public string ctco_med03 {
+            get {
+                return this.ctco_med03Field;
+            }
+            set {
+                this.ctco_med03Field = value;
+                this.RaisePropertyChanged("ctco_med03");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=10)]
+        public string ctco_med04 {
+            get {
+                return this.ctco_med04Field;
+            }
+            set {
+                this.ctco_med04Field = value;
+                this.RaisePropertyChanged("ctco_med04");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=11)]
+        public string ctco_med05 {
+            get {
+                return this.ctco_med05Field;
+            }
+            set {
+                this.ctco_med05Field = value;
+                this.RaisePropertyChanged("ctco_med05");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=12)]
+        public string ctco_med06 {
+            get {
+                return this.ctco_med06Field;
+            }
+            set {
+                this.ctco_med06Field = value;
+                this.RaisePropertyChanged("ctco_med06");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=13)]
+        public string ctco_med07 {
+            get {
+                return this.ctco_med07Field;
+            }
+            set {
+                this.ctco_med07Field = value;
+                this.RaisePropertyChanged("ctco_med07");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=14)]
+        public string ctco_med08 {
+            get {
+                return this.ctco_med08Field;
+            }
+            set {
+                this.ctco_med08Field = value;
+                this.RaisePropertyChanged("ctco_med08");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=15)]
+        public string ctco_med09 {
+            get {
+                return this.ctco_med09Field;
+            }
+            set {
+                this.ctco_med09Field = value;
+                this.RaisePropertyChanged("ctco_med09");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=16)]
+        public string ctco_med10 {
+            get {
+                return this.ctco_med10Field;
+            }
+            set {
+                this.ctco_med10Field = value;
+                this.RaisePropertyChanged("ctco_med10");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=17)]
+        public string ctco_med11 {
+            get {
+                return this.ctco_med11Field;
+            }
+            set {
+                this.ctco_med11Field = value;
+                this.RaisePropertyChanged("ctco_med11");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=18)]
+        public string ctco_orige {
+            get {
+                return this.ctco_origeField;
+            }
+            set {
+                this.ctco_origeField = value;
+                this.RaisePropertyChanged("ctco_orige");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=19)]
+        public System.DateTime ctco_fecha {
+            get {
+                return this.ctco_fechaField;
+            }
+            set {
+                this.ctco_fechaField = value;
+                this.RaisePropertyChanged("ctco_fecha");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=20)]
+        public string ctco_usern {
+            get {
+                return this.ctco_usernField;
+            }
+            set {
+                this.ctco_usernField = value;
+                this.RaisePropertyChanged("ctco_usern");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=21)]
+        public string ctco_empre {
+            get {
+                return this.ctco_empreField;
+            }
+            set {
+                this.ctco_empreField = value;
+                this.RaisePropertyChanged("ctco_empre");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=22)]
+        public string ctco_ftx {
+            get {
+                return this.ctco_ftxField;
+            }
+            set {
+                this.ctco_ftxField = value;
+                this.RaisePropertyChanged("ctco_ftx");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=23)]
+        public string ctco_txpos {
+            get {
+                return this.ctco_txposField;
+            }
+            set {
+                this.ctco_txposField = value;
+                this.RaisePropertyChanged("ctco_txpos");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://bataperu.com.pe/")]
+    public partial class Ent_List_Scactco : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private Ent_Scactco[] lista_scactcoField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(Order=0)]
+        public Ent_Scactco[] lista_scactco {
+            get {
+                return this.lista_scactcoField;
+            }
+            set {
+                this.lista_scactcoField = value;
+                this.RaisePropertyChanged("lista_scactco");
             }
         }
         
@@ -3951,6 +4342,44 @@ namespace AppBata_WS_Interfaces.BataTransac {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="ws_envia_Scactco_list", WrapperNamespace="http://bataperu.com.pe/", IsWrapped=true)]
+    public partial class ws_envia_Scactco_listRequest {
+        
+        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://bataperu.com.pe/")]
+        public AppBata_WS_Interfaces.BataTransac.ValidateAcceso ValidateAcceso;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=0)]
+        public AppBata_WS_Interfaces.BataTransac.Ent_List_Scactco listscactco;
+        
+        public ws_envia_Scactco_listRequest() {
+        }
+        
+        public ws_envia_Scactco_listRequest(AppBata_WS_Interfaces.BataTransac.ValidateAcceso ValidateAcceso, AppBata_WS_Interfaces.BataTransac.Ent_List_Scactco listscactco) {
+            this.ValidateAcceso = ValidateAcceso;
+            this.listscactco = listscactco;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="ws_envia_Scactco_listResponse", WrapperNamespace="http://bataperu.com.pe/", IsWrapped=true)]
+    public partial class ws_envia_Scactco_listResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=0)]
+        public AppBata_WS_Interfaces.BataTransac.Ent_MsgTransac ws_envia_Scactco_listResult;
+        
+        public ws_envia_Scactco_listResponse() {
+        }
+        
+        public ws_envia_Scactco_listResponse(AppBata_WS_Interfaces.BataTransac.Ent_MsgTransac ws_envia_Scactco_listResult) {
+            this.ws_envia_Scactco_listResult = ws_envia_Scactco_listResult;
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface Bata_TransactionSoapChannel : AppBata_WS_Interfaces.BataTransac.Bata_TransactionSoap, System.ServiceModel.IClientChannel {
     }
@@ -4170,6 +4599,19 @@ namespace AppBata_WS_Interfaces.BataTransac {
             inValue._name = _name;
             AppBata_WS_Interfaces.BataTransac.ws_transmision_ingreso_nubeResponse retVal = ((AppBata_WS_Interfaces.BataTransac.Bata_TransactionSoap)(this)).ws_transmision_ingreso_nube(inValue);
             return retVal.ws_transmision_ingreso_nubeResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        AppBata_WS_Interfaces.BataTransac.ws_envia_Scactco_listResponse AppBata_WS_Interfaces.BataTransac.Bata_TransactionSoap.ws_envia_Scactco_list(AppBata_WS_Interfaces.BataTransac.ws_envia_Scactco_listRequest request) {
+            return base.Channel.ws_envia_Scactco_list(request);
+        }
+        
+        public AppBata_WS_Interfaces.BataTransac.Ent_MsgTransac ws_envia_Scactco_list(AppBata_WS_Interfaces.BataTransac.ValidateAcceso ValidateAcceso, AppBata_WS_Interfaces.BataTransac.Ent_List_Scactco listscactco) {
+            AppBata_WS_Interfaces.BataTransac.ws_envia_Scactco_listRequest inValue = new AppBata_WS_Interfaces.BataTransac.ws_envia_Scactco_listRequest();
+            inValue.ValidateAcceso = ValidateAcceso;
+            inValue.listscactco = listscactco;
+            AppBata_WS_Interfaces.BataTransac.ws_envia_Scactco_listResponse retVal = ((AppBata_WS_Interfaces.BataTransac.Bata_TransactionSoap)(this)).ws_envia_Scactco_list(inValue);
+            return retVal.ws_envia_Scactco_listResult;
         }
     }
 }

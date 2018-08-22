@@ -15,7 +15,7 @@ namespace InterfaceWPF.Bll
     {
         public String ruta_temp_interface = System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "//tmpinterface";
         private string ftp_ruta_destino = "/tmp";
-
+        //private string ftp_ruta_destino = "/app/webxst/BCL/autodeploy/data/";
         #region<ENVIO POR FTP ARCHIVOS MNT>
         public Boolean sendftp_file_mnt()
         {
@@ -82,7 +82,9 @@ namespace InterfaceWPF.Bll
                     transferResult.Check();
                     //string subido = "SUBIDO_FTP";
 
+
                     valida_envio = true;
+                   // valida_envio = false;
                 }
 
 

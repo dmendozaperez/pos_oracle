@@ -257,25 +257,25 @@ namespace InterfaceWPF
                 /*DATOS DE INTERFACE RETAIL_LOCATION Y RETAIL_LOCATION_PROMERY*/
                 /*Se recorre los datos del dataset y convertir a mnt el final del codigo y envia por un metodo en basico de envio
                  por ftp*/
-                DataSet ds =await Task.Run(()=> dat_interface.get_retail_location(codtda, pais));
+                DataSet ds = await Task.Run(() => dat_interface.get_retail_location(codtda, pais));
                 StringBuilder str = null;
                 string str_cadena = "";
-                if (ds!=null)
+                if (ds != null)
                 {
                     DataTable dt_retail_location = ds.Tables[0];
                     DataTable dt_retail_location_property = ds.Tables[1];
                     string name_retail_location = ""; string in_retail_location = "";
-                    if (dt_retail_location.Rows.Count>0)
+                    if (dt_retail_location.Rows.Count > 0)
                     {
                         str = new StringBuilder();
-                        for (Int32 i=0;i<dt_retail_location.Rows.Count;++i)
+                        for (Int32 i = 0; i < dt_retail_location.Rows.Count; ++i)
                         {
                             str.Append(dt_retail_location.Rows[i]["RETAIL_LOCATION"].ToString());
 
-                            if (i<dt_retail_location.Rows.Count - 1)
+                            if (i < dt_retail_location.Rows.Count - 1)
                             {
                                 str.Append("\r\n");
-                          
+
                             }
 
                         }
@@ -287,7 +287,7 @@ namespace InterfaceWPF
                         in_retail_location = ruta_interface + "\\" + name_retail_location;
 
                         if (File.Exists(@in_retail_location)) File.Delete(@in_retail_location);
-                        File.WriteAllText(@in_retail_location, str_cadena);                    
+                        File.WriteAllText(@in_retail_location, str_cadena);
                     }
                     if (dt_retail_location_property.Rows.Count > 0)
                     {
@@ -311,7 +311,7 @@ namespace InterfaceWPF
                         if (File.Exists(@in_retail_location)) File.Delete(@in_retail_location);
                         File.WriteAllText(@in_retail_location, str_cadena);
                         envio = true;
-                        mensaje = "Se creo en la ruta : "+ in_retail_location;
+                        mensaje = "Se creo en la ruta : " + in_retail_location;
                     }
 
                 }

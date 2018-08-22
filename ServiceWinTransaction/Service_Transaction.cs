@@ -132,19 +132,23 @@ namespace ServiceWinTransaction
         }
 
         void tmpServicioDBF_Elapsed(object sender, ElapsedEventArgs e)
-        {           
+        {
+            Int32 _valor = 0;
             try
             {
                 if (_valida_serviceDBF == 0)
-                { 
+                {
+                    _valor = 1;
+                    _valida_serviceDBF = 1;
                     string _valida_proc_dbf = @"D:\venta.txt";
                     Boolean proceso_insertDBF = false;
 
                     if (File.Exists(_valida_proc_dbf)) proceso_insertDBF = true;
 
                     if (proceso_insertDBF)
-                    {                                       
-                            string _error = "";                      
+                    {
+                        _valor = 1;
+                        string _error = "";                      
                             _valida_serviceDBF = 1;                        
                             Basico ejecuta_procesos =new Basico();                     
                             ejecuta_procesos.procesar_dbf_pos(ref _error);                        
@@ -159,7 +163,11 @@ namespace ServiceWinTransaction
                 //string errSwc = "";
                 _valida_serviceDBF = 0;
             }
-         }
+            if (_valor == 1)
+            {
+                _valida_serviceDBF = 0;
+            }
+        }
 
         protected override void OnStart(string[] args)
         {

@@ -469,12 +469,13 @@ namespace CapaServicioWindows.Modular
                 string strCodTienda = "";
                 if (!Directory.Exists(@carpetatienda)) Directory.CreateDirectory(@carpetatienda);
                 if (!Directory.Exists(@carpetadbf)) Directory.CreateDirectory(@carpetadbf);
-                string[] filesborrar= Directory.GetFiles(@carpetadbf, "*.*");
+             
                 string[] filespaquete= Directory.GetFiles(@carpetatienda, "*.*");
                
 
                 for (Int32 i = 0; i < filespaquete.Length; ++i)
                 {
+                    string[] filesborrar = Directory.GetFiles(@carpetadbf, "*.*");
                     strCodTienda = "";
                     foreach (string filedetele in filesborrar)
                         File.Delete(filedetele);

@@ -10,10 +10,21 @@ namespace CapaEntidad.Util
     {
 
         #region<CONEXION FTP>
-        public static string ftp_server { get { return "172.24.12.176"; } }
+
+        #region<CONEXION DESARROLLO>
+        //public static string ftp_server { get { return "172.24.12.176"; } }
+        //public static string ftp_user { get { return "retailc"; } }
+        //public static string ftp_password { get { return "1wiAwNRa"; } }
+        //public static Int32 ftp_puerto { get { return 22; } }
+        #endregion
+
+        #region<CONEXION DESARROLLO>
+        public static string ftp_server { get { return "172.24.20.182"; } }
         public static string ftp_user { get { return "retailc"; } }
         public static string ftp_password { get { return "1wiAwNRa"; } }
         public static Int32 ftp_puerto { get { return 22; } }
+        #endregion
+
         #endregion
 
         #region<CONEXION DE BASE DE DATOS>

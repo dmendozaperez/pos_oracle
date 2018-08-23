@@ -201,6 +201,8 @@
                                 <RowDefinition Height="40"/>
                                 <RowDefinition Height="40"/>
                                 <RowDefinition Height="40"/>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="40"/>
                             </Grid.RowDefinitions>
                              <Label HorizontalAlignment="Right" Content="Seleccione Tienda" FontSize="14" FontWeight="Bold"/>
                             <dxe:ComboBoxEdit  x:Name="dwtienda_M" ValidateOnTextInput="False"  Width="300" Height="28" Grid.Row="0" Cursor="Hand" Grid.Column="1" Grid.ColumnSpan="2" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" AutoComplete="True"/>
@@ -211,12 +213,16 @@
                             <CheckBox Grid.Row="1" Margin="10,0,0,0" ToolTip="IMAGEN" IsChecked="False" Cursor="Hand" Grid.Column="2"  x:Name="chk_item_images" HorizontalAlignment="Left" VerticalAlignment="Center" Content="ITEM__IMAGES"/>
                             <CheckBox Grid.Row="2" Margin="10,0,0,0" ToolTip="CODIGO DE BARRA" IsChecked="False" Cursor="Hand" Grid.Column="2"  x:Name="chk_item_xref" HorizontalAlignment="Left" VerticalAlignment="Center" Content="ITEM__XREF"/>
 
-                            <CheckBox Grid.Row="3"  Margin="10,0,0,0"  IsEnabled="true" IsChecked="True" Cursor="Hand" Grid.Column="0"  x:Name="chk_ftp_M" HorizontalAlignment="Left" VerticalAlignment="Center" Content="ENVIAR FTP"/>
-                            <RadioButton  Grid.Row="3"  Margin="10,0,0,0"  IsEnabled="true" IsChecked="True" Cursor="Hand" Grid.Column="1"  Name="rbtPe_M" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Peru"  />
-                            <RadioButton  Grid.Row="3"  Margin="10,0,0,0"  IsEnabled="true" IsChecked="False" Cursor="Hand" Grid.Column="2"  Name="rbtEcu_M" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Ecuador" />
+                            <CheckBox Grid.Row="3" Margin="10,0,0,0" ToolTip="" IsChecked="False" Cursor="Hand" Grid.Column="0"  x:Name="chk_org_hier" HorizontalAlignment="Left" VerticalAlignment="Center" Content="ORG HIER"/>
+                            <CheckBox Grid.Row="3" Margin="10,0,0,0" ToolTip="LINE-CATERIA-SUB-RIMS" IsChecked="False" Cursor="Hand" Grid.Column="1"  x:Name="chk_merch_hier" HorizontalAlignment="Left" VerticalAlignment="Center" Content="MERCH HIER"/>
                             
-                            <CheckBox Grid.Row="3" Visibility="Hidden" Margin="10,0,0,0" ToolTip="LINE-CATERIA-SUB-RIMS" IsChecked="False" Cursor="Hand" Grid.Column="1"  x:Name="chk_merch_hier" HorizontalAlignment="Left" VerticalAlignment="Center" Content="MERCH__HIER"/>
-                            <Button Cursor="Hand" Grid.Column="1" Content="Genera Interface Maestros" Width="170" Grid.Row="4" HorizontalAlignment="Left" x:Name="btnmaestros" Click="btnmaestros_Click" />
+                            
+                            <CheckBox Grid.Row="4"  Margin="10,0,0,0"  IsEnabled="true" IsChecked="True" Cursor="Hand" Grid.Column="0"  x:Name="chk_ftp_M" HorizontalAlignment="Left" VerticalAlignment="Center" Content="ENVIAR FTP"/>
+                            <RadioButton  Grid.Row="4"  Margin="10,0,0,0"  IsEnabled="true" IsChecked="True" Cursor="Hand" Grid.Column="1"  Name="rbtPe_M" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Peru"  />
+                            <RadioButton  Grid.Row="4"  Margin="10,0,0,0"  IsEnabled="true" IsChecked="False" Cursor="Hand" Grid.Column="2"  Name="rbtEcu_M" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Ecuador" />
+                            
+                            <CheckBox Grid.Row="3" Visibility="Hidden" Margin="10,0,0,0" ToolTip="LINE-CATERIA-SUB-RIMS" IsChecked="False" Cursor="Hand" Grid.Column="1"  x:Name="chk_merch_hier2" HorizontalAlignment="Left" VerticalAlignment="Center" Content="MERCH__HIER"/>
+                            <Button Cursor="Hand" Grid.Column="1" Content="Genera Interface Maestros" Width="170" Grid.Row="6" HorizontalAlignment="Left" x:Name="btnmaestros" Click="btnmaestros_Click" />
                         </Grid>
 
 

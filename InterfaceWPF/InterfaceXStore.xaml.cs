@@ -591,6 +591,103 @@ namespace InterfaceWPF
                     }
                 }
                 #endregion
+
+                #region<ORG HIER>
+                if (chk_org_hier.IsChecked == true)
+                {
+                    DataTable dt = await Task.Run(() => dat_interface.get_org_hier(pais, codtda));
+                    if (dt != null)
+                    {
+                        if (dt.Rows.Count > 0)
+                        {
+                            str = new StringBuilder();
+                            Decimal i = 0;
+                            foreach (DataRow fila in dt.Rows)
+                            {
+
+                                str.Append(fila["ORG_HIER"].ToString());
+                                if (i < dt.Rows.Count - 1)
+                                {
+                                    str.Append("\r\n");
+
+                                }
+                                i += 1;
+
+                            }
+
+                            //for (Int32 i = 0; i < dt.Rows.Count; ++i)
+                            //{
+                            //    str.Append(dt.Rows[i]["ITEM"].ToString());
+
+                            //    if (i < dt.Rows.Count - 1)
+                            //    {
+                            //        str.Append("\r\n");
+
+                            //    }
+
+                            //}
+                            str_cadena = str.ToString();
+
+
+
+                            name_maestros = "ORG_HIER_" + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
+                            in_maestros = ruta_interface + "\\" + name_maestros;
+
+                            if (File.Exists(@in_maestros)) File.Delete(@in_maestros);
+                            File.WriteAllText(@in_maestros, str_cadena);
+                        }
+                    }
+                }
+                #endregion
+
+                #region<MERCH HIER>
+                if (chk_merch_hier.IsChecked == true)
+                {
+                    DataTable dt = await Task.Run(() => dat_interface.get_merch_hier(pais, codtda));
+                    if (dt != null)
+                    {
+                        if (dt.Rows.Count > 0)
+                        {
+                            str = new StringBuilder();
+                            Decimal i = 0;
+                            foreach (DataRow fila in dt.Rows)
+                            {
+
+                                str.Append(fila["MERCH_HIER"].ToString());
+                                if (i < dt.Rows.Count - 1)
+                                {
+                                    str.Append("\r\n");
+
+                                }
+                                i += 1;
+
+                            }
+
+                            //for (Int32 i = 0; i < dt.Rows.Count; ++i)
+                            //{
+                            //    str.Append(dt.Rows[i]["ITEM"].ToString());
+
+                            //    if (i < dt.Rows.Count - 1)
+                            //    {
+                            //        str.Append("\r\n");
+
+                            //    }
+
+                            //}
+                            str_cadena = str.ToString();
+
+
+
+                            name_maestros = "MERCH_HIER_" + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
+                            in_maestros = ruta_interface + "\\" + name_maestros;
+
+                            if (File.Exists(@in_maestros)) File.Delete(@in_maestros);
+                            File.WriteAllText(@in_maestros, str_cadena);
+                        }
+                    }
+                }
+                #endregion
+
                 #region<ITEM XREF>
                 if (chk_item_xref.IsChecked == true)
                 {

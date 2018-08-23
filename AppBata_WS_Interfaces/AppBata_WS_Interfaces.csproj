@@ -145,9 +145,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\BataTransac\Bata_Transaction1.disco" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Service References\BataEC\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>
@@ -161,6 +158,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\BataEC\BataEcommerce1.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\BataTransac\Bata_Transaction1.disco" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="BeforeBuild">

@@ -578,6 +578,58 @@
           <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
         </s:sequence>
       </s:complexType>
+      <s:element name="ws_envia_Scactco_list">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="listscactco" type="tns:Ent_List_Scactco" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Ent_List_Scactco">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="lista_scactco" type="tns:ArrayOfEnt_Scactco" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfEnt_Scactco">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Ent_Scactco" nillable="true" type="tns:Ent_Scactco" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Ent_Scactco">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ctco_talpr" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ctco_plaoc" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ctco_artic" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ctco_calid" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ctco_plpr" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ctco_impr" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ctco_med00" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ctco_med01" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ctco_med02" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ctco_med03" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ctco_med04" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ctco_med05" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ctco_med06" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ctco_med07" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ctco_med08" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ctco_med09" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ctco_med10" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ctco_med11" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ctco_orige" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ctco_fecha" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="ctco_usern" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ctco_empre" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ctco_ftx" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ctco_txpos" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ws_envia_Scactco_listResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ws_envia_Scactco_listResult" type="tns:Ent_MsgTransac" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="HelloWorldSoapIn">
@@ -721,6 +773,15 @@
   <wsdl:message name="ws_transmision_ingreso_nubeValidateAcceso">
     <wsdl:part name="ValidateAcceso" element="tns:ValidateAcceso" />
   </wsdl:message>
+  <wsdl:message name="ws_envia_Scactco_listSoapIn">
+    <wsdl:part name="parameters" element="tns:ws_envia_Scactco_list" />
+  </wsdl:message>
+  <wsdl:message name="ws_envia_Scactco_listSoapOut">
+    <wsdl:part name="parameters" element="tns:ws_envia_Scactco_listResponse" />
+  </wsdl:message>
+  <wsdl:message name="ws_envia_Scactco_listValidateAcceso">
+    <wsdl:part name="ValidateAcceso" element="tns:ValidateAcceso" />
+  </wsdl:message>
   <wsdl:portType name="Bata_TransactionSoap">
     <wsdl:operation name="HelloWorld">
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Consula de bienvenida</wsdl:documentation>
@@ -802,6 +863,11 @@
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Enviar Ventas Paquetes</wsdl:documentation>
       <wsdl:input message="tns:ws_transmision_ingreso_nubeSoapIn" />
       <wsdl:output message="tns:ws_transmision_ingreso_nubeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ws_envia_Scactco_list">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Enviar Scactco</wsdl:documentation>
+      <wsdl:input message="tns:ws_envia_Scactco_listSoapIn" />
+      <wsdl:output message="tns:ws_envia_Scactco_listSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="Bata_TransactionSoap" type="tns:Bata_TransactionSoap">
@@ -972,6 +1038,16 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="ws_envia_Scactco_list">
+      <soap:operation soapAction="http://bataperu.com.pe/ws_envia_Scactco_list" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ws_envia_Scactco_listValidateAcceso" part="ValidateAcceso" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="Bata_TransactionSoap12" type="tns:Bata_TransactionSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -1136,6 +1212,16 @@
       <wsdl:input>
         <soap12:body use="literal" />
         <soap12:header message="tns:ws_transmision_ingreso_nubeValidateAcceso" part="ValidateAcceso" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_envia_Scactco_list">
+      <soap12:operation soapAction="http://bataperu.com.pe/ws_envia_Scactco_list" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ws_envia_Scactco_listValidateAcceso" part="ValidateAcceso" use="literal" />
       </wsdl:input>
       <wsdl:output>
         <soap12:body use="literal" />

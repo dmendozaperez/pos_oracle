@@ -28,16 +28,41 @@ namespace CapaBasico.Util
                     foreach(var item in path_server)
                     {
                         string _archivo_ruta = "";
-                        /*si es venta de procesos*/
-                        if (item.rutloc_namedbf.Substring(0,1)=="V")
+                        if (!Directory.Exists(@item.rutloc_location)) Directory.CreateDirectory(@item.rutloc_location);
+                        /*si es venta de procesos SQL SERVER*/
+                        if (item.rutloc_namedbf.Substring(0,1)=="S")
                         {
+                            
                             _archivo_ruta = item.rutloc_location + "\\" + _tienda_archivo;
                             File.WriteAllBytes(_archivo_ruta, _archivo_zip);
                         }
                         else
                         {
                             /*en este caso vamos a generar casilla*/
-                            //string folder_td="TD" + _tienda_archivo.
+                            string folder_td = "TD" + _tienda_archivo.Substring(_tienda_archivo.Length - 3, 3);
+
+                            /*creamos folder para las tiendas*/
+
+                            string ruta_td = @item.rutloc_location + "/" + folder_td;
+
+                            if (!Directory.Exists(@ruta_td)) Directory.CreateDirectory(@ruta_td);
+
+                            string _WX = "WX"  /*envio de paquete de tiendas*/;
+                            string _TX = "TX"; /*envio haci tiendas cen*/
+
+                            string folder_wx = item.rutloc_location + "/" + folder_td + "/" + _WX;
+                            string folder_tx = item.rutloc_location + "/" + folder_td + "/" + _TX;
+
+                            if (!Directory.Exists(@folder_wx)) Directory.CreateDirectory(@folder_wx);
+                            if (!Directory.Exists(@folder_tx)) Directory.CreateDirectory(@folder_tx);
+
+                            if (Directory.Exists(@folder_wx))
+                            {
+                                _archivo_ruta = folder_wx + "/" + _tienda_archivo;
+                                File.WriteAllBytes(_archivo_ruta, _archivo_zip);
+                            }
+
+
                             //_archivo_ruta = item.rutloc_location;
                             /**/
                         }

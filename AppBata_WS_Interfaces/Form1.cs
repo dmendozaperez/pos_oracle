@@ -253,7 +253,7 @@ namespace AppBata_WS_Interfaces
 
             BataTransac.Bata_TransactionSoapClient batatran = new BataTransac.Bata_TransactionSoapClient();
 
-            string pathFileIn = @"D:\TD180811.143";
+            string pathFileIn = @"D:\TD180821.143";
 
 
 

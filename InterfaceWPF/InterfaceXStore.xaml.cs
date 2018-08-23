@@ -688,6 +688,61 @@ namespace InterfaceWPF
                 }
                 #endregion
 
+                #region<PARTY>
+                if (chk_party_supplier.IsChecked == true || chk_party_employee.IsChecked == true)
+                {
+
+                    string strCodEmpl = "N";
+                    string strCodSupl = "N";
+
+                    if(chk_party_supplier.IsChecked==true) strCodSupl = "S";
+                    if (chk_party_employee.IsChecked == true) strCodEmpl = "S";
+
+                    DataTable dt = await Task.Run(() => dat_interface.get_Party(pais, codtda, strCodSupl, strCodEmpl));
+                    if (dt != null)
+                    {
+                        if (dt.Rows.Count > 0)
+                        {
+                            str = new StringBuilder();
+                            Decimal i = 0;
+                            foreach (DataRow fila in dt.Rows)
+                            {
+
+                                str.Append(fila["PARTY"].ToString());
+                                if (i < dt.Rows.Count - 1)
+                                {
+                                    str.Append("\r\n");
+
+                                }
+                                i += 1;
+
+                            }
+
+                            //for (Int32 i = 0; i < dt.Rows.Count; ++i)
+                            //{
+                            //    str.Append(dt.Rows[i]["ITEM"].ToString());
+
+                            //    if (i < dt.Rows.Count - 1)
+                            //    {
+                            //        str.Append("\r\n");
+
+                            //    }
+
+                            //}
+                            str_cadena = str.ToString();
+
+
+
+                            name_maestros = "PARTY_" + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
+                            in_maestros = ruta_interface + "\\" + name_maestros;
+
+                            if (File.Exists(@in_maestros)) File.Delete(@in_maestros);
+                            File.WriteAllText(@in_maestros, str_cadena);
+                        }
+                    }
+                }
+                #endregion
+
                 #region<ITEM XREF>
                 if (chk_item_xref.IsChecked == true)
                 {
@@ -755,7 +810,7 @@ namespace InterfaceWPF
             if ((chk_item_dimension_type.IsChecked == false) && (chk_item_dimension_value.IsChecked == false)
                && (chk_item.IsChecked == false) && (chk_price_update.IsChecked == false)
                && (chk_item_images.IsChecked == false) && (chk_item_xref.IsChecked == false)
-               && (chk_merch_hier.IsChecked == false))
+               && (chk_merch_hier.IsChecked == false) && (chk_merch_hier.IsChecked == false) && (chk_org_hier.IsChecked == false) && (chk_party_employee.IsChecked == false) && (chk_party_supplier.IsChecked == false))
             {
                 await metroWindow.ShowMessageAsync(Ent_Msg.msginfomacion, "Seleccione al menos una interface.", MessageDialogStyle.Affirmative, metroWindow.MetroDialogOptions);
 

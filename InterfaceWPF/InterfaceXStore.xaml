@@ -215,11 +215,14 @@
 
                             <CheckBox Grid.Row="3" Margin="10,0,0,0" ToolTip="" IsChecked="False" Cursor="Hand" Grid.Column="0"  x:Name="chk_org_hier" HorizontalAlignment="Left" VerticalAlignment="Center" Content="ORG HIER"/>
                             <CheckBox Grid.Row="3" Margin="10,0,0,0" ToolTip="LINE-CATERIA-SUB-RIMS" IsChecked="False" Cursor="Hand" Grid.Column="1"  x:Name="chk_merch_hier" HorizontalAlignment="Left" VerticalAlignment="Center" Content="MERCH HIER"/>
-                            
-                            
-                            <CheckBox Grid.Row="4"  Margin="10,0,0,0"  IsEnabled="true" IsChecked="True" Cursor="Hand" Grid.Column="0"  x:Name="chk_ftp_M" HorizontalAlignment="Left" VerticalAlignment="Center" Content="ENVIAR FTP"/>
-                            <RadioButton  Grid.Row="4"  Margin="10,0,0,0"  IsEnabled="true" IsChecked="True" Cursor="Hand" Grid.Column="1"  Name="rbtPe_M" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Peru"  />
-                            <RadioButton  Grid.Row="4"  Margin="10,0,0,0"  IsEnabled="true" IsChecked="False" Cursor="Hand" Grid.Column="2"  Name="rbtEcu_M" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Ecuador" />
+
+                            <CheckBox Grid.Row="4" Margin="10,0,0,0" ToolTip="" IsChecked="False" Cursor="Hand" Grid.Column="0"  x:Name="chk_party_employee" HorizontalAlignment="Left" VerticalAlignment="Center" Content="PARTY EMPLOYEE"/>
+                            <CheckBox Grid.Row="4" Margin="10,0,0,0" ToolTip="" IsChecked="False" Cursor="Hand" Grid.Column="1"  x:Name="chk_party_supplier" HorizontalAlignment="Left" VerticalAlignment="Center" Content="PARTY SUPPLIER"/>
+
+
+                            <CheckBox Grid.Row="5"  Margin="10,0,0,0"  IsEnabled="true" IsChecked="True" Cursor="Hand" Grid.Column="0"  x:Name="chk_ftp_M" HorizontalAlignment="Left" VerticalAlignment="Center" Content="ENVIAR FTP"/>
+                            <RadioButton  Grid.Row="5"  Margin="10,0,0,0"  IsEnabled="true" IsChecked="True" Cursor="Hand" Grid.Column="1"  Name="rbtPe_M" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Peru"  />
+                            <RadioButton  Grid.Row="5"  Margin="10,0,0,0"  IsEnabled="true" IsChecked="False" Cursor="Hand" Grid.Column="2"  Name="rbtEcu_M" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Ecuador" />
                             
                             <CheckBox Grid.Row="3" Visibility="Hidden" Margin="10,0,0,0" ToolTip="LINE-CATERIA-SUB-RIMS" IsChecked="False" Cursor="Hand" Grid.Column="1"  x:Name="chk_merch_hier2" HorizontalAlignment="Left" VerticalAlignment="Center" Content="MERCH__HIER"/>
                             <Button Cursor="Hand" Grid.Column="1" Content="Genera Interface Maestros" Width="170" Grid.Row="6" HorizontalAlignment="Left" x:Name="btnmaestros" Click="btnmaestros_Click" />

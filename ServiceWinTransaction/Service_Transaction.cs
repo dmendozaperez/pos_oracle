@@ -20,8 +20,11 @@ namespace ServiceWinTransaction
     {
         Timer tmservicio = null;
         Timer tmservicioDBF = null;
+        Timer tmservicioScactcoDBF = null;
+
         private Int32 _valida_service = 0;
         private Int32 _valida_serviceDBF = 0;
+        private Int32 _valida_serviceScactcoDBF = 0;
 
         public Service_Transaction()
         {
@@ -32,6 +35,9 @@ namespace ServiceWinTransaction
 
             tmservicioDBF = new Timer(5000);
             tmservicioDBF.Elapsed += new ElapsedEventHandler(tmpServicioDBF_Elapsed);
+
+            tmservicioScactcoDBF = new Timer(5000);
+            tmservicioScactcoDBF.Elapsed += new ElapsedEventHandler(tmpServicioScactcoDBF_Elapsed);
         }
         void tmpServicio_Elapsed(object sender, ElapsedEventArgs e)
         {
@@ -169,19 +175,58 @@ namespace ServiceWinTransaction
             }
         }
 
+        void tmpServicioScactcoDBF_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            Int32 _valor = 0;
+            try
+            {
+                if (_valida_serviceScactcoDBF == 0)
+                {
+                    _valor = 1;
+                    _valida_serviceScactcoDBF = 1;
+                    string _valida_proc_dbf = @"D:\venta.txt";
+                    Boolean proceso_venta = false;
+
+                    if (File.Exists(_valida_proc_dbf)) proceso_venta = true;
+
+                    if (!proceso_venta)
+                    {
+                        _valor = 1;
+                        string _error = "";
+                        _valida_serviceScactcoDBF = 1;
+                        Basico ejecuta_procesos = new Basico();
+                        ejecuta_procesos.enviar_scactco(ref _error);
+                        _valida_serviceScactcoDBF = 0;
+
+                    }
+                }
+
+            }
+            catch (Exception exc)
+            {
+                //string errSwc = "";
+                _valida_serviceScactcoDBF = 0;
+            }
+            if (_valor == 1)
+            {
+                _valida_serviceScactcoDBF = 0;
+            }
+        }
+
         protected override void OnStart(string[] args)
         {
             tmservicio.Start();
             tmservicioDBF.Start();
+            tmservicioScactcoDBF.Start();
         }
 
         protected override void OnStop()
         {
             tmservicio.Stop();
             tmservicioDBF.Stop();
+            tmservicioScactcoDBF.Stop();
         }       
-
-       
+              
 
     }
 }

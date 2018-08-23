@@ -66,10 +66,45 @@ namespace CapaServicioWindows.BataTransac {
         [System.ServiceModel.OperationContractAttribute(Action="http://bataperu.com.pe/ws_download_file", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         CapaServicioWindows.BataTransac.ws_download_fileResponse ws_download_file(CapaServicioWindows.BataTransac.ws_download_fileRequest request);
+        
+        // CODEGEN: Se está generando un contrato de mensaje, ya que el mensaje ws_get_time_servicetransRequest tiene encabezados.
+        [System.ServiceModel.OperationContractAttribute(Action="http://bataperu.com.pe/ws_get_time_servicetrans", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        CapaServicioWindows.BataTransac.ws_get_time_servicetransResponse ws_get_time_servicetrans(CapaServicioWindows.BataTransac.ws_get_time_servicetransRequest request);
+        
+        // CODEGEN: Se está generando un contrato de mensaje, ya que el mensaje ws_envia_stock_tdaRequest tiene encabezados.
+        [System.ServiceModel.OperationContractAttribute(Action="http://bataperu.com.pe/ws_envia_stock_tda", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        CapaServicioWindows.BataTransac.ws_envia_stock_tdaResponse ws_envia_stock_tda(CapaServicioWindows.BataTransac.ws_envia_stock_tdaRequest request);
+        
+        // CODEGEN: Se está generando un contrato de mensaje, ya que el mensaje ws_envia_venta_tdaRequest tiene encabezados.
+        [System.ServiceModel.OperationContractAttribute(Action="http://bataperu.com.pe/ws_envia_venta_tda", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        CapaServicioWindows.BataTransac.ws_envia_venta_tdaResponse ws_envia_venta_tda(CapaServicioWindows.BataTransac.ws_envia_venta_tdaRequest request);
+        
+        // CODEGEN: Se está generando un contrato de mensaje, ya que el mensaje ws_envia_venta_tda_listRequest tiene encabezados.
+        [System.ServiceModel.OperationContractAttribute(Action="http://bataperu.com.pe/ws_envia_venta_tda_list", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        CapaServicioWindows.BataTransac.ws_envia_venta_tda_listResponse ws_envia_venta_tda_list(CapaServicioWindows.BataTransac.ws_envia_venta_tda_listRequest request);
+        
+        // CODEGEN: Se está generando un contrato de mensaje, ya que el mensaje ws_envia_venta_tda_listaRequest tiene encabezados.
+        [System.ServiceModel.OperationContractAttribute(Action="http://bataperu.com.pe/ws_envia_venta_tda_lista", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        CapaServicioWindows.BataTransac.ws_envia_venta_tda_listaResponse ws_envia_venta_tda_lista(CapaServicioWindows.BataTransac.ws_envia_venta_tda_listaRequest request);
+        
+        // CODEGEN: Se está generando un contrato de mensaje, ya que el mensaje ws_transmision_ingreso_nubeRequest tiene encabezados.
+        [System.ServiceModel.OperationContractAttribute(Action="http://bataperu.com.pe/ws_transmision_ingreso_nube", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        CapaServicioWindows.BataTransac.ws_transmision_ingreso_nubeResponse ws_transmision_ingreso_nube(CapaServicioWindows.BataTransac.ws_transmision_ingreso_nubeRequest request);
+        
+        // CODEGEN: Se está generando un contrato de mensaje, ya que el mensaje ws_envia_Scactco_listRequest tiene encabezados.
+        [System.ServiceModel.OperationContractAttribute(Action="http://bataperu.com.pe/ws_envia_Scactco_list", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        CapaServicioWindows.BataTransac.ws_envia_Scactco_listResponse ws_envia_Scactco_list(CapaServicioWindows.BataTransac.ws_envia_Scactco_listRequest request);
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -129,7 +164,2523 @@ namespace CapaServicioWindows.BataTransac {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://bataperu.com.pe/")]
+    public partial class Ent_Scactco : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string ctco_talprField;
+        
+        private string ctco_plaocField;
+        
+        private string ctco_articField;
+        
+        private string ctco_calidField;
+        
+        private string ctco_plprField;
+        
+        private string ctco_imprField;
+        
+        private string ctco_med00Field;
+        
+        private string ctco_med01Field;
+        
+        private string ctco_med02Field;
+        
+        private string ctco_med03Field;
+        
+        private string ctco_med04Field;
+        
+        private string ctco_med05Field;
+        
+        private string ctco_med06Field;
+        
+        private string ctco_med07Field;
+        
+        private string ctco_med08Field;
+        
+        private string ctco_med09Field;
+        
+        private string ctco_med10Field;
+        
+        private string ctco_med11Field;
+        
+        private string ctco_origeField;
+        
+        private System.DateTime ctco_fechaField;
+        
+        private string ctco_usernField;
+        
+        private string ctco_empreField;
+        
+        private string ctco_ftxField;
+        
+        private string ctco_txposField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public string ctco_talpr {
+            get {
+                return this.ctco_talprField;
+            }
+            set {
+                this.ctco_talprField = value;
+                this.RaisePropertyChanged("ctco_talpr");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public string ctco_plaoc {
+            get {
+                return this.ctco_plaocField;
+            }
+            set {
+                this.ctco_plaocField = value;
+                this.RaisePropertyChanged("ctco_plaoc");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
+        public string ctco_artic {
+            get {
+                return this.ctco_articField;
+            }
+            set {
+                this.ctco_articField = value;
+                this.RaisePropertyChanged("ctco_artic");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
+        public string ctco_calid {
+            get {
+                return this.ctco_calidField;
+            }
+            set {
+                this.ctco_calidField = value;
+                this.RaisePropertyChanged("ctco_calid");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
+        public string ctco_plpr {
+            get {
+                return this.ctco_plprField;
+            }
+            set {
+                this.ctco_plprField = value;
+                this.RaisePropertyChanged("ctco_plpr");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
+        public string ctco_impr {
+            get {
+                return this.ctco_imprField;
+            }
+            set {
+                this.ctco_imprField = value;
+                this.RaisePropertyChanged("ctco_impr");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
+        public string ctco_med00 {
+            get {
+                return this.ctco_med00Field;
+            }
+            set {
+                this.ctco_med00Field = value;
+                this.RaisePropertyChanged("ctco_med00");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=7)]
+        public string ctco_med01 {
+            get {
+                return this.ctco_med01Field;
+            }
+            set {
+                this.ctco_med01Field = value;
+                this.RaisePropertyChanged("ctco_med01");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=8)]
+        public string ctco_med02 {
+            get {
+                return this.ctco_med02Field;
+            }
+            set {
+                this.ctco_med02Field = value;
+                this.RaisePropertyChanged("ctco_med02");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=9)]
+        public string ctco_med03 {
+            get {
+                return this.ctco_med03Field;
+            }
+            set {
+                this.ctco_med03Field = value;
+                this.RaisePropertyChanged("ctco_med03");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=10)]
+        public string ctco_med04 {
+            get {
+                return this.ctco_med04Field;
+            }
+            set {
+                this.ctco_med04Field = value;
+                this.RaisePropertyChanged("ctco_med04");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=11)]
+        public string ctco_med05 {
+            get {
+                return this.ctco_med05Field;
+            }
+            set {
+                this.ctco_med05Field = value;
+                this.RaisePropertyChanged("ctco_med05");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=12)]
+        public string ctco_med06 {
+            get {
+                return this.ctco_med06Field;
+            }
+            set {
+                this.ctco_med06Field = value;
+                this.RaisePropertyChanged("ctco_med06");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=13)]
+        public string ctco_med07 {
+            get {
+                return this.ctco_med07Field;
+            }
+            set {
+                this.ctco_med07Field = value;
+                this.RaisePropertyChanged("ctco_med07");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=14)]
+        public string ctco_med08 {
+            get {
+                return this.ctco_med08Field;
+            }
+            set {
+                this.ctco_med08Field = value;
+                this.RaisePropertyChanged("ctco_med08");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=15)]
+        public string ctco_med09 {
+            get {
+                return this.ctco_med09Field;
+            }
+            set {
+                this.ctco_med09Field = value;
+                this.RaisePropertyChanged("ctco_med09");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=16)]
+        public string ctco_med10 {
+            get {
+                return this.ctco_med10Field;
+            }
+            set {
+                this.ctco_med10Field = value;
+                this.RaisePropertyChanged("ctco_med10");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=17)]
+        public string ctco_med11 {
+            get {
+                return this.ctco_med11Field;
+            }
+            set {
+                this.ctco_med11Field = value;
+                this.RaisePropertyChanged("ctco_med11");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=18)]
+        public string ctco_orige {
+            get {
+                return this.ctco_origeField;
+            }
+            set {
+                this.ctco_origeField = value;
+                this.RaisePropertyChanged("ctco_orige");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=19)]
+        public System.DateTime ctco_fecha {
+            get {
+                return this.ctco_fechaField;
+            }
+            set {
+                this.ctco_fechaField = value;
+                this.RaisePropertyChanged("ctco_fecha");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=20)]
+        public string ctco_usern {
+            get {
+                return this.ctco_usernField;
+            }
+            set {
+                this.ctco_usernField = value;
+                this.RaisePropertyChanged("ctco_usern");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=21)]
+        public string ctco_empre {
+            get {
+                return this.ctco_empreField;
+            }
+            set {
+                this.ctco_empreField = value;
+                this.RaisePropertyChanged("ctco_empre");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=22)]
+        public string ctco_ftx {
+            get {
+                return this.ctco_ftxField;
+            }
+            set {
+                this.ctco_ftxField = value;
+                this.RaisePropertyChanged("ctco_ftx");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=23)]
+        public string ctco_txpos {
+            get {
+                return this.ctco_txposField;
+            }
+            set {
+                this.ctco_txposField = value;
+                this.RaisePropertyChanged("ctco_txpos");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://bataperu.com.pe/")]
+    public partial class Ent_List_Scactco : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private Ent_Scactco[] lista_scactcoField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(Order=0)]
+        public Ent_Scactco[] lista_scactco {
+            get {
+                return this.lista_scactcoField;
+            }
+            set {
+                this.lista_scactcoField = value;
+                this.RaisePropertyChanged("lista_scactco");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://bataperu.com.pe/")]
+    public partial class Ent_Fnotaa : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string na_notaField;
+        
+        private string na_itemField;
+        
+        private string na_moneField;
+        
+        private string na_tpagField;
+        
+        private decimal na_tasaField;
+        
+        private string na_crefField;
+        
+        private string na_srefField;
+        
+        private string na_nrefField;
+        
+        private decimal na_vrefField;
+        
+        private decimal na_vpagField;
+        
+        private string na_estaField;
+        
+        private string na_cierField;
+        
+        private string na_fcreField;
+        
+        private string na_fmodField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public string na_nota {
+            get {
+                return this.na_notaField;
+            }
+            set {
+                this.na_notaField = value;
+                this.RaisePropertyChanged("na_nota");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public string na_item {
+            get {
+                return this.na_itemField;
+            }
+            set {
+                this.na_itemField = value;
+                this.RaisePropertyChanged("na_item");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
+        public string na_mone {
+            get {
+                return this.na_moneField;
+            }
+            set {
+                this.na_moneField = value;
+                this.RaisePropertyChanged("na_mone");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
+        public string na_tpag {
+            get {
+                return this.na_tpagField;
+            }
+            set {
+                this.na_tpagField = value;
+                this.RaisePropertyChanged("na_tpag");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
+        public decimal na_tasa {
+            get {
+                return this.na_tasaField;
+            }
+            set {
+                this.na_tasaField = value;
+                this.RaisePropertyChanged("na_tasa");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
+        public string na_cref {
+            get {
+                return this.na_crefField;
+            }
+            set {
+                this.na_crefField = value;
+                this.RaisePropertyChanged("na_cref");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
+        public string na_sref {
+            get {
+                return this.na_srefField;
+            }
+            set {
+                this.na_srefField = value;
+                this.RaisePropertyChanged("na_sref");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=7)]
+        public string na_nref {
+            get {
+                return this.na_nrefField;
+            }
+            set {
+                this.na_nrefField = value;
+                this.RaisePropertyChanged("na_nref");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=8)]
+        public decimal na_vref {
+            get {
+                return this.na_vrefField;
+            }
+            set {
+                this.na_vrefField = value;
+                this.RaisePropertyChanged("na_vref");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=9)]
+        public decimal na_vpag {
+            get {
+                return this.na_vpagField;
+            }
+            set {
+                this.na_vpagField = value;
+                this.RaisePropertyChanged("na_vpag");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=10)]
+        public string na_esta {
+            get {
+                return this.na_estaField;
+            }
+            set {
+                this.na_estaField = value;
+                this.RaisePropertyChanged("na_esta");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=11)]
+        public string na_cier {
+            get {
+                return this.na_cierField;
+            }
+            set {
+                this.na_cierField = value;
+                this.RaisePropertyChanged("na_cier");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=12)]
+        public string na_fcre {
+            get {
+                return this.na_fcreField;
+            }
+            set {
+                this.na_fcreField = value;
+                this.RaisePropertyChanged("na_fcre");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=13)]
+        public string na_fmod {
+            get {
+                return this.na_fmodField;
+            }
+            set {
+                this.na_fmodField = value;
+                this.RaisePropertyChanged("na_fmod");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://bataperu.com.pe/")]
+    public partial class Ent_List_Fnotaa : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private Ent_Fnotaa[] lista_fnotaaField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(Order=0)]
+        public Ent_Fnotaa[] lista_fnotaa {
+            get {
+                return this.lista_fnotaaField;
+            }
+            set {
+                this.lista_fnotaaField = value;
+                this.RaisePropertyChanged("lista_fnotaa");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://bataperu.com.pe/")]
+    public partial class Ent_Ffactd : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string fd_nintField;
+        
+        private string fd_tipoField;
+        
+        private string fd_artiField;
+        
+        private string fd_reglField;
+        
+        private string fd_coloField;
+        
+        private string fd_itemField;
+        
+        private string fd_icmbField;
+        
+        private decimal fd_qfacField;
+        
+        private string fd_lpreField;
+        
+        private string fd_calmField;
+        
+        private decimal fd_prefField;
+        
+        private decimal fd_drefField;
+        
+        private decimal fd_precField;
+        
+        private decimal fd_brutField;
+        
+        private decimal fd_pimp1Field;
+        
+        private decimal fd_vimp1Field;
+        
+        private decimal fd_subt1Field;
+        
+        private decimal fd_pimp2Field;
+        
+        private decimal fd_vimp2Field;
+        
+        private decimal fd_subt2Field;
+        
+        private decimal fd_pdct1Field;
+        
+        private decimal fd_vdct1Field;
+        
+        private decimal fd_subt3Field;
+        
+        private decimal fd_vdct4Field;
+        
+        private decimal fd_vdc23Field;
+        
+        private decimal fd_vvtaField;
+        
+        private decimal fd_pimp3Field;
+        
+        private decimal fd_vimp3Field;
+        
+        private decimal fd_pimp4Field;
+        
+        private decimal fd_vimp4Field;
+        
+        private decimal fd_totalField;
+        
+        private string fd_cuseField;
+        
+        private string fd_museField;
+        
+        private System.DateTime fd_fcreField;
+        
+        private System.DateTime fd_fmodField;
+        
+        private string fd_autoField;
+        
+        private decimal fd_dre2Field;
+        
+        private string fd_asocField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public string fd_nint {
+            get {
+                return this.fd_nintField;
+            }
+            set {
+                this.fd_nintField = value;
+                this.RaisePropertyChanged("fd_nint");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public string fd_tipo {
+            get {
+                return this.fd_tipoField;
+            }
+            set {
+                this.fd_tipoField = value;
+                this.RaisePropertyChanged("fd_tipo");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
+        public string fd_arti {
+            get {
+                return this.fd_artiField;
+            }
+            set {
+                this.fd_artiField = value;
+                this.RaisePropertyChanged("fd_arti");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
+        public string fd_regl {
+            get {
+                return this.fd_reglField;
+            }
+            set {
+                this.fd_reglField = value;
+                this.RaisePropertyChanged("fd_regl");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
+        public string fd_colo {
+            get {
+                return this.fd_coloField;
+            }
+            set {
+                this.fd_coloField = value;
+                this.RaisePropertyChanged("fd_colo");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
+        public string fd_item {
+            get {
+                return this.fd_itemField;
+            }
+            set {
+                this.fd_itemField = value;
+                this.RaisePropertyChanged("fd_item");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
+        public string fd_icmb {
+            get {
+                return this.fd_icmbField;
+            }
+            set {
+                this.fd_icmbField = value;
+                this.RaisePropertyChanged("fd_icmb");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=7)]
+        public decimal fd_qfac {
+            get {
+                return this.fd_qfacField;
+            }
+            set {
+                this.fd_qfacField = value;
+                this.RaisePropertyChanged("fd_qfac");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=8)]
+        public string fd_lpre {
+            get {
+                return this.fd_lpreField;
+            }
+            set {
+                this.fd_lpreField = value;
+                this.RaisePropertyChanged("fd_lpre");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=9)]
+        public string fd_calm {
+            get {
+                return this.fd_calmField;
+            }
+            set {
+                this.fd_calmField = value;
+                this.RaisePropertyChanged("fd_calm");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=10)]
+        public decimal fd_pref {
+            get {
+                return this.fd_prefField;
+            }
+            set {
+                this.fd_prefField = value;
+                this.RaisePropertyChanged("fd_pref");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=11)]
+        public decimal fd_dref {
+            get {
+                return this.fd_drefField;
+            }
+            set {
+                this.fd_drefField = value;
+                this.RaisePropertyChanged("fd_dref");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=12)]
+        public decimal fd_prec {
+            get {
+                return this.fd_precField;
+            }
+            set {
+                this.fd_precField = value;
+                this.RaisePropertyChanged("fd_prec");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=13)]
+        public decimal fd_brut {
+            get {
+                return this.fd_brutField;
+            }
+            set {
+                this.fd_brutField = value;
+                this.RaisePropertyChanged("fd_brut");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=14)]
+        public decimal fd_pimp1 {
+            get {
+                return this.fd_pimp1Field;
+            }
+            set {
+                this.fd_pimp1Field = value;
+                this.RaisePropertyChanged("fd_pimp1");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=15)]
+        public decimal fd_vimp1 {
+            get {
+                return this.fd_vimp1Field;
+            }
+            set {
+                this.fd_vimp1Field = value;
+                this.RaisePropertyChanged("fd_vimp1");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=16)]
+        public decimal fd_subt1 {
+            get {
+                return this.fd_subt1Field;
+            }
+            set {
+                this.fd_subt1Field = value;
+                this.RaisePropertyChanged("fd_subt1");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=17)]
+        public decimal fd_pimp2 {
+            get {
+                return this.fd_pimp2Field;
+            }
+            set {
+                this.fd_pimp2Field = value;
+                this.RaisePropertyChanged("fd_pimp2");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=18)]
+        public decimal fd_vimp2 {
+            get {
+                return this.fd_vimp2Field;
+            }
+            set {
+                this.fd_vimp2Field = value;
+                this.RaisePropertyChanged("fd_vimp2");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=19)]
+        public decimal fd_subt2 {
+            get {
+                return this.fd_subt2Field;
+            }
+            set {
+                this.fd_subt2Field = value;
+                this.RaisePropertyChanged("fd_subt2");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=20)]
+        public decimal fd_pdct1 {
+            get {
+                return this.fd_pdct1Field;
+            }
+            set {
+                this.fd_pdct1Field = value;
+                this.RaisePropertyChanged("fd_pdct1");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=21)]
+        public decimal fd_vdct1 {
+            get {
+                return this.fd_vdct1Field;
+            }
+            set {
+                this.fd_vdct1Field = value;
+                this.RaisePropertyChanged("fd_vdct1");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=22)]
+        public decimal fd_subt3 {
+            get {
+                return this.fd_subt3Field;
+            }
+            set {
+                this.fd_subt3Field = value;
+                this.RaisePropertyChanged("fd_subt3");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=23)]
+        public decimal fd_vdct4 {
+            get {
+                return this.fd_vdct4Field;
+            }
+            set {
+                this.fd_vdct4Field = value;
+                this.RaisePropertyChanged("fd_vdct4");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=24)]
+        public decimal fd_vdc23 {
+            get {
+                return this.fd_vdc23Field;
+            }
+            set {
+                this.fd_vdc23Field = value;
+                this.RaisePropertyChanged("fd_vdc23");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=25)]
+        public decimal fd_vvta {
+            get {
+                return this.fd_vvtaField;
+            }
+            set {
+                this.fd_vvtaField = value;
+                this.RaisePropertyChanged("fd_vvta");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=26)]
+        public decimal fd_pimp3 {
+            get {
+                return this.fd_pimp3Field;
+            }
+            set {
+                this.fd_pimp3Field = value;
+                this.RaisePropertyChanged("fd_pimp3");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=27)]
+        public decimal fd_vimp3 {
+            get {
+                return this.fd_vimp3Field;
+            }
+            set {
+                this.fd_vimp3Field = value;
+                this.RaisePropertyChanged("fd_vimp3");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=28)]
+        public decimal fd_pimp4 {
+            get {
+                return this.fd_pimp4Field;
+            }
+            set {
+                this.fd_pimp4Field = value;
+                this.RaisePropertyChanged("fd_pimp4");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=29)]
+        public decimal fd_vimp4 {
+            get {
+                return this.fd_vimp4Field;
+            }
+            set {
+                this.fd_vimp4Field = value;
+                this.RaisePropertyChanged("fd_vimp4");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=30)]
+        public decimal fd_total {
+            get {
+                return this.fd_totalField;
+            }
+            set {
+                this.fd_totalField = value;
+                this.RaisePropertyChanged("fd_total");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=31)]
+        public string fd_cuse {
+            get {
+                return this.fd_cuseField;
+            }
+            set {
+                this.fd_cuseField = value;
+                this.RaisePropertyChanged("fd_cuse");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=32)]
+        public string fd_muse {
+            get {
+                return this.fd_museField;
+            }
+            set {
+                this.fd_museField = value;
+                this.RaisePropertyChanged("fd_muse");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=33)]
+        public System.DateTime fd_fcre {
+            get {
+                return this.fd_fcreField;
+            }
+            set {
+                this.fd_fcreField = value;
+                this.RaisePropertyChanged("fd_fcre");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=34)]
+        public System.DateTime fd_fmod {
+            get {
+                return this.fd_fmodField;
+            }
+            set {
+                this.fd_fmodField = value;
+                this.RaisePropertyChanged("fd_fmod");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=35)]
+        public string fd_auto {
+            get {
+                return this.fd_autoField;
+            }
+            set {
+                this.fd_autoField = value;
+                this.RaisePropertyChanged("fd_auto");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=36)]
+        public decimal fd_dre2 {
+            get {
+                return this.fd_dre2Field;
+            }
+            set {
+                this.fd_dre2Field = value;
+                this.RaisePropertyChanged("fd_dre2");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=37)]
+        public string fd_asoc {
+            get {
+                return this.fd_asocField;
+            }
+            set {
+                this.fd_asocField = value;
+                this.RaisePropertyChanged("fd_asoc");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://bataperu.com.pe/")]
+    public partial class Ent_List_Ffactd : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private Ent_Ffactd[] lista_ffactdField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(Order=0)]
+        public Ent_Ffactd[] lista_ffactd {
+            get {
+                return this.lista_ffactdField;
+            }
+            set {
+                this.lista_ffactdField = value;
+                this.RaisePropertyChanged("lista_ffactd");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://bataperu.com.pe/")]
+    public partial class Ent_Ffactc : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string fc_nintField;
+        
+        private string fc_nnotField;
+        
+        private string fc_codiField;
+        
+        private string fc_sunaField;
+        
+        private string fc_sfacField;
+        
+        private string fc_nfacField;
+        
+        private System.DateTime fc_ffacField;
+        
+        private string fc_nordField;
+        
+        private string fc_crefField;
+        
+        private string fc_srefField;
+        
+        private string fc_nrefField;
+        
+        private string fc_pvtaField;
+        
+        private string fc_csucField;
+        
+        private string fc_gvtaField;
+        
+        private string fc_zonaField;
+        
+        private string fc_clieField;
+        
+        private string fc_ncliField;
+        
+        private string fc_nombField;
+        
+        private string fc_apepField;
+        
+        private string fc_apemField;
+        
+        private string fc_dcliField;
+        
+        private string fc_cubiField;
+        
+        private string fc_rucField;
+        
+        private string fc_vuseField;
+        
+        private string fc_vendField;
+        
+        private string fc_ipreField;
+        
+        private string fc_tintField;
+        
+        private decimal fc_pintField;
+        
+        private string fc_lcsgField;
+        
+        private string fc_nconField;
+        
+        private string fc_dconField;
+        
+        private string fc_lconField;
+        
+        private string fc_lrucField;
+        
+        private string fc_agenField;
+        
+        private string fc_moneField;
+        
+        private decimal fc_tasaField;
+        
+        private string fc_fpagField;
+        
+        private decimal fc_nletField;
+        
+        private decimal fc_qtotField;
+        
+        private decimal fc_prefField;
+        
+        private decimal fc_drefField;
+        
+        private decimal fc_brutField;
+        
+        private decimal fc_vimp1Field;
+        
+        private decimal fc_vimp2Field;
+        
+        private decimal fc_vdct1Field;
+        
+        private decimal fc_vdct4Field;
+        
+        private decimal fc_pdc2Field;
+        
+        private decimal fc_pdc3Field;
+        
+        private decimal fc_vdc23Field;
+        
+        private decimal fc_vvtaField;
+        
+        private decimal fc_vimp3Field;
+        
+        private decimal fc_pimp4Field;
+        
+        private decimal fc_vimp4Field;
+        
+        private decimal fc_totalField;
+        
+        private string fc_estaField;
+        
+        private string fc_tdocField;
+        
+        private string fc_cuseField;
+        
+        private string fc_museField;
+        
+        private System.DateTime fc_fcreField;
+        
+        private System.DateTime fc_fmodField;
+        
+        private string fc_horaField;
+        
+        private string fc_autoField;
+        
+        private string fc_ftxField;
+        
+        private string fc_estcField;
+        
+        private string fc_sexoField;
+        
+        private string fc_mpubField;
+        
+        private string fc_edadField;
+        
+        private string fc_regvField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public string fc_nint {
+            get {
+                return this.fc_nintField;
+            }
+            set {
+                this.fc_nintField = value;
+                this.RaisePropertyChanged("fc_nint");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public string fc_nnot {
+            get {
+                return this.fc_nnotField;
+            }
+            set {
+                this.fc_nnotField = value;
+                this.RaisePropertyChanged("fc_nnot");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
+        public string fc_codi {
+            get {
+                return this.fc_codiField;
+            }
+            set {
+                this.fc_codiField = value;
+                this.RaisePropertyChanged("fc_codi");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
+        public string fc_suna {
+            get {
+                return this.fc_sunaField;
+            }
+            set {
+                this.fc_sunaField = value;
+                this.RaisePropertyChanged("fc_suna");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
+        public string fc_sfac {
+            get {
+                return this.fc_sfacField;
+            }
+            set {
+                this.fc_sfacField = value;
+                this.RaisePropertyChanged("fc_sfac");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
+        public string fc_nfac {
+            get {
+                return this.fc_nfacField;
+            }
+            set {
+                this.fc_nfacField = value;
+                this.RaisePropertyChanged("fc_nfac");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
+        public System.DateTime fc_ffac {
+            get {
+                return this.fc_ffacField;
+            }
+            set {
+                this.fc_ffacField = value;
+                this.RaisePropertyChanged("fc_ffac");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=7)]
+        public string fc_nord {
+            get {
+                return this.fc_nordField;
+            }
+            set {
+                this.fc_nordField = value;
+                this.RaisePropertyChanged("fc_nord");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=8)]
+        public string fc_cref {
+            get {
+                return this.fc_crefField;
+            }
+            set {
+                this.fc_crefField = value;
+                this.RaisePropertyChanged("fc_cref");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=9)]
+        public string fc_sref {
+            get {
+                return this.fc_srefField;
+            }
+            set {
+                this.fc_srefField = value;
+                this.RaisePropertyChanged("fc_sref");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=10)]
+        public string fc_nref {
+            get {
+                return this.fc_nrefField;
+            }
+            set {
+                this.fc_nrefField = value;
+                this.RaisePropertyChanged("fc_nref");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=11)]
+        public string fc_pvta {
+            get {
+                return this.fc_pvtaField;
+            }
+            set {
+                this.fc_pvtaField = value;
+                this.RaisePropertyChanged("fc_pvta");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=12)]
+        public string fc_csuc {
+            get {
+                return this.fc_csucField;
+            }
+            set {
+                this.fc_csucField = value;
+                this.RaisePropertyChanged("fc_csuc");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=13)]
+        public string fc_gvta {
+            get {
+                return this.fc_gvtaField;
+            }
+            set {
+                this.fc_gvtaField = value;
+                this.RaisePropertyChanged("fc_gvta");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=14)]
+        public string fc_zona {
+            get {
+                return this.fc_zonaField;
+            }
+            set {
+                this.fc_zonaField = value;
+                this.RaisePropertyChanged("fc_zona");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=15)]
+        public string fc_clie {
+            get {
+                return this.fc_clieField;
+            }
+            set {
+                this.fc_clieField = value;
+                this.RaisePropertyChanged("fc_clie");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=16)]
+        public string fc_ncli {
+            get {
+                return this.fc_ncliField;
+            }
+            set {
+                this.fc_ncliField = value;
+                this.RaisePropertyChanged("fc_ncli");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=17)]
+        public string fc_nomb {
+            get {
+                return this.fc_nombField;
+            }
+            set {
+                this.fc_nombField = value;
+                this.RaisePropertyChanged("fc_nomb");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=18)]
+        public string fc_apep {
+            get {
+                return this.fc_apepField;
+            }
+            set {
+                this.fc_apepField = value;
+                this.RaisePropertyChanged("fc_apep");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=19)]
+        public string fc_apem {
+            get {
+                return this.fc_apemField;
+            }
+            set {
+                this.fc_apemField = value;
+                this.RaisePropertyChanged("fc_apem");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=20)]
+        public string fc_dcli {
+            get {
+                return this.fc_dcliField;
+            }
+            set {
+                this.fc_dcliField = value;
+                this.RaisePropertyChanged("fc_dcli");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=21)]
+        public string fc_cubi {
+            get {
+                return this.fc_cubiField;
+            }
+            set {
+                this.fc_cubiField = value;
+                this.RaisePropertyChanged("fc_cubi");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=22)]
+        public string fc_ruc {
+            get {
+                return this.fc_rucField;
+            }
+            set {
+                this.fc_rucField = value;
+                this.RaisePropertyChanged("fc_ruc");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=23)]
+        public string fc_vuse {
+            get {
+                return this.fc_vuseField;
+            }
+            set {
+                this.fc_vuseField = value;
+                this.RaisePropertyChanged("fc_vuse");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=24)]
+        public string fc_vend {
+            get {
+                return this.fc_vendField;
+            }
+            set {
+                this.fc_vendField = value;
+                this.RaisePropertyChanged("fc_vend");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=25)]
+        public string fc_ipre {
+            get {
+                return this.fc_ipreField;
+            }
+            set {
+                this.fc_ipreField = value;
+                this.RaisePropertyChanged("fc_ipre");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=26)]
+        public string fc_tint {
+            get {
+                return this.fc_tintField;
+            }
+            set {
+                this.fc_tintField = value;
+                this.RaisePropertyChanged("fc_tint");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=27)]
+        public decimal fc_pint {
+            get {
+                return this.fc_pintField;
+            }
+            set {
+                this.fc_pintField = value;
+                this.RaisePropertyChanged("fc_pint");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=28)]
+        public string fc_lcsg {
+            get {
+                return this.fc_lcsgField;
+            }
+            set {
+                this.fc_lcsgField = value;
+                this.RaisePropertyChanged("fc_lcsg");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=29)]
+        public string fc_ncon {
+            get {
+                return this.fc_nconField;
+            }
+            set {
+                this.fc_nconField = value;
+                this.RaisePropertyChanged("fc_ncon");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=30)]
+        public string fc_dcon {
+            get {
+                return this.fc_dconField;
+            }
+            set {
+                this.fc_dconField = value;
+                this.RaisePropertyChanged("fc_dcon");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=31)]
+        public string fc_lcon {
+            get {
+                return this.fc_lconField;
+            }
+            set {
+                this.fc_lconField = value;
+                this.RaisePropertyChanged("fc_lcon");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=32)]
+        public string fc_lruc {
+            get {
+                return this.fc_lrucField;
+            }
+            set {
+                this.fc_lrucField = value;
+                this.RaisePropertyChanged("fc_lruc");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=33)]
+        public string fc_agen {
+            get {
+                return this.fc_agenField;
+            }
+            set {
+                this.fc_agenField = value;
+                this.RaisePropertyChanged("fc_agen");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=34)]
+        public string fc_mone {
+            get {
+                return this.fc_moneField;
+            }
+            set {
+                this.fc_moneField = value;
+                this.RaisePropertyChanged("fc_mone");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=35)]
+        public decimal fc_tasa {
+            get {
+                return this.fc_tasaField;
+            }
+            set {
+                this.fc_tasaField = value;
+                this.RaisePropertyChanged("fc_tasa");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=36)]
+        public string fc_fpag {
+            get {
+                return this.fc_fpagField;
+            }
+            set {
+                this.fc_fpagField = value;
+                this.RaisePropertyChanged("fc_fpag");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=37)]
+        public decimal fc_nlet {
+            get {
+                return this.fc_nletField;
+            }
+            set {
+                this.fc_nletField = value;
+                this.RaisePropertyChanged("fc_nlet");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=38)]
+        public decimal fc_qtot {
+            get {
+                return this.fc_qtotField;
+            }
+            set {
+                this.fc_qtotField = value;
+                this.RaisePropertyChanged("fc_qtot");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=39)]
+        public decimal fc_pref {
+            get {
+                return this.fc_prefField;
+            }
+            set {
+                this.fc_prefField = value;
+                this.RaisePropertyChanged("fc_pref");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=40)]
+        public decimal fc_dref {
+            get {
+                return this.fc_drefField;
+            }
+            set {
+                this.fc_drefField = value;
+                this.RaisePropertyChanged("fc_dref");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=41)]
+        public decimal fc_brut {
+            get {
+                return this.fc_brutField;
+            }
+            set {
+                this.fc_brutField = value;
+                this.RaisePropertyChanged("fc_brut");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=42)]
+        public decimal fc_vimp1 {
+            get {
+                return this.fc_vimp1Field;
+            }
+            set {
+                this.fc_vimp1Field = value;
+                this.RaisePropertyChanged("fc_vimp1");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=43)]
+        public decimal fc_vimp2 {
+            get {
+                return this.fc_vimp2Field;
+            }
+            set {
+                this.fc_vimp2Field = value;
+                this.RaisePropertyChanged("fc_vimp2");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=44)]
+        public decimal fc_vdct1 {
+            get {
+                return this.fc_vdct1Field;
+            }
+            set {
+                this.fc_vdct1Field = value;
+                this.RaisePropertyChanged("fc_vdct1");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=45)]
+        public decimal fc_vdct4 {
+            get {
+                return this.fc_vdct4Field;
+            }
+            set {
+                this.fc_vdct4Field = value;
+                this.RaisePropertyChanged("fc_vdct4");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=46)]
+        public decimal fc_pdc2 {
+            get {
+                return this.fc_pdc2Field;
+            }
+            set {
+                this.fc_pdc2Field = value;
+                this.RaisePropertyChanged("fc_pdc2");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=47)]
+        public decimal fc_pdc3 {
+            get {
+                return this.fc_pdc3Field;
+            }
+            set {
+                this.fc_pdc3Field = value;
+                this.RaisePropertyChanged("fc_pdc3");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=48)]
+        public decimal fc_vdc23 {
+            get {
+                return this.fc_vdc23Field;
+            }
+            set {
+                this.fc_vdc23Field = value;
+                this.RaisePropertyChanged("fc_vdc23");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=49)]
+        public decimal fc_vvta {
+            get {
+                return this.fc_vvtaField;
+            }
+            set {
+                this.fc_vvtaField = value;
+                this.RaisePropertyChanged("fc_vvta");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=50)]
+        public decimal fc_vimp3 {
+            get {
+                return this.fc_vimp3Field;
+            }
+            set {
+                this.fc_vimp3Field = value;
+                this.RaisePropertyChanged("fc_vimp3");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=51)]
+        public decimal fc_pimp4 {
+            get {
+                return this.fc_pimp4Field;
+            }
+            set {
+                this.fc_pimp4Field = value;
+                this.RaisePropertyChanged("fc_pimp4");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=52)]
+        public decimal fc_vimp4 {
+            get {
+                return this.fc_vimp4Field;
+            }
+            set {
+                this.fc_vimp4Field = value;
+                this.RaisePropertyChanged("fc_vimp4");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=53)]
+        public decimal fc_total {
+            get {
+                return this.fc_totalField;
+            }
+            set {
+                this.fc_totalField = value;
+                this.RaisePropertyChanged("fc_total");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=54)]
+        public string fc_esta {
+            get {
+                return this.fc_estaField;
+            }
+            set {
+                this.fc_estaField = value;
+                this.RaisePropertyChanged("fc_esta");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=55)]
+        public string fc_tdoc {
+            get {
+                return this.fc_tdocField;
+            }
+            set {
+                this.fc_tdocField = value;
+                this.RaisePropertyChanged("fc_tdoc");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=56)]
+        public string fc_cuse {
+            get {
+                return this.fc_cuseField;
+            }
+            set {
+                this.fc_cuseField = value;
+                this.RaisePropertyChanged("fc_cuse");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=57)]
+        public string fc_muse {
+            get {
+                return this.fc_museField;
+            }
+            set {
+                this.fc_museField = value;
+                this.RaisePropertyChanged("fc_muse");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=58)]
+        public System.DateTime fc_fcre {
+            get {
+                return this.fc_fcreField;
+            }
+            set {
+                this.fc_fcreField = value;
+                this.RaisePropertyChanged("fc_fcre");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=59)]
+        public System.DateTime fc_fmod {
+            get {
+                return this.fc_fmodField;
+            }
+            set {
+                this.fc_fmodField = value;
+                this.RaisePropertyChanged("fc_fmod");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=60)]
+        public string fc_hora {
+            get {
+                return this.fc_horaField;
+            }
+            set {
+                this.fc_horaField = value;
+                this.RaisePropertyChanged("fc_hora");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=61)]
+        public string fc_auto {
+            get {
+                return this.fc_autoField;
+            }
+            set {
+                this.fc_autoField = value;
+                this.RaisePropertyChanged("fc_auto");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=62)]
+        public string fc_ftx {
+            get {
+                return this.fc_ftxField;
+            }
+            set {
+                this.fc_ftxField = value;
+                this.RaisePropertyChanged("fc_ftx");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=63)]
+        public string fc_estc {
+            get {
+                return this.fc_estcField;
+            }
+            set {
+                this.fc_estcField = value;
+                this.RaisePropertyChanged("fc_estc");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=64)]
+        public string fc_sexo {
+            get {
+                return this.fc_sexoField;
+            }
+            set {
+                this.fc_sexoField = value;
+                this.RaisePropertyChanged("fc_sexo");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=65)]
+        public string fc_mpub {
+            get {
+                return this.fc_mpubField;
+            }
+            set {
+                this.fc_mpubField = value;
+                this.RaisePropertyChanged("fc_mpub");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=66)]
+        public string fc_edad {
+            get {
+                return this.fc_edadField;
+            }
+            set {
+                this.fc_edadField = value;
+                this.RaisePropertyChanged("fc_edad");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=67)]
+        public string fc_regv {
+            get {
+                return this.fc_regvField;
+            }
+            set {
+                this.fc_regvField = value;
+                this.RaisePropertyChanged("fc_regv");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://bataperu.com.pe/")]
+    public partial class Ent_List_Ffactc : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private Ent_Ffactc[] lista_ffactcField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(Order=0)]
+        public Ent_Ffactc[] lista_ffactc {
+            get {
+                return this.lista_ffactcField;
+            }
+            set {
+                this.lista_ffactcField = value;
+                this.RaisePropertyChanged("lista_ffactc");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://bataperu.com.pe/")]
+    public partial class Ent_Venta : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private System.DateTime fechaField;
+        
+        private string cod_tdaField;
+        
+        private string fc_sunaField;
+        
+        private string fc_sfacField;
+        
+        private string fc_nfacField;
+        
+        private string fc_nintField;
+        
+        private System.DateTime fecha2Field;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public System.DateTime fecha {
+            get {
+                return this.fechaField;
+            }
+            set {
+                this.fechaField = value;
+                this.RaisePropertyChanged("fecha");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public string cod_tda {
+            get {
+                return this.cod_tdaField;
+            }
+            set {
+                this.cod_tdaField = value;
+                this.RaisePropertyChanged("cod_tda");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
+        public string fc_suna {
+            get {
+                return this.fc_sunaField;
+            }
+            set {
+                this.fc_sunaField = value;
+                this.RaisePropertyChanged("fc_suna");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
+        public string fc_sfac {
+            get {
+                return this.fc_sfacField;
+            }
+            set {
+                this.fc_sfacField = value;
+                this.RaisePropertyChanged("fc_sfac");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
+        public string fc_nfac {
+            get {
+                return this.fc_nfacField;
+            }
+            set {
+                this.fc_nfacField = value;
+                this.RaisePropertyChanged("fc_nfac");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
+        public string fc_nint {
+            get {
+                return this.fc_nintField;
+            }
+            set {
+                this.fc_nintField = value;
+                this.RaisePropertyChanged("fc_nint");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
+        public System.DateTime fecha2 {
+            get {
+                return this.fecha2Field;
+            }
+            set {
+                this.fecha2Field = value;
+                this.RaisePropertyChanged("fecha2");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://bataperu.com.pe/")]
+    public partial class Ent_Venta_List : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private Ent_Venta[] lista_ventaField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(Order=0)]
+        public Ent_Venta[] lista_venta {
+            get {
+                return this.lista_ventaField;
+            }
+            set {
+                this.lista_ventaField = value;
+                this.RaisePropertyChanged("lista_venta");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://bataperu.com.pe/")]
+    public partial class Ent_Stock : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string cod_tdaField;
+        
+        private string art_codField;
+        
+        private string art_calField;
+        
+        private string art_tallaField;
+        
+        private int art_paresField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public string cod_tda {
+            get {
+                return this.cod_tdaField;
+            }
+            set {
+                this.cod_tdaField = value;
+                this.RaisePropertyChanged("cod_tda");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public string art_cod {
+            get {
+                return this.art_codField;
+            }
+            set {
+                this.art_codField = value;
+                this.RaisePropertyChanged("art_cod");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
+        public string art_cal {
+            get {
+                return this.art_calField;
+            }
+            set {
+                this.art_calField = value;
+                this.RaisePropertyChanged("art_cal");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
+        public string art_talla {
+            get {
+                return this.art_tallaField;
+            }
+            set {
+                this.art_tallaField = value;
+                this.RaisePropertyChanged("art_talla");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
+        public int art_pares {
+            get {
+                return this.art_paresField;
+            }
+            set {
+                this.art_paresField = value;
+                this.RaisePropertyChanged("art_pares");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://bataperu.com.pe/")]
+    public partial class Ent_Lista_Stock : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private Ent_Stock[] lista_stockField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(Order=0)]
+        public Ent_Stock[] lista_stock {
+            get {
+                return this.lista_stockField;
+            }
+            set {
+                this.lista_stockField = value;
+                this.RaisePropertyChanged("lista_stock");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://bataperu.com.pe/")]
+    public partial class Ent_Config_Service : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private int cser_minField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public int cser_min {
+            get {
+                return this.cser_minField;
+            }
+            set {
+                this.cser_minField = value;
+                this.RaisePropertyChanged("cser_min");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -175,7 +2726,7 @@ namespace CapaServicioWindows.BataTransac {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -207,7 +2758,7 @@ namespace CapaServicioWindows.BataTransac {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -239,7 +2790,7 @@ namespace CapaServicioWindows.BataTransac {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -285,7 +2836,7 @@ namespace CapaServicioWindows.BataTransac {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -793,7 +3344,7 @@ namespace CapaServicioWindows.BataTransac {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1217,7 +3768,7 @@ namespace CapaServicioWindows.BataTransac {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1271,11 +3822,15 @@ namespace CapaServicioWindows.BataTransac {
         [System.ServiceModel.MessageHeaderAttribute(Namespace="http://bataperu.com.pe/")]
         public CapaServicioWindows.BataTransac.ValidateAcceso ValidateAcceso;
         
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=0)]
+        public string cod_tda;
+        
         public HelloWorldRequest() {
         }
         
-        public HelloWorldRequest(CapaServicioWindows.BataTransac.ValidateAcceso ValidateAcceso) {
+        public HelloWorldRequest(CapaServicioWindows.BataTransac.ValidateAcceso ValidateAcceso, string cod_tda) {
             this.ValidateAcceso = ValidateAcceso;
+            this.cod_tda = cod_tda;
         }
     }
     
@@ -1534,6 +4089,297 @@ namespace CapaServicioWindows.BataTransac {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="ws_get_time_servicetrans", WrapperNamespace="http://bataperu.com.pe/", IsWrapped=true)]
+    public partial class ws_get_time_servicetransRequest {
+        
+        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://bataperu.com.pe/")]
+        public CapaServicioWindows.BataTransac.ValidateAcceso ValidateAcceso;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=0)]
+        public string cser_cod;
+        
+        public ws_get_time_servicetransRequest() {
+        }
+        
+        public ws_get_time_servicetransRequest(CapaServicioWindows.BataTransac.ValidateAcceso ValidateAcceso, string cser_cod) {
+            this.ValidateAcceso = ValidateAcceso;
+            this.cser_cod = cser_cod;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="ws_get_time_servicetransResponse", WrapperNamespace="http://bataperu.com.pe/", IsWrapped=true)]
+    public partial class ws_get_time_servicetransResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=0)]
+        public CapaServicioWindows.BataTransac.Ent_Config_Service ws_get_time_servicetransResult;
+        
+        public ws_get_time_servicetransResponse() {
+        }
+        
+        public ws_get_time_servicetransResponse(CapaServicioWindows.BataTransac.Ent_Config_Service ws_get_time_servicetransResult) {
+            this.ws_get_time_servicetransResult = ws_get_time_servicetransResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="ws_envia_stock_tda", WrapperNamespace="http://bataperu.com.pe/", IsWrapped=true)]
+    public partial class ws_envia_stock_tdaRequest {
+        
+        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://bataperu.com.pe/")]
+        public CapaServicioWindows.BataTransac.ValidateAcceso ValidateAcceso;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=0)]
+        public CapaServicioWindows.BataTransac.Ent_Lista_Stock lista_stk;
+        
+        public ws_envia_stock_tdaRequest() {
+        }
+        
+        public ws_envia_stock_tdaRequest(CapaServicioWindows.BataTransac.ValidateAcceso ValidateAcceso, CapaServicioWindows.BataTransac.Ent_Lista_Stock lista_stk) {
+            this.ValidateAcceso = ValidateAcceso;
+            this.lista_stk = lista_stk;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="ws_envia_stock_tdaResponse", WrapperNamespace="http://bataperu.com.pe/", IsWrapped=true)]
+    public partial class ws_envia_stock_tdaResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=0)]
+        public CapaServicioWindows.BataTransac.Ent_MsgTransac ws_envia_stock_tdaResult;
+        
+        public ws_envia_stock_tdaResponse() {
+        }
+        
+        public ws_envia_stock_tdaResponse(CapaServicioWindows.BataTransac.Ent_MsgTransac ws_envia_stock_tdaResult) {
+            this.ws_envia_stock_tdaResult = ws_envia_stock_tdaResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="ws_envia_venta_tda", WrapperNamespace="http://bataperu.com.pe/", IsWrapped=true)]
+    public partial class ws_envia_venta_tdaRequest {
+        
+        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://bataperu.com.pe/")]
+        public CapaServicioWindows.BataTransac.ValidateAcceso ValidateAcceso;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=0)]
+        public string cod_tda;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=1)]
+        public System.Data.DataSet ds_transac_tda;
+        
+        public ws_envia_venta_tdaRequest() {
+        }
+        
+        public ws_envia_venta_tdaRequest(CapaServicioWindows.BataTransac.ValidateAcceso ValidateAcceso, string cod_tda, System.Data.DataSet ds_transac_tda) {
+            this.ValidateAcceso = ValidateAcceso;
+            this.cod_tda = cod_tda;
+            this.ds_transac_tda = ds_transac_tda;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="ws_envia_venta_tdaResponse", WrapperNamespace="http://bataperu.com.pe/", IsWrapped=true)]
+    public partial class ws_envia_venta_tdaResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=0)]
+        public CapaServicioWindows.BataTransac.Ent_MsgTransac ws_envia_venta_tdaResult;
+        
+        public ws_envia_venta_tdaResponse() {
+        }
+        
+        public ws_envia_venta_tdaResponse(CapaServicioWindows.BataTransac.Ent_MsgTransac ws_envia_venta_tdaResult) {
+            this.ws_envia_venta_tdaResult = ws_envia_venta_tdaResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="ws_envia_venta_tda_list", WrapperNamespace="http://bataperu.com.pe/", IsWrapped=true)]
+    public partial class ws_envia_venta_tda_listRequest {
+        
+        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://bataperu.com.pe/")]
+        public CapaServicioWindows.BataTransac.ValidateAcceso ValidateAcceso;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=0)]
+        public string cod_tda;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=1)]
+        public CapaServicioWindows.BataTransac.Ent_Venta_List listaventa;
+        
+        public ws_envia_venta_tda_listRequest() {
+        }
+        
+        public ws_envia_venta_tda_listRequest(CapaServicioWindows.BataTransac.ValidateAcceso ValidateAcceso, string cod_tda, CapaServicioWindows.BataTransac.Ent_Venta_List listaventa) {
+            this.ValidateAcceso = ValidateAcceso;
+            this.cod_tda = cod_tda;
+            this.listaventa = listaventa;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="ws_envia_venta_tda_listResponse", WrapperNamespace="http://bataperu.com.pe/", IsWrapped=true)]
+    public partial class ws_envia_venta_tda_listResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=0)]
+        public CapaServicioWindows.BataTransac.Ent_MsgTransac ws_envia_venta_tda_listResult;
+        
+        public ws_envia_venta_tda_listResponse() {
+        }
+        
+        public ws_envia_venta_tda_listResponse(CapaServicioWindows.BataTransac.Ent_MsgTransac ws_envia_venta_tda_listResult) {
+            this.ws_envia_venta_tda_listResult = ws_envia_venta_tda_listResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="ws_envia_venta_tda_lista", WrapperNamespace="http://bataperu.com.pe/", IsWrapped=true)]
+    public partial class ws_envia_venta_tda_listaRequest {
+        
+        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://bataperu.com.pe/")]
+        public CapaServicioWindows.BataTransac.ValidateAcceso ValidateAcceso;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=0)]
+        public string cod_tda;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=1)]
+        public CapaServicioWindows.BataTransac.Ent_List_Ffactc ffactc;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=2)]
+        public CapaServicioWindows.BataTransac.Ent_List_Ffactd ffactd;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=3)]
+        public CapaServicioWindows.BataTransac.Ent_List_Fnotaa fnotaa;
+        
+        public ws_envia_venta_tda_listaRequest() {
+        }
+        
+        public ws_envia_venta_tda_listaRequest(CapaServicioWindows.BataTransac.ValidateAcceso ValidateAcceso, string cod_tda, CapaServicioWindows.BataTransac.Ent_List_Ffactc ffactc, CapaServicioWindows.BataTransac.Ent_List_Ffactd ffactd, CapaServicioWindows.BataTransac.Ent_List_Fnotaa fnotaa) {
+            this.ValidateAcceso = ValidateAcceso;
+            this.cod_tda = cod_tda;
+            this.ffactc = ffactc;
+            this.ffactd = ffactd;
+            this.fnotaa = fnotaa;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="ws_envia_venta_tda_listaResponse", WrapperNamespace="http://bataperu.com.pe/", IsWrapped=true)]
+    public partial class ws_envia_venta_tda_listaResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=0)]
+        public CapaServicioWindows.BataTransac.Ent_MsgTransac ws_envia_venta_tda_listaResult;
+        
+        public ws_envia_venta_tda_listaResponse() {
+        }
+        
+        public ws_envia_venta_tda_listaResponse(CapaServicioWindows.BataTransac.Ent_MsgTransac ws_envia_venta_tda_listaResult) {
+            this.ws_envia_venta_tda_listaResult = ws_envia_venta_tda_listaResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="ws_transmision_ingreso_nube", WrapperNamespace="http://bataperu.com.pe/", IsWrapped=true)]
+    public partial class ws_transmision_ingreso_nubeRequest {
+        
+        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://bataperu.com.pe/")]
+        public CapaServicioWindows.BataTransac.ValidateAcceso ValidateAcceso;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")]
+        public byte[] _archivo_zip;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=1)]
+        public string _name;
+        
+        public ws_transmision_ingreso_nubeRequest() {
+        }
+        
+        public ws_transmision_ingreso_nubeRequest(CapaServicioWindows.BataTransac.ValidateAcceso ValidateAcceso, byte[] _archivo_zip, string _name) {
+            this.ValidateAcceso = ValidateAcceso;
+            this._archivo_zip = _archivo_zip;
+            this._name = _name;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="ws_transmision_ingreso_nubeResponse", WrapperNamespace="http://bataperu.com.pe/", IsWrapped=true)]
+    public partial class ws_transmision_ingreso_nubeResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=0)]
+        public string[] ws_transmision_ingreso_nubeResult;
+        
+        public ws_transmision_ingreso_nubeResponse() {
+        }
+        
+        public ws_transmision_ingreso_nubeResponse(string[] ws_transmision_ingreso_nubeResult) {
+            this.ws_transmision_ingreso_nubeResult = ws_transmision_ingreso_nubeResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="ws_envia_Scactco_list", WrapperNamespace="http://bataperu.com.pe/", IsWrapped=true)]
+    public partial class ws_envia_Scactco_listRequest {
+        
+        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://bataperu.com.pe/")]
+        public CapaServicioWindows.BataTransac.ValidateAcceso ValidateAcceso;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=0)]
+        public CapaServicioWindows.BataTransac.Ent_List_Scactco listscactco;
+        
+        public ws_envia_Scactco_listRequest() {
+        }
+        
+        public ws_envia_Scactco_listRequest(CapaServicioWindows.BataTransac.ValidateAcceso ValidateAcceso, CapaServicioWindows.BataTransac.Ent_List_Scactco listscactco) {
+            this.ValidateAcceso = ValidateAcceso;
+            this.listscactco = listscactco;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="ws_envia_Scactco_listResponse", WrapperNamespace="http://bataperu.com.pe/", IsWrapped=true)]
+    public partial class ws_envia_Scactco_listResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=0)]
+        public CapaServicioWindows.BataTransac.Ent_MsgTransac ws_envia_Scactco_listResult;
+        
+        public ws_envia_Scactco_listResponse() {
+        }
+        
+        public ws_envia_Scactco_listResponse(CapaServicioWindows.BataTransac.Ent_MsgTransac ws_envia_Scactco_listResult) {
+            this.ws_envia_Scactco_listResult = ws_envia_Scactco_listResult;
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface Bata_TransactionSoapChannel : CapaServicioWindows.BataTransac.Bata_TransactionSoap, System.ServiceModel.IClientChannel {
     }
@@ -1566,9 +4412,10 @@ namespace CapaServicioWindows.BataTransac {
             return base.Channel.HelloWorld(request);
         }
         
-        public CapaServicioWindows.BataTransac.Ent_MsgTransac HelloWorld(CapaServicioWindows.BataTransac.ValidateAcceso ValidateAcceso) {
+        public CapaServicioWindows.BataTransac.Ent_MsgTransac HelloWorld(CapaServicioWindows.BataTransac.ValidateAcceso ValidateAcceso, string cod_tda) {
             CapaServicioWindows.BataTransac.HelloWorldRequest inValue = new CapaServicioWindows.BataTransac.HelloWorldRequest();
             inValue.ValidateAcceso = ValidateAcceso;
+            inValue.cod_tda = cod_tda;
             CapaServicioWindows.BataTransac.HelloWorldResponse retVal = ((CapaServicioWindows.BataTransac.Bata_TransactionSoap)(this)).HelloWorld(inValue);
             return retVal.HelloWorldResult;
         }
@@ -1668,6 +4515,103 @@ namespace CapaServicioWindows.BataTransac {
             inValue.file_name = file_name;
             inValue.file_tipo = file_tipo;
             CapaServicioWindows.BataTransac.ws_download_fileResponse retVal = ((CapaServicioWindows.BataTransac.Bata_TransactionSoap)(this)).ws_download_file(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        CapaServicioWindows.BataTransac.ws_get_time_servicetransResponse CapaServicioWindows.BataTransac.Bata_TransactionSoap.ws_get_time_servicetrans(CapaServicioWindows.BataTransac.ws_get_time_servicetransRequest request) {
+            return base.Channel.ws_get_time_servicetrans(request);
+        }
+        
+        public CapaServicioWindows.BataTransac.Ent_Config_Service ws_get_time_servicetrans(CapaServicioWindows.BataTransac.ValidateAcceso ValidateAcceso, string cser_cod) {
+            CapaServicioWindows.BataTransac.ws_get_time_servicetransRequest inValue = new CapaServicioWindows.BataTransac.ws_get_time_servicetransRequest();
+            inValue.ValidateAcceso = ValidateAcceso;
+            inValue.cser_cod = cser_cod;
+            CapaServicioWindows.BataTransac.ws_get_time_servicetransResponse retVal = ((CapaServicioWindows.BataTransac.Bata_TransactionSoap)(this)).ws_get_time_servicetrans(inValue);
+            return retVal.ws_get_time_servicetransResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        CapaServicioWindows.BataTransac.ws_envia_stock_tdaResponse CapaServicioWindows.BataTransac.Bata_TransactionSoap.ws_envia_stock_tda(CapaServicioWindows.BataTransac.ws_envia_stock_tdaRequest request) {
+            return base.Channel.ws_envia_stock_tda(request);
+        }
+        
+        public CapaServicioWindows.BataTransac.Ent_MsgTransac ws_envia_stock_tda(CapaServicioWindows.BataTransac.ValidateAcceso ValidateAcceso, CapaServicioWindows.BataTransac.Ent_Lista_Stock lista_stk) {
+            CapaServicioWindows.BataTransac.ws_envia_stock_tdaRequest inValue = new CapaServicioWindows.BataTransac.ws_envia_stock_tdaRequest();
+            inValue.ValidateAcceso = ValidateAcceso;
+            inValue.lista_stk = lista_stk;
+            CapaServicioWindows.BataTransac.ws_envia_stock_tdaResponse retVal = ((CapaServicioWindows.BataTransac.Bata_TransactionSoap)(this)).ws_envia_stock_tda(inValue);
+            return retVal.ws_envia_stock_tdaResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        CapaServicioWindows.BataTransac.ws_envia_venta_tdaResponse CapaServicioWindows.BataTransac.Bata_TransactionSoap.ws_envia_venta_tda(CapaServicioWindows.BataTransac.ws_envia_venta_tdaRequest request) {
+            return base.Channel.ws_envia_venta_tda(request);
+        }
+        
+        public CapaServicioWindows.BataTransac.Ent_MsgTransac ws_envia_venta_tda(CapaServicioWindows.BataTransac.ValidateAcceso ValidateAcceso, string cod_tda, System.Data.DataSet ds_transac_tda) {
+            CapaServicioWindows.BataTransac.ws_envia_venta_tdaRequest inValue = new CapaServicioWindows.BataTransac.ws_envia_venta_tdaRequest();
+            inValue.ValidateAcceso = ValidateAcceso;
+            inValue.cod_tda = cod_tda;
+            inValue.ds_transac_tda = ds_transac_tda;
+            CapaServicioWindows.BataTransac.ws_envia_venta_tdaResponse retVal = ((CapaServicioWindows.BataTransac.Bata_TransactionSoap)(this)).ws_envia_venta_tda(inValue);
+            return retVal.ws_envia_venta_tdaResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        CapaServicioWindows.BataTransac.ws_envia_venta_tda_listResponse CapaServicioWindows.BataTransac.Bata_TransactionSoap.ws_envia_venta_tda_list(CapaServicioWindows.BataTransac.ws_envia_venta_tda_listRequest request) {
+            return base.Channel.ws_envia_venta_tda_list(request);
+        }
+        
+        public CapaServicioWindows.BataTransac.Ent_MsgTransac ws_envia_venta_tda_list(CapaServicioWindows.BataTransac.ValidateAcceso ValidateAcceso, string cod_tda, CapaServicioWindows.BataTransac.Ent_Venta_List listaventa) {
+            CapaServicioWindows.BataTransac.ws_envia_venta_tda_listRequest inValue = new CapaServicioWindows.BataTransac.ws_envia_venta_tda_listRequest();
+            inValue.ValidateAcceso = ValidateAcceso;
+            inValue.cod_tda = cod_tda;
+            inValue.listaventa = listaventa;
+            CapaServicioWindows.BataTransac.ws_envia_venta_tda_listResponse retVal = ((CapaServicioWindows.BataTransac.Bata_TransactionSoap)(this)).ws_envia_venta_tda_list(inValue);
+            return retVal.ws_envia_venta_tda_listResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        CapaServicioWindows.BataTransac.ws_envia_venta_tda_listaResponse CapaServicioWindows.BataTransac.Bata_TransactionSoap.ws_envia_venta_tda_lista(CapaServicioWindows.BataTransac.ws_envia_venta_tda_listaRequest request) {
+            return base.Channel.ws_envia_venta_tda_lista(request);
+        }
+        
+        public CapaServicioWindows.BataTransac.Ent_MsgTransac ws_envia_venta_tda_lista(CapaServicioWindows.BataTransac.ValidateAcceso ValidateAcceso, string cod_tda, CapaServicioWindows.BataTransac.Ent_List_Ffactc ffactc, CapaServicioWindows.BataTransac.Ent_List_Ffactd ffactd, CapaServicioWindows.BataTransac.Ent_List_Fnotaa fnotaa) {
+            CapaServicioWindows.BataTransac.ws_envia_venta_tda_listaRequest inValue = new CapaServicioWindows.BataTransac.ws_envia_venta_tda_listaRequest();
+            inValue.ValidateAcceso = ValidateAcceso;
+            inValue.cod_tda = cod_tda;
+            inValue.ffactc = ffactc;
+            inValue.ffactd = ffactd;
+            inValue.fnotaa = fnotaa;
+            CapaServicioWindows.BataTransac.ws_envia_venta_tda_listaResponse retVal = ((CapaServicioWindows.BataTransac.Bata_TransactionSoap)(this)).ws_envia_venta_tda_lista(inValue);
+            return retVal.ws_envia_venta_tda_listaResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        CapaServicioWindows.BataTransac.ws_transmision_ingreso_nubeResponse CapaServicioWindows.BataTransac.Bata_TransactionSoap.ws_transmision_ingreso_nube(CapaServicioWindows.BataTransac.ws_transmision_ingreso_nubeRequest request) {
+            return base.Channel.ws_transmision_ingreso_nube(request);
+        }
+        
+        public string[] ws_transmision_ingreso_nube(CapaServicioWindows.BataTransac.ValidateAcceso ValidateAcceso, byte[] _archivo_zip, string _name) {
+            CapaServicioWindows.BataTransac.ws_transmision_ingreso_nubeRequest inValue = new CapaServicioWindows.BataTransac.ws_transmision_ingreso_nubeRequest();
+            inValue.ValidateAcceso = ValidateAcceso;
+            inValue._archivo_zip = _archivo_zip;
+            inValue._name = _name;
+            CapaServicioWindows.BataTransac.ws_transmision_ingreso_nubeResponse retVal = ((CapaServicioWindows.BataTransac.Bata_TransactionSoap)(this)).ws_transmision_ingreso_nube(inValue);
+            return retVal.ws_transmision_ingreso_nubeResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        CapaServicioWindows.BataTransac.ws_envia_Scactco_listResponse CapaServicioWindows.BataTransac.Bata_TransactionSoap.ws_envia_Scactco_list(CapaServicioWindows.BataTransac.ws_envia_Scactco_listRequest request) {
+            return base.Channel.ws_envia_Scactco_list(request);
+        }
+        
+        public CapaServicioWindows.BataTransac.Ent_MsgTransac ws_envia_Scactco_list(CapaServicioWindows.BataTransac.ValidateAcceso ValidateAcceso, CapaServicioWindows.BataTransac.Ent_List_Scactco listscactco) {
+            CapaServicioWindows.BataTransac.ws_envia_Scactco_listRequest inValue = new CapaServicioWindows.BataTransac.ws_envia_Scactco_listRequest();
+            inValue.ValidateAcceso = ValidateAcceso;
+            inValue.listscactco = listscactco;
+            CapaServicioWindows.BataTransac.ws_envia_Scactco_listResponse retVal = ((CapaServicioWindows.BataTransac.Bata_TransactionSoap)(this)).ws_envia_Scactco_list(inValue);
+            return retVal.ws_envia_Scactco_listResult;
         }
     }
 }

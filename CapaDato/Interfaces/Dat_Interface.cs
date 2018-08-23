@@ -91,7 +91,7 @@ namespace CapaDato.Interfaces
         /// get de la regla de medida - talla
         /// </summary>
         /// <returns></returns>
-        public DataTable get_item_dimension_type(string pais)
+        public DataTable get_item_dimension_type(string pais, string codtda)
         {
             DataTable dt = null;
             string sqlquery = "USP_XSTORE_GET_ITEM_DIMENSION_TYPE";
@@ -104,6 +104,7 @@ namespace CapaDato.Interfaces
                         cmd.CommandTimeout = 0;
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@PAIS", pais);
+                        cmd.Parameters.AddWithValue("@cod_tda", codtda);
 
                         using (SqlDataAdapter da = new SqlDataAdapter(cmd))
                         {
@@ -124,7 +125,7 @@ namespace CapaDato.Interfaces
         /// get de la talla - bata
         /// </summary>
         /// <returns></returns>
-        public DataTable get_item_dimension_value(string pais)
+        public DataTable get_item_dimension_value(string pais, string codtda)
         {
             DataTable dt = null;
             string sqlquery = "USP_XSTORE_GET_ITEM_DIMENSION_VALUE";
@@ -137,6 +138,7 @@ namespace CapaDato.Interfaces
                         cmd.CommandTimeout = 0;
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@PAIS", pais);
+                        cmd.Parameters.AddWithValue("@CODTIENDA", codtda);
 
                         using (SqlDataAdapter da = new SqlDataAdapter(cmd))
                         {
@@ -157,7 +159,7 @@ namespace CapaDato.Interfaces
         /// get maestros de articulos
         /// </summary>
         /// <returns></returns>
-        public DataTable get_item(string pais)
+        public DataTable get_item(string pais, string codtda)
         {
             DataTable dt = null;
             string sqlquery = "USP_XSTORE_GET_ITEM";
@@ -170,6 +172,7 @@ namespace CapaDato.Interfaces
                         cmd.CommandTimeout = 0;
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@PAIS", pais);
+                        cmd.Parameters.AddWithValue("@CODTIENDA", codtda);
 
                         using (SqlDataAdapter da = new SqlDataAdapter(cmd))
                         {
@@ -190,7 +193,7 @@ namespace CapaDato.Interfaces
         /// get precios de articulos
         /// </summary>
         /// <returns></returns>
-        public DataTable get_price_update_2(string pais)
+        public DataTable get_price_update_2(string pais, string codtda)
         {
             DataTable dt = null;
             string sqlquery = "USP_XSTORE_GET_PRICE_UPDATE_2";
@@ -203,6 +206,7 @@ namespace CapaDato.Interfaces
                         cmd.CommandTimeout = 0;
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@PAIS", pais);
+                        cmd.Parameters.AddWithValue("@CODTIENDA", codtda);
 
                         using (SqlDataAdapter da = new SqlDataAdapter(cmd))
                         {
@@ -223,7 +227,7 @@ namespace CapaDato.Interfaces
         /// get imagenes de articulos
         /// </summary>
         /// <returns></returns>
-        public DataTable get_item_images(string pais)
+        public DataTable get_item_images(string pais, string codtda)
         {
             DataTable dt = null;
             string sqlquery = "USP_XSTORE_GET_ITEM_IMAGES";
@@ -236,6 +240,7 @@ namespace CapaDato.Interfaces
                         cmd.CommandTimeout = 0;
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@PAIS", pais);
+                        cmd.Parameters.AddWithValue("@CODTIENDA", codtda);
 
                         using (SqlDataAdapter da = new SqlDataAdapter(cmd))
                         {
@@ -256,7 +261,7 @@ namespace CapaDato.Interfaces
         /// get codigo de barra
         /// </summary>
         /// <returns></returns>
-        public DataTable get_item_xref(string pais)
+        public DataTable get_item_xref(string pais, string codtda)
         {
             DataTable dt = null;
             string sqlquery = "USP_XSTORE_GET_ITEM_XREF";
@@ -269,6 +274,7 @@ namespace CapaDato.Interfaces
                         cmd.CommandTimeout = 0;
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@PAIS", pais);
+                        cmd.Parameters.AddWithValue("@CODTIENDA", codtda);
 
                         using (SqlDataAdapter da = new SqlDataAdapter(cmd))
                         {

@@ -61,6 +61,13 @@ namespace InterfaceWPF
             dwtienda.SelectedIndex = -1;
             dwtienda.Focus();
 
+            /*maestros de tienda*/
+            dwtienda_M.ItemsSource = _tienda.get_tienda("PE", true);
+            dwtienda_M.DisplayMember = "des_entid";
+            dwtienda_M.ValueMember = "cod_entid";
+            dwtienda_M.SelectedIndex = 0;
+            dwtienda_M.Focus();
+
             /*stock de tienda*/
             dwtiendastk.ItemsSource = _tienda.get_tienda("PE");
             dwtiendastk.DisplayMember = "des_entid";
@@ -397,6 +404,7 @@ namespace InterfaceWPF
                 ProgressAlert.SetIndeterminate();
 
                 string ruta_interface = basico.ruta_temp_interface;
+                string codtda = dwtienda_M.EditValue.ToString();
 
                 if (!Directory.Exists(@ruta_interface)) Directory.CreateDirectory(@ruta_interface);
 
@@ -407,7 +415,7 @@ namespace InterfaceWPF
                 #region<DIMENSION TYPE>
                 if (chk_item_dimension_type.IsChecked==true)
                 {
-                    DataTable  dt = await Task.Run(() => dat_interface.get_item_dimension_type(pais));
+                    DataTable  dt = await Task.Run(() => dat_interface.get_item_dimension_type(pais, codtda));
                     if (dt!=null)
                     {
                         if (dt.Rows.Count > 0)
@@ -440,7 +448,7 @@ namespace InterfaceWPF
                 #region<DIMENSION VALUE>
                 if (chk_item_dimension_value.IsChecked == true)
                 {
-                    DataTable dt = await Task.Run(() => dat_interface.get_item_dimension_value(pais));
+                    DataTable dt = await Task.Run(() => dat_interface.get_item_dimension_value(pais, codtda));
                     if (dt != null)
                     {
                         if (dt.Rows.Count > 0)
@@ -473,7 +481,7 @@ namespace InterfaceWPF
                 #region<ITEM>
                 if (chk_item.IsChecked == true)
                 {
-                    DataTable dt = await Task.Run(() => dat_interface.get_item(pais));
+                    DataTable dt = await Task.Run(() => dat_interface.get_item(pais, codtda));
                     if (dt != null)
                     {
                         if (dt.Rows.Count > 0)
@@ -520,7 +528,7 @@ namespace InterfaceWPF
                 #region<PRICE UPDATE 2>
                 if (chk_price_update.IsChecked == true)
                 {
-                    DataTable dt = await Task.Run(() => dat_interface.get_price_update_2(pais));
+                    DataTable dt = await Task.Run(() => dat_interface.get_price_update_2(pais, codtda));
                     if (dt != null)
                     {
                         if (dt.Rows.Count > 0)
@@ -553,7 +561,7 @@ namespace InterfaceWPF
                 #region<ITEM IMAGES>
                 if (chk_item_images.IsChecked == true)
                 {
-                    DataTable dt = await Task.Run(() => dat_interface.get_item_images(pais));
+                    DataTable dt = await Task.Run(() => dat_interface.get_item_images(pais, codtda));
                     if (dt != null)
                     {
                         if (dt.Rows.Count > 0)
@@ -586,7 +594,7 @@ namespace InterfaceWPF
                 #region<ITEM XREF>
                 if (chk_item_xref.IsChecked == true)
                 {
-                    DataTable dt = await Task.Run(() => dat_interface.get_item_xref(pais));
+                    DataTable dt = await Task.Run(() => dat_interface.get_item_xref(pais, codtda));
                     if (dt != null)
                     {
                         if (dt.Rows.Count > 0)

@@ -18,7 +18,7 @@ namespace CapaEntidad.Util
         //public static Int32 ftp_puerto { get { return 22; } }
         #endregion
 
-        #region<CONEXION DESARROLLO>
+        #region<CONEXION QA>
         public static string ftp_server { get { return "172.24.20.182"; } }
         public static string ftp_user { get { return "retailc"; } }
         public static string ftp_password { get { return "1wiAwNRa"; } }

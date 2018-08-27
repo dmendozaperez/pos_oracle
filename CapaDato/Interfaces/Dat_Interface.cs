@@ -360,6 +360,42 @@ namespace CapaDato.Interfaces
             return dt;
         }
         /// <summary>
+        /// get PARTY
+        /// </summary>
+        /// <returns></returns>
+        public DataTable get_Party(string pais, string codtda, string strCodSupl, string strCodEmpl)
+        {
+            DataTable dt = null;
+            string sqlquery = "USP_XSTORE_GET_PARTY";
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(Ent_Conexion.conexion_posperu))
+                {
+                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@PAIS", pais);
+                        cmd.Parameters.AddWithValue("@CODTIENDA", codtda);
+                        cmd.Parameters.AddWithValue("@CODSPL", strCodSupl);
+                        cmd.Parameters.AddWithValue("@CODEMPL", strCodEmpl);
+
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            dt = new DataTable();
+                            da.Fill(dt);
+                        }
+
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+            return dt;
+        }
+        /// <summary>
         /// get stock de articulos
         /// </summary>
         /// <param name="fecha"></param>

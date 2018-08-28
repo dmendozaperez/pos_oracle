@@ -1238,7 +1238,7 @@ namespace InterfaceWPF
 
 
 
-                        name_inv_doc = "INV_DOC_" + cod_tda + "_" + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
+                        name_inv_doc = "INV_DOC_" + cod_tda + "_" + DateTime.Today.ToString("yyyyMMdd") + "_" + nro_guia + ".MNT";
                         in_inv_doc = ruta_interface + "\\" + name_inv_doc;
 
                         if (File.Exists(@in_inv_doc)) File.Delete(@in_inv_doc);
@@ -1266,7 +1266,7 @@ namespace InterfaceWPF
 
 
 
-                        name_inv_doc_line_item= "INV_DOC_LINE_ITEM_" + cod_tda + "_" + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
+                        name_inv_doc_line_item= "INV_DOC_LINE_ITEM_" + cod_tda + "_" + DateTime.Today.ToString("yyyyMMdd") + "_" + nro_guia + ".MNT";
                         in_inv_doc = ruta_interface + "\\" + name_inv_doc_line_item;
 
                         if (File.Exists(@in_inv_doc)) File.Delete(@in_inv_doc);
@@ -1293,7 +1293,7 @@ namespace InterfaceWPF
 
 
 
-                        name_carton= "CARTON_" + cod_tda + "_" + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
+                        name_carton= "CARTON_" + cod_tda + "_" + DateTime.Today.ToString("yyyyMMdd") + "_" + nro_guia + ".MNT";
                         in_inv_doc = ruta_interface + "\\" + name_carton;
 
                         if (File.Exists(@in_inv_doc)) File.Delete(@in_inv_doc);
@@ -1303,7 +1303,7 @@ namespace InterfaceWPF
 
                 }
 
-                Boolean envio = await Task.Run(() => basico.sendftp_file_mnt());
+                Boolean envio =  await Task.Run(() => basico.sendftp_file_mnt());
 
                 if (envio) await metroWindow.ShowMessageAsync(Ent_Msg.msginfomacion, "Se enviaron al ftp", MessageDialogStyle.Affirmative, metroWindow.MetroDialogOptions);
 

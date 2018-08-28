@@ -405,6 +405,9 @@ namespace InterfaceWPF
 
                 string ruta_interface = basico.ruta_temp_interface;
                 string codtda = dwtienda_M.EditValue.ToString();
+                string sufijoNombre = "";
+
+                if (codtda != "-1") sufijoNombre = codtda + "_";
 
                 if (!Directory.Exists(@ruta_interface)) Directory.CreateDirectory(@ruta_interface);
 
@@ -436,7 +439,7 @@ namespace InterfaceWPF
 
 
 
-                            name_maestros = "ITEM_DIMENSION_TYPE_" + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
+                            name_maestros = "ITEM_DIMENSION_TYPE_" + sufijoNombre + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
                             in_maestros = ruta_interface + "\\" + name_maestros;
 
                             if (File.Exists(@in_maestros)) File.Delete(@in_maestros);
@@ -469,7 +472,7 @@ namespace InterfaceWPF
 
 
 
-                            name_maestros = "ITEM_DIMENSION_VALUE_" + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
+                            name_maestros = "ITEM_DIMENSION_VALUE_" + sufijoNombre + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
                             in_maestros = ruta_interface + "\\" + name_maestros;
 
                             if (File.Exists(@in_maestros)) File.Delete(@in_maestros);
@@ -516,7 +519,7 @@ namespace InterfaceWPF
 
 
 
-                            name_maestros = "ITEM_" + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
+                            name_maestros = "ITEM_" + sufijoNombre + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
                             in_maestros = ruta_interface + "\\" + name_maestros;
 
                             if (File.Exists(@in_maestros)) File.Delete(@in_maestros);
@@ -549,7 +552,7 @@ namespace InterfaceWPF
 
 
 
-                            name_maestros = "PRICE_UPDATE_2_" + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
+                            name_maestros = "PRICE_UPDATE_2_" + sufijoNombre + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
                             in_maestros = ruta_interface + "\\" + name_maestros;
 
                             if (File.Exists(@in_maestros)) File.Delete(@in_maestros);
@@ -582,7 +585,7 @@ namespace InterfaceWPF
 
 
 
-                            name_maestros = "ITEM_IMAGES_" + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
+                            name_maestros = "ITEM_IMAGES_" + sufijoNombre + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
                             in_maestros = ruta_interface + "\\" + name_maestros;
 
                             if (File.Exists(@in_maestros)) File.Delete(@in_maestros);
@@ -630,7 +633,7 @@ namespace InterfaceWPF
 
 
 
-                            name_maestros = "ORG_HIER_" + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
+                            name_maestros = "ORG_HIER_" + sufijoNombre + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
                             in_maestros = ruta_interface + "\\" + name_maestros;
 
                             if (File.Exists(@in_maestros)) File.Delete(@in_maestros);
@@ -678,7 +681,7 @@ namespace InterfaceWPF
 
 
 
-                            name_maestros = "MERCH_HIER_" + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
+                            name_maestros = "MERCH_HIER_" + sufijoNombre + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
                             in_maestros = ruta_interface + "\\" + name_maestros;
 
                             if (File.Exists(@in_maestros)) File.Delete(@in_maestros);
@@ -733,7 +736,7 @@ namespace InterfaceWPF
 
 
 
-                            name_maestros = "PARTY_" + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
+                            name_maestros = "PARTY_" + sufijoNombre + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
                             in_maestros = ruta_interface + "\\" + name_maestros;
 
                             if (File.Exists(@in_maestros)) File.Delete(@in_maestros);
@@ -767,7 +770,7 @@ namespace InterfaceWPF
 
 
 
-                            name_maestros = "ITEM_XREF_" + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
+                            name_maestros = "ITEM_XREF_" + sufijoNombre + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
                             in_maestros = ruta_interface + "\\" + name_maestros;
 
                             if (File.Exists(@in_maestros)) File.Delete(@in_maestros);
@@ -1172,20 +1175,27 @@ namespace InterfaceWPF
         private void btnenviotraspaso_Click(object sender, RoutedEventArgs e)
         {
             var button = sender as Button;
+            string strEnvia = "N";
 
             if (button != null)
             {
                 var task = button.DataContext as Ent_GuiasDespacho_Cab;
 
+                if (chk_ftp_Trans.IsChecked ==true) {
+
+                    strEnvia = "S";
+                }
+
                 if (task != null)
                 {
-                    generainter_inv_doc(task.cod_alm, task.nro_guia, task.cod_tda);
+                  generainter_inv_doc(task.cod_alm, task.nro_guia, task.cod_tda, strEnvia);
                 }
             }
         }
-        private async void generainter_inv_doc(string cod_alm,string nro_guia,string cod_tda)
+        private async void generainter_inv_doc(string cod_alm,string nro_guia,string cod_tda,string strEnviaFtp)
         {
             var metroWindow = this;
+            string in_inv_doc = "";
             metroWindow.MetroDialogOptions.ColorScheme = MetroDialogOptions.ColorScheme;
             ProgressDialogController ProgressAlert = null;
             try
@@ -1208,7 +1218,7 @@ namespace InterfaceWPF
                 if (ds != null)
                 {
                     string name_inv_doc = ""; string name_inv_doc_line_item = "";
-                    string name_carton="" ; string in_inv_doc = "";
+                    string name_carton="" ; 
 
                     DataTable dt_inv = null;DataTable dt_inv_doc_line_item = null;DataTable dt_carton = null;
 
@@ -1238,7 +1248,7 @@ namespace InterfaceWPF
 
 
 
-                        name_inv_doc = "INV_DOC_" + cod_tda + "_" + DateTime.Today.ToString("yyyyMMdd") + "_" + nro_guia + ".MNT";
+                        name_inv_doc = "INV_DOC_" + cod_tda + "_" + nro_guia + "_" +DateTime.Today.ToString("yyyyMMdd") + ".MNT";
                         in_inv_doc = ruta_interface + "\\" + name_inv_doc;
 
                         if (File.Exists(@in_inv_doc)) File.Delete(@in_inv_doc);
@@ -1266,7 +1276,7 @@ namespace InterfaceWPF
 
 
 
-                        name_inv_doc_line_item= "INV_DOC_LINE_ITEM_" + cod_tda + "_" + DateTime.Today.ToString("yyyyMMdd") + "_" + nro_guia + ".MNT";
+                        name_inv_doc_line_item= "INV_DOC_LINE_ITEM_" + cod_tda + "_" + nro_guia + "_" + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
                         in_inv_doc = ruta_interface + "\\" + name_inv_doc_line_item;
 
                         if (File.Exists(@in_inv_doc)) File.Delete(@in_inv_doc);
@@ -1293,7 +1303,7 @@ namespace InterfaceWPF
 
 
 
-                        name_carton= "CARTON_" + cod_tda + "_" + DateTime.Today.ToString("yyyyMMdd") + "_" + nro_guia + ".MNT";
+                        name_carton= "CARTON_" + cod_tda + "_" + nro_guia + "_" + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
                         in_inv_doc = ruta_interface + "\\" + name_carton;
 
                         if (File.Exists(@in_inv_doc)) File.Delete(@in_inv_doc);
@@ -1303,9 +1313,22 @@ namespace InterfaceWPF
 
                 }
 
-                Boolean envio =  await Task.Run(() => basico.sendftp_file_mnt());
+                Boolean envio = true;
+                string mensaje = "";
+                if (strEnviaFtp.Equals("S"))
+                {
+                    mensaje = "Se enviaron al ftp";
+                    envio = await Task.Run(() => basico.sendftp_file_mnt());
+                }
+                else {
+                    mensaje = "Se creo en la ruta : " + in_inv_doc;
 
-                if (envio) await metroWindow.ShowMessageAsync(Ent_Msg.msginfomacion, "Se enviaron al ftp", MessageDialogStyle.Affirmative, metroWindow.MetroDialogOptions);
+                }               
+
+
+
+
+                if (envio) await metroWindow.ShowMessageAsync(Ent_Msg.msginfomacion, mensaje, MessageDialogStyle.Affirmative, metroWindow.MetroDialogOptions);
 
                 if (ProgressAlert.IsOpen)
                     await ProgressAlert.CloseAsync();

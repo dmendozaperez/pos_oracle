@@ -55,10 +55,10 @@ namespace InterfaceWPF
 
             Dat_Interface _tienda = new Dat_Interface();
             /*maestros de tienda*/
-            dwtienda.ItemsSource = _tienda.get_tienda("PE");
+            dwtienda.ItemsSource = _tienda.get_tienda("PE", true);
             dwtienda.DisplayMember = "des_entid";
             dwtienda.ValueMember = "cod_entid";
-            dwtienda.SelectedIndex = -1;
+            dwtienda.SelectedIndex = 0;
             dwtienda.Focus();
 
             /*maestros de tienda*/
@@ -261,6 +261,8 @@ namespace InterfaceWPF
                              
 
                 string codtda = dwtienda.EditValue.ToString();
+                string sufijoNombre = "";
+                if (codtda != "-1") sufijoNombre = codtda +"_";
                 /*DATOS DE INTERFACE RETAIL_LOCATION Y RETAIL_LOCATION_PROMERY*/
                 /*Se recorre los datos del dataset y convertir a mnt el final del codigo y envia por un metodo en basico de envio
                  por ftp*/
@@ -290,7 +292,7 @@ namespace InterfaceWPF
 
 
 
-                        name_retail_location = "RETAIL_LOCATION_" + codtda + "_" + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
+                        name_retail_location = "RETAIL_LOCATION_" + sufijoNombre +  DateTime.Today.ToString("yyyyMMdd") + ".MNT";
                         in_retail_location = ruta_interface + "\\" + name_retail_location;
 
                         if (File.Exists(@in_retail_location)) File.Delete(@in_retail_location);
@@ -312,7 +314,7 @@ namespace InterfaceWPF
                         }
                         str_cadena = str.ToString();
 
-                        name_retail_location = "RETAIL_LOCATION_PROPERTY_" + codtda + "_" + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
+                        name_retail_location = "RETAIL_LOCATION_PROPERTY_" + sufijoNombre +  DateTime.Today.ToString("yyyyMMdd") + ".MNT";
                         in_retail_location = ruta_interface + "\\" + name_retail_location;
 
                         if (File.Exists(@in_retail_location)) File.Delete(@in_retail_location);

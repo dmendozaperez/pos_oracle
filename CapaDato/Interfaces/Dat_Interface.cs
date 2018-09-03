@@ -396,6 +396,39 @@ namespace CapaDato.Interfaces
             return dt;
         }
         /// <summary>
+        /// get PARTY
+        /// </summary>
+        /// <returns></returns>
+        public DataTable get_Location_Property(string pais, string codtda)
+        {
+            DataTable dt = null;
+            string sqlquery = "USP_XSTORE_GET_INV_LOCATION_PROPERTY";
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(Ent_Conexion.conexion_posperu))
+                {
+                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@PAIS", pais);
+                        cmd.Parameters.AddWithValue("@cod_tda", codtda);
+
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            dt = new DataTable();
+                            da.Fill(dt);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                dt = null;
+            }
+            return dt;
+        }
+        /// <summary>
         /// get stock de articulos
         /// </summary>
         /// <param name="fecha"></param>

@@ -215,6 +215,7 @@
 
                             <CheckBox Grid.Row="3" Margin="10,0,0,0" ToolTip="" IsChecked="False" Cursor="Hand" Grid.Column="0"  x:Name="chk_org_hier" HorizontalAlignment="Left" VerticalAlignment="Center" Content="ORG HIER"/>
                             <CheckBox Grid.Row="3" Margin="10,0,0,0" ToolTip="LINE-CATERIA-SUB-RIMS" IsChecked="False" Cursor="Hand" Grid.Column="1"  x:Name="chk_merch_hier" HorizontalAlignment="Left" VerticalAlignment="Center" Content="MERCH HIER"/>
+                            <CheckBox Grid.Row="3" Margin="10,0,0,0" ToolTip="LINE-CATERIA-SUB-RIMS" IsChecked="False" Cursor="Hand" Grid.Column="2"  x:Name="chk_Location_Property" HorizontalAlignment="Left" VerticalAlignment="Center" Content="INV LOCATION PROPERTY"/>
 
                             <CheckBox Grid.Row="4" Margin="10,0,0,0" ToolTip="" IsChecked="False" Cursor="Hand" Grid.Column="0"  x:Name="chk_party_employee" HorizontalAlignment="Left" VerticalAlignment="Center" Content="PARTY EMPLOYEE"/>
                             <CheckBox Grid.Row="4" Margin="10,0,0,0" ToolTip="" IsChecked="False" Cursor="Hand" Grid.Column="1"  x:Name="chk_party_supplier" HorizontalAlignment="Left" VerticalAlignment="Center" Content="PARTY SUPPLIER"/>

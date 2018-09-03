@@ -30,12 +30,13 @@
         {
             this.btn_servicewin = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.btnbarra = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn_servicewin
             // 
             this.btn_servicewin.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_servicewin.Location = new System.Drawing.Point(79, 73);
+            this.btn_servicewin.Location = new System.Drawing.Point(12, 32);
             this.btn_servicewin.Name = "btn_servicewin";
             this.btn_servicewin.Size = new System.Drawing.Size(392, 51);
             this.btn_servicewin.TabIndex = 4;
@@ -45,7 +46,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(160, 190);
+            this.button1.Location = new System.Drawing.Point(43, 139);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 5;
@@ -53,11 +54,23 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // btnbarra
+            // 
+            this.btnbarra.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnbarra.Location = new System.Drawing.Point(290, 165);
+            this.btnbarra.Name = "btnbarra";
+            this.btnbarra.Size = new System.Drawing.Size(172, 31);
+            this.btnbarra.TabIndex = 6;
+            this.btnbarra.Text = "COD BARRA";
+            this.btnbarra.UseVisualStyleBackColor = true;
+            this.btnbarra.Click += new System.EventHandler(this.btnbarra_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(507, 261);
+            this.Controls.Add(this.btnbarra);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btn_servicewin);
             this.Name = "Form1";
@@ -70,6 +83,7 @@
 
         private System.Windows.Forms.Button btn_servicewin;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnbarra;
     }
 }
 

@@ -55,5 +55,14 @@ namespace ServiceWin32Framework4
             Cursor.Current = Cursors.Default;
 
         }
+
+        private void btnbarra_Click(object sender, EventArgs e)
+        {
+            string _error = "";
+            Basico ejecuta_procesos = new Basico();
+            ejecuta_procesos.enviar_scdremb(ref _error);
+
+            //ejecuta_procesos.enviar_scactco(ref _error);
+        }
     }
 }

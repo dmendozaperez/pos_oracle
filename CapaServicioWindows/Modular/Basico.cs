@@ -117,6 +117,77 @@ namespace CapaServicioWindows.Modular
             return _lista_scdddes;
         }
 
+        private List<BataTransac.Ent_Scdremb> get_scdremb(string _path, ref string error)
+        {
+            List<BataTransac.Ent_Scdremb> _lista_scdremb = null;
+
+            string sqlquery_scdremb = "SELECT  remb_guiac,remb_artic,remb_calid,remb_medid,remb_corra,remb_canti," +
+                                      "remb_almac,remb_cpack,remb_condm,remb_rmed,remb_u_med,remb_categ,remb_subca," +
+                                      "remb_clase,remb_prvta,remb_costo,remb_talpr,remb_plaoc,remb_femba,remb_hemba," +
+                                      "remb_empre,remb_secci,remb_user,remb_aassd,remb_flag,remb_secue,remb_estad," +
+                                      "remb_log,remb_ftx FROM SCDREMB WHERE (LEN(remb_guiac)>0 or  NOT remb_guiac is null) AND !EMPTY(remb_guiac) order by remb_guiac";
+            try
+            {
+
+                using (OleDbConnection cn = new OleDbConnection(ConexionDBF._conexion_fvdes_oledb(_path)))
+                {
+                    using (OleDbCommand cmd = new OleDbCommand(sqlquery_scdremb, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+
+                        using (OleDbDataAdapter da = new OleDbDataAdapter(cmd))
+                        {
+                            DataTable dt = new DataTable();
+                            da.Fill(dt);
+                            _lista_scdremb = new List<BataTransac.Ent_Scdremb>();
+                            _lista_scdremb = (from DataRow dr in dt.Rows
+                                              
+                                              select new BataTransac.Ent_Scdremb()
+                                              {
+                                                  remb_guiac = dr["remb_guiac"].ToString(),
+                                                  remb_artic = dr["remb_artic"].ToString(),
+                                                  remb_calid = dr["remb_calid"].ToString(),
+                                                  remb_medid = dr["remb_medid"].ToString(),
+                                                  remb_corra = dr["remb_corra"].ToString(),
+                                                  remb_canti = Convert.ToDecimal(dr["remb_canti"]),
+                                                  remb_almac = dr["remb_almac"].ToString(),
+                                                  remb_cpack = dr["remb_cpack"].ToString(),
+                                                  remb_condm = dr["remb_condm"].ToString(),
+                                                  remb_rmed = dr["remb_rmed"].ToString(),
+                                                  remb_u_med = dr["remb_u_med"].ToString(),
+                                                  remb_categ = dr["remb_categ"].ToString(),
+                                                  remb_subca = dr["remb_subca"].ToString(),
+                                                  remb_clase = dr["remb_clase"].ToString(),
+                                                  remb_prvta = Convert.ToDecimal(dr["remb_prvta"]),
+                                                  remb_costo = Convert.ToDecimal(dr["remb_costo"]),
+                                                  remb_talpr = dr["remb_talpr"].ToString(),
+                                                  remb_plaoc = dr["remb_plaoc"].ToString(),
+                                                  remb_femba = dr["remb_femba"].ToString(),
+                                                  remb_hemba = dr["remb_hemba"].ToString(),
+                                                  remb_empre = dr["remb_empre"].ToString(),
+                                                  remb_secci = dr["remb_secci"].ToString(),
+                                                  remb_user = dr["remb_user"].ToString(),
+                                                  remb_aassd = dr["remb_aassd"].ToString(),
+                                                  remb_flag = dr["remb_flag"].ToString(),
+                                                  remb_secue = Convert.ToDecimal(dr["remb_secue"])
+                                                  //remb_estad = dr["remb_estad"].ToString(),
+                                                  //remb_log = dr["remb_log"].ToString(),
+                                                  //remb_ftx = dr["remb_ftx"].ToString(),
+
+                                              }).ToList();
+                        }
+                    }
+
+                }
+
+            }
+            catch (Exception exc)
+            {
+                error = exc.Message;
+                _lista_scdremb = null;
+            }
+            return _lista_scdremb;
+        }
 
         private List<BataTransac.Ent_Scactco> get_scactco(string _path, ref string error)
         {
@@ -694,7 +765,7 @@ namespace CapaServicioWindows.Modular
             try
             {
                 /*segundos para ejecutar*/
-                _espera_ejecuta(20);
+             //   _espera_ejecuta(20);
                 /***********************/
 
                 #region<CAPTURAR EL PATH DE LOS DBF>
@@ -763,6 +834,94 @@ namespace CapaServicioWindows.Modular
             //return _error_transac;
         }
 
+        public void enviar_scdremb(ref string _error_ws)
+        {
+            //BataTransac.Ent_Fvdespc fvdespc = new BataTransac.Ent_Fvdespc();
+            //BataTransac.Ent_Scdddes scdddes = new BataTransac.Ent_Scdddes();
+            //Envio_Guias ws_envio = new Envio_Guias();
+            BataTransac.Bata_TransactionSoapClient bata_trans = new BataTransac.Bata_TransactionSoapClient();
+            //string envio_guias_ws = ws_envio.envio_ws_guias(fvdespc, scdddes);
+            string _error_transac = "";
+            List<BataTransac.Ent_Scdremb> _lista_scdremb = new List<BataTransac.Ent_Scdremb>();
+
+
+
+            BataTransac.Ent_List_Scdrem listArray = new BataTransac.Ent_List_Scdrem();
+            string _error = "";
+
+            try
+            {
+                /*segundos para ejecutar*/
+                //   _espera_ejecuta(20);
+                /***********************/
+
+                #region<CAPTURAR EL PATH DE LOS DBF>
+
+                Util locationdbf = new Util();
+                string rutloc_location = locationdbf.get_ruta_locationProcesa_dbf("SCDREMB");
+
+                #endregion
+
+                if (rutloc_location == null) return;
+
+                /*VALIDACION DE EJECUCION */
+                #region<VALIDA ARCHIVO SI EXISTE PARA NO REALIZAR NINGUNA ACCCION POR SEGURIDAD DE REINDEXACION DEL FOX>
+
+                string name_txt = "SCDREMB";
+
+                //Boolean valida_exists_txt = false;
+                string ruta_validacion = "";
+                if (rutloc_location != null)
+                {
+                    ruta_validacion = rutloc_location + "\\" + name_txt + ".txt";
+                }
+
+                #endregion
+
+                /*ya no entra a consultar*/
+                if (File.Exists(@ruta_validacion)) return;
+                /**/
+
+                _lista_scdremb = get_scdremb(rutloc_location, ref _error);
+
+                /*VERIFICAR SI HAY ERROR*/
+                if (_error.Length > 0)
+                {
+                    _error += " ==>TABLA SCDREMB]";
+                    Util ws_error_transac = new Util();
+                    /*si hay un error entonces 07 error de lectura dbf*/
+                    ws_error_transac.control_errores_transac("07", _error, ref _error_ws);
+                }
+                /**/
+
+                if (_lista_scdremb != null)
+                {
+                    listArray.lista_scdremb = _lista_scdremb.ToArray();
+
+
+                    Envio_Scdremb ws_envio = new Envio_Scdremb();
+
+                    string envio_scdremb_ws = ws_envio.envio_ws_Scdremb(listArray);
+
+                    if (envio_scdremb_ws.Length > 0)
+                    {
+                        Util ws_error_transac = new Util();
+                        _error_ws = envio_scdremb_ws.ToString();
+                        /*si hay un error entonces 02 error de transaction*/
+                        ws_error_transac.control_errores_transac("07", envio_scdremb_ws, ref _error_ws);
+                    }
+
+                }
+
+            }
+            catch (Exception exc)
+            {
+                _error_ws = exc.Message;
+                _error_transac = exc.Message;
+                //_envio_guias = "";
+            }
+            //return _error_transac;
+        }
         private static string descomprimir(string _rutazip, string _destino)
         {
             string _error = "";

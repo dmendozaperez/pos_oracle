@@ -101,6 +101,11 @@ namespace ServiceWin32Framework4.BataTransac {
         [System.ServiceModel.OperationContractAttribute(Action="http://bataperu.com.pe/ws_envia_Scactco_list", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         ServiceWin32Framework4.BataTransac.ws_envia_Scactco_listResponse ws_envia_Scactco_list(ServiceWin32Framework4.BataTransac.ws_envia_Scactco_listRequest request);
+        
+        // CODEGEN: Se está generando un contrato de mensaje, ya que el mensaje ws_envia_scdrembRequest tiene encabezados.
+        [System.ServiceModel.OperationContractAttribute(Action="http://bataperu.com.pe/ws_envia_scdremb", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        ServiceWin32Framework4.BataTransac.ws_envia_scdrembResponse ws_envia_scdremb(ServiceWin32Framework4.BataTransac.ws_envia_scdrembRequest request);
     }
     
     /// <remarks/>
@@ -150,6 +155,462 @@ namespace ServiceWin32Framework4.BataTransac {
             set {
                 this.anyAttrField = value;
                 this.RaisePropertyChanged("AnyAttr");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://bataperu.com.pe/")]
+    public partial class Ent_Scdremb : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string remb_guiacField;
+        
+        private string remb_articField;
+        
+        private string remb_calidField;
+        
+        private string remb_medidField;
+        
+        private string remb_corraField;
+        
+        private decimal remb_cantiField;
+        
+        private string remb_almacField;
+        
+        private string remb_cpackField;
+        
+        private string remb_condmField;
+        
+        private string remb_rmedField;
+        
+        private string remb_u_medField;
+        
+        private string remb_categField;
+        
+        private string remb_subcaField;
+        
+        private string remb_claseField;
+        
+        private decimal remb_prvtaField;
+        
+        private decimal remb_costoField;
+        
+        private string remb_talprField;
+        
+        private string remb_plaocField;
+        
+        private string remb_fembaField;
+        
+        private string remb_hembaField;
+        
+        private string remb_empreField;
+        
+        private string remb_secciField;
+        
+        private string remb_userField;
+        
+        private string remb_aassdField;
+        
+        private string remb_flagField;
+        
+        private decimal remb_secueField;
+        
+        private string remb_estadField;
+        
+        private string remb_logField;
+        
+        private string remb_ftxField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public string remb_guiac {
+            get {
+                return this.remb_guiacField;
+            }
+            set {
+                this.remb_guiacField = value;
+                this.RaisePropertyChanged("remb_guiac");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public string remb_artic {
+            get {
+                return this.remb_articField;
+            }
+            set {
+                this.remb_articField = value;
+                this.RaisePropertyChanged("remb_artic");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
+        public string remb_calid {
+            get {
+                return this.remb_calidField;
+            }
+            set {
+                this.remb_calidField = value;
+                this.RaisePropertyChanged("remb_calid");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
+        public string remb_medid {
+            get {
+                return this.remb_medidField;
+            }
+            set {
+                this.remb_medidField = value;
+                this.RaisePropertyChanged("remb_medid");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
+        public string remb_corra {
+            get {
+                return this.remb_corraField;
+            }
+            set {
+                this.remb_corraField = value;
+                this.RaisePropertyChanged("remb_corra");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
+        public decimal remb_canti {
+            get {
+                return this.remb_cantiField;
+            }
+            set {
+                this.remb_cantiField = value;
+                this.RaisePropertyChanged("remb_canti");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
+        public string remb_almac {
+            get {
+                return this.remb_almacField;
+            }
+            set {
+                this.remb_almacField = value;
+                this.RaisePropertyChanged("remb_almac");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=7)]
+        public string remb_cpack {
+            get {
+                return this.remb_cpackField;
+            }
+            set {
+                this.remb_cpackField = value;
+                this.RaisePropertyChanged("remb_cpack");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=8)]
+        public string remb_condm {
+            get {
+                return this.remb_condmField;
+            }
+            set {
+                this.remb_condmField = value;
+                this.RaisePropertyChanged("remb_condm");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=9)]
+        public string remb_rmed {
+            get {
+                return this.remb_rmedField;
+            }
+            set {
+                this.remb_rmedField = value;
+                this.RaisePropertyChanged("remb_rmed");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=10)]
+        public string remb_u_med {
+            get {
+                return this.remb_u_medField;
+            }
+            set {
+                this.remb_u_medField = value;
+                this.RaisePropertyChanged("remb_u_med");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=11)]
+        public string remb_categ {
+            get {
+                return this.remb_categField;
+            }
+            set {
+                this.remb_categField = value;
+                this.RaisePropertyChanged("remb_categ");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=12)]
+        public string remb_subca {
+            get {
+                return this.remb_subcaField;
+            }
+            set {
+                this.remb_subcaField = value;
+                this.RaisePropertyChanged("remb_subca");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=13)]
+        public string remb_clase {
+            get {
+                return this.remb_claseField;
+            }
+            set {
+                this.remb_claseField = value;
+                this.RaisePropertyChanged("remb_clase");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=14)]
+        public decimal remb_prvta {
+            get {
+                return this.remb_prvtaField;
+            }
+            set {
+                this.remb_prvtaField = value;
+                this.RaisePropertyChanged("remb_prvta");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=15)]
+        public decimal remb_costo {
+            get {
+                return this.remb_costoField;
+            }
+            set {
+                this.remb_costoField = value;
+                this.RaisePropertyChanged("remb_costo");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=16)]
+        public string remb_talpr {
+            get {
+                return this.remb_talprField;
+            }
+            set {
+                this.remb_talprField = value;
+                this.RaisePropertyChanged("remb_talpr");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=17)]
+        public string remb_plaoc {
+            get {
+                return this.remb_plaocField;
+            }
+            set {
+                this.remb_plaocField = value;
+                this.RaisePropertyChanged("remb_plaoc");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=18)]
+        public string remb_femba {
+            get {
+                return this.remb_fembaField;
+            }
+            set {
+                this.remb_fembaField = value;
+                this.RaisePropertyChanged("remb_femba");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=19)]
+        public string remb_hemba {
+            get {
+                return this.remb_hembaField;
+            }
+            set {
+                this.remb_hembaField = value;
+                this.RaisePropertyChanged("remb_hemba");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=20)]
+        public string remb_empre {
+            get {
+                return this.remb_empreField;
+            }
+            set {
+                this.remb_empreField = value;
+                this.RaisePropertyChanged("remb_empre");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=21)]
+        public string remb_secci {
+            get {
+                return this.remb_secciField;
+            }
+            set {
+                this.remb_secciField = value;
+                this.RaisePropertyChanged("remb_secci");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=22)]
+        public string remb_user {
+            get {
+                return this.remb_userField;
+            }
+            set {
+                this.remb_userField = value;
+                this.RaisePropertyChanged("remb_user");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=23)]
+        public string remb_aassd {
+            get {
+                return this.remb_aassdField;
+            }
+            set {
+                this.remb_aassdField = value;
+                this.RaisePropertyChanged("remb_aassd");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=24)]
+        public string remb_flag {
+            get {
+                return this.remb_flagField;
+            }
+            set {
+                this.remb_flagField = value;
+                this.RaisePropertyChanged("remb_flag");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=25)]
+        public decimal remb_secue {
+            get {
+                return this.remb_secueField;
+            }
+            set {
+                this.remb_secueField = value;
+                this.RaisePropertyChanged("remb_secue");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=26)]
+        public string remb_estad {
+            get {
+                return this.remb_estadField;
+            }
+            set {
+                this.remb_estadField = value;
+                this.RaisePropertyChanged("remb_estad");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=27)]
+        public string remb_log {
+            get {
+                return this.remb_logField;
+            }
+            set {
+                this.remb_logField = value;
+                this.RaisePropertyChanged("remb_log");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=28)]
+        public string remb_ftx {
+            get {
+                return this.remb_ftxField;
+            }
+            set {
+                this.remb_ftxField = value;
+                this.RaisePropertyChanged("remb_ftx");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://bataperu.com.pe/")]
+    public partial class Ent_List_Scdrem : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private Ent_Scdremb[] lista_scdrembField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(Order=0)]
+        public Ent_Scdremb[] lista_scdremb {
+            get {
+                return this.lista_scdrembField;
+            }
+            set {
+                this.lista_scdrembField = value;
+                this.RaisePropertyChanged("lista_scdremb");
             }
         }
         
@@ -4380,6 +4841,44 @@ namespace ServiceWin32Framework4.BataTransac {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="ws_envia_scdremb", WrapperNamespace="http://bataperu.com.pe/", IsWrapped=true)]
+    public partial class ws_envia_scdrembRequest {
+        
+        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://bataperu.com.pe/")]
+        public ServiceWin32Framework4.BataTransac.ValidateAcceso ValidateAcceso;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=0)]
+        public ServiceWin32Framework4.BataTransac.Ent_List_Scdrem list_scdrem;
+        
+        public ws_envia_scdrembRequest() {
+        }
+        
+        public ws_envia_scdrembRequest(ServiceWin32Framework4.BataTransac.ValidateAcceso ValidateAcceso, ServiceWin32Framework4.BataTransac.Ent_List_Scdrem list_scdrem) {
+            this.ValidateAcceso = ValidateAcceso;
+            this.list_scdrem = list_scdrem;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="ws_envia_scdrembResponse", WrapperNamespace="http://bataperu.com.pe/", IsWrapped=true)]
+    public partial class ws_envia_scdrembResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=0)]
+        public ServiceWin32Framework4.BataTransac.Ent_MsgTransac ws_envia_scdrembResult;
+        
+        public ws_envia_scdrembResponse() {
+        }
+        
+        public ws_envia_scdrembResponse(ServiceWin32Framework4.BataTransac.Ent_MsgTransac ws_envia_scdrembResult) {
+            this.ws_envia_scdrembResult = ws_envia_scdrembResult;
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface Bata_TransactionSoapChannel : ServiceWin32Framework4.BataTransac.Bata_TransactionSoap, System.ServiceModel.IClientChannel {
     }
@@ -4612,6 +5111,19 @@ namespace ServiceWin32Framework4.BataTransac {
             inValue.listscactco = listscactco;
             ServiceWin32Framework4.BataTransac.ws_envia_Scactco_listResponse retVal = ((ServiceWin32Framework4.BataTransac.Bata_TransactionSoap)(this)).ws_envia_Scactco_list(inValue);
             return retVal.ws_envia_Scactco_listResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        ServiceWin32Framework4.BataTransac.ws_envia_scdrembResponse ServiceWin32Framework4.BataTransac.Bata_TransactionSoap.ws_envia_scdremb(ServiceWin32Framework4.BataTransac.ws_envia_scdrembRequest request) {
+            return base.Channel.ws_envia_scdremb(request);
+        }
+        
+        public ServiceWin32Framework4.BataTransac.Ent_MsgTransac ws_envia_scdremb(ServiceWin32Framework4.BataTransac.ValidateAcceso ValidateAcceso, ServiceWin32Framework4.BataTransac.Ent_List_Scdrem list_scdrem) {
+            ServiceWin32Framework4.BataTransac.ws_envia_scdrembRequest inValue = new ServiceWin32Framework4.BataTransac.ws_envia_scdrembRequest();
+            inValue.ValidateAcceso = ValidateAcceso;
+            inValue.list_scdrem = list_scdrem;
+            ServiceWin32Framework4.BataTransac.ws_envia_scdrembResponse retVal = ((ServiceWin32Framework4.BataTransac.Bata_TransactionSoap)(this)).ws_envia_scdremb(inValue);
+            return retVal.ws_envia_scdrembResult;
         }
     }
 }

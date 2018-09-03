@@ -92,6 +92,10 @@ namespace WS_Bata_Interfaces
         {
             return new Ent_Lista_File();
         }
+        public Ent_List_Scdrem scdremb()
+        {
+            return new Ent_List_Scdrem();
+        }
 
         [SoapHeader("Authentication", Required = true)]
         [WebMethod(Description = "Update de transaccion de guias")]
@@ -564,7 +568,50 @@ namespace WS_Bata_Interfaces
             }
             return msg_transac;
         }
-        
+
+        [SoapHeader("Authentication", Required = true)]
+        [WebMethod(Description = "Enviar scdremb")]
+        public Ent_MsgTransac ws_envia_scdremb(Ent_List_Scdrem list_scdrem)
+        {
+            Ent_MsgTransac msg_transac = null;
+            autentication_ws = new Ba_WsConexion();
+            Dat_Scdremb insert_scdremb = null;
+
+            try
+            {
+                msg_transac = new Ent_MsgTransac();
+
+                Boolean valida_ws = autentication_ws.ckeckAuthentication_ws("01", Authentication.Username, Authentication.Password);
+                //Boolean valida_ws = true;
+                if (valida_ws)
+                {
+
+                    insert_scdremb = new Dat_Scdremb();
+                    msg_transac = insert_scdremb.insertar_Scdrem(list_scdrem);
+
+                    if (msg_transac.codigo != "0")
+                    {
+                        String tip_error = "07";
+                        Dat_Error_Transac error_transac = new Dat_Error_Transac();
+                        error_transac.insertar_errores_transac(tip_error, msg_transac.descripcion);
+                    }
+
+                }
+                else
+                {
+                    msg_transac.codigo = "1";
+                    msg_transac.descripcion = "Conexión sin exito";
+                }
+
+            }
+            catch (Exception exc)
+            {
+
+                msg_transac.codigo = "1";
+                msg_transac.descripcion = exc.Message;
+            }
+            return msg_transac;
+        }
     }
 
     public class ValidateAcceso:SoapHeader

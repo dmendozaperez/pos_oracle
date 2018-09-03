@@ -630,6 +630,63 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="ws_envia_scdremb">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="list_scdrem" type="tns:Ent_List_Scdrem" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Ent_List_Scdrem">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="lista_scdremb" type="tns:ArrayOfEnt_Scdremb" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfEnt_Scdremb">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Ent_Scdremb" nillable="true" type="tns:Ent_Scdremb" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Ent_Scdremb">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="remb_guiac" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="remb_artic" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="remb_calid" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="remb_medid" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="remb_corra" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="remb_canti" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="remb_almac" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="remb_cpack" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="remb_condm" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="remb_rmed" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="remb_u_med" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="remb_categ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="remb_subca" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="remb_clase" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="remb_prvta" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="remb_costo" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="remb_talpr" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="remb_plaoc" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="remb_femba" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="remb_hemba" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="remb_empre" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="remb_secci" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="remb_user" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="remb_aassd" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="remb_flag" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="remb_secue" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="remb_estad" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="remb_log" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="remb_ftx" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ws_envia_scdrembResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ws_envia_scdrembResult" type="tns:Ent_MsgTransac" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="HelloWorldSoapIn">
@@ -782,6 +839,15 @@
   <wsdl:message name="ws_envia_Scactco_listValidateAcceso">
     <wsdl:part name="ValidateAcceso" element="tns:ValidateAcceso" />
   </wsdl:message>
+  <wsdl:message name="ws_envia_scdrembSoapIn">
+    <wsdl:part name="parameters" element="tns:ws_envia_scdremb" />
+  </wsdl:message>
+  <wsdl:message name="ws_envia_scdrembSoapOut">
+    <wsdl:part name="parameters" element="tns:ws_envia_scdrembResponse" />
+  </wsdl:message>
+  <wsdl:message name="ws_envia_scdrembValidateAcceso">
+    <wsdl:part name="ValidateAcceso" element="tns:ValidateAcceso" />
+  </wsdl:message>
   <wsdl:portType name="Bata_TransactionSoap">
     <wsdl:operation name="HelloWorld">
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Consula de bienvenida</wsdl:documentation>
@@ -868,6 +934,11 @@
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Enviar Scactco</wsdl:documentation>
       <wsdl:input message="tns:ws_envia_Scactco_listSoapIn" />
       <wsdl:output message="tns:ws_envia_Scactco_listSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ws_envia_scdremb">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Enviar scdremb</wsdl:documentation>
+      <wsdl:input message="tns:ws_envia_scdrembSoapIn" />
+      <wsdl:output message="tns:ws_envia_scdrembSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="Bata_TransactionSoap" type="tns:Bata_TransactionSoap">
@@ -1048,6 +1119,16 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="ws_envia_scdremb">
+      <soap:operation soapAction="http://bataperu.com.pe/ws_envia_scdremb" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ws_envia_scdrembValidateAcceso" part="ValidateAcceso" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="Bata_TransactionSoap12" type="tns:Bata_TransactionSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -1222,6 +1303,16 @@
       <wsdl:input>
         <soap12:body use="literal" />
         <soap12:header message="tns:ws_envia_Scactco_listValidateAcceso" part="ValidateAcceso" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_envia_scdremb">
+      <soap12:operation soapAction="http://bataperu.com.pe/ws_envia_scdremb" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ws_envia_scdrembValidateAcceso" part="ValidateAcceso" use="literal" />
       </wsdl:input>
       <wsdl:output>
         <soap12:body use="literal" />

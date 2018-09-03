@@ -52,6 +52,7 @@
     <Compile Include="Envio_Ws\Envio_Scactco.cs" />
     <Compile Include="Envio_Ws\Envio_Guias.cs" />
     <Compile Include="Entidad\FVDESPC.cs" />
+    <Compile Include="Envio_Ws\Envio_Scdremb.cs" />
     <Compile Include="Modular\Basico.cs" />
     <Compile Include="Modular\Util.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

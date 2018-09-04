@@ -1035,40 +1035,82 @@ namespace InterfaceWPF
                 /*DATOS DE INTERFACE INVALID */
                 /*Se recorre los datos del dataset y convertir a mnt el final del codigo y envia por un metodo en basico de envio
                  por ftp*/
-                DataTable dt = await Task.Run(() => dat_interface.get_inv_valid_destinations(codtda, pais));
-                StringBuilder str = null;
-                string str_cadena = "";
-                if (dt != null)
-                {                   
-                    string name_inv_valid = ""; string in_inv_valid = "";
-                    if (dt.Rows.Count > 0)
-                    {
-                        str = new StringBuilder();
-                        for (Int32 i = 0; i < dt.Rows.Count; ++i)
-                        {
-                            str.Append(dt.Rows[i]["INV_VALID_DESTINATIONS"].ToString());
 
-                            if (i < dt.Rows.Count - 1)
+                if (chk_inv_valid_destinations.IsChecked == true) {
+                    DataTable dt = await Task.Run(() => dat_interface.get_inv_valid_destinations(codtda, pais));
+                    StringBuilder str = null;
+                    string str_cadena = "";
+                    if (dt != null)
+                    {                   
+                        string name_inv_valid = ""; string in_inv_valid = "";
+                        if (dt.Rows.Count > 0)
+                        {
+                            str = new StringBuilder();
+                            for (Int32 i = 0; i < dt.Rows.Count; ++i)
                             {
-                                str.Append("\r\n");
+                                str.Append(dt.Rows[i]["INV_VALID_DESTINATIONS"].ToString());
+
+                                if (i < dt.Rows.Count - 1)
+                                {
+                                    str.Append("\r\n");
+
+                                }
 
                             }
+                            str_cadena = str.ToString();
 
+
+
+                            name_inv_valid = "INV_VALID_DESTINATIONS_" + codtda + "_" + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
+                            in_inv_valid = ruta_interface + "\\" + name_inv_valid;
+
+                            if (File.Exists(@in_inv_valid)) File.Delete(@in_inv_valid);
+                            File.WriteAllText(@in_inv_valid, str_cadena);
+
+                            envio = true;
+                            mensaje = "Se creo en la ruta : " + ruta_interface + "\\" + name_inv_valid;
+                        }                   
+
+                    }
+                }
+
+                if (chk_inv_valid_destinations_pro.IsChecked == true)
+                {
+                    DataTable dtP = await Task.Run(() => dat_interface.get_inv_valid_destinations_property(codtda, pais));
+                    StringBuilder strP = null;
+                    string str_cadenaP = "";
+                    if (dtP != null)
+                    {
+                        string name_inv_valid = ""; string in_inv_valid = "";
+                        if (dtP.Rows.Count > 0)
+                        {
+                            strP = new StringBuilder();
+                            for (Int32 i = 0; i < dtP.Rows.Count; ++i)
+                            {
+                                strP.Append(dtP.Rows[i]["INV_VALID_DESTINATIONS_PROPERTY"].ToString());
+
+                                if (i < dtP.Rows.Count - 1)
+                                {
+                                    strP.Append("\r\n");
+
+                                }
+
+                            }
+                            str_cadenaP = strP.ToString();
+
+
+
+                            name_inv_valid = "INV_VALID_DESTINATIONS_PROPERTY_" + codtda + "_" + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
+                            in_inv_valid = ruta_interface + "\\" + name_inv_valid;
+
+                            if (File.Exists(@in_inv_valid)) File.Delete(@in_inv_valid);
+                            File.WriteAllText(@in_inv_valid, str_cadenaP);
+
+                            envio = true;
+                            mensaje = "Se creo en la ruta : " + ruta_interface + "\\" + name_inv_valid;
                         }
-                        str_cadena = str.ToString();
 
-
-
-                        name_inv_valid = "INV_VALID_DESTINATIONS_" + codtda + "_" + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
-                        in_inv_valid = ruta_interface + "\\" + name_inv_valid;
-
-                        if (File.Exists(@in_inv_valid)) File.Delete(@in_inv_valid);
-                        File.WriteAllText(@in_inv_valid, str_cadena);
-
-                        envio = true;
-                        mensaje = "Se creo en la ruta : " + ruta_interface + "\\" + name_inv_valid;
-                    }                   
-
+                    }
                 }
 
                 if (EnviarFTP.Equals("S"))
@@ -1106,7 +1148,7 @@ namespace InterfaceWPF
                 return valida;
             }
 
-            if ((chk_inv_valid_destinations.IsChecked == false))
+            if ((chk_inv_valid_destinations.IsChecked == false)&& (chk_inv_valid_destinations_pro.IsChecked == false))
             {
                 await metroWindow.ShowMessageAsync(Ent_Msg.msginfomacion, "Seleccione al menos una interface.", MessageDialogStyle.Affirmative, metroWindow.MetroDialogOptions);
 

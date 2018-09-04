@@ -364,11 +364,12 @@
                             </Grid.RowDefinitions>
                             <Label HorizontalAlignment="Right" Content="Seleccione Tienda" FontSize="14" FontWeight="Bold"/>
                             <dxe:ComboBoxEdit  x:Name="dwtiendatrans" ValidateOnTextInput="False"  Width="370" Height="28" Grid.Row="0" Cursor="Hand" Grid.Column="1" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" AutoComplete="True"/>
-                            <CheckBox Grid.Row="1" IsEnabled="False" IsChecked="True" Cursor="Hand" Grid.Column="1"  x:Name="chk_inv_valid_destinations" HorizontalAlignment="Left" VerticalAlignment="Center" Content="INV VALID DESTINATIONS"/>
+                            <CheckBox Grid.Row="1" IsEnabled="True" IsChecked="True" Cursor="Hand" Grid.Column="1"  x:Name="chk_inv_valid_destinations" HorizontalAlignment="Left" VerticalAlignment="Center" Content="INV VALID DESTINATIONS"/>
+                            <CheckBox Grid.Row="2" IsEnabled="True" IsChecked="True" Cursor="Hand" Grid.Column="1"  x:Name="chk_inv_valid_destinations_pro" HorizontalAlignment="Left" VerticalAlignment="Center" Content="INV VALID DESTINATIONS PROPERTY"/>
 
-                            <CheckBox Grid.Row="2" IsEnabled="true" IsChecked="True" Cursor="Hand" Grid.Column="1"  x:Name="chk_ftp_sh" HorizontalAlignment="Left" VerticalAlignment="Center" Content="ENVIAR FTP"/>
-                            <RadioButton  Grid.Row="3" IsEnabled="true" Checked="llenarTiendaShp"  IsChecked="True" Cursor="Hand" Grid.Column="1"  Name="rbtPe_sh" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Peru"  />
-                            <RadioButton  Grid.Row="3" IsEnabled="true" Checked="llenarTiendaShp" IsChecked="False" Cursor="Hand" Grid.Column="1"  Name="rbtEcu_sh" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Ecuador" Margin="108,12,0,11"  />
+                            <CheckBox Grid.Row="3" IsEnabled="true" IsChecked="True" Cursor="Hand" Grid.Column="1"  x:Name="chk_ftp_sh" HorizontalAlignment="Left" VerticalAlignment="Center" Content="ENVIAR FTP"/>
+                            <RadioButton  Grid.Row="4" IsEnabled="true" Checked="llenarTiendaShp"  IsChecked="True" Cursor="Hand" Grid.Column="1"  Name="rbtPe_sh" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Peru"  />
+                            <RadioButton  Grid.Row="4" IsEnabled="true" Checked="llenarTiendaShp" IsChecked="False" Cursor="Hand" Grid.Column="1"  Name="rbtEcu_sh" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Ecuador" Margin="108,12,0,11"  />
                             <!--<CheckBox Grid.Row="2" IsEnabled="False" IsChecked="True" Cursor="Hand" Grid.Column="1"  x:Name="chk_retail_location_property" HorizontalAlignment="Left" VerticalAlignment="Center" Content="RETAIL LOCATION PROPERTY"/>-->
                             <Button Cursor="Hand" Grid.Column="1" Content="Genera Interface Transferencia" Width="190" Grid.Row="5" HorizontalAlignment="Left" x:Name="btntrans" Click="btntrans_Click"  />
                         </Grid>

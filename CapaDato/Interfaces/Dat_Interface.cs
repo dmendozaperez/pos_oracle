@@ -500,6 +500,36 @@ namespace CapaDato.Interfaces
             return dt;
         }
 
+        public DataTable get_inv_valid_destinations_property(string codtda, string pais)
+        {
+            DataTable dt = null;
+            string sqlquery = "USP_XSTORE_GET_INV_VALID_DESTINATIONS_PROPERTY";
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(Ent_Conexion.conexion_posperu))
+                {
+                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@cod_tda", codtda);
+                        cmd.Parameters.AddWithValue("@PAIS", pais);
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            dt = new DataTable();
+                            da.Fill(dt);
+                        }
+
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+            return dt;
+        }
+
         /// <summary>
         /// Genera la interface de traspasos del cd hacia tda
         /// </summary>

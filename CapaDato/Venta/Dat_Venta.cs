@@ -575,5 +575,42 @@ namespace CapaDato.Venta
             return table;
         }
 
+        public DataSet GET_OBTENER_VENTA_XSTORE(string cod_tda, DateTime fecha)
+        {
+            string sqlquery = "USP_EXTRAER_VENTAS_TDA";
+            DataSet ds = null;
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(Ent_Conexion.conexion_posperu))
+                {
+                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@COD_TDA", cod_tda);
+                        cmd.Parameters.AddWithValue("@FEC_INI", fecha);
+                     
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            ds = new DataSet();
+                            da.Fill(ds);
+
+                            ds.Tables[0].TableName = "FFACTC";
+                            ds.Tables[1].TableName = "FFACTD";
+                            ds.Tables[2].TableName = "FNOTAA";
+
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                ds = null;
+            }
+            return ds;
+        }
+
+
+
     }
 }

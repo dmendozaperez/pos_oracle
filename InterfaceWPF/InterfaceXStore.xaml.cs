@@ -1,6 +1,7 @@
 ﻿using CapaDato;
 using CapaDato.Interfaces;
 using CapaDato.Logistica;
+using CapaDato.Venta;
 using CapaDato.Poslog;
 using CapaEntidad;
 using CapaEntidad.Logistica;
@@ -19,6 +20,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using ICSharpCode.SharpZipLib.Zip;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -101,7 +103,14 @@ namespace InterfaceWPF
             dwtienda_bcl.SelectedIndex = -1;
             dwtienda_bcl.Focus();
 
-            
+            /*stock de tienda*/
+            dwtienda_dbf.ItemsSource = _tienda.get_tienda("PE");
+            dwtienda_dbf.DisplayMember = "des_entid";
+            dwtienda_dbf.ValueMember = "cod_entid";
+            dwtienda_dbf.SelectedIndex = -1;
+            dwtienda_dbf.Focus();
+
+
         }
 
 
@@ -1195,6 +1204,319 @@ namespace InterfaceWPF
         private void btnconsultag_Click(object sender, RoutedEventArgs e)
         {
             consultar_guias();
+        }
+
+        private void btngenerarDBF_Click(object sender, RoutedEventArgs e)
+        {
+            generar_dbf();
+        }
+
+
+        private async void generar_dbf()
+        {
+            var metroWindow = this;
+            if (await valida_generar_dbf()) return;
+
+            metroWindow.MetroDialogOptions.ColorScheme = MetroDialogOptions.ColorScheme;
+            ProgressDialogController ProgressAlert = null;
+            Dat_Venta con_venta = null;
+            
+            try
+            {             
+
+                ProgressAlert = await this.ShowProgressAsync(Ent_Msg.msgcargando, "Generando DBF 2");  //show message
+                ProgressAlert.SetIndeterminate();
+                string cod_tda = dwtienda_dbf.EditValue.ToString();
+                DateTime fecha = Convert.ToDateTime(dtpFecha_DBF.Text);
+              
+                con_venta = new Dat_Venta();
+                DataSet ds  = await Task.Run(() => con_venta.GET_OBTENER_VENTA_XSTORE(cod_tda, fecha));
+
+                tabla_FFACTC(ds.Tables[0]);
+                tabla_FFACTD(ds.Tables[1]);
+                tabla_FNOTAA(ds.Tables[2]);
+
+                string archivo = "";
+                _comprimir_archivo(cod_tda, fecha, ref archivo);
+
+                if (ProgressAlert.IsOpen)
+                    await ProgressAlert.CloseAsync();
+            }
+            catch (Exception exc)
+            {
+                if (ProgressAlert != null) await ProgressAlert.CloseAsync();
+                await metroWindow.ShowMessageAsync(Ent_Msg.msginfomacion, exc.Message, MessageDialogStyle.Affirmative, metroWindow.MetroDialogOptions);
+            }
+        }
+
+
+        private  void tabla_FFACTD(DataTable dt)
+        {
+            try
+            {
+                string _path_envia = basico.ruta_temp_DBF;
+                DBFNET venta_det = new DBFNET();
+                venta_det.tabla = "FFACTD";
+                venta_det.addcol("fd_nint", Tipo.Caracter, "8");
+                venta_det.addcol("fd_tipo", Tipo.Caracter, "1");
+                venta_det.addcol("fd_arti", Tipo.Caracter, "12");
+                venta_det.addcol("fd_regl", Tipo.Caracter, "4");
+                venta_det.addcol("fd_colo", Tipo.Caracter, "2");
+                venta_det.addcol("fd_item", Tipo.Caracter, "3");
+                venta_det.addcol("fd_icmb", Tipo.Caracter, "1");
+                venta_det.addcol("fd_qfac", Tipo.Numerico, "8,3");
+                venta_det.addcol("fd_lpre", Tipo.Caracter, "2");
+                venta_det.addcol("fd_calm", Tipo.Caracter, "4");
+                venta_det.addcol("fd_pref", Tipo.Numerico, "14,4");
+                venta_det.addcol("fd_dref", Tipo.Numerico, "14,4");
+                venta_det.addcol("fd_prec", Tipo.Numerico, "14,4");
+                venta_det.addcol("fd_brut", Tipo.Numerico, "14,4");
+                venta_det.addcol("fd_pimp1", Tipo.Numerico, "6,2");
+                venta_det.addcol("fd_vimp1", Tipo.Numerico, "14,4");
+                venta_det.addcol("fd_subt1", Tipo.Numerico, "14,4");
+                venta_det.addcol("fd_pimp2", Tipo.Numerico, "6,2");
+                venta_det.addcol("fd_vimp2", Tipo.Numerico, "14,4");
+                venta_det.addcol("fd_subt2", Tipo.Numerico, "14,4");
+                venta_det.addcol("fd_pdct1", Tipo.Numerico, "6,2");
+                venta_det.addcol("fd_vdct1", Tipo.Numerico, "14,4");
+                venta_det.addcol("fd_subt3", Tipo.Numerico, "14,4");
+                venta_det.addcol("fd_vdct4", Tipo.Numerico, "14,4");
+                venta_det.addcol("fd_vdc23", Tipo.Numerico, "14,4");
+                venta_det.addcol("fd_vvta", Tipo.Numerico, "14,4");
+                venta_det.addcol("fd_pimp3", Tipo.Numerico, "6,2");
+                venta_det.addcol("fd_vimp3", Tipo.Numerico, "14,4");
+                venta_det.addcol("fd_pimp4", Tipo.Numerico, "14,4");
+                venta_det.addcol("fd_vimp4", Tipo.Numerico, "14,4");
+
+                venta_det.addcol("fd_total", Tipo.Numerico, "14,4");
+                venta_det.addcol("fd_cuse", Tipo.Caracter, "3");
+                venta_det.addcol("fd_muse", Tipo.Caracter, "3");
+                venta_det.addcol("fd_fcre", Tipo.Fecha);
+                venta_det.addcol("fd_fmod", Tipo.Fecha);
+                venta_det.addcol("fd_auto", Tipo.Caracter, "6");
+                venta_det.addcol("fd_dre2", Tipo.Numerico, "14,4");
+                venta_det.addcol("fd_asoc", Tipo.Caracter, "13");
+
+                venta_det.creardbf(_path_envia);
+                venta_det.Insertar_tabla(dt, _path_envia);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+        private void tabla_FNOTAA(DataTable dt)
+        {
+            try
+            {
+                string _path_envia = basico.ruta_temp_DBF;
+                DBFNET venta_pago = new DBFNET();
+                venta_pago.tabla = "FNOTAA";
+                venta_pago.addcol("na_nota", Tipo.Caracter, "8");
+                venta_pago.addcol("na_item", Tipo.Caracter, "3");
+                venta_pago.addcol("na_mone", Tipo.Caracter, "2");
+                venta_pago.addcol("na_tpag", Tipo.Caracter, "2");
+                venta_pago.addcol("na_tasa", Tipo.Numerico, "10,4");
+                venta_pago.addcol("na_cref", Tipo.Caracter, "2");
+                venta_pago.addcol("na_sref", Tipo.Caracter, "4");
+                venta_pago.addcol("na_nref", Tipo.Caracter, "22");
+                venta_pago.addcol("na_vref", Tipo.Numerico, "14,4");
+                venta_pago.addcol("na_vpag", Tipo.Numerico, "14,4");
+                venta_pago.addcol("na_esta", Tipo.Caracter, "1");
+                venta_pago.addcol("na_cier", Tipo.Caracter, "1");
+                venta_pago.addcol("na_fcre", Tipo.Caracter, "30");
+                venta_pago.addcol("na_fmod", Tipo.Caracter, "30");
+                venta_pago.creardbf(_path_envia);
+                venta_pago.Insertar_tabla(dt, _path_envia);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+        private void tabla_FFACTC(DataTable dt)
+        {
+            try
+            {
+                string _path_envia = basico.ruta_temp_DBF;
+                DBFNET venta_cab = new DBFNET();
+                venta_cab.tabla = "FFACTC";
+                venta_cab.addcol("fc_nint", Tipo.Caracter, "8");
+                venta_cab.addcol("fc_nnot", Tipo.Caracter, "8");
+                venta_cab.addcol("fc_codi", Tipo.Caracter, "2");
+                venta_cab.addcol("fc_suna", Tipo.Caracter, "2");
+                venta_cab.addcol("fc_sfac", Tipo.Caracter, "4");
+                venta_cab.addcol("fc_nfac", Tipo.Caracter, "8");
+                venta_cab.addcol("fc_ffac", Tipo.Fecha);
+                venta_cab.addcol("fc_nord", Tipo.Caracter, "8");
+                venta_cab.addcol("fc_cref", Tipo.Caracter, "2");
+                venta_cab.addcol("fc_sref", Tipo.Caracter, "4");
+                venta_cab.addcol("fc_nref", Tipo.Caracter, "8");
+                venta_cab.addcol("fc_pvta", Tipo.Caracter, "2");
+                venta_cab.addcol("fc_csuc", Tipo.Caracter, "3");
+                venta_cab.addcol("fc_gvta", Tipo.Caracter, "2");
+                venta_cab.addcol("fc_zona", Tipo.Caracter, "3");
+                venta_cab.addcol("fc_clie", Tipo.Caracter, "8");
+                venta_cab.addcol("fc_ncli", Tipo.Caracter, "90");
+                venta_cab.addcol("fc_nomb", Tipo.Caracter, "30");
+                venta_cab.addcol("fc_apep", Tipo.Caracter, "30");
+                venta_cab.addcol("fc_apem", Tipo.Caracter, "30");
+                venta_cab.addcol("fc_dcli", Tipo.Caracter, "50");
+                venta_cab.addcol("fc_cubi", Tipo.Caracter, "8");
+                venta_cab.addcol("fc_ruc", Tipo.Caracter, "20");
+                venta_cab.addcol("fc_vuse", Tipo.Caracter, "3");
+                venta_cab.addcol("fc_vend", Tipo.Caracter, "8");
+                venta_cab.addcol("fc_ipre", Tipo.Caracter, "1");
+                venta_cab.addcol("fc_tint", Tipo.Caracter, "2");
+                venta_cab.addcol("fc_pint", Tipo.Numerico, "6,2");
+                venta_cab.addcol("fc_lcsg", Tipo.Caracter, "2");
+                venta_cab.addcol("fc_ncon", Tipo.Caracter, "30");
+                venta_cab.addcol("fc_dcon", Tipo.Caracter, "30");
+                venta_cab.addcol("fc_lcon", Tipo.Caracter, "20");
+                venta_cab.addcol("fc_lruc", Tipo.Caracter, "11");
+                venta_cab.addcol("fc_agen", Tipo.Caracter, "20");
+                venta_cab.addcol("fc_mone", Tipo.Caracter, "2");
+                venta_cab.addcol("fc_tasa", Tipo.Numerico, "10,4");
+                venta_cab.addcol("fc_fpag", Tipo.Caracter, "2");
+
+                venta_cab.addcol("fc_nlet", Tipo.Numerico, "2,0");
+                venta_cab.addcol("fc_qtot", Tipo.Numerico, "8,2");
+                venta_cab.addcol("fc_pref", Tipo.Numerico, "14,4");
+                venta_cab.addcol("fc_dref", Tipo.Numerico, "14,4");
+                venta_cab.addcol("fc_brut", Tipo.Numerico, "14,4");
+                venta_cab.addcol("fc_vimp1", Tipo.Numerico, "14,4");
+                venta_cab.addcol("fc_vimp2", Tipo.Numerico, "14,4");
+                venta_cab.addcol("fc_vdct1", Tipo.Numerico, "14,4");
+                venta_cab.addcol("fc_vdct4", Tipo.Numerico, "14,4");
+
+                venta_cab.addcol("fc_pdc2", Tipo.Numerico, "6,2");
+                venta_cab.addcol("fc_pdc3", Tipo.Numerico, "6,2");
+                venta_cab.addcol("fc_vdc23", Tipo.Numerico, "14,4");
+                venta_cab.addcol("fc_vvta", Tipo.Numerico, "14,4");
+                venta_cab.addcol("fc_vimp3", Tipo.Numerico, "14,4");
+                venta_cab.addcol("fc_pimp4", Tipo.Numerico, "6,2");
+
+                venta_cab.addcol("fc_vimp4", Tipo.Numerico, "14,4");
+                venta_cab.addcol("fc_total", Tipo.Numerico, "14,4");
+                venta_cab.addcol("fc_esta", Tipo.Caracter, "1");
+                venta_cab.addcol("fc_tdoc", Tipo.Caracter, "1");
+                venta_cab.addcol("fc_cuse", Tipo.Caracter, "3");
+                venta_cab.addcol("fc_muse", Tipo.Caracter, "3");
+
+                venta_cab.addcol("fc_fcre", Tipo.Fecha);
+                venta_cab.addcol("fc_fmod", Tipo.Fecha);
+
+                venta_cab.addcol("fc_hora", Tipo.Caracter, "8");
+                venta_cab.addcol("fc_auto", Tipo.Caracter, "3");
+                venta_cab.addcol("fc_ftx", Tipo.Caracter, "1");
+                venta_cab.addcol("fc_estc", Tipo.Caracter, "1");
+                venta_cab.addcol("fc_sexo", Tipo.Caracter, "1");
+                venta_cab.addcol("fc_mpub", Tipo.Caracter, "2");
+                venta_cab.addcol("fc_edad", Tipo.Caracter, "2");
+                venta_cab.addcol("fc_regv", Tipo.Caracter, "25");
+                venta_cab.creardbf(_path_envia);
+                venta_cab.Insertar_tabla(dt, _path_envia);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        private void _comprimir_archivo(string codTda,DateTime _fecha_proceso, ref string _archivo)
+        {           
+            ZipOutputStream zipOut = null;
+            try
+            {
+                string _path_envia = basico.ruta_temp_DBF;
+               
+                string _comprimir = _path_envia + "\\Comp";
+
+                if (!Directory.Exists(@_comprimir))
+                    Directory.CreateDirectory(@_comprimir);
+
+                string _ano = _fecha_proceso.ToString("yy");
+                string _mes = _fecha_proceso.Month.ToString("D2");
+                string _dia = _fecha_proceso.Day.ToString("D2");
+                string _fecha = _ano + _mes + _dia;
+                String[] filenames = Directory.GetFiles(_path_envia, "*.*");
+                _archivo = "TD" + _fecha + "." + codTda.Substring(2, 3);
+                string ruta_zip = @_comprimir + "\\TD" + _fecha + "." + codTda.Substring(2, 3);
+
+                string[] _file_cmp = Directory.GetFiles(_comprimir, "*.*");
+                foreach (string f in _file_cmp)
+                {
+                    File.Delete(f.ToString());
+                }
+
+                //if (File.Exists(ruta_zip))
+                //{
+                //    File.Delete(ruta_zip);
+                //}
+
+                //crear archivo zip
+                zipOut = new ZipOutputStream(File.Create(@ruta_zip));
+
+                //*********************               
+
+                for (Int32 i = 0; i < filenames.Length; ++i)
+                {
+                    string _archivo_xml = filenames[i].ToString();
+                    FileInfo fi = new FileInfo(_archivo_xml);
+                    ICSharpCode.SharpZipLib.Zip.ZipEntry entry = new ICSharpCode.SharpZipLib.Zip.ZipEntry(fi.Name);
+                    FileStream sReader = File.OpenRead(_archivo_xml);
+                    byte[] buff = new byte[Convert.ToInt32(sReader.Length)];
+                    sReader.Read(buff, 0, (int)sReader.Length);
+                    entry.DateTime = fi.LastWriteTime;
+                    entry.Size = sReader.Length;
+                    sReader.Close();
+                    zipOut.PutNextEntry(entry);
+                    zipOut.Write(buff, 0, buff.Length);
+                }
+
+                zipOut.Finish();
+                zipOut.Close();               
+
+                string[] _file = Directory.GetFiles(_path_envia, "*.*");
+                foreach (string f in _file)
+                {
+                    File.Delete(f.ToString());
+                }
+
+
+
+            }
+            catch
+            {
+                if (zipOut != null)
+                {
+                    zipOut.Finish();
+                    zipOut.Close();
+                }
+                throw;
+            }           
+        }
+
+        private async Task<Boolean> valida_generar_dbf()
+        {
+            var metroWindow = this;
+            Boolean valida = false;
+            metroWindow.MetroDialogOptions.ColorScheme = MetroDialogOptions.ColorScheme;
+            string _cod_tda_select = "";
+            if (dwtienda_dbf.EditValue != null)
+            {
+                _cod_tda_select = dwtienda_dbf.EditValue.ToString();
+            }
+            if (_cod_tda_select.Length == 0)
+            {
+                await metroWindow.ShowMessageAsync(Ent_Msg.msginfomacion, "Seleccion la Tienda.", MessageDialogStyle.Affirmative, metroWindow.MetroDialogOptions);
+                dwtienda.Focus();
+                valida = true;
+                return valida;
+            }
+
+
+            return valida;
         }
 
         private async void btndetalle_Click(object sender, RoutedEventArgs e)

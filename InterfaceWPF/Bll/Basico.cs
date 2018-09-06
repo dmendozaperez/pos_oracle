@@ -14,6 +14,7 @@ namespace InterfaceWPF.Bll
     public class Basico
     {
         public String ruta_temp_interface = System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "//tmpinterface";
+        public String ruta_temp_DBF = System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "//tmpDBF";
         private string ftp_ruta_destino = "/tmp";
         //private string ftp_ruta_destino = "/app/webxst/BCL/autodeploy/data/";
         #region<ENVIO POR FTP ARCHIVOS MNT>

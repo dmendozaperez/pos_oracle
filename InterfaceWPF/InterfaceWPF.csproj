@@ -147,6 +147,10 @@
       <Project>{c24d20c9-781b-4fd8-b956-dbb16280e929}</Project>
       <Name>CapaEntidad</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ICSharpCode.SharpZLib\ICSharpCode.SharpZLib.csproj">
+      <Project>{a219098e-4077-470f-a709-f5f0142845be}</Project>
+      <Name>ICSharpCode.SharpZLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Design\Images\lupa.jpg" />

@@ -1224,7 +1224,7 @@ namespace InterfaceWPF
             try
             {             
 
-                ProgressAlert = await this.ShowProgressAsync(Ent_Msg.msgcargando, "Generando DBF 2");  //show message
+                ProgressAlert = await this.ShowProgressAsync(Ent_Msg.msgcargando, "Generando DBF");  //show message
                 ProgressAlert.SetIndeterminate();
                 string cod_tda = dwtienda_dbf.EditValue.ToString();
                 DateTime fecha = Convert.ToDateTime(dtpFecha_DBF.Text);
@@ -1241,6 +1241,9 @@ namespace InterfaceWPF
 
                 if (ProgressAlert.IsOpen)
                     await ProgressAlert.CloseAsync();
+
+                string _path_envia = basico.ruta_temp_DBF;
+                await metroWindow.ShowMessageAsync(Ent_Msg.msginfomacion, "Se genero el comprimido DBF en la ruta: " + _path_envia, MessageDialogStyle.Affirmative, metroWindow.MetroDialogOptions);
             }
             catch (Exception exc)
             {

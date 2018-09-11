@@ -16,7 +16,7 @@ namespace CapaServicioWindows.Modular
 {
     public class Basico
     {
-        private DateTime fecha_despacho = DateTime.Today.AddDays(-3);
+        private DateTime fecha_despacho = DateTime.Today.AddDays(-5);
 
         /// <summary>
         /// tiempo de espera a ejecutar
@@ -936,5 +936,30 @@ namespace CapaServicioWindows.Modular
             }
             return _error;
         }
+
+        #region<ENVIO POSLOG>
+        public void procesar_poslog_pos(ref string _error_procesos)
+        {
+            Dat_Venta venta_ing = null;
+            Util datUtil = null;
+            try
+            {
+                datUtil = new Util();
+                venta_ing = new Dat_Venta();
+                _error_procesos = venta_ing.procesar_poslog();
+
+                if (_error_procesos.Length>0)
+                {
+                    datUtil.control_errores_transac("08", _error_procesos, ref _error_procesos);
+                }
+
+            }
+            catch (Exception exc)
+            {
+                _error_procesos = exc.Message;                
+            }
+        }
+
+        #endregion
     }
 }

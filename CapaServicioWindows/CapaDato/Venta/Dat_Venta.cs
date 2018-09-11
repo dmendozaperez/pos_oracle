@@ -131,6 +131,40 @@ namespace CapaServicioWindows.CapaDato.Venta
             }
             return error;
         }
+        #region<REGION ENVIO XSTORE>
+        public string procesar_poslog()
+        {
+            string sqlquery = "[USP_PROCESAR_TEM_POS_LOG]";
+            string error = "";
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(ConexionSQL.conexion))
+                {
+                    try
+                    {
+                        if (cn.State == 0) cn.Open();
+                        using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                        {
+                            cmd.CommandTimeout = 0;
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+                    catch (Exception exc)
+                    {
 
+                        error = exc.Message;
+                    }
+                    if (cn != null)
+                        if (cn.State == ConnectionState.Open) cn.Close();
+                }
+            }
+            catch (Exception exc)
+            {
+                error = exc.Message;
+            }
+            return error;
+        }
+        #endregion
     }
 }

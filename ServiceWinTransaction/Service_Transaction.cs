@@ -20,11 +20,15 @@ namespace ServiceWinTransaction
     {
         Timer tmservicio = null;
         Timer tmservicioDBF = null;
-        Timer tmservicioScactcoDBF = null;
+        //Timer tmservicioScactcoDBF = null;
+
+        Timer tmservicioposlog = null;
 
         private Int32 _valida_service = 0;
         private Int32 _valida_serviceDBF = 0;
-        private Int32 _valida_serviceScactcoDBF = 0;
+        //private Int32 _valida_serviceScactcoDBF = 0;
+
+        private Int32 _valida_serviceposlog = 0;
 
         public Service_Transaction()
         {
@@ -36,8 +40,12 @@ namespace ServiceWinTransaction
             tmservicioDBF = new Timer(5000);
             tmservicioDBF.Elapsed += new ElapsedEventHandler(tmpServicioDBF_Elapsed);
 
-            tmservicioScactcoDBF = new Timer(5000);
-            tmservicioScactcoDBF.Elapsed += new ElapsedEventHandler(tmpServicioScactcoDBF_Elapsed);
+            //tmservicioScactcoDBF = new Timer(5000);
+            //tmservicioScactcoDBF.Elapsed += new ElapsedEventHandler(tmpServicioScactcoDBF_Elapsed);
+
+            tmservicioposlog = new Timer(5000);
+            tmservicioposlog.Elapsed += new ElapsedEventHandler(tmservicioposlog_Elapsed);
+
         }
         void tmpServicio_Elapsed(object sender, ElapsedEventArgs e)
         {
@@ -174,29 +182,28 @@ namespace ServiceWinTransaction
                 _valida_serviceDBF = 0;
             }
         }
-
-        void tmpServicioScactcoDBF_Elapsed(object sender, ElapsedEventArgs e)
+        void tmservicioposlog_Elapsed(object sender, ElapsedEventArgs e)
         {
             Int32 _valor = 0;
             try
             {
-                if (_valida_serviceScactcoDBF == 0)
+                if (_valida_serviceposlog == 0)
                 {
                     _valor = 1;
-                    _valida_serviceScactcoDBF = 1;
-                    string _valida_proc_dbf = @"D:\venta.txt";
-                    Boolean proceso_venta = false;
+                    _valida_serviceposlog = 1;
+                    string _valida_proc_ven = @"D:\venta.txt";
+                    Boolean proceso_insert_polog = false;
 
-                    if (File.Exists(_valida_proc_dbf)) proceso_venta = true;
+                    if (File.Exists(_valida_proc_ven)) proceso_insert_polog = true;
 
-                    if (!proceso_venta)
+                    if (proceso_insert_polog)
                     {
                         _valor = 1;
                         string _error = "";
-                        _valida_serviceScactcoDBF = 1;
-                        Basico ejecuta_procesos = new Basico();
-                        ejecuta_procesos.enviar_scactco(ref _error);
-                        _valida_serviceScactcoDBF = 0;
+                        _valida_serviceposlog = 1;
+                         Basico ejecuta_procesos = new Basico();
+                        ejecuta_procesos.procesar_poslog_pos(ref _error);
+                        _valida_serviceposlog = 0;
 
                     }
                 }
@@ -205,26 +212,66 @@ namespace ServiceWinTransaction
             catch (Exception exc)
             {
                 //string errSwc = "";
-                _valida_serviceScactcoDBF = 0;
+                _valida_serviceposlog = 0;
             }
             if (_valor == 1)
             {
-                _valida_serviceScactcoDBF = 0;
+                _valida_serviceposlog = 0;
             }
         }
+
+        //void tmpServicioScactcoDBF_Elapsed(object sender, ElapsedEventArgs e)
+        //{
+        //    Int32 _valor = 0;
+        //    try
+        //    {
+        //        if (_valida_serviceScactcoDBF == 0)
+        //        {
+        //            _valor = 1;
+        //            _valida_serviceScactcoDBF = 1;
+        //            string _valida_proc_dbf = @"D:\venta.txt";
+        //            Boolean proceso_venta = false;
+
+        //            if (File.Exists(_valida_proc_dbf)) proceso_venta = true;
+
+        //            if (!proceso_venta)
+        //            {
+        //                _valor = 1;
+        //                string _error = "";
+        //                _valida_serviceScactcoDBF = 1;
+        //                Basico ejecuta_procesos = new Basico();
+        //                ejecuta_procesos.enviar_scactco(ref _error);
+        //                _valida_serviceScactcoDBF = 0;
+
+        //            }
+        //        }
+
+        //    }
+        //    catch (Exception exc)
+        //    {
+        //        //string errSwc = "";
+        //        _valida_serviceScactcoDBF = 0;
+        //    }
+        //    if (_valor == 1)
+        //    {
+        //        _valida_serviceScactcoDBF = 0;
+        //    }
+        //}
 
         protected override void OnStart(string[] args)
         {
             tmservicio.Start();
             tmservicioDBF.Start();
-            tmservicioScactcoDBF.Start();
+            tmservicioposlog.Start();
+            //tmservicioScactcoDBF.Start();
         }
 
         protected override void OnStop()
         {
             tmservicio.Stop();
             tmservicioDBF.Stop();
-            tmservicioScactcoDBF.Stop();
+            tmservicioposlog.Stop();
+            //tmservicioScactcoDBF.Stop();
         }       
               
 

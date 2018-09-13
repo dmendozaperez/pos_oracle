@@ -560,7 +560,7 @@
             </TabItem>
 
             <!--Diseño de Transferencias de tiendas-->
-            <TabItem Header="Interface Orce" Background="#FF79787E" BorderThickness="1" Height="30" VerticalAlignment="Bottom" >
+            <TabItem Header="Interface Orce" Background="SteelBlue" BorderThickness="1" Height="30" VerticalAlignment="Bottom" >
                 <Border CornerRadius="2">
                     <Border.Effect>
                         <DropShadowEffect BlurRadius="20"/>

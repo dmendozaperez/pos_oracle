@@ -61,18 +61,18 @@ namespace InterfaceWPF.Bll
 
                 // return false;
 
-                string[] _archivos_mnt = Directory.GetFiles(@ruta_temp_interface, "*.MNT");
+                string[] _archivos_xml = Directory.GetFiles(@ruta_temp_interface, "*.XML");
 
-                for (Int32 a = 0; a < _archivos_mnt.Length; ++a)
+                for (Int32 a = 0; a < _archivos_xml.Length; ++a)
                 {
-                    string _path_archivo_mnt = _archivos_mnt[a].ToString();
-                    string _nombrearchivo_mnt = Path.GetFileNameWithoutExtension(@_path_archivo_mnt);
-                    string _extension_archivo = Path.GetExtension(@_path_archivo_mnt);
-                    string _file_path_destino = ftp_ruta_orce + "/" + _nombrearchivo_mnt + _extension_archivo;
-                    Boolean valida_subida = subida_server_ftp(@_path_archivo_mnt, _file_path_destino);
+                    string _path_archivo_xml = _archivos_xml[a].ToString();
+                    string _nombrearchivo_xml = Path.GetFileNameWithoutExtension(@_path_archivo_xml);
+                    string _extension_archivo = Path.GetExtension(@_path_archivo_xml);
+                    string _file_path_destino = ftp_ruta_orce + "/" + _nombrearchivo_xml + _extension_archivo;
+                    Boolean valida_subida = subida_server_ftp(@_path_archivo_xml, _file_path_destino);
                     if (valida_subida)
                     {
-                        if (File.Exists(@_path_archivo_mnt)) File.Delete(@_path_archivo_mnt);
+                        if (File.Exists(@_path_archivo_xml)) File.Delete(@_path_archivo_xml);
                     }
 
                 }

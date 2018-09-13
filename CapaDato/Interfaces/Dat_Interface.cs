@@ -849,7 +849,7 @@ namespace CapaDato.Interfaces
         public DataTable OrcRetailLocations()
         {
             DataTable dt = null;
-            string sqlquery = "USP_ORCE_MerchandiseHierarchyMaintenance";
+            string sqlquery = "USP_ORCE_RetailLocations";
             try
             {
                 using (SqlConnection cn = new SqlConnection(Ent_Conexion.conexion_posperu))

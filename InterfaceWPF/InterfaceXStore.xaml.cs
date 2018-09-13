@@ -939,14 +939,10 @@ namespace InterfaceWPF
                             if (i < dt.Rows.Count - 1)
                             {
                                 str.Append("\r\n");
-
                             }
-
                         }
                         str_cadena = str.ToString();
-
-
-
+                        
                         name_stock_ledger = "STOCK_LEDGER_" + codtda + "_" + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
                         in_stock_ledger = ruta_interface + "\\" + name_stock_ledger;
 
@@ -954,8 +950,7 @@ namespace InterfaceWPF
                         File.WriteAllText(@in_stock_ledger, str_cadena);
 
                         mensaje = "Se creo en la ruta : " + in_stock_ledger;
-                    }                   
-
+                    }                 
                 }
 
                 if (EnviarFTP.Equals("S"))
@@ -2179,7 +2174,7 @@ namespace InterfaceWPF
 
 
 
-                            name_maestros = "ItemMaintenance_" + DateTime.Today.ToString("yyyyMMdd") + ".xml";
+                            name_maestros = "ItemMaintenance_" + DateTime.Today.ToString("yyyyMMdd") + ".XML";
                             in_maestros = ruta_interface + "\\" + name_maestros;
 
                             if (File.Exists(@in_maestros)) File.Delete(@in_maestros);
@@ -2213,7 +2208,7 @@ namespace InterfaceWPF
 
 
 
-                            name_maestros = "MerchandiseHierarchyMaintenance_" + DateTime.Today.ToString("yyyyMMdd") + ".xml";
+                            name_maestros = "MerchandiseHierarchyMaintenance_" + DateTime.Today.ToString("yyyyMMdd") + ".XML";
                             in_maestros = ruta_interface + "\\" + name_maestros;
 
                             if (File.Exists(@in_maestros)) File.Delete(@in_maestros);
@@ -2223,6 +2218,39 @@ namespace InterfaceWPF
                 }
                 #endregion
 
+                #region<ORCE_RetailLocations>
+                if (chk_OrcRetailLocations.IsChecked == true)
+                {
+                    DataTable dt = await Task.Run(() => dat_interface.OrcRetailLocations());
+                    if (dt != null)
+                    {
+                        if (dt.Rows.Count > 0)
+                        {
+                            str = new StringBuilder();
+                            for (Int32 i = 0; i < dt.Rows.Count; ++i)
+                            {
+                                str.Append(dt.Rows[i]["strXml"].ToString());
+
+                                if (i < dt.Rows.Count - 1)
+                                {
+                                    str.Append("\r\n");
+
+                                }
+
+                            }
+                            str_cadena = str.ToString();
+
+
+
+                            name_maestros = "RetailLocations_" + DateTime.Today.ToString("yyyyMMdd") + ".XML";
+                            in_maestros = ruta_interface + "\\" + name_maestros;
+
+                            if (File.Exists(@in_maestros)) File.Delete(@in_maestros);
+                            File.WriteAllText(@in_maestros, str_cadena);
+                        }
+                    }
+                }
+                #endregion
 
                 envio = true;
 
@@ -2239,8 +2267,6 @@ namespace InterfaceWPF
                 if (envio) await metroWindow.ShowMessageAsync(Ent_Msg.msginfomacion, mensaje, MessageDialogStyle.Affirmative, metroWindow.MetroDialogOptions);
                 if (ProgressAlert.IsOpen)
                     await ProgressAlert.CloseAsync();
-
-
 
             }
             catch (Exception exc)

@@ -30,6 +30,7 @@ namespace CapaEntidad.Util
         public static string ftp_user { get { return "webposbpe"; } }
         public static string ftp_password { get { return "JU737CbDmJvu"; } }
         public static Int32 ftp_puerto { get { return 22; } }
+
         #endregion
         #endregion
 

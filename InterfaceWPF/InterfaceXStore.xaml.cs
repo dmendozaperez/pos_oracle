@@ -71,10 +71,10 @@ namespace InterfaceWPF
             dwtienda_M.Focus();
 
             /*stock de tienda*/
-            dwtiendastk.ItemsSource = _tienda.get_tienda("PE");
+            dwtiendastk.ItemsSource = _tienda.get_tienda("PE", true);
             dwtiendastk.DisplayMember = "des_entid";
             dwtiendastk.ValueMember = "cod_entid";
-            dwtiendastk.SelectedIndex = -1;
+            dwtiendastk.SelectedIndex = 0;
             dwtiendastk.Focus();
 
 
@@ -917,10 +917,13 @@ namespace InterfaceWPF
 
                 string codtda = dwtiendastk.EditValue.ToString();
                 string fecha = Convert.ToDateTime(dtpfecha.ToString()).ToString("yyyyMMdd");
-                
-                /*Se recorre los datos del dataset y convertir a mnt el final del codigo y envia por un metodo en basico de envio
-                 por ftp*/
-                DataTable dt = await Task.Run(() => dat_interface.get_stock_ledger(fecha,codtda,pais));
+
+                if (codtda == "-1")
+                    codtda = "0";
+
+            /*Se recorre los datos del dataset y convertir a mnt el final del codigo y envia por un metodo en basico de envio
+             por ftp*/
+            DataTable dt = await Task.Run(() => dat_interface.get_stock_ledger(fecha,codtda,pais));
                 StringBuilder str = null;
                 string str_cadena = "";
                 if (dt != null)
@@ -2096,6 +2099,166 @@ namespace InterfaceWPF
                && (chk_bcl_county_city.IsChecked == false) && (chk_bcl_tender.IsChecked == false) && (chk_bcl_tender_property.IsChecked == false))
             {
                 await metroWindow.ShowMessageAsync(Ent_Msg.msginfomacion, "Seleccione al menos una interface.", MessageDialogStyle.Affirmative, metroWindow.MetroDialogOptions);
+
+                valida = true;
+                return valida;
+            }
+
+            return valida;
+        }
+
+        private void btnOrc_Click(object sender, RoutedEventArgs e)
+        {
+            genera_Orc();
+        }
+
+        private async void genera_Orc()
+        {
+            var metroWindow = this;
+            metroWindow.MetroDialogOptions.ColorScheme = MetroDialogOptions.ColorScheme;
+
+            ProgressDialogController ProgressAlert = null;
+            try
+            {
+
+                if (await valida_ORC()) return;
+
+              
+                string pais = "";
+                string EnviarFTP = "N";
+                string mensaje = "";
+                string mensajeEspera = "Generando Interface";
+                Boolean envio = false;
+
+                if (chk_ftp_orc.IsChecked == true)
+                {
+                    EnviarFTP = "S";
+                    mensajeEspera = "Enviando X FTP Interface: Seleccionadas";
+                }
+
+                //if (rbtPe_bcl.IsChecked == true)
+                //    pais = "PE";
+
+                //if (rbtEcu_bcl.IsChecked == true)
+                //    pais = "EC";
+
+
+                //if (await valida_maestros()) return;
+                ProgressAlert = await this.ShowProgressAsync(Ent_Msg.msgcargando, mensajeEspera);  //show message
+                ProgressAlert.SetIndeterminate();
+
+                string ruta_interface = basico.ruta_temp_interface;
+
+                if (!Directory.Exists(@ruta_interface)) Directory.CreateDirectory(@ruta_interface);
+
+
+                StringBuilder str = null;
+                string str_cadena = "";
+                string name_maestros = ""; string in_maestros = "";
+                #region<ItemMaintenance>
+                if (chk_ItemMaintenance.IsChecked == true)
+                {
+                    DataTable dt = await Task.Run(() => dat_interface.ItemMaintenance());
+                    if (dt != null)
+                    {
+                        if (dt.Rows.Count > 0)
+                        {
+                            str = new StringBuilder();
+                            for (Int32 i = 0; i < dt.Rows.Count; ++i)
+                            {
+                                str.Append(dt.Rows[i]["ItemMaintenance"].ToString());
+
+                                if (i < dt.Rows.Count - 1)
+                                {
+                                    str.Append("\r\n");
+
+                                }
+
+                            }
+                            str_cadena = str.ToString();
+
+
+
+                            name_maestros = "ItemMaintenance_" + DateTime.Today.ToString("yyyyMMdd") + ".xml";
+                            in_maestros = ruta_interface + "\\" + name_maestros;
+
+                            if (File.Exists(@in_maestros)) File.Delete(@in_maestros);
+                            File.WriteAllText(@in_maestros, str_cadena);
+                        }
+                    }
+                }
+                #endregion
+
+                #region<MerchandiseHierarch>
+                if (chk_MerchandiseHierarch.IsChecked == true)
+                {
+                    DataTable dt = await Task.Run(() => dat_interface.MerchandiseHierarch());
+                    if (dt != null)
+                    {
+                        if (dt.Rows.Count > 0)
+                        {
+                            str = new StringBuilder();
+                            for (Int32 i = 0; i < dt.Rows.Count; ++i)
+                            {
+                                str.Append(dt.Rows[i]["MerchandiseHierarchyMaintenance"].ToString());
+
+                                if (i < dt.Rows.Count - 1)
+                                {
+                                    str.Append("\r\n");
+
+                                }
+
+                            }
+                            str_cadena = str.ToString();
+
+
+
+                            name_maestros = "MerchandiseHierarchyMaintenance_" + DateTime.Today.ToString("yyyyMMdd") + ".xml";
+                            in_maestros = ruta_interface + "\\" + name_maestros;
+
+                            if (File.Exists(@in_maestros)) File.Delete(@in_maestros);
+                            File.WriteAllText(@in_maestros, str_cadena);
+                        }
+                    }
+                }
+                #endregion
+
+
+                envio = true;
+
+                if (EnviarFTP.Equals("S"))
+                {
+                    mensaje = "Se enviaron al ftp";
+                    envio = await Task.Run(() => basico.sendftp_file_orce());
+                }
+                else
+                {
+                    mensaje = "Se creo en la ruta : " + ruta_interface;
+                }
+
+                if (envio) await metroWindow.ShowMessageAsync(Ent_Msg.msginfomacion, mensaje, MessageDialogStyle.Affirmative, metroWindow.MetroDialogOptions);
+                if (ProgressAlert.IsOpen)
+                    await ProgressAlert.CloseAsync();
+
+
+
+            }
+            catch (Exception exc)
+            {
+                if (ProgressAlert != null) await ProgressAlert.CloseAsync();
+                await metroWindow.ShowMessageAsync(Ent_Msg.msginfomacion, exc.Message, MessageDialogStyle.Affirmative, metroWindow.MetroDialogOptions);
+            }
+        }
+
+        private async Task<Boolean> valida_ORC()
+        {
+            var metroWindow = this;
+            Boolean valida = false;
+            metroWindow.MetroDialogOptions.ColorScheme = MetroDialogOptions.ColorScheme;
+         
+            if ((chk_ItemMaintenance.IsChecked == false) && (chk_MerchandiseHierarch.IsChecked == false)&& (chk_OrcRetailLocations.IsChecked == false))
+            {
+                await metroWindow.ShowMessageAsync(Ent_Msg.msginfomacion, "Seleccione al menos una generacion de archivos.", MessageDialogStyle.Affirmative, metroWindow.MetroDialogOptions);
 
                 valida = true;
                 return valida;

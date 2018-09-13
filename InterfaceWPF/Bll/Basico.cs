@@ -17,6 +17,7 @@ namespace InterfaceWPF.Bll
         public String ruta_temp_DBF = System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "//tmpDBF";
 
         private string ftp_ruta_destino = "/opt/webxst/BCL/autodeploy/data/org2000";
+        private string ftp_ruta_orce = "/app/webce/BPE/CE/batch_processing/auto_fileset";
         //private string ftp_ruta_destino = "/tmp";
         //private string ftp_ruta_destino = "/app/webxst/BCL/autodeploy/data/";
         #region<ENVIO POR FTP ARCHIVOS MNT>
@@ -48,6 +49,38 @@ namespace InterfaceWPF.Bll
             catch (Exception)
             {
                 valida = false;                
+            }
+            return valida;
+        }
+
+        public Boolean sendftp_file_orce()
+        {
+            Boolean valida = false;
+            try
+            {
+
+                // return false;
+
+                string[] _archivos_mnt = Directory.GetFiles(@ruta_temp_interface, "*.MNT");
+
+                for (Int32 a = 0; a < _archivos_mnt.Length; ++a)
+                {
+                    string _path_archivo_mnt = _archivos_mnt[a].ToString();
+                    string _nombrearchivo_mnt = Path.GetFileNameWithoutExtension(@_path_archivo_mnt);
+                    string _extension_archivo = Path.GetExtension(@_path_archivo_mnt);
+                    string _file_path_destino = ftp_ruta_orce + "/" + _nombrearchivo_mnt + _extension_archivo;
+                    Boolean valida_subida = subida_server_ftp(@_path_archivo_mnt, _file_path_destino);
+                    if (valida_subida)
+                    {
+                        if (File.Exists(@_path_archivo_mnt)) File.Delete(@_path_archivo_mnt);
+                    }
+
+                }
+                valida = true;
+            }
+            catch (Exception)
+            {
+                valida = false;
             }
             return valida;
         }

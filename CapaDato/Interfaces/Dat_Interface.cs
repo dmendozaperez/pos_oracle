@@ -789,6 +789,93 @@ namespace CapaDato.Interfaces
 
         #endregion
 
+        #region<DATOS_ORCE>
+        public DataTable ItemMaintenance()
+        {
+            DataTable dt = null;
+            string sqlquery = "USP_ORCE_ItemMaintenance";
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(Ent_Conexion.conexion_posperu))
+                {
+                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                       using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            dt = new DataTable();
+                            da.Fill(dt);
+                        }
+
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+            return dt;
+        }
+
+        public DataTable MerchandiseHierarch()
+        {
+            DataTable dt = null;
+            string sqlquery = "USP_ORCE_MerchandiseHierarchyMaintenance";
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(Ent_Conexion.conexion_posperu))
+                {
+                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            dt = new DataTable();
+                            da.Fill(dt);
+                        }
+
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+            return dt;
+        }
+
+        public DataTable OrcRetailLocations()
+        {
+            DataTable dt = null;
+            string sqlquery = "USP_ORCE_MerchandiseHierarchyMaintenance";
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(Ent_Conexion.conexion_posperu))
+                {
+                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            dt = new DataTable();
+                            da.Fill(dt);
+                        }
+
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+            return dt;
+        }
+
+        #endregion
+
 
     }
 }

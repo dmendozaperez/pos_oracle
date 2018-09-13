@@ -558,7 +558,55 @@
                     </Grid>
                 </Border>
             </TabItem>
-            
+
+            <!--Diseño de Transferencias de tiendas-->
+            <TabItem Header="Interface Orce" Background="#FF79787E" BorderThickness="1" Height="30" VerticalAlignment="Bottom" >
+                <Border CornerRadius="2">
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="20"/>
+                    </Border.Effect>
+                    <Grid Margin="0,0,0,0" Width="930" Height="475" Background="AliceBlue">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="800"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="70"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="300"/>
+                                <ColumnDefinition Width="500"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="40"/>
+                            </Grid.RowDefinitions>
+                            <CheckBox Grid.Row="1" IsEnabled="True" IsChecked="True" Cursor="Hand" Grid.Column="1"  x:Name="chk_ItemMaintenance" HorizontalAlignment="Left" VerticalAlignment="Center" Content="ITEM MAINTENANCE"/>
+                            <CheckBox Grid.Row="2" IsEnabled="True" IsChecked="True" Cursor="Hand" Grid.Column="1"  x:Name="chk_MerchandiseHierarch" HorizontalAlignment="Left" VerticalAlignment="Center" Content="MERCHANDISE HIERARCHY MAINTENANCE"/>
+                            <CheckBox Grid.Row="3" IsEnabled="True" IsChecked="True" Cursor="Hand" Grid.Column="1"  x:Name="chk_OrcRetailLocations" HorizontalAlignment="Left" VerticalAlignment="Center" Content="ORCE RETAIL LOCATIONS"/>
+
+                            <CheckBox Grid.Row="4" IsEnabled="true" IsChecked="True" Cursor="Hand" Grid.Column="1"  x:Name="chk_ftp_orc" HorizontalAlignment="Left" VerticalAlignment="Center" Content="ENVIAR FTP"/>
+                            <!--<RadioButton  Grid.Row="5" IsEnabled="true" Checked="llenarTiendaShp"  IsChecked="True" Cursor="Hand" Grid.Column="1"  Name="rbtPe_orc" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Peru"  />
+                            <RadioButton  Grid.Row="5" IsEnabled="true" Checked="llenarTiendaShp" IsChecked="False" Cursor="Hand" Grid.Column="1"  Name="rbtEcu_orc" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Ecuador" Margin="108,12,0,11"  />-->
+                            <!--<CheckBox Grid.Row="2" IsEnabled="False" IsChecked="True" Cursor="Hand" Grid.Column="1"  x:Name="chk_retail_location_property" HorizontalAlignment="Left" VerticalAlignment="Center" Content="RETAIL LOCATION PROPERTY"/>-->
+                            <Button Cursor="Hand" Grid.Column="1" Content="Genera Archivo Orce" Width="190" Grid.Row="7" HorizontalAlignment="Left" x:Name="btnArc" Click="btnOrc_Click"  />
+                        </Grid>
+
+
+                    </Grid>
+                </Border>
+            </TabItem>
+
+
         </TabControl>
 
     </Grid>

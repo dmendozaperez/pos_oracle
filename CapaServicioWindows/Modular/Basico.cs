@@ -948,6 +948,14 @@ namespace CapaServicioWindows.Modular
                 venta_ing = new Dat_Venta();
                 _error_procesos = venta_ing.procesar_poslog();
 
+                #region<ENVIO DE VENTAS DEL XSTORE A LA BASE DE DATOS>
+                if (_error_procesos.Length==0)
+                { 
+                    _error_procesos=venta_ing.procesar_ventas_xstore();
+                }
+                #endregion
+
+
                 if (_error_procesos.Length>0)
                 {
                     datUtil.control_errores_transac("08", _error_procesos, ref _error_procesos);

@@ -1445,10 +1445,10 @@ namespace InterfaceWPF
                 string ruta_zip = @_comprimir + "\\TD" + _fecha + "." + codTda.Substring(2, 3);
 
                 string[] _file_cmp = Directory.GetFiles(_comprimir, "*.*");
-                foreach (string f in _file_cmp)
-                {
-                    File.Delete(f.ToString());
-                }
+                //foreach (string f in _file_cmp)
+                //{
+                //    File.Delete(f.ToString());
+                //}
 
                 //if (File.Exists(ruta_zip))
                 //{

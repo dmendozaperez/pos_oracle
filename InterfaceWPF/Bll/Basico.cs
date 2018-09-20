@@ -87,18 +87,26 @@ namespace InterfaceWPF.Bll
         private Boolean subida_server_ftp(string file_origen,string file_destino)
         {
             Boolean valida_envio = false;
+
+
             try
             {
                 // Setup session options
                 SessionOptions sessionOptions = new SessionOptions
                 {
+                    //Protocol = Protocol.Sftp,
+                    //HostName = "172.24.20.183",//Ent_Conexion.ftp_server,// "172.24.28.216",
+                    //UserName = "retailc",//Ent_Conexion.ftp_user,// "webposintg",
+                    //Password = "1wiAwNRa", //Ent_Conexion.ftp_password,// "SubJFpHEN27y",
+                    //PortNumber =Ent_Conexion.ftp_puerto,// 22,
+                    //GiveUpSecurityAndAcceptAnySshHostKey = true,
+                    //SshHostKeyFingerprint = "ssh-rsa 2048 xx:xx:xx:xx:xx:xx:xx:xx..."
                     Protocol = Protocol.Sftp,
                     HostName = Ent_Conexion.ftp_server,// "172.24.28.216",
                     UserName = Ent_Conexion.ftp_user,// "webposintg",
                     Password = Ent_Conexion.ftp_password,// "SubJFpHEN27y",
-                    PortNumber =Ent_Conexion.ftp_puerto,// 22,
+                    PortNumber = Ent_Conexion.ftp_puerto,// 22,
                     GiveUpSecurityAndAcceptAnySshHostKey = true,
-                    //SshHostKeyFingerprint = "ssh-rsa 2048 xx:xx:xx:xx:xx:xx:xx:xx..."
                 };
 
                 using (Session session = new Session())
@@ -110,6 +118,10 @@ namespace InterfaceWPF.Bll
                     transferOptions.PreserveTimestamp = false;
                     transferOptions.TransferMode = TransferMode.Binary;
                     TransferOperationResult transferResult;
+
+                    /*destino ORCE*/
+                    //transferResult =
+                    //    session.PutFiles(file_origen, "/tmp/", false, transferOptions);
 
                     transferResult =
                         session.PutFiles(file_origen, file_destino, false, transferOptions);

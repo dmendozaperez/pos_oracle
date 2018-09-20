@@ -158,14 +158,17 @@
                                 <RowDefinition Height="40"/>
                                 <RowDefinition Height="40"/>
                                 <RowDefinition Height="40"/>
+                                <RowDefinition Height="40"/>
                             </Grid.RowDefinitions>
-                            <Label HorizontalAlignment="Right" Content="Seleccione Tienda" FontSize="14" FontWeight="Bold"/>
-                            <dxe:ComboBoxEdit  x:Name="dwtienda" ItemsSource="llenarTiendaTda" ValidateOnTextInput="False"  Width="370" Height="28" Grid.Row="0" Cursor="Hand" Grid.Column="1" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" AutoComplete="True"/>
-                            <CheckBox Grid.Row="1" IsEnabled="False" IsChecked="True" Cursor="Hand" Grid.Column="1"  x:Name="chk_retail_location" HorizontalAlignment="Left" VerticalAlignment="Center" Content="RETAIL LOCATION"/>
-                            <CheckBox Grid.Row="2" IsEnabled="False" IsChecked="True" Cursor="Hand" Grid.Column="1"  x:Name="chk_retail_location_property" HorizontalAlignment="Left" VerticalAlignment="Center" Content="RETAIL LOCATION PROPERTY"/>
-                            <CheckBox Grid.Row="3" IsEnabled="true" IsChecked="True" Cursor="Hand" Grid.Column="1"  x:Name="chk_ftp_Tda" HorizontalAlignment="Left" VerticalAlignment="Center" Content="ENVIAR FTP"/>
-                            <RadioButton  Grid.Row="4" IsEnabled="true" Click="llenarTiendaTda"    IsChecked="True" Cursor="Hand" Grid.Column="1"  Name="rbtPe_Tda" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Peru"  />
-                            <RadioButton  Grid.Row="4" IsEnabled="true"  Click="llenarTiendaTda" IsChecked="False" Cursor="Hand" Grid.Column="1"  Name="rbtEc_Tda" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Ecuador" Margin="108,12,0,11"  />
+                            <Label HorizontalAlignment="Right" Content="Seleccione Ambiente" Grid.Row="0" FontSize="14" FontWeight="Bold"/>
+                            <dxe:ComboBoxEdit  x:Name="dwAmbienteT"  ValidateOnTextInput="False"  Width="370" Height="28" Grid.Row="0" Cursor="Hand" Grid.Column="1" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" AutoComplete="True"/>
+                            <Label HorizontalAlignment="Right" Content="Seleccione Tienda" Grid.Row="1" FontSize="14" FontWeight="Bold"/>
+                            <dxe:ComboBoxEdit  x:Name="dwtienda" ItemsSource="llenarTiendaTda" ValidateOnTextInput="False"  Width="370" Height="28" Grid.Row="1" Cursor="Hand" Grid.Column="1" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" AutoComplete="True"/>
+                            <CheckBox Grid.Row="2" IsEnabled="False" IsChecked="True" Cursor="Hand" Grid.Column="1"  x:Name="chk_retail_location" HorizontalAlignment="Left" VerticalAlignment="Center" Content="RETAIL LOCATION"/>
+                            <CheckBox Grid.Row="3" IsEnabled="False" IsChecked="True" Cursor="Hand" Grid.Column="1"  x:Name="chk_retail_location_property" HorizontalAlignment="Left" VerticalAlignment="Center" Content="RETAIL LOCATION PROPERTY"/>
+                            <CheckBox Grid.Row="4" IsEnabled="true" IsChecked="True" Cursor="Hand" Grid.Column="1"  x:Name="chk_ftp_Tda" HorizontalAlignment="Left" VerticalAlignment="Center" Content="ENVIAR FTP"/>
+                            <RadioButton  Grid.Row="5" IsEnabled="true" Click="llenarTiendaTda"    IsChecked="True" Cursor="Hand" Grid.Column="1"  Name="rbtPe_Tda" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Peru"  />
+                            <RadioButton  Grid.Row="5" IsEnabled="true"  Click="llenarTiendaTda" IsChecked="False" Cursor="Hand" Grid.Column="1"  Name="rbtEc_Tda" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Ecuador" Margin="108,12,0,11"  />
                             <Button Grid.Row="6"  Cursor="Hand" Grid.Column="1" Content="Genera Interface Tienda" Width="150" HorizontalAlignment="Left" x:Name="btntienda" Click="btntienda_Click" />
                         </Grid>
 
@@ -203,30 +206,34 @@
                                 <RowDefinition Height="40"/>
                                 <RowDefinition Height="40"/>
                                 <RowDefinition Height="40"/>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="40"/>
                             </Grid.RowDefinitions>
-                            <Label HorizontalAlignment="Right" Content="Seleccione Tienda" FontSize="14" FontWeight="Bold"/>
-                            <dxe:ComboBoxEdit  x:Name="dwtienda_M" ValidateOnTextInput="False"  Width="300" Height="28" Grid.Row="0" Cursor="Hand" Grid.Column="1" Grid.ColumnSpan="2" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" AutoComplete="True"/>
-                            <CheckBox Grid.Row="1" Margin="10,0,0,0" ToolTip="DIMENSION DE TALLA" IsChecked="False" Cursor="Hand" Grid.Column="0"  x:Name="chk_item_dimension_type" HorizontalAlignment="Left" VerticalAlignment="Center" Content="ITEM__DIMENSION__TYPE"/>
-                            <CheckBox Grid.Row="2" Margin="10,0,0,0" ToolTip="TALLA" IsChecked="False" Cursor="Hand" Grid.Column="0"  x:Name="chk_item_dimension_value" HorizontalAlignment="Left" VerticalAlignment="Center" Content="ITEM__DIMENSION__VALUE"/>
-                            <CheckBox Grid.Row="1" Margin="10,0,0,0" ToolTip="ARTICULO" IsChecked="False" Cursor="Hand" Grid.Column="1"  x:Name="chk_item" HorizontalAlignment="Left" VerticalAlignment="Center" Content="ITEM"/>
-                            <CheckBox Grid.Row="2" Margin="10,0,0,0" ToolTip="PRECIO" IsChecked="False" Cursor="Hand" Grid.Column="1"  x:Name="chk_price_update" HorizontalAlignment="Left" VerticalAlignment="Center" Content="PRICE__UPDATE__2"/>
-                            <CheckBox Grid.Row="1" Margin="10,0,0,0" ToolTip="IMAGEN" IsChecked="False" Cursor="Hand" Grid.Column="2"  x:Name="chk_item_images" HorizontalAlignment="Left" VerticalAlignment="Center" Content="ITEM__IMAGES"/>
-                            <CheckBox Grid.Row="2" Margin="10,0,0,0" ToolTip="CODIGO DE BARRA" IsChecked="False" Cursor="Hand" Grid.Column="2"  x:Name="chk_item_xref" HorizontalAlignment="Left" VerticalAlignment="Center" Content="ITEM__XREF"/>
+                            <Label HorizontalAlignment="Right" Content="Seleccione Ambiente" Grid.Row="0" FontSize="14" FontWeight="Bold"/>
+                            <dxe:ComboBoxEdit  x:Name="dwAmbiente_M" ValidateOnTextInput="False"  Width="300" Height="28" Grid.Row="0" Cursor="Hand" Grid.Column="1" Grid.ColumnSpan="2" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" AutoComplete="True"/>
+                            <Label HorizontalAlignment="Right" Content="Seleccione Tienda" Grid.Row="1" FontSize="14" FontWeight="Bold"/>
+                            <dxe:ComboBoxEdit  x:Name="dwtienda_M" ValidateOnTextInput="False"  Width="300" Height="28" Grid.Row="1" Cursor="Hand" Grid.Column="1" Grid.ColumnSpan="2" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" AutoComplete="True"/>
+                            <CheckBox Grid.Row="2" Margin="10,0,0,0" ToolTip="DIMENSION DE TALLA" IsChecked="False" Cursor="Hand" Grid.Column="0"  x:Name="chk_item_dimension_type" HorizontalAlignment="Left" VerticalAlignment="Center" Content="ITEM__DIMENSION__TYPE"/>
+                            <CheckBox Grid.Row="3" Margin="10,0,0,0" ToolTip="TALLA" IsChecked="False" Cursor="Hand" Grid.Column="0"  x:Name="chk_item_dimension_value" HorizontalAlignment="Left" VerticalAlignment="Center" Content="ITEM__DIMENSION__VALUE"/>
+                            <CheckBox Grid.Row="2" Margin="10,0,0,0" ToolTip="ARTICULO" IsChecked="False" Cursor="Hand" Grid.Column="1"  x:Name="chk_item" HorizontalAlignment="Left" VerticalAlignment="Center" Content="ITEM"/>
+                            <CheckBox Grid.Row="3" Margin="10,0,0,0" ToolTip="PRECIO" IsChecked="False" Cursor="Hand" Grid.Column="1"  x:Name="chk_price_update" HorizontalAlignment="Left" VerticalAlignment="Center" Content="PRICE__UPDATE__2"/>
+                            <CheckBox Grid.Row="2" Margin="10,0,0,0" ToolTip="IMAGEN" IsChecked="False" Cursor="Hand" Grid.Column="2"  x:Name="chk_item_images" HorizontalAlignment="Left" VerticalAlignment="Center" Content="ITEM__IMAGES"/>
+                            <CheckBox Grid.Row="3" Margin="10,0,0,0" ToolTip="CODIGO DE BARRA" IsChecked="False" Cursor="Hand" Grid.Column="2"  x:Name="chk_item_xref" HorizontalAlignment="Left" VerticalAlignment="Center" Content="ITEM__XREF"/>
 
-                            <CheckBox Grid.Row="3" Margin="10,0,0,0" ToolTip="" IsChecked="False" Cursor="Hand" Grid.Column="0"  x:Name="chk_org_hier" HorizontalAlignment="Left" VerticalAlignment="Center" Content="ORG HIER"/>
-                            <CheckBox Grid.Row="3" Margin="10,0,0,0" ToolTip="LINE-CATERIA-SUB-RIMS" IsChecked="False" Cursor="Hand" Grid.Column="1"  x:Name="chk_merch_hier" HorizontalAlignment="Left" VerticalAlignment="Center" Content="MERCH HIER"/>
-                            <CheckBox Grid.Row="3" Margin="10,0,0,0" ToolTip="LINE-CATERIA-SUB-RIMS" IsChecked="False" Cursor="Hand" Grid.Column="2"  x:Name="chk_Location_Property" HorizontalAlignment="Left" VerticalAlignment="Center" Content="INV LOCATION PROPERTY"/>
+                            <CheckBox Grid.Row="4" Margin="10,0,0,0" ToolTip="" IsChecked="False" Cursor="Hand" Grid.Column="0"  x:Name="chk_org_hier" HorizontalAlignment="Left" VerticalAlignment="Center" Content="ORG HIER"/>
+                            <CheckBox Grid.Row="4" Margin="10,0,0,0" ToolTip="LINE-CATERIA-SUB-RIMS" IsChecked="False" Cursor="Hand" Grid.Column="1"  x:Name="chk_merch_hier" HorizontalAlignment="Left" VerticalAlignment="Center" Content="MERCH HIER"/>
+                            <CheckBox Grid.Row="4" Margin="10,0,0,0" ToolTip="LINE-CATERIA-SUB-RIMS" IsChecked="False" Cursor="Hand" Grid.Column="2"  x:Name="chk_Location_Property" HorizontalAlignment="Left" VerticalAlignment="Center" Content="INV LOCATION PROPERTY"/>
 
-                            <CheckBox Grid.Row="4" Margin="10,0,0,0" ToolTip="" IsChecked="False" Cursor="Hand" Grid.Column="0"  x:Name="chk_party_employee" HorizontalAlignment="Left" VerticalAlignment="Center" Content="PARTY EMPLOYEE"/>
-                            <CheckBox Grid.Row="4" Margin="10,0,0,0" ToolTip="" IsChecked="False" Cursor="Hand" Grid.Column="1"  x:Name="chk_party_supplier" HorizontalAlignment="Left" VerticalAlignment="Center" Content="PARTY SUPPLIER"/>
+                            <CheckBox Grid.Row="5" Margin="10,0,0,0" ToolTip="" IsChecked="False" Cursor="Hand" Grid.Column="0"  x:Name="chk_party_employee" HorizontalAlignment="Left" VerticalAlignment="Center" Content="PARTY EMPLOYEE"/>
+                            <CheckBox Grid.Row="5" Margin="10,0,0,0" ToolTip="" IsChecked="False" Cursor="Hand" Grid.Column="1"  x:Name="chk_party_supplier" HorizontalAlignment="Left" VerticalAlignment="Center" Content="PARTY SUPPLIER"/>
 
 
-                            <CheckBox Grid.Row="5"  Margin="10,0,0,0"  IsEnabled="true" IsChecked="True" Cursor="Hand" Grid.Column="0"  x:Name="chk_ftp_M" HorizontalAlignment="Left" VerticalAlignment="Center" Content="ENVIAR FTP"/>
-                            <RadioButton  Grid.Row="5"  Margin="10,0,0,0"  IsEnabled="true" IsChecked="True" Cursor="Hand" Grid.Column="1"  Name="rbtPe_M" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Peru"  />
-                            <RadioButton  Grid.Row="5"  Margin="10,0,0,0"  IsEnabled="true" IsChecked="False" Cursor="Hand" Grid.Column="2"  Name="rbtEcu_M" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Ecuador" />
+                            <CheckBox Grid.Row="6"  Margin="10,0,0,0"  IsEnabled="true" IsChecked="True" Cursor="Hand" Grid.Column="0"  x:Name="chk_ftp_M" HorizontalAlignment="Left" VerticalAlignment="Center" Content="ENVIAR FTP"/>
+                            <RadioButton  Grid.Row="6"  Margin="10,0,0,0"  IsEnabled="true" IsChecked="True" Cursor="Hand" Grid.Column="1"  Name="rbtPe_M" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Peru"  />
+                            <RadioButton  Grid.Row="6"  Margin="10,0,0,0"  IsEnabled="true" IsChecked="False" Cursor="Hand" Grid.Column="2"  Name="rbtEcu_M" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Ecuador" />
 
                             <CheckBox Grid.Row="3" Visibility="Hidden" Margin="10,0,0,0" ToolTip="LINE-CATERIA-SUB-RIMS" IsChecked="False" Cursor="Hand" Grid.Column="1"  x:Name="chk_merch_hier2" HorizontalAlignment="Left" VerticalAlignment="Center" Content="MERCH__HIER"/>
-                            <Button Cursor="Hand" Grid.Column="1" Content="Genera Interface Maestros" Width="170" Grid.Row="6" HorizontalAlignment="Left" x:Name="btnmaestros" Click="btnmaestros_Click" />
+                            <Button Cursor="Hand" Grid.Column="1" Content="Genera Interface Maestros" Width="170" Grid.Row="7" HorizontalAlignment="Left" x:Name="btnmaestros" Click="btnmaestros_Click" />
                         </Grid>
 
 
@@ -261,18 +268,21 @@
                                 <RowDefinition Height="40"/>
                                 <RowDefinition Height="40"/>
                                 <RowDefinition Height="40"/>
+                                <RowDefinition Height="40"/>
                             </Grid.RowDefinitions>
-                            <Label HorizontalAlignment="Right" Content="Seleccione Tienda" FontSize="14" FontWeight="Bold"/>
-                            <Label HorizontalAlignment="Right" Grid.Row="1" Content="Fecha" FontSize="14" FontWeight="Bold"/>
-                            <dxe:ComboBoxEdit  x:Name="dwtiendastk" ValidateOnTextInput="False"  Width="370" Height="28" Grid.Row="0" Cursor="Hand" Grid.Column="1" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" AutoComplete="True"/>
-                            <DatePicker x:Name="dtpfecha" HorizontalAlignment="Left" Width="180" Cursor="Hand" FontSize="14" Height="25" Grid.Column="2" Grid.Row="1"/>
-                            <CheckBox Grid.Row="2" IsEnabled="False" IsChecked="True" Cursor="Hand" Grid.Column="1"  x:Name="chk_stock_ledger" HorizontalAlignment="Left" VerticalAlignment="Center" Content="STOCK LEDGER"/>
+                            <Label HorizontalAlignment="Right" Content="Seleccione Ambiente" Grid.Row="0" FontSize="14" FontWeight="Bold"/>
+                            <dxe:ComboBoxEdit  x:Name="dwAmbiente_stk" ValidateOnTextInput="False"  Width="370" Height="28" Grid.Row="0" Cursor="Hand" Grid.Column="1" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" AutoComplete="True"/>
+                            <Label HorizontalAlignment="Right" Grid.Row="1" Content="Seleccione Tienda" FontSize="14" FontWeight="Bold"/>
+                            <Label HorizontalAlignment="Right" Grid.Row="2" Content="Fecha" FontSize="14" FontWeight="Bold"/>
+                            <dxe:ComboBoxEdit  x:Name="dwtiendastk" ValidateOnTextInput="False"  Width="370" Height="28" Grid.Row="1" Cursor="Hand" Grid.Column="1" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" AutoComplete="True"/>
+                            <DatePicker x:Name="dtpfecha" HorizontalAlignment="Left" Width="180" Cursor="Hand" FontSize="14" Height="25" Grid.Column="2" Grid.Row="2"/>
+                            <CheckBox Grid.Row="3" IsEnabled="False" IsChecked="True" Cursor="Hand" Grid.Column="1"  x:Name="chk_stock_ledger" HorizontalAlignment="Left" VerticalAlignment="Center" Content="STOCK LEDGER"/>
 
-                            <CheckBox Grid.Row="3" IsEnabled="true" IsChecked="True" Cursor="Hand" Grid.Column="1"  x:Name="chk_ftp_stk" HorizontalAlignment="Left" VerticalAlignment="Center" Content="ENVIAR FTP"/>
-                            <RadioButton  Grid.Row="4" IsEnabled="true"  Checked="llenarTiendaStk"  IsChecked="True" Cursor="Hand" Grid.Column="1"  Name="rbtPe_stk" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Peru"  />
-                            <RadioButton  Grid.Row="4" IsEnabled="true" Checked="llenarTiendaStk"  IsChecked="False" Cursor="Hand" Grid.Column="1"  Name="rbtEcu_stk" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Ecuador" Margin="108,12,0,11"  />
+                            <CheckBox Grid.Row="4" IsEnabled="true" IsChecked="True" Cursor="Hand" Grid.Column="1"  x:Name="chk_ftp_stk" HorizontalAlignment="Left" VerticalAlignment="Center" Content="ENVIAR FTP"/>
+                            <RadioButton  Grid.Row="5" IsEnabled="true"  Checked="llenarTiendaStk"  IsChecked="True" Cursor="Hand" Grid.Column="1"  Name="rbtPe_stk" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Peru"  />
+                            <RadioButton  Grid.Row="5" IsEnabled="true" Checked="llenarTiendaStk"  IsChecked="False" Cursor="Hand" Grid.Column="1"  Name="rbtEcu_stk" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Ecuador" Margin="108,12,0,11"  />
 
-                            <Button Cursor="Hand" Grid.Column="1" Content="Genera Interface Stock" Width="150" Grid.Row="6" HorizontalAlignment="Left" x:Name="btnstock" Click="btnstock_Click" Height="41" VerticalAlignment="Bottom"  />
+                            <Button Cursor="Hand" Grid.Column="1" Content="Genera Interface Stock" Width="150" Grid.Row="7" HorizontalAlignment="Left" x:Name="btnstock" Click="btnstock_Click" Height="41" VerticalAlignment="Bottom"  />
                         </Grid>
 
 
@@ -310,22 +320,25 @@
                                 <RowDefinition Height="40"/>
                                 <RowDefinition Height="40"/>
                                 <RowDefinition Height="40"/>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="40"/>
                             </Grid.RowDefinitions>
+                            <Label HorizontalAlignment="Right" Content="Seleccione Ambiente" Grid.Row="0" FontSize="14" FontWeight="Bold"/>
+                            <dxe:ComboBoxEdit  x:Name="dwAmbiente_bcl" ValidateOnTextInput="False"  Width="370" Height="28" Grid.Row="0" Cursor="Hand" Grid.Column="1" Grid.ColumnSpan="2" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" AutoComplete="True"/>
+                            <Label HorizontalAlignment="Right" Grid.Row="1" Content="Seleccione Tienda" FontSize="14" FontWeight="Bold"/>
+                            <dxe:ComboBoxEdit  x:Name="dwtienda_bcl" ValidateOnTextInput="False"  Width="370" Height="28" Grid.Row="1" Cursor="Hand" Grid.Column="1" Grid.ColumnSpan="2" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" AutoComplete="True"/>
+                            <RadioButton  Grid.Row="2" IsEnabled="true" Checked="llenarTiendaBCL"  IsChecked="True" Cursor="Hand" Grid.Column="1"  Name="rbtPe_bcl" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Peru"  />
+                            <RadioButton  Grid.Row="2" IsEnabled="true" Checked="llenarTiendaBCL" IsChecked="False" Cursor="Hand" Grid.Column="1"  Name="rbtEcu_bcl" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Ecuador" Margin="108,12,0,11"  />
+                            <CheckBox Grid.Row="3" IsEnabled="true" IsChecked="True" Cursor="Hand" Grid.Column="1"  x:Name="chk_ftp_BCL" HorizontalAlignment="Left" VerticalAlignment="Center" Content="ENVIAR FTP"/>
+                            <CheckBox Grid.Row="4" IsEnabled="true" IsChecked="True" Cursor="Hand" Grid.Column="1"  x:Name="chk_bcl_county_city" HorizontalAlignment="Left" VerticalAlignment="Center" Content="COUNTY CITY"/>
+                            <CheckBox Grid.Row="4" IsEnabled="true" IsChecked="True" Cursor="Hand" Grid.Column="2"  x:Name="chk_bcl_state" HorizontalAlignment="Left" VerticalAlignment="Center" Content="STATE COUNTY"/>
+                            <CheckBox Grid.Row="5" IsEnabled="true" IsChecked="True" Cursor="Hand" Grid.Column="1"  x:Name="chk_bcl_electronic" HorizontalAlignment="Left" VerticalAlignment="Center" Content="ELECTRONIC CORRELATIVES"/>
+                            <CheckBox Grid.Row="5" IsEnabled="true" IsChecked="True" Cursor="Hand" Grid.Column="2"  x:Name="chk_bcl_manual" HorizontalAlignment="Left" VerticalAlignment="Center" Content="MANUAL CORRELATIVES"/>
+                            <CheckBox Grid.Row="6" IsEnabled="true" IsChecked="True" Cursor="Hand" Grid.Column="1"  x:Name="chk_bcl_tender" HorizontalAlignment="Left" VerticalAlignment="Center" Content="TENDER REPOSITORY"/>
+                            <CheckBox Grid.Row="6" IsEnabled="true" IsChecked="True" Cursor="Hand" Grid.Column="2"  x:Name="chk_bcl_tender_property" HorizontalAlignment="Left" VerticalAlignment="Center" Content="TENDER REPOSITORY PROPERTY"/>
 
-                            <Label HorizontalAlignment="Right" Content="Seleccione Tienda" FontSize="14" FontWeight="Bold"/>
-                            <dxe:ComboBoxEdit  x:Name="dwtienda_bcl" ValidateOnTextInput="False"  Width="370" Height="28" Grid.Row="0" Cursor="Hand" Grid.Column="1" Grid.ColumnSpan="2" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" AutoComplete="True"/>
-                            <RadioButton  Grid.Row="1" IsEnabled="true" Checked="llenarTiendaBCL"  IsChecked="True" Cursor="Hand" Grid.Column="1"  Name="rbtPe_bcl" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Peru"  />
-                            <RadioButton  Grid.Row="1" IsEnabled="true" Checked="llenarTiendaBCL" IsChecked="False" Cursor="Hand" Grid.Column="1"  Name="rbtEcu_bcl" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Ecuador" Margin="108,12,0,11"  />
-                            <CheckBox Grid.Row="2" IsEnabled="true" IsChecked="True" Cursor="Hand" Grid.Column="1"  x:Name="chk_ftp_BCL" HorizontalAlignment="Left" VerticalAlignment="Center" Content="ENVIAR FTP"/>
-                            <CheckBox Grid.Row="3" IsEnabled="true" IsChecked="True" Cursor="Hand" Grid.Column="1"  x:Name="chk_bcl_county_city" HorizontalAlignment="Left" VerticalAlignment="Center" Content="COUNTY CITY"/>
-                            <CheckBox Grid.Row="3" IsEnabled="true" IsChecked="True" Cursor="Hand" Grid.Column="2"  x:Name="chk_bcl_state" HorizontalAlignment="Left" VerticalAlignment="Center" Content="STATE COUNTY"/>
-                            <CheckBox Grid.Row="4" IsEnabled="true" IsChecked="True" Cursor="Hand" Grid.Column="1"  x:Name="chk_bcl_electronic" HorizontalAlignment="Left" VerticalAlignment="Center" Content="ELECTRONIC CORRELATIVES"/>
-                            <CheckBox Grid.Row="4" IsEnabled="true" IsChecked="True" Cursor="Hand" Grid.Column="2"  x:Name="chk_bcl_manual" HorizontalAlignment="Left" VerticalAlignment="Center" Content="MANUAL CORRELATIVES"/>
-                            <CheckBox Grid.Row="5" IsEnabled="true" IsChecked="True" Cursor="Hand" Grid.Column="1"  x:Name="chk_bcl_tender" HorizontalAlignment="Left" VerticalAlignment="Center" Content="TENDER REPOSITORY"/>
-                            <CheckBox Grid.Row="5" IsEnabled="true" IsChecked="True" Cursor="Hand" Grid.Column="2"  x:Name="chk_bcl_tender_property" HorizontalAlignment="Left" VerticalAlignment="Center" Content="TENDER REPOSITORY PROPERTY"/>
-
-                            <CheckBox Grid.Row="6" IsEnabled="true" IsChecked="True" Cursor="Hand" Grid.Column="1"  x:Name="chk_bcl_variacion" HorizontalAlignment="Left" VerticalAlignment="Center" Content="VARIACION PRECIOS"/>
-                            <Button Cursor="Hand" Grid.Column="1" Content="Genera Interface BCL" Width="190" Grid.Row="7" HorizontalAlignment="Left" x:Name="btnBCL" Click="btnBCL_Click"  />
+                            <CheckBox Grid.Row="7" IsEnabled="true" IsChecked="True" Cursor="Hand" Grid.Column="1"  x:Name="chk_bcl_variacion" HorizontalAlignment="Left" VerticalAlignment="Center" Content="VARIACION PRECIOS"/>
+                            <Button Cursor="Hand" Grid.Column="1" Content="Genera Interface BCL" Width="190" Grid.Row="8" HorizontalAlignment="Left" x:Name="btnBCL" Click="btnBCL_Click"  />
                         </Grid>
 
 
@@ -361,17 +374,22 @@
                                 <RowDefinition Height="40"/>
                                 <RowDefinition Height="40"/>
                                 <RowDefinition Height="40"/>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="40"/>
                             </Grid.RowDefinitions>
-                            <Label HorizontalAlignment="Right" Content="Seleccione Tienda" FontSize="14" FontWeight="Bold"/>
-                            <dxe:ComboBoxEdit  x:Name="dwtiendatrans" ValidateOnTextInput="False"  Width="370" Height="28" Grid.Row="0" Cursor="Hand" Grid.Column="1" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" AutoComplete="True"/>
-                            <CheckBox Grid.Row="1" IsEnabled="True" IsChecked="True" Cursor="Hand" Grid.Column="1"  x:Name="chk_inv_valid_destinations" HorizontalAlignment="Left" VerticalAlignment="Center" Content="INV VALID DESTINATIONS"/>
-                            <CheckBox Grid.Row="2" IsEnabled="True" IsChecked="True" Cursor="Hand" Grid.Column="1"  x:Name="chk_inv_valid_destinations_pro" HorizontalAlignment="Left" VerticalAlignment="Center" Content="INV VALID DESTINATIONS PROPERTY"/>
+                            <Label HorizontalAlignment="Right" Content="Seleccione Ambiente" Grid.Row="0" FontSize="14" FontWeight="Bold"/>
+                            <dxe:ComboBoxEdit  x:Name="dwAmbiente_trans" ValidateOnTextInput="False"  Width="370" Height="28" Grid.Row="0" Cursor="Hand" Grid.Column="1" Grid.ColumnSpan="2" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" AutoComplete="True"/>
 
-                            <CheckBox Grid.Row="3" IsEnabled="true" IsChecked="True" Cursor="Hand" Grid.Column="1"  x:Name="chk_ftp_sh" HorizontalAlignment="Left" VerticalAlignment="Center" Content="ENVIAR FTP"/>
-                            <RadioButton  Grid.Row="4" IsEnabled="true" Checked="llenarTiendaShp"  IsChecked="True" Cursor="Hand" Grid.Column="1"  Name="rbtPe_sh" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Peru"  />
-                            <RadioButton  Grid.Row="4" IsEnabled="true" Checked="llenarTiendaShp" IsChecked="False" Cursor="Hand" Grid.Column="1"  Name="rbtEcu_sh" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Ecuador" Margin="108,12,0,11"  />
+                            <Label HorizontalAlignment="Right" Content="Seleccione Tienda" Grid.Row="1"  FontSize="14" FontWeight="Bold"/>
+                            <dxe:ComboBoxEdit  x:Name="dwtiendatrans" ValidateOnTextInput="False"  Width="370" Height="28" Grid.Row="1" Cursor="Hand" Grid.Column="1" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" AutoComplete="True"/>
+                            <CheckBox Grid.Row="2" IsEnabled="True" IsChecked="True" Cursor="Hand" Grid.Column="1"  x:Name="chk_inv_valid_destinations" HorizontalAlignment="Left" VerticalAlignment="Center" Content="INV VALID DESTINATIONS"/>
+                            <CheckBox Grid.Row="3" IsEnabled="True" IsChecked="True" Cursor="Hand" Grid.Column="1"  x:Name="chk_inv_valid_destinations_pro" HorizontalAlignment="Left" VerticalAlignment="Center" Content="INV VALID DESTINATIONS PROPERTY"/>
+
+                            <CheckBox Grid.Row="4" IsEnabled="true" IsChecked="True" Cursor="Hand" Grid.Column="1"  x:Name="chk_ftp_sh" HorizontalAlignment="Left" VerticalAlignment="Center" Content="ENVIAR FTP"/>
+                            <RadioButton  Grid.Row="5" IsEnabled="true" Checked="llenarTiendaShp"  IsChecked="True" Cursor="Hand" Grid.Column="1"  Name="rbtPe_sh" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Peru"  />
+                            <RadioButton  Grid.Row="5" IsEnabled="true" Checked="llenarTiendaShp" IsChecked="False" Cursor="Hand" Grid.Column="1"  Name="rbtEcu_sh" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Ecuador" Margin="108,12,0,11"  />
                             <!--<CheckBox Grid.Row="2" IsEnabled="False" IsChecked="True" Cursor="Hand" Grid.Column="1"  x:Name="chk_retail_location_property" HorizontalAlignment="Left" VerticalAlignment="Center" Content="RETAIL LOCATION PROPERTY"/>-->
-                            <Button Cursor="Hand" Grid.Column="1" Content="Genera Interface Transferencia" Width="190" Grid.Row="5" HorizontalAlignment="Left" x:Name="btntrans" Click="btntrans_Click"  />
+                            <Button Cursor="Hand" Grid.Column="1" Content="Genera Interface Transferencia" Width="190" Grid.Row="6" HorizontalAlignment="Left" x:Name="btntrans" Click="btntrans_Click"  />
                         </Grid>
 
 
@@ -525,6 +543,8 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="40"/>
                                 <RowDefinition Height="40"/>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="40"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
                             <Grid Grid.Row="0" Grid.Column="0">
@@ -535,11 +555,23 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="40"/>
                                 </Grid.RowDefinitions>
-                                <Label HorizontalAlignment="Center"  Grid.Column="0" Grid.Row="0" Content="Seleccione Tienda" FontSize="14" FontWeight="Bold"/>
-                                <dxe:ComboBoxEdit  x:Name="dwtienda_dbf" ValidateOnTextInput="False"  Width="300" Height="28" Grid.Row="0" Cursor="Hand" Grid.Column="1" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" AutoComplete="True"/>
+                                <Label HorizontalAlignment="Center"  Grid.Column="0" Grid.Row="3" Content="Seleccione Ambiente" FontSize="14" FontWeight="Bold"/>
+                                <dxe:ComboBoxEdit  x:Name="dwambiente_dbf" ValidateOnTextInput="False"  Width="300" Height="28" Grid.Row="1" Cursor="Hand" Grid.Column="1" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" AutoComplete="True"/>
+
+                            </Grid>
+                            <Grid Grid.Row="1" Grid.Column="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="200"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="40"/>
+                                </Grid.RowDefinitions>
+                                <Label HorizontalAlignment="Center"  Grid.Column="0" Grid.Row="3" Content="Seleccione Tienda" FontSize="14" FontWeight="Bold"/>
+                                <dxe:ComboBoxEdit  x:Name="dwtienda_dbf" ValidateOnTextInput="False"  Width="300" Height="28" Grid.Row="1" Cursor="Hand" Grid.Column="1" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" AutoComplete="True"/>
                                 
                             </Grid>
-                            <Grid Grid.Row="1" Grid.Column="0" >
+                            <Grid Grid.Row="3" Grid.Column="0" >
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="200"/>
                                     <ColumnDefinition Width="190"/>
@@ -590,6 +622,8 @@
                                 <RowDefinition Height="40"/>
                                 <RowDefinition Height="40"/>
                             </Grid.RowDefinitions>
+                            <Label HorizontalAlignment="Center"  Grid.Column="0" Grid.Row="0" Content="Seleccione Ambiente" FontSize="14" FontWeight="Bold"/>
+                            <dxe:ComboBoxEdit  x:Name="dwambiente_orce" ValidateOnTextInput="False"  Width="300" Height="28" Grid.Row="0" Cursor="Hand" Grid.Column="1" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" AutoComplete="True"/>
                             <CheckBox Grid.Row="1" IsEnabled="True" IsChecked="True" Cursor="Hand" Grid.Column="1"  x:Name="chk_ItemMaintenance" HorizontalAlignment="Left" VerticalAlignment="Center" Content="ITEM MAINTENANCE"/>
                             <CheckBox Grid.Row="2" IsEnabled="True" IsChecked="True" Cursor="Hand" Grid.Column="1"  x:Name="chk_MerchandiseHierarch" HorizontalAlignment="Left" VerticalAlignment="Center" Content="MERCHANDISE HIERARCHY MAINTENANCE"/>
                             <CheckBox Grid.Row="3" IsEnabled="True" IsChecked="True" Cursor="Hand" Grid.Column="1"  x:Name="chk_OrcRetailLocations" HorizontalAlignment="Left" VerticalAlignment="Center" Content="ORCE RETAIL LOCATIONS"/>

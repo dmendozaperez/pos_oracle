@@ -200,6 +200,73 @@ namespace CapaServicioWindows.CapaDato.Venta
             return error;
         }
 
+        public void procesar_ventas_movimiento()
+        {
+            string sqlquery = "[USP_PROCESAR_MOV_STOCK_VENTA_XSTORE]";
+            string error = "";
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(ConexionSQL.conexion))
+                {
+                    try
+                    {
+                        if (cn.State == 0) cn.Open();
+                        using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                        {
+                            cmd.CommandTimeout = 0;
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+                    catch (Exception exc)
+                    {
+
+                        error = exc.Message;
+                    }
+                    if (cn != null)
+                        if (cn.State == ConnectionState.Open) cn.Close();
+                }
+            }
+            catch (Exception exc)
+            {
+                error = exc.Message;
+            }
+           // return error;
+        }
+        public void procesar_guias_movimiento()
+        {
+            string sqlquery = "[USP_PROCESAR_GUIAS_XSTORE]";
+            string error = "";
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(ConexionSQL.conexion))
+                {
+                    try
+                    {
+                        if (cn.State == 0) cn.Open();
+                        using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                        {
+                            cmd.CommandTimeout = 0;
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+                    catch (Exception exc)
+                    {
+
+                        error = exc.Message;
+                    }
+                    if (cn != null)
+                        if (cn.State == ConnectionState.Open) cn.Close();
+                }
+            }
+            catch (Exception exc)
+            {
+                error = exc.Message;
+            }
+            //return error;
+        }
+
         #endregion
     }
 }

@@ -135,7 +135,7 @@
                     <Border.Effect>
                         <DropShadowEffect BlurRadius="20"/>
                     </Border.Effect>
-                    <Grid Margin="0,0,0,0" Width="930" Height="475" Background="AliceBlue">
+                    <Grid Margin="0,0,0,0" Width="1000" Height="475" Background="AliceBlue">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="800"/>
                             <ColumnDefinition Width="*"/>
@@ -182,7 +182,7 @@
                     <Border.Effect>
                         <DropShadowEffect BlurRadius="20"/>
                     </Border.Effect>
-                    <Grid Margin="0,0,0,0" Background="AliceBlue" Width="930" Height="475">
+                    <Grid Margin="0,0,0,0" Background="AliceBlue" Width="1000" Height="475">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="216"/>
                             <ColumnDefinition Width="584"/>
@@ -246,7 +246,7 @@
                     <Border.Effect>
                         <DropShadowEffect BlurRadius="20"/>
                     </Border.Effect>
-                    <Grid Margin="0,0,0,0" Background="AliceBlue" Width="930" Height="475">
+                    <Grid Margin="0,0,0,0" Background="AliceBlue" Width="1000" Height="475">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="800"/>
                             <ColumnDefinition Width="*"/>
@@ -295,7 +295,7 @@
                     <Border.Effect>
                         <DropShadowEffect BlurRadius="20"/>
                     </Border.Effect>
-                    <Grid Margin="0,0,0,0" Width="930" Height="475" Background="AliceBlue">
+                    <Grid Margin="0,0,0,0" Width="1000" Height="475" Background="AliceBlue">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="800"/>
                             <ColumnDefinition Width="*"/>
@@ -352,7 +352,7 @@
                     <Border.Effect>
                         <DropShadowEffect BlurRadius="20"/>
                     </Border.Effect>
-                    <Grid Margin="0,0,0,0" Width="930" Height="475" Background="AliceBlue">
+                    <Grid Margin="0,0,0,0" Width="1000" Height="475" Background="AliceBlue">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="800"/>
                             <ColumnDefinition Width="*"/>
@@ -401,7 +401,7 @@
                     <Border.Effect>
                         <DropShadowEffect BlurRadius="20"/>
                     </Border.Effect>
-                    <Grid Margin="0,0,0,0" Width="930" Height="475" Background="AliceBlue">
+                    <Grid Margin="0,0,0,0" Width="1000" Height="475" Background="AliceBlue">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="418"/>
                             <ColumnDefinition Width="303"/>
@@ -533,7 +533,7 @@
                     <Border.Effect>
                         <DropShadowEffect BlurRadius="20"/>
                     </Border.Effect>
-                    <Grid Margin="0,0,0,0" Width="930" Height="475" Background="AliceBlue">
+                    <Grid Margin="0,0,0,0" Width="1000" Height="475" Background="AliceBlue">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="720"/>
                             <!--<ColumnDefinition Width="*"/>-->
@@ -603,7 +603,7 @@
                     <Border.Effect>
                         <DropShadowEffect BlurRadius="20"/>
                     </Border.Effect>
-                    <Grid Margin="0,0,0,0" Width="930" Height="475" Background="AliceBlue">
+                    <Grid Margin="0,0,0,0" Width="1000" Height="475" Background="AliceBlue">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="800"/>
                             <ColumnDefinition Width="*"/>
@@ -651,7 +651,7 @@
                     <Border.Effect>
                         <DropShadowEffect BlurRadius="20"/>
                     </Border.Effect>
-                    <Grid Margin="0,0,0,0" Width="930" Height="475" Background="AliceBlue">
+                    <Grid Margin="0,0,0,0" Width="1000" Height="475" Background="AliceBlue">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="720"/>
                             <!--<ColumnDefinition Width="*"/>-->
@@ -676,17 +676,17 @@
                             </Grid.RowDefinitions>
                             <Grid Grid.Row="0" Grid.Column="0">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="150"/>
-                                    <ColumnDefinition Width="250"/>
-                                    <ColumnDefinition Width="150"/>
-                                    <ColumnDefinition Width="250"/>
+                                    <ColumnDefinition Width="120"/>
+                                    <ColumnDefinition Width="270"/>
+                                    <ColumnDefinition Width="130"/>
+                                    <ColumnDefinition Width="300"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="40"/>
                                 </Grid.RowDefinitions>
                                 <Label HorizontalAlignment="Center"  Grid.Column="0" Grid.Row="0" Content="Ambiente FTP" FontSize="14" FontWeight="Bold"/>
-                                <dxe:ComboBoxEdit  x:Name="dwambiente_ven" ValidateOnTextInput="False"  Width="300" Height="28" Grid.Row="1" Cursor="Hand" Grid.Column="1" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" AutoComplete="True"/>
+                                <dxe:ComboBoxEdit  x:Name="dwambiente_ven" ValidateOnTextInput="False"  Width="250" Height="28" Grid.Row="1" Cursor="Hand" Grid.Column="1" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" AutoComplete="True"/>
 
                                 <Label HorizontalAlignment="Center"  Grid.Column="2" Grid.Row="0" Content="Seleccione Tienda" FontSize="14" FontWeight="Bold"/>
                                 <dxe:ComboBoxEdit  x:Name="dwtienda_ven" ValidateOnTextInput="False"  Width="300" Height="28" Grid.Row="1" Cursor="Hand" Grid.Column="3" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" AutoComplete="True"/>

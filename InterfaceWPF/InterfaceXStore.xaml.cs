@@ -2716,19 +2716,22 @@ namespace InterfaceWPF
             string ftp_user = "";
             string ftp_password = "";
             int ftp_puerto = 0;
+            string ruta_destino = "";
 
             for (int i = 0; i < gdt_Xoficce.Rows.Count; i++)
             {
                 //aca haces las operaciones con cada fila de la tabla ej:
                 if (codAmbiente == gdt_Xoficce.Rows[i]["Amb_Cod"].ToString())
                 {
+                    ruta_destino = gdt_Orce.Rows[i]["Amb_Ftp_Path"].ToString();
                     ftp_server = gdt_Xoficce.Rows[i]["Amb_Ftp_Server"].ToString();
-                    ftp_user = gdt_Xoficce.Rows[i]["Amb_Ftp_Server"].ToString();
-                    ftp_password = gdt_Xoficce.Rows[i]["Amb_Ftp_Server"].ToString();
-                    ftp_puerto = Int32.Parse(gdt_Xoficce.Rows[i]["Amb_Ftp_Server"].ToString());
+                    ftp_user = gdt_Xoficce.Rows[i]["Amb_Ftp_User"].ToString();
+                    ftp_password = gdt_Xoficce.Rows[i]["Amb_Ftp_Pass"].ToString();
+                    ftp_puerto = Int32.Parse(gdt_Xoficce.Rows[i]["Amb_Ftp_Port"].ToString());
                 }
             }
 
+            basico.ftp_ruta_destino = ruta_destino;
             Ent_Conexion.ftp_server = ftp_server;
             Ent_Conexion.ftp_user = ftp_user;
             Ent_Conexion.ftp_password = ftp_password;
@@ -2742,6 +2745,7 @@ namespace InterfaceWPF
             string ftp_server = "";
             string ftp_user = "";
             string ftp_password = "";
+            string ruta_destino = "";
             int ftp_puerto = 0;
 
             for (int i = 0; i < gdt_Orce.Rows.Count; i++)
@@ -2749,13 +2753,15 @@ namespace InterfaceWPF
                 //aca haces las operaciones con cada fila de la tabla ej:
                 if (codAmbiente == gdt_Orce.Rows[i]["Amb_Cod"].ToString())
                 {
+                    ruta_destino = gdt_Orce.Rows[i]["Amb_Ftp_Path"].ToString();
                     ftp_server = gdt_Orce.Rows[i]["Amb_Ftp_Server"].ToString();
-                    ftp_user = gdt_Orce.Rows[i]["Amb_Ftp_Server"].ToString();
-                    ftp_password = gdt_Orce.Rows[i]["Amb_Ftp_Server"].ToString();
-                    ftp_puerto = Int32.Parse(gdt_Orce.Rows[i]["Amb_Ftp_Server"].ToString());
+                    ftp_user = gdt_Orce.Rows[i]["Amb_Ftp_User"].ToString();
+                    ftp_password = gdt_Orce.Rows[i]["Amb_Ftp_Pass"].ToString();
+                    ftp_puerto = Int32.Parse(gdt_Orce.Rows[i]["Amb_Ftp_Port"].ToString());
                 }
             }
 
+            basico.ftp_ruta_orce = ruta_destino;
             Ent_Conexion.ftp_orce_server = ftp_server;
             Ent_Conexion.ftp_orce_user = ftp_user;
             Ent_Conexion.ftp_orce_password = ftp_password;

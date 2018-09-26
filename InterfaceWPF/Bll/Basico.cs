@@ -17,8 +17,8 @@ namespace InterfaceWPF.Bll
         public String ruta_temp_DBF = System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "//tmpDBF";
 
         //private string ftp_ruta_destino = "/opt/webxst/BCL/autodeploy/data/org2000";
-        private string ftp_ruta_orce = "/app/webce/BPE/CE/batch_processing/auto_fileset";
-        private string ftp_ruta_destino = "/tmp";
+        public string ftp_ruta_orce = "";//"/app/webce/BPE/CE/batch_processing/auto_fileset";
+        public string ftp_ruta_destino = "";// "/tmp";
         //private string ftp_ruta_destino = "/app/webxst/BCL/autodeploy/data/";
         #region<ENVIO POR FTP ARCHIVOS MNT>
         public Boolean sendftp_file_mnt()

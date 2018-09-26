@@ -116,6 +116,8 @@ namespace InterfaceWPF
 
         private void btntienda_Click(object sender, RoutedEventArgs e)
         {
+            //CapaDato.Xoficce.StockAct d = new CapaDato.Xoficce.StockAct();
+            //DataTable dt = d.get_stock_xoffice("50145");
             //Dat_PosLog poslog = new Dat_PosLog();
             //List<Ent_PosLog> lista_poslog = poslog.get_poslog();
 
@@ -1233,6 +1235,7 @@ namespace InterfaceWPF
                 tabla_FFACTC(ds.Tables[0]);
                 tabla_FFACTD(ds.Tables[1]);
                 tabla_FNOTAA(ds.Tables[2]);
+                tabla_FSTKG(ds.Tables[3]);
 
                 string archivo = "";
                 _comprimir_archivo(cod_tda, fecha, ref archivo);
@@ -1250,6 +1253,59 @@ namespace InterfaceWPF
             }
         }
 
+        private void tabla_FSTKG(DataTable dtstk)
+        {
+            try
+            {
+                StringBuilder str = null;
+                string str_cadena = "";
+               
+
+                if (dtstk.Rows.Count > 0)
+                {
+                    str = new StringBuilder();
+                    for (Int32 i = 0; i < dtstk.Rows.Count; ++i)
+                    {
+                        string cad_envio = "\""+ dtstk.Rows[i]["TIENDA"].ToString() + "\"" + ",\"" + dtstk.Rows[i]["ARTICULO"].ToString() + "\"" + "," +
+                                           dtstk.Rows[i]["TOTAL"].ToString() + "," + dtstk.Rows[i]["00"].ToString() + "," +
+                                           dtstk.Rows[i]["01"].ToString() + "," + dtstk.Rows[i]["02"].ToString() + "," +
+                                           dtstk.Rows[i]["03"].ToString() + "," + dtstk.Rows[i]["04"].ToString() + "," +
+                                           dtstk.Rows[i]["05"].ToString() + "," + dtstk.Rows[i]["06"].ToString() + "," +
+                                           dtstk.Rows[i]["07"].ToString() + "," + dtstk.Rows[i]["08"].ToString() + "," +
+                                           dtstk.Rows[i]["09"].ToString() + "," + dtstk.Rows[i]["10"].ToString() + "," +
+                                           dtstk.Rows[i]["11"].ToString() + "," + dtstk.Rows[i]["FECHA"].ToString() ;
+
+                        str.Append(cad_envio);
+
+                        if (i < dtstk.Rows.Count - 1)
+                        {
+                            str.Append("\r\n");
+
+                        }
+
+                    }
+                    str_cadena = str.ToString();
+
+                    string _path_envia = basico.ruta_temp_DBF;
+
+                    if (!Directory.Exists(_path_envia))
+                        Directory.CreateDirectory(_path_envia);
+                    string file_stk = "FSTKG";
+                    string ruta_file_stk = _path_envia + "\\" + file_stk + ".txt";                 
+
+                    if (File.Exists(@ruta_file_stk)) File.Delete(@ruta_file_stk);
+                    File.WriteAllText(@ruta_file_stk, str_cadena);
+                }
+
+                //DBFNET venta_det = new DBFNET();
+                //venta_det.creartxt_stk(_path_envia);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
 
         private  void tabla_FFACTD(DataTable dt)
         {

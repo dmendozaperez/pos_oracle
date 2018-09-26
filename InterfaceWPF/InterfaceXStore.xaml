@@ -504,7 +504,7 @@
                 </Border>
             </TabItem>
 
-            <TabItem Header="Generar DBF" Background="#FF79787E" BorderThickness="1" >
+            <TabItem Header="Generar Paquete SIS" Background="#FF79787E" BorderThickness="1" >
                 <Border CornerRadius="2">
                     <Border.Effect>
                         <DropShadowEffect BlurRadius="20"/>

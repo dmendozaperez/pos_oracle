@@ -115,6 +115,28 @@ namespace CapaDato.Venta
             if (cn != null)
                 if (cn.State == ConnectionState.Open) cn.Close();
         }
+
+        public void creartxt_stk(string strRuta)
+        {
+            try
+            {
+                if (!Directory.Exists(strRuta))
+                    Directory.CreateDirectory(strRuta);
+                string file_stk = "FSTKG";
+                string ruta_file = strRuta + "\\" + file_stk + ".txt";
+
+
+
+
+            }
+            catch
+            {
+
+                throw;
+            }
+
+        }
+
         public void creardbf(string strRuta)
         {
             OleDbConnection cn = null;

@@ -955,6 +955,13 @@ namespace CapaServicioWindows.Modular
                 }
                 #endregion
 
+                #region<actualizacion de la tabla movimiento ventas y guias>
+
+                venta_ing.procesar_ventas_movimiento();
+                venta_ing.procesar_guias_movimiento();
+                    
+                #endregion
+
 
                 if (_error_procesos.Length>0)
                 {

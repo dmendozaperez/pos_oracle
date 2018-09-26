@@ -49,6 +49,70 @@ namespace CapaDato.Interfaces
         }
         #endregion
 
+        #region<LISTA DE AMBIENTE>
+        public DataTable get_ambiente_xoficce(string pais)
+        {
+            DataTable dt = null;
+            string sqlquery = "USP_GET_XSTORE_AMBIENTE_XOFICCE";
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(Ent_Conexion.conexion_posperu))
+                {
+                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@PAIS", pais);
+
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            dt = new DataTable();
+                           
+                            da.Fill(dt);
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+            return dt;
+        }
+        #endregion
+
+        #region<LISTA DE AMBIENTE ORCE>
+        public DataTable get_ambiente_orce(string pais)
+        {
+            DataTable dt = null;
+            string sqlquery = "USP_GET_XSTORE_AMBIENTE_ORCE";
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(Ent_Conexion.conexion_posperu))
+                {
+                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@PAIS", pais);
+
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            dt = new DataTable();
+                            
+                            da.Fill(dt);
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+            return dt;
+        }
+        #endregion
+
         #region<INTERFACES XSTORE>
         /// <summary>
         /// get de maestros tienda
@@ -66,7 +130,7 @@ namespace CapaDato.Interfaces
                     using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
                     {
                         cmd.CommandTimeout = 0;
-                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.CommandType = CommandType.StoredProcedure; 
                         cmd.Parameters.AddWithValue("@cod_tda", _cod_tda);
                         cmd.Parameters.AddWithValue("@PAIS", pais);
                         using (SqlDataAdapter da = new SqlDataAdapter(cmd))
@@ -81,7 +145,7 @@ namespace CapaDato.Interfaces
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception exc)
             {
                 ds = null;                
             }

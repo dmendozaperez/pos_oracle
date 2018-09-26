@@ -43,9 +43,12 @@ namespace InterfaceWPF
 
         private Dat_Interface dat_interface = null;
         private Basico basico = null;
+        private DataTable gdt_Orce = new DataTable();
+        private DataTable gdt_Xoficce = new DataTable();
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
             LoadIniWPF();
+            LoadAmbiente();
         }
 
         #region<REGION DE INTERFACES RETAIL_LOCATION Y  RETAIL_LOCATION_PROPERTY>
@@ -109,6 +112,87 @@ namespace InterfaceWPF
             dwtienda_dbf.ValueMember = "cod_entid";
             dwtienda_dbf.SelectedIndex = -1;
             dwtienda_dbf.Focus();
+
+            dwtienda_ven.ItemsSource = _tienda.get_tienda("PE");
+            dwtienda_ven.DisplayMember = "des_entid";
+            dwtienda_ven.ValueMember = "cod_entid";
+            dwtienda_ven.SelectedIndex = -1;
+            dwtienda_ven.Focus();
+        }
+
+
+        private void LoadAmbiente()
+        {
+            basico = new Basico();
+            dat_interface = new Dat_Interface();
+
+            Dat_Interface _ambiente= new Dat_Interface();
+            /*maestros de tienda*/
+            DataTable dt = new DataTable();
+            DataTable dtOrce = new DataTable();
+            dt = _ambiente.get_ambiente_xoficce("PE");
+            dtOrce = _ambiente.get_ambiente_orce("PE");
+            gdt_Xoficce = dt;
+            gdt_Orce = dtOrce;
+
+
+            /*maestros de tienda*/
+            dwAmbienteT.ItemsSource = dt;
+            dwAmbienteT.DisplayMember = "Amb_Des";
+            dwAmbienteT.ValueMember = "Amb_Cod";
+            dwAmbienteT.SelectedIndex = 0;
+            dwAmbienteT.Focus();
+
+            /*maestros de maestros*/
+            dwAmbiente_M.ItemsSource = dt;
+            dwAmbiente_M.DisplayMember = "Amb_Des";
+            dwAmbiente_M.ValueMember = "Amb_Cod";
+            dwAmbiente_M.SelectedIndex = 0;
+            dwAmbiente_M.Focus();
+
+            /*maestros de stock*/
+            dwAmbiente_stk.ItemsSource = dt;
+            dwAmbiente_stk.DisplayMember = "Amb_Des";
+            dwAmbiente_stk.ValueMember = "Amb_Cod";
+            dwAmbiente_stk.SelectedIndex = 0;
+            dwAmbiente_stk.Focus();
+
+            /*maestros de bcl*/
+            dwAmbiente_bcl.ItemsSource = dt;
+            dwAmbiente_bcl.DisplayMember = "Amb_Des";
+            dwAmbiente_bcl.ValueMember = "Amb_Cod";
+            dwAmbiente_bcl.SelectedIndex = 0;
+            dwAmbiente_bcl.Focus();
+
+
+            /*maestros de shiping*/
+            dwAmbiente_trans.ItemsSource = dt;
+            dwAmbiente_trans.DisplayMember = "Amb_Des";
+            dwAmbiente_trans.ValueMember = "Amb_Cod";
+            dwAmbiente_trans.SelectedIndex = 0;
+            dwAmbiente_trans.Focus();
+
+            /*maestros de despacho*/
+            dwAmbienteDsp.ItemsSource = dt;
+            dwAmbienteDsp.DisplayMember = "Amb_Des";
+            dwAmbienteDsp.ValueMember = "Amb_Cod";
+            dwAmbienteDsp.SelectedIndex = 0;
+            dwAmbienteDsp.Focus();
+
+            /*Ambiente Orce */
+
+            dwambiente_orce.ItemsSource = dtOrce;
+            dwambiente_orce.DisplayMember = "Amb_Des";
+            dwambiente_orce.ValueMember = "Amb_Cod";
+            dwambiente_orce.SelectedIndex = 0;
+            dwambiente_orce.Focus();
+
+            dwambiente_ven.ItemsSource = dtOrce;
+            dwambiente_ven.DisplayMember = "Amb_Des";
+            dwambiente_ven.ValueMember = "Amb_Cod";
+            dwambiente_ven.SelectedIndex = 0;
+            dwambiente_ven.Focus();
+
 
 
         }
@@ -236,6 +320,33 @@ namespace InterfaceWPF
             }
         }
 
+        private void llenarTienda_ven(object sender, RoutedEventArgs e)
+        {
+
+            try
+            {
+                Dat_Interface _tienda = new Dat_Interface();
+                string Pais = "";
+                string c = e.OriginalSource.ToString();
+
+                if (c.Contains("Peru"))
+                    Pais = "PE";
+
+                if (c.Contains("Ecuador"))
+                    Pais = "EC";
+
+                /*transferencia de tienda invalid*/
+                dwtienda_ven.ItemsSource = _tienda.get_tienda(Pais);
+                dwtienda_ven.DisplayMember = "des_entid";
+                dwtienda_ven.ValueMember = "cod_entid";
+                dwtienda_ven.SelectedIndex = -1;
+                dwtienda_ven.Focus();
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+
         private async void generainter_retail_location()
         {
             var metroWindow = this;
@@ -337,6 +448,9 @@ namespace InterfaceWPF
                 }
 
                 if (EnviarFTP.Equals("S")) {
+                    string codAmbiente = dwAmbienteT.EditValue.ToString();
+                    setearAmbXoficce(codAmbiente);
+
                     mensaje = "Se enviaron al ftp";
                     envio = await Task.Run(() => basico.sendftp_file_mnt());
                 }
@@ -386,6 +500,7 @@ namespace InterfaceWPF
         {
             generainter_maestros();
         }
+
         private async void generainter_maestros()
         {
             var metroWindow = this;
@@ -835,6 +950,8 @@ namespace InterfaceWPF
 
                 if (EnviarFTP.Equals("S"))
                 {
+                    string codAmbiente = dwAmbiente_M.EditValue.ToString();
+                    setearAmbXoficce(codAmbiente);
                     mensaje = "Se enviaron al ftp";
                     envio = await Task.Run(() => basico.sendftp_file_mnt());
                 }
@@ -877,6 +994,292 @@ namespace InterfaceWPF
             return valida;
         }
         #endregion
+
+        #region<REGION OBTENER LAS VENTAS>
+
+
+        private void btnVtaTienda_Click(object sender, RoutedEventArgs e)
+        {
+            generar_ventas_tda();
+        }     
+
+
+
+        private async void generar_ventas_tda()
+        {
+            var metroWindow = this;
+            metroWindow.MetroDialogOptions.ColorScheme = MetroDialogOptions.ColorScheme;
+            ProgressDialogController ProgressAlert = null;
+            DataTable dt1 = new DataTable();
+           
+            try
+            {
+                string pais = "PE";
+                string EnviarFTP = "N";
+                string mensaje = "";
+                string mensajeEspera = "Generando Interface";
+                Boolean envio = false;
+
+                if (chk_ftp_ven.IsChecked == true)
+                {
+                    EnviarFTP = "S";
+                    mensajeEspera = "Enviando X FTP Interface: Seleccionadas";
+                }
+
+                //if (rbtPe_M.IsChecked == true)
+                //    pais = "PE";
+
+                //if (rbtEcu_M.IsChecked == true)
+                //    pais = "EC";
+
+                //Boolean envio = await Task.Run(() => basico.sendftp_file_mnt());
+                if (await valida_Ext_Ventda()) return;
+                ProgressAlert = await this.ShowProgressAsync(Ent_Msg.msgcargando, mensajeEspera);  //show message
+                ProgressAlert.SetIndeterminate();
+
+                string ruta_interface = basico.ruta_temp_interface;
+
+                string codtda = dwtienda_ven.EditValue.ToString();
+                DateTime fechaIni = Convert.ToDateTime(dtpdesde_ven.Text);
+                DateTime fecha_Fin = Convert.ToDateTime(dtphasta_ven.Text);
+
+                string sufijoNombre = "";
+
+                if (codtda != "-1") sufijoNombre = codtda + "_";
+
+                if (!Directory.Exists(@ruta_interface)) Directory.CreateDirectory(@ruta_interface);
+
+
+                StringBuilder str = null;
+                string str_cadena = "";
+                string name_maestros = ""; string in_archivos = "";
+
+                Dat_Venta con_venta = new Dat_Venta();
+               
+                DataSet ds = await Task.Run(() => con_venta.SET_XSTORE_VENTA_EXPORTAR(codtda, fechaIni, fecha_Fin));
+
+                #region<TRANS_LINE_TENDER>
+                if (chk_line_tender.IsChecked == true)
+                {
+                    DataTable dt = ds.Tables[0];
+                    if (dt != null)
+                    {
+                        if (dt.Rows.Count > 0)
+                        {
+                            str = new StringBuilder();
+                            for (Int32 i = 0; i < dt.Rows.Count; ++i)
+                            {
+                                str.Append(dt.Rows[i]["TRANS_LINE_TENDER"].ToString());
+
+                                if (i < dt.Rows.Count - 1)
+                                {
+                                    str.Append("\r\n");
+
+                                }
+
+                            }
+                            str_cadena = str.ToString();
+
+
+
+                            name_maestros = "TRANS_LINE_TENDER_" + sufijoNombre + ".MNT";
+                            in_archivos = ruta_interface + "\\" + name_maestros;
+
+                            if (File.Exists(@in_archivos)) File.Delete(@in_archivos);
+                            File.WriteAllText(@in_archivos, str_cadena);
+                        }
+                    }
+                }
+                #endregion
+                #region<TRANS_TAX>
+                if (chk_tax.IsChecked == true)
+                {
+                    DataTable dt = ds.Tables[1];
+                    if (dt != null)
+                    {
+                        if (dt.Rows.Count > 0)
+                        {
+                            str = new StringBuilder();
+                            for (Int32 i = 0; i < dt.Rows.Count; ++i)
+                            {
+                                str.Append(dt.Rows[i]["TRANS_TAX"].ToString());
+
+                                if (i < dt.Rows.Count - 1)
+                                {
+                                    str.Append("\r\n");
+
+                                }
+
+                            }
+                            str_cadena = str.ToString();
+
+
+
+                            name_maestros = "TRANS_TAX_" + sufijoNombre + ".MNT";
+                            @in_archivos = ruta_interface + "\\" + name_maestros;
+
+                            if (File.Exists(@in_archivos)) File.Delete(@in_archivos);
+                            File.WriteAllText(@in_archivos, str_cadena);
+                        }
+                    }
+                }
+                #endregion
+                #region<TRANS_LINE_ITEM_TAX>
+                if (chk_item_Tax.IsChecked == true)
+                {
+                    DataTable dt = ds.Tables[2];
+                    if (dt != null)
+                    {
+                        if (dt.Rows.Count > 0)
+                        {
+                            str = new StringBuilder();
+                            Decimal i = 0;
+                            foreach (DataRow fila in dt.Rows)
+                            {
+
+                                str.Append(fila["TRANS_LINE_ITEM_TAX"].ToString());
+                                if (i < dt.Rows.Count - 1)
+                                {
+                                    str.Append("\r\n");
+
+                                }
+                                i += 1;
+
+                            }
+
+                      
+                            str_cadena = str.ToString();
+
+
+
+                            name_maestros = "TRANS_LINE_ITEM_TAX_" + sufijoNombre  + ".MNT";
+                            in_archivos = ruta_interface + "\\" + name_maestros;
+
+                            if (File.Exists(@in_archivos)) File.Delete(@in_archivos);
+                            File.WriteAllText(@in_archivos, str_cadena);
+                        }
+                    }
+                }
+                #endregion
+                #region<TRANS_LINE_ITEM>
+                if (chk_line_item.IsChecked == true)
+                {
+                    DataTable dt = ds.Tables[3];
+                    if (dt != null)
+                    {
+                        if (dt.Rows.Count > 0)
+                        {
+                            str = new StringBuilder();
+                            for (Int32 i = 0; i < dt.Rows.Count; ++i)
+                            {
+                                str.Append(dt.Rows[i]["TRANS_LINE_ITEM"].ToString());
+
+                                if (i < dt.Rows.Count - 1)
+                                {
+                                    str.Append("\r\n");
+
+                                }
+
+                            }
+                            str_cadena = str.ToString();
+
+
+
+                            name_maestros = "TRANS_LINE_ITEM_" + sufijoNombre  + ".MNT";
+                            in_archivos = ruta_interface + "\\" + name_maestros;
+
+                            if (File.Exists(@in_archivos)) File.Delete(@in_archivos);
+                            File.WriteAllText(@in_archivos, str_cadena);
+                        }
+                    }
+                }
+                #endregion
+                #region<TRANS_HEADER>
+                if (chk_header.IsChecked == true)
+                {
+                    DataTable dt = ds.Tables[4];
+                    if (dt != null)
+                    {
+                        if (dt.Rows.Count > 0)
+                        {
+                            str = new StringBuilder();
+                            for (Int32 i = 0; i < dt.Rows.Count; ++i)
+                            {
+                                str.Append(dt.Rows[i]["TRANS_HEADER"].ToString());
+
+                                if (i < dt.Rows.Count - 1)
+                                {
+                                    str.Append("\r\n");
+
+                                }
+
+                            }
+                            str_cadena = str.ToString();
+
+
+
+                            name_maestros = "TRANS_HEADER_" + sufijoNombre+ ".MNT";
+                            in_archivos = ruta_interface + "\\" + name_maestros;
+
+                            if (File.Exists(@in_archivos)) File.Delete(@in_archivos);
+                            File.WriteAllText(@in_archivos, str_cadena);
+                        }
+                    }
+                }
+                #endregion
+
+                
+                envio = true;
+
+                if (EnviarFTP.Equals("S"))
+                {
+
+                    string codAmbiente = dwambiente_ven.EditValue.ToString();
+                    setearAmbXoficce(codAmbiente);
+
+                    mensaje = "Se enviaron al ftp";
+                    envio = await Task.Run(() => basico.sendftp_file_mnt());
+                }
+                else
+                {
+                    mensaje = "Se creo en la ruta : " + ruta_interface;
+                }
+
+                if (envio) await metroWindow.ShowMessageAsync(Ent_Msg.msginfomacion, mensaje, MessageDialogStyle.Affirmative, metroWindow.MetroDialogOptions);
+                if (ProgressAlert.IsOpen)
+                    await ProgressAlert.CloseAsync();
+
+
+
+            }
+            catch (Exception exc)
+            {
+                if (ProgressAlert != null) await ProgressAlert.CloseAsync();
+                await metroWindow.ShowMessageAsync(Ent_Msg.msginfomacion, exc.Message, MessageDialogStyle.Affirmative, metroWindow.MetroDialogOptions);
+            }
+        }
+
+        private async Task<Boolean> valida_Ext_Ventda()
+        {
+            var metroWindow = this;
+            Boolean valida = false;
+            metroWindow.MetroDialogOptions.ColorScheme = MetroDialogOptions.ColorScheme;
+
+
+            if ((chk_tax.IsChecked == false) && (chk_item_Tax.IsChecked == false)
+               && (chk_line_item.IsChecked == false) && (chk_header.IsChecked == false)
+               && (chk_line_tender.IsChecked == false))
+            {
+                await metroWindow.ShowMessageAsync(Ent_Msg.msginfomacion, "Seleccione al menos una interface.", MessageDialogStyle.Affirmative, metroWindow.MetroDialogOptions);
+
+                valida = true;
+                return valida;
+            }
+            return valida;
+        }
+
+        #endregion
+
         #region<REGION DE STOCK >
         private void btnstock_Click(object sender, RoutedEventArgs e)
         {
@@ -957,6 +1360,8 @@ namespace InterfaceWPF
 
                 if (EnviarFTP.Equals("S"))
                 {
+                    string codAmbiente = dwAmbiente_stk.EditValue.ToString();
+                    setearAmbXoficce(codAmbiente);
                     mensaje = "Se enviaron al ftp";
                     envio = await Task.Run(() => basico.sendftp_file_mnt());
                 }
@@ -1124,6 +1529,9 @@ namespace InterfaceWPF
 
                 if (EnviarFTP.Equals("S"))
                 {
+                    string codAmbiente = dwAmbiente_trans.EditValue.ToString();
+                    setearAmbXoficce(codAmbiente);
+               
                     mensaje = "Se enviaron al ftp";
                     envio = await Task.Run(() => basico.sendftp_file_mnt());
                 }
@@ -1781,6 +2189,9 @@ namespace InterfaceWPF
                 string mensaje = "";
                 if (strEnviaFtp.Equals("S"))
                 {
+                    string codAmbiente = dwAmbiente_trans.EditValue.ToString();
+                    setearAmbXoficce(codAmbiente);
+
                     mensaje = "Se enviaron al ftp";
                     envio = await Task.Run(() => basico.sendftp_file_mnt());
                 }
@@ -2105,6 +2516,9 @@ namespace InterfaceWPF
 
                 if (EnviarFTP.Equals("S"))
                 {
+                    string codAmbiente = dwAmbiente_bcl.EditValue.ToString();
+                    setearAmbXoficce(codAmbiente);
+
                     mensaje = "Se enviaron al ftp";
                     envio = await Task.Run(() => basico.sendftp_file_mnt());
                 }
@@ -2313,6 +2727,9 @@ namespace InterfaceWPF
                 if (EnviarFTP.Equals("S"))
                 {
                     mensaje = "Se enviaron al ftp";
+
+                    string codAmbiente = dwambiente_orce.EditValue.ToString();
+                    setearAmbOrce(codAmbiente);
                     envio = await Task.Run(() => basico.sendftp_file_orce());
                 }
                 else
@@ -2347,6 +2764,65 @@ namespace InterfaceWPF
             }
 
             return valida;
+        }
+
+        private void setearAmbXoficce(string codAmbiente)
+        {
+            string ftp_server = "";
+            string ftp_user = "";
+            string ftp_password = "";
+            int ftp_puerto = 0;
+            string ruta_destino = "";
+
+            for (int i = 0; i < gdt_Xoficce.Rows.Count; i++)
+            {
+                //aca haces las operaciones con cada fila de la tabla ej:
+                if (codAmbiente == gdt_Xoficce.Rows[i]["Amb_Cod"].ToString())
+                {
+                    ruta_destino = gdt_Orce.Rows[i]["Amb_Ftp_Path"].ToString();
+                    ftp_server = gdt_Xoficce.Rows[i]["Amb_Ftp_Server"].ToString();
+                    ftp_user = gdt_Xoficce.Rows[i]["Amb_Ftp_User"].ToString();
+                    ftp_password = gdt_Xoficce.Rows[i]["Amb_Ftp_Pass"].ToString();
+                    ftp_puerto = Int32.Parse(gdt_Xoficce.Rows[i]["Amb_Ftp_Port"].ToString());
+                }
+            }
+
+            basico.ftp_ruta_destino = ruta_destino;
+            Ent_Conexion.ftp_server = ftp_server;
+            Ent_Conexion.ftp_user = ftp_user;
+            Ent_Conexion.ftp_password = ftp_password;
+            Ent_Conexion.ftp_puerto = ftp_puerto;
+
+        }
+
+        private void setearAmbOrce(string codAmbiente)
+        {
+
+            string ftp_server = "";
+            string ftp_user = "";
+            string ftp_password = "";
+            string ruta_destino = "";
+            int ftp_puerto = 0;
+
+            for (int i = 0; i < gdt_Orce.Rows.Count; i++)
+            {
+                //aca haces las operaciones con cada fila de la tabla ej:
+                if (codAmbiente == gdt_Orce.Rows[i]["Amb_Cod"].ToString())
+                {
+                    ruta_destino = gdt_Orce.Rows[i]["Amb_Ftp_Path"].ToString();
+                    ftp_server = gdt_Orce.Rows[i]["Amb_Ftp_Server"].ToString();
+                    ftp_user = gdt_Orce.Rows[i]["Amb_Ftp_User"].ToString();
+                    ftp_password = gdt_Orce.Rows[i]["Amb_Ftp_Pass"].ToString();
+                    ftp_puerto = Int32.Parse(gdt_Orce.Rows[i]["Amb_Ftp_Port"].ToString());
+                }
+            }
+
+            basico.ftp_ruta_orce = ruta_destino;
+            Ent_Conexion.ftp_orce_server = ftp_server;
+            Ent_Conexion.ftp_orce_user = ftp_user;
+            Ent_Conexion.ftp_orce_password = ftp_password;
+            Ent_Conexion.ftp_orce_puerto = ftp_puerto;
+
         }
     }
 }

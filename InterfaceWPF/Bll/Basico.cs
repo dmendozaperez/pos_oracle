@@ -16,9 +16,9 @@ namespace InterfaceWPF.Bll
         public String ruta_temp_interface = System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "//tmpinterface";
         public String ruta_temp_DBF = System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "//tmpDBF";
 
-        private string ftp_ruta_destino = "/opt/webxst/BCL/autodeploy/data/org2000";
-        private string ftp_ruta_orce = "/app/webce/BPE/CE/batch_processing/auto_fileset";
-        //private string ftp_ruta_destino = "/tmp";
+        //private string ftp_ruta_destino = "/opt/webxst/BCL/autodeploy/data/org2000";
+        public string ftp_ruta_orce = "";//"/app/webce/BPE/CE/batch_processing/auto_fileset";
+        public string ftp_ruta_destino = "";// "/tmp";
         //private string ftp_ruta_destino = "/app/webxst/BCL/autodeploy/data/";
         #region<ENVIO POR FTP ARCHIVOS MNT>
         public Boolean sendftp_file_mnt()
@@ -69,7 +69,7 @@ namespace InterfaceWPF.Bll
                     string _nombrearchivo_xml = Path.GetFileNameWithoutExtension(@_path_archivo_xml);
                     string _extension_archivo = Path.GetExtension(@_path_archivo_xml);
                     string _file_path_destino = ftp_ruta_orce + "/" + _nombrearchivo_xml + _extension_archivo;
-                    Boolean valida_subida = subida_server_ftp(@_path_archivo_xml, _file_path_destino);
+                    Boolean valida_subida = subida_server_ftp_orce(@_path_archivo_xml, _file_path_destino);
                     if (valida_subida)
                     {
                         if (File.Exists(@_path_archivo_xml)) File.Delete(@_path_archivo_xml);
@@ -86,8 +86,7 @@ namespace InterfaceWPF.Bll
         }
         private Boolean subida_server_ftp(string file_origen,string file_destino)
         {
-            Boolean valida_envio = false;
-
+            Boolean valida_envio = false;       
 
             try
             {
@@ -101,6 +100,7 @@ namespace InterfaceWPF.Bll
                     //PortNumber =Ent_Conexion.ftp_puerto,// 22,
                     //GiveUpSecurityAndAcceptAnySshHostKey = true,
                     //SshHostKeyFingerprint = "ssh-rsa 2048 xx:xx:xx:xx:xx:xx:xx:xx..."
+                    
                     Protocol = Protocol.Sftp,
                     HostName = Ent_Conexion.ftp_server,// "172.24.28.216",
                     UserName = Ent_Conexion.ftp_user,// "webposintg",
@@ -138,6 +138,54 @@ namespace InterfaceWPF.Bll
 
             }
             catch(Exception exc) 
+            {
+                valida_envio = false;
+            }
+            return valida_envio;
+        }
+
+        private Boolean subida_server_ftp_orce(string file_origen, string file_destino)
+        {
+            Boolean valida_envio = false;
+            try
+            {
+                // Setup session options
+                SessionOptions sessionOptions = new SessionOptions
+                {
+                    Protocol = Protocol.Sftp,
+                    HostName = Ent_Conexion.ftp_orce_server,// "172.24.28.216",
+                    UserName = Ent_Conexion.ftp_orce_user,// "webposintg",
+                    Password = Ent_Conexion.ftp_orce_password,// "SubJFpHEN27y",
+                    PortNumber = Ent_Conexion.ftp_orce_puerto,// 22,
+                    GiveUpSecurityAndAcceptAnySshHostKey = true,
+                    //SshHostKeyFingerprint = "ssh-rsa 2048 xx:xx:xx:xx:xx:xx:xx:xx..."
+                };
+
+                using (Session session = new Session())
+                {
+                    session.Open(sessionOptions);
+                    // Upload files
+                    TransferOptions transferOptions = new TransferOptions();
+                    transferOptions.FilePermissions = null; // This is default
+                    transferOptions.PreserveTimestamp = false;
+                    transferOptions.TransferMode = TransferMode.Binary;
+                    TransferOperationResult transferResult;
+
+                    transferResult =
+                        session.PutFiles(file_origen, file_destino, false, transferOptions);
+
+                    // Throw on any error
+                    transferResult.Check();
+                    //string subido = "SUBIDO_FTP";
+
+
+                    valida_envio = true;
+                    // valida_envio = false;
+                }
+
+
+            }
+            catch (Exception exc)
             {
                 valida_envio = false;
             }

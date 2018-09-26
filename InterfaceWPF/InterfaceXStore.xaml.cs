@@ -187,7 +187,7 @@ namespace InterfaceWPF
             dwambiente_orce.SelectedIndex = 0;
             dwambiente_orce.Focus();
 
-            dwambiente_ven.ItemsSource = dtOrce;
+            dwambiente_ven.ItemsSource = dt;
             dwambiente_ven.DisplayMember = "Amb_Des";
             dwambiente_ven.ValueMember = "Amb_Cod";
             dwambiente_ven.SelectedIndex = 0;
@@ -2723,7 +2723,7 @@ namespace InterfaceWPF
                 //aca haces las operaciones con cada fila de la tabla ej:
                 if (codAmbiente == gdt_Xoficce.Rows[i]["Amb_Cod"].ToString())
                 {
-                    ruta_destino = gdt_Orce.Rows[i]["Amb_Ftp_Path"].ToString();
+                    ruta_destino = gdt_Xoficce.Rows[i]["Amb_Ftp_Path"].ToString();
                     ftp_server = gdt_Xoficce.Rows[i]["Amb_Ftp_Server"].ToString();
                     ftp_user = gdt_Xoficce.Rows[i]["Amb_Ftp_User"].ToString();
                     ftp_password = gdt_Xoficce.Rows[i]["Amb_Ftp_Pass"].ToString();

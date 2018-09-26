@@ -610,6 +610,45 @@ namespace CapaDato.Venta
             return ds;
         }
 
-       
+
+        public DataSet SET_XSTORE_VENTA_EXPORTAR(string cod_tda, DateTime fechaIni, DateTime fechaFin)
+        {
+            string sqlquery = "USP_SET_XSTORE_VENTA_EXPORTAR";
+            DataSet ds = null;
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(Ent_Conexion.conexion_posperu))
+                {
+                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@COD_TDA", cod_tda);
+                        cmd.Parameters.AddWithValue("@FEC_INI", fechaIni);
+                        cmd.Parameters.AddWithValue("@FEC_FIN", fechaFin);
+
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            ds = new DataSet();
+                            da.Fill(ds);
+
+                            ds.Tables[0].TableName = "TRANS_LINE_TENDER";
+                            ds.Tables[1].TableName = "TRANS_TAX";
+                            ds.Tables[2].TableName = "TRANS_LINE_ITEM_TAX";
+                            ds.Tables[3].TableName = "TRANS_LINE_ITEM";
+                            ds.Tables[4].TableName = "TRANS_HEADER";                           
+
+                        }
+                    }
+                }
+            }
+            catch ( Exception exc)
+            {
+                ds = null;
+            }
+            return ds;
+        }
+
+
     }
 }

@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:InterfaceWPF"
         xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol" x:Class="InterfaceWPF.InterfaceXStore"
         mc:Ignorable="d"
-        Title="Interface del Xstore"  Height="580" Width="950"  WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" Loaded="MetroWindow_Loaded" Icon="Design/Images/bata.ico">
+        Title="Interface del Xstore"  Height="580" Width="1050"  WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" Loaded="MetroWindow_Loaded" Icon="Design/Images/bata.ico">
     <Controls:MetroWindow.Flyouts>
         <Controls:FlyoutsControl x:Name="flyoutsControl">
             <Controls:Flyout Header="Modal"
@@ -160,7 +160,7 @@
                                 <RowDefinition Height="40"/>
                                 <RowDefinition Height="40"/>
                             </Grid.RowDefinitions>
-                            <Label HorizontalAlignment="Right" Content="Seleccione Ambiente" Grid.Row="0" FontSize="14" FontWeight="Bold"/>
+                            <Label HorizontalAlignment="Right" Content="Ambiente FTP" Grid.Row="0" FontSize="14" FontWeight="Bold"/>
                             <dxe:ComboBoxEdit  x:Name="dwAmbienteT"  ValidateOnTextInput="False"  Width="370" Height="28" Grid.Row="0" Cursor="Hand" Grid.Column="1" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" AutoComplete="True"/>
                             <Label HorizontalAlignment="Right" Content="Seleccione Tienda" Grid.Row="1" FontSize="14" FontWeight="Bold"/>
                             <dxe:ComboBoxEdit  x:Name="dwtienda" ItemsSource="llenarTiendaTda" ValidateOnTextInput="False"  Width="370" Height="28" Grid.Row="1" Cursor="Hand" Grid.Column="1" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" AutoComplete="True"/>
@@ -209,7 +209,7 @@
                                 <RowDefinition Height="40"/>
                                 <RowDefinition Height="40"/>
                             </Grid.RowDefinitions>
-                            <Label HorizontalAlignment="Right" Content="Seleccione Ambiente" Grid.Row="0" FontSize="14" FontWeight="Bold"/>
+                            <Label HorizontalAlignment="Right" Content="Ambiente FTP" Grid.Row="0" FontSize="14" FontWeight="Bold"/>
                             <dxe:ComboBoxEdit  x:Name="dwAmbiente_M" ValidateOnTextInput="False"  Width="300" Height="28" Grid.Row="0" Cursor="Hand" Grid.Column="1" Grid.ColumnSpan="2" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" AutoComplete="True"/>
                             <Label HorizontalAlignment="Right" Content="Seleccione Tienda" Grid.Row="1" FontSize="14" FontWeight="Bold"/>
                             <dxe:ComboBoxEdit  x:Name="dwtienda_M" ValidateOnTextInput="False"  Width="300" Height="28" Grid.Row="1" Cursor="Hand" Grid.Column="1" Grid.ColumnSpan="2" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" AutoComplete="True"/>
@@ -270,7 +270,7 @@
                                 <RowDefinition Height="40"/>
                                 <RowDefinition Height="40"/>
                             </Grid.RowDefinitions>
-                            <Label HorizontalAlignment="Right" Content="Seleccione Ambiente" Grid.Row="0" FontSize="14" FontWeight="Bold"/>
+                            <Label HorizontalAlignment="Right" Content="Ambiente FTP" Grid.Row="0" FontSize="14" FontWeight="Bold"/>
                             <dxe:ComboBoxEdit  x:Name="dwAmbiente_stk" ValidateOnTextInput="False"  Width="370" Height="28" Grid.Row="0" Cursor="Hand" Grid.Column="1" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" AutoComplete="True"/>
                             <Label HorizontalAlignment="Right" Grid.Row="1" Content="Seleccione Tienda" FontSize="14" FontWeight="Bold"/>
                             <Label HorizontalAlignment="Right" Grid.Row="2" Content="Fecha" FontSize="14" FontWeight="Bold"/>
@@ -323,7 +323,7 @@
                                 <RowDefinition Height="40"/>
                                 <RowDefinition Height="40"/>
                             </Grid.RowDefinitions>
-                            <Label HorizontalAlignment="Right" Content="Seleccione Ambiente" Grid.Row="0" FontSize="14" FontWeight="Bold"/>
+                            <Label HorizontalAlignment="Right" Content="Ambiente FTP" Grid.Row="0" FontSize="14" FontWeight="Bold"/>
                             <dxe:ComboBoxEdit  x:Name="dwAmbiente_bcl" ValidateOnTextInput="False"  Width="370" Height="28" Grid.Row="0" Cursor="Hand" Grid.Column="1" Grid.ColumnSpan="2" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" AutoComplete="True"/>
                             <Label HorizontalAlignment="Right" Grid.Row="1" Content="Seleccione Tienda" FontSize="14" FontWeight="Bold"/>
                             <dxe:ComboBoxEdit  x:Name="dwtienda_bcl" ValidateOnTextInput="False"  Width="370" Height="28" Grid.Row="1" Cursor="Hand" Grid.Column="1" Grid.ColumnSpan="2" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" AutoComplete="True"/>
@@ -377,7 +377,7 @@
                                 <RowDefinition Height="40"/>
                                 <RowDefinition Height="40"/>
                             </Grid.RowDefinitions>
-                            <Label HorizontalAlignment="Right" Content="Seleccione Ambiente" Grid.Row="0" FontSize="14" FontWeight="Bold"/>
+                            <Label HorizontalAlignment="Right" Content="Ambiente FTP" Grid.Row="0" FontSize="14" FontWeight="Bold"/>
                             <dxe:ComboBoxEdit  x:Name="dwAmbiente_trans" ValidateOnTextInput="False"  Width="370" Height="28" Grid.Row="0" Cursor="Hand" Grid.Column="1" Grid.ColumnSpan="2" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" AutoComplete="True"/>
 
                             <Label HorizontalAlignment="Right" Content="Seleccione Tienda" Grid.Row="1"  FontSize="14" FontWeight="Bold"/>
@@ -403,14 +403,15 @@
                     </Border.Effect>
                     <Grid Margin="0,0,0,0" Width="930" Height="475" Background="AliceBlue">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="720"/>
+                            <ColumnDefinition Width="418"/>
+                            <ColumnDefinition Width="303"/>
                             <!--<ColumnDefinition Width="*"/>-->
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="5"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <Grid Grid.Row="1" Margin="0,5,-206,0">
+                        <Grid Grid.Row="1" Margin="0,5,-206,0" Grid.ColumnSpan="2">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
@@ -419,17 +420,23 @@
                                 <RowDefinition Height="40"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <Grid Grid.Row="0" Grid.Column="0">
+                            <Grid Grid.Row="0" Grid.Column="0" Margin="-32,0,31,0">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="200"/>
-                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="200"/>
+                                    <ColumnDefinition Width="180"/>
+                                    <ColumnDefinition Width="220"/>
+                                    <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="40"/>
                                 </Grid.RowDefinitions>
-                                <Label HorizontalAlignment="Center"  Grid.Column="0" Grid.Row="0" Content="Seleccione Tienda" FontSize="14" FontWeight="Bold"/>
-                                <dxe:ComboBoxEdit  x:Name="dwtiendatrans1" ValidateOnTextInput="False"  Width="300" Height="28" Grid.Row="0" Cursor="Hand" Grid.Column="1" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" AutoComplete="True"/>
-                                <CheckBox IsEnabled="true" IsChecked="True" Cursor="Hand" Grid.Column="1"  x:Name="chk_ftp_Trans" HorizontalAlignment="Left" VerticalAlignment="Center" Content="ENVIAR FTP" Margin="402,10,0,12"/>
+                                <Label HorizontalAlignment="Center"  Grid.Column="0" Grid.Row="0" Content="Ambiente FTP" FontSize="14" FontWeight="Bold"/>
+                                <dxe:ComboBoxEdit  x:Name="dwAmbienteDsp" ValidateOnTextInput="False"  Width="200" Height="28" Grid.Row="0" Cursor="Hand" Grid.Column="1" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" AutoComplete="True"/>
+
+                                <Label HorizontalAlignment="Center"  Grid.Column="2" Grid.Row="0" Content="Seleccione Tienda" FontSize="14" FontWeight="Bold"/>
+                                <dxe:ComboBoxEdit  x:Name="dwtiendatrans1" ValidateOnTextInput="False"  Width="210" Height="28" Grid.Row="0" Cursor="Hand" Grid.Column="3" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" AutoComplete="True"/>
+                                <CheckBox IsEnabled="true" IsChecked="True" Cursor="Hand" Grid.Column="4"  x:Name="chk_ftp_Trans" HorizontalAlignment="Center" VerticalAlignment="Center" Content="ENVIAR FTP" />
                             </Grid>
                             <Grid Grid.Row="1" Grid.Column="0" >
                                 <Grid.ColumnDefinitions>
@@ -521,7 +528,6 @@
                     </Grid>
                 </Border>
             </TabItem>
-
             <TabItem Header="Generar DBF" Background="#FF79787E" BorderThickness="1" >
                 <Border CornerRadius="2">
                     <Border.Effect>
@@ -555,8 +561,8 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="40"/>
                                 </Grid.RowDefinitions>
-                                <Label HorizontalAlignment="Center"  Grid.Column="0" Grid.Row="3" Content="Seleccione Ambiente" FontSize="14" FontWeight="Bold"/>
-                                <dxe:ComboBoxEdit  x:Name="dwambiente_dbf" ValidateOnTextInput="False"  Width="300" Height="28" Grid.Row="1" Cursor="Hand" Grid.Column="1" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" AutoComplete="True"/>
+                                <!--<Label HorizontalAlignment="Center"  Grid.Column="0" Grid.Row="3" Content="Seleccione Ambiente" FontSize="14" FontWeight="Bold"/>
+                                <dxe:ComboBoxEdit  x:Name="dwambiente_dbf" ValidateOnTextInput="False"  Width="300" Height="28" Grid.Row="1" Cursor="Hand" Grid.Column="1" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" AutoComplete="True"/>-->
 
                             </Grid>
                             <Grid Grid.Row="1" Grid.Column="0">
@@ -569,9 +575,9 @@
                                 </Grid.RowDefinitions>
                                 <Label HorizontalAlignment="Center"  Grid.Column="0" Grid.Row="3" Content="Seleccione Tienda" FontSize="14" FontWeight="Bold"/>
                                 <dxe:ComboBoxEdit  x:Name="dwtienda_dbf" ValidateOnTextInput="False"  Width="300" Height="28" Grid.Row="1" Cursor="Hand" Grid.Column="1" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" AutoComplete="True"/>
-                                
+
                             </Grid>
-                            <Grid Grid.Row="3" Grid.Column="0" >
+                            <Grid Grid.Row="2" Grid.Column="0" >
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="200"/>
                                     <ColumnDefinition Width="190"/>
@@ -580,11 +586,11 @@
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
                                 <Label HorizontalAlignment="Right" Grid.Column="0" VerticalAlignment="Center" Content="Desde" FontSize="14" FontWeight="Bold"/>
-                               <DatePicker x:Name="dtpFecha_DBF" HorizontalAlignment="Left" VerticalAlignment="Center" Width="180" Cursor="Hand" FontSize="14" Height="25" Grid.Column="1" Grid.Row="0"/>
+                                <DatePicker x:Name="dtpFecha_DBF" HorizontalAlignment="Left" VerticalAlignment="Center" Width="180" Cursor="Hand" FontSize="14" Height="25" Grid.Column="1" Grid.Row="0"/>
                                 <Button Cursor="Hand" Grid.Column="4" Content="Generar" Width="100" Height="30" Grid.Row="0" HorizontalAlignment="Left" x:Name="btn_generar" Click="btngenerarDBF_Click"/>
                             </Grid>
-                            
-                           </Grid>
+
+                        </Grid>
 
 
                     </Grid>
@@ -622,7 +628,7 @@
                                 <RowDefinition Height="40"/>
                                 <RowDefinition Height="40"/>
                             </Grid.RowDefinitions>
-                            <Label HorizontalAlignment="Center"  Grid.Column="0" Grid.Row="0" Content="Seleccione Ambiente" FontSize="14" FontWeight="Bold"/>
+                            <Label HorizontalAlignment="Center"  Grid.Column="0" Grid.Row="0" Content="Ambiente FTP" FontSize="14" FontWeight="Bold"/>
                             <dxe:ComboBoxEdit  x:Name="dwambiente_orce" ValidateOnTextInput="False"  Width="300" Height="28" Grid.Row="0" Cursor="Hand" Grid.Column="1" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" AutoComplete="True"/>
                             <CheckBox Grid.Row="1" IsEnabled="True" IsChecked="True" Cursor="Hand" Grid.Column="1"  x:Name="chk_ItemMaintenance" HorizontalAlignment="Left" VerticalAlignment="Center" Content="ITEM MAINTENANCE"/>
                             <CheckBox Grid.Row="2" IsEnabled="True" IsChecked="True" Cursor="Hand" Grid.Column="1"  x:Name="chk_MerchandiseHierarch" HorizontalAlignment="Left" VerticalAlignment="Center" Content="MERCHANDISE HIERARCHY MAINTENANCE"/>
@@ -635,6 +641,104 @@
                             <Button Cursor="Hand" Grid.Column="1" Content="Genera Archivo Orce" Width="190" Grid.Row="7" HorizontalAlignment="Left" x:Name="btnArc" Click="btnOrc_Click"  />
                         </Grid>
 
+
+                    </Grid>
+                </Border>
+            </TabItem>
+
+            <TabItem Header="venta Tienda" Background="#FFB63B62" BorderThickness="1" >
+                <Border CornerRadius="2">
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="20"/>
+                    </Border.Effect>
+                    <Grid Margin="0,0,0,0" Width="930" Height="475" Background="AliceBlue">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="720"/>
+                            <!--<ColumnDefinition Width="*"/>-->
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="1" Margin="0,5,-206,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="40"/>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0" Grid.Column="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="150"/>
+                                    <ColumnDefinition Width="250"/>
+                                    <ColumnDefinition Width="150"/>
+                                    <ColumnDefinition Width="250"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="40"/>
+                                </Grid.RowDefinitions>
+                                <Label HorizontalAlignment="Center"  Grid.Column="0" Grid.Row="0" Content="Ambiente FTP" FontSize="14" FontWeight="Bold"/>
+                                <dxe:ComboBoxEdit  x:Name="dwambiente_ven" ValidateOnTextInput="False"  Width="300" Height="28" Grid.Row="1" Cursor="Hand" Grid.Column="1" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" AutoComplete="True"/>
+
+                                <Label HorizontalAlignment="Center"  Grid.Column="2" Grid.Row="0" Content="Seleccione Tienda" FontSize="14" FontWeight="Bold"/>
+                                <dxe:ComboBoxEdit  x:Name="dwtienda_ven" ValidateOnTextInput="False"  Width="300" Height="28" Grid.Row="1" Cursor="Hand" Grid.Column="3" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" AutoComplete="True"/>
+                                
+                                <CheckBox IsEnabled="true" IsChecked="True" Cursor="Hand" Grid.Column="4"  x:Name="chk_ftp_ven" HorizontalAlignment="Left" VerticalAlignment="Center" Content="ENVIAR FTP" Margin="20,10,0,12"/>
+                            </Grid>
+                            <Grid Grid.Row="1" Grid.Column="0" >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="200"/>
+                                    <ColumnDefinition Width="190"/>
+                                    <ColumnDefinition Width="50"/>
+                                    <ColumnDefinition Width="200"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label HorizontalAlignment="Right" Grid.Column="0" VerticalAlignment="Center" Content="Desde" FontSize="14" FontWeight="Bold"/>
+                                <Label HorizontalAlignment="Right" Grid.Column="2" VerticalAlignment="Center" Content="Hasta" FontSize="14" FontWeight="Bold"/>
+                                <DatePicker x:Name="dtpdesde_ven" HorizontalAlignment="Left" VerticalAlignment="Center" Width="180" Cursor="Hand" FontSize="14" Height="25" Grid.Column="1" Grid.Row="0"/>
+                                <DatePicker x:Name="dtphasta_ven" HorizontalAlignment="Left" VerticalAlignment="Center" Width="180" Cursor="Hand" FontSize="14" Height="25" Grid.Column="3" Grid.Row="0"/>
+                                <Button Cursor="Hand" Grid.Column="4" Content="Generar Archivo" Width="100" Height="30" Grid.Row="0" HorizontalAlignment="Left" x:Name="btnVtaTienda" Click="btnVtaTienda_Click"/>
+                            </Grid>
+
+                            <Grid Grid.Row="3" Grid.Column="0" >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="300"/>
+                                    <ColumnDefinition Width="300"/>
+                                    <ColumnDefinition Width="300"/>
+                                </Grid.ColumnDefinitions>
+                                <CheckBox Grid.Row="3" Margin="10,0,0,0" ToolTip="" IsChecked="False" Cursor="Hand" Grid.Column="0"  x:Name="chk_line_tender" HorizontalAlignment="Left" VerticalAlignment="Center" Content="LINE TENDER"/>
+                                <CheckBox Grid.Row="3" Margin="10,0,0,0" ToolTip="LINE-CATERIA-SUB-RIMS" IsChecked="False" Cursor="Hand" Grid.Column="1"  x:Name="chk_tax" HorizontalAlignment="Left" VerticalAlignment="Center" Content="TAX"/>
+                                <CheckBox Grid.Row="3" Margin="10,0,0,0" ToolTip="LINE-CATERIA-SUB-RIMS" IsChecked="False" Cursor="Hand" Grid.Column="2"  x:Name="chk_item_Tax" HorizontalAlignment="Left" VerticalAlignment="Center" Content="ITEM TAX"/>
+
+                            </Grid>
+                            <Grid Grid.Row="4" Grid.Column="0" >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="300"/>
+                                    <ColumnDefinition Width="300"/>
+                                    <ColumnDefinition Width="300"/>
+                                </Grid.ColumnDefinitions>
+                                <CheckBox Grid.Row="3" Margin="10,0,0,0" ToolTip="" IsChecked="False" Cursor="Hand" Grid.Column="0"  x:Name="chk_line_item" HorizontalAlignment="Left" VerticalAlignment="Center" Content="LINE ITEM"/>
+                                <CheckBox Grid.Row="3" Margin="10,0,0,0" ToolTip="LINE-CATERIA-SUB-RIMS" IsChecked="False" Cursor="Hand" Grid.Column="1"  x:Name="chk_header" HorizontalAlignment="Left" VerticalAlignment="Center" Content="HEADER"/>
+
+
+                            </Grid>
+
+                            <!--<Grid.RowDefinitions>
+                                <RowDefinition Height="40"/>
+                            </Grid.RowDefinitions>
+                            <Label HorizontalAlignment="Right" Content="Seleccione Tienda" FontSize="14" FontWeight="Bold"></Label>
+                            <dxe:ComboBoxEdit  Name="dwtiendatrans1" ValidateOnTextInput="False"  Width="370" Height="28" Grid.Row="0" Cursor="Hand" Grid.Column="1" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" AutoComplete="True"/>-->
+
+
+                        </Grid>
 
                     </Grid>
                 </Border>

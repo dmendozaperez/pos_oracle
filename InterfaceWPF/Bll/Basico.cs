@@ -86,8 +86,7 @@ namespace InterfaceWPF.Bll
         }
         private Boolean subida_server_ftp(string file_origen,string file_destino)
         {
-            Boolean valida_envio = false;
-
+            Boolean valida_envio = false;       
 
             try
             {
@@ -101,6 +100,7 @@ namespace InterfaceWPF.Bll
                     //PortNumber =Ent_Conexion.ftp_puerto,// 22,
                     //GiveUpSecurityAndAcceptAnySshHostKey = true,
                     //SshHostKeyFingerprint = "ssh-rsa 2048 xx:xx:xx:xx:xx:xx:xx:xx..."
+                    
                     Protocol = Protocol.Sftp,
                     HostName = Ent_Conexion.ftp_server,// "172.24.28.216",
                     UserName = Ent_Conexion.ftp_user,// "webposintg",

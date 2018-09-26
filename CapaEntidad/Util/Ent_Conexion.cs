@@ -34,10 +34,10 @@ namespace CapaEntidad.Util
         #endregion
 
         #region<CONEXION PRODUCCION>
-        public static string ftp_server { get { return "172.16.24.216"; } }
-        public static string ftp_user { get { return "webposbpe"; } }
-        public static string ftp_password { get { return "JU737CbDmJvu"; } }
-        public static Int32 ftp_puerto { get { return 22; } }
+        //public static string ftp_server { get { return "172.16.24.216"; } }
+        //public static string ftp_user { get { return "webposbpe"; } }
+        //public static string ftp_password { get { return "JU737CbDmJvu"; } }
+        //public static Int32 ftp_puerto { get { return 22; } }
 
         #endregion
         #endregion

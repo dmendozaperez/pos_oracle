@@ -1644,6 +1644,7 @@ namespace InterfaceWPF
                 tabla_FFACTD(ds.Tables[1]);
                 tabla_FNOTAA(ds.Tables[2]);
                 tabla_FSTKG(ds.Tables[3]);
+                tabla_FCIERR(ds.Tables[4]);
 
                 string archivo = "";
                 _comprimir_archivo(cod_tda, fecha, ref archivo);
@@ -1658,6 +1659,35 @@ namespace InterfaceWPF
             {
                 if (ProgressAlert != null) await ProgressAlert.CloseAsync();
                 await metroWindow.ShowMessageAsync(Ent_Msg.msginfomacion, exc.Message, MessageDialogStyle.Affirmative, metroWindow.MetroDialogOptions);
+            }
+        }
+
+        private void tabla_FCIERR(DataTable dt)
+        {
+            try
+            {
+                string _path_envia = basico.ruta_temp_DBF;
+                DBFNET fcierr = new DBFNET();
+                fcierr.tabla = "FCIERR";
+                               
+                fcierr.addcol("Ci_csuc", Tipo.Caracter, "3");
+                fcierr.addcol("Ci_fech", Tipo.Fecha);
+                fcierr.addcol("Ci_esta", Tipo.Caracter, "1");
+                fcierr.addcol("Ci_fetr", Tipo.Fecha);
+                fcierr.addcol("Ci_cuse", Tipo.Caracter, "3");
+                fcierr.addcol("Ci_muse", Tipo.Caracter, "3");
+                fcierr.addcol("Ci_fcre", Tipo.Fecha);
+                fcierr.addcol("Ci_fmod", Tipo.Fecha);
+                fcierr.addcol("Ci_impz", Tipo.Caracter, "1");
+                fcierr.addcol("Ci_aper", Tipo.Caracter, "30");
+                fcierr.addcol("Ci_cier", Tipo.Caracter, "30");
+
+                fcierr.creardbf(_path_envia);
+                fcierr.Insertar_tabla(dt, _path_envia);
+            }
+            catch
+            {
+                throw;
             }
         }
 

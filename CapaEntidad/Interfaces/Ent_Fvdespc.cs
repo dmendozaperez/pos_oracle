@@ -40,6 +40,7 @@ namespace CapaEntidad.Interfaces
         public Decimal DESC_VANC { get; set; }
         public Decimal DESC_VCAJ { get; set; }
 
+        public List<Ent_Fvdespd> FVDESPD { get; set; }
         /// con todas las reglas de medida horizontal
         /// </summary>
         public DataTable DT_FVDESPD_TREGMEDIDA { get; set; }

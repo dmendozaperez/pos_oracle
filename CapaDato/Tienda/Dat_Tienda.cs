@@ -11,6 +11,42 @@ namespace CapaDato.Tienda
 {
     public class Dat_Tienda
     {
+
+        public Boolean tienda_traspaso(string cod_tda)
+        {
+            string sqlquery = "USP_GET_ACCESO_TRASPADO_TDA";
+            Boolean acceso = false;
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(Ent_Conexion.conexion_posperu))
+                {
+                    try
+                    {
+                        if (cn.State == 0) cn.Open();
+                        using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                        {
+                            cmd.CommandTimeout = 0;
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.Parameters.AddWithValue("@cod_tda", cod_tda);
+                            cmd.Parameters.Add("@acceso_tras", SqlDbType.Bit);
+                            cmd.Parameters["@acceso_tras"].Direction = ParameterDirection.Output;
+                            cmd.ExecuteNonQuery();
+                            acceso =Convert.ToBoolean(cmd.Parameters["@acceso_tras"].Value);
+                        }
+                    }
+                    catch
+                    {
+
+                        acceso = false;
+                    }
+                }
+            }
+            catch 
+            {
+                acceso = false;                
+            }
+            return acceso;
+        }
         public DataSet dsgettienda(ref string verror)
         {
             SqlConnection cn = null;

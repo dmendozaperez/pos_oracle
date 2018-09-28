@@ -3,6 +3,7 @@ using CapaDato.Basico;
 using CapaDato.Control;
 using CapaDato.Interfaces;
 using CapaDato.Logistica;
+using CapaDato.Tienda;
 using CapaDato.Venta;
 using CapaEntidad.Interfaces;
 using CapaEntidad.Logistica;
@@ -612,6 +613,39 @@ namespace WS_Bata_Interfaces
             }
             return msg_transac;
         }
+
+        [SoapHeader("Authentication", Required = true)]
+        [WebMethod(Description = "Valida Tiendas traspasos")]
+        public Boolean ws_valida_traspaso_tda(string  cod_tda)
+        {
+            Boolean acceso = false;
+            autentication_ws = new Ba_WsConexion();
+            Dat_Tienda valida_tda = null; 
+            try
+            {            
+
+                Boolean valida_ws = autentication_ws.ckeckAuthentication_ws("01", Authentication.Username, Authentication.Password);
+                //Boolean valida_ws = true;
+                if (valida_ws)
+                {
+                    valida_tda = new Dat_Tienda();
+
+                    acceso = valida_tda.tienda_traspaso(cod_tda);                   
+                }
+                else
+                {
+                    acceso = false;
+                }
+
+            }
+            catch 
+            {
+
+                acceso = false;
+            }
+            return acceso;
+        }
+
     }
 
     public class ValidateAcceso:SoapHeader

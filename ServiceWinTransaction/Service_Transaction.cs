@@ -20,6 +20,7 @@ namespace ServiceWinTransaction
     {
         Timer tmservicio = null;
         Timer tmservicioDBF = null;
+        Timer tmservicioVentaXstore = null;
         //Timer tmservicioScactcoDBF = null;
 
         Timer tmservicioposlog = null;
@@ -29,6 +30,8 @@ namespace ServiceWinTransaction
         //private Int32 _valida_serviceScactcoDBF = 0;
 
         private Int32 _valida_serviceposlog = 0;
+
+        private Int32 _valida_serviceVentaXstore = 0;
 
         public Service_Transaction()
         {
@@ -144,6 +147,45 @@ namespace ServiceWinTransaction
 
 
         }
+
+        void tmpServicioVentaXstore_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            Int32 _valor = 0;
+            try
+            {
+                if (_valida_serviceVentaXstore == 0)
+                {
+                    _valor = 1;
+                    _valida_serviceVentaXstore = 1;
+                    string _valida_proc_venXstore = @"D:\venta.txt";
+                    Boolean proceso_ventaXSTORE = false;
+
+                    if (File.Exists(_valida_proc_venXstore)) proceso_ventaXSTORE = true;
+
+                    if (proceso_ventaXSTORE)
+                    {
+                        _valor = 1;
+                        string _error = "";
+                        _valida_serviceVentaXstore = 1;
+                        Basico ejecuta_procesos = new Basico();
+                        ejecuta_procesos.procesar_dbf_pos(ref _error);
+                        _valida_serviceVentaXstore = 0;
+
+                    }
+                }
+
+            }
+            catch (Exception exc)
+            {
+                //string errSwc = "";
+                _valida_serviceDBF = 0;
+            }
+            if (_valor == 1)
+            {
+                _valida_serviceDBF = 0;
+            }
+        }
+
 
         void tmpServicioDBF_Elapsed(object sender, ElapsedEventArgs e)
         {

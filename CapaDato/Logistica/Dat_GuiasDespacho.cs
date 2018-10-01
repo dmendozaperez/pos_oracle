@@ -1,4 +1,5 @@
-﻿using CapaEntidad.Logistica;
+﻿using CapaEntidad.Interfaces;
+using CapaEntidad.Logistica;
 using CapaEntidad.Util;
 using System;
 using System.Collections.Generic;
@@ -160,6 +161,114 @@ namespace CapaDato.Logistica
                 
             }
             return list_art;
+        }
+
+        public DataSet ds_FVDESP(List<CapaEntidad.Interfaces.Ent_Fvdespc> listar_guia)
+        {
+            DataSet ds = null;
+            try
+            {
+                ds = new DataSet();
+                DataTable dt_FVDESPC = new DataTable(); DataTable dt_FVDESPD = new DataTable();
+                /********TABLA CABECERA***/
+                dt_FVDESPC.Columns.Add("DESC_ALMAC", typeof(string));
+                dt_FVDESPC.Columns.Add("DESC_GUDIS", typeof(string));
+                dt_FVDESPC.Columns.Add("DESC_NDESP", typeof(string));
+                dt_FVDESPC.Columns.Add("DESC_TDES", typeof(string));
+                dt_FVDESPC.Columns.Add("DESC_FECHA", typeof(DateTime));
+                dt_FVDESPC.Columns.Add("DESC_FDESP", typeof(DateTime));
+                dt_FVDESPC.Columns.Add("DESC_FEMI", typeof(DateTime));                
+                dt_FVDESPC.Columns.Add("DESC_FTRA", typeof(DateTime));
+                dt_FVDESPC.Columns.Add("DESC_NUME", typeof(string));                
+                /*************************************/
+                /********TABLA DETALLE*****/
+                dt_FVDESPD.Columns.Add("DESD_GUDIS", typeof(string));
+                dt_FVDESPD.Columns.Add("DESD_NDESP", typeof(string));
+                dt_FVDESPD.Columns.Add("DESD_ALMAC", typeof(string));
+                dt_FVDESPD.Columns.Add("DESD_ARTIC", typeof(string));
+                dt_FVDESPD.Columns.Add("DESD_CALID", typeof(string));
+                dt_FVDESPD.Columns.Add("DESD_TALLA", typeof(string));
+                dt_FVDESPD.Columns.Add("DESD_PARES", typeof(Int32));
+                dt_FVDESPD.Columns.Add("DESD_PRVTA", typeof(Decimal));
+                /************************/
+
+                foreach(Ent_Fvdespc guias_cab in listar_guia)
+                {
+                    dt_FVDESPC.Rows.Add(guias_cab.DESC_ALMAC, guias_cab.DESC_GUDIS, guias_cab.DESC_NDESP, guias_cab.DESC_TDES, guias_cab.DESC_FECHA,
+                                        guias_cab.DESC_FDESP, guias_cab.DESC_FEMI,  guias_cab.DESC_FTRA, guias_cab.DESC_NUME);
+
+                    foreach(Ent_Fvdespd guias_det in guias_cab.FVDESPD)
+                    {
+                        dt_FVDESPD.Rows.Add(guias_det.DESD_GUDIS, guias_det.DESD_NDESP, guias_det.DESD_ALMAC, guias_det.DESD_ARTIC, guias_det.DESD_CALID,
+                                            guias_det.DESD_TALLA, guias_det.DESD_PARES, guias_det.DESD_PRVTA);
+                    }
+                    
+                }
+
+                ds.Tables.Add(dt_FVDESPC);
+                ds.Tables.Add(dt_FVDESPD);
+            }
+            catch
+            {
+                ds = null;
+                throw;
+                
+            }
+            return ds;
+        }
+
+        public Ent_MsgTransac insertar_guias_traspaso_tda(string cod_tda,List<CapaEntidad.Interfaces.Ent_Fvdespc> listar_guia)
+        {
+            string sqlquery = "USP_INSERTAR_TRASPASOS_TDA";
+            Ent_MsgTransac msg_error = null;
+            try
+            {
+                msg_error = new Ent_MsgTransac();
+                if (listar_guia!=null)
+                {
+                    if (listar_guia.Count>0)
+                    {
+                        DataSet ds = ds_FVDESP(listar_guia);
+                        DataTable dt_FVDESPC = ds.Tables[0];
+                        DataTable dt_FVDESPD = ds.Tables[1];
+
+                        using (SqlConnection cn = new SqlConnection(Ent_Conexion.conexion_posperu))
+                        {
+                            try
+                            {
+                                if (cn.State == 0) cn.Open();
+                                using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                                {
+                                    cmd.CommandTimeout = 0;
+                                    cmd.CommandType = CommandType.StoredProcedure;
+                                    cmd.Parameters.AddWithValue("@COD_TDA", cod_tda);
+                                    cmd.Parameters.AddWithValue("@TMP_FVDESPC", dt_FVDESPC);
+                                    cmd.Parameters.AddWithValue("@TMP_FVDESPD", dt_FVDESPD);
+                                    cmd.ExecuteNonQuery();
+                                    msg_error.codigo = "0";
+                                    msg_error.descripcion = "Se actualizo correctamente";
+                                }
+                            }
+                            catch (Exception exc)
+                            {
+                                msg_error.codigo = "1";
+                                msg_error.descripcion = exc.Message;
+                            }
+                            if (cn != null)
+                                if (cn.State == ConnectionState.Open) cn.Close();
+                        }
+
+                    }
+                }
+
+            }
+            catch (Exception exc)
+            {
+
+                msg_error.codigo = "1";
+                msg_error.descripcion = exc.Message;
+            }
+            return msg_error;
         }
 
     }

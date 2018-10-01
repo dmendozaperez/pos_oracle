@@ -3,6 +3,7 @@ using CapaDato.Basico;
 using CapaDato.Control;
 using CapaDato.Interfaces;
 using CapaDato.Logistica;
+using CapaDato.Tienda;
 using CapaDato.Venta;
 using CapaEntidad.Interfaces;
 using CapaEntidad.Logistica;
@@ -609,6 +610,72 @@ namespace WS_Bata_Interfaces
 
                 msg_transac.codigo = "1";
                 msg_transac.descripcion = exc.Message;
+            }
+            return msg_transac;
+        }
+
+        [SoapHeader("Authentication", Required = true)]
+        [WebMethod(Description = "Valida Tiendas traspasos")]
+        public Boolean ws_valida_traspaso_tda(string  cod_tda)
+        {
+            Boolean acceso = false;
+            autentication_ws = new Ba_WsConexion();
+            Dat_Tienda valida_tda = null; 
+            try
+            {            
+
+                Boolean valida_ws = autentication_ws.ckeckAuthentication_ws("01", Authentication.Username, Authentication.Password);
+                //Boolean valida_ws = true;
+                if (valida_ws)
+                {
+                    valida_tda = new Dat_Tienda();
+
+                    acceso = valida_tda.tienda_traspaso(cod_tda);                   
+                }
+                else
+                {
+                    acceso = false;
+                }
+
+            }
+            catch 
+            {
+
+                acceso = false;
+            }
+            return acceso;
+        }
+
+        [SoapHeader("Authentication", Required = true)]
+        [WebMethod(Description = "envio de traspasos de tienda")]
+        public Ent_MsgTransac ws_envio_traspaso_tda(string cod_tda, List<Ent_Fvdespc> despacho)
+        {
+            Ent_MsgTransac msg_transac = null;
+            autentication_ws = new Ba_WsConexion();
+            Dat_GuiasDespacho update_guias_traspaso = null;
+            try
+            {
+
+                Boolean valida_ws = autentication_ws.ckeckAuthentication_ws("01", Authentication.Username, Authentication.Password);
+                if (valida_ws)
+                {
+                    /*en esta validaion entonce sya verifico y va aconsumir la base de datos 
+                     para la inyeccion de la guias cerreadas*/
+                    update_guias_traspaso = new Dat_GuiasDespacho();
+                    msg_transac = update_guias_traspaso.insertar_guias_traspaso_tda(cod_tda, despacho);
+                    /*********************************************************/
+                }
+                else
+                {
+                    msg_transac.codigo = "1";
+                    msg_transac.descripcion = "Conexión sin exito";
+                }
+
+            }
+            catch(Exception exc)
+            {
+                msg_transac.codigo = "1";
+                msg_transac.descripcion = exc.Message;                
             }
             return msg_transac;
         }

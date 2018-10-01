@@ -646,6 +646,39 @@ namespace WS_Bata_Interfaces
             return acceso;
         }
 
+        [SoapHeader("Authentication", Required = true)]
+        [WebMethod(Description = "envio de traspasos de tienda")]
+        public Ent_MsgTransac ws_envio_traspaso_tda(string cod_tda, List<Ent_Fvdespc> despacho)
+        {
+            Ent_MsgTransac msg_transac = null;
+            autentication_ws = new Ba_WsConexion();
+            Dat_GuiasDespacho update_guias_traspaso = null;
+            try
+            {
+
+                Boolean valida_ws = autentication_ws.ckeckAuthentication_ws("01", Authentication.Username, Authentication.Password);
+                if (valida_ws)
+                {
+                    /*en esta validaion entonce sya verifico y va aconsumir la base de datos 
+                     para la inyeccion de la guias cerreadas*/
+                    update_guias_traspaso = new Dat_GuiasDespacho();
+                    msg_transac = update_guias_traspaso.insertar_guias_traspaso_tda(cod_tda, despacho);
+                    /*********************************************************/
+                }
+                else
+                {
+                    msg_transac.codigo = "1";
+                    msg_transac.descripcion = "Conexión sin exito";
+                }
+
+            }
+            catch(Exception exc)
+            {
+                msg_transac.codigo = "1";
+                msg_transac.descripcion = exc.Message;                
+            }
+            return msg_transac;
+        }
     }
 
     public class ValidateAcceso:SoapHeader

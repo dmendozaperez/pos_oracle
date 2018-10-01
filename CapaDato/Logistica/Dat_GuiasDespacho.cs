@@ -1,4 +1,5 @@
-﻿using CapaEntidad.Logistica;
+﻿using CapaEntidad.Interfaces;
+using CapaEntidad.Logistica;
 using CapaEntidad.Util;
 using System;
 using System.Collections.Generic;
@@ -167,6 +168,7 @@ namespace CapaDato.Logistica
             DataSet ds = null;
             try
             {
+                ds = new DataSet();
                 DataTable dt_FVDESPC = new DataTable(); DataTable dt_FVDESPD = new DataTable();
                 /********TABLA CABECERA***/
                 dt_FVDESPC.Columns.Add("DESC_ALMAC", typeof(string));
@@ -175,15 +177,9 @@ namespace CapaDato.Logistica
                 dt_FVDESPC.Columns.Add("DESC_TDES", typeof(string));
                 dt_FVDESPC.Columns.Add("DESC_FECHA", typeof(DateTime));
                 dt_FVDESPC.Columns.Add("DESC_FDESP", typeof(DateTime));
-                dt_FVDESPC.Columns.Add("DESC_FEMI", typeof(DateTime));
-                dt_FVDESPC.Columns.Add("DESC_SEMI", typeof(string));
+                dt_FVDESPC.Columns.Add("DESC_FEMI", typeof(DateTime));                
                 dt_FVDESPC.Columns.Add("DESC_FTRA", typeof(DateTime));
-                dt_FVDESPC.Columns.Add("DESC_NUME", typeof(string));
-                dt_FVDESPC.Columns.Add("DESC_CONCE", typeof(string));
-                dt_FVDESPC.Columns.Add("DESC_EMPRE", typeof(string));
-                dt_FVDESPC.Columns.Add("DESC_SECCI", typeof(string));
-                dt_FVDESPC.Columns.Add("DESC_CANAL", typeof(string));
-                dt_FVDESPC.Columns.Add("DESC_CADEN", typeof(string));
+                dt_FVDESPC.Columns.Add("DESC_NUME", typeof(string));                
                 /*************************************/
                 /********TABLA DETALLE*****/
                 dt_FVDESPD.Columns.Add("DESD_GUDIS", typeof(string));
@@ -192,23 +188,30 @@ namespace CapaDato.Logistica
                 dt_FVDESPD.Columns.Add("DESD_ARTIC", typeof(string));
                 dt_FVDESPD.Columns.Add("DESD_CALID", typeof(string));
                 dt_FVDESPD.Columns.Add("DESD_TALLA", typeof(string));
-                dt_FVDESPD.Columns.Add("DESD_PARES", typeof(string));
-                dt_FVDESPD.Columns.Add("DESD_PRVTA", typeof(string));
+                dt_FVDESPD.Columns.Add("DESD_PARES", typeof(Int32));
+                dt_FVDESPD.Columns.Add("DESD_PRVTA", typeof(Decimal));
                 /************************/
 
-                foreach(var guias_cab in listar_guia)
+                foreach(Ent_Fvdespc guias_cab in listar_guia)
                 {
                     dt_FVDESPC.Rows.Add(guias_cab.DESC_ALMAC, guias_cab.DESC_GUDIS, guias_cab.DESC_NDESP, guias_cab.DESC_TDES, guias_cab.DESC_FECHA,
-                                        guias_cab.DESC_FDESP, guias_cab.DESC_FEMI, guias_cab.DESC_SEMI, guias_cab.DESC_FTRA, guias_cab.DESC_NUME,
-                                        guias_cab.DESC_CONCE, guias_cab.DESC_EMPRE, guias_cab.DESC_SECCI, guias_cab.DESC_CANAL, guias_cab.DESC_CADEN);
+                                        guias_cab.DESC_FDESP, guias_cab.DESC_FEMI,  guias_cab.DESC_FTRA, guias_cab.DESC_NUME);
+
+                    foreach(Ent_Fvdespd guias_det in guias_cab.FVDESPD)
+                    {
+                        dt_FVDESPD.Rows.Add(guias_det.DESD_GUDIS, guias_det.DESD_NDESP, guias_det.DESD_ALMAC, guias_det.DESD_ARTIC, guias_det.DESD_CALID,
+                                            guias_det.DESD_TALLA, guias_det.DESD_PARES, guias_det.DESD_PRVTA);
+                    }
+                    
                 }
 
-
-
+                ds.Tables.Add(dt_FVDESPC);
+                ds.Tables.Add(dt_FVDESPD);
             }
             catch
             {
                 ds = null;
+                throw;
                 
             }
             return ds;
@@ -225,8 +228,9 @@ namespace CapaDato.Logistica
                 {
                     if (listar_guia.Count>0)
                     {
-                        DataTable dt_FVDESPC = null;
-                        DataTable dt_FVDESPD = null;
+                        DataSet ds = ds_FVDESP(listar_guia);
+                        DataTable dt_FVDESPC = ds.Tables[0];
+                        DataTable dt_FVDESPD = ds.Tables[1];
 
                         using (SqlConnection cn = new SqlConnection(Ent_Conexion.conexion_posperu))
                         {
@@ -241,6 +245,8 @@ namespace CapaDato.Logistica
                                     cmd.Parameters.AddWithValue("@TMP_FVDESPC", dt_FVDESPC);
                                     cmd.Parameters.AddWithValue("@TMP_FVDESPD", dt_FVDESPD);
                                     cmd.ExecuteNonQuery();
+                                    msg_error.codigo = "0";
+                                    msg_error.descripcion = "Se actualizo correctamente";
                                 }
                             }
                             catch (Exception exc)
@@ -248,6 +254,8 @@ namespace CapaDato.Logistica
                                 msg_error.codigo = "1";
                                 msg_error.descripcion = exc.Message;
                             }
+                            if (cn != null)
+                                if (cn.State == ConnectionState.Open) cn.Close();
                         }
 
                     }

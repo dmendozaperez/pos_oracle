@@ -267,6 +267,73 @@ namespace CapaServicioWindows.CapaDato.Venta
             //return error;
         }
 
+        public DataSet procesar_listaEnvioXstore()
+        {
+            string sqlquery = "USP_EXTRAER_LISTA_ENVIO_XSTORE";
+            DataSet ds = null;
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(ConexionSQL.conexion))
+                {
+                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            ds = new DataSet();
+                            da.Fill(ds);
+
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                ds = null;
+            }
+
+            return ds;
+        }
+
+
+        public DataSet GET_OBTENER_VENTA_XSTORE(string cod_tda, DateTime fecha)
+        {
+            string sqlquery = "USP_EXTRAER_VENTAS_TDA";
+            DataSet ds = null;
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(ConexionSQL.conexion))
+                {
+                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@COD_TDA", cod_tda);
+                        cmd.Parameters.AddWithValue("@FEC_INI", fecha);
+
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            ds = new DataSet();
+                            da.Fill(ds);
+
+                            ds.Tables[0].TableName = "FFACTC";
+                            ds.Tables[1].TableName = "FFACTD";
+                            ds.Tables[2].TableName = "FNOTAA";
+                            ds.Tables[3].TableName = "FSTKG";
+                            ds.Tables[4].TableName = "FCIERR";
+
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                ds = null;
+            }
+            return ds;
+        }
         #endregion
     }
 }

@@ -599,7 +599,8 @@ namespace CapaDato.Venta
                             ds.Tables[1].TableName = "FFACTD";
                             ds.Tables[2].TableName = "FNOTAA";
                             ds.Tables[3].TableName = "FSTKG";
-                            ds.Tables[4].TableName = "FCIERR";
+                            ds.Tables[4].TableName = "FCIERR"; 
+                            ds.Tables[5].TableName = "FFLASH";
 
                         }
                     }

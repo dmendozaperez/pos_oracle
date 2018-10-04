@@ -53,6 +53,7 @@ namespace CapaServicioWindows.Modular
                                 tabla_FNOTAA(ds.Tables[2]);
                                 tabla_FSTKG(ds.Tables[3]);
                                 tabla_FCIERR(ds.Tables[4]);
+                                tabla_FFLASH(ds.Tables[5]);
 
                                 string archivo = "";
                                 byte[] file_bytes = null;
@@ -429,5 +430,46 @@ namespace CapaServicioWindows.Modular
                 throw;
             }
         }
+
+        private void tabla_FFLASH(DataTable dt)
+        {
+            try
+            {
+                string _path_envia = ruta_temp_DBF;
+                DBFNET fflash = new DBFNET();
+                fflash.tabla = "FFLASH";
+
+                fflash.addcol("fc_ctda", Tipo.Caracter, "3");
+                fflash.addcol("fc_fech", Tipo.Fecha);
+                fflash.addcol("fc_nsem", Tipo.Numerico, "2,0");
+                fflash.addcol("fc_ndse", Tipo.Numerico, "2,0");
+                fflash.addcol("fc_sica", Tipo.Numerico, "10,0");
+                fflash.addcol("fc_vund", Tipo.Numerico, "4,0");
+                fflash.addcol("fc_vimp", Tipo.Numerico, "10,0");
+                fflash.addcol("fc_gtos", Tipo.Numerico, "10,0");
+                fflash.addcol("fc_rete", Tipo.Numerico, "10,0");
+                fflash.addcol("fc_depo", Tipo.Numerico, "10,0");
+                fflash.addcol("fc_bcod", Tipo.Caracter, "2");
+                fflash.addcol("fc_difd", Tipo.Numerico, "10,0");
+                fflash.addcol("fc_motd", Tipo.Caracter, "40");
+                fflash.addcol("fc_depd", Tipo.Numerico, "10,0");
+                fflash.addcol("fc_bcdo", Tipo.Caracter, "2");
+                fflash.addcol("fc_pdes", Tipo.Numerico, "10,0");
+                fflash.addcol("fc_pbcs", Tipo.Caracter, "2");
+                fflash.addcol("fc_pded", Tipo.Numerico, "10,0");
+                fflash.addcol("fc_pbcd", Tipo.Caracter, "2");
+                fflash.addcol("fc_ftrx", Tipo.Fecha);
+                fflash.addcol("fc_resp", Tipo.Caracter, "3");
+
+                fflash.creardbf(_path_envia);
+                fflash.Insertar_tabla(dt, _path_envia);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+
     }
 }

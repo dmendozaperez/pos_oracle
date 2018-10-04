@@ -22,6 +22,9 @@ namespace ServiceWinTransaction
         Timer tmservicioDBF = null;
         //Timer tmservicioScactcoDBF = null;
 
+        Timer tmservicio_trans = null;
+        private Int32 _valida_service_trans = 0;
+
         Timer tmservicioposlog = null;
 
         private Int32 _valida_service = 0;
@@ -46,7 +49,53 @@ namespace ServiceWinTransaction
             tmservicioposlog = new Timer(5000);
             tmservicioposlog.Elapsed += new ElapsedEventHandler(tmservicioposlog_Elapsed);
 
+            tmservicio_trans = new Timer(5000);
+            tmservicio_trans.Elapsed += new ElapsedEventHandler(tmservicio_trans_Elapsed);
+
+
         }
+
+        void tmservicio_trans_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            Int32 _valor = 0;
+            try
+            {
+                if (_valida_service_trans == 0)
+                {
+                    _valor = 1;
+                    _valida_service_trans = 1;
+                    string _valida_proc_dbf = @"D:\venta.txt";
+                    Boolean proceso_insertDBF = false;
+
+                    if (File.Exists(_valida_proc_dbf)) proceso_insertDBF = true;
+
+                    if (proceso_insertDBF)
+                    {
+                        _valor = 1;
+                        string _error = "";
+                        _valida_service_trans = 1;
+                        Proceso_Novell proc_nov = new Proceso_Novell();
+                        
+                        proc_nov.procesos_novell(ref _error);
+                        //Basico ejecuta_procesos = new Basico();
+                        //ejecuta_procesos.procesar_dbf_pos(ref _error);
+                        _valida_serviceDBF = 0;
+
+                    }
+                }
+
+            }
+            catch (Exception exc)
+            {
+                //string errSwc = "";
+                _valida_service_trans = 0;
+            }
+            if (_valor == 1)
+            {
+                _valida_service_trans = 0;
+            }
+        }
+
         void tmpServicio_Elapsed(object sender, ElapsedEventArgs e)
         {
             //string varchivov = "c://valida_hash.txt";
@@ -263,6 +312,7 @@ namespace ServiceWinTransaction
             tmservicio.Start();
             tmservicioDBF.Start();
             tmservicioposlog.Start();
+            tmservicio_trans.Start();
             //tmservicioScactcoDBF.Start();
         }
 
@@ -271,6 +321,7 @@ namespace ServiceWinTransaction
             tmservicio.Stop();
             tmservicioDBF.Stop();
             tmservicioposlog.Stop();
+            tmservicio_trans.Stop();
             //tmservicioScactcoDBF.Stop();
         }       
               

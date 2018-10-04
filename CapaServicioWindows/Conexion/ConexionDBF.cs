@@ -27,5 +27,10 @@ namespace CapaServicioWindows.Conexion
         {
             return "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + _path + ";Extended Properties=dBASE IV;";
         }
+        public static string conexion_DBF_POS
+        {
+            //get { return "Provider=VFPOLEDB.1;Data Source=" + _path_default + ";Exclusive=No"; }
+            get { return "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=XXXX;Extended Properties=dBASE IV;"; }
+        }
     }
 }

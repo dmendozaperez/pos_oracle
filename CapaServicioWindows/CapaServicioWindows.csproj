@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CapaDato\Novell\Dat_Proc_Novell.cs" />
     <Compile Include="CapaDato\Venta\Dat_Venta.cs" />
     <Compile Include="Conexion\ConexionDBF.cs" />
     <Compile Include="Conexion\ConexionSQL.cs" />
@@ -54,9 +55,16 @@
     <Compile Include="Entidad\FVDESPC.cs" />
     <Compile Include="Envio_Ws\Envio_Scdremb.cs" />
     <Compile Include="Modular\Basico.cs" />
+    <Compile Include="Modular\DBFNET.cs" />
+    <Compile Include="Modular\Proceso_Novell.cs" />
     <Compile Include="Modular\Util.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service References\BataTransac\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\BataTrans\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -67,6 +75,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Properties\DataSources\System.Data.DataSet.datasource" />
     <None Include="Service References\BataTransac\Bata_Transaction.wsdl" />
     <None Include="Service References\BataTransac\CapaServicioWindows.BataTransac.Ent_Config_Service.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -89,6 +98,16 @@
     <None Include="Service References\BataTransac\CapaServicioWindows.BataTransac.Ent_Scdddes.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\BataTrans\bata_transaccion.wsdl" />
+    <None Include="Service References\BataTrans\CapaServicioWindows.BataTrans.Fvdespc.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\BataTrans\CapaServicioWindows.BataTrans.Resultado_Tda_Ecu.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\BataTrans\CapaServicioWindows.BataTrans.Ruta_Update_File.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ICSharpCode.SharpZLib\ICSharpCode.SharpZLib.csproj">
@@ -98,6 +117,7 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\BataTransac\" />
+    <WCFMetadataStorage Include="Service References\BataTrans\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\BataTransac\Bata_Transaction.disco" />
@@ -110,6 +130,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\BataTransac\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\BataTrans\bata_transaccion.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\BataTrans\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\BataTrans\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\BataTrans\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

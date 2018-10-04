@@ -16,7 +16,7 @@ namespace CapaServicioWindows.Modular
 {
     public class Basico
     {
-        private DateTime fecha_despacho = DateTime.Today.AddDays(-5);
+        private DateTime fecha_despacho = DateTime.Today.AddDays(-25);
 
         /// <summary>
         /// tiempo de espera a ejecutar
@@ -42,7 +42,7 @@ namespace CapaServicioWindows.Modular
         {
             /*fecha para traer los pedido cerrados desde una fecha*/
             List<BataTransac.Ent_Scdddes> _lista_scdddes = null;
-            String sqlquery_scdddes = "SELECT DDES_TIPO,DDES_ALMAC,DDES_GUIRE,DDES_NDESP,DDES_MFDES,DDES_DESTI," +
+            String sqlquery_scdddes = "SELECT  DDES_TIPO,DDES_ALMAC,DDES_GUIRE,DDES_NDESP,DDES_MFDES,DDES_DESTI," +
                                       "DDES_N_INI,DDES_N_FIN,DDES_CPAGO,DDES_FEMBA,DDES_FECHA,DDES_FDESP,DDES_ESTAD," +
                                       "DDES_GGUIA,DDES_CCOND,DDES_CALZ,DDES_NCALZ,DDES_TOCAJ,DDES_IMPRE,DDES_GVALO," +
                                       "DDES_SUBGR,DDES_RUCTC,DDES_TRANS,DDES_TRAN2,DDES_OBSER,DDES_NOMTC,DDES_NGUIA," +
@@ -384,7 +384,7 @@ namespace CapaServicioWindows.Modular
             try
             {
                 /*segundos para ejecutar*/
-                _espera_ejecuta(20);
+                //_espera_ejecuta(20);
                 /***********************/
 
                 #region<CAPTURAR EL PATH DE LOS DBF>
@@ -419,7 +419,7 @@ namespace CapaServicioWindows.Modular
 
                 string _error = "";
                 /*ya no entra a consultar*/
-                if (File.Exists(@ruta_validacion)) return;
+               // if (File.Exists(@ruta_validacion)) return;
                 /**/
                 _lista_guiasC = get_scdddes(_locatio_scdddes.rutloc_location,ref _error);
 
@@ -451,7 +451,7 @@ namespace CapaServicioWindows.Modular
                         var _location_fvdespc = listar_location_dbf.Where(x => x.rutloc_namedbf == name_dbf).FirstOrDefault();
 
                         /*ya no entra a consultar*/
-                        if (File.Exists(@ruta_validacion)) return;
+                       // if (File.Exists(@ruta_validacion)) return;
                         /**/
 
                         BataTransac.Ent_Fvdespc fvdespc = get_fvdespc(filaC.DDES_ALMAC, filaC.DDES_GUIRE, _location_fvdespc.rutloc_location, ref _error, ref existe_data);
@@ -485,7 +485,7 @@ namespace CapaServicioWindows.Modular
                                 var _location_fvdespd = listar_location_dbf.Where(x => x.rutloc_namedbf == name_dbf).FirstOrDefault();
 
                                 /*ya no entra a consultar*/
-                                if (File.Exists(@ruta_validacion)) return;
+                             //   if (File.Exists(@ruta_validacion)) return;
                                 /**/
 
                                 DataTable fvdespd = get_fvdespd(filaC.DDES_ALMAC, filaC.DDES_GUIRE, _location_fvdespd.rutloc_location, ref _error);
@@ -524,10 +524,10 @@ namespace CapaServicioWindows.Modular
                                             /*si es que las guias se grabaron correctamente entonces vamos a setear el valor en el dbf*/
 
                                             /*ya no entra a consultar*/
-                                            if (File.Exists(@ruta_validacion)) return;
+                                           // if (File.Exists(@ruta_validacion)) return;
                                             /**/
 
-                                            edit_scdddes(fvdespc.DESC_ALMAC, fvdespc.DESC_GUDIS, _locatio_scdddes_edit.rutloc_location);
+                                            edit_scdddes(fvdespc.DESC_ALMAC, fvdespc.DESC_GUDIS, _locatio_scdddes_edit.rutloc_location,ref _error_ws);
                                         }
                                         else
                                         {
@@ -559,7 +559,7 @@ namespace CapaServicioWindows.Modular
         {
             return "xxxx";
         }
-        private void edit_scdddes(string cod_alm,string nroguia,string _path)
+        private void edit_scdddes(string cod_alm,string nroguia,string _path,ref string _error_ws)
         {
             string sqlquery = "UPDATE SCDDDES SET DDES_FTXTD='X' WHERE DDES_ALMAC='" + cod_alm + "' AND DDES_GUIRE='" + nroguia + "'";
             try
@@ -577,8 +577,9 @@ namespace CapaServicioWindows.Modular
                         }
 
                     }
-                    catch (Exception)
+                    catch (Exception exc)
                     {
+                        _error_ws = exc.Message;
                         if (cn!=null)
                         if (cn.State == ConnectionState.Open) cn.Close();                       
                     }
@@ -587,9 +588,9 @@ namespace CapaServicioWindows.Modular
                 }
 
             }
-            catch
+            catch(Exception exc)
             {
-                               
+                _error_ws = exc.Message;
             }
         }
 

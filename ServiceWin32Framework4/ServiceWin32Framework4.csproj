@@ -60,6 +60,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Service References\BataTrans\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -74,6 +79,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="app.config" />
+    <None Include="Properties\DataSources\System.Data.DataSet.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -105,6 +111,16 @@
     <None Include="Service References\BataTransac\ServiceWin32Framework4.BataTransac.Ent_Scdddes.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\BataTrans\bata_transaccion.wsdl" />
+    <None Include="Service References\BataTrans\ServiceWin32Framework4.BataTrans.Fvdespc.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\BataTrans\ServiceWin32Framework4.BataTrans.Resultado_Tda_Ecu.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\BataTrans\ServiceWin32Framework4.BataTrans.Ruta_Update_File.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
@@ -117,6 +133,7 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\BataTransac\" />
+    <WCFMetadataStorage Include="Service References\BataTrans\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\BataTransac\Bata_Transaction.disco" />
@@ -129,6 +146,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\BataTransac\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\BataTrans\bata_transaccion.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\BataTrans\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\BataTrans\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\BataTrans\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

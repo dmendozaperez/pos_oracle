@@ -31,6 +31,8 @@
             this.btn_servicewin = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.btnbarra = new System.Windows.Forms.Button();
+            this.btnenvio_nov = new System.Windows.Forms.Button();
+            this.btnenviog = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn_servicewin
@@ -65,11 +67,35 @@
             this.btnbarra.UseVisualStyleBackColor = true;
             this.btnbarra.Click += new System.EventHandler(this.btnbarra_Click);
             // 
+            // btnenvio_nov
+            // 
+            this.btnenvio_nov.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnenvio_nov.Location = new System.Drawing.Point(43, 212);
+            this.btnenvio_nov.Name = "btnenvio_nov";
+            this.btnenvio_nov.Size = new System.Drawing.Size(185, 37);
+            this.btnenvio_nov.TabIndex = 7;
+            this.btnenvio_nov.Text = "ENVIO NOVELL";
+            this.btnenvio_nov.UseVisualStyleBackColor = true;
+            this.btnenvio_nov.Click += new System.EventHandler(this.btnenvio_nov_Click);
+            // 
+            // btnenviog
+            // 
+            this.btnenviog.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnenviog.Location = new System.Drawing.Point(214, 110);
+            this.btnenviog.Name = "btnenviog";
+            this.btnenviog.Size = new System.Drawing.Size(210, 34);
+            this.btnenviog.TabIndex = 8;
+            this.btnenviog.Text = "ENVIO DE GUIAS";
+            this.btnenviog.UseVisualStyleBackColor = true;
+            this.btnenviog.Click += new System.EventHandler(this.btnenviog_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(507, 261);
+            this.Controls.Add(this.btnenviog);
+            this.Controls.Add(this.btnenvio_nov);
             this.Controls.Add(this.btnbarra);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btn_servicewin);
@@ -84,6 +110,8 @@
         private System.Windows.Forms.Button btn_servicewin;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btnbarra;
+        private System.Windows.Forms.Button btnenvio_nov;
+        private System.Windows.Forms.Button btnenviog;
     }
 }
 

@@ -1,0 +1,2211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="ws_consulta_asistencia">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="_cod_tda" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="_fecha_ini" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="_fecha_fin" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_consulta_asistenciaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ws_consulta_asistenciaResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Autenticacion" type="tns:Autenticacion" />
+      <s:complexType name="Autenticacion">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="user_password" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="user_name" type="s:string" />
+        </s:sequence>
+        <s:anyAttribute />
+      </s:complexType>
+      <s:element name="ws_tdaupdate_wsurl">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="_cod_tda" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="_ws_url" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_tdaupdate_wsurlResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ws_tdaupdate_wsurlResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_tdaupdate_wsurl_win">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="_cod_tda" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="_ws_url" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_tdaupdate_wsurl_winResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ws_tdaupdate_wsurl_winResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_existe_fepe_dll_data">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="_cod_tda" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="_fepe_nombre" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="fepe_peso" type="s:decimal" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_existe_fepe_dll_dataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ws_existe_fepe_dll_dataResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ws_existe_certificado_WS">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="_cod_tda" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="_cer_nombre" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="cer_peso" type="s:decimal" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_existe_certificado_WSResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ws_existe_certificado_WSResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_existe_url_WS_Win">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="_cod_tda" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="_ws_url" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_existe_url_WS_WinResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ws_existe_url_WS_WinResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_existe_url_WS">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="_cod_tda" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="_ws_url" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_existe_url_WSResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ws_existe_url_WSResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_update_url_fe">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="_tipo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="_url_in" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_update_url_feResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ws_update_url_feResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_inserta_asistencia">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="_cod_sup" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="_cod_tda" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="_fecha_hora" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="_codusu" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_inserta_asistenciaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ws_inserta_asistenciaResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_transmision_salida">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="_tienda" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_transmision_salidaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ws_transmision_salidaResult" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_borrar_archivo_cen">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="_tienda" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="_archivos" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_borrar_archivo_cenResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ws_borrar_archivo_cenResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_tienda_lista">
+        <s:complexType />
+      </s:element>
+      <s:element name="ws_tienda_listaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ws_tienda_listaResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_actualiza_archivo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="_name_archivo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="_version_tienda" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_actualiza_archivoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ws_actualiza_archivoResult" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_update_app_tx">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="_version_tienda" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_update_app_txResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ws_update_app_txResult" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_update_dll_com">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="_tienda" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="_archivo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_update_dll_comResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ws_update_dll_comResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_update_fepe_dll">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="_tienda" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="_archivo" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="_tanaño" type="s:decimal" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_update_fepe_dllResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ws_update_fepe_dllResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_update_certificado_pfx">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="_tienda" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="_archivo" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="_tanaño" type="s:decimal" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_update_certificado_pfxResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ws_update_certificado_pfxResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_update_versiondll_net">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="_tienda" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="_archivo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="_version" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_update_versiondll_netResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ws_update_versiondll_netResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_existe_tienda">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="_codigo_tienda" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_existe_tiendaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ws_existe_tiendaResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_transmision_ingreso_transminet">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="_archivo_zip" type="s:base64Binary" />
+            <s:element minOccurs="0" maxOccurs="1" name="_name" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_transmision_ingreso_transminetResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ws_transmision_ingreso_transminetResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_transmision_ingreso">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="_archivo_zip" type="s:base64Binary" />
+            <s:element minOccurs="0" maxOccurs="1" name="_name" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_transmision_ingresoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ws_transmision_ingresoResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_dll_service_tda">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="_name_archivo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_dll_service_tdaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ws_dll_service_tdaResult" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_existe_exewinupdate_version">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="_version" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_existe_exewinupdate_versionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ws_existe_exewinupdate_versionResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_existe_fepe_dll">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="_tamaño" type="s:decimal" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_existe_fepe_dllResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ws_existe_fepe_dllResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_existe_certificado">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="_tamaño" type="s:decimal" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_existe_certificadoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ws_existe_certificadoResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_existe_genera_hash_version">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="_version" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_existe_genera_hash_versionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ws_existe_genera_hash_versionResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_existe_serviciowin_version">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="_version" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_existe_serviciowin_versionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ws_existe_serviciowin_versionResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_envia_stock_inv">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="_cod_tda" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="dtstk_plan">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_envia_stock_invResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ws_envia_stock_invResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_error_mov_transac">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="_cod_tda" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="_error_des" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_error_mov_transacResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ws_error_mov_transacResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_genera_mov">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="_tipo_origen" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="_cod_tda" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="_dt_cab">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="_dt_det">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_genera_movResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ws_genera_movResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_recepcion_transac">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="_cod_tda" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_recepcion_transacResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ws_recepcion_transacResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_transaccion_flag">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="_nro_transa" type="s:decimal" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_transaccion_flagResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ws_transaccion_flagResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_tienda_inv">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="_cod_tda" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_tienda_invResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ws_tienda_invResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_existe_archivo_SQL">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="_nombre" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_existe_archivo_SQLResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ws_existe_archivo_SQLResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_transmision_ingreso_SQL">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="_archivo_zip" type="s:base64Binary" />
+            <s:element minOccurs="0" maxOccurs="1" name="_name" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_transmision_ingreso_SQLResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ws_transmision_ingreso_SQLResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_update_vales">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="_serie" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="_correlativo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="_cod_tda_venta" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="_dni_venta" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="_nombres_venta" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="_fecha_doc" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="_tipo_doc" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="_serie_doc" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="_numero_doc" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="_estado_doc" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="_fc_nint" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="_email_venta" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="_telefono_venta" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_update_valesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ws_update_valesResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_update_venta_empl">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="_Tip_Id_Ven" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="_Nro_Dni_Ven" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="_Cod_Tda_Ven" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="_Nro_Doc_Ven" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="_Tip_Doc_Ven" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="_Ser_Doc_Ven" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="_Num_Doc_Ven" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="_Fec_Doc_Ven" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="_Est_Doc_Ven" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="_Fc_Nin_Ven" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_update_venta_emplResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ws_update_venta_emplResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_valida_tda_ecu">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="cod_tda" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_valida_tda_ecuResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ws_valida_tda_ecuResult" type="tns:Resultado_Tda_Ecu" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Resultado_Tda_Ecu">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="existe" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="descripcion" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ws_get_file_upload">
+        <s:complexType />
+      </s:element>
+      <s:element name="ws_get_file_uploadResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ws_get_file_uploadResult" type="tns:ArrayOfRuta_Update_File" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfRuta_Update_File">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Ruta_Update_File" nillable="true" type="tns:Ruta_Update_File" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Ruta_Update_File">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="tda_act_rutaws" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="tda_act_carpetanom" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="tda_act_carpetalocal" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="tda_act_file" type="tns:ArrayOfFile_Upload" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfFile_Upload">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="File_Upload" nillable="true" type="tns:File_Upload" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="File_Upload">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="name_file_server" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fecha_file_server" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="longitud_file_server" type="s:decimal" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ws_bytes_file_server">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="_file_ws" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_bytes_file_serverResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ws_bytes_file_serverResult" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_get_guias_tienda_almacen">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="cod_tda" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_get_guias_tienda_almacenResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ws_get_guias_tienda_almacenResult" type="tns:ArrayOfFvdespc" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfFvdespc">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Fvdespc" nillable="true" type="tns:Fvdespc" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Fvdespc">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="DESC_ALMAC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DESC_GUDIS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DESC_NDESP" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DESC_TDES" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DESC_FECHA" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="DESC_FDESP" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="DESC_ESTAD" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DESC_TIPO" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DESC_TORI" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DESC_FEMI" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="DESC_SEMI" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DESC_FTRA" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="DESC_NUME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DESC_CONCE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DESC_NMOVC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DESC_EMPRE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DESC_SECCI" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DESC_CANAL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DESC_CADEN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DESC_FTX" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DESC_TXPOS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DT_FVDESPD">
+            <s:complexType>
+              <s:sequence>
+                <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+              </s:sequence>
+            </s:complexType>
+          </s:element>
+          <s:element minOccurs="1" maxOccurs="1" name="DESC_UNCA" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="DESC_UNNC" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="DESC_CAJA" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="DESC_VACA" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="DESC_VANC" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="DESC_VCAJ" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="DESC_SEM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DT_FVDESPD_TREGMEDIDA">
+            <s:complexType>
+              <s:sequence>
+                <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+              </s:sequence>
+            </s:complexType>
+          </s:element>
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ws_update_guia_tienda_almacen">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="cod_tda" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="nro_guia" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_update_guia_tienda_almacenResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ws_update_guia_tienda_almacenResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_exists_guia_tienda_alm">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="cod_tda" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_exists_guia_tienda_almResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ws_exists_guia_tienda_almResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="ws_consulta_asistenciaSoapIn">
+    <wsdl:part name="parameters" element="tns:ws_consulta_asistencia" />
+  </wsdl:message>
+  <wsdl:message name="ws_consulta_asistenciaSoapOut">
+    <wsdl:part name="parameters" element="tns:ws_consulta_asistenciaResponse" />
+  </wsdl:message>
+  <wsdl:message name="ws_consulta_asistenciaAutenticacion">
+    <wsdl:part name="Autenticacion" element="tns:Autenticacion" />
+  </wsdl:message>
+  <wsdl:message name="ws_tdaupdate_wsurlSoapIn">
+    <wsdl:part name="parameters" element="tns:ws_tdaupdate_wsurl" />
+  </wsdl:message>
+  <wsdl:message name="ws_tdaupdate_wsurlSoapOut">
+    <wsdl:part name="parameters" element="tns:ws_tdaupdate_wsurlResponse" />
+  </wsdl:message>
+  <wsdl:message name="ws_tdaupdate_wsurlAutenticacion">
+    <wsdl:part name="Autenticacion" element="tns:Autenticacion" />
+  </wsdl:message>
+  <wsdl:message name="ws_tdaupdate_wsurl_winSoapIn">
+    <wsdl:part name="parameters" element="tns:ws_tdaupdate_wsurl_win" />
+  </wsdl:message>
+  <wsdl:message name="ws_tdaupdate_wsurl_winSoapOut">
+    <wsdl:part name="parameters" element="tns:ws_tdaupdate_wsurl_winResponse" />
+  </wsdl:message>
+  <wsdl:message name="ws_tdaupdate_wsurl_winAutenticacion">
+    <wsdl:part name="Autenticacion" element="tns:Autenticacion" />
+  </wsdl:message>
+  <wsdl:message name="ws_existe_fepe_dll_dataSoapIn">
+    <wsdl:part name="parameters" element="tns:ws_existe_fepe_dll_data" />
+  </wsdl:message>
+  <wsdl:message name="ws_existe_fepe_dll_dataSoapOut">
+    <wsdl:part name="parameters" element="tns:ws_existe_fepe_dll_dataResponse" />
+  </wsdl:message>
+  <wsdl:message name="ws_existe_fepe_dll_dataAutenticacion">
+    <wsdl:part name="Autenticacion" element="tns:Autenticacion" />
+  </wsdl:message>
+  <wsdl:message name="ws_existe_certificado_WSSoapIn">
+    <wsdl:part name="parameters" element="tns:ws_existe_certificado_WS" />
+  </wsdl:message>
+  <wsdl:message name="ws_existe_certificado_WSSoapOut">
+    <wsdl:part name="parameters" element="tns:ws_existe_certificado_WSResponse" />
+  </wsdl:message>
+  <wsdl:message name="ws_existe_certificado_WSAutenticacion">
+    <wsdl:part name="Autenticacion" element="tns:Autenticacion" />
+  </wsdl:message>
+  <wsdl:message name="ws_existe_url_WS_WinSoapIn">
+    <wsdl:part name="parameters" element="tns:ws_existe_url_WS_Win" />
+  </wsdl:message>
+  <wsdl:message name="ws_existe_url_WS_WinSoapOut">
+    <wsdl:part name="parameters" element="tns:ws_existe_url_WS_WinResponse" />
+  </wsdl:message>
+  <wsdl:message name="ws_existe_url_WS_WinAutenticacion">
+    <wsdl:part name="Autenticacion" element="tns:Autenticacion" />
+  </wsdl:message>
+  <wsdl:message name="ws_existe_url_WSSoapIn">
+    <wsdl:part name="parameters" element="tns:ws_existe_url_WS" />
+  </wsdl:message>
+  <wsdl:message name="ws_existe_url_WSSoapOut">
+    <wsdl:part name="parameters" element="tns:ws_existe_url_WSResponse" />
+  </wsdl:message>
+  <wsdl:message name="ws_existe_url_WSAutenticacion">
+    <wsdl:part name="Autenticacion" element="tns:Autenticacion" />
+  </wsdl:message>
+  <wsdl:message name="ws_update_url_feSoapIn">
+    <wsdl:part name="parameters" element="tns:ws_update_url_fe" />
+  </wsdl:message>
+  <wsdl:message name="ws_update_url_feSoapOut">
+    <wsdl:part name="parameters" element="tns:ws_update_url_feResponse" />
+  </wsdl:message>
+  <wsdl:message name="ws_update_url_feAutenticacion">
+    <wsdl:part name="Autenticacion" element="tns:Autenticacion" />
+  </wsdl:message>
+  <wsdl:message name="ws_inserta_asistenciaSoapIn">
+    <wsdl:part name="parameters" element="tns:ws_inserta_asistencia" />
+  </wsdl:message>
+  <wsdl:message name="ws_inserta_asistenciaSoapOut">
+    <wsdl:part name="parameters" element="tns:ws_inserta_asistenciaResponse" />
+  </wsdl:message>
+  <wsdl:message name="ws_inserta_asistenciaAutenticacion">
+    <wsdl:part name="Autenticacion" element="tns:Autenticacion" />
+  </wsdl:message>
+  <wsdl:message name="ws_transmision_salidaSoapIn">
+    <wsdl:part name="parameters" element="tns:ws_transmision_salida" />
+  </wsdl:message>
+  <wsdl:message name="ws_transmision_salidaSoapOut">
+    <wsdl:part name="parameters" element="tns:ws_transmision_salidaResponse" />
+  </wsdl:message>
+  <wsdl:message name="ws_transmision_salidaAutenticacion">
+    <wsdl:part name="Autenticacion" element="tns:Autenticacion" />
+  </wsdl:message>
+  <wsdl:message name="ws_borrar_archivo_cenSoapIn">
+    <wsdl:part name="parameters" element="tns:ws_borrar_archivo_cen" />
+  </wsdl:message>
+  <wsdl:message name="ws_borrar_archivo_cenSoapOut">
+    <wsdl:part name="parameters" element="tns:ws_borrar_archivo_cenResponse" />
+  </wsdl:message>
+  <wsdl:message name="ws_borrar_archivo_cenAutenticacion">
+    <wsdl:part name="Autenticacion" element="tns:Autenticacion" />
+  </wsdl:message>
+  <wsdl:message name="ws_tienda_listaSoapIn">
+    <wsdl:part name="parameters" element="tns:ws_tienda_lista" />
+  </wsdl:message>
+  <wsdl:message name="ws_tienda_listaSoapOut">
+    <wsdl:part name="parameters" element="tns:ws_tienda_listaResponse" />
+  </wsdl:message>
+  <wsdl:message name="ws_tienda_listaAutenticacion">
+    <wsdl:part name="Autenticacion" element="tns:Autenticacion" />
+  </wsdl:message>
+  <wsdl:message name="ws_actualiza_archivoSoapIn">
+    <wsdl:part name="parameters" element="tns:ws_actualiza_archivo" />
+  </wsdl:message>
+  <wsdl:message name="ws_actualiza_archivoSoapOut">
+    <wsdl:part name="parameters" element="tns:ws_actualiza_archivoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ws_actualiza_archivoAutenticacion">
+    <wsdl:part name="Autenticacion" element="tns:Autenticacion" />
+  </wsdl:message>
+  <wsdl:message name="ws_update_app_txSoapIn">
+    <wsdl:part name="parameters" element="tns:ws_update_app_tx" />
+  </wsdl:message>
+  <wsdl:message name="ws_update_app_txSoapOut">
+    <wsdl:part name="parameters" element="tns:ws_update_app_txResponse" />
+  </wsdl:message>
+  <wsdl:message name="ws_update_app_txAutenticacion">
+    <wsdl:part name="Autenticacion" element="tns:Autenticacion" />
+  </wsdl:message>
+  <wsdl:message name="ws_update_dll_comSoapIn">
+    <wsdl:part name="parameters" element="tns:ws_update_dll_com" />
+  </wsdl:message>
+  <wsdl:message name="ws_update_dll_comSoapOut">
+    <wsdl:part name="parameters" element="tns:ws_update_dll_comResponse" />
+  </wsdl:message>
+  <wsdl:message name="ws_update_dll_comAutenticacion">
+    <wsdl:part name="Autenticacion" element="tns:Autenticacion" />
+  </wsdl:message>
+  <wsdl:message name="ws_update_fepe_dllSoapIn">
+    <wsdl:part name="parameters" element="tns:ws_update_fepe_dll" />
+  </wsdl:message>
+  <wsdl:message name="ws_update_fepe_dllSoapOut">
+    <wsdl:part name="parameters" element="tns:ws_update_fepe_dllResponse" />
+  </wsdl:message>
+  <wsdl:message name="ws_update_fepe_dllAutenticacion">
+    <wsdl:part name="Autenticacion" element="tns:Autenticacion" />
+  </wsdl:message>
+  <wsdl:message name="ws_update_certificado_pfxSoapIn">
+    <wsdl:part name="parameters" element="tns:ws_update_certificado_pfx" />
+  </wsdl:message>
+  <wsdl:message name="ws_update_certificado_pfxSoapOut">
+    <wsdl:part name="parameters" element="tns:ws_update_certificado_pfxResponse" />
+  </wsdl:message>
+  <wsdl:message name="ws_update_certificado_pfxAutenticacion">
+    <wsdl:part name="Autenticacion" element="tns:Autenticacion" />
+  </wsdl:message>
+  <wsdl:message name="ws_update_versiondll_netSoapIn">
+    <wsdl:part name="parameters" element="tns:ws_update_versiondll_net" />
+  </wsdl:message>
+  <wsdl:message name="ws_update_versiondll_netSoapOut">
+    <wsdl:part name="parameters" element="tns:ws_update_versiondll_netResponse" />
+  </wsdl:message>
+  <wsdl:message name="ws_update_versiondll_netAutenticacion">
+    <wsdl:part name="Autenticacion" element="tns:Autenticacion" />
+  </wsdl:message>
+  <wsdl:message name="ws_existe_tiendaSoapIn">
+    <wsdl:part name="parameters" element="tns:ws_existe_tienda" />
+  </wsdl:message>
+  <wsdl:message name="ws_existe_tiendaSoapOut">
+    <wsdl:part name="parameters" element="tns:ws_existe_tiendaResponse" />
+  </wsdl:message>
+  <wsdl:message name="ws_existe_tiendaAutenticacion">
+    <wsdl:part name="Autenticacion" element="tns:Autenticacion" />
+  </wsdl:message>
+  <wsdl:message name="ws_transmision_ingreso_transminetSoapIn">
+    <wsdl:part name="parameters" element="tns:ws_transmision_ingreso_transminet" />
+  </wsdl:message>
+  <wsdl:message name="ws_transmision_ingreso_transminetSoapOut">
+    <wsdl:part name="parameters" element="tns:ws_transmision_ingreso_transminetResponse" />
+  </wsdl:message>
+  <wsdl:message name="ws_transmision_ingreso_transminetAutenticacion">
+    <wsdl:part name="Autenticacion" element="tns:Autenticacion" />
+  </wsdl:message>
+  <wsdl:message name="ws_transmision_ingresoSoapIn">
+    <wsdl:part name="parameters" element="tns:ws_transmision_ingreso" />
+  </wsdl:message>
+  <wsdl:message name="ws_transmision_ingresoSoapOut">
+    <wsdl:part name="parameters" element="tns:ws_transmision_ingresoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ws_transmision_ingresoAutenticacion">
+    <wsdl:part name="Autenticacion" element="tns:Autenticacion" />
+  </wsdl:message>
+  <wsdl:message name="ws_dll_service_tdaSoapIn">
+    <wsdl:part name="parameters" element="tns:ws_dll_service_tda" />
+  </wsdl:message>
+  <wsdl:message name="ws_dll_service_tdaSoapOut">
+    <wsdl:part name="parameters" element="tns:ws_dll_service_tdaResponse" />
+  </wsdl:message>
+  <wsdl:message name="ws_dll_service_tdaAutenticacion">
+    <wsdl:part name="Autenticacion" element="tns:Autenticacion" />
+  </wsdl:message>
+  <wsdl:message name="ws_existe_exewinupdate_versionSoapIn">
+    <wsdl:part name="parameters" element="tns:ws_existe_exewinupdate_version" />
+  </wsdl:message>
+  <wsdl:message name="ws_existe_exewinupdate_versionSoapOut">
+    <wsdl:part name="parameters" element="tns:ws_existe_exewinupdate_versionResponse" />
+  </wsdl:message>
+  <wsdl:message name="ws_existe_exewinupdate_versionAutenticacion">
+    <wsdl:part name="Autenticacion" element="tns:Autenticacion" />
+  </wsdl:message>
+  <wsdl:message name="ws_existe_fepe_dllSoapIn">
+    <wsdl:part name="parameters" element="tns:ws_existe_fepe_dll" />
+  </wsdl:message>
+  <wsdl:message name="ws_existe_fepe_dllSoapOut">
+    <wsdl:part name="parameters" element="tns:ws_existe_fepe_dllResponse" />
+  </wsdl:message>
+  <wsdl:message name="ws_existe_fepe_dllAutenticacion">
+    <wsdl:part name="Autenticacion" element="tns:Autenticacion" />
+  </wsdl:message>
+  <wsdl:message name="ws_existe_certificadoSoapIn">
+    <wsdl:part name="parameters" element="tns:ws_existe_certificado" />
+  </wsdl:message>
+  <wsdl:message name="ws_existe_certificadoSoapOut">
+    <wsdl:part name="parameters" element="tns:ws_existe_certificadoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ws_existe_certificadoAutenticacion">
+    <wsdl:part name="Autenticacion" element="tns:Autenticacion" />
+  </wsdl:message>
+  <wsdl:message name="ws_existe_genera_hash_versionSoapIn">
+    <wsdl:part name="parameters" element="tns:ws_existe_genera_hash_version" />
+  </wsdl:message>
+  <wsdl:message name="ws_existe_genera_hash_versionSoapOut">
+    <wsdl:part name="parameters" element="tns:ws_existe_genera_hash_versionResponse" />
+  </wsdl:message>
+  <wsdl:message name="ws_existe_genera_hash_versionAutenticacion">
+    <wsdl:part name="Autenticacion" element="tns:Autenticacion" />
+  </wsdl:message>
+  <wsdl:message name="ws_existe_serviciowin_versionSoapIn">
+    <wsdl:part name="parameters" element="tns:ws_existe_serviciowin_version" />
+  </wsdl:message>
+  <wsdl:message name="ws_existe_serviciowin_versionSoapOut">
+    <wsdl:part name="parameters" element="tns:ws_existe_serviciowin_versionResponse" />
+  </wsdl:message>
+  <wsdl:message name="ws_existe_serviciowin_versionAutenticacion">
+    <wsdl:part name="Autenticacion" element="tns:Autenticacion" />
+  </wsdl:message>
+  <wsdl:message name="ws_envia_stock_invSoapIn">
+    <wsdl:part name="parameters" element="tns:ws_envia_stock_inv" />
+  </wsdl:message>
+  <wsdl:message name="ws_envia_stock_invSoapOut">
+    <wsdl:part name="parameters" element="tns:ws_envia_stock_invResponse" />
+  </wsdl:message>
+  <wsdl:message name="ws_envia_stock_invAutenticacion">
+    <wsdl:part name="Autenticacion" element="tns:Autenticacion" />
+  </wsdl:message>
+  <wsdl:message name="ws_error_mov_transacSoapIn">
+    <wsdl:part name="parameters" element="tns:ws_error_mov_transac" />
+  </wsdl:message>
+  <wsdl:message name="ws_error_mov_transacSoapOut">
+    <wsdl:part name="parameters" element="tns:ws_error_mov_transacResponse" />
+  </wsdl:message>
+  <wsdl:message name="ws_error_mov_transacAutenticacion">
+    <wsdl:part name="Autenticacion" element="tns:Autenticacion" />
+  </wsdl:message>
+  <wsdl:message name="ws_genera_movSoapIn">
+    <wsdl:part name="parameters" element="tns:ws_genera_mov" />
+  </wsdl:message>
+  <wsdl:message name="ws_genera_movSoapOut">
+    <wsdl:part name="parameters" element="tns:ws_genera_movResponse" />
+  </wsdl:message>
+  <wsdl:message name="ws_genera_movAutenticacion">
+    <wsdl:part name="Autenticacion" element="tns:Autenticacion" />
+  </wsdl:message>
+  <wsdl:message name="ws_recepcion_transacSoapIn">
+    <wsdl:part name="parameters" element="tns:ws_recepcion_transac" />
+  </wsdl:message>
+  <wsdl:message name="ws_recepcion_transacSoapOut">
+    <wsdl:part name="parameters" element="tns:ws_recepcion_transacResponse" />
+  </wsdl:message>
+  <wsdl:message name="ws_recepcion_transacAutenticacion">
+    <wsdl:part name="Autenticacion" element="tns:Autenticacion" />
+  </wsdl:message>
+  <wsdl:message name="ws_transaccion_flagSoapIn">
+    <wsdl:part name="parameters" element="tns:ws_transaccion_flag" />
+  </wsdl:message>
+  <wsdl:message name="ws_transaccion_flagSoapOut">
+    <wsdl:part name="parameters" element="tns:ws_transaccion_flagResponse" />
+  </wsdl:message>
+  <wsdl:message name="ws_transaccion_flagAutenticacion">
+    <wsdl:part name="Autenticacion" element="tns:Autenticacion" />
+  </wsdl:message>
+  <wsdl:message name="ws_tienda_invSoapIn">
+    <wsdl:part name="parameters" element="tns:ws_tienda_inv" />
+  </wsdl:message>
+  <wsdl:message name="ws_tienda_invSoapOut">
+    <wsdl:part name="parameters" element="tns:ws_tienda_invResponse" />
+  </wsdl:message>
+  <wsdl:message name="ws_tienda_invAutenticacion">
+    <wsdl:part name="Autenticacion" element="tns:Autenticacion" />
+  </wsdl:message>
+  <wsdl:message name="ws_existe_archivo_SQLSoapIn">
+    <wsdl:part name="parameters" element="tns:ws_existe_archivo_SQL" />
+  </wsdl:message>
+  <wsdl:message name="ws_existe_archivo_SQLSoapOut">
+    <wsdl:part name="parameters" element="tns:ws_existe_archivo_SQLResponse" />
+  </wsdl:message>
+  <wsdl:message name="ws_existe_archivo_SQLAutenticacion">
+    <wsdl:part name="Autenticacion" element="tns:Autenticacion" />
+  </wsdl:message>
+  <wsdl:message name="ws_transmision_ingreso_SQLSoapIn">
+    <wsdl:part name="parameters" element="tns:ws_transmision_ingreso_SQL" />
+  </wsdl:message>
+  <wsdl:message name="ws_transmision_ingreso_SQLSoapOut">
+    <wsdl:part name="parameters" element="tns:ws_transmision_ingreso_SQLResponse" />
+  </wsdl:message>
+  <wsdl:message name="ws_transmision_ingreso_SQLAutenticacion">
+    <wsdl:part name="Autenticacion" element="tns:Autenticacion" />
+  </wsdl:message>
+  <wsdl:message name="ws_update_valesSoapIn">
+    <wsdl:part name="parameters" element="tns:ws_update_vales" />
+  </wsdl:message>
+  <wsdl:message name="ws_update_valesSoapOut">
+    <wsdl:part name="parameters" element="tns:ws_update_valesResponse" />
+  </wsdl:message>
+  <wsdl:message name="ws_update_venta_emplSoapIn">
+    <wsdl:part name="parameters" element="tns:ws_update_venta_empl" />
+  </wsdl:message>
+  <wsdl:message name="ws_update_venta_emplSoapOut">
+    <wsdl:part name="parameters" element="tns:ws_update_venta_emplResponse" />
+  </wsdl:message>
+  <wsdl:message name="ws_valida_tda_ecuSoapIn">
+    <wsdl:part name="parameters" element="tns:ws_valida_tda_ecu" />
+  </wsdl:message>
+  <wsdl:message name="ws_valida_tda_ecuSoapOut">
+    <wsdl:part name="parameters" element="tns:ws_valida_tda_ecuResponse" />
+  </wsdl:message>
+  <wsdl:message name="ws_valida_tda_ecuAutenticacion">
+    <wsdl:part name="Autenticacion" element="tns:Autenticacion" />
+  </wsdl:message>
+  <wsdl:message name="ws_get_file_uploadSoapIn">
+    <wsdl:part name="parameters" element="tns:ws_get_file_upload" />
+  </wsdl:message>
+  <wsdl:message name="ws_get_file_uploadSoapOut">
+    <wsdl:part name="parameters" element="tns:ws_get_file_uploadResponse" />
+  </wsdl:message>
+  <wsdl:message name="ws_get_file_uploadAutenticacion">
+    <wsdl:part name="Autenticacion" element="tns:Autenticacion" />
+  </wsdl:message>
+  <wsdl:message name="ws_bytes_file_serverSoapIn">
+    <wsdl:part name="parameters" element="tns:ws_bytes_file_server" />
+  </wsdl:message>
+  <wsdl:message name="ws_bytes_file_serverSoapOut">
+    <wsdl:part name="parameters" element="tns:ws_bytes_file_serverResponse" />
+  </wsdl:message>
+  <wsdl:message name="ws_bytes_file_serverAutenticacion">
+    <wsdl:part name="Autenticacion" element="tns:Autenticacion" />
+  </wsdl:message>
+  <wsdl:message name="ws_get_guias_tienda_almacenSoapIn">
+    <wsdl:part name="parameters" element="tns:ws_get_guias_tienda_almacen" />
+  </wsdl:message>
+  <wsdl:message name="ws_get_guias_tienda_almacenSoapOut">
+    <wsdl:part name="parameters" element="tns:ws_get_guias_tienda_almacenResponse" />
+  </wsdl:message>
+  <wsdl:message name="ws_get_guias_tienda_almacenAutenticacion">
+    <wsdl:part name="Autenticacion" element="tns:Autenticacion" />
+  </wsdl:message>
+  <wsdl:message name="ws_update_guia_tienda_almacenSoapIn">
+    <wsdl:part name="parameters" element="tns:ws_update_guia_tienda_almacen" />
+  </wsdl:message>
+  <wsdl:message name="ws_update_guia_tienda_almacenSoapOut">
+    <wsdl:part name="parameters" element="tns:ws_update_guia_tienda_almacenResponse" />
+  </wsdl:message>
+  <wsdl:message name="ws_update_guia_tienda_almacenAutenticacion">
+    <wsdl:part name="Autenticacion" element="tns:Autenticacion" />
+  </wsdl:message>
+  <wsdl:message name="ws_exists_guia_tienda_almSoapIn">
+    <wsdl:part name="parameters" element="tns:ws_exists_guia_tienda_alm" />
+  </wsdl:message>
+  <wsdl:message name="ws_exists_guia_tienda_almSoapOut">
+    <wsdl:part name="parameters" element="tns:ws_exists_guia_tienda_almResponse" />
+  </wsdl:message>
+  <wsdl:message name="ws_exists_guia_tienda_almAutenticacion">
+    <wsdl:part name="Autenticacion" element="tns:Autenticacion" />
+  </wsdl:message>
+  <wsdl:portType name="bata_transaccionSoap">
+    <wsdl:operation name="ws_consulta_asistencia">
+      <wsdl:input message="tns:ws_consulta_asistenciaSoapIn" />
+      <wsdl:output message="tns:ws_consulta_asistenciaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ws_tdaupdate_wsurl">
+      <wsdl:input message="tns:ws_tdaupdate_wsurlSoapIn" />
+      <wsdl:output message="tns:ws_tdaupdate_wsurlSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ws_tdaupdate_wsurl_win">
+      <wsdl:input message="tns:ws_tdaupdate_wsurl_winSoapIn" />
+      <wsdl:output message="tns:ws_tdaupdate_wsurl_winSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ws_existe_fepe_dll_data">
+      <wsdl:input message="tns:ws_existe_fepe_dll_dataSoapIn" />
+      <wsdl:output message="tns:ws_existe_fepe_dll_dataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ws_existe_certificado_WS">
+      <wsdl:input message="tns:ws_existe_certificado_WSSoapIn" />
+      <wsdl:output message="tns:ws_existe_certificado_WSSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ws_existe_url_WS_Win">
+      <wsdl:input message="tns:ws_existe_url_WS_WinSoapIn" />
+      <wsdl:output message="tns:ws_existe_url_WS_WinSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ws_existe_url_WS">
+      <wsdl:input message="tns:ws_existe_url_WSSoapIn" />
+      <wsdl:output message="tns:ws_existe_url_WSSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ws_update_url_fe">
+      <wsdl:input message="tns:ws_update_url_feSoapIn" />
+      <wsdl:output message="tns:ws_update_url_feSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ws_inserta_asistencia">
+      <wsdl:input message="tns:ws_inserta_asistenciaSoapIn" />
+      <wsdl:output message="tns:ws_inserta_asistenciaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ws_transmision_salida">
+      <wsdl:input message="tns:ws_transmision_salidaSoapIn" />
+      <wsdl:output message="tns:ws_transmision_salidaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ws_borrar_archivo_cen">
+      <wsdl:input message="tns:ws_borrar_archivo_cenSoapIn" />
+      <wsdl:output message="tns:ws_borrar_archivo_cenSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ws_tienda_lista">
+      <wsdl:input message="tns:ws_tienda_listaSoapIn" />
+      <wsdl:output message="tns:ws_tienda_listaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ws_actualiza_archivo">
+      <wsdl:input message="tns:ws_actualiza_archivoSoapIn" />
+      <wsdl:output message="tns:ws_actualiza_archivoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ws_update_app_tx">
+      <wsdl:input message="tns:ws_update_app_txSoapIn" />
+      <wsdl:output message="tns:ws_update_app_txSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ws_update_dll_com">
+      <wsdl:input message="tns:ws_update_dll_comSoapIn" />
+      <wsdl:output message="tns:ws_update_dll_comSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ws_update_fepe_dll">
+      <wsdl:input message="tns:ws_update_fepe_dllSoapIn" />
+      <wsdl:output message="tns:ws_update_fepe_dllSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ws_update_certificado_pfx">
+      <wsdl:input message="tns:ws_update_certificado_pfxSoapIn" />
+      <wsdl:output message="tns:ws_update_certificado_pfxSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ws_update_versiondll_net">
+      <wsdl:input message="tns:ws_update_versiondll_netSoapIn" />
+      <wsdl:output message="tns:ws_update_versiondll_netSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ws_existe_tienda">
+      <wsdl:input message="tns:ws_existe_tiendaSoapIn" />
+      <wsdl:output message="tns:ws_existe_tiendaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ws_transmision_ingreso_transminet">
+      <wsdl:input message="tns:ws_transmision_ingreso_transminetSoapIn" />
+      <wsdl:output message="tns:ws_transmision_ingreso_transminetSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ws_transmision_ingreso">
+      <wsdl:input message="tns:ws_transmision_ingresoSoapIn" />
+      <wsdl:output message="tns:ws_transmision_ingresoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ws_dll_service_tda">
+      <wsdl:input message="tns:ws_dll_service_tdaSoapIn" />
+      <wsdl:output message="tns:ws_dll_service_tdaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ws_existe_exewinupdate_version">
+      <wsdl:input message="tns:ws_existe_exewinupdate_versionSoapIn" />
+      <wsdl:output message="tns:ws_existe_exewinupdate_versionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ws_existe_fepe_dll">
+      <wsdl:input message="tns:ws_existe_fepe_dllSoapIn" />
+      <wsdl:output message="tns:ws_existe_fepe_dllSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ws_existe_certificado">
+      <wsdl:input message="tns:ws_existe_certificadoSoapIn" />
+      <wsdl:output message="tns:ws_existe_certificadoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ws_existe_genera_hash_version">
+      <wsdl:input message="tns:ws_existe_genera_hash_versionSoapIn" />
+      <wsdl:output message="tns:ws_existe_genera_hash_versionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ws_existe_serviciowin_version">
+      <wsdl:input message="tns:ws_existe_serviciowin_versionSoapIn" />
+      <wsdl:output message="tns:ws_existe_serviciowin_versionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ws_envia_stock_inv">
+      <wsdl:input message="tns:ws_envia_stock_invSoapIn" />
+      <wsdl:output message="tns:ws_envia_stock_invSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ws_error_mov_transac">
+      <wsdl:input message="tns:ws_error_mov_transacSoapIn" />
+      <wsdl:output message="tns:ws_error_mov_transacSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ws_genera_mov">
+      <wsdl:input message="tns:ws_genera_movSoapIn" />
+      <wsdl:output message="tns:ws_genera_movSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ws_recepcion_transac">
+      <wsdl:input message="tns:ws_recepcion_transacSoapIn" />
+      <wsdl:output message="tns:ws_recepcion_transacSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ws_transaccion_flag">
+      <wsdl:input message="tns:ws_transaccion_flagSoapIn" />
+      <wsdl:output message="tns:ws_transaccion_flagSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ws_tienda_inv">
+      <wsdl:input message="tns:ws_tienda_invSoapIn" />
+      <wsdl:output message="tns:ws_tienda_invSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ws_existe_archivo_SQL">
+      <wsdl:input message="tns:ws_existe_archivo_SQLSoapIn" />
+      <wsdl:output message="tns:ws_existe_archivo_SQLSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ws_transmision_ingreso_SQL">
+      <wsdl:input message="tns:ws_transmision_ingreso_SQLSoapIn" />
+      <wsdl:output message="tns:ws_transmision_ingreso_SQLSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ws_update_vales">
+      <wsdl:input message="tns:ws_update_valesSoapIn" />
+      <wsdl:output message="tns:ws_update_valesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ws_update_venta_empl">
+      <wsdl:input message="tns:ws_update_venta_emplSoapIn" />
+      <wsdl:output message="tns:ws_update_venta_emplSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ws_valida_tda_ecu">
+      <wsdl:input message="tns:ws_valida_tda_ecuSoapIn" />
+      <wsdl:output message="tns:ws_valida_tda_ecuSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ws_get_file_upload">
+      <wsdl:input message="tns:ws_get_file_uploadSoapIn" />
+      <wsdl:output message="tns:ws_get_file_uploadSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ws_bytes_file_server">
+      <wsdl:input message="tns:ws_bytes_file_serverSoapIn" />
+      <wsdl:output message="tns:ws_bytes_file_serverSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ws_get_guias_tienda_almacen">
+      <wsdl:input message="tns:ws_get_guias_tienda_almacenSoapIn" />
+      <wsdl:output message="tns:ws_get_guias_tienda_almacenSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ws_update_guia_tienda_almacen">
+      <wsdl:input message="tns:ws_update_guia_tienda_almacenSoapIn" />
+      <wsdl:output message="tns:ws_update_guia_tienda_almacenSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ws_exists_guia_tienda_alm">
+      <wsdl:input message="tns:ws_exists_guia_tienda_almSoapIn" />
+      <wsdl:output message="tns:ws_exists_guia_tienda_almSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="bata_transaccionSoap" type="tns:bata_transaccionSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ws_consulta_asistencia">
+      <soap:operation soapAction="http://tempuri.org/ws_consulta_asistencia" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ws_consulta_asistenciaAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_tdaupdate_wsurl">
+      <soap:operation soapAction="http://tempuri.org/ws_tdaupdate_wsurl" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ws_tdaupdate_wsurlAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_tdaupdate_wsurl_win">
+      <soap:operation soapAction="http://tempuri.org/ws_tdaupdate_wsurl_win" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ws_tdaupdate_wsurl_winAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_existe_fepe_dll_data">
+      <soap:operation soapAction="http://tempuri.org/ws_existe_fepe_dll_data" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ws_existe_fepe_dll_dataAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_existe_certificado_WS">
+      <soap:operation soapAction="http://tempuri.org/ws_existe_certificado_WS" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ws_existe_certificado_WSAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_existe_url_WS_Win">
+      <soap:operation soapAction="http://tempuri.org/ws_existe_url_WS_Win" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ws_existe_url_WS_WinAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_existe_url_WS">
+      <soap:operation soapAction="http://tempuri.org/ws_existe_url_WS" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ws_existe_url_WSAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_update_url_fe">
+      <soap:operation soapAction="http://tempuri.org/ws_update_url_fe" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ws_update_url_feAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_inserta_asistencia">
+      <soap:operation soapAction="http://tempuri.org/ws_inserta_asistencia" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ws_inserta_asistenciaAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_transmision_salida">
+      <soap:operation soapAction="http://tempuri.org/ws_transmision_salida" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ws_transmision_salidaAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_borrar_archivo_cen">
+      <soap:operation soapAction="http://tempuri.org/ws_borrar_archivo_cen" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ws_borrar_archivo_cenAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_tienda_lista">
+      <soap:operation soapAction="http://tempuri.org/ws_tienda_lista" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ws_tienda_listaAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_actualiza_archivo">
+      <soap:operation soapAction="http://tempuri.org/ws_actualiza_archivo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ws_actualiza_archivoAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_update_app_tx">
+      <soap:operation soapAction="http://tempuri.org/ws_update_app_tx" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ws_update_app_txAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_update_dll_com">
+      <soap:operation soapAction="http://tempuri.org/ws_update_dll_com" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ws_update_dll_comAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_update_fepe_dll">
+      <soap:operation soapAction="http://tempuri.org/ws_update_fepe_dll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ws_update_fepe_dllAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_update_certificado_pfx">
+      <soap:operation soapAction="http://tempuri.org/ws_update_certificado_pfx" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ws_update_certificado_pfxAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_update_versiondll_net">
+      <soap:operation soapAction="http://tempuri.org/ws_update_versiondll_net" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ws_update_versiondll_netAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_existe_tienda">
+      <soap:operation soapAction="http://tempuri.org/ws_existe_tienda" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ws_existe_tiendaAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_transmision_ingreso_transminet">
+      <soap:operation soapAction="http://tempuri.org/ws_transmision_ingreso_transminet" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ws_transmision_ingreso_transminetAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_transmision_ingreso">
+      <soap:operation soapAction="http://tempuri.org/ws_transmision_ingreso" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ws_transmision_ingresoAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_dll_service_tda">
+      <soap:operation soapAction="http://tempuri.org/ws_dll_service_tda" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ws_dll_service_tdaAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_existe_exewinupdate_version">
+      <soap:operation soapAction="http://tempuri.org/ws_existe_exewinupdate_version" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ws_existe_exewinupdate_versionAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_existe_fepe_dll">
+      <soap:operation soapAction="http://tempuri.org/ws_existe_fepe_dll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ws_existe_fepe_dllAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_existe_certificado">
+      <soap:operation soapAction="http://tempuri.org/ws_existe_certificado" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ws_existe_certificadoAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_existe_genera_hash_version">
+      <soap:operation soapAction="http://tempuri.org/ws_existe_genera_hash_version" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ws_existe_genera_hash_versionAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_existe_serviciowin_version">
+      <soap:operation soapAction="http://tempuri.org/ws_existe_serviciowin_version" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ws_existe_serviciowin_versionAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_envia_stock_inv">
+      <soap:operation soapAction="http://tempuri.org/ws_envia_stock_inv" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ws_envia_stock_invAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_error_mov_transac">
+      <soap:operation soapAction="http://tempuri.org/ws_error_mov_transac" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ws_error_mov_transacAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_genera_mov">
+      <soap:operation soapAction="http://tempuri.org/ws_genera_mov" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ws_genera_movAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_recepcion_transac">
+      <soap:operation soapAction="http://tempuri.org/ws_recepcion_transac" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ws_recepcion_transacAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_transaccion_flag">
+      <soap:operation soapAction="http://tempuri.org/ws_transaccion_flag" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ws_transaccion_flagAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_tienda_inv">
+      <soap:operation soapAction="http://tempuri.org/ws_tienda_inv" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ws_tienda_invAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_existe_archivo_SQL">
+      <soap:operation soapAction="http://tempuri.org/ws_existe_archivo_SQL" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ws_existe_archivo_SQLAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_transmision_ingreso_SQL">
+      <soap:operation soapAction="http://tempuri.org/ws_transmision_ingreso_SQL" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ws_transmision_ingreso_SQLAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_update_vales">
+      <soap:operation soapAction="http://tempuri.org/ws_update_vales" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_update_venta_empl">
+      <soap:operation soapAction="http://tempuri.org/ws_update_venta_empl" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_valida_tda_ecu">
+      <soap:operation soapAction="http://tempuri.org/ws_valida_tda_ecu" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ws_valida_tda_ecuAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_get_file_upload">
+      <soap:operation soapAction="http://tempuri.org/ws_get_file_upload" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ws_get_file_uploadAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_bytes_file_server">
+      <soap:operation soapAction="http://tempuri.org/ws_bytes_file_server" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ws_bytes_file_serverAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_get_guias_tienda_almacen">
+      <soap:operation soapAction="http://tempuri.org/ws_get_guias_tienda_almacen" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ws_get_guias_tienda_almacenAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_update_guia_tienda_almacen">
+      <soap:operation soapAction="http://tempuri.org/ws_update_guia_tienda_almacen" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ws_update_guia_tienda_almacenAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_exists_guia_tienda_alm">
+      <soap:operation soapAction="http://tempuri.org/ws_exists_guia_tienda_alm" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ws_exists_guia_tienda_almAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="bata_transaccionSoap12" type="tns:bata_transaccionSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ws_consulta_asistencia">
+      <soap12:operation soapAction="http://tempuri.org/ws_consulta_asistencia" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ws_consulta_asistenciaAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_tdaupdate_wsurl">
+      <soap12:operation soapAction="http://tempuri.org/ws_tdaupdate_wsurl" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ws_tdaupdate_wsurlAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_tdaupdate_wsurl_win">
+      <soap12:operation soapAction="http://tempuri.org/ws_tdaupdate_wsurl_win" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ws_tdaupdate_wsurl_winAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_existe_fepe_dll_data">
+      <soap12:operation soapAction="http://tempuri.org/ws_existe_fepe_dll_data" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ws_existe_fepe_dll_dataAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_existe_certificado_WS">
+      <soap12:operation soapAction="http://tempuri.org/ws_existe_certificado_WS" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ws_existe_certificado_WSAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_existe_url_WS_Win">
+      <soap12:operation soapAction="http://tempuri.org/ws_existe_url_WS_Win" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ws_existe_url_WS_WinAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_existe_url_WS">
+      <soap12:operation soapAction="http://tempuri.org/ws_existe_url_WS" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ws_existe_url_WSAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_update_url_fe">
+      <soap12:operation soapAction="http://tempuri.org/ws_update_url_fe" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ws_update_url_feAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_inserta_asistencia">
+      <soap12:operation soapAction="http://tempuri.org/ws_inserta_asistencia" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ws_inserta_asistenciaAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_transmision_salida">
+      <soap12:operation soapAction="http://tempuri.org/ws_transmision_salida" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ws_transmision_salidaAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_borrar_archivo_cen">
+      <soap12:operation soapAction="http://tempuri.org/ws_borrar_archivo_cen" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ws_borrar_archivo_cenAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_tienda_lista">
+      <soap12:operation soapAction="http://tempuri.org/ws_tienda_lista" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ws_tienda_listaAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_actualiza_archivo">
+      <soap12:operation soapAction="http://tempuri.org/ws_actualiza_archivo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ws_actualiza_archivoAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_update_app_tx">
+      <soap12:operation soapAction="http://tempuri.org/ws_update_app_tx" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ws_update_app_txAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_update_dll_com">
+      <soap12:operation soapAction="http://tempuri.org/ws_update_dll_com" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ws_update_dll_comAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_update_fepe_dll">
+      <soap12:operation soapAction="http://tempuri.org/ws_update_fepe_dll" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ws_update_fepe_dllAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_update_certificado_pfx">
+      <soap12:operation soapAction="http://tempuri.org/ws_update_certificado_pfx" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ws_update_certificado_pfxAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_update_versiondll_net">
+      <soap12:operation soapAction="http://tempuri.org/ws_update_versiondll_net" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ws_update_versiondll_netAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_existe_tienda">
+      <soap12:operation soapAction="http://tempuri.org/ws_existe_tienda" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ws_existe_tiendaAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_transmision_ingreso_transminet">
+      <soap12:operation soapAction="http://tempuri.org/ws_transmision_ingreso_transminet" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ws_transmision_ingreso_transminetAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_transmision_ingreso">
+      <soap12:operation soapAction="http://tempuri.org/ws_transmision_ingreso" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ws_transmision_ingresoAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_dll_service_tda">
+      <soap12:operation soapAction="http://tempuri.org/ws_dll_service_tda" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ws_dll_service_tdaAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_existe_exewinupdate_version">
+      <soap12:operation soapAction="http://tempuri.org/ws_existe_exewinupdate_version" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ws_existe_exewinupdate_versionAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_existe_fepe_dll">
+      <soap12:operation soapAction="http://tempuri.org/ws_existe_fepe_dll" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ws_existe_fepe_dllAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_existe_certificado">
+      <soap12:operation soapAction="http://tempuri.org/ws_existe_certificado" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ws_existe_certificadoAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_existe_genera_hash_version">
+      <soap12:operation soapAction="http://tempuri.org/ws_existe_genera_hash_version" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ws_existe_genera_hash_versionAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_existe_serviciowin_version">
+      <soap12:operation soapAction="http://tempuri.org/ws_existe_serviciowin_version" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ws_existe_serviciowin_versionAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_envia_stock_inv">
+      <soap12:operation soapAction="http://tempuri.org/ws_envia_stock_inv" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ws_envia_stock_invAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_error_mov_transac">
+      <soap12:operation soapAction="http://tempuri.org/ws_error_mov_transac" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ws_error_mov_transacAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_genera_mov">
+      <soap12:operation soapAction="http://tempuri.org/ws_genera_mov" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ws_genera_movAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_recepcion_transac">
+      <soap12:operation soapAction="http://tempuri.org/ws_recepcion_transac" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ws_recepcion_transacAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_transaccion_flag">
+      <soap12:operation soapAction="http://tempuri.org/ws_transaccion_flag" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ws_transaccion_flagAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_tienda_inv">
+      <soap12:operation soapAction="http://tempuri.org/ws_tienda_inv" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ws_tienda_invAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_existe_archivo_SQL">
+      <soap12:operation soapAction="http://tempuri.org/ws_existe_archivo_SQL" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ws_existe_archivo_SQLAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_transmision_ingreso_SQL">
+      <soap12:operation soapAction="http://tempuri.org/ws_transmision_ingreso_SQL" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ws_transmision_ingreso_SQLAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_update_vales">
+      <soap12:operation soapAction="http://tempuri.org/ws_update_vales" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_update_venta_empl">
+      <soap12:operation soapAction="http://tempuri.org/ws_update_venta_empl" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_valida_tda_ecu">
+      <soap12:operation soapAction="http://tempuri.org/ws_valida_tda_ecu" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ws_valida_tda_ecuAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_get_file_upload">
+      <soap12:operation soapAction="http://tempuri.org/ws_get_file_upload" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ws_get_file_uploadAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_bytes_file_server">
+      <soap12:operation soapAction="http://tempuri.org/ws_bytes_file_server" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ws_bytes_file_serverAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_get_guias_tienda_almacen">
+      <soap12:operation soapAction="http://tempuri.org/ws_get_guias_tienda_almacen" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ws_get_guias_tienda_almacenAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_update_guia_tienda_almacen">
+      <soap12:operation soapAction="http://tempuri.org/ws_update_guia_tienda_almacen" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ws_update_guia_tienda_almacenAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_exists_guia_tienda_alm">
+      <soap12:operation soapAction="http://tempuri.org/ws_exists_guia_tienda_alm" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ws_exists_guia_tienda_almAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="bata_transaccion">
+    <wsdl:port name="bata_transaccionSoap" binding="tns:bata_transaccionSoap">
+      <soap:address location="http://www.bgr.pe/web_site_tienda/bata_transaccion.asmx" />
+    </wsdl:port>
+    <wsdl:port name="bata_transaccionSoap12" binding="tns:bata_transaccionSoap12">
+      <soap12:address location="http://www.bgr.pe/web_site_tienda/bata_transaccion.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

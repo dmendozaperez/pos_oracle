@@ -419,7 +419,7 @@ namespace CapaServicioWindows.Modular
 
                 string _error = "";
                 /*ya no entra a consultar*/
-               // if (File.Exists(@ruta_validacion)) return;
+                if (File.Exists(@ruta_validacion)) return;
                 /**/
                 _lista_guiasC = get_scdddes(_locatio_scdddes.rutloc_location,ref _error);
 
@@ -451,7 +451,7 @@ namespace CapaServicioWindows.Modular
                         var _location_fvdespc = listar_location_dbf.Where(x => x.rutloc_namedbf == name_dbf).FirstOrDefault();
 
                         /*ya no entra a consultar*/
-                       // if (File.Exists(@ruta_validacion)) return;
+                        if (File.Exists(@ruta_validacion)) return;
                         /**/
 
                         BataTransac.Ent_Fvdespc fvdespc = get_fvdespc(filaC.DDES_ALMAC, filaC.DDES_GUIRE, _location_fvdespc.rutloc_location, ref _error, ref existe_data);
@@ -485,7 +485,7 @@ namespace CapaServicioWindows.Modular
                                 var _location_fvdespd = listar_location_dbf.Where(x => x.rutloc_namedbf == name_dbf).FirstOrDefault();
 
                                 /*ya no entra a consultar*/
-                             //   if (File.Exists(@ruta_validacion)) return;
+                                if (File.Exists(@ruta_validacion)) return;
                                 /**/
 
                                 DataTable fvdespd = get_fvdespd(filaC.DDES_ALMAC, filaC.DDES_GUIRE, _location_fvdespd.rutloc_location, ref _error);
@@ -524,7 +524,7 @@ namespace CapaServicioWindows.Modular
                                             /*si es que las guias se grabaron correctamente entonces vamos a setear el valor en el dbf*/
 
                                             /*ya no entra a consultar*/
-                                           // if (File.Exists(@ruta_validacion)) return;
+                                            if (File.Exists(@ruta_validacion)) return;
                                             /**/
 
                                             edit_scdddes(fvdespc.DESC_ALMAC, fvdespc.DESC_GUDIS, _locatio_scdddes_edit.rutloc_location,ref _error_ws);

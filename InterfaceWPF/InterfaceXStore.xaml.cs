@@ -2259,7 +2259,7 @@ namespace InterfaceWPF
                 string mensaje = "";
                 if (strEnviaFtp.Equals("S"))
                 {
-                    string codAmbiente = dwAmbiente_trans.EditValue.ToString();
+                    string codAmbiente = dwAmbienteDsp.EditValue.ToString();
                     setearAmbXoficce(codAmbiente);
 
                     mensaje = "Se enviaron al ftp";

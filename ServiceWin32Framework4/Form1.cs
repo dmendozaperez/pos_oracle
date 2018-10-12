@@ -88,5 +88,12 @@ namespace ServiceWin32Framework4
             MessageBox.Show("termino");
             Cursor.Current = Cursors.Default;
         }
+
+        private void btnposlog_Click(object sender, EventArgs e)
+        {
+            string _error = "";
+            Basico ejecuta_procesos = new Basico();
+            ejecuta_procesos.procesar_poslog_pos(ref _error);
+        }
     }
 }

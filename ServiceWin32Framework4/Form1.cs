@@ -95,5 +95,14 @@ namespace ServiceWin32Framework4
             Basico ejecuta_procesos = new Basico();
             ejecuta_procesos.procesar_poslog_pos(ref _error);
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+            string _error = "";
+            Basico ejecuta_procesos = new Basico();
+            ejecuta_procesos.envio_Guias_ToxStore(ref _error);
+
+        }
     }
 }

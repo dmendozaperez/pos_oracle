@@ -42,6 +42,9 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="WinSCPnet">
+      <HintPath>..\packages\WinSCP.5.13.1\lib\net\WinSCPnet.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CapaDato\Novell\Dat_Proc_Novell.cs" />

@@ -33,6 +33,7 @@
             this.btnbarra = new System.Windows.Forms.Button();
             this.btnenvio_nov = new System.Windows.Forms.Button();
             this.btnenviog = new System.Windows.Forms.Button();
+            this.btnposlog = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn_servicewin
@@ -89,11 +90,23 @@
             this.btnenviog.UseVisualStyleBackColor = true;
             this.btnenviog.Click += new System.EventHandler(this.btnenviog_Click);
             // 
+            // btnposlog
+            // 
+            this.btnposlog.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnposlog.Location = new System.Drawing.Point(530, 80);
+            this.btnposlog.Name = "btnposlog";
+            this.btnposlog.Size = new System.Drawing.Size(166, 23);
+            this.btnposlog.TabIndex = 9;
+            this.btnposlog.Text = "ENVIO POS LOG";
+            this.btnposlog.UseVisualStyleBackColor = true;
+            this.btnposlog.Click += new System.EventHandler(this.btnposlog_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(507, 261);
+            this.ClientSize = new System.Drawing.Size(744, 261);
+            this.Controls.Add(this.btnposlog);
             this.Controls.Add(this.btnenviog);
             this.Controls.Add(this.btnenvio_nov);
             this.Controls.Add(this.btnbarra);
@@ -112,6 +125,7 @@
         private System.Windows.Forms.Button btnbarra;
         private System.Windows.Forms.Button btnenvio_nov;
         private System.Windows.Forms.Button btnenviog;
+        private System.Windows.Forms.Button btnposlog;
     }
 }
 

@@ -13,6 +13,10 @@
       <Name>Rpt_EstadoStock.rdl</Name>
       <FullPath>Rpt_EstadoStock.rdl</FullPath>
     </ProjectItem>
+    <ProjectItem>
+      <Name>Rpt_Planilla.rdl</Name>
+      <FullPath>Rpt_Planilla.rdl</FullPath>
+    </ProjectItem>
   </Reports>
   <Configurations>
     <Configuration>
@@ -28,7 +32,7 @@
         <TargetDatasetFolder>Conjuntos de datos</TargetDatasetFolder>
         <OverwriteDatasets>true</OverwriteDatasets>
         <TargetReportPartFolder>Elementos de informe</TargetReportPartFolder>
-        <StartItem>Rpt_EstadoStock.rdl</StartItem>
+        <StartItem>Rpt_Planilla.rdl</StartItem>
       </Options>
     </Configuration>
     <Configuration>

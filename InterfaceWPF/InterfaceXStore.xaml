@@ -409,6 +409,7 @@
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="5"/>
+                            
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
                         <Grid Grid.Row="1" Margin="0,5,-206,0" Grid.ColumnSpan="2">
@@ -416,6 +417,7 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
+                                <RowDefinition Height="40"/>
                                 <RowDefinition Height="40"/>
                                 <RowDefinition Height="40"/>
                                 <RowDefinition Height="*"/>
@@ -433,16 +435,32 @@
                                 </Grid.RowDefinitions>
                                 <Label HorizontalAlignment="Center"  Grid.Column="0" Grid.Row="0" Content="Ambiente FTP" FontSize="14" FontWeight="Bold"/>
                                 <dxe:ComboBoxEdit  x:Name="dwAmbienteDsp" ValidateOnTextInput="False"  Width="200" Height="28" Grid.Row="0" Cursor="Hand" Grid.Column="1" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" AutoComplete="True"/>
+                        </Grid>
+                            <Grid Grid.Row="1" Grid.Column="0" Margin="-32,0,31,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="200"/>
+                                    <ColumnDefinition Width="200"/>
+                                    <ColumnDefinition Width="180"/>
+                                    <ColumnDefinition Width="220"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="40"/>
+                                </Grid.RowDefinitions>
+                                <Label HorizontalAlignment="Center"  Grid.Column="0" Grid.Row="0" Content="Tienda Origen" FontSize="14" FontWeight="Bold"/>
+                                <dxe:ComboBoxEdit  x:Name="dwtdaOrigen" ValidateOnTextInput="False"  Width="200" Height="28" Grid.Row="0" Cursor="Hand" Grid.Column="1" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" AutoComplete="True"/>
 
-                                <Label HorizontalAlignment="Center"  Grid.Column="2" Grid.Row="0" Content="Seleccione Tienda" FontSize="14" FontWeight="Bold"/>
+                                <Label HorizontalAlignment="Center"  Grid.Column="2" Grid.Row="0" Content="Tienda Destino" FontSize="14" FontWeight="Bold"/>
                                 <dxe:ComboBoxEdit  x:Name="dwtiendatrans1" ValidateOnTextInput="False"  Width="210" Height="28" Grid.Row="0" Cursor="Hand" Grid.Column="3" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" AutoComplete="True"/>
                                 <CheckBox IsEnabled="true" IsChecked="True" Cursor="Hand" Grid.Column="4"  x:Name="chk_ftp_Trans" HorizontalAlignment="Center" VerticalAlignment="Center" Content="ENVIAR FTP" />
                             </Grid>
-                            <Grid Grid.Row="1" Grid.Column="0" >
+                            <Grid Grid.Row="2" Grid.Column="0" >
                                 <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100"/>
                                     <ColumnDefinition Width="200"/>
-                                    <ColumnDefinition Width="190"/>
-                                    <ColumnDefinition Width="50"/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="200"/>
+                                    <ColumnDefinition Width="200"/>
                                     <ColumnDefinition Width="200"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
@@ -450,9 +468,11 @@
                                 <Label HorizontalAlignment="Right" Grid.Column="2" VerticalAlignment="Center" Content="Hasta" FontSize="14" FontWeight="Bold"/>
                                 <DatePicker x:Name="dtpdesde" HorizontalAlignment="Left" VerticalAlignment="Center" Width="180" Cursor="Hand" FontSize="14" Height="25" Grid.Column="1" Grid.Row="0"/>
                                 <DatePicker x:Name="dtphasta" HorizontalAlignment="Left" VerticalAlignment="Center" Width="180" Cursor="Hand" FontSize="14" Height="25" Grid.Column="3" Grid.Row="0"/>
-                                <Button Cursor="Hand" Grid.Column="4" Content="Consultar" Width="100" Height="30" Grid.Row="0" HorizontalAlignment="Left" x:Name="btnconsultag" Click="btnconsultag_Click"/>
+                                <Label HorizontalAlignment="Left" Grid.Column="4" VerticalAlignment="Center" Content="Doc." FontSize="14" FontWeight="Bold"/>
+                                <TextBox  x:Name="Docu" HorizontalAlignment="Right" VerticalAlignment="Center" Width="150" Cursor="Hand" FontSize="14" Height="25" Grid.Column="4" Grid.Row="0"/>
+                                <Button Cursor="Hand" Grid.Column="5" Content="Consultar" Width="100" Height="30" Grid.Row="0" HorizontalAlignment="Left" x:Name="btnconsultag" Click="btnconsultag_Click" Margin="10,6,0,4"/>
                             </Grid>
-                            <Grid Grid.Row="2" Background="#FFE5E5E5">
+                            <Grid Grid.Row="4" Background="#FFE5E5E5">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="223*"/>
                                     <ColumnDefinition Width="86*"/>

@@ -21,6 +21,8 @@ namespace ServiceWinTransaction
         Timer tmservicio = null;
         Timer tmservicioDBF = null;
         Timer tmservicioVentaXstore = null;
+
+        Timer tmservicio_GuiaToXstore = null;
         //Timer tmservicioScactcoDBF = null;
 
         Timer tmservicio_trans = null;
@@ -35,6 +37,8 @@ namespace ServiceWinTransaction
         private Int32 _valida_serviceposlog = 0;
 
         private Int32 _valida_serviceVentaXstore = 0;
+
+        private Int32 _valida_serviceGuiaToXstore = 0;
 
         public Service_Transaction()
         {
@@ -56,7 +60,53 @@ namespace ServiceWinTransaction
             tmservicio_trans.Elapsed += new ElapsedEventHandler(tmservicio_trans_Elapsed);
 
 
+            tmservicio_GuiaToXstore = new Timer(5000);
+            tmservicio_GuiaToXstore.Elapsed += new ElapsedEventHandler(tmservicio_GuiaToXstore_Elapsed);
+
+
         }
+
+        void tmservicio_GuiaToXstore_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            Int32 _valor = 0;
+            try
+            {
+                if (_valida_serviceGuiaToXstore == 0)
+                {
+                    _valor = 1;
+                    _valida_serviceGuiaToXstore = 1;
+                    string _valida_proc_guiaToXstore = @"D:\XSTORE\proc_xs.txt";
+                    Boolean proceso_guiaToXstore = false;
+
+                    if (File.Exists(_valida_proc_guiaToXstore)) proceso_guiaToXstore = true;
+
+                    if (proceso_guiaToXstore)
+                    {
+                        _valor = 1;
+                        string _error = "";
+                        _valida_serviceGuiaToXstore = 1;
+                      
+                        Basico ejecuta_procesos = null;
+                        ejecuta_procesos = new Basico();
+                        ejecuta_procesos.envio_Guias_ToxStore(ref _error);
+
+                        _valida_serviceGuiaToXstore = 0;
+
+                    }
+                }
+
+            }
+            catch (Exception exc)
+            {
+                //string errSwc = "";
+                _valida_serviceGuiaToXstore = 0;
+            }
+            if (_valor == 1)
+            {
+                _valida_serviceGuiaToXstore = 0;
+            }
+        }
+
 
         void tmservicio_trans_Elapsed(object sender, ElapsedEventArgs e)
         {
@@ -71,6 +121,10 @@ namespace ServiceWinTransaction
                     Boolean proceso_insertDBF = false;
 
                     if (File.Exists(_valida_proc_dbf)) proceso_insertDBF = true;
+
+                    string _valida_proc_guiaToXstore = @"D:\XSTORE\proc_xs.txt";
+                    if (File.Exists(_valida_proc_guiaToXstore)) proceso_insertDBF = false;
+
 
                     if (proceso_insertDBF)
                     {
@@ -118,6 +172,9 @@ namespace ServiceWinTransaction
 
                 /*si el archivo existe entonces ejecutar procesos de venta*/
                 if (File.Exists(@_valida_proc_venta)) proceso_venta = true;
+
+                string _valida_proc_guiaToXstore = @"D:\XSTORE\proc_xs.txt";
+                if (File.Exists(_valida_proc_guiaToXstore)) proceso_venta = false;
 
                 if (_valida_service == 0)
                 {
@@ -211,6 +268,9 @@ namespace ServiceWinTransaction
 
                     if (File.Exists(_valida_proc_venXstore)) proceso_ventaXSTORE = true;
 
+                    string _valida_proc_guiaToXstore = @"D:\XSTORE\proc_xs.txt";
+                    if (File.Exists(_valida_proc_guiaToXstore)) proceso_ventaXSTORE = false;
+
                     if (proceso_ventaXSTORE)
                     {
                         _valor = 1;
@@ -250,6 +310,10 @@ namespace ServiceWinTransaction
 
                     if (File.Exists(_valida_proc_dbf)) proceso_insertDBF = true;
 
+
+                    string _valida_proc_guiaToXstore = @"D:\XSTORE\proc_xs.txt";
+                    if (File.Exists(_valida_proc_guiaToXstore)) proceso_insertDBF = false;
+
                     if (proceso_insertDBF)
                     {
                         _valor = 1;
@@ -286,6 +350,9 @@ namespace ServiceWinTransaction
                     Boolean proceso_insert_polog = false;
 
                     if (File.Exists(_valida_proc_ven)) proceso_insert_polog = true;
+
+                    string _valida_proc_guiaToXstore = @"D:\XSTORE\proc_xs.txt";
+                    if (File.Exists(_valida_proc_guiaToXstore)) proceso_insert_polog = false;
 
                     if (proceso_insert_polog)
                     {
@@ -355,6 +422,7 @@ namespace ServiceWinTransaction
             tmservicioDBF.Start();
             tmservicioposlog.Start();
             tmservicio_trans.Start();
+            tmservicio_GuiaToXstore.Start();
             //tmservicioScactcoDBF.Start();
         }
 
@@ -364,6 +432,7 @@ namespace ServiceWinTransaction
             tmservicioDBF.Stop();
             tmservicioposlog.Stop();
             tmservicio_trans.Stop();
+            tmservicio_GuiaToXstore.Stop();
             //tmservicioScactcoDBF.Stop();
         }       
               

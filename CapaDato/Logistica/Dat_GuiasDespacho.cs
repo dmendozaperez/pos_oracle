@@ -71,7 +71,7 @@ namespace CapaDato.Logistica
         /// <param name="fecha final"></param>
         /// <param name="codigo de tienda"></param>
         /// <returns></returns>
-        public List<Ent_GuiasDespacho_Cab> get_guias_tda_cab(DateTime fecha_ini,DateTime fecha_fin,string cod_tda)
+        public List<Ent_GuiasDespacho_Cab> get_guias_tda_cab(DateTime fecha_ini,DateTime fecha_fin,string cod_tda, string _nro_Doc)
         {
             string sqlquery = "USP_GET_GUIAS_TIENDA_CAB";
             List<Ent_GuiasDespacho_Cab> listar = null;

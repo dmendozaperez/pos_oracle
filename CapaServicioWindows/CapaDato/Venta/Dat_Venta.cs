@@ -297,6 +297,104 @@ namespace CapaServicioWindows.CapaDato.Venta
             return ds;
         }
 
+        public DataSet procesar_listaGuia_ToXstore()
+        {
+            string sqlquery = "USP_LISTAR_GUIA_TOXSTORE";
+            DataSet ds = null;
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(ConexionSQL.conexion))
+                {
+                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            ds = new DataSet();
+                            da.Fill(ds);
+
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ds = null;
+            }
+
+            return ds;
+        }
+
+        public DataSet get_inv_doc(string cod_alm, string nro_guia)
+        {
+            string sqlquery = "[USP_XSTORE_GET_INV_DOC]";
+            DataSet ds = null;
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(ConexionSQL.conexion))
+                {
+                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@DESC_ALMAC", cod_alm);
+                        cmd.Parameters.AddWithValue("@DESC_GUDIS", nro_guia);
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            ds = new DataSet();
+                            da.Fill(ds);
+
+                            if (ds.Tables.Count > 0)
+                            {
+                                /*guias de traspasos*/
+                                ds.Tables[0].TableName = "INV_DOC";
+                                ds.Tables[1].TableName = "INV_DOC_LINE_ITEM";
+                                ds.Tables[2].TableName = "CARTON";
+                            }
+
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ds = null;
+            }
+            return ds;
+        }
+
+
+        public DataSet get_amb_Xstore(string pais, string CodAmb)
+        {
+            string sqlquery = "[USP_GET_XSTORE_AMBIENTE_XOFICCE]";
+            DataSet ds = null;
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(ConexionSQL.conexion))
+                {
+                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@PAIS", pais);
+                        cmd.Parameters.AddWithValue("@cod", CodAmb);
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            ds = new DataSet();
+                            da.Fill(ds);                         
+
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ds = null;
+            }
+            return ds;
+        }
 
         public DataSet GET_OBTENER_VENTA_XSTORE(string cod_tda, DateTime fecha)
         {
@@ -334,6 +432,47 @@ namespace CapaServicioWindows.CapaDato.Venta
             }
             return ds;
         }
+
+
+        public string Actualizar_Guia_ToXstore(string almac, string gudis, string tdes)
+        {
+            string sqlquery = "USP_ACTUALIZAR_GUIA_TOXSTORE";
+            string error = "";
+            try
+            {
+
+                using (SqlConnection cn = new SqlConnection(ConexionSQL.conexion))
+                {
+                    try
+                    {
+                        if (cn.State == 0) cn.Open();
+                        using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                        {
+                            cmd.CommandTimeout = 120;
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.Parameters.AddWithValue("@ALMAC", almac);
+                            cmd.Parameters.AddWithValue("@GUDIS", gudis);
+                            cmd.Parameters.AddWithValue("@TDES", tdes);
+                            cmd.ExecuteNonQuery();
+
+                        }
+                    }
+                    catch (Exception exc)
+                    {
+                        error = exc.Message;
+                    }
+                    if (cn != null)
+                        if (cn.State == ConnectionState.Open) cn.Close();
+                }
+
+            }
+            catch (Exception exc)
+            {
+                error = exc.Message;
+            }
+            return error;
+        }
+
         #endregion
     }
 }

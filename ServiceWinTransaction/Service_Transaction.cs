@@ -174,7 +174,7 @@ namespace ServiceWinTransaction
                 if (File.Exists(@_valida_proc_venta)) proceso_venta = true;
 
                 string _valida_proc_guiaToXstore = @"D:\XSTORE\proc_xs.txt";
-                if (File.Exists(_valida_proc_guiaToXstore)) proceso_venta = false;
+                if (File.Exists(_valida_proc_guiaToXstore)) return; //proceso_venta = false;
 
                 if (_valida_service == 0)
                 {

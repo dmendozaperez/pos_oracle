@@ -1474,7 +1474,11 @@ namespace CapaServicioWindows.Modular
             }
             catch (Exception exc)
             {
-
+                TextWriter tw1 = new StreamWriter(@"D:\XSTORE\ERROR.txt", true);
+                tw1.WriteLine(exc.Message);
+                tw1.Flush();
+                tw1.Close();
+                tw1.Dispose();
             }
         }
 
@@ -1503,9 +1507,10 @@ namespace CapaServicioWindows.Modular
                 }
                 valida = true;
             }
-            catch (Exception)
+            catch (Exception exc)
             {
                 valida = false;
+                throw;
             }
             return valida;
         }
@@ -1560,7 +1565,9 @@ namespace CapaServicioWindows.Modular
             }
             catch (Exception exc)
             {
+                
                 valida_envio = false;
+                throw;
             }
             return valida_envio;
         }

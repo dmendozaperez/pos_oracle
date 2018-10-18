@@ -307,64 +307,173 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>0.44319in</Width>
+                  <Width>0.28125in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.31493in</Width>
+                  <Width>0.36458in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.48163in</Width>
+                  <Width>0.51042in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.43528in</Width>
+                  <Width>0.48958in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.71159in</Width>
+                  <Width>2.36456in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.28in</Width>
+                  <Width>0.79167in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.3in</Width>
+                  <Width>0.69913in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.3in</Width>
+                  <Width>1.08905in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.3in</Width>
+                  <Width>0.45833in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.3in</Width>
+                  <Width>0.34375in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.3in</Width>
+                  <Width>0.34375in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.3in</Width>
+                  <Width>0.34375in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.3in</Width>
+                  <Width>0.34375in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.3in</Width>
+                  <Width>0.34375in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.3in</Width>
+                  <Width>0.34375in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.3in</Width>
+                  <Width>0.34375in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.3in</Width>
+                  <Width>0.34375in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.3in</Width>
+                  <Width>0.34375in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>0.34375in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>0.34375in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>0.34375in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
                   <Height>0.57417in</Height>
                   <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="textbox2">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style>
+                                    <FontFamily />
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>#666666</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>textbox2</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>None</Style>
+                            </Border>
+                            <TopBorder>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Style>None</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <LeftBorder>
+                              <Width>1pt</Width>
+                            </LeftBorder>
+                            <RightBorder>
+                              <Width>1pt</Width>
+                            </RightBorder>
+                            <BackgroundColor>WhiteSmoke</BackgroundColor>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="textbox4">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style>
+                                    <FontFamily />
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>#666666</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>textbox4</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>None</Style>
+                            </Border>
+                            <TopBorder>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Style>None</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <LeftBorder>
+                              <Width>1pt</Width>
+                            </LeftBorder>
+                            <RightBorder>
+                              <Width>1pt</Width>
+                            </RightBorder>
+                            <BackgroundColor>WhiteSmoke</BackgroundColor>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
                     <TablixCell>
                       <CellContents>
                         <Textbox Name="textbox6">
@@ -417,6 +526,55 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
+                        <Textbox Name="Textbox311">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style>
+                                    <FontFamily />
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>#666666</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox311</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>None</Style>
+                            </Border>
+                            <TopBorder>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Style>None</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <LeftBorder>
+                              <Width>1pt</Width>
+                            </LeftBorder>
+                            <RightBorder>
+                              <Width>1pt</Width>
+                            </RightBorder>
+                            <BackgroundColor>WhiteSmoke</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
                         <Textbox Name="textbox10">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
@@ -427,7 +585,7 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
                                   <Value>Articulo</Value>
                                   <Style>
                                     <FontFamily />
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>11pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                     <Color>#666666</Color>
                                   </Style>
@@ -480,17 +638,17 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>P.Plani</Value>
+                                  <Value>P.Planilla</Value>
                                   <Style>
                                     <FontFamily />
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>11pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                     <Color>#666666</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
-                                <TextAlign>Left</TextAlign>
+                                <TextAlign>Right</TextAlign>
                               </Style>
                             </Paragraph>
                           </Paragraphs>
@@ -539,7 +697,7 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
                                   <Value>Stock</Value>
                                   <Style>
                                     <FontFamily />
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>11pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                     <Color>#666666</Color>
                                     <Language>es-PE</Language>
@@ -596,7 +754,7 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
                                   <Value>Valor</Value>
                                   <Style>
                                     <FontFamily />
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>11pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                     <Color>#666666</Color>
                                     <Language>es-PE</Language>
@@ -708,6 +866,105 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>calidad</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                            </Border>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="textbox27">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style>
+                                    <FontFamily />
+                                    <Color>#333333</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>textbox27</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                            </Border>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="textbox28">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style>
+                                    <FontFamily />
+                                    <Color>#333333</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>textbox28</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                            </Border>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="textbox29">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style>
+                                    <FontFamily />
+                                    <Color>#333333</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>textbox29</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -1323,6 +1580,41 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
+                        <Textbox Name="textbox47">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style>
+                                    <FontFamily />
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <FontFamily />
+                                <TextAlign>Right</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>textbox47</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                            </Border>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
                         <Textbox Name="grupo">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
@@ -1344,6 +1636,84 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>grupo</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                            </Border>
+                            <BottomBorder>
+                              <Style>Solid</Style>
+                            </BottomBorder>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="textbox48">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style>
+                                    <FontFamily />
+                                    <Color>#333333</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <FontFamily />
+                                <TextAlign>Right</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>textbox48</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                            </Border>
+                            <BottomBorder>
+                              <Style>Solid</Style>
+                            </BottomBorder>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="textbox49">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style>
+                                    <FontFamily />
+                                    <Color>#333333</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <FontFamily />
+                                <TextAlign>Right</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>textbox49</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -2032,6 +2402,72 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
+                        <Textbox Name="textbox3">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style>
+                                    <FontFamily />
+                                    <Color>#333333</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>textbox3</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                            </Border>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="textbox5">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style>
+                                    <FontFamily />
+                                    <Color>#333333</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>textbox5</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                            </Border>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
                         <Textbox Name="textbox7">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
@@ -2065,6 +2501,39 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
+                        <Textbox Name="textbox9">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style>
+                                    <FontFamily />
+                                    <Color>#333333</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>textbox9</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                            </Border>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
                         <Textbox Name="articulo">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
@@ -2075,7 +2544,6 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
                                   <Value>=Fields!articulo.Value</Value>
                                   <Style>
                                     <FontFamily />
-                                    <FontSize>8pt</FontSize>
                                     <Color>#333333</Color>
                                   </Style>
                                 </TextRun>
@@ -2112,7 +2580,6 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
                                   <Value>=Fields!pventa.Value</Value>
                                   <Style>
                                     <FontFamily />
-                                    <FontSize>8pt</FontSize>
                                     <Color>#333333</Color>
                                   </Style>
                                 </TextRun>
@@ -2151,7 +2618,6 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
                                   <Value>=Fields!tcant.Value</Value>
                                   <Style>
                                     <FontFamily />
-                                    <FontSize>8pt</FontSize>
                                     <Color>#333333</Color>
                                     <Language>es-PE</Language>
                                   </Style>
@@ -2191,7 +2657,6 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
                                   <Value>=Fields!valor.Value</Value>
                                   <Style>
                                     <FontFamily />
-                                    <FontSize>8pt</FontSize>
                                     <Format>#,0.00;(#,0.00)</Format>
                                     <Color>#333333</Color>
                                     <Language>es-PE</Language>
@@ -2232,7 +2697,6 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
                                   <Value>=Fields!rmed.Value</Value>
                                   <Style>
                                     <FontFamily />
-                                    <FontSize>8pt</FontSize>
                                     <Color>#333333</Color>
                                   </Style>
                                 </TextRun>
@@ -2271,7 +2735,6 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
                                   <Value>=Fields!ID00.Value</Value>
                                   <Style>
                                     <FontFamily />
-                                    <FontSize>8pt</FontSize>
                                     <Color>#333333</Color>
                                   </Style>
                                 </TextRun>
@@ -2310,7 +2773,6 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
                                   <Value>=Fields!ID01.Value</Value>
                                   <Style>
                                     <FontFamily />
-                                    <FontSize>8pt</FontSize>
                                     <Color>#333333</Color>
                                   </Style>
                                 </TextRun>
@@ -2349,7 +2811,6 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
                                   <Value>=Fields!ID02.Value</Value>
                                   <Style>
                                     <FontFamily />
-                                    <FontSize>8pt</FontSize>
                                     <Color>#333333</Color>
                                   </Style>
                                 </TextRun>
@@ -2388,7 +2849,6 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
                                   <Value>=Fields!ID03.Value</Value>
                                   <Style>
                                     <FontFamily />
-                                    <FontSize>8pt</FontSize>
                                     <Color>#333333</Color>
                                   </Style>
                                 </TextRun>
@@ -2427,7 +2887,6 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
                                   <Value>=Fields!ID04.Value</Value>
                                   <Style>
                                     <FontFamily />
-                                    <FontSize>8pt</FontSize>
                                     <Color>#333333</Color>
                                   </Style>
                                 </TextRun>
@@ -2466,7 +2925,6 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
                                   <Value>=Fields!ID05.Value</Value>
                                   <Style>
                                     <FontFamily />
-                                    <FontSize>8pt</FontSize>
                                     <Color>#333333</Color>
                                   </Style>
                                 </TextRun>
@@ -2505,7 +2963,6 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
                                   <Value>=Fields!ID06.Value</Value>
                                   <Style>
                                     <FontFamily />
-                                    <FontSize>8pt</FontSize>
                                     <Color>#333333</Color>
                                   </Style>
                                 </TextRun>
@@ -2544,7 +3001,6 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
                                   <Value>=Fields!ID07.Value</Value>
                                   <Style>
                                     <FontFamily />
-                                    <FontSize>8pt</FontSize>
                                     <Color>#333333</Color>
                                   </Style>
                                 </TextRun>
@@ -2583,7 +3039,6 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
                                   <Value>=Fields!ID08.Value</Value>
                                   <Style>
                                     <FontFamily />
-                                    <FontSize>8pt</FontSize>
                                     <Color>#333333</Color>
                                   </Style>
                                 </TextRun>
@@ -2622,7 +3077,6 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
                                   <Value>=Fields!ID09.Value</Value>
                                   <Style>
                                     <FontFamily />
-                                    <FontSize>8pt</FontSize>
                                     <Color>#333333</Color>
                                   </Style>
                                 </TextRun>
@@ -2661,7 +3115,6 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
                                   <Value>=Fields!ID10.Value</Value>
                                   <Style>
                                     <FontFamily />
-                                    <FontSize>8pt</FontSize>
                                     <Color>#333333</Color>
                                   </Style>
                                 </TextRun>
@@ -2700,7 +3153,6 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
                                   <Value>=Fields!ID11.Value</Value>
                                   <Style>
                                     <FontFamily />
-                                    <FontSize>8pt</FontSize>
                                     <Color>#333333</Color>
                                   </Style>
                                 </TextRun>
@@ -2734,7 +3186,106 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox260">
+                        <Textbox Name="Textbox256">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style>
+                                    <FontFamily />
+                                    <Color>#333333</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox256</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                            </Border>
+                            <BackgroundColor>WhiteSmoke</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox257">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style>
+                                    <FontFamily />
+                                    <Color>#333333</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox257</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                            </Border>
+                            <BackgroundColor>WhiteSmoke</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox258">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style>
+                                    <FontFamily />
+                                    <Color>#333333</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox258</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                            </Border>
+                            <BackgroundColor>WhiteSmoke</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox259">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
@@ -2791,7 +3342,7 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
                                   <Value>=Fields!subcat3_des.Value</Value>
                                   <Style>
                                     <FontFamily />
-                                    <FontSize>7pt</FontSize>
+                                    <FontSize>8.5pt</FontSize>
                                     <Color>#333333</Color>
                                   </Style>
                                 </TextRun>
@@ -2866,7 +3417,6 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
                                   <Value>=sum(cint(iif(Fields!tcant.Value="", 0, Fields!tcant.Value)))</Value>
                                   <Style>
                                     <FontFamily />
-                                    <FontSize>8pt</FontSize>
                                     <Color>#333333</Color>
                                     <Language>es-PE</Language>
                                   </Style>
@@ -2906,7 +3456,6 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
                                   <Value>=sum(cdec(replace(Fields!valor.Value,".",",")))</Value>
                                   <Style>
                                     <FontFamily />
-                                    <FontSize>8pt</FontSize>
                                     <Format>#,0.00;(#,0.00)</Format>
                                     <Color>#333333</Color>
                                     <Language>es-PE</Language>
@@ -3436,6 +3985,72 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
+                        <Textbox Name="Textbox235">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style>
+                                    <FontFamily />
+                                    <Color>#333333</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox235</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                            </Border>
+                            <BackgroundColor>WhiteSmoke</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox236">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style>
+                                    <FontFamily />
+                                    <Color>#333333</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox236</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                            </Border>
+                            <BackgroundColor>WhiteSmoke</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
                         <Textbox Name="Textbox237">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
@@ -3469,6 +4084,39 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
+                        <Textbox Name="cate3_des">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style>
+                                    <FontFamily />
+                                    <Color>#333333</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>cate3_des</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                            </Border>
+                            <BackgroundColor>WhiteSmoke</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
                         <Textbox Name="cate3_des1">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
@@ -3479,7 +4127,7 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
                                   <Value>=Fields!cate3_des.Value</Value>
                                   <Style>
                                     <FontFamily />
-                                    <FontSize>7pt</FontSize>
+                                    <FontSize>8.5pt</FontSize>
                                     <Color>#333333</Color>
                                   </Style>
                                 </TextRun>
@@ -3554,7 +4202,6 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
                                   <Value>=sum(cint(iif(Fields!tcant.Value="", 0, Fields!tcant.Value)))</Value>
                                   <Style>
                                     <FontFamily />
-                                    <FontSize>8pt</FontSize>
                                     <Color>#333333</Color>
                                     <Language>es-PE</Language>
                                   </Style>
@@ -3594,7 +4241,6 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
                                   <Value>=sum(cdec(replace(Fields!valor.Value,".",",")))</Value>
                                   <Style>
                                     <FontFamily />
-                                    <FontSize>8pt</FontSize>
                                     <Format>#,0.00;(#,0.00)</Format>
                                     <Color>#333333</Color>
                                     <Language>es-PE</Language>
@@ -4141,6 +4787,9 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
                 <TablixMember />
                 <TablixMember />
                 <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
               </TablixMembers>
             </TablixColumnHierarchy>
             <TablixRowHierarchy>
@@ -4237,18 +4886,20 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>DataPlanilla</DataSetName>
+            <Top>0.125in</Top>
+            <Left>0.50271cm</Left>
             <Height>1.70417in</Height>
-            <Width>7.26661in</Width>
+            <Width>11.17357in</Width>
             <Style />
           </Tablix>
         </ReportItems>
-        <Height>1.75916in</Height>
+        <Height>1.9675in</Height>
         <Style />
       </Body>
-      <Width>7.29854in</Width>
+      <Width>13.57979in</Width>
       <Page>
         <PageHeader>
-          <Height>1.19791in</Height>
+          <Height>1.01958in</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -4269,8 +4920,8 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox292</rd:DefaultName>
-              <Top>0.25in</Top>
-              <Left>6.57288in</Left>
+              <Top>0.07167in</Top>
+              <Left>10.69788in</Left>
               <Height>0.25in</Height>
               <Width>0.6875in</Width>
               <Style>
@@ -4302,8 +4953,8 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox292</rd:DefaultName>
-              <Top>0.5527in</Top>
-              <Left>6.57288in</Left>
+              <Top>0.37437in</Top>
+              <Left>10.69788in</Left>
               <Height>0.25in</Height>
               <Width>0.6875in</Width>
               <ZIndex>1</ZIndex>
@@ -4336,8 +4987,8 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox292</rd:DefaultName>
-              <Top>0.8027in</Top>
-              <Left>6.57288in</Left>
+              <Top>0.62437in</Top>
+              <Left>10.69788in</Left>
               <Height>0.25in</Height>
               <Width>0.6875in</Width>
               <ZIndex>2</ZIndex>
@@ -4368,8 +5019,8 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox295</rd:DefaultName>
-              <Top>0.25in</Top>
-              <Left>5.97792in</Left>
+              <Top>0.07167in</Top>
+              <Left>10.10292in</Left>
               <Height>0.25in</Height>
               <Width>0.58107in</Width>
               <ZIndex>3</ZIndex>
@@ -4398,8 +5049,8 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox295</rd:DefaultName>
-              <Top>0.5527in</Top>
-              <Left>5.97792in</Left>
+              <Top>0.37437in</Top>
+              <Left>10.10292in</Left>
               <Height>0.25in</Height>
               <Width>0.58107in</Width>
               <ZIndex>4</ZIndex>
@@ -4428,8 +5079,8 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox295</rd:DefaultName>
-              <Top>0.8027in</Top>
-              <Left>5.97792in</Left>
+              <Top>0.62437in</Top>
+              <Left>10.10292in</Left>
               <Height>0.25in</Height>
               <Width>0.58107in</Width>
               <ZIndex>5</ZIndex>
@@ -4453,7 +5104,7 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
                       <Value>STOCK DE ARTICULOS EN GENERAL DE MERCADERIA STANDAR</Value>
                       <Style>
                         <FontFamily>Segoe UI Light</FontFamily>
-                        <FontSize>9pt</FontSize>
+                        <FontSize>12pt</FontSize>
                         <FontWeight>Bold</FontWeight>
                         <TextDecoration>None</TextDecoration>
                       </Style>
@@ -4465,10 +5116,10 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>textbox1</rd:DefaultName>
-              <Top>0.54027cm</Top>
-              <Left>4.85515cm</Left>
+              <Top>0.40481cm</Top>
+              <Left>10.25265cm</Left>
               <Height>0.30812in</Height>
-              <Width>4.03763in</Width>
+              <Width>5.16142in</Width>
               <ZIndex>6</ZIndex>
               <Style>
                 <PaddingLeft>2pt</PaddingLeft>
@@ -4485,17 +5136,15 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
                   <TextRuns>
                     <TextRun>
                       <Value>=First(Fields!des_entid.Value, "DataPlanilla")</Value>
-                      <Style>
-                        <FontSize>8pt</FontSize>
-                      </Style>
+                      <Style />
                     </TextRun>
                   </TextRuns>
                   <Style />
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>des_entid</rd:DefaultName>
-              <Top>0.6777in</Top>
-              <Left>0.155in</Left>
+              <Top>0.49937in</Top>
+              <Left>1.405in</Left>
               <Height>0.25in</Height>
               <Width>1.94792in</Width>
               <ZIndex>7</ZIndex>
@@ -4517,17 +5166,15 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
                   <TextRuns>
                     <TextRun>
                       <Value>=First(Fields!store_name.Value, "DataPlanilla")</Value>
-                      <Style>
-                        <FontSize>8pt</FontSize>
-                      </Style>
+                      <Style />
                     </TextRun>
                   </TextRuns>
                   <Style />
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>store_name</rd:DefaultName>
-              <Top>0.39583in</Top>
-              <Left>0.155in</Left>
+              <Top>0.2175in</Top>
+              <Left>1.405in</Left>
               <Height>0.25in</Height>
               <Width>1.94792in</Width>
               <ZIndex>8</ZIndex>
@@ -4549,17 +5196,15 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
                   <TextRuns>
                     <TextRun>
                       <Value>=First(Fields!des_entid.Value, "DataPlanilla")</Value>
-                      <Style>
-                        <FontSize>8pt</FontSize>
-                      </Style>
+                      <Style />
                     </TextRun>
                   </TextRuns>
                   <Style />
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>des_entid</rd:DefaultName>
-              <Top>0.48326in</Top>
-              <Left>3.19093in</Left>
+              <Top>0.42993in</Top>
+              <Left>5.94093in</Left>
               <Height>0.25in</Height>
               <Width>1.94792in</Width>
               <ZIndex>9</ZIndex>
@@ -4581,17 +5226,15 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
                   <TextRuns>
                     <TextRun>
                       <Value>TIENDA:</Value>
-                      <Style>
-                        <FontSize>8pt</FontSize>
-                      </Style>
+                      <Style />
                     </TextRun>
                   </TextRuns>
                   <Style />
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox313</rd:DefaultName>
-              <Top>0.48326in</Top>
-              <Left>2.57984in</Left>
+              <Top>0.42993in</Top>
+              <Left>5.32984in</Left>
               <Height>0.25in</Height>
               <Width>0.58333in</Width>
               <ZIndex>10</ZIndex>
@@ -4613,17 +5256,15 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
                   <TextRuns>
                     <TextRun>
                       <Value>=First(Fields!semana_str.Value, "DataPlanilla")</Value>
-                      <Style>
-                        <FontSize>8pt</FontSize>
-                      </Style>
+                      <Style />
                     </TextRun>
                   </TextRuns>
                   <Style />
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>semana_str</rd:DefaultName>
-              <Top>0.69791in</Top>
-              <Left>2.57984in</Left>
+              <Top>0.64458in</Top>
+              <Left>5.32984in</Left>
               <Height>0.25in</Height>
               <Width>2.99427in</Width>
               <ZIndex>11</ZIndex>
@@ -4637,20 +5278,6 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
                 <PaddingBottom>2pt</PaddingBottom>
               </Style>
             </Textbox>
-            <Image Name="Image1">
-              <Source>Embedded</Source>
-              <Value>batalogo</Value>
-              <Sizing>FitProportional</Sizing>
-              <Left>0.3175cm</Left>
-              <Height>0.38542in</Height>
-              <Width>1.17833in</Width>
-              <ZIndex>12</ZIndex>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-              </Style>
-            </Image>
           </ReportItems>
           <Style>
             <Border>
@@ -4659,12 +5286,12 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
             <BackgroundColor>WhiteSmoke</BackgroundColor>
           </Style>
         </PageHeader>
-        <PageHeight>11.69in</PageHeight>
-        <PageWidth>8.27in</PageWidth>
-        <LeftMargin>0.2in</LeftMargin>
-        <RightMargin>0.2in</RightMargin>
-        <TopMargin>0.2in</TopMargin>
-        <BottomMargin>0.2in</BottomMargin>
+        <PageHeight>8.27in</PageHeight>
+        <PageWidth>11.69in</PageWidth>
+        <LeftMargin>1in</LeftMargin>
+        <RightMargin>1in</RightMargin>
+        <TopMargin>1in</TopMargin>
+        <BottomMargin>1in</BottomMargin>
         <Style />
       </Page>
     </ReportSection>
@@ -4759,18 +5386,6 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
       </CellDefinitions>
     </GridLayoutDefinition>
   </ReportParametersLayout>
-  <EmbeddedImages>
-    <EmbeddedImage Name="batalogo">
-      <MIMEType>image/jpeg</MIMEType>
-      <ImageData>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</ImageData>
-    </EmbeddedImage>
-  </EmbeddedImages>
   <Language>es-ES</Language>
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
   <rd:ReportUnitType>Inch</rd:ReportUnitType>

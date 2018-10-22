@@ -117,7 +117,7 @@
                   <Width>0.3in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.3in</Width>
+                  <Width>0.28in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -712,6 +712,7 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
+                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                   </TablixCells>
@@ -751,19 +752,20 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>DataSet1</DataSetName>
-            <Top>0.055in</Top>
-            <Left>0.3175cm</Left>
+            <Left>0.04in</Left>
             <Height>0.21in</Height>
-            <Width>3.88in</Width>
+            <Width>3.86in</Width>
             <Style>
               <BackgroundColor>WhiteSmoke</BackgroundColor>
             </Style>
           </Tablix>
         </ReportItems>
-        <Height>0.33917in</Height>
-        <Style />
+        <Height>0.21in</Height>
+        <Style>
+          <BackgroundColor>WhiteSmoke</BackgroundColor>
+        </Style>
       </Body>
-      <Width>4.125in</Width>
+      <Width>3.93208in</Width>
       <Page>
         <LeftMargin>1in</LeftMargin>
         <RightMargin>1in</RightMargin>

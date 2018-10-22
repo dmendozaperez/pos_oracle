@@ -4238,7 +4238,7 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
             </TablixRowHierarchy>
             <DataSetName>DataPlanilla</DataSetName>
             <Height>1.70417in</Height>
-            <Width>7.26662in</Width>
+            <Width>7.26661in</Width>
             <Style />
           </Tablix>
         </ReportItems>

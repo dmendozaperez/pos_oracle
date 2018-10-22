@@ -32,6 +32,9 @@ namespace ServiceWinTransaction
 
         private Int32 _valida_service = 0;
         private Int32 _valida_serviceDBF = 0;
+
+        private Int32 _valida_ven_tmpDBF = 0;
+
         //private Int32 _valida_serviceScactcoDBF = 0;
 
         private Int32 _valida_serviceposlog = 0;
@@ -301,10 +304,10 @@ namespace ServiceWinTransaction
             Int32 _valor = 0;
             try
             {
-                if (_valida_serviceDBF == 0)
+                if (_valida_ven_tmpDBF == 0)
                 {
                     _valor = 1;
-                    _valida_serviceDBF = 1;
+                    _valida_ven_tmpDBF = 1;
                     string _valida_proc_dbf = @"D:\venta.txt";
                     Boolean proceso_insertDBF = false;
 
@@ -317,11 +320,11 @@ namespace ServiceWinTransaction
                     if (proceso_insertDBF)
                     {
                         _valor = 1;
-                        string _error = "";                      
-                            _valida_serviceDBF = 1;                        
+                        string _error = "";
+                        _valida_ven_tmpDBF = 1;                        
                             Basico ejecuta_procesos =new Basico();                     
-                            ejecuta_procesos.procesar_dbf_pos(ref _error);                        
-                            _valida_serviceDBF = 0;
+                            ejecuta_procesos.procesar_dbf_pos(ref _error);
+                        _valida_ven_tmpDBF = 0;
                    
                     }
                }
@@ -330,11 +333,11 @@ namespace ServiceWinTransaction
             catch (Exception exc)
             {
                 //string errSwc = "";
-                _valida_serviceDBF = 0;
+                _valida_ven_tmpDBF = 0;
             }
             if (_valor == 1)
             {
-                _valida_serviceDBF = 0;
+                _valida_ven_tmpDBF = 0;
             }
         }
         void tmservicioposlog_Elapsed(object sender, ElapsedEventArgs e)

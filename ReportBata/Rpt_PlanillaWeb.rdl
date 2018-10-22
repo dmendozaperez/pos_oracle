@@ -18,16 +18,16 @@
             <Value>=Parameters!cod_tda.Value</Value>
           </QueryParameter>
           <QueryParameter Name="@Grupo">
-            <Value>=Join(Parameters!Grupo.Value,",")</Value>
+            <Value>=Parameters!Grupo.Value</Value>
           </QueryParameter>
           <QueryParameter Name="@Categoria">
-            <Value>=Join(Parameters!Categoria.Value,",")</Value>
+            <Value>=Parameters!Categoria.Value</Value>
           </QueryParameter>
           <QueryParameter Name="@SubCategoria">
-            <Value>=Join(Parameters!SubCategoria.Value,",")</Value>
+            <Value>=Parameters!SubCategoria.Value</Value>
           </QueryParameter>
           <QueryParameter Name="@Estado">
-            <Value>=Join(Parameters!Estado.Value,",")</Value>
+            <Value>=Parameters!Estado.Value</Value>
           </QueryParameter>
         </QueryParameters>
         <CommandType>StoredProcedure</CommandType>
@@ -294,6 +294,31 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
         </Field>
         <Field Name="des_campo2">
           <DataField>des_campo2</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="DsPrueba">
+      <Query>
+        <DataSourceName>cnBdPos</DataSourceName>
+        <CommandText>SELECT        cod_cate3, des_cate3, cod_line3, flg_tx
+FROM            TCATEGORI3</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="cod_cate3">
+          <DataField>cod_cate3</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="des_cate3">
+          <DataField>des_cate3</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="cod_line3">
+          <DataField>cod_line3</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="flg_tx">
+          <DataField>flg_tx</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
@@ -4237,15 +4262,16 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>DataPlanilla</DataSetName>
+            <Left>5.3975cm</Left>
             <Height>1.70417in</Height>
             <Width>7.26662in</Width>
             <Style />
           </Tablix>
         </ReportItems>
-        <Height>1.75916in</Height>
+        <Height>2.42583in</Height>
         <Style />
       </Body>
-      <Width>7.29854in</Width>
+      <Width>13.12146in</Width>
       <Page>
         <PageHeader>
           <Height>1.19791in</Height>
@@ -4270,7 +4296,7 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
               </Paragraphs>
               <rd:DefaultName>Textbox292</rd:DefaultName>
               <Top>0.25in</Top>
-              <Left>6.57288in</Left>
+              <Left>8.57288in</Left>
               <Height>0.25in</Height>
               <Width>0.6875in</Width>
               <Style>
@@ -4303,7 +4329,7 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
               </Paragraphs>
               <rd:DefaultName>Textbox292</rd:DefaultName>
               <Top>0.5527in</Top>
-              <Left>6.57288in</Left>
+              <Left>8.57288in</Left>
               <Height>0.25in</Height>
               <Width>0.6875in</Width>
               <ZIndex>1</ZIndex>
@@ -4337,7 +4363,7 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
               </Paragraphs>
               <rd:DefaultName>Textbox292</rd:DefaultName>
               <Top>0.8027in</Top>
-              <Left>6.57288in</Left>
+              <Left>8.57288in</Left>
               <Height>0.25in</Height>
               <Width>0.6875in</Width>
               <ZIndex>2</ZIndex>
@@ -4369,7 +4395,7 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
               </Paragraphs>
               <rd:DefaultName>Textbox295</rd:DefaultName>
               <Top>0.25in</Top>
-              <Left>5.97792in</Left>
+              <Left>7.97792in</Left>
               <Height>0.25in</Height>
               <Width>0.58107in</Width>
               <ZIndex>3</ZIndex>
@@ -4399,7 +4425,7 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
               </Paragraphs>
               <rd:DefaultName>Textbox295</rd:DefaultName>
               <Top>0.5527in</Top>
-              <Left>5.97792in</Left>
+              <Left>7.97792in</Left>
               <Height>0.25in</Height>
               <Width>0.58107in</Width>
               <ZIndex>4</ZIndex>
@@ -4429,7 +4455,7 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
               </Paragraphs>
               <rd:DefaultName>Textbox295</rd:DefaultName>
               <Top>0.8027in</Top>
-              <Left>5.97792in</Left>
+              <Left>7.97792in</Left>
               <Height>0.25in</Height>
               <Width>0.58107in</Width>
               <ZIndex>5</ZIndex>
@@ -4466,7 +4492,7 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
               </Paragraphs>
               <rd:DefaultName>textbox1</rd:DefaultName>
               <Top>0.54027cm</Top>
-              <Left>4.85515cm</Left>
+              <Left>9.93515cm</Left>
               <Height>0.30812in</Height>
               <Width>4.03763in</Width>
               <ZIndex>6</ZIndex>
@@ -4495,7 +4521,7 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
               </Paragraphs>
               <rd:DefaultName>des_entid</rd:DefaultName>
               <Top>0.6777in</Top>
-              <Left>0.155in</Left>
+              <Left>2.155in</Left>
               <Height>0.25in</Height>
               <Width>1.94792in</Width>
               <ZIndex>7</ZIndex>
@@ -4527,7 +4553,7 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
               </Paragraphs>
               <rd:DefaultName>store_name</rd:DefaultName>
               <Top>0.39583in</Top>
-              <Left>0.155in</Left>
+              <Left>2.155in</Left>
               <Height>0.25in</Height>
               <Width>1.94792in</Width>
               <ZIndex>8</ZIndex>
@@ -4559,7 +4585,7 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
               </Paragraphs>
               <rd:DefaultName>des_entid</rd:DefaultName>
               <Top>0.48326in</Top>
-              <Left>3.19093in</Left>
+              <Left>5.19093in</Left>
               <Height>0.25in</Height>
               <Width>1.94792in</Width>
               <ZIndex>9</ZIndex>
@@ -4591,7 +4617,7 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
               </Paragraphs>
               <rd:DefaultName>Textbox313</rd:DefaultName>
               <Top>0.48326in</Top>
-              <Left>2.57984in</Left>
+              <Left>4.57984in</Left>
               <Height>0.25in</Height>
               <Width>0.58333in</Width>
               <ZIndex>10</ZIndex>
@@ -4623,7 +4649,7 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
               </Paragraphs>
               <rd:DefaultName>semana_str</rd:DefaultName>
               <Top>0.69791in</Top>
-              <Left>2.57984in</Left>
+              <Left>4.57984in</Left>
               <Height>0.25in</Height>
               <Width>2.99427in</Width>
               <ZIndex>11</ZIndex>
@@ -4641,7 +4667,7 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
               <Source>Embedded</Source>
               <Value>batalogo</Value>
               <Sizing>FitProportional</Sizing>
-              <Left>0.3175cm</Left>
+              <Left>5.3975cm</Left>
               <Height>0.38542in</Height>
               <Width>1.17833in</Width>
               <ZIndex>12</ZIndex>
@@ -4677,26 +4703,10 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
     <ReportParameter Name="Grupo">
       <DataType>String</DataType>
       <Prompt>Grupo</Prompt>
-      <ValidValues>
-        <DataSetReference>
-          <DataSetName>Grupo</DataSetName>
-          <ValueField>cod_line3</ValueField>
-          <LabelField>des_line3</LabelField>
-        </DataSetReference>
-      </ValidValues>
-      <MultiValue>true</MultiValue>
     </ReportParameter>
     <ReportParameter Name="Categoria">
       <DataType>String</DataType>
       <Prompt>Categoria</Prompt>
-      <ValidValues>
-        <DataSetReference>
-          <DataSetName>Categoria</DataSetName>
-          <ValueField>cod_cate3</ValueField>
-          <LabelField>des_cate3</LabelField>
-        </DataSetReference>
-      </ValidValues>
-      <MultiValue>true</MultiValue>
       <cl:ComponentMetadata>
         <cl:HideUpdateNotifications>true</cl:HideUpdateNotifications>
       </cl:ComponentMetadata>
@@ -4704,26 +4714,10 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
     <ReportParameter Name="SubCategoria">
       <DataType>String</DataType>
       <Prompt>Sub-Categoria</Prompt>
-      <ValidValues>
-        <DataSetReference>
-          <DataSetName>SubCategoria</DataSetName>
-          <ValueField>cod_subc3</ValueField>
-          <LabelField>des_subc3</LabelField>
-        </DataSetReference>
-      </ValidValues>
-      <MultiValue>true</MultiValue>
     </ReportParameter>
     <ReportParameter Name="Estado">
       <DataType>String</DataType>
       <Prompt>Estado</Prompt>
-      <ValidValues>
-        <DataSetReference>
-          <DataSetName>Estado</DataSetName>
-          <ValueField>des_campo1</ValueField>
-          <LabelField>des_campo2</LabelField>
-        </DataSetReference>
-      </ValidValues>
-      <MultiValue>true</MultiValue>
     </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>

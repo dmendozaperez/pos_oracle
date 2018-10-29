@@ -89,11 +89,11 @@ namespace InterfaceWPF
             dwtiendatrans.Focus();
 
             /*transpaso de almacen a tienda*/
-            dwtdaOrigen.ItemsSource = _tienda.get_tienda("PE", true);
-            dwtdaOrigen.DisplayMember = "des_entid";
-            dwtdaOrigen.ValueMember = "cod_entid";
-            dwtdaOrigen.SelectedIndex = 0;
-            dwtdaOrigen.Focus();
+            //dwtdaOrigen.ItemsSource = _tienda.get_tienda("PE", true);
+            //dwtdaOrigen.DisplayMember = "des_entid";
+            //dwtdaOrigen.ValueMember = "cod_entid";
+            //dwtdaOrigen.SelectedIndex = 0;
+            //dwtdaOrigen.Focus();
 
             dwtiendatrans1.ItemsSource = _tienda.get_tienda("PE",true);
             dwtiendatrans1.DisplayMember = "des_entid";
@@ -1599,7 +1599,7 @@ namespace InterfaceWPF
                 ProgressAlert = await this.ShowProgressAsync(Ent_Msg.msgcargando, "Consultando Guias de Transpasos");  //show message
                 ProgressAlert.SetIndeterminate();
                 string _cod_tda = dwtiendatrans1.EditValue.ToString();
-                string _nro_Doc = Docu.Text;
+                string _nro_Doc = "";// Docu.Text;
                 DateTime _fec_ini =Convert.ToDateTime(dtpdesde.Text);
                 DateTime _fec_fin = Convert.ToDateTime(dtphasta.Text);
                 con_guia = new Dat_GuiasDespacho();                

@@ -13,6 +13,22 @@
       <Name>Rpt_EstadoStock.rdl</Name>
       <FullPath>Rpt_EstadoStock.rdl</FullPath>
     </ProjectItem>
+    <ProjectItem>
+      <Name>Rpt_Planilla.rdl</Name>
+      <FullPath>Rpt_Planilla.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Rpt_Planilla2.rdl</Name>
+      <FullPath>Rpt_Planilla2.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Rpt_PlanillaWeb.rdl</Name>
+      <FullPath>Rpt_PlanillaWeb.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Rpt_Rmedida.rdl</Name>
+      <FullPath>Rpt_Rmedida.rdl</FullPath>
+    </ProjectItem>
   </Reports>
   <Configurations>
     <Configuration>
@@ -28,7 +44,7 @@
         <TargetDatasetFolder>Conjuntos de datos</TargetDatasetFolder>
         <OverwriteDatasets>true</OverwriteDatasets>
         <TargetReportPartFolder>Elementos de informe</TargetReportPartFolder>
-        <StartItem>Rpt_EstadoStock.rdl</StartItem>
+        <StartItem>Rpt_PlanillaWeb.rdl</StartItem>
       </Options>
     </Configuration>
     <Configuration>
@@ -49,12 +65,13 @@
       <Platform>Win32</Platform>
       <Options>
         <OutputPath>bin\Release</OutputPath>
-        <TargetServerVersion>SSRS2016</TargetServerVersion>
-        <TargetServerURL>http://localhost/reportserver</TargetServerURL>
+        <TargetServerVersion>SSRS2008R2</TargetServerVersion>
+        <TargetServerURL>http://posperu.bgr.pe/BataRptSrv</TargetServerURL>
         <TargetFolder>ReportBata</TargetFolder>
-        <TargetDataSourceFolder>Orígenes de datos</TargetDataSourceFolder>
+        <TargetDataSourceFolder>BataPOS</TargetDataSourceFolder>
         <TargetDatasetFolder>Conjuntos de datos</TargetDatasetFolder>
         <TargetReportPartFolder>Elementos de informe</TargetReportPartFolder>
+        <StartItem>Rpt_PlanillaWeb.rdl</StartItem>
       </Options>
     </Configuration>
   </Configurations>

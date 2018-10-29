@@ -340,7 +340,8 @@
 		<col def="S0">ISDotNetInstallerArgsCommit</col>
 		<col def="S0">ISDotNetInstallerArgsUninstall</col>
 		<col def="S0">ISDotNetInstallerArgsRollback</col>
-		<row><td>ServiceWinTransaction.Resultado_principal</td><td>{AB52204D-648B-4537-BDE2-9DCBE13A2D90}</td><td>INSTALLDIR</td><td>2</td><td/><td>servicewintransaction.result</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>ServiceWinTransaction.Resultado_principal</td><td>{FD24BF76-1DB3-4F83-A566-14149AFA8CCD}</td><td>INSTALLDIR</td><td>2</td><td/><td>servicewintransaction.result</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>WinSCP.exe</td><td>{6466473D-F777-4C3E-9AED-61FE45876571}</td><td>INSTALLDIR</td><td>2</td><td/><td>winscp.exe</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 	</table>
 
 	<table name="Condition">
@@ -1050,6 +1051,7 @@
 		<col key="yes" def="s72">Directory_</col>
 		<col key="yes" def="s72">Component_</col>
 		<row><td>INSTALLDIR</td><td>ServiceWinTransaction.Resultado_principal</td></row>
+		<row><td>INSTALLDIR</td><td>WinSCP.exe</td></row>
 	</table>
 
 	<table name="CustomAction">
@@ -1174,6 +1176,8 @@
 		<row><td>USERPROFILE</td><td>TARGETDIR</td><td>.:USERPR~1|UserProfile</td><td/><td>0</td><td/></row>
 		<row><td>WindowsFolder</td><td>TARGETDIR</td><td>.:Windows</td><td/><td>0</td><td/></row>
 		<row><td>WindowsVolume</td><td>TARGETDIR</td><td>.:WinRoot</td><td/><td>0</td><td/></row>
+		<row><td>batape_1_bata_peru</td><td>ProgramMenuFolder</td><td>BATAPE~1|Bata Peru</td><td/><td>1</td><td/></row>
+		<row><td>servic_1_service_transaction__bata_</td><td>batape_1_bata_peru</td><td>SERVIC~1|Service Transaction (Bata)</td><td/><td>1</td><td/></row>
 	</table>
 
 	<table name="DrLocator">
@@ -1866,6 +1870,7 @@
 		<col key="yes" def="s38">Feature_</col>
 		<col key="yes" def="s72">Component_</col>
 		<row><td>AlwaysInstall</td><td>ServiceWinTransaction.Resultado_principal</td></row>
+		<row><td>AlwaysInstall</td><td>WinSCP.exe</td></row>
 	</table>
 
 	<table name="File">
@@ -1881,6 +1886,7 @@
 		<col def="I4">ISAttributes</col>
 		<col def="S72">ISComponentSubFolder_</col>
 		<row><td>servicewintransaction.result</td><td>ServiceWinTransaction.Resultado_principal</td><td>ServiceWinTransaction.Resultado principal</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;ServiceWinTransaction&gt;|Built</td><td>3</td><td/></row>
+		<row><td>winscp.exe</td><td>WinSCP.exe</td><td>WinSCP.exe</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Fuentes\POS\IntegracionPos_Peru\IntegracionPos_Peru\ServiceWinTransaction\bin\Debug\WinSCP.exe</td><td>1</td><td/></row>
 	</table>
 
 	<table name="FileSFPCatalog">
@@ -2022,7 +2028,8 @@
 		<col def="S0">FTPLocation</col>
 		<col def="S0">HTTPLocation</col>
 		<col def="S0">Miscellaneous</col>
-		<row><td>ServiceWinTransaction.Resultado_principal</td><td/><td/><td>_93B37318_B75F_44B5_90FC_A1607A4F8ACA_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>ServiceWinTransaction.Resultado_principal</td><td/><td/><td>_A08C33A9_FFE7_4B0E_B641_54EBDF4D15EE_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>WinSCP.exe</td><td/><td/><td>_EEBC9E04_7B63_429C_9E4B_708080322188_FILTER</td><td/><td/><td/><td/></row>
 	</table>
 
 	<table name="ISCustomActionReference">
@@ -3426,6 +3433,10 @@
 		<row><td>IDS_PROGMSG_XML_UPDATE_FILE</td><td>1034</td><td>Actualizando archivo XML %s...</td><td>0</td><td/><td>2057744849</td></row>
 		<row><td>IDS_SETUPEXE_EXPIRE_MSG</td><td>1034</td><td>Esta configuración funcionará hasta %s. Se cerrará la instalación.</td><td>0</td><td/><td>2057744849</td></row>
 		<row><td>IDS_SETUPEXE_LAUNCH_COND_E</td><td>1034</td><td>Esta configuración se creó con una versión de evaluación de InstallShield y solo se puede iniciar desde el archivo setup.exe.</td><td>0</td><td/><td>2057744849</td></row>
+		<row><td>IDS_SHORTCUT_DISPLAY_NAME1</td><td>1033</td><td/><td>0</td><td/><td>2099661748</td></row>
+		<row><td>IDS_SHORTCUT_DISPLAY_NAME1</td><td>1034</td><td>LAUNCH~1.EXE|Launch WinSCP.exe</td><td>0</td><td/><td>2099661748</td></row>
+		<row><td>IDS_SHORTCUT_DISPLAY_NAME2</td><td>1033</td><td/><td>0</td><td/><td>2099680180</td></row>
+		<row><td>IDS_SHORTCUT_DISPLAY_NAME2</td><td>1034</td><td>LAUNCH~1.EXE|Launch WinSCP.exe</td><td>0</td><td/><td>2099680180</td></row>
 		<row><td>IDS_SQLBROWSE_INTRO</td><td>1034</td><td>Seleccione el servidor de base de datos de destino en la lista de servidores que aparece a continuación.</td><td>0</td><td/><td>2057744849</td></row>
 		<row><td>IDS_SQLBROWSE_INTRO_DB</td><td>1034</td><td>En la lista de nombres de catálogo siguiente, seleccione el catálogo de base de datos de destino.</td><td>0</td><td/><td>2057744849</td></row>
 		<row><td>IDS_SQLBROWSE_INTRO_TEMPLATE</td><td>1034</td><td>[IS_SQLBROWSE_INTRO]</td><td>0</td><td/><td>2057744849</td></row>
@@ -3715,6 +3726,10 @@
 		<row><td>IDS__TargetReq_DESC_RAM</td><td>1034</td><td>La cantidad de RAM no es la adecuada para ejecutar [ProductName].</td><td>0</td><td/><td>2057744849</td></row>
 		<row><td>IDS__TargetReq_DESC_RESOLUTION</td><td>1034</td><td>La resolución de pantalla no es la adecuada para ejecutar [ProductName].</td><td>0</td><td/><td>2057744849</td></row>
 		<row><td>ID_STRING1</td><td>1034</td><td>http://www.BataPeru.com</td><td>0</td><td/><td>2057744849</td></row>
+		<row><td>ID_STRING10</td><td>1033</td><td>Service Transaction (Bata)</td><td>0</td><td/><td>2099686100</td></row>
+		<row><td>ID_STRING10</td><td>1034</td><td>Service Transaction (Bata)</td><td>0</td><td/><td>2099686100</td></row>
+		<row><td>ID_STRING11</td><td>1033</td><td>Service Transaction (Bata)</td><td>0</td><td/><td>2099698388</td></row>
+		<row><td>ID_STRING11</td><td>1034</td><td>Service Transaction (Bata)</td><td>0</td><td/><td>2099698388</td></row>
 		<row><td>ID_STRING2</td><td>1034</td><td>Bata Peru</td><td>0</td><td/><td>2057744849</td></row>
 		<row><td>ID_STRING3</td><td>1033</td><td/><td>0</td><td/><td>2057734641</td></row>
 		<row><td>ID_STRING3</td><td>1034</td><td/><td>0</td><td/><td>2057734641</td></row>
@@ -3844,6 +3859,8 @@
 		<col def="S255">ISBuildSourcePath</col>
 		<col def="I2">ISIconIndex</col>
 		<row><td>ARPPRODUCTICON.exe</td><td/><td>&lt;ISProductFolder&gt;\redist\Language Independent\OS Independent\setupicon.ico</td><td>0</td></row>
+		<row><td>WinSCP.exe_7922D6BC740347D8A8C8C0B00249572D.exe</td><td/><td>D:\Fuentes\POS\IntegracionPos_Peru\IntegracionPos_Peru\ServiceWinTransaction\bin\Debug\WinSCP.exe</td><td>0</td></row>
+		<row><td>WinSCP.exe_7C20372EFC5449D5AB769E62034B325C.exe</td><td/><td>D:\Fuentes\POS\IntegracionPos_Peru\IntegracionPos_Peru\ServiceWinTransaction\bin\Debug\WinSCP.exe</td><td>0</td></row>
 	</table>
 
 	<table name="IniFile">
@@ -4430,6 +4447,7 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<col def="L255">FileName</col>
 		<col def="s72">DirProperty</col>
 		<col def="i2">InstallMode</col>
+		<row><td>WinSCP.exe</td><td>WinSCP.exe</td><td/><td>servic_1_service_transaction__bata_</td><td>2</td></row>
 	</table>
 
 	<table name="RemoveIniFile">
@@ -4494,7 +4512,7 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<col def="S255">Arguments</col>
 		<col def="s72">Component_</col>
 		<col def="L255">Description</col>
-		<row><td>NewServiceInstall1</td><td>Service Transaction (Bata)</td><td>##ID_STRING8##</td><td>16</td><td>2</td><td>1</td><td/><td/><td/><td/><td/><td>ServiceWinTransaction.Resultado_principal</td><td>##ID_STRING9##</td></row>
+		<row><td>NewServiceInstall1</td><td>Service Transaction (Bata)</td><td>##ID_STRING10##</td><td>16</td><td>2</td><td>1</td><td/><td/><td/><td/><td/><td>ServiceWinTransaction.Resultado_principal</td><td>##ID_STRING11##</td></row>
 	</table>
 
 	<table name="Shortcut">
@@ -4517,6 +4535,7 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<col def="S255">ISComments</col>
 		<col def="S255">ISShortcutName</col>
 		<col def="I4">ISAttributes</col>
+		<row><td>WinSCP.exe</td><td>servic_1_service_transaction__bata_</td><td>##IDS_SHORTCUT_DISPLAY_NAME2##</td><td>WinSCP.exe</td><td>AlwaysInstall</td><td/><td/><td/><td>WinSCP.exe_7922D6BC740347D8A8C8C0B00249572D.exe</td><td>1</td><td>1</td><td>INSTALLDIR</td><td/><td/><td/><td/><td/><td/><td/></row>
 	</table>
 
 	<table name="Signature">

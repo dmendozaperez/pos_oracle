@@ -42,18 +42,25 @@ namespace CapaServicioWindows.Modular
                         string cod_tda = fila["tienda"].ToString();
                         DateTime fec_cie =Convert.ToDateTime(fila["fecha"]);
 
+
+
                         DataSet ds = proc_nov.GET_OBTENER_VENTA_XSTORE(cod_tda, fec_cie);
 
                         if (ds!=null)
                         { 
                             if (ds.Tables[0].Rows.Count>0)
-                            { 
+                            {
                                 tabla_FFACTC(ds.Tables[0]);
                                 tabla_FFACTD(ds.Tables[1]);
                                 tabla_FNOTAA(ds.Tables[2]);
                                 tabla_FSTKG(ds.Tables[3]);
                                 tabla_FCIERR(ds.Tables[4]);
                                 tabla_FFLASH(ds.Tables[5]);
+
+                                /*TABLA MOVIMIENTO*/
+                                tabla_FMC(ds.Tables[6]);
+                                tabla_FMD(ds.Tables[7]);
+                                /**/
 
                                 string archivo = "";
                                 byte[] file_bytes = null;
@@ -430,7 +437,6 @@ namespace CapaServicioWindows.Modular
                 throw;
             }
         }
-
         private void tabla_FFLASH(DataTable dt)
         {
             try
@@ -469,7 +475,119 @@ namespace CapaServicioWindows.Modular
                 throw;
             }
         }
+        private void tabla_FMC(DataTable dt)
+        {
+            try
+            {
+                string _path_envia = ruta_temp_DBF;
+                DBFNET FMC = new DBFNET();
+                FMC.tabla = "FMC";
+
+                FMC.addcol("v_proc", Tipo.Caracter, "1");
+                FMC.addcol("v_cfor", Tipo.Caracter, "2");
+                FMC.addcol("v_sfor", Tipo.Caracter, "4");
+                FMC.addcol("v_nfor", Tipo.Caracter, "8");
+                FMC.addcol("v_ffor", Tipo.Fecha);
+                FMC.addcol("v_mone", Tipo.Caracter, "2");
+                FMC.addcol("v_tasa", Tipo.Numerico, "14,4");
+                FMC.addcol("v_almo", Tipo.Caracter, "4");
+                FMC.addcol("v_almd", Tipo.Caracter, "4");
+                FMC.addcol("v_tane", Tipo.Caracter, "2");
+                FMC.addcol("v_anex", Tipo.Caracter, "8");
+                FMC.addcol("v_tdoc", Tipo.Caracter, "2");
+                FMC.addcol("v_tfor", Tipo.Caracter, "1");                                                                                               
+                
+                FMC.addcol("v_suna", Tipo.Caracter, "2");
+                FMC.addcol("v_sdoc", Tipo.Caracter, "4");
+                FMC.addcol("v_ndoc", Tipo.Caracter, "8");
+                FMC.addcol("v_fdoc", Tipo.Fecha);
+                FMC.addcol("v_tref", Tipo.Caracter, "2");
+                FMC.addcol("v_sref", Tipo.Caracter, "4");
+                FMC.addcol("v_nref", Tipo.Caracter, "8");
+                FMC.addcol("v_tipo", Tipo.Caracter, "1");
+                FMC.addcol("v_arti", Tipo.Caracter, "12");
+                FMC.addcol("v_regl", Tipo.Caracter, "4");
+                FMC.addcol("v_colo", Tipo.Caracter, "2");
+                FMC.addcol("v_cant", Tipo.Numerico, "14,4");
+                FMC.addcol("v_pres", Tipo.Numerico, "14,4");
+                FMC.addcol("v_pred", Tipo.Numerico, "14,4");
+                FMC.addcol("v_vvts", Tipo.Numerico, "14,4");
+                FMC.addcol("v_vvtd", Tipo.Numerico, "14,4");
+                FMC.addcol("v_auto", Tipo.Caracter, "10");
+                FMC.addcol("v_ptot", Tipo.Numerico, "14,4");
+                FMC.addcol("v_impr", Tipo.Caracter, "1");
+                FMC.addcol("v_cuse", Tipo.Caracter, "3");
+                FMC.addcol("v_muse", Tipo.Caracter, "3");
+                FMC.addcol("v_fcre",Tipo.Fecha);
+                FMC.addcol("v_fmod", Tipo.Fecha);
+                FMC.addcol("v_ftrx", Tipo.Fecha);
+                FMC.addcol("v_ctra", Tipo.Caracter, "30");
+                FMC.addcol("v_memo", Tipo.Caracter, "10");
+                FMC.addcol("v_motr", Tipo.Caracter, "2");
+                FMC.addcol("v_par1", Tipo.Caracter, "80");
+
+                FMC.addcol("v_par2", Tipo.Caracter, "80");
+                FMC.addcol("v_par3", Tipo.Caracter, "80");
+                FMC.addcol("v_lle1", Tipo.Caracter, "80");
+                FMC.addcol("v_lle2", Tipo.Caracter, "80");
+                FMC.addcol("v_lle3", Tipo.Caracter, "80");
+                FMC.addcol("v_tipe", Tipo.Caracter, "2");
+                FMC.addcol("v_ruc2", Tipo.Caracter, "15");
+                FMC.addcol("v_rzo2", Tipo.Caracter, "40");
 
 
+                FMC.creardbf(_path_envia);
+                FMC.Insertar_tabla(dt, _path_envia);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+        private void tabla_FMD(DataTable dt)
+        {
+            try
+            {
+                string _path_envia = ruta_temp_DBF;
+                DBFNET FMD = new DBFNET();
+                FMD.tabla = "FMD";
+
+                FMD.addcol("i_tfor", Tipo.Caracter, "1");
+                FMD.addcol("i_proc", Tipo.Caracter, "1");
+                FMD.addcol("i_cfor", Tipo.Caracter, "2");
+                FMD.addcol("i_sfor", Tipo.Caracter, "4");
+                FMD.addcol("i_nfor", Tipo.Caracter, "8");
+                FMD.addcol("i_tipo", Tipo.Caracter, "1");
+                FMD.addcol("i_arti", Tipo.Caracter, "12");
+                FMD.addcol("i_regl", Tipo.Caracter, "4");
+                FMD.addcol("i_colo", Tipo.Caracter, "2");
+                FMD.addcol("i_item", Tipo.Caracter, "3");
+                FMD.addcol("i_unic", Tipo.Caracter, "3");
+                FMD.addcol("i_equ1", Tipo.Numerico, "10,4");
+                FMD.addcol("i_unim", Tipo.Caracter, "3");
+                             
+                
+                FMD.addcol("i_canc", Tipo.Numerico, "14,4");
+                FMD.addcol("i_canm", Tipo.Numerico, "14,4");
+                FMD.addcol("i_pres", Tipo.Numerico, "14,4");
+                FMD.addcol("i_pred", Tipo.Numerico, "14,4");
+                FMD.addcol("i_vvts", Tipo.Numerico, "14,4");
+                FMD.addcol("i_vvtd", Tipo.Numerico, "14,4");
+                FMD.addcol("i_plis", Tipo.Numerico, "14,4");
+                FMD.addcol("i_ptot", Tipo.Numerico, "14,4");
+                FMD.addcol("i_impr", Tipo.Caracter, "1");
+                FMD.addcol("i_cuse", Tipo.Caracter, "3");
+                FMD.addcol("i_muse", Tipo.Caracter, "3");
+                FMD.addcol("i_fcre", Tipo.Fecha);
+                FMD.addcol("i_fmod", Tipo.Fecha);
+
+                FMD.creardbf(_path_envia);
+                FMD.Insertar_tabla(dt, _path_envia);
+            }
+            catch
+            {
+                throw;
+            }
+        }
     }
 }

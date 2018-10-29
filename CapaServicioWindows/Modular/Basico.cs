@@ -608,7 +608,7 @@ namespace CapaServicioWindows.Modular
             try
             {
                 datUtil = new Util();
-                string carpetatienda = datUtil.get_ruta_locationProcesa_dbf("SQL");
+                string carpetatienda = @"D:\TiendaPaq"; //datUtil.get_ruta_locationProcesa_dbf("SQL");
                 string carpetadbf = carpetatienda + "\\DBF";
                 string strCodTienda = "";
                 if (!Directory.Exists(@carpetatienda)) Directory.CreateDirectory(@carpetatienda);

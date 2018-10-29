@@ -47,6 +47,39 @@ namespace CapaServicioWindows.CapaDato.Venta
         
         }
 
+        public void procesar_fcacb_SQL(ref string error)
+        {
+            string sqlquery = "USP_INSERTAR_FCACB_FDECB";
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(ConexionSQL.conexion))
+                {
+                    try
+                    {
+                        if (cn.State == 0) cn.Open();
+                        using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                        {
+                            cmd.CommandTimeout = 0;
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+                    catch (Exception exc)
+                    {
+                        error += " " + exc.Message;
+
+                    }
+                    if (cn != null)
+                        if (cn.State == ConnectionState.Open) cn.Close();
+                }
+            }
+            catch (Exception exc)
+            {
+                error += " " + exc.Message;
+            }
+
+        }
+
         public string inserta_venta(string cod_tda,DataSet dsventa)
         {
             string sqlquery = "[USP_INSERTAR_VENTAS_TDA]";

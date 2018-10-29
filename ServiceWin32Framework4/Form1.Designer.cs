@@ -34,7 +34,8 @@
             this.btnenvio_nov = new System.Windows.Forms.Button();
             this.btnenviog = new System.Windows.Forms.Button();
             this.btnposlog = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.procesar_fcacb_SQL = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn_servicewin
@@ -94,7 +95,7 @@
             // btnposlog
             // 
             this.btnposlog.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnposlog.Location = new System.Drawing.Point(530, 80);
+            this.btnposlog.Location = new System.Drawing.Point(530, 32);
             this.btnposlog.Name = "btnposlog";
             this.btnposlog.Size = new System.Drawing.Size(166, 23);
             this.btnposlog.TabIndex = 9;
@@ -102,22 +103,33 @@
             this.btnposlog.UseVisualStyleBackColor = true;
             this.btnposlog.Click += new System.EventHandler(this.btnposlog_Click);
             // 
-            // button2
+            // procesar_fcacb_SQL
             // 
-            this.button2.Location = new System.Drawing.Point(384, 212);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(207, 37);
-            this.button2.TabIndex = 10;
-            this.button2.Text = "ENVIO_GUIAS_TOXSTORE";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.procesar_fcacb_SQL.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.procesar_fcacb_SQL.Location = new System.Drawing.Point(505, 200);
+            this.procesar_fcacb_SQL.Name = "procesar_fcacb_SQL";
+            this.procesar_fcacb_SQL.Size = new System.Drawing.Size(207, 37);
+            this.procesar_fcacb_SQL.TabIndex = 10;
+            this.procesar_fcacb_SQL.Text = "procesar_fcacb_SQL";
+            this.procesar_fcacb_SQL.UseVisualStyleBackColor = true;
+            this.procesar_fcacb_SQL.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(530, 95);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(152, 23);
+            this.button3.TabIndex = 11;
+            this.button3.Text = "button3";
+            this.button3.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(744, 261);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.procesar_fcacb_SQL);
             this.Controls.Add(this.btnposlog);
             this.Controls.Add(this.btnenviog);
             this.Controls.Add(this.btnenvio_nov);
@@ -138,7 +150,8 @@
         private System.Windows.Forms.Button btnenvio_nov;
         private System.Windows.Forms.Button btnenviog;
         private System.Windows.Forms.Button btnposlog;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button procesar_fcacb_SQL;
+        private System.Windows.Forms.Button button3;
     }
 }
 

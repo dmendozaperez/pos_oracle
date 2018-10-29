@@ -69,6 +69,7 @@ namespace ServiceWinTransaction
 
         }
 
+        #region<GUIAS>
         void tmservicio_GuiaToXstore_Elapsed(object sender, ElapsedEventArgs e)
         {
             Int32 _valor = 0;
@@ -109,8 +110,9 @@ namespace ServiceWinTransaction
                 _valida_serviceGuiaToXstore = 0;
             }
         }
+        #endregion
 
-
+        #region<ENVIO DE PAQUETES>
         void tmservicio_trans_Elapsed(object sender, ElapsedEventArgs e)
         {
             Int32 _valor = 0;
@@ -139,7 +141,7 @@ namespace ServiceWinTransaction
                         proc_nov.procesos_novell(ref _error);
                         //Basico ejecuta_procesos = new Basico();
                         //ejecuta_procesos.procesar_dbf_pos(ref _error);
-                        _valida_serviceDBF = 0;
+                        _valida_service_trans = 0;
 
                     }
                 }
@@ -155,7 +157,9 @@ namespace ServiceWinTransaction
                 _valida_service_trans = 0;
             }
         }
+        #endregion
 
+        #region<METODO DE ENVIO DE VENTAS>
         void tmpServicio_Elapsed(object sender, ElapsedEventArgs e)
         {
             //string varchivov = "c://valida_hash.txt";
@@ -209,8 +213,14 @@ namespace ServiceWinTransaction
                         Dat_Venta ejecuta_proc_venta = null;
                         ejecuta_proc_venta = new Dat_Venta();
                         ejecuta_proc_venta.procesar_ventas_SQL(ref _error_ws);
+
+                        #region<PROCESAMIENTO DE FCACB Y FDECB>
+                        ejecuta_proc_venta.procesar_fcacb_SQL(ref _error_ws);
+                        #endregion
                     }
                     #endregion
+
+
 
                     _valida_service = 0;
 
@@ -256,47 +266,47 @@ namespace ServiceWinTransaction
 
 
         }
+        #endregion
+        //void tmpServicioVentaXstore_Elapsed(object sender, ElapsedEventArgs e)
+        //{
+        //    Int32 _valor = 0;
+        //    try
+        //    {
+        //        if (_valida_serviceVentaXstore == 0)
+        //        {
+        //            _valor = 1;
+        //            _valida_serviceVentaXstore = 1;
+        //            string _valida_proc_venXstore = @"D:\venta.txt";
+        //            Boolean proceso_ventaXSTORE = false;
 
-        void tmpServicioVentaXstore_Elapsed(object sender, ElapsedEventArgs e)
-        {
-            Int32 _valor = 0;
-            try
-            {
-                if (_valida_serviceVentaXstore == 0)
-                {
-                    _valor = 1;
-                    _valida_serviceVentaXstore = 1;
-                    string _valida_proc_venXstore = @"D:\venta.txt";
-                    Boolean proceso_ventaXSTORE = false;
+        //            if (File.Exists(_valida_proc_venXstore)) proceso_ventaXSTORE = true;
 
-                    if (File.Exists(_valida_proc_venXstore)) proceso_ventaXSTORE = true;
+        //            string _valida_proc_guiaToXstore = @"D:\XSTORE\proc_xs.txt";
+        //            if (File.Exists(_valida_proc_guiaToXstore)) proceso_ventaXSTORE = false;
 
-                    string _valida_proc_guiaToXstore = @"D:\XSTORE\proc_xs.txt";
-                    if (File.Exists(_valida_proc_guiaToXstore)) proceso_ventaXSTORE = false;
+        //            if (proceso_ventaXSTORE)
+        //            {
+        //                _valor = 1;
+        //                string _error = "";
+        //                _valida_serviceVentaXstore = 1;
+        //                Basico ejecuta_procesos = new Basico();
+        //                ejecuta_procesos.procesar_dbf_pos(ref _error);
+        //                _valida_serviceVentaXstore = 0;
 
-                    if (proceso_ventaXSTORE)
-                    {
-                        _valor = 1;
-                        string _error = "";
-                        _valida_serviceVentaXstore = 1;
-                        Basico ejecuta_procesos = new Basico();
-                        ejecuta_procesos.procesar_dbf_pos(ref _error);
-                        _valida_serviceVentaXstore = 0;
+        //            }
+        //        }
 
-                    }
-                }
-
-            }
-            catch (Exception exc)
-            {
-                //string errSwc = "";
-                _valida_serviceDBF = 0;
-            }
-            if (_valor == 1)
-            {
-                _valida_serviceDBF = 0;
-            }
-        }
+        //    }
+        //    catch (Exception exc)
+        //    {
+        //        //string errSwc = "";
+        //        _valida_serviceVentaXstore = 0;
+        //    }
+        //    if (_valor == 1)
+        //    {
+        //        _valida_serviceVentaXstore = 0;
+        //    }
+        //}
 
 
         void tmpServicioDBF_Elapsed(object sender, ElapsedEventArgs e)

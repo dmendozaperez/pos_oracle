@@ -1,4 +1,5 @@
 ﻿//using CapaServicioWindows.Modular;
+using CapaServicioWindows.CapaDato.Venta;
 using CapaServicioWindows.Modular;
 using System;
 using System.Collections.Generic;
@@ -100,8 +101,14 @@ namespace ServiceWin32Framework4
         {
 
             string _error = "";
-            Basico ejecuta_procesos = new Basico();
-            ejecuta_procesos.envio_Guias_ToxStore(ref _error);
+            Dat_Venta ejecuta_proc_venta = new Dat_Venta();
+           
+            ejecuta_proc_venta.procesar_fcacb_SQL(ref _error);
+
+            //string _error = "";
+            //Basico ejecuta_procesos = new Basico();
+            //ejecuta_procesos.PRO .procesar_fcacb_SQL(ref _error_ws);
+            //ejecuta_procesos.envio_Guias_ToxStore(ref _error);
 
         }
     }

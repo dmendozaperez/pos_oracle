@@ -16,6 +16,7 @@ namespace CapaServicioWindows.CapaDato.Novell
         public DataTable dt_get_envio_novell()
         {
             string sqlquery = "USP_EXTRAER_LISTA_ENVIO_XSTORE";
+            //string sqlquery = "select tienda=Mc_Tda,fecha=Mc_FechaDoc from MOVIMIENTO_CAB group by Mc_Tda,Mc_FechaDoc order by Mc_FechaDoc asc";
             DataTable dt = null;
             try
             {
@@ -34,7 +35,7 @@ namespace CapaServicioWindows.CapaDato.Novell
                             }
                         }
                     }
-                    catch (Exception)
+                    catch (Exception exc)
                     {
                         dt = null;
                     }
@@ -112,6 +113,8 @@ namespace CapaServicioWindows.CapaDato.Novell
                             ds.Tables[3].TableName = "FSTKG";
                             ds.Tables[4].TableName = "FCIERR";
                             ds.Tables[5].TableName = "FFLASH";
+                            ds.Tables[6].TableName = "FMC";
+                            ds.Tables[7].TableName = "FMD";
 
                         }
                     }

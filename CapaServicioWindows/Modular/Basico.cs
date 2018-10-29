@@ -1461,7 +1461,7 @@ namespace CapaServicioWindows.Modular
 
                     if (envio)
                     {
-                        venta_ing.Actualizar_Guia_ToXstore(cod_alm, nro_guia, cod_tda);
+                       string err = venta_ing.Actualizar_Guia_ToXstore(cod_alm, nro_guia, cod_tda);
                     }
                                         
                 }
@@ -1503,7 +1503,6 @@ namespace CapaServicioWindows.Modular
                     {
                         if (File.Exists(@_path_archivo_mnt)) File.Delete(@_path_archivo_mnt);
                     }
-
                 }
                 valida = true;
             }

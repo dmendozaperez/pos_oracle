@@ -37,6 +37,16 @@ namespace CapaServicioWindows.BataTransac {
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         CapaServicioWindows.BataTransac.Ent_File list_file();
         
+        // CODEGEN: Se está generando un contrato de mensaje, ya que el mensaje ws_lista_alma_EcuRequest tiene encabezados.
+        [System.ServiceModel.OperationContractAttribute(Action="http://bataperu.com.pe/ws_lista_alma_Ecu", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        CapaServicioWindows.BataTransac.ws_lista_alma_EcuResponse ws_lista_alma_Ecu(CapaServicioWindows.BataTransac.ws_lista_alma_EcuRequest request);
+        
+        // CODEGEN: Se está generando un contrato de mensaje, ya que el mensaje ws_get_xstore_carpeta_uploadRequest tiene encabezados.
+        [System.ServiceModel.OperationContractAttribute(Action="http://bataperu.com.pe/ws_get_xstore_carpeta_upload", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        CapaServicioWindows.BataTransac.ws_get_xstore_carpeta_uploadResponse ws_get_xstore_carpeta_upload(CapaServicioWindows.BataTransac.ws_get_xstore_carpeta_uploadRequest request);
+        
         // CODEGEN: Se está generando un contrato de mensaje, ya que el mensaje ws_update_transaction_guiasRequest tiene encabezados.
         [System.ServiceModel.OperationContractAttribute(Action="http://bataperu.com.pe/ws_update_transaction_guias", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -106,6 +116,16 @@ namespace CapaServicioWindows.BataTransac {
         [System.ServiceModel.OperationContractAttribute(Action="http://bataperu.com.pe/ws_envia_scdremb", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         CapaServicioWindows.BataTransac.ws_envia_scdrembResponse ws_envia_scdremb(CapaServicioWindows.BataTransac.ws_envia_scdrembRequest request);
+        
+        // CODEGEN: Se está generando un contrato de mensaje, ya que el mensaje ws_valida_traspaso_tdaRequest tiene encabezados.
+        [System.ServiceModel.OperationContractAttribute(Action="http://bataperu.com.pe/ws_valida_traspaso_tda", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        CapaServicioWindows.BataTransac.ws_valida_traspaso_tdaResponse ws_valida_traspaso_tda(CapaServicioWindows.BataTransac.ws_valida_traspaso_tdaRequest request);
+        
+        // CODEGEN: Se está generando un contrato de mensaje, ya que el mensaje ws_envio_traspaso_tdaRequest tiene encabezados.
+        [System.ServiceModel.OperationContractAttribute(Action="http://bataperu.com.pe/ws_envio_traspaso_tda", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        CapaServicioWindows.BataTransac.ws_envio_traspaso_tdaResponse ws_envio_traspaso_tda(CapaServicioWindows.BataTransac.ws_envio_traspaso_tdaRequest request);
     }
     
     /// <remarks/>
@@ -3256,11 +3276,203 @@ namespace CapaServicioWindows.BataTransac {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://bataperu.com.pe/")]
+    public partial class Ent_CarpetaUpload_Xstore : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string paisField;
+        
+        private string entornoField;
+        
+        private string opcionField;
+        
+        private string rut_uploadField;
+        
+        private string ftp_serverField;
+        
+        private string ftp_userField;
+        
+        private string ftp_passField;
+        
+        private int ftp_portField;
+        
+        private string ftp_folderField;
+        
+        private string ftp_sendField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public string pais {
+            get {
+                return this.paisField;
+            }
+            set {
+                this.paisField = value;
+                this.RaisePropertyChanged("pais");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public string entorno {
+            get {
+                return this.entornoField;
+            }
+            set {
+                this.entornoField = value;
+                this.RaisePropertyChanged("entorno");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
+        public string opcion {
+            get {
+                return this.opcionField;
+            }
+            set {
+                this.opcionField = value;
+                this.RaisePropertyChanged("opcion");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
+        public string rut_upload {
+            get {
+                return this.rut_uploadField;
+            }
+            set {
+                this.rut_uploadField = value;
+                this.RaisePropertyChanged("rut_upload");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
+        public string ftp_server {
+            get {
+                return this.ftp_serverField;
+            }
+            set {
+                this.ftp_serverField = value;
+                this.RaisePropertyChanged("ftp_server");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
+        public string ftp_user {
+            get {
+                return this.ftp_userField;
+            }
+            set {
+                this.ftp_userField = value;
+                this.RaisePropertyChanged("ftp_user");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
+        public string ftp_pass {
+            get {
+                return this.ftp_passField;
+            }
+            set {
+                this.ftp_passField = value;
+                this.RaisePropertyChanged("ftp_pass");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=7)]
+        public int ftp_port {
+            get {
+                return this.ftp_portField;
+            }
+            set {
+                this.ftp_portField = value;
+                this.RaisePropertyChanged("ftp_port");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=8)]
+        public string ftp_folder {
+            get {
+                return this.ftp_folderField;
+            }
+            set {
+                this.ftp_folderField = value;
+                this.RaisePropertyChanged("ftp_folder");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=9)]
+        public string ftp_send {
+            get {
+                return this.ftp_sendField;
+            }
+            set {
+                this.ftp_sendField = value;
+                this.RaisePropertyChanged("ftp_send");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://bataperu.com.pe/")]
+    public partial class Ent_Alma_Ecu : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string alma_ecuField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public string alma_ecu {
+            get {
+                return this.alma_ecuField;
+            }
+            set {
+                this.alma_ecuField = value;
+                this.RaisePropertyChanged("alma_ecu");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://bataperu.com.pe/")]
     public partial class Ent_PathDBF : object, System.ComponentModel.INotifyPropertyChanged {
         
         private string rutloc_namedbfField;
         
         private string rutloc_locationField;
+        
+        private string rutloc_location_ecuField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
@@ -3283,6 +3495,18 @@ namespace CapaServicioWindows.BataTransac {
             set {
                 this.rutloc_locationField = value;
                 this.RaisePropertyChanged("rutloc_location");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
+        public string rutloc_location_ecu {
+            get {
+                return this.rutloc_location_ecuField;
+            }
+            set {
+                this.rutloc_location_ecuField = value;
+                this.RaisePropertyChanged("rutloc_location_ecu");
             }
         }
         
@@ -3810,6 +4034,136 @@ namespace CapaServicioWindows.BataTransac {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://bataperu.com.pe/")]
+    public partial class Ent_Fvdespd : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string dESD_GUDISField;
+        
+        private string dESD_NDESPField;
+        
+        private string dESD_ALMACField;
+        
+        private string dESD_ARTICField;
+        
+        private string dESD_CALIDField;
+        
+        private string dESD_TALLAField;
+        
+        private int dESD_PARESField;
+        
+        private decimal dESD_PRVTAField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public string DESD_GUDIS {
+            get {
+                return this.dESD_GUDISField;
+            }
+            set {
+                this.dESD_GUDISField = value;
+                this.RaisePropertyChanged("DESD_GUDIS");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public string DESD_NDESP {
+            get {
+                return this.dESD_NDESPField;
+            }
+            set {
+                this.dESD_NDESPField = value;
+                this.RaisePropertyChanged("DESD_NDESP");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
+        public string DESD_ALMAC {
+            get {
+                return this.dESD_ALMACField;
+            }
+            set {
+                this.dESD_ALMACField = value;
+                this.RaisePropertyChanged("DESD_ALMAC");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
+        public string DESD_ARTIC {
+            get {
+                return this.dESD_ARTICField;
+            }
+            set {
+                this.dESD_ARTICField = value;
+                this.RaisePropertyChanged("DESD_ARTIC");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
+        public string DESD_CALID {
+            get {
+                return this.dESD_CALIDField;
+            }
+            set {
+                this.dESD_CALIDField = value;
+                this.RaisePropertyChanged("DESD_CALID");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
+        public string DESD_TALLA {
+            get {
+                return this.dESD_TALLAField;
+            }
+            set {
+                this.dESD_TALLAField = value;
+                this.RaisePropertyChanged("DESD_TALLA");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
+        public int DESD_PARES {
+            get {
+                return this.dESD_PARESField;
+            }
+            set {
+                this.dESD_PARESField = value;
+                this.RaisePropertyChanged("DESD_PARES");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=7)]
+        public decimal DESD_PRVTA {
+            get {
+                return this.dESD_PRVTAField;
+            }
+            set {
+                this.dESD_PRVTAField = value;
+                this.RaisePropertyChanged("DESD_PRVTA");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://bataperu.com.pe/")]
     public partial class Ent_Fvdespc : object, System.ComponentModel.INotifyPropertyChanged {
         
         private string dESC_ALMACField;
@@ -3867,6 +4221,8 @@ namespace CapaServicioWindows.BataTransac {
         private decimal dESC_VANCField;
         
         private decimal dESC_VCAJField;
+        
+        private Ent_Fvdespd[] fVDESPDField;
         
         private System.Data.DataTable dT_FVDESPD_TREGMEDIDAField;
         
@@ -4207,7 +4563,19 @@ namespace CapaServicioWindows.BataTransac {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=28)]
+        [System.Xml.Serialization.XmlArrayAttribute(Order=28)]
+        public Ent_Fvdespd[] FVDESPD {
+            get {
+                return this.fVDESPDField;
+            }
+            set {
+                this.fVDESPDField = value;
+                this.RaisePropertyChanged("FVDESPD");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=29)]
         public System.Data.DataTable DT_FVDESPD_TREGMEDIDA {
             get {
                 return this.dT_FVDESPD_TREGMEDIDAField;
@@ -4309,6 +4677,74 @@ namespace CapaServicioWindows.BataTransac {
         
         public HelloWorldResponse(CapaServicioWindows.BataTransac.Ent_MsgTransac HelloWorldResult) {
             this.HelloWorldResult = HelloWorldResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="ws_lista_alma_Ecu", WrapperNamespace="http://bataperu.com.pe/", IsWrapped=true)]
+    public partial class ws_lista_alma_EcuRequest {
+        
+        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://bataperu.com.pe/")]
+        public CapaServicioWindows.BataTransac.ValidateAcceso ValidateAcceso;
+        
+        public ws_lista_alma_EcuRequest() {
+        }
+        
+        public ws_lista_alma_EcuRequest(CapaServicioWindows.BataTransac.ValidateAcceso ValidateAcceso) {
+            this.ValidateAcceso = ValidateAcceso;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="ws_lista_alma_EcuResponse", WrapperNamespace="http://bataperu.com.pe/", IsWrapped=true)]
+    public partial class ws_lista_alma_EcuResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=0)]
+        public CapaServicioWindows.BataTransac.Ent_Alma_Ecu[] ws_lista_alma_EcuResult;
+        
+        public ws_lista_alma_EcuResponse() {
+        }
+        
+        public ws_lista_alma_EcuResponse(CapaServicioWindows.BataTransac.Ent_Alma_Ecu[] ws_lista_alma_EcuResult) {
+            this.ws_lista_alma_EcuResult = ws_lista_alma_EcuResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="ws_get_xstore_carpeta_upload", WrapperNamespace="http://bataperu.com.pe/", IsWrapped=true)]
+    public partial class ws_get_xstore_carpeta_uploadRequest {
+        
+        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://bataperu.com.pe/")]
+        public CapaServicioWindows.BataTransac.ValidateAcceso ValidateAcceso;
+        
+        public ws_get_xstore_carpeta_uploadRequest() {
+        }
+        
+        public ws_get_xstore_carpeta_uploadRequest(CapaServicioWindows.BataTransac.ValidateAcceso ValidateAcceso) {
+            this.ValidateAcceso = ValidateAcceso;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="ws_get_xstore_carpeta_uploadResponse", WrapperNamespace="http://bataperu.com.pe/", IsWrapped=true)]
+    public partial class ws_get_xstore_carpeta_uploadResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=0)]
+        public CapaServicioWindows.BataTransac.Ent_CarpetaUpload_Xstore[] ws_get_xstore_carpeta_uploadResult;
+        
+        public ws_get_xstore_carpeta_uploadResponse() {
+        }
+        
+        public ws_get_xstore_carpeta_uploadResponse(CapaServicioWindows.BataTransac.Ent_CarpetaUpload_Xstore[] ws_get_xstore_carpeta_uploadResult) {
+            this.ws_get_xstore_carpeta_uploadResult = ws_get_xstore_carpeta_uploadResult;
         }
     }
     
@@ -4879,6 +5315,86 @@ namespace CapaServicioWindows.BataTransac {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="ws_valida_traspaso_tda", WrapperNamespace="http://bataperu.com.pe/", IsWrapped=true)]
+    public partial class ws_valida_traspaso_tdaRequest {
+        
+        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://bataperu.com.pe/")]
+        public CapaServicioWindows.BataTransac.ValidateAcceso ValidateAcceso;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=0)]
+        public string cod_tda;
+        
+        public ws_valida_traspaso_tdaRequest() {
+        }
+        
+        public ws_valida_traspaso_tdaRequest(CapaServicioWindows.BataTransac.ValidateAcceso ValidateAcceso, string cod_tda) {
+            this.ValidateAcceso = ValidateAcceso;
+            this.cod_tda = cod_tda;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="ws_valida_traspaso_tdaResponse", WrapperNamespace="http://bataperu.com.pe/", IsWrapped=true)]
+    public partial class ws_valida_traspaso_tdaResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=0)]
+        public bool ws_valida_traspaso_tdaResult;
+        
+        public ws_valida_traspaso_tdaResponse() {
+        }
+        
+        public ws_valida_traspaso_tdaResponse(bool ws_valida_traspaso_tdaResult) {
+            this.ws_valida_traspaso_tdaResult = ws_valida_traspaso_tdaResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="ws_envio_traspaso_tda", WrapperNamespace="http://bataperu.com.pe/", IsWrapped=true)]
+    public partial class ws_envio_traspaso_tdaRequest {
+        
+        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://bataperu.com.pe/")]
+        public CapaServicioWindows.BataTransac.ValidateAcceso ValidateAcceso;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=0)]
+        public string cod_tda;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=1)]
+        public CapaServicioWindows.BataTransac.Ent_Fvdespc[] despacho;
+        
+        public ws_envio_traspaso_tdaRequest() {
+        }
+        
+        public ws_envio_traspaso_tdaRequest(CapaServicioWindows.BataTransac.ValidateAcceso ValidateAcceso, string cod_tda, CapaServicioWindows.BataTransac.Ent_Fvdespc[] despacho) {
+            this.ValidateAcceso = ValidateAcceso;
+            this.cod_tda = cod_tda;
+            this.despacho = despacho;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="ws_envio_traspaso_tdaResponse", WrapperNamespace="http://bataperu.com.pe/", IsWrapped=true)]
+    public partial class ws_envio_traspaso_tdaResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=0)]
+        public CapaServicioWindows.BataTransac.Ent_MsgTransac ws_envio_traspaso_tdaResult;
+        
+        public ws_envio_traspaso_tdaResponse() {
+        }
+        
+        public ws_envio_traspaso_tdaResponse(CapaServicioWindows.BataTransac.Ent_MsgTransac ws_envio_traspaso_tdaResult) {
+            this.ws_envio_traspaso_tdaResult = ws_envio_traspaso_tdaResult;
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface Bata_TransactionSoapChannel : CapaServicioWindows.BataTransac.Bata_TransactionSoap, System.ServiceModel.IClientChannel {
     }
@@ -4933,6 +5449,30 @@ namespace CapaServicioWindows.BataTransac {
         
         public CapaServicioWindows.BataTransac.Ent_File list_file() {
             return base.Channel.list_file();
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        CapaServicioWindows.BataTransac.ws_lista_alma_EcuResponse CapaServicioWindows.BataTransac.Bata_TransactionSoap.ws_lista_alma_Ecu(CapaServicioWindows.BataTransac.ws_lista_alma_EcuRequest request) {
+            return base.Channel.ws_lista_alma_Ecu(request);
+        }
+        
+        public CapaServicioWindows.BataTransac.Ent_Alma_Ecu[] ws_lista_alma_Ecu(CapaServicioWindows.BataTransac.ValidateAcceso ValidateAcceso) {
+            CapaServicioWindows.BataTransac.ws_lista_alma_EcuRequest inValue = new CapaServicioWindows.BataTransac.ws_lista_alma_EcuRequest();
+            inValue.ValidateAcceso = ValidateAcceso;
+            CapaServicioWindows.BataTransac.ws_lista_alma_EcuResponse retVal = ((CapaServicioWindows.BataTransac.Bata_TransactionSoap)(this)).ws_lista_alma_Ecu(inValue);
+            return retVal.ws_lista_alma_EcuResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        CapaServicioWindows.BataTransac.ws_get_xstore_carpeta_uploadResponse CapaServicioWindows.BataTransac.Bata_TransactionSoap.ws_get_xstore_carpeta_upload(CapaServicioWindows.BataTransac.ws_get_xstore_carpeta_uploadRequest request) {
+            return base.Channel.ws_get_xstore_carpeta_upload(request);
+        }
+        
+        public CapaServicioWindows.BataTransac.Ent_CarpetaUpload_Xstore[] ws_get_xstore_carpeta_upload(CapaServicioWindows.BataTransac.ValidateAcceso ValidateAcceso) {
+            CapaServicioWindows.BataTransac.ws_get_xstore_carpeta_uploadRequest inValue = new CapaServicioWindows.BataTransac.ws_get_xstore_carpeta_uploadRequest();
+            inValue.ValidateAcceso = ValidateAcceso;
+            CapaServicioWindows.BataTransac.ws_get_xstore_carpeta_uploadResponse retVal = ((CapaServicioWindows.BataTransac.Bata_TransactionSoap)(this)).ws_get_xstore_carpeta_upload(inValue);
+            return retVal.ws_get_xstore_carpeta_uploadResult;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -5124,6 +5664,33 @@ namespace CapaServicioWindows.BataTransac {
             inValue.list_scdrem = list_scdrem;
             CapaServicioWindows.BataTransac.ws_envia_scdrembResponse retVal = ((CapaServicioWindows.BataTransac.Bata_TransactionSoap)(this)).ws_envia_scdremb(inValue);
             return retVal.ws_envia_scdrembResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        CapaServicioWindows.BataTransac.ws_valida_traspaso_tdaResponse CapaServicioWindows.BataTransac.Bata_TransactionSoap.ws_valida_traspaso_tda(CapaServicioWindows.BataTransac.ws_valida_traspaso_tdaRequest request) {
+            return base.Channel.ws_valida_traspaso_tda(request);
+        }
+        
+        public bool ws_valida_traspaso_tda(CapaServicioWindows.BataTransac.ValidateAcceso ValidateAcceso, string cod_tda) {
+            CapaServicioWindows.BataTransac.ws_valida_traspaso_tdaRequest inValue = new CapaServicioWindows.BataTransac.ws_valida_traspaso_tdaRequest();
+            inValue.ValidateAcceso = ValidateAcceso;
+            inValue.cod_tda = cod_tda;
+            CapaServicioWindows.BataTransac.ws_valida_traspaso_tdaResponse retVal = ((CapaServicioWindows.BataTransac.Bata_TransactionSoap)(this)).ws_valida_traspaso_tda(inValue);
+            return retVal.ws_valida_traspaso_tdaResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        CapaServicioWindows.BataTransac.ws_envio_traspaso_tdaResponse CapaServicioWindows.BataTransac.Bata_TransactionSoap.ws_envio_traspaso_tda(CapaServicioWindows.BataTransac.ws_envio_traspaso_tdaRequest request) {
+            return base.Channel.ws_envio_traspaso_tda(request);
+        }
+        
+        public CapaServicioWindows.BataTransac.Ent_MsgTransac ws_envio_traspaso_tda(CapaServicioWindows.BataTransac.ValidateAcceso ValidateAcceso, string cod_tda, CapaServicioWindows.BataTransac.Ent_Fvdespc[] despacho) {
+            CapaServicioWindows.BataTransac.ws_envio_traspaso_tdaRequest inValue = new CapaServicioWindows.BataTransac.ws_envio_traspaso_tdaRequest();
+            inValue.ValidateAcceso = ValidateAcceso;
+            inValue.cod_tda = cod_tda;
+            inValue.despacho = despacho;
+            CapaServicioWindows.BataTransac.ws_envio_traspaso_tdaResponse retVal = ((CapaServicioWindows.BataTransac.Bata_TransactionSoap)(this)).ws_envio_traspaso_tda(inValue);
+            return retVal.ws_envio_traspaso_tdaResult;
         }
     }
 }

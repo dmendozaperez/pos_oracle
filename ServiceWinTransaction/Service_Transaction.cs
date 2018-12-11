@@ -22,6 +22,9 @@ namespace ServiceWinTransaction
         Timer tmservicioDBF = null;
         Timer tmservicioVentaXstore = null;
 
+
+        private string file_almace_ecu = @"D:\BataTransaction\ECU.txt";
+
         Timer tmservicio_GuiaToXstore = null;
         //Timer tmservicioScactcoDBF = null;
 
@@ -75,6 +78,10 @@ namespace ServiceWinTransaction
             Int32 _valor = 0;
             try
             {
+                #region<region solo almacen ecuador>
+                if (File.Exists(@file_almace_ecu)) return;
+                #endregion
+
                 if (_valida_serviceGuiaToXstore == 0)
                 {
                     _valor = 1;
@@ -118,6 +125,9 @@ namespace ServiceWinTransaction
             Int32 _valor = 0;
             try
             {
+                #region<region solo almacen ecuador>
+                if (File.Exists(@file_almace_ecu)) return;
+                #endregion
                 if (_valida_service_trans == 0)
                 {
                     _valor = 1;
@@ -314,6 +324,9 @@ namespace ServiceWinTransaction
             Int32 _valor = 0;
             try
             {
+                #region<region solo almacen ecuador>
+                if (File.Exists(@file_almace_ecu)) return;
+                #endregion
                 if (_valida_ven_tmpDBF == 0)
                 {
                     _valor = 1;
@@ -355,6 +368,9 @@ namespace ServiceWinTransaction
             Int32 _valor = 0;
             try
             {
+                #region<region solo almacen ecuador>
+                if (File.Exists(@file_almace_ecu)) return;
+                #endregion
                 if (_valida_serviceposlog == 0)
                 {
                     _valor = 1;

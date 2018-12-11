@@ -24,6 +24,8 @@ namespace LoginTiendaWPF
     {
         public MainWindow()
         {
+            try
+            { 
                       
             string strCambiante  = DateTime.Now.ToString("M/d/yyyy");
             string nombre = strCambiante + "_" + Environment.MachineName;
@@ -31,12 +33,17 @@ namespace LoginTiendaWPF
             byte[] encryted = System.Text.Encoding.Unicode.GetBytes(nombre);
             strparam = Convert.ToBase64String(encryted);
 
-            ProcessStartInfo startInfo = new ProcessStartInfo("http://posperu.bgr.pe/BataWeb2/LoginIntermedio/Login?variable=" + strparam);
+            ProcessStartInfo startInfo = new ProcessStartInfo("http://posperu.bgr.pe/BataWeb/LoginIntermedio/Login?variable=" + strparam);
             Process.Start(startInfo);
 
 
             InitializeComponent();
             Close();
+            }
+            catch
+            {
+
+            }
         }
 
 

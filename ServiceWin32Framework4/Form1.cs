@@ -1,5 +1,6 @@
 ﻿//using CapaServicioWindows.Modular;
 using CapaServicioWindows.CapaDato.Venta;
+using CapaServicioWindows.Envio_Ftp_Xstore;
 using CapaServicioWindows.Modular;
 using System;
 using System.Collections.Generic;
@@ -110,6 +111,16 @@ namespace ServiceWin32Framework4
             //ejecuta_procesos.PRO .procesar_fcacb_SQL(ref _error_ws);
             //ejecuta_procesos.envio_Guias_ToxStore(ref _error);
 
+        }
+
+        private void ws_get_xstore_carpeta_upload_Click(object sender, EventArgs e)
+        {
+            string _error = "";
+            Ftp_Xstore_Service_Send envio = new Ftp_Xstore_Service_Send();
+            envio.ejecutar_upload_xstore_auto(ref _error);
+            //Dat_Venta ejecuta_proc_venta = new Dat_Venta();
+            //CapaServicioWindows.Envio_Ftp_Xstore
+            //ejecuta_proc_venta.procesar_fcacb_SQL(ref _error);
         }
     }
 }

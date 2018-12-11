@@ -52,8 +52,14 @@ namespace CapaEntidad.Util
         #endregion
 
         #region<CONEXION DE BASE DE DATOS>
+      
+        //public static string conexion { get; set; }
+        //public static string conexion_posperu { get; set; }
+        //public static string conexion_posperu_DES { get; set; }
+        //public static string conexion_posperu_QA { get; set; }
+
         public static string conexion
-        {           
+        {
             //get { return "Server=10.10.10.208;Database=BdTienda;User ID=sa;Password=Bata2013;Trusted_Connection=False;"; }
             get { return "Server=posperu.bgr.pe;Database=BDPOS;User ID=pos_oracle;Password=Bata2018**;Trusted_Connection=False;"; }
         }
@@ -81,6 +87,21 @@ namespace CapaEntidad.Util
         public static string conexion_208
         {
             get { return "Server=www.bgr.pe;Database=BdTienda;User ID=dmendoza;Password=Bata2013;Trusted_Connection=False;"; }
+        }
+
+        #endregion
+
+        #region<CONEXIONES ECUADOR>
+        //public static string conexion_posecuador { get; set; }
+        //public static string conexion_posecuador_QA { get; set; }
+
+        public static string conexion_posecuador_QA
+        {
+            get { return "Server=posperu.bgr.pe;Database=BDPOS_ECU_QA;User ID=pos_oracle;Password=Bata2018**;Trusted_Connection=False;"; }
+        }
+        public static string conexion_posecuador
+        {
+            get { return "Server=posperu.bgr.pe;Database=BDPOS;User ID=pos_oracle;Password=Bata2018**;Trusted_Connection=False;"; }
         }
         #endregion
         #endregion

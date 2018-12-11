@@ -13,6 +13,7 @@ namespace CapaEntidad.Util
         /// </summary>
         public string rutloc_namedbf { get; set; }
         public string rutloc_location { get; set; }
-
+      
+        public string rutloc_location_ecu { get; set; }
     }
 }

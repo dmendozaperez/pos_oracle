@@ -69,6 +69,8 @@
     <Content Include="packages.config" />
     <None Include="Properties\PublishProfiles\WS_POSLOG.pubxml" />
     <None Include="Properties\PublishProfiles\WS_POSLOG_DES.pubxml" />
+    <None Include="Properties\PublishProfiles\WS_POSLOG_ECU_QA.pubxml" />
+    <None Include="Properties\PublishProfiles\WS_POSLOG_PE_PROD.pubxml" />
     <None Include="Properties\PublishProfiles\WS_POSLOG_QA.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -78,7 +80,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="XO_XMLSERVICE.asmx" />
   </ItemGroup>
   <ItemGroup>
@@ -92,6 +96,10 @@
     <ProjectReference Include="..\CapaDato\CapaDato.csproj">
       <Project>{d7d144b0-89b5-41e1-ae1e-340da4c00141}</Project>
       <Name>CapaDato</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CapaEntidad\CapaEntidad.csproj">
+      <Project>{c24d20c9-781b-4fd8-b956-dbb16280e929}</Project>
+      <Name>CapaEntidad</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

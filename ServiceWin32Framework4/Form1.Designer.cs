@@ -36,6 +36,7 @@
             this.btnposlog = new System.Windows.Forms.Button();
             this.procesar_fcacb_SQL = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
+            this.ws_get_xstore_carpeta_upload = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn_servicewin
@@ -68,7 +69,6 @@
             this.btnbarra.TabIndex = 6;
             this.btnbarra.Text = "COD BARRA";
             this.btnbarra.UseVisualStyleBackColor = true;
-            this.btnbarra.Click += new System.EventHandler(this.btnbarra_Click);
             // 
             // btnenvio_nov
             // 
@@ -84,7 +84,7 @@
             // btnenviog
             // 
             this.btnenviog.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnenviog.Location = new System.Drawing.Point(214, 110);
+            this.btnenviog.Location = new System.Drawing.Point(95, 88);
             this.btnenviog.Name = "btnenviog";
             this.btnenviog.Size = new System.Drawing.Size(210, 34);
             this.btnenviog.TabIndex = 8;
@@ -123,11 +123,23 @@
             this.button3.Text = "button3";
             this.button3.UseVisualStyleBackColor = true;
             // 
+            // ws_get_xstore_carpeta_upload
+            // 
+            this.ws_get_xstore_carpeta_upload.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ws_get_xstore_carpeta_upload.Location = new System.Drawing.Point(263, 257);
+            this.ws_get_xstore_carpeta_upload.Name = "ws_get_xstore_carpeta_upload";
+            this.ws_get_xstore_carpeta_upload.Size = new System.Drawing.Size(290, 30);
+            this.ws_get_xstore_carpeta_upload.TabIndex = 12;
+            this.ws_get_xstore_carpeta_upload.Text = "ws_get_xstore_carpeta_upload";
+            this.ws_get_xstore_carpeta_upload.UseVisualStyleBackColor = true;
+            this.ws_get_xstore_carpeta_upload.Click += new System.EventHandler(this.ws_get_xstore_carpeta_upload_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(744, 261);
+            this.ClientSize = new System.Drawing.Size(744, 313);
+            this.Controls.Add(this.ws_get_xstore_carpeta_upload);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.procesar_fcacb_SQL);
             this.Controls.Add(this.btnposlog);
@@ -152,6 +164,7 @@
         private System.Windows.Forms.Button btnposlog;
         private System.Windows.Forms.Button procesar_fcacb_SQL;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button ws_get_xstore_carpeta_upload;
     }
 }
 

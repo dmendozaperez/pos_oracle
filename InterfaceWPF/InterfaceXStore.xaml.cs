@@ -1653,6 +1653,10 @@ namespace InterfaceWPF
                 tabla_FSTKG(ds.Tables[3]);
                 tabla_FCIERR(ds.Tables[4]);
                 tabla_FFLASH(ds.Tables[5]);
+                /*TABLA MOVIMIENTO*/
+                tabla_FMC(ds.Tables[6]);
+                tabla_FMD(ds.Tables[7]);
+                /**/
 
                 string archivo = "";
                 _comprimir_archivo(cod_tda, fecha, ref archivo);
@@ -1669,7 +1673,120 @@ namespace InterfaceWPF
                 await metroWindow.ShowMessageAsync(Ent_Msg.msginfomacion, exc.Message, MessageDialogStyle.Affirmative, metroWindow.MetroDialogOptions);
             }
         }
+        private void tabla_FMC(DataTable dt)
+        {
+            try
+            {
+                string _path_envia = basico.ruta_temp_DBF;
+                DBFNET FMC = new DBFNET();
+                FMC.tabla = "FMC";
 
+                FMC.addcol("v_proc", Tipo.Caracter, "1");
+                FMC.addcol("v_cfor", Tipo.Caracter, "2");
+                FMC.addcol("v_sfor", Tipo.Caracter, "4");
+                FMC.addcol("v_nfor", Tipo.Caracter, "8");
+                FMC.addcol("v_ffor", Tipo.Fecha);
+                FMC.addcol("v_mone", Tipo.Caracter, "2");
+                FMC.addcol("v_tasa", Tipo.Numerico, "14,4");
+                FMC.addcol("v_almo", Tipo.Caracter, "4");
+                FMC.addcol("v_almd", Tipo.Caracter, "4");
+                FMC.addcol("v_tane", Tipo.Caracter, "2");
+                FMC.addcol("v_anex", Tipo.Caracter, "8");
+                FMC.addcol("v_tdoc", Tipo.Caracter, "2");
+                FMC.addcol("v_tfor", Tipo.Caracter, "1");
+
+                FMC.addcol("v_suna", Tipo.Caracter, "2");
+                FMC.addcol("v_sdoc", Tipo.Caracter, "4");
+                FMC.addcol("v_ndoc", Tipo.Caracter, "8");
+                FMC.addcol("v_fdoc", Tipo.Fecha);
+                FMC.addcol("v_tref", Tipo.Caracter, "2");
+                FMC.addcol("v_sref", Tipo.Caracter, "4");
+                FMC.addcol("v_nref", Tipo.Caracter, "8");
+                FMC.addcol("v_tipo", Tipo.Caracter, "1");
+                FMC.addcol("v_arti", Tipo.Caracter, "12");
+                FMC.addcol("v_regl", Tipo.Caracter, "4");
+                FMC.addcol("v_colo", Tipo.Caracter, "2");
+                FMC.addcol("v_cant", Tipo.Numerico, "14,4");
+                FMC.addcol("v_pres", Tipo.Numerico, "14,4");
+                FMC.addcol("v_pred", Tipo.Numerico, "14,4");
+                FMC.addcol("v_vvts", Tipo.Numerico, "14,4");
+                FMC.addcol("v_vvtd", Tipo.Numerico, "14,4");
+                FMC.addcol("v_auto", Tipo.Caracter, "10");
+                FMC.addcol("v_ptot", Tipo.Numerico, "14,4");
+                FMC.addcol("v_impr", Tipo.Caracter, "1");
+                FMC.addcol("v_cuse", Tipo.Caracter, "3");
+                FMC.addcol("v_muse", Tipo.Caracter, "3");
+                FMC.addcol("v_fcre", Tipo.Fecha);
+                FMC.addcol("v_fmod", Tipo.Fecha);
+                FMC.addcol("v_ftrx", Tipo.Fecha);
+                FMC.addcol("v_ctra", Tipo.Caracter, "30");
+                FMC.addcol("v_memo", Tipo.Caracter, "10");
+                FMC.addcol("v_motr", Tipo.Caracter, "2");
+                FMC.addcol("v_par1", Tipo.Caracter, "80");
+
+                FMC.addcol("v_par2", Tipo.Caracter, "80");
+                FMC.addcol("v_par3", Tipo.Caracter, "80");
+                FMC.addcol("v_lle1", Tipo.Caracter, "80");
+                FMC.addcol("v_lle2", Tipo.Caracter, "80");
+                FMC.addcol("v_lle3", Tipo.Caracter, "80");
+                FMC.addcol("v_tipe", Tipo.Caracter, "2");
+                FMC.addcol("v_ruc2", Tipo.Caracter, "15");
+                FMC.addcol("v_rzo2", Tipo.Caracter, "40");
+
+
+                FMC.creardbf(_path_envia);
+                FMC.Insertar_tabla(dt, _path_envia);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+        private void tabla_FMD(DataTable dt)
+        {
+            try
+            {
+                string _path_envia = basico.ruta_temp_DBF;
+                DBFNET FMD = new DBFNET();
+                FMD.tabla = "FMD";
+
+                FMD.addcol("i_tfor", Tipo.Caracter, "1");
+                FMD.addcol("i_proc", Tipo.Caracter, "1");
+                FMD.addcol("i_cfor", Tipo.Caracter, "2");
+                FMD.addcol("i_sfor", Tipo.Caracter, "4");
+                FMD.addcol("i_nfor", Tipo.Caracter, "8");
+                FMD.addcol("i_tipo", Tipo.Caracter, "1");
+                FMD.addcol("i_arti", Tipo.Caracter, "12");
+                FMD.addcol("i_regl", Tipo.Caracter, "4");
+                FMD.addcol("i_colo", Tipo.Caracter, "2");
+                FMD.addcol("i_item", Tipo.Caracter, "3");
+                FMD.addcol("i_unic", Tipo.Caracter, "3");
+                FMD.addcol("i_equ1", Tipo.Numerico, "10,4");
+                FMD.addcol("i_unim", Tipo.Caracter, "3");
+
+
+                FMD.addcol("i_canc", Tipo.Numerico, "14,4");
+                FMD.addcol("i_canm", Tipo.Numerico, "14,4");
+                FMD.addcol("i_pres", Tipo.Numerico, "14,4");
+                FMD.addcol("i_pred", Tipo.Numerico, "14,4");
+                FMD.addcol("i_vvts", Tipo.Numerico, "14,4");
+                FMD.addcol("i_vvtd", Tipo.Numerico, "14,4");
+                FMD.addcol("i_plis", Tipo.Numerico, "14,4");
+                FMD.addcol("i_ptot", Tipo.Numerico, "14,4");
+                FMD.addcol("i_impr", Tipo.Caracter, "1");
+                FMD.addcol("i_cuse", Tipo.Caracter, "3");
+                FMD.addcol("i_muse", Tipo.Caracter, "3");
+                FMD.addcol("i_fcre", Tipo.Fecha);
+                FMD.addcol("i_fmod", Tipo.Fecha);
+
+                FMD.creardbf(_path_envia);
+                FMD.Insertar_tabla(dt, _path_envia);
+            }
+            catch
+            {
+                throw;
+            }
+        }
         private void tabla_FFLASH(DataTable dt)
         {
             try
@@ -2137,11 +2254,13 @@ namespace InterfaceWPF
 
                 if (task != null)
                 {
-                  generainter_inv_doc(task.cod_alm, task.nro_guia, task.cod_tda, strEnvia);
+                  generainter_inv_doc(task.cod_alm, task.nro_guia, task.cod_tda, strEnvia,task.Amb_Pais,task.Amb_Ftp_Server,task.Amb_Ftp_User,task.Amb_Ftp_Pass,task.Amb_Ftp_Port,task.Amb_Ftp_Path);
                 }
             }
         }
-        private async void generainter_inv_doc(string cod_alm,string nro_guia,string cod_tda,string strEnviaFtp)
+        private async void generainter_inv_doc(string cod_alm,string nro_guia,string cod_tda,string strEnviaFtp,
+                                               string Amb_Pais,string Amb_Ftp_Server,string Amb_Ftp_User,string Amb_Ftp_Pass,
+                                               Int32 Amb_Ftp_Port,string Amb_Ftp_Path)
         {
             var metroWindow = this;
             string in_inv_doc = "";
@@ -2161,7 +2280,7 @@ namespace InterfaceWPF
                 /*DATOS DE INTERFACE INV DOC */
                 /*Se recorre los datos del dataset y convertir a mnt el final del codigo y envia por un metodo en basico de envio
                  por ftp*/
-                DataSet ds = await Task.Run(() => dat_interface.get_inv_doc(cod_alm,nro_guia));
+                DataSet ds = await Task.Run(() => dat_interface.get_inv_doc(cod_alm,nro_guia, Amb_Pais));
                 StringBuilder str = null;
                 string str_cadena = "";
                 if (ds != null)
@@ -2268,6 +2387,12 @@ namespace InterfaceWPF
                 {
                     string codAmbiente = dwAmbienteDsp.EditValue.ToString();
                     setearAmbXoficce(codAmbiente);
+
+                    Ent_Conexion.ftp_server = Amb_Ftp_Server;
+                    Ent_Conexion.ftp_user = Amb_Ftp_User;
+                    Ent_Conexion.ftp_password = Amb_Ftp_Pass;
+                    Ent_Conexion.ftp_puerto = Amb_Ftp_Port;
+                    basico.ftp_ruta_destino = Amb_Ftp_Path;
 
                     mensaje = "Se enviaron al ftp";
                     envio = await Task.Run(() => basico.sendftp_file_mnt());

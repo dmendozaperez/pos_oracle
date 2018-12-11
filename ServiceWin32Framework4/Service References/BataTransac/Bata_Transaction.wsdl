@@ -77,6 +77,7 @@
           <s:element minOccurs="1" maxOccurs="1" name="DESC_VACA" type="s:decimal" />
           <s:element minOccurs="1" maxOccurs="1" name="DESC_VANC" type="s:decimal" />
           <s:element minOccurs="1" maxOccurs="1" name="DESC_VCAJ" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="FVDESPD" type="tns:ArrayOfEnt_Fvdespd" />
           <s:element minOccurs="0" maxOccurs="1" name="DT_FVDESPD_TREGMEDIDA">
             <s:complexType>
               <s:sequence>
@@ -85,6 +86,23 @@
               </s:sequence>
             </s:complexType>
           </s:element>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfEnt_Fvdespd">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Ent_Fvdespd" nillable="true" type="tns:Ent_Fvdespd" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Ent_Fvdespd">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="DESD_GUDIS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DESD_NDESP" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DESD_ALMAC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DESD_ARTIC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DESD_CALID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DESD_TALLA" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DESD_PARES" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="DESD_PRVTA" type="s:decimal" />
         </s:sequence>
       </s:complexType>
       <s:element name="scdddes">
@@ -150,6 +168,7 @@
         <s:sequence>
           <s:element minOccurs="0" maxOccurs="1" name="rutloc_namedbf" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="rutloc_location" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="rutloc_location_ecu" type="s:string" />
         </s:sequence>
       </s:complexType>
       <s:element name="list_file">
@@ -165,6 +184,55 @@
       <s:complexType name="Ent_File">
         <s:sequence>
           <s:element minOccurs="0" maxOccurs="1" name="file_name" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ws_lista_alma_Ecu">
+        <s:complexType />
+      </s:element>
+      <s:element name="ws_lista_alma_EcuResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ws_lista_alma_EcuResult" type="tns:ArrayOfEnt_Alma_Ecu" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfEnt_Alma_Ecu">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Ent_Alma_Ecu" nillable="true" type="tns:Ent_Alma_Ecu" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Ent_Alma_Ecu">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="alma_ecu" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ws_get_xstore_carpeta_upload">
+        <s:complexType />
+      </s:element>
+      <s:element name="ws_get_xstore_carpeta_uploadResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ws_get_xstore_carpeta_uploadResult" type="tns:ArrayOfEnt_CarpetaUpload_Xstore" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfEnt_CarpetaUpload_Xstore">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Ent_CarpetaUpload_Xstore" nillable="true" type="tns:Ent_CarpetaUpload_Xstore" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Ent_CarpetaUpload_Xstore">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="pais" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="entorno" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="opcion" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="rut_upload" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ftp_server" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ftp_user" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ftp_pass" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ftp_port" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ftp_folder" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ftp_send" type="s:string" />
         </s:sequence>
       </s:complexType>
       <s:element name="ws_update_transaction_guias">
@@ -687,6 +755,40 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="ws_valida_traspaso_tda">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="cod_tda" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_valida_traspaso_tdaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ws_valida_traspaso_tdaResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_envio_traspaso_tda">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="cod_tda" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="despacho" type="tns:ArrayOfEnt_Fvdespc" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfEnt_Fvdespc">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Ent_Fvdespc" nillable="true" type="tns:Ent_Fvdespc" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ws_envio_traspaso_tdaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ws_envio_traspaso_tdaResult" type="tns:Ent_MsgTransac" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="HelloWorldSoapIn">
@@ -721,6 +823,24 @@
   </wsdl:message>
   <wsdl:message name="list_fileSoapOut">
     <wsdl:part name="parameters" element="tns:list_fileResponse" />
+  </wsdl:message>
+  <wsdl:message name="ws_lista_alma_EcuSoapIn">
+    <wsdl:part name="parameters" element="tns:ws_lista_alma_Ecu" />
+  </wsdl:message>
+  <wsdl:message name="ws_lista_alma_EcuSoapOut">
+    <wsdl:part name="parameters" element="tns:ws_lista_alma_EcuResponse" />
+  </wsdl:message>
+  <wsdl:message name="ws_lista_alma_EcuValidateAcceso">
+    <wsdl:part name="ValidateAcceso" element="tns:ValidateAcceso" />
+  </wsdl:message>
+  <wsdl:message name="ws_get_xstore_carpeta_uploadSoapIn">
+    <wsdl:part name="parameters" element="tns:ws_get_xstore_carpeta_upload" />
+  </wsdl:message>
+  <wsdl:message name="ws_get_xstore_carpeta_uploadSoapOut">
+    <wsdl:part name="parameters" element="tns:ws_get_xstore_carpeta_uploadResponse" />
+  </wsdl:message>
+  <wsdl:message name="ws_get_xstore_carpeta_uploadValidateAcceso">
+    <wsdl:part name="ValidateAcceso" element="tns:ValidateAcceso" />
   </wsdl:message>
   <wsdl:message name="ws_update_transaction_guiasSoapIn">
     <wsdl:part name="parameters" element="tns:ws_update_transaction_guias" />
@@ -848,6 +968,24 @@
   <wsdl:message name="ws_envia_scdrembValidateAcceso">
     <wsdl:part name="ValidateAcceso" element="tns:ValidateAcceso" />
   </wsdl:message>
+  <wsdl:message name="ws_valida_traspaso_tdaSoapIn">
+    <wsdl:part name="parameters" element="tns:ws_valida_traspaso_tda" />
+  </wsdl:message>
+  <wsdl:message name="ws_valida_traspaso_tdaSoapOut">
+    <wsdl:part name="parameters" element="tns:ws_valida_traspaso_tdaResponse" />
+  </wsdl:message>
+  <wsdl:message name="ws_valida_traspaso_tdaValidateAcceso">
+    <wsdl:part name="ValidateAcceso" element="tns:ValidateAcceso" />
+  </wsdl:message>
+  <wsdl:message name="ws_envio_traspaso_tdaSoapIn">
+    <wsdl:part name="parameters" element="tns:ws_envio_traspaso_tda" />
+  </wsdl:message>
+  <wsdl:message name="ws_envio_traspaso_tdaSoapOut">
+    <wsdl:part name="parameters" element="tns:ws_envio_traspaso_tdaResponse" />
+  </wsdl:message>
+  <wsdl:message name="ws_envio_traspaso_tdaValidateAcceso">
+    <wsdl:part name="ValidateAcceso" element="tns:ValidateAcceso" />
+  </wsdl:message>
   <wsdl:portType name="Bata_TransactionSoap">
     <wsdl:operation name="HelloWorld">
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Consula de bienvenida</wsdl:documentation>
@@ -869,6 +1007,16 @@
     <wsdl:operation name="list_file">
       <wsdl:input message="tns:list_fileSoapIn" />
       <wsdl:output message="tns:list_fileSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ws_lista_alma_Ecu">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Lista de almacenes de Ecuador</wsdl:documentation>
+      <wsdl:input message="tns:ws_lista_alma_EcuSoapIn" />
+      <wsdl:output message="tns:ws_lista_alma_EcuSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ws_get_xstore_carpeta_upload">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Lista de carpeta Xstore Upload</wsdl:documentation>
+      <wsdl:input message="tns:ws_get_xstore_carpeta_uploadSoapIn" />
+      <wsdl:output message="tns:ws_get_xstore_carpeta_uploadSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="ws_update_transaction_guias">
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Update de transaccion de guias</wsdl:documentation>
@@ -940,6 +1088,16 @@
       <wsdl:input message="tns:ws_envia_scdrembSoapIn" />
       <wsdl:output message="tns:ws_envia_scdrembSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="ws_valida_traspaso_tda">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Valida Tiendas traspasos</wsdl:documentation>
+      <wsdl:input message="tns:ws_valida_traspaso_tdaSoapIn" />
+      <wsdl:output message="tns:ws_valida_traspaso_tdaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ws_envio_traspaso_tda">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">envio de traspasos de tienda</wsdl:documentation>
+      <wsdl:input message="tns:ws_envio_traspaso_tdaSoapIn" />
+      <wsdl:output message="tns:ws_envio_traspaso_tdaSoapOut" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="Bata_TransactionSoap" type="tns:Bata_TransactionSoap">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -984,6 +1142,26 @@
       <soap:operation soapAction="http://bataperu.com.pe/list_file" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_lista_alma_Ecu">
+      <soap:operation soapAction="http://bataperu.com.pe/ws_lista_alma_Ecu" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ws_lista_alma_EcuValidateAcceso" part="ValidateAcceso" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_get_xstore_carpeta_upload">
+      <soap:operation soapAction="http://bataperu.com.pe/ws_get_xstore_carpeta_upload" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ws_get_xstore_carpeta_uploadValidateAcceso" part="ValidateAcceso" use="literal" />
       </wsdl:input>
       <wsdl:output>
         <soap:body use="literal" />
@@ -1129,6 +1307,26 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="ws_valida_traspaso_tda">
+      <soap:operation soapAction="http://bataperu.com.pe/ws_valida_traspaso_tda" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ws_valida_traspaso_tdaValidateAcceso" part="ValidateAcceso" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_envio_traspaso_tda">
+      <soap:operation soapAction="http://bataperu.com.pe/ws_envio_traspaso_tda" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ws_envio_traspaso_tdaValidateAcceso" part="ValidateAcceso" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="Bata_TransactionSoap12" type="tns:Bata_TransactionSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -1173,6 +1371,26 @@
       <soap12:operation soapAction="http://bataperu.com.pe/list_file" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_lista_alma_Ecu">
+      <soap12:operation soapAction="http://bataperu.com.pe/ws_lista_alma_Ecu" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ws_lista_alma_EcuValidateAcceso" part="ValidateAcceso" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_get_xstore_carpeta_upload">
+      <soap12:operation soapAction="http://bataperu.com.pe/ws_get_xstore_carpeta_upload" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ws_get_xstore_carpeta_uploadValidateAcceso" part="ValidateAcceso" use="literal" />
       </wsdl:input>
       <wsdl:output>
         <soap12:body use="literal" />
@@ -1313,6 +1531,26 @@
       <wsdl:input>
         <soap12:body use="literal" />
         <soap12:header message="tns:ws_envia_scdrembValidateAcceso" part="ValidateAcceso" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_valida_traspaso_tda">
+      <soap12:operation soapAction="http://bataperu.com.pe/ws_valida_traspaso_tda" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ws_valida_traspaso_tdaValidateAcceso" part="ValidateAcceso" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_envio_traspaso_tda">
+      <soap12:operation soapAction="http://bataperu.com.pe/ws_envio_traspaso_tda" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ws_envio_traspaso_tdaValidateAcceso" part="ValidateAcceso" use="literal" />
       </wsdl:input>
       <wsdl:output>
         <soap12:body use="literal" />

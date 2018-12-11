@@ -14,8 +14,12 @@ namespace CapaServicioWindows.Modular
         public  List<BataTransac.Ent_PathDBF> get_location_dbf(ref string _error_ws)
         {
             List<BataTransac.Ent_PathDBF> list = null;
+            Basico valida_ecu = null;
             try
             {
+
+                valida_ecu = new Basico();
+
                 /*acceso header user y pass clave de acceso a ws*/
                 BataTransac.ValidateAcceso header_user = new BataTransac.ValidateAcceso();
                 header_user.Username = ConexionWS.user;
@@ -31,7 +35,15 @@ namespace CapaServicioWindows.Modular
                     {
                         BataTransac.Ent_PathDBF valor = new BataTransac.Ent_PathDBF();
                         valor.rutloc_namedbf = listar.rutloc_namedbf;
-                        valor.rutloc_location = listar.rutloc_location;
+
+                        //if (!valida_ecu.valida_file_ecu())
+                       // {
+                         valor.rutloc_location = (!valida_ecu.valida_file_ecu()) ?listar.rutloc_location: listar.rutloc_location_ecu;
+                        //}
+
+                        
+
+                        valor.rutloc_location_ecu = listar.rutloc_location_ecu;
                         list.Add(valor);
                     }
                 }

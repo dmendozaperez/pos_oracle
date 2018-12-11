@@ -62,12 +62,14 @@
     <Compile Include="Interfaces\Dat_RecepcionGuias.cs" />
     <Compile Include="Interfaces\Dat_Scactco.cs" />
     <Compile Include="Interfaces\Dat_Scdremb.cs" />
+    <Compile Include="Logistica\Dat_Alma_Ecu.cs" />
     <Compile Include="Logistica\Dat_GuiasDespacho.cs" />
     <Compile Include="Logistica\Dat_Stock.cs" />
     <Compile Include="Poslog\Dat_PosLog.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tienda\Dat_Tienda.cs" />
     <Compile Include="Transac\Dat_PosLog.cs" />
+    <Compile Include="Util\Dat_ProcXstore.cs" />
     <Compile Include="Venta\Dat_Venta.cs" />
     <Compile Include="Venta\DBF_NET.cs" />
     <Compile Include="Xoficce\StockAct.cs" />

@@ -11,7 +11,7 @@ namespace CapaDato.Transac
 {
     public class Dat_PosLog
     {
-        public string InsertarTransac_Poslog(string entrada_poslog,string ambiente_bd)
+        public string InsertarTransac_Poslog(string entrada_poslog,string ambiente_bd,string pais)
         {
             string sqlquery = "USP_INSERTAR_POS_LOG";
             string _valida = "";
@@ -23,18 +23,36 @@ namespace CapaDato.Transac
                 /*QA=QA*/
                 string conexion_sql = "";
 
-                switch (ambiente_bd)
+                switch(pais)
                 {
-                    case "PROD":
-                        conexion_sql = Ent_Conexion.conexion_posperu;
+                    case "PE":
+                        switch (ambiente_bd)
+                        {
+                            case "PROD":
+                                conexion_sql = Ent_Conexion.conexion_posperu;
+                                break;
+                            case "DES":
+                                conexion_sql = Ent_Conexion.conexion_posperu_DES;
+                                break;
+                            case "QA":
+                                conexion_sql = Ent_Conexion.conexion_posperu_QA;
+                                break;
+                        }
                         break;
-                    case "DES":
-                        conexion_sql = Ent_Conexion.conexion_posperu_DES;
-                        break;
-                    case "QA":
-                        conexion_sql = Ent_Conexion.conexion_posperu_QA;
+                    case "EC":
+                        switch (ambiente_bd)
+                        {
+                            case "PROD":
+                                conexion_sql = Ent_Conexion.conexion_posecuador;
+                                break;
+                            case "QA":
+                                conexion_sql = Ent_Conexion.conexion_posecuador_QA;
+                                break;
+                        }
                         break;
                 }
+
+                
 
                 using (SqlConnection cn = new SqlConnection(conexion_sql))
                 {
@@ -46,6 +64,7 @@ namespace CapaDato.Transac
                             cmd.CommandTimeout = 0;
                             cmd.CommandType = CommandType.StoredProcedure;
                             cmd.Parameters.AddWithValue("@data_pos", entrada_poslog);
+                            cmd.Parameters.AddWithValue("@pais", pais);
                             cmd.ExecuteNonQuery();
                         }
                     }

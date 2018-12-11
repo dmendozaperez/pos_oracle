@@ -97,6 +97,12 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <None Include="Service References\BataTransac\Bata_Transaction.wsdl" />
+    <None Include="Service References\BataTransac\ServiceWin32Framework4.BataTransac.Ent_Alma_Ecu.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\BataTransac\ServiceWin32Framework4.BataTransac.Ent_CarpetaUpload_Xstore.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\BataTransac\ServiceWin32Framework4.BataTransac.Ent_Config_Service.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

@@ -83,6 +83,9 @@
     <None Include="packages.config" />
     <None Include="Properties\DataSources\System.Data.DataSet.datasource" />
     <None Include="Service References\BataTransac\Bata_Transaction.wsdl" />
+    <None Include="Service References\BataTransac\ServiceWinTransaction.BataTransac.Ent_Alma_Ecu.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\BataTransac\ServiceWinTransaction.BataTransac.Ent_Config_Service.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

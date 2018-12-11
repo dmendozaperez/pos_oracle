@@ -53,7 +53,7 @@ namespace CapaServicioWindows.Modular
                                       "DDES_GGUIA,DDES_CCOND,DDES_CALZ,DDES_NCALZ,DDES_TOCAJ,DDES_IMPRE,DDES_GVALO," +
                                       "DDES_SUBGR,DDES_RUCTC,DDES_TRANS,DDES_TRAN2,DDES_OBSER,DDES_NOMTC,DDES_NGUIA," +
                                       "DDES_NRLIQ,DDES_LIMPR,DDES_EMPRE,DDES_CANAL,DDES_CADEN,DDES_SECCI,DDES_FTX,DDES_FTXTD " +
-                                      "FROM SCDDDES WHERE DDES_FDESP>=CTOD('" + fecha_despacho.ToString("MM/dd/yy")  + "') and DDES_TIPO='DES' and DDES_ESTAD<>'A' AND EMPTY(DDES_FTXTD) AND (NOT EMPTY(DDES_CADEN)) ";            
+                                      "FROM SCDDDES WHERE DDES_FDESP>=CTOD('" + fecha_despacho.ToString("MM/dd/yy") + "') and DDES_TIPO='DES' and DDES_ESTAD<>'A' AND EMPTY(DDES_FTXTD) AND (NOT EMPTY(DDES_CADEN)) and DDES_GUIRE='2006752'" + get_query_alm_ecu() ;            
             try
             {
                 //Util dd = new Util();
@@ -117,7 +117,8 @@ namespace CapaServicioWindows.Modular
             }
             catch (Exception exc)
             {
-                error = exc.Message;
+                throw;
+                //error = exc.Message;
                 _lista_scdddes = null;
             }
             return _lista_scdddes;
@@ -264,16 +265,22 @@ namespace CapaServicioWindows.Modular
         /// </summary>
         /// <param name="nroguia"></param>
         /// <returns></returns>
-        private BataTransac.Ent_Fvdespc get_fvdespc(string codalm, string nroguia,string _path, ref string error,ref Boolean fila_existe)
+        private List<BataTransac.Ent_Fvdespc> get_fvdespc(string codalm, string nroguia,string _path, ref string error,ref Boolean fila_existe,string ruta_scdddes)
         {
-            BataTransac.Ent_Fvdespc fvdespc = null;
+            List<BataTransac.Ent_Fvdespc> fvdespc = null;
+            //String sqlquery_fvdespc = "SELECT DESC_ALMAC,DESC_GUDIS,DESC_NDESP,DESC_TDES,DESC_FECHA,DESC_FDESP," +
+            //                          "DESC_ESTAD,DESC_TIPO,DESC_TORI,DESC_FEMI,DESC_SEMI,DESC_FTRA,DESC_NUME," +
+            //                          "DESC_CONCE,DESC_NMOVC,DESC_EMPRE,DESC_SECCI,DESC_CANAL,DESC_CADEN,DESC_FTX," +
+            //                          "DESC_TXPOS,DESC_UNCA,DESC_UNNC,DESC_CAJA,DESC_VACA,DESC_VANC,DESC_VCAJ " +
+            //                          "FROM FVDESPC WHERE DESC_GUDIS='" + nroguia + "' AND DESC_ALMAC='" + codalm +"'";
             String sqlquery_fvdespc = "SELECT DESC_ALMAC,DESC_GUDIS,DESC_NDESP,DESC_TDES,DESC_FECHA,DESC_FDESP," +
-                                      "DESC_ESTAD,DESC_TIPO,DESC_TORI,DESC_FEMI,DESC_SEMI,DESC_FTRA,DESC_NUME," +
-                                      "DESC_CONCE,DESC_NMOVC,DESC_EMPRE,DESC_SECCI,DESC_CANAL,DESC_CADEN,DESC_FTX," +
-                                      "DESC_TXPOS,DESC_UNCA,DESC_UNNC,DESC_CAJA,DESC_VACA,DESC_VANC,DESC_VCAJ " +
-                                      "FROM FVDESPC WHERE DESC_GUDIS='" + nroguia + "' AND DESC_ALMAC='" + codalm +"'";
+                          "DESC_ESTAD,DESC_TIPO,DESC_TORI,DESC_FEMI,DESC_SEMI,DESC_FTRA,DESC_NUME," +
+                          "DESC_CONCE,DESC_NMOVC,DESC_EMPRE,DESC_SECCI,DESC_CANAL,DESC_CADEN,DESC_FTX," +
+                          "DESC_TXPOS,DESC_UNCA,DESC_UNNC,DESC_CAJA,DESC_VACA,DESC_VANC,DESC_VCAJ " +
+                          "FROM FVDESPC WHERE DESC_GUDIS='2006752' and   DESC_GUDIS + DESC_ALMAC IN (SELECT DDES_GUIRE + DDES_ALMAC FROM " + ruta_scdddes + "/SCDDDES WHERE DDES_FDESP>=CTOD('" + fecha_despacho.ToString("MM/dd/yy") + "') and DDES_TIPO='DES' and DDES_ESTAD<>'A' AND EMPTY(DDES_FTXTD) AND (NOT EMPTY(DDES_CADEN)))";
             try
             {
+                //_path = @"D:\FVT\SISTEMAS";
                 using (OleDbConnection cn = new OleDbConnection(ConexionDBF._conexion_fvdes_oledb(_path)))
                 {
                     using (OleDbCommand cmd = new OleDbCommand(sqlquery_fvdespc, cn))
@@ -324,7 +331,7 @@ namespace CapaServicioWindows.Modular
                             else
                             {
                                 fila_existe = true;
-                                fvdespc = list_fvdespc[0];
+                                fvdespc = list_fvdespc;
                             }
                         }
                     }
@@ -332,6 +339,13 @@ namespace CapaServicioWindows.Modular
             }
             catch (Exception exc)
             {
+
+                string _hora = DateTime.Now.ToLongTimeString() + exc.Message;
+                TextWriter tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                tw.WriteLine(_hora);
+                tw.Flush();
+                tw.Close();
+                tw.Dispose();
                 error = exc.Message;
                 fvdespc=null;
             }
@@ -342,16 +356,22 @@ namespace CapaServicioWindows.Modular
         /// </summary>
         /// <param name="nroguia"></param>
         /// <returns></returns>
-        private DataTable get_fvdespd(string codalm,string nroguia, string _path, ref string error)
+        private DataTable get_fvdespd(string codalm,string nroguia, string _path, ref string error, string ruta_scdddes)
         {
             DataTable fvdespd = null;
+            //string sqlquery_fvdespd = "SELECT DESD_TIPO,DESD_GUDIS,DESD_NDESP,DESD_ALMAC,DESD_ARTIC,DESD_CALID," +
+            //                           "DESD_ME00,DESD_ME01,DESD_ME02,DESD_ME03,DESD_ME04,DESD_ME05,DESD_ME06,DESD_ME07,DESD_ME08," + 
+            //                           "DESD_ME09,DESD_ME10,DESD_ME11,DESD_CLASE,DESD_MERC,DESD_CATEG,DESD_SUBCA," + 
+            //                           "DESD_MARCA,DESD_MERC3,DESD_CATE3,DESD_SUBC3,DESD_MARC3,DESD_CNDME," + 
+            //                           "DESD_EMPRE,DESD_SECCI,DESD_CANAL," +
+            //                           "DESD_CADEN,DESD_GGUIA,DESD_ESTAD,DESD_PRVTA,DESD_COSTO FROM FVDESPD WHERE DESD_GUDIS='" + nroguia + "'" +
+            //                           " AND DESD_ALMAC='" + codalm + "'";
             string sqlquery_fvdespd = "SELECT DESD_TIPO,DESD_GUDIS,DESD_NDESP,DESD_ALMAC,DESD_ARTIC,DESD_CALID," +
-                                       "DESD_ME00,DESD_ME01,DESD_ME02,DESD_ME03,DESD_ME04,DESD_ME05,DESD_ME06,DESD_ME07,DESD_ME08," + 
-                                       "DESD_ME09,DESD_ME10,DESD_ME11,DESD_CLASE,DESD_MERC,DESD_CATEG,DESD_SUBCA," + 
-                                       "DESD_MARCA,DESD_MERC3,DESD_CATE3,DESD_SUBC3,DESD_MARC3,DESD_CNDME," + 
-                                       "DESD_EMPRE,DESD_SECCI,DESD_CANAL," +
-                                       "DESD_CADEN,DESD_GGUIA,DESD_ESTAD,DESD_PRVTA,DESD_COSTO FROM FVDESPD WHERE DESD_GUDIS='" + nroguia + "'" +
-                                       " AND DESD_ALMAC='" + codalm + "'";
+                                      "DESD_ME00,DESD_ME01,DESD_ME02,DESD_ME03,DESD_ME04,DESD_ME05,DESD_ME06,DESD_ME07,DESD_ME08," +
+                                      "DESD_ME09,DESD_ME10,DESD_ME11,DESD_CLASE,DESD_MERC,DESD_CATEG,DESD_SUBCA," +
+                                      "DESD_MARCA,DESD_MERC3,DESD_CATE3,DESD_SUBC3,DESD_MARC3,DESD_CNDME," +
+                                      "DESD_EMPRE,DESD_SECCI,DESD_CANAL," +
+                                      "DESD_CADEN,DESD_GGUIA,DESD_ESTAD,DESD_PRVTA,DESD_COSTO FROM FVDESPD WHERE DESD_GUDIS='2006752' and  DESD_GUDIS + DESD_ALMAC IN (SELECT DDES_GUIRE + DDES_ALMAC FROM " + ruta_scdddes + "/SCDDDES WHERE DDES_FDESP>=CTOD('" + fecha_despacho.ToString("MM/dd/yy") + "') and DDES_TIPO='DES' and DDES_ESTAD<>'A' AND EMPTY(DDES_FTXTD) AND (NOT EMPTY(DDES_CADEN)))";
             try
             {
                 using (OleDbConnection cn = new OleDbConnection(ConexionDBF._conexion_fvdes_oledb(_path)))
@@ -374,6 +394,71 @@ namespace CapaServicioWindows.Modular
                 fvdespd = null;                
             }
             return fvdespd;
+        }
+       
+        public string get_query_alm_ecu()
+        {
+            string sqlquery = "";
+            try
+            {
+                if (valida_file_ecu())
+                {
+                    BataTransac.ValidateAcceso header_user = new BataTransac.ValidateAcceso();
+                    header_user.Username = ConexionWS.user;
+                    header_user.Password = ConexionWS.password;
+
+                    BataTransac.Bata_TransactionSoapClient bata_trans = new BataTransac.Bata_TransactionSoapClient();
+
+                    var lista_almac = bata_trans.ws_lista_alma_Ecu(header_user);
+
+                    if (lista_almac!=null)
+                    {
+                        
+                        Int32 cur_alm = 1;
+                        foreach (var item in lista_almac)
+                        {
+                            if (cur_alm==1)
+                            {
+                                sqlquery = " and DDES_ALMAC in ('" + item.alma_ecu+ "'";
+                            }
+                            else
+                            {
+                                sqlquery += ",'"+item.alma_ecu + "'" ;
+                            }
+
+                            if (lista_almac.Count()==cur_alm)
+                            {
+                                sqlquery += ")";
+                            }
+                            
+
+                            cur_alm += 1;
+                        }
+                    }
+                }
+            }
+            catch 
+            {
+                sqlquery = "";                
+            }
+            return sqlquery;
+        }
+        public Boolean valida_file_ecu()
+        {
+            Boolean valida = false;
+            try
+            {
+                string file = @"D:\BataTransaction\ECU.txt";
+                if (File.Exists(file))
+                {
+                    valida = true;
+                }
+            }
+            catch 
+            {
+                valida = false;
+            }
+            return valida;
         }
 
         /// <summary>
@@ -409,12 +494,19 @@ namespace CapaServicioWindows.Modular
                 string ruta_validacion = "";
                 if (_locatio_noservicio!=null)
                 {
-                     ruta_validacion = _locatio_noservicio.rutloc_location + "\\" + _locatio_noservicio.rutloc_namedbf + ".txt";
-
-                   /* if (File.Exists(@ruta_validacion)) return;*/ //valida_exists_txt = true;
+                   
+                    ruta_validacion = _locatio_noservicio.rutloc_location + "\\" + _locatio_noservicio.rutloc_namedbf + ".txt";                   
+                    /* if (File.Exists(@ruta_validacion)) return;*/ //valida_exists_txt = true;
 
                 }
 
+                #endregion
+
+                #region<EN ESTE PASO TRATAMOS DE ENTRAR AL NOVELL PARA TRAERME LA INFO>
+                if (valida_file_ecu())
+                {
+                    NetworkShare.ConnectToShare(_locatio_noservicio.rutloc_location, ConexionDBF.user_novell, ConexionDBF.password_novell);
+                }
                 #endregion
 
                 //if (valida_exists_txt) return;
@@ -426,8 +518,35 @@ namespace CapaServicioWindows.Modular
                 string _error = "";
                 /*ya no entra a consultar*/
                 if (File.Exists(@ruta_validacion)) return;
+                string _hora = DateTime.Now.ToLongTimeString() + "==>INGRESO PASO1";
+                TextWriter tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                tw.WriteLine(_hora);
+                tw.Flush();
+                tw.Close();
+                tw.Dispose();
                 /**/
+
+
+                #region<EN ESTE PASO TRATAMOS DE ENTRAR AL NOVELL PARA TRAERME LA INFO>
+                if (valida_file_ecu())
+                {
+                    NetworkShare.ConnectToShare(_locatio_noservicio.rutloc_location, ConexionDBF.user_novell, ConexionDBF.password_novell);
+                }
+                else
+                {
+                    NetworkShare.ConnectToShare(_locatio_scdddes.rutloc_location, @".\Tareas", "tareas");
+                }
+                #endregion
+
                 _lista_guiasC = get_scdddes(_locatio_scdddes.rutloc_location,ref _error);
+               
+
+                _hora = DateTime.Now.ToLongTimeString() + "==>get_scdddes ==>" + _error + _lista_guiasC.Count().ToString();
+                tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                tw.WriteLine(_hora);
+                tw.Flush();
+                tw.Close();
+                tw.Dispose();
 
                 /*VERIFICAR SI HAY ERROR*/
                 if (_error.Length>0)
@@ -441,27 +560,86 @@ namespace CapaServicioWindows.Modular
                
                 if (_lista_guiasC!=null)
                 {
+                    #region<METODO GRUPO CONSULTA>
+                    if (File.Exists(@ruta_validacion)) return;
+                    /*en este caso */
+                    _error = "";
+                    name_dbf = "FVDESPC";
+                    Boolean existe_data = false;
+                    var _location_fvdespc = listar_location_dbf.Where(x => x.rutloc_namedbf == name_dbf).FirstOrDefault();
+
+                    _hora = DateTime.Now.ToLongTimeString() + "inicio==>acceso dbf ";
+                    tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                    tw.WriteLine(_hora);
+                    tw.Flush();
+                    tw.Close();
+                    tw.Dispose();
+
+                    #region<EN ESTE PASO TRATAMOS DE ENTRAR AL NOVELL PARA TRAERME LA INFO>
+                    if (valida_file_ecu())
+                    {
+                        NetworkShare.ConnectToShare(_location_fvdespc.rutloc_location, ConexionDBF.user_novell, ConexionDBF.password_novell);
+                    }
+                    #endregion
+
+                    List<BataTransac.Ent_Fvdespc> fvdespc_lista = get_fvdespc("","", _location_fvdespc.rutloc_location, ref _error, ref existe_data, _locatio_scdddes.rutloc_location);
+                    _hora = DateTime.Now.ToLongTimeString() + "get_fvdespc==>>" + _error + " " + fvdespc_lista.Count().ToString();
+                    tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                    tw.WriteLine(_hora);
+                    tw.Flush();
+                    tw.Close();
+                    tw.Dispose();
+
+                    name_dbf = "FVDESPD";
+                    var _location_fvdespd = listar_location_dbf.Where(x => x.rutloc_namedbf == name_dbf).FirstOrDefault();
+                    if (File.Exists(@ruta_validacion)) return;
+                    #region<EN ESTE PASO TRATAMOS DE ENTRAR AL NOVELL PARA TRAERME LA INFO>
+                    if (valida_file_ecu())
+                    {
+                        NetworkShare.ConnectToShare(_location_fvdespd.rutloc_location, ConexionDBF.user_novell, ConexionDBF.password_novell);
+                    }
+                    #endregion
+
+                    DataTable fvdespd_lista = get_fvdespd("", "", _location_fvdespd.rutloc_location, ref _error, _locatio_scdddes.rutloc_location);
+                    _hora = DateTime.Now.ToLongTimeString() + "get_fvdespd==>>" + _error + " " + fvdespd_lista.Rows.Count.ToString();
+                    tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                    tw.WriteLine(_hora);
+                    tw.Flush();
+                    tw.Close();
+                    tw.Dispose();
+
+
+                    _hora = DateTime.Now.ToLongTimeString() + "fin==>acceso dbf ";
+                    tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                    tw.WriteLine(_hora);
+                    tw.Flush();
+                    tw.Close();
+                    tw.Dispose();
+
+                    _hora = DateTime.Now.ToLongTimeString() + "fin==>acceso dbf ";
+                    tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                    tw.WriteLine(_hora);
+                    tw.Flush();
+                    tw.Close();
+                    tw.Dispose();
+                    #endregion
+                    /**/
+
                     foreach (BataTransac.Ent_Scdddes filaC in _lista_guiasC)
                     {
-                        //if (filaC.DDES_GUIRE == "1914315")
-                        //{
+                      
+                        var fvdespc_tmp = fvdespc_lista.Where(d => d.DESC_ALMAC == filaC.DDES_ALMAC && d.DESC_GUDIS == filaC.DDES_GUIRE).ToList(); // get_fvdespc(filaC.DDES_ALMAC, filaC.DDES_GUIRE, _location_fvdespc.rutloc_location, ref _error, ref existe_data);
 
-                     
+                        BataTransac.Ent_Fvdespc fvdespc = new BataTransac.Ent_Fvdespc();
+                        fvdespc = fvdespc_tmp[0];
+                      
 
-                        _error = "";
-                        name_dbf = "FVDESPC";
-
-                        /*verificar si  existe la guias en la tabla cab fv*/
-                        Boolean existe_data = false;
-
-                        var _location_fvdespc = listar_location_dbf.Where(x => x.rutloc_namedbf == name_dbf).FirstOrDefault();
-
-                        /*ya no entra a consultar*/
-                        if (File.Exists(@ruta_validacion)) return;
-                        /**/
-
-                        BataTransac.Ent_Fvdespc fvdespc = get_fvdespc(filaC.DDES_ALMAC, filaC.DDES_GUIRE, _location_fvdespc.rutloc_location, ref _error, ref existe_data);
-
+                        _hora = DateTime.Now.ToLongTimeString() + "==>get_fvdespc " + filaC.DDES_GUIRE; 
+                        tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                        tw.WriteLine(_hora);
+                        tw.Flush();
+                        tw.Close();
+                        tw.Dispose();
                         /*si existe data entonces entra a la condicion*/
                         if (existe_data)
                         {
@@ -488,13 +666,33 @@ namespace CapaServicioWindows.Modular
                             {
                                 _error = "";
                                 name_dbf = "FVDESPD";
-                                var _location_fvdespd = listar_location_dbf.Where(x => x.rutloc_namedbf == name_dbf).FirstOrDefault();
+                              
+                         
 
-                                /*ya no entra a consultar*/
-                                if (File.Exists(@ruta_validacion)) return;
-                                /**/
+                                _hora = DateTime.Now.ToLongTimeString() + "inicio==>get_fvdespd " + filaC.DDES_GUIRE;
+                                tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                                tw.WriteLine(_hora);
+                                tw.Flush();
+                                tw.Close();
+                                tw.Dispose();
 
-                                DataTable fvdespd = get_fvdespd(filaC.DDES_ALMAC, filaC.DDES_GUIRE, _location_fvdespd.rutloc_location, ref _error);
+                               
+                                DataTable fvdespd = new DataTable();
+                                fvdespd = fvdespd_lista.Clone();
+                                DataRow[] filas_fvdespd = null;
+                                filas_fvdespd = fvdespd_lista.Select("DESD_ALMAC='" + filaC.DDES_ALMAC + "' and DESD_GUDIS='" + filaC.DDES_GUIRE + "'"); // get_fvdespd(filaC.DDES_ALMAC, filaC.DDES_GUIRE, _location_fvdespd.rutloc_location, ref _error);
+
+                                foreach(DataRow fila in filas_fvdespd)
+                                {
+                                    fvdespd.ImportRow(fila);
+                                }
+
+                                _hora = DateTime.Now.ToLongTimeString() + "fin==>get_fvdespd " + filaC.DDES_GUIRE;
+                                tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                                tw.WriteLine(_hora);
+                                tw.Flush();
+                                tw.Close();
+                                tw.Dispose();
 
                                 /*VERIFICAR SI HAY ERROR*/
                                 if (_error.Length > 0)
@@ -519,9 +717,23 @@ namespace CapaServicioWindows.Modular
                                         BataTransac.Ent_Scdddes scdddes = new BataTransac.Ent_Scdddes();
                                         scdddes = filaC;
 
+                                        _hora = DateTime.Now.ToLongTimeString() + "==>inicio de envio web service " + filaC.DDES_GUIRE;
+                                        tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                                        tw.WriteLine(_hora);
+                                        tw.Flush();
+                                        tw.Close();
+                                        tw.Dispose();
                                         /***********************************/
                                         Envio_Guias ws_envio = new Envio_Guias();
                                         string envio_guias_ws = ws_envio.envio_ws_guias(fvdespc, scdddes);
+
+                                        _hora = DateTime.Now.ToLongTimeString() + "==>envio web service " + filaC.DDES_GUIRE;
+                                        tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                                        tw.WriteLine(_hora);
+                                        tw.Flush();
+                                        tw.Close();
+                                        tw.Dispose();
+
                                         //si return es true entonces validamos los dbf
                                         if (envio_guias_ws.Length == 0)
                                         {
@@ -532,8 +744,29 @@ namespace CapaServicioWindows.Modular
                                             /*ya no entra a consultar*/
                                             if (File.Exists(@ruta_validacion)) return;
                                             /**/
+                                            _hora = DateTime.Now.ToLongTimeString() + "==>inicio de update scddes " + filaC.DDES_GUIRE;
+                                            tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                                            tw.WriteLine(_hora);
+                                            tw.Flush();
+                                            tw.Close();
+                                            tw.Dispose();
+
+                                            #region<EN ESTE PASO TRATAMOS DE ENTRAR AL NOVELL PARA TRAERME LA INFO>
+                                            if (valida_file_ecu())
+                                            {
+                                                NetworkShare.ConnectToShare(_locatio_scdddes_edit.rutloc_location, ConexionDBF.user_novell, ConexionDBF.password_novell);
+                                            }
+                                            #endregion
 
                                             edit_scdddes(fvdespc.DESC_ALMAC, fvdespc.DESC_GUDIS, _locatio_scdddes_edit.rutloc_location,ref _error_ws);
+                                            _hora = DateTime.Now.ToLongTimeString() + "==>fin de update scddes " + _error_ws + "  "  + filaC.DDES_GUIRE;
+                                            tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                                            tw.WriteLine(_hora);
+                                            tw.Flush();
+                                            tw.Close();
+                                            tw.Dispose();
+
+
                                         }
                                         else
                                         {
@@ -554,8 +787,8 @@ namespace CapaServicioWindows.Modular
             }
             catch (Exception exc)
             {
-                _error_ws = exc.Message;
-                _error_transac = exc.Message;
+                _error_ws = exc.Message +" error de metodo";
+                _error_transac = exc.Message + " error de metodo";
                 //_envio_guias = "";
             }
             //return _error_transac;

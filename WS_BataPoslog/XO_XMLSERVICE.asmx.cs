@@ -1,7 +1,9 @@
 ﻿using CapaDato.Control;
 using CapaDato.Transac;
+using CapaEntidad.Util;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Services;
@@ -29,17 +31,30 @@ namespace WS_BataPoslog
             Dat_PosLog insert_bd = null;
             try
             {
+
+                //Ent_Conexion.conexion = ConfigurationManager.ConnectionStrings["SQL_PROD_PE"].ConnectionString;
+                //Ent_Conexion.conexion_posperu = ConfigurationManager.ConnectionStrings["SQL_PROD_PE"].ConnectionString;
+                //Ent_Conexion.conexion_posperu_DES = ConfigurationManager.ConnectionStrings["SQL_DES_PE"].ConnectionString;
+                //Ent_Conexion.conexion_posperu_QA = ConfigurationManager.ConnectionStrings["SQL_QA_PE"].ConnectionString;
+                //Ent_Conexion.conexion_posecuador = ConfigurationManager.ConnectionStrings["SQL_PROD_EC"].ConnectionString;
+                //Ent_Conexion.conexion_posecuador_QA = ConfigurationManager.ConnectionStrings["SQL_QA_EC"].ConnectionString;
+
+
+
                 /*ambiente_bd*/
                 /*PROD=PRODUCCION*/
                 /*DES=DESARROLLO*/
                 /*QA=QA*/
 
-                string ambiente_bd = "QA";
+                //string ambiente_bd = "PROD";
+                //string pais = "EC";
 
+                string ambiente_bd = ConfigurationManager.AppSettings["AMBIENTE"].ToString();
+                string pais = ConfigurationManager.AppSettings["PAIS"].ToString();// "EC";
 
 
                 insert_bd = new Dat_PosLog();
-                string _valida_error=insert_bd.InsertarTransac_Poslog(rawPoslogString, ambiente_bd);
+                string _valida_error=insert_bd.InsertarTransac_Poslog(rawPoslogString, ambiente_bd, pais);
                 /*en este proceso quiere decir que paso un error en la transacion del pos log
                  CODIGO DE ERROR 01*/
                 if (_valida_error.Length>0)

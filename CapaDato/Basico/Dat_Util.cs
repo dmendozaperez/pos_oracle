@@ -41,6 +41,9 @@ namespace CapaDato.Basico
                                     Ent_PathDBF dbf = new Ent_PathDBF();
                                     dbf.rutloc_namedbf = dr["RUTLOC_NAMEDBF"].ToString();
                                     dbf.rutloc_location = dr["RUTLOC_LOCATION"].ToString();
+                                    dbf.rutloc_location_ecu= dr["RUTLOC_LOCATION_ECU"].ToString();
+
+
                                     list.Add(dbf);
                                 }
                             }

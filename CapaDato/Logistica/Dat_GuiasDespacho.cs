@@ -101,7 +101,14 @@ namespace CapaDato.Logistica
                                           cod_tda = dr["COD_TDA"].ToString(),
                                           des_tda = dr["DES_TDA"].ToString(),
                                           con_des = dr["CONCEPTO"].ToString(),
-                                          fec_des = Convert.ToDateTime(dr["FECHA_DESP"])
+                                          fec_des = Convert.ToDateTime(dr["FECHA_DESP"]),
+                                          Amb_Pais= dr["Amb_Pais"].ToString(),
+                                          Amb_Ftp_Server = dr["Amb_Ftp_Server"].ToString(),
+                                          Amb_Ftp_User = dr["Amb_Ftp_User"].ToString(),
+                                          Amb_Ftp_Pass = dr["Amb_Ftp_Pass"].ToString(),
+                                          Amb_Ftp_Port =Convert.ToInt32(dr["Amb_Ftp_Port"]),
+                                          Amb_Ftp_Path = dr["Amb_Ftp_Path"].ToString(),
+
                                       }).ToList();
                         }
                     }

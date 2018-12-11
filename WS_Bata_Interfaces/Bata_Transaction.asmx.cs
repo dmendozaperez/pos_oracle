@@ -4,6 +4,7 @@ using CapaDato.Control;
 using CapaDato.Interfaces;
 using CapaDato.Logistica;
 using CapaDato.Tienda;
+using CapaDato.Util;
 using CapaDato.Venta;
 using CapaEntidad.Interfaces;
 using CapaEntidad.Logistica;
@@ -97,6 +98,55 @@ namespace WS_Bata_Interfaces
         {
             return new Ent_List_Scdrem();
         }
+
+        [SoapHeader("Authentication", Required = true)]
+        [WebMethod(Description = "Lista de almacenes de Ecuador")]
+        public List<Ent_Alma_Ecu> ws_lista_alma_Ecu()
+        {
+            autentication_ws = new Ba_WsConexion();
+            List<Ent_Alma_Ecu> listar = null;
+            Dat_Alma_Ecu dat_alma = null;
+            try
+            {
+                Boolean valida_ws = autentication_ws.ckeckAuthentication_ws("01", Authentication.Username, Authentication.Password);
+                if (valida_ws)
+                {
+                    dat_alma = new Dat_Alma_Ecu();
+                    listar = dat_alma.get_lista_alma_ecu();
+                    /*********************************************************/
+                }
+
+            }
+            catch (Exception)
+            {
+                listar = null;
+            }
+            return listar;
+        }
+
+        [SoapHeader("Authentication", Required = true)]
+        [WebMethod(Description = "Lista de carpeta Xstore Upload")]
+        public List<Ent_CarpetaUpload_Xstore> ws_get_xstore_carpeta_upload()
+        {
+            autentication_ws = new Ba_WsConexion();
+            List<Ent_CarpetaUpload_Xstore> listar = null;
+            Dat_ProcXstore dat_proc = null;
+            try
+            {
+                Boolean valida_ws = autentication_ws.ckeckAuthentication_ws("01", Authentication.Username, Authentication.Password);
+                if (valida_ws)
+                {
+                    dat_proc = new Dat_ProcXstore();
+                    listar =dat_proc.get_xs_carpeta_upload();
+                }
+            }
+            catch (Exception)
+            {
+                listar = null;
+            }
+            return listar;
+        }
+
 
         [SoapHeader("Authentication", Required = true)]
         [WebMethod(Description = "Update de transaccion de guias")]

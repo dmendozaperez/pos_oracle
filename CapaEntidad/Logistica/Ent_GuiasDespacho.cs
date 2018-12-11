@@ -16,7 +16,12 @@ namespace CapaEntidad.Logistica
         public string des_tda { get; set; }
         public string con_des { get; set; }
         public DateTime fec_des { get; set; }
-
+        public string Amb_Pais { get; set; }
+        public string Amb_Ftp_Server { get; set; }
+        public string Amb_Ftp_User { get; set; }
+        public string Amb_Ftp_Pass { get; set; }
+        public Int32 Amb_Ftp_Port { get; set; }
+        public string Amb_Ftp_Path { get; set; }
     }
     public class Ent_GuiasDespacho_Det
     {

@@ -53,7 +53,7 @@ namespace CapaServicioWindows.Modular
                                       "DDES_GGUIA,DDES_CCOND,DDES_CALZ,DDES_NCALZ,DDES_TOCAJ,DDES_IMPRE,DDES_GVALO," +
                                       "DDES_SUBGR,DDES_RUCTC,DDES_TRANS,DDES_TRAN2,DDES_OBSER,DDES_NOMTC,DDES_NGUIA," +
                                       "DDES_NRLIQ,DDES_LIMPR,DDES_EMPRE,DDES_CANAL,DDES_CADEN,DDES_SECCI,DDES_FTX,DDES_FTXTD " +
-                                      "FROM SCDDDES WHERE DDES_FDESP>=CTOD('" + fecha_despacho.ToString("MM/dd/yy") + "') and DDES_TIPO='DES' and DDES_ESTAD<>'A' AND EMPTY(DDES_FTXTD) AND (NOT EMPTY(DDES_CADEN)) and DDES_GUIRE='2006752'" + get_query_alm_ecu() ;            
+                                      "FROM SCDDDES WHERE DDES_FDESP>=CTOD('" + fecha_despacho.ToString("MM/dd/yy") + "') and DDES_TIPO='DES' and DDES_ESTAD<>'A' AND EMPTY(DDES_FTXTD) AND (NOT EMPTY(DDES_CADEN)) " + get_query_alm_ecu() ;            
             try
             {
                 //Util dd = new Util();
@@ -277,7 +277,7 @@ namespace CapaServicioWindows.Modular
                           "DESC_ESTAD,DESC_TIPO,DESC_TORI,DESC_FEMI,DESC_SEMI,DESC_FTRA,DESC_NUME," +
                           "DESC_CONCE,DESC_NMOVC,DESC_EMPRE,DESC_SECCI,DESC_CANAL,DESC_CADEN,DESC_FTX," +
                           "DESC_TXPOS,DESC_UNCA,DESC_UNNC,DESC_CAJA,DESC_VACA,DESC_VANC,DESC_VCAJ " +
-                          "FROM FVDESPC WHERE DESC_GUDIS='2006752' and   DESC_GUDIS + DESC_ALMAC IN (SELECT DDES_GUIRE + DDES_ALMAC FROM " + ruta_scdddes + "/SCDDDES WHERE DDES_FDESP>=CTOD('" + fecha_despacho.ToString("MM/dd/yy") + "') and DDES_TIPO='DES' and DDES_ESTAD<>'A' AND EMPTY(DDES_FTXTD) AND (NOT EMPTY(DDES_CADEN)))";
+                          "FROM FVDESPC WHERE   DESC_GUDIS + DESC_ALMAC IN (SELECT DDES_GUIRE + DDES_ALMAC FROM " + ruta_scdddes + "/SCDDDES WHERE DDES_FDESP>=CTOD('" + fecha_despacho.ToString("MM/dd/yy") + "') and DDES_TIPO='DES' and DDES_ESTAD<>'A' AND EMPTY(DDES_FTXTD) AND (NOT EMPTY(DDES_CADEN)))";
             try
             {
                 //_path = @"D:\FVT\SISTEMAS";
@@ -371,7 +371,7 @@ namespace CapaServicioWindows.Modular
                                       "DESD_ME09,DESD_ME10,DESD_ME11,DESD_CLASE,DESD_MERC,DESD_CATEG,DESD_SUBCA," +
                                       "DESD_MARCA,DESD_MERC3,DESD_CATE3,DESD_SUBC3,DESD_MARC3,DESD_CNDME," +
                                       "DESD_EMPRE,DESD_SECCI,DESD_CANAL," +
-                                      "DESD_CADEN,DESD_GGUIA,DESD_ESTAD,DESD_PRVTA,DESD_COSTO FROM FVDESPD WHERE DESD_GUDIS='2006752' and  DESD_GUDIS + DESD_ALMAC IN (SELECT DDES_GUIRE + DDES_ALMAC FROM " + ruta_scdddes + "/SCDDDES WHERE DDES_FDESP>=CTOD('" + fecha_despacho.ToString("MM/dd/yy") + "') and DDES_TIPO='DES' and DDES_ESTAD<>'A' AND EMPTY(DDES_FTXTD) AND (NOT EMPTY(DDES_CADEN)))";
+                                      "DESD_CADEN,DESD_GGUIA,DESD_ESTAD,DESD_PRVTA,DESD_COSTO FROM FVDESPD WHERE  DESD_GUDIS + DESD_ALMAC IN (SELECT DDES_GUIRE + DDES_ALMAC FROM " + ruta_scdddes + "/SCDDDES WHERE DDES_FDESP>=CTOD('" + fecha_despacho.ToString("MM/dd/yy") + "') and DDES_TIPO='DES' and DDES_ESTAD<>'A' AND EMPTY(DDES_FTXTD) AND (NOT EMPTY(DDES_CADEN)))";
             try
             {
                 using (OleDbConnection cn = new OleDbConnection(ConexionDBF._conexion_fvdes_oledb(_path)))
@@ -461,6 +461,32 @@ namespace CapaServicioWindows.Modular
             return valida;
         }
 
+        private void forzar_delete_nopos(string ruta_nopos)
+        {
+            try
+            {
+                if (File.Exists(@ruta_nopos))
+                {
+                    DateTime fcreacion = File.GetCreationTime(@ruta_nopos);
+
+                    DateTime factual = DateTime.Now;
+
+                    TimeSpan ts = factual - fcreacion;
+
+                    Int32 max_num = 3;
+                    
+                    if (ts.Hours>= max_num)
+                    {
+                        File.Delete(@ruta_nopos);
+                    }
+                }
+            }
+            catch
+            {
+
+               
+            }
+        }
         /// <summary>
         ///ejecutar proceso de envios de guias
         /// </summary>
@@ -499,7 +525,8 @@ namespace CapaServicioWindows.Modular
                     /* if (File.Exists(@ruta_validacion)) return;*/ //valida_exists_txt = true;
 
                 }
-
+                //ruta_validacion = @"D:\FVT\SISTEMAS\NOPOS.TXT";
+                forzar_delete_nopos(ruta_validacion);
                 #endregion
 
                 #region<EN ESTE PASO TRATAMOS DE ENTRAR AL NOVELL PARA TRAERME LA INFO>
@@ -510,6 +537,7 @@ namespace CapaServicioWindows.Modular
                 #endregion
 
                 //if (valida_exists_txt) return;
+
 
 
                 string name_dbf = "SCDDDES";
@@ -1536,15 +1564,15 @@ namespace CapaServicioWindows.Modular
 
 
                 /*obtenermos los datos del ambiente de produccion del ftp*/
-                    DataSet dsFtp = new DataSet();
-                    dsFtp = venta_ing.get_amb_Xstore("PE", "02");
-                    DataTable dt_ftp = null;
-                    dt_ftp = dsFtp.Tables[0];
-                    gHostName = dt_ftp.Rows[0]["Amb_Ftp_Server"].ToString();
-                    gUserName = dt_ftp.Rows[0]["Amb_Ftp_User"].ToString();
-                    gPassword = dt_ftp.Rows[0]["Amb_Ftp_Pass"].ToString();
-                    gPortNumber = Int32.Parse(dt_ftp.Rows[0]["Amb_Ftp_Port"].ToString());
-                    gftp_ruta_destino = dt_ftp.Rows[0]["Amb_Ftp_Path"].ToString();
+                    //DataSet dsFtp = new DataSet();
+                    //dsFtp = venta_ing.get_amb_Xstore("PE", "02");
+                    //DataTable dt_ftp = null;
+                    //dt_ftp = dsFtp.Tables[0];
+                    //gHostName = dt_ftp.Rows[0]["Amb_Ftp_Server"].ToString();
+                    //gUserName = dt_ftp.Rows[0]["Amb_Ftp_User"].ToString();
+                    //gPassword = dt_ftp.Rows[0]["Amb_Ftp_Pass"].ToString();
+                    //gPortNumber = Int32.Parse(dt_ftp.Rows[0]["Amb_Ftp_Port"].ToString());
+                    //gftp_ruta_destino = dt_ftp.Rows[0]["Amb_Ftp_Path"].ToString();
 
                 /*obtenermos los datos del ambiente de produccion del ftp*/
 
@@ -1555,9 +1583,14 @@ namespace CapaServicioWindows.Modular
                     string strOrigen = dtLista.Rows[i]["DESC_ALMAC"].ToString();
                     string strDocumento = dtLista.Rows[i]["DESC_GUDIS"].ToString();
                     string strDestino = dtLista.Rows[i]["DESC_TDES"].ToString();
+                    string pais= dtLista.Rows[i]["PAIS"].ToString();
+                    gHostName = dtLista.Rows[i]["FTP_SERVER"].ToString();
+                    gUserName = dtLista.Rows[i]["FTP_USER"].ToString();
+                    gPassword= dtLista.Rows[i]["FTP_PASSWORD"].ToString();
+                    gPortNumber=Convert.ToInt32(dtLista.Rows[i]["FTP_PORT"]);
+                    gftp_ruta_destino= dtLista.Rows[i]["FTP_PATH"].ToString();
 
-
-                    generainter_inv_doc(strOrigen, strDocumento, strDestino, "S");
+                    generainter_inv_doc(strOrigen, strDocumento, strDestino, "S", pais);
 
                 }
 
@@ -1568,7 +1601,7 @@ namespace CapaServicioWindows.Modular
             }
         }
 
-        private void generainter_inv_doc(string cod_alm, string nro_guia, string cod_tda, string strEnviaFtp)
+        private void generainter_inv_doc(string cod_alm, string nro_guia, string cod_tda, string strEnviaFtp,string pais)
         {
             var metroWindow = this;
             string in_inv_doc = "";
@@ -1576,14 +1609,15 @@ namespace CapaServicioWindows.Modular
             try
             {
                 Util locationdbf = new Util();
-                string ruta_interface = locationdbf.get_ruta_locationProcesa_dbf("GUIA_TO_XSTORE");
+                string ruta_interface = locationdbf.get_ruta_locationProcesa_dbf("GUIA_TO_XSTORE") + "/" + pais;
+
 
                 if (!Directory.Exists(@ruta_interface)) Directory.CreateDirectory(@ruta_interface);
 
                 Dat_Venta venta_ing = new Dat_Venta();
                 DataSet ds = new DataSet();
              
-                ds = venta_ing.get_inv_doc(cod_alm, nro_guia);
+                ds = venta_ing.get_inv_doc(cod_alm, nro_guia,pais);
                 
                 StringBuilder str = null;
                 string str_cadena = "";

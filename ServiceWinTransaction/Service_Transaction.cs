@@ -13,6 +13,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
 using ICSharpCode.SharpZipLib.Zip;
+using CapaServicioWindows.Envio_Ftp_Xstore;
 
 namespace ServiceWinTransaction
 {
@@ -21,6 +22,15 @@ namespace ServiceWinTransaction
         Timer tmservicio = null;
         Timer tmservicioDBF = null;
         Timer tmservicioVentaXstore = null;
+
+        #region<generacion de interfaces y envio de sftp>
+        Timer tmgenera_interface =null;
+        private Int32 _valida_genera_interface = 0;
+
+        Timer tmenvia_sftp = null;
+        private Int32 _valida_envia_sftp = 0;
+
+        #endregion
 
 
         private string file_almace_ecu = @"D:\BataTransaction\ECU.txt";
@@ -69,8 +79,114 @@ namespace ServiceWinTransaction
             tmservicio_GuiaToXstore = new Timer(5000);
             tmservicio_GuiaToXstore.Elapsed += new ElapsedEventHandler(tmservicio_GuiaToXstore_Elapsed);
 
+            tmgenera_interface = new Timer(5000);
+            tmgenera_interface.Elapsed += new ElapsedEventHandler(tmgenera_interface_Elapsed);
+
+            tmenvia_sftp = new Timer(5000);
+            tmenvia_sftp.Elapsed += new ElapsedEventHandler(tmenvia_sftp_Elapsed);
+
 
         }
+
+        #region<envio de interfaces automatico>
+        void tmenvia_sftp_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            Int32 _valor = 0;
+            try
+            {
+                #region<region solo almacen ecuador>
+                if (File.Exists(@file_almace_ecu)) return;
+                #endregion
+
+                if (_valida_envia_sftp == 0)
+                {
+                    _valor = 1;
+                    _valida_envia_sftp = 1;
+                    string _valida_proc_guiaToXstore = @"D:\XSTORE\proc_xs.txt";
+                    Boolean proceso_guiaToXstore = false;
+
+                    if (File.Exists(_valida_proc_guiaToXstore)) proceso_guiaToXstore = true;
+
+                    if (proceso_guiaToXstore)
+                    {
+                        _valor = 1;
+                        string _error = "";
+                        _valida_envia_sftp = 1;
+
+                        Ftp_Xstore_Service_Send ejecuta_procesos = null;
+                        ejecuta_procesos = new Ftp_Xstore_Service_Send();
+
+
+                        ejecuta_procesos.proc_envio_ftp();
+                        //proc_envio_ftp
+                        //ejecuta_procesos.ejecutar_genera_file_xstore_auto(ref _error);
+
+                        //ejecuta_procesos.envio_Guias_ToxStore(ref _error);
+
+                        _valida_envia_sftp = 0;
+
+                    }
+                }
+
+            }
+            catch (Exception exc)
+            {
+                //string errSwc = "";
+                _valida_envia_sftp = 0;
+            }
+            if (_valor == 1)
+            {
+                _valida_envia_sftp = 0;
+            }
+        }
+        void tmgenera_interface_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            Int32 _valor = 0;
+            try
+            {
+                #region<region solo almacen ecuador>
+                if (File.Exists(@file_almace_ecu)) return;
+                #endregion
+
+                if (_valida_genera_interface == 0)
+                {
+                    _valor = 1;
+                    _valida_genera_interface = 1;
+                    string _valida_proc_guiaToXstore = @"D:\XSTORE\proc_xs.txt";
+                    Boolean proceso_guiaToXstore = false;
+
+                    if (File.Exists(_valida_proc_guiaToXstore)) proceso_guiaToXstore = true;
+
+                    if (proceso_guiaToXstore)
+                    {
+                        _valor = 1;
+                        string _error = "";
+                        _valida_genera_interface = 1;
+
+                        Ftp_Xstore_Service_Send ejecuta_procesos = null;
+                        ejecuta_procesos = new Ftp_Xstore_Service_Send();
+
+                        ejecuta_procesos.ejecutar_genera_file_xstore_auto(ref _error);
+
+                        //ejecuta_procesos.envio_Guias_ToxStore(ref _error);
+
+                        _valida_genera_interface = 0;
+
+                    }
+                }
+
+            }
+            catch (Exception exc)
+            {
+                //string errSwc = "";
+                _valida_genera_interface = 0;
+            }
+            if (_valor == 1)
+            {
+                _valida_genera_interface = 0;
+            }
+        }
+        #endregion
 
         #region<GUIAS>
         void tmservicio_GuiaToXstore_Elapsed(object sender, ElapsedEventArgs e)
@@ -452,6 +568,8 @@ namespace ServiceWinTransaction
             tmservicioposlog.Start();
             tmservicio_trans.Start();
             tmservicio_GuiaToXstore.Start();
+            tmgenera_interface.Start();
+            tmenvia_sftp.Start();
             //tmservicioScactcoDBF.Start();
         }
 
@@ -462,6 +580,8 @@ namespace ServiceWinTransaction
             tmservicioposlog.Stop();
             tmservicio_trans.Stop();
             tmservicio_GuiaToXstore.Stop();
+            tmgenera_interface.Stop();
+            tmenvia_sftp.Stop();
             //tmservicioScactcoDBF.Stop();
         }       
               

@@ -31,6 +31,8 @@ namespace InterfaceWPF.Bll
 
                 string[] _archivos_mnt = Directory.GetFiles(@ruta_temp_interface, "*.MNT");
 
+                //ftp_ruta_destino = "/opt/webxst/BCL/autodeploy/data/org5000";
+
                 for (Int32 a = 0; a < _archivos_mnt.Length; ++a)
                 {
                     string _path_archivo_mnt = _archivos_mnt[a].ToString();

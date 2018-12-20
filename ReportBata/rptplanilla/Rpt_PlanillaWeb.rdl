@@ -18,16 +18,16 @@
             <Value>=Parameters!cod_tda.Value</Value>
           </QueryParameter>
           <QueryParameter Name="@Grupo">
-            <Value>=Parameters!Grupo.Value</Value>
+            <Value>=Join(Parameters!Grupo.Value,",")</Value>
           </QueryParameter>
           <QueryParameter Name="@Categoria">
-            <Value>=Parameters!Categoria.Value</Value>
+            <Value>=Join(Parameters!Categoria.Value,",")</Value>
           </QueryParameter>
           <QueryParameter Name="@SubCategoria">
-            <Value>=Parameters!SubCategoria.Value</Value>
+            <Value>=Join(Parameters!SubCategoria.Value,",")</Value>
           </QueryParameter>
           <QueryParameter Name="@Estado">
-            <Value>=Parameters!Estado.Value</Value>
+            <Value>=Join(Parameters!Estado.Value,",")</Value>
           </QueryParameter>
         </QueryParameters>
         <CommandType>StoredProcedure</CommandType>
@@ -4677,10 +4677,26 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
     <ReportParameter Name="Grupo">
       <DataType>String</DataType>
       <Prompt>Grupo</Prompt>
+      <ValidValues>
+        <DataSetReference>
+          <DataSetName>Grupo</DataSetName>
+          <ValueField>cod_line3</ValueField>
+          <LabelField>des_line3</LabelField>
+        </DataSetReference>
+      </ValidValues>
+      <MultiValue>true</MultiValue>
     </ReportParameter>
     <ReportParameter Name="Categoria">
       <DataType>String</DataType>
       <Prompt>Categoria</Prompt>
+      <ValidValues>
+        <DataSetReference>
+          <DataSetName>Categoria</DataSetName>
+          <ValueField>cod_cate3</ValueField>
+          <LabelField>des_cate3</LabelField>
+        </DataSetReference>
+      </ValidValues>
+      <MultiValue>true</MultiValue>
       <cl:ComponentMetadata>
         <cl:HideUpdateNotifications>true</cl:HideUpdateNotifications>
       </cl:ComponentMetadata>
@@ -4688,10 +4704,26 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
     <ReportParameter Name="SubCategoria">
       <DataType>String</DataType>
       <Prompt>Sub-Categoria</Prompt>
+      <ValidValues>
+        <DataSetReference>
+          <DataSetName>SubCategoria</DataSetName>
+          <ValueField>cod_subc3</ValueField>
+          <LabelField>des_subc3</LabelField>
+        </DataSetReference>
+      </ValidValues>
+      <MultiValue>true</MultiValue>
     </ReportParameter>
     <ReportParameter Name="Estado">
       <DataType>String</DataType>
       <Prompt>Estado</Prompt>
+      <ValidValues>
+        <DataSetReference>
+          <DataSetName>Estado</DataSetName>
+          <ValueField>des_campo1</ValueField>
+          <LabelField>des_campo2</LabelField>
+        </DataSetReference>
+      </ValidValues>
+      <MultiValue>true</MultiValue>
     </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>

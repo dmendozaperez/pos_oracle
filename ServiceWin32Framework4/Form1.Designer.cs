@@ -37,12 +37,14 @@
             this.procesar_fcacb_SQL = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.ws_get_xstore_carpeta_upload = new System.Windows.Forms.Button();
+            this.envio_Guias_ToxStore = new System.Windows.Forms.Button();
+            this.ejecutar_genera_interface_xstore = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn_servicewin
             // 
             this.btn_servicewin.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_servicewin.Location = new System.Drawing.Point(12, 32);
+            this.btn_servicewin.Location = new System.Drawing.Point(2, 12);
             this.btn_servicewin.Name = "btn_servicewin";
             this.btn_servicewin.Size = new System.Drawing.Size(392, 51);
             this.btn_servicewin.TabIndex = 4;
@@ -84,7 +86,7 @@
             // btnenviog
             // 
             this.btnenviog.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnenviog.Location = new System.Drawing.Point(95, 88);
+            this.btnenviog.Location = new System.Drawing.Point(2, 69);
             this.btnenviog.Name = "btnenviog";
             this.btnenviog.Size = new System.Drawing.Size(210, 34);
             this.btnenviog.TabIndex = 8;
@@ -106,7 +108,7 @@
             // procesar_fcacb_SQL
             // 
             this.procesar_fcacb_SQL.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.procesar_fcacb_SQL.Location = new System.Drawing.Point(505, 200);
+            this.procesar_fcacb_SQL.Location = new System.Drawing.Point(288, 212);
             this.procesar_fcacb_SQL.Name = "procesar_fcacb_SQL";
             this.procesar_fcacb_SQL.Size = new System.Drawing.Size(207, 37);
             this.procesar_fcacb_SQL.TabIndex = 10;
@@ -126,7 +128,7 @@
             // ws_get_xstore_carpeta_upload
             // 
             this.ws_get_xstore_carpeta_upload.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ws_get_xstore_carpeta_upload.Location = new System.Drawing.Point(263, 257);
+            this.ws_get_xstore_carpeta_upload.Location = new System.Drawing.Point(73, 271);
             this.ws_get_xstore_carpeta_upload.Name = "ws_get_xstore_carpeta_upload";
             this.ws_get_xstore_carpeta_upload.Size = new System.Drawing.Size(290, 30);
             this.ws_get_xstore_carpeta_upload.TabIndex = 12;
@@ -134,11 +136,35 @@
             this.ws_get_xstore_carpeta_upload.UseVisualStyleBackColor = true;
             this.ws_get_xstore_carpeta_upload.Click += new System.EventHandler(this.ws_get_xstore_carpeta_upload_Click);
             // 
+            // envio_Guias_ToxStore
+            // 
+            this.envio_Guias_ToxStore.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.envio_Guias_ToxStore.Location = new System.Drawing.Point(236, 95);
+            this.envio_Guias_ToxStore.Name = "envio_Guias_ToxStore";
+            this.envio_Guias_ToxStore.Size = new System.Drawing.Size(259, 47);
+            this.envio_Guias_ToxStore.TabIndex = 13;
+            this.envio_Guias_ToxStore.Text = "envio_Guias_ToxStore";
+            this.envio_Guias_ToxStore.UseVisualStyleBackColor = true;
+            this.envio_Guias_ToxStore.Click += new System.EventHandler(this.envio_Guias_ToxStore_Click);
+            // 
+            // ejecutar_genera_interface_xstore
+            // 
+            this.ejecutar_genera_interface_xstore.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ejecutar_genera_interface_xstore.Location = new System.Drawing.Point(512, 182);
+            this.ejecutar_genera_interface_xstore.Name = "ejecutar_genera_interface_xstore";
+            this.ejecutar_genera_interface_xstore.Size = new System.Drawing.Size(280, 39);
+            this.ejecutar_genera_interface_xstore.TabIndex = 14;
+            this.ejecutar_genera_interface_xstore.Text = "ejecutar_genera_interface_xstore";
+            this.ejecutar_genera_interface_xstore.UseVisualStyleBackColor = true;
+            this.ejecutar_genera_interface_xstore.Click += new System.EventHandler(this.ejecutar_genera_interface_xstore_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(744, 313);
+            this.ClientSize = new System.Drawing.Size(826, 313);
+            this.Controls.Add(this.ejecutar_genera_interface_xstore);
+            this.Controls.Add(this.envio_Guias_ToxStore);
             this.Controls.Add(this.ws_get_xstore_carpeta_upload);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.procesar_fcacb_SQL);
@@ -150,6 +176,7 @@
             this.Controls.Add(this.btn_servicewin);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
 
         }
@@ -165,6 +192,8 @@
         private System.Windows.Forms.Button procesar_fcacb_SQL;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button ws_get_xstore_carpeta_upload;
+        private System.Windows.Forms.Button envio_Guias_ToxStore;
+        private System.Windows.Forms.Button ejecutar_genera_interface_xstore;
     }
 }
 

@@ -67,7 +67,7 @@ namespace InterfaceWPF
             dwtienda.Focus();
 
             /*maestros de tienda*/
-            dwtienda_M.ItemsSource = _tienda.get_tienda("PE", true);
+            dwtienda_M.ItemsSource = _tienda.get_tienda("EC", true);
             dwtienda_M.DisplayMember = "des_entid";
             dwtienda_M.ValueMember = "cod_entid";
             dwtienda_M.SelectedIndex = 0;

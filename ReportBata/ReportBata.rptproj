@@ -22,12 +22,16 @@
       <FullPath>Rpt_Planilla2.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>Rpt_Rmedida.rdl</Name>
+      <FullPath>Rpt_Rmedida.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>Rpt_PlanillaWeb.rdl</Name>
       <FullPath>Rpt_PlanillaWeb.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>Rpt_Rmedida.rdl</Name>
-      <FullPath>Rpt_Rmedida.rdl</FullPath>
+      <Name>Rpt_PlanillaWeb2.rdl</Name>
+      <FullPath>Rpt_PlanillaWeb2.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>

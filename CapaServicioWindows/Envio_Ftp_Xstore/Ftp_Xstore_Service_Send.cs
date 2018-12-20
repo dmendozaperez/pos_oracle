@@ -6,12 +6,38 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using System.Text;
+using WinSCP;
 
 namespace CapaServicioWindows.Envio_Ftp_Xstore
 {
     public class Ftp_Xstore_Service_Send
     {
-        public void ejecutar_upload_xstore_auto(ref string error)
+        private Boolean valida_lun_ejec()
+        {
+            Boolean valida = false;
+            try
+            {                
+                DateTime fechadesdesemana = DateTime.Now;
+
+                string nombredia = fechadesdesemana.ToString("dddd").ToUpper();
+
+                var list_str = new List<string>();
+                list_str.Add("MONDAY");
+                list_str.Add("LUNES");
+                //list_str.Add("VIERNES");
+                //list_str.Add("FRIDAY");
+
+                if (list_str.Contains(nombredia))                
+                    valida = true;                                 
+
+            }
+            catch 
+            {
+                valida = false;
+            }
+            return valida;
+        }
+        public void ejecutar_genera_file_xstore_auto(ref string error)
         {            
             try
             {
@@ -33,7 +59,9 @@ namespace CapaServicioWindows.Envio_Ftp_Xstore
 
                 string _hora_actual = myDt.ToString("HH:mm");
 
-                //if (_hora_actual != _hora_ejecucion) return;
+                Boolean valida_dia = valida_lun_ejec();
+
+                if (_hora_actual != _hora_ejecucion) return;
 
                 #region<SI LA HORA DE EJECUCION ES LA CORRECTA EJECUTA LAS INTERFACES XOFICCE U ORCE>
 
@@ -60,9 +88,21 @@ namespace CapaServicioWindows.Envio_Ftp_Xstore
 
                         foreach(var det_inter in inter_det_entorno)
                         {
-                          
-                            genera_automatico_inter(pais, cod_tda, env_peru_det.rut_upload, det_inter.inter_nom,det_inter.entorno,
-                                                   ref dt_item,ref dt_images,ref dt_merch_hier,ref  dt_price_update);
+                            /*solo esta interface price_update se ejecuta los lunes*/
+                           
+
+                            if (det_inter.inter_nom== "PRICE_UPDATE" && valida_dia)
+                            {
+                                genera_automatico_inter(pais, cod_tda, env_peru_det.rut_upload, det_inter.inter_nom, det_inter.entorno,
+                                                   ref dt_item, ref dt_images, ref dt_merch_hier, ref dt_price_update);
+                            }
+                            if (det_inter.inter_nom != "PRICE_UPDATE")
+                            {
+                                genera_automatico_inter(pais, cod_tda, env_peru_det.rut_upload, det_inter.inter_nom, det_inter.entorno,
+                                                   ref dt_item, ref dt_images, ref dt_merch_hier, ref dt_price_update);
+                            }
+
+
                         }
                     }
                                         
@@ -93,7 +133,7 @@ namespace CapaServicioWindows.Envio_Ftp_Xstore
                 error = exc.Message;
             }         
         }
-        private DataTable dt_replace_tda(DataTable dt)
+        private DataTable dt_replace_tda(DataTable dt,string cod_tda)
         {
             DataTable dt_replace = null;
             try
@@ -104,7 +144,13 @@ namespace CapaServicioWindows.Envio_Ftp_Xstore
                     dt_replace = dt;
                     string file_cab = dt.Rows[0][0].ToString();
 
-                    string cad = file_cab.Substring(file_cab.IndexOf(':') - 6, file_cab.IndexOf(':') + 7);
+                    string str_tda_ant = file_cab.Substring(file_cab.IndexOf(':') - 6,13);
+
+                    string str_tda_new= "\"" + str_tda_ant.Replace(str_tda_ant, "STORE:" + cod_tda) + "\"";
+
+                    file_cab = file_cab.Replace(str_tda_ant, str_tda_new);
+                    dt_replace.Rows[0][0] = file_cab.ToString();
+
                 }
             }
             catch 
@@ -142,7 +188,7 @@ namespace CapaServicioWindows.Envio_Ftp_Xstore
                                 }
                                 else
                                 {
-                                    dt_replace_tda(dt_item);
+                                    dt = dt_replace_tda(dt_item,_codtda);
                                 }                                                              
 
                                 if (dt != null)
@@ -178,8 +224,19 @@ namespace CapaServicioWindows.Envio_Ftp_Xstore
                                 break;
                             #endregion
                             case "PRICE_UPDATE":
-                                #region<PRICE_UPDATE>                        
-                                dt = dat_geninter.get_price_update_2_PE(_pais, _codtda);
+                                #region<PRICE_UPDATE> 
+
+                                if (dt_price_update == null)
+                                {
+                                    dt = dat_geninter.get_price_update_2_PE(_pais, _codtda);
+                                    dt_price_update = dt;
+                                }
+                                else
+                                {
+                                    dt = dt_replace_tda(dt_price_update, _codtda);
+                                }
+
+                                //dt = dat_geninter.get_price_update_2_PE(_pais, _codtda);
                                 if (dt != null)
                                 {
                                     if (dt.Rows.Count > 0)
@@ -209,8 +266,19 @@ namespace CapaServicioWindows.Envio_Ftp_Xstore
                                 break;
                             #endregion
                             case "MERCH_HIER":
-                                #region<MERCH_HIER>                       
-                                dt = dat_geninter.get_merch_hier_PE(_pais, _codtda);
+                                #region<MERCH_HIER>     
+
+                                if (dt_merch_hier == null)
+                                {
+                                    dt = dat_geninter.get_merch_hier_PE(_pais, _codtda);
+                                    dt_merch_hier = dt;
+                                }
+                                else
+                                {
+                                    dt = dt_replace_tda(dt_merch_hier, _codtda);
+                                }
+
+                                //dt = dat_geninter.get_merch_hier_PE(_pais, _codtda);
                                 if (dt != null)
                                 {
                                     if (dt.Rows.Count > 0)
@@ -245,8 +313,19 @@ namespace CapaServicioWindows.Envio_Ftp_Xstore
                                 break;
                             #endregion
                             case "ITEM_IMAGES":
-                                #region<ITEM_IMAGES>                   
-                                dt = dat_geninter.get_item_images_PE(_pais, _codtda);
+                                #region<ITEM_IMAGES>    
+
+                                if (dt_images == null)
+                                {
+                                    dt = dat_geninter.get_item_images_PE(_pais, _codtda);
+                                    dt_images = dt;
+                                }
+                                else
+                                {
+                                    dt = dt_replace_tda(dt_images, _codtda);
+                                }
+
+                                //dt = dat_geninter.get_item_images_PE(_pais, _codtda);
                                 if (dt != null)
                                 {
                                     if (dt.Rows.Count > 0)
@@ -389,6 +468,90 @@ namespace CapaServicioWindows.Envio_Ftp_Xstore
 
 
             }
+        }
+
+        public void proc_envio_ftp()
+        {
+            try
+            {
+                /*acceso header user y pass clave de acceso a ws*/
+                BataTransac.ValidateAcceso header_user = new BataTransac.ValidateAcceso();
+                header_user.Username = ConexionWS.user;
+                header_user.Password = ConexionWS.password;
+                /****************************************************************/
+
+                BataTransac.Bata_TransactionSoapClient bata_trans = new BataTransac.Bata_TransactionSoapClient();
+                var lista = bata_trans.ws_get_xstore_carpeta_upload(header_user);
+
+                string tipo_file = "";
+
+                foreach(var item in lista)
+                {
+                    tipo_file = (item.entorno == "ORCE") ? "*.xml*" : "*.mnt*";
+
+                    if (!Directory.Exists(@item.rut_upload)) Directory.CreateDirectory(@item.rut_upload);
+
+                    string[] files = Directory.GetFiles(@item.rut_upload, tipo_file);
+
+                    foreach(string str_item in files)
+                    {
+                        string _path_archivo = str_item;
+                        string _nombrearchivo = Path.GetFileNameWithoutExtension(@str_item);
+                        string _extension_archivo = Path.GetExtension(@_path_archivo);
+                        string _file_path_destino = item.ftp_folder + "/" + _nombrearchivo + _extension_archivo;
+                        Boolean envio_ftp = subida_server_ftp(item.ftp_server,item.ftp_user,item.ftp_pass,item.ftp_port,str_item, _file_path_destino);
+
+                        if (envio_ftp) File.Delete(@_path_archivo);
+
+                    }
+                }
+                               
+            }
+            catch (Exception)
+            {
+                
+            }            
+        }
+        private Boolean subida_server_ftp(string gHostName,string gUserName,string gPassword,
+                                          Int32 gPortNumber,string file_origen, string file_destino)
+        {
+            Boolean valida_envio = false;
+            try
+            {
+                SessionOptions sessionOptions = new SessionOptions
+                {                   
+
+                    Protocol = 0,
+                    HostName = gHostName,
+                    UserName = gUserName,
+                    Password = gPassword,
+                    PortNumber = gPortNumber,
+                    GiveUpSecurityAndAcceptAnySshHostKey = true,
+                };
+
+                using (Session session = new Session())
+                {
+                    session.Open(sessionOptions);
+
+                    TransferOptions transferOptions = new TransferOptions();
+                    transferOptions.FilePermissions = null; // This is default
+                    transferOptions.PreserveTimestamp = false;
+                    transferOptions.TransferMode = TransferMode.Binary;
+                    TransferOperationResult transferResult;
+
+                    transferResult =
+                        session.PutFiles(file_origen, file_destino, false, transferOptions);
+
+                    transferResult.Check();
+
+                    valida_envio = true;
+                }
+            }
+            catch (Exception exc)
+            {
+                valida_envio = false;              
+            }
+            return valida_envio;
         }
     }
 }

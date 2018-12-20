@@ -59,6 +59,7 @@
     <Compile Include="Conexion\ConexionWS.cs" />
     <Compile Include="Conexion\NetworkShare.cs" />
     <Compile Include="Entidad\Ent_InterAuto_PL.cs" />
+    <Compile Include="Entidad\Ent_InterGenera_PL.cs" />
     <Compile Include="Entidad\SCDDDES.cs" />
     <Compile Include="Envio_Ftp_Xstore\Ftp_Xstore_Service_Send.cs" />
     <Compile Include="Envio_Ws\Envio_Scactco.cs" />
@@ -69,6 +70,7 @@
     <Compile Include="Modular\DBFNET.cs" />
     <Compile Include="Modular\Proceso_Novell.cs" />
     <Compile Include="Modular\Util.cs" />
+    <Compile Include="Modular\Xstore_Genera_Inter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service References\BataTransac\Reference.cs">
       <AutoGen>True</AutoGen>

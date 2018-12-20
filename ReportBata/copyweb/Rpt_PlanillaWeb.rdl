@@ -298,6 +298,31 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
         </Field>
       </Fields>
     </DataSet>
+    <DataSet Name="DsPrueba">
+      <Query>
+        <DataSourceName>cnBdPos</DataSourceName>
+        <CommandText>SELECT        cod_cate3, des_cate3, cod_line3, flg_tx
+FROM            TCATEGORI3</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="cod_cate3">
+          <DataField>cod_cate3</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="des_cate3">
+          <DataField>des_cate3</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="cod_line3">
+          <DataField>cod_line3</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="flg_tx">
+          <DataField>flg_tx</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
   </DataSets>
   <ReportSections>
     <ReportSection>
@@ -307,58 +332,58 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>0.44319in</Width>
+                  <Width>0.44898in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.31493in</Width>
+                  <Width>1.32072in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.48163in</Width>
+                  <Width>0.48742in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.43528in</Width>
+                  <Width>0.44107in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.71159in</Width>
+                  <Width>0.71738in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.28in</Width>
+                  <Width>0.28579in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.3in</Width>
+                  <Width>0.30579in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.3in</Width>
+                  <Width>0.30579in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.3in</Width>
+                  <Width>0.30579in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.3in</Width>
+                  <Width>0.30579in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.3in</Width>
+                  <Width>0.30579in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.3in</Width>
+                  <Width>0.30579in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.3in</Width>
+                  <Width>0.30579in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.3in</Width>
+                  <Width>0.30579in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.3in</Width>
+                  <Width>0.30579in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.3in</Width>
+                  <Width>0.30579in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.3in</Width>
+                  <Width>0.30579in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.3in</Width>
+                  <Width>0.30579in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -469,6 +494,7 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
+                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell>
@@ -4236,16 +4262,17 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
                 </TablixMember>
               </TablixMembers>
             </TablixRowHierarchy>
+            <RepeatColumnHeaders>true</RepeatColumnHeaders>
             <DataSetName>DataPlanilla</DataSetName>
             <Height>1.70417in</Height>
-            <Width>7.26662in</Width>
+            <Width>7.37079in</Width>
             <Style />
           </Tablix>
         </ReportItems>
-        <Height>1.75916in</Height>
+        <Height>1.74584in</Height>
         <Style />
       </Body>
-      <Width>7.29854in</Width>
+      <Width>7.38538in</Width>
       <Page>
         <PageHeader>
           <Height>1.19791in</Height>

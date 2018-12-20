@@ -360,9 +360,9 @@ namespace CapaServicioWindows.CapaDato.Venta
             return ds;
         }
 
-        public DataSet get_inv_doc(string cod_alm, string nro_guia)
+        public DataSet get_inv_doc(string cod_alm, string nro_guia,string pais)
         {
-            string sqlquery = "[USP_XSTORE_GET_INV_DOC]";
+            string sqlquery = (pais=="PE")? "[USP_XSTORE_GET_INV_DOC]": "[USP_XSTORE_GET_INV_DOC_ECU]";
             DataSet ds = null;
             try
             {

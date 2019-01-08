@@ -166,7 +166,17 @@ namespace ServiceWinTransaction
                         Ftp_Xstore_Service_Send ejecuta_procesos = null;
                         ejecuta_procesos = new Ftp_Xstore_Service_Send();
 
-                        ejecuta_procesos.ejecutar_genera_file_xstore_auto(ref _error);
+                        string pais = "PE";
+
+                        ejecuta_procesos.ejecutar_genera_file_xstore_auto(pais,ref _error);
+
+                        pais = "EC";
+                        ejecuta_procesos.ejecutar_genera_file_xstore_auto(pais, ref _error);
+
+                        /*GENERACION DE INTERFACE*/
+                        Xstore_Genera_Inter ejecuta_procesos_inter = new Xstore_Genera_Inter();
+                        ejecuta_procesos_inter.ejecutar_genera_interface_xstore(ref _error);
+                        /********************************/
 
                         //ejecuta_procesos.envio_Guias_ToxStore(ref _error);
 

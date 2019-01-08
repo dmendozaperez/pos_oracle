@@ -17,6 +17,7 @@ namespace CapaServicioWindows.Modular
             try
             {
                 String pais = "PE";
+                #region<INTERFACES DE PERU>
                 DataTable dt_item = null;
                 DataTable dt_images = null;
                 DataTable dt_merch_hier = null;
@@ -32,11 +33,50 @@ namespace CapaServicioWindows.Modular
                 {
                     foreach(var item in list_gen)
                     {
-                        genera_automatico_inter(item.pais, item.cod_tda, item.rut_gen, item.int_nom, item.entorno,
+                        string codigo = item.int_cab_cod.ToString() + item.int_id.ToString();
+                        Boolean valida_genera = false;
+                        genera_automatico_inter(codigo, item.pais, item.cod_tda, item.rut_gen, item.int_nom, item.entorno,
                                                 ref dt_item, ref dt_images, ref dt_merch_hier, ref dt_price_update,
-                                                ref _ITEM_MAINTENANCE,ref _ORCE_RETAIL_LOCATIONS,ref _MERCHANDISE_HIERARCHY_MAINTENANCE);
+                                                ref _ITEM_MAINTENANCE,ref _ORCE_RETAIL_LOCATIONS,ref _MERCHANDISE_HIERARCHY_MAINTENANCE,
+                                                ref valida_genera);
+                        if (valida_genera)
+                        {
+                            get_inter.Update_Interface_Genera(codigo);
+                        }
                     }
                 }
+                #endregion
+                #region<INTERFACES DE ECUADOR>
+                pais = "EC";
+                dt_item = null;
+                dt_images = null;
+                dt_merch_hier = null;
+                dt_price_update = null;
+                get_inter = new Dat_Interfaces();
+                list_gen = get_inter.lista_inter_pl_genera(pais);
+
+                _ITEM_MAINTENANCE = false;
+                _ORCE_RETAIL_LOCATIONS = false;
+                _MERCHANDISE_HIERARCHY_MAINTENANCE = false;
+
+                if (list_gen != null)
+                {
+                    foreach (var item in list_gen)
+                    {
+                        string codigo = item.int_cab_cod.ToString() + item.int_id.ToString();
+                        Boolean valida_genera = false;
+                        genera_automatico_inter(codigo, item.pais, item.cod_tda, item.rut_gen, item.int_nom, item.entorno,
+                                                ref dt_item, ref dt_images, ref dt_merch_hier, ref dt_price_update,
+                                                ref _ITEM_MAINTENANCE, ref _ORCE_RETAIL_LOCATIONS, ref _MERCHANDISE_HIERARCHY_MAINTENANCE,
+                                                ref valida_genera);
+                        if (valida_genera)
+                        {
+                            get_inter.Update_Interface_Genera(codigo);
+                        }
+
+                    }
+                }
+                #endregion
 
             }
             catch (Exception exc)
@@ -70,10 +110,11 @@ namespace CapaServicioWindows.Modular
             }
             return dt_replace;
         }
-        private void genera_automatico_inter(string _pais, string _codtda, string _gen_ruta, string _gen_inter_name, string _entorno,
+        private void genera_automatico_inter(string codigo,string _pais, string _codtda, string _gen_ruta, string _gen_inter_name, string _entorno,
                                             ref DataTable dt_item, ref DataTable dt_images, ref DataTable dt_merch_hier,
                                             ref DataTable dt_price_update,
-                                            ref Boolean _ITEM_MAINTENANCE,ref Boolean _ORCE_RETAIL_LOCATIONS,ref Boolean _MERCHANDISE_HIERARCHY_MAINTENANCE)
+                                            ref Boolean _ITEM_MAINTENANCE,ref Boolean _ORCE_RETAIL_LOCATIONS,
+                                            ref Boolean _MERCHANDISE_HIERARCHY_MAINTENANCE,ref Boolean valida_genera)
         {
             Dat_Interfaces dat_geninter = null;
             DataTable dt = null;
@@ -96,7 +137,7 @@ namespace CapaServicioWindows.Modular
                                 #region<ITEM>
                                 if (dt_item == null)
                                 {
-                                    dt = dat_geninter.get_item_PE(_pais, _codtda);
+                                    dt = (_pais=="PE")? dat_geninter.get_item_PE(_pais, _codtda): dat_geninter.get_item_EC(_pais, _codtda);
                                     dt_item = dt;
                                 }
                                 else
@@ -127,11 +168,12 @@ namespace CapaServicioWindows.Modular
 
 
 
-                                        name_file = "ITEM_" + sufijoNombre + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
+                                        name_file = "ITEM_" + sufijoNombre + DateTime.Today.ToString("yyyyMMdd") + "_" + codigo + ".MNT";
                                         in_maestros = _gen_ruta + "\\" + name_file;
 
                                         if (File.Exists(@in_maestros)) File.Delete(@in_maestros);
                                         File.WriteAllText(@in_maestros, str_cadena);
+                                        valida_genera = true;
                                     }
                                 }
                                 break;
@@ -141,7 +183,7 @@ namespace CapaServicioWindows.Modular
 
                                 if (dt_price_update == null)
                                 {
-                                    dt = dat_geninter.get_price_update_2_PE(_pais, _codtda);
+                                    dt =(_pais=="PE")? dat_geninter.get_price_update_2_PE(_pais, _codtda): dat_geninter.get_price_update_2_EC(_pais, _codtda);
                                     dt_price_update = dt;
                                 }
                                 else
@@ -168,11 +210,12 @@ namespace CapaServicioWindows.Modular
                                         }
                                         str_cadena = str.ToString();
 
-                                        name_file = "PRICE_UPDATE_2_" + sufijoNombre + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
+                                        name_file = "PRICE_UPDATE_2_" + sufijoNombre + DateTime.Today.ToString("yyyyMMdd") + "_" + codigo + ".MNT";
                                         in_maestros = _gen_ruta + "\\" + name_file;
 
                                         if (File.Exists(@in_maestros)) File.Delete(@in_maestros);
                                         File.WriteAllText(@in_maestros, str_cadena);
+                                        valida_genera = true;
                                     }
                                 }
 
@@ -183,7 +226,7 @@ namespace CapaServicioWindows.Modular
 
                                 if (dt_merch_hier == null)
                                 {
-                                    dt = dat_geninter.get_merch_hier_PE(_pais, _codtda);
+                                    dt = (_pais=="PE")? dat_geninter.get_merch_hier_PE(_pais, _codtda): dat_geninter.get_merch_hier_EC(_pais, _codtda);
                                     dt_merch_hier = dt;
                                 }
                                 else
@@ -216,11 +259,12 @@ namespace CapaServicioWindows.Modular
 
 
 
-                                        name_file = "MERCH_HIER_" + sufijoNombre + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
+                                        name_file = "MERCH_HIER_" + sufijoNombre + DateTime.Today.ToString("yyyyMMdd") + "_" + codigo + ".MNT";
                                         in_maestros = _gen_ruta + "\\" + name_file;
 
                                         if (File.Exists(@in_maestros)) File.Delete(@in_maestros);
                                         File.WriteAllText(@in_maestros, str_cadena);
+                                        valida_genera = true;
                                     }
                                 }
                                 break;
@@ -230,7 +274,7 @@ namespace CapaServicioWindows.Modular
 
                                 if (dt_images == null)
                                 {
-                                    dt = dat_geninter.get_item_images_PE(_pais, _codtda);
+                                    dt =(_pais=="PE")? dat_geninter.get_item_images_PE(_pais, _codtda): dat_geninter.get_item_images_EC(_pais, _codtda);
                                     dt_images = dt;
                                 }
                                 else
@@ -259,18 +303,19 @@ namespace CapaServicioWindows.Modular
 
 
 
-                                        name_file = "ITEM_IMAGES_" + sufijoNombre + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
+                                        name_file = "ITEM_IMAGES_" + sufijoNombre + DateTime.Today.ToString("yyyyMMdd") + "_" + codigo + ".MNT";
                                         in_maestros = _gen_ruta + "\\" + name_file;
 
                                         if (File.Exists(@in_maestros)) File.Delete(@in_maestros);
                                         File.WriteAllText(@in_maestros, str_cadena);
+                                        valida_genera = true;
                                     }
                                 }
                                 break;
                             #endregion
                             case "RETAIL_LOCATION":
                                 #region<RETAIL_LOCATION>
-                                ds = dat_geninter.get_retail_location_PE(_codtda,_pais);
+                                ds = (_pais=="PE")? dat_geninter.get_retail_location_PE(_codtda,_pais): dat_geninter.get_retail_location_EC(_codtda, _pais); 
                                 str = new StringBuilder();                               
                                 if (ds != null)
                                 {
@@ -294,7 +339,7 @@ namespace CapaServicioWindows.Modular
 
 
 
-                                        name_file = "RETAIL_LOCATION_" + sufijoNombre + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
+                                        name_file = "RETAIL_LOCATION_" + sufijoNombre + DateTime.Today.ToString("yyyyMMdd") + "_" + codigo + ".MNT";
                                         in_maestros = _gen_ruta + "\\" + name_file;
 
                                         if (File.Exists(@in_maestros)) File.Delete(@in_maestros);
@@ -316,12 +361,12 @@ namespace CapaServicioWindows.Modular
                                         }
                                         str_cadena = str.ToString();
 
-                                        name_file = "RETAIL_LOCATION_PROPERTY_" + sufijoNombre + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
+                                        name_file = "RETAIL_LOCATION_PROPERTY_" + sufijoNombre + DateTime.Today.ToString("yyyyMMdd") + "_" + codigo + ".MNT";
                                         in_maestros = _gen_ruta + "\\" + name_file;
 
                                         if (File.Exists(@in_maestros)) File.Delete(@in_maestros);
                                         File.WriteAllText(@in_maestros, str_cadena);
-                                        
+                                        valida_genera = true;
                                     }
 
                                 }
@@ -330,7 +375,7 @@ namespace CapaServicioWindows.Modular
                             case "ITEM_DIMENSION":
                                 #region<ITEM_DIMENSION> 
 
-                                dt = dat_geninter.get_item_dimension_type_PE(_pais, _codtda);
+                                dt = (_pais=="PE")? dat_geninter.get_item_dimension_type_PE(_pais, _codtda): dat_geninter.get_item_dimension_type_EC(_pais, _codtda); 
                                 if (dt != null)
                                 {
                                     if (dt.Rows.Count > 0)
@@ -351,7 +396,7 @@ namespace CapaServicioWindows.Modular
 
 
 
-                                        name_file = "ITEM_DIMENSION_TYPE_" + sufijoNombre + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
+                                        name_file = "ITEM_DIMENSION_TYPE_" + sufijoNombre + DateTime.Today.ToString("yyyyMMdd") + "_" + codigo + ".MNT";
                                         in_maestros = _gen_ruta + "\\" + name_file;
 
                                         if (File.Exists(@in_maestros)) File.Delete(@in_maestros);
@@ -359,7 +404,7 @@ namespace CapaServicioWindows.Modular
                                     }
                                 }
 
-                                 dt = dat_geninter.get_item_dimension_value_PE(_pais,_codtda);
+                                dt =(_pais=="PE")? dat_geninter.get_item_dimension_value_PE(_pais,_codtda) : dat_geninter.get_item_dimension_value_EC(_pais, _codtda); ;
                                 if (dt != null)
                                 {
                                     if (dt.Rows.Count > 0)
@@ -380,11 +425,12 @@ namespace CapaServicioWindows.Modular
 
 
 
-                                        name_file = "ITEM_DIMENSION_VALUE_" + sufijoNombre + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
+                                        name_file = "ITEM_DIMENSION_VALUE_" + sufijoNombre + DateTime.Today.ToString("yyyyMMdd") + "_" + codigo + ".MNT";
                                         in_maestros = _gen_ruta + "\\" + name_file;
 
                                         if (File.Exists(@in_maestros)) File.Delete(@in_maestros);
                                         File.WriteAllText(@in_maestros, str_cadena);
+                                        valida_genera = true;
                                     }
                                 }
                                 break;
@@ -394,7 +440,7 @@ namespace CapaServicioWindows.Modular
                                     string strCodEmpl = "S";
                                     string strCodSupl = "S";                                 
 
-                                     dt = dat_geninter.get_Party_PE(_pais, _codtda, strCodSupl, strCodEmpl);
+                                     dt = (_pais=="PE")? dat_geninter.get_Party_PE(_pais, _codtda, strCodSupl, strCodEmpl): dat_geninter.get_Party_EC(_pais, _codtda, strCodSupl, strCodEmpl);
                                     if (dt != null)
                                     {
                                         if (dt.Rows.Count > 0)
@@ -418,18 +464,19 @@ namespace CapaServicioWindows.Modular
 
 
 
-                                            name_file = "PARTY_" + sufijoNombre + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
+                                            name_file = "PARTY_" + sufijoNombre + DateTime.Today.ToString("yyyyMMdd") + "_" + codigo + ".MNT";
                                             in_maestros = _gen_ruta + "\\" + name_file;
 
                                             if (File.Exists(@in_maestros)) File.Delete(@in_maestros);
                                             File.WriteAllText(@in_maestros, str_cadena);
-                                        }
+                                        valida_genera = true;
+                                    }
                                     }                                                           
                                 break;
                             #endregion
                             case "INV_LOCATION_PROPERTY":
                                 #region<INV_LOCATION_PROPERTY>                                
-                                    dt = dat_geninter.get_Location_Property_PE(_pais, _codtda);
+                                    dt = (_pais=="PE")? dat_geninter.get_Location_Property_PE(_pais, _codtda) : dat_geninter.get_Location_Property_EC(_pais, _codtda);
                                     if (dt != null)
                                     {
                                         if (dt.Rows.Count > 0)
@@ -451,18 +498,19 @@ namespace CapaServicioWindows.Modular
 
                                             str_cadena = str.ToString();
 
-                                            name_file = "INV_LOCATION_PROPERTY_" + sufijoNombre + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
+                                            name_file = "INV_LOCATION_PROPERTY_" + sufijoNombre + DateTime.Today.ToString("yyyyMMdd") + "_" + codigo + ".MNT";
                                             in_maestros = _gen_ruta + "\\" + name_file;
 
                                             if (File.Exists(@in_maestros)) File.Delete(@in_maestros);
                                             File.WriteAllText(@in_maestros, str_cadena);
-                                        }
+                                        valida_genera = true;
+                                    }
                                     }                                
                                 break;
                             #endregion
                             case "STOCK_LEDGER":
                                 #region<STOCK_LEDGER>
-                                dt = dat_geninter.get_stock_ledger_PE("", _codtda, _pais);                                
+                                dt = (_pais=="PE")? dat_geninter.get_stock_ledger_PE("", _codtda, _pais): dat_geninter.get_stock_ledger_EC("", _codtda, _pais);                                
                                 if (dt != null)
                                 {
                                     string in_stock_ledger = "";
@@ -480,18 +528,19 @@ namespace CapaServicioWindows.Modular
                                         }
                                         str_cadena = str.ToString();
 
-                                        name_file = "STOCK_LEDGER_" + _codtda + "_" + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
+                                        name_file = "STOCK_LEDGER_" + _codtda + "_" + DateTime.Today.ToString("yyyyMMdd") + "_" + codigo + ".MNT";
                                         in_stock_ledger = _gen_ruta + "\\" + name_file;
 
                                         if (File.Exists(@in_stock_ledger)) File.Delete(@in_stock_ledger);
-                                        File.WriteAllText(@in_stock_ledger, str_cadena);                                      
+                                        File.WriteAllText(@in_stock_ledger, str_cadena);
+                                        valida_genera = true;
                                     }
                                 }
                                 break;
                             #endregion
                             case "COUNTRY_CITY":
                                 #region<COUNTRY_CITY>                                                             
-                                    dt = dat_geninter.get_county_city_PE(_codtda, _pais);
+                                    dt =(_pais=="PE")? dat_geninter.get_county_city_PE(_codtda, _pais): dat_geninter.get_county_city_EC(_codtda, _pais);
                                     if (dt != null)
                                     {
                                         if (dt.Rows.Count > 0)
@@ -510,7 +559,7 @@ namespace CapaServicioWindows.Modular
                                             }
                                             str_cadena = str.ToString();
 
-                                            name_file = "BCL_COUNTY_CITY_" + _codtda + "_" + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
+                                            name_file = "BCL_COUNTY_CITY_" + _codtda + "_" + DateTime.Today.ToString("yyyyMMdd") + "_" + codigo + ".MNT";
                                             in_maestros = _gen_ruta + "\\" + name_file;
 
                                             if (File.Exists(@in_maestros)) File.Delete(@in_maestros);
@@ -518,7 +567,7 @@ namespace CapaServicioWindows.Modular
                                         }
                                     }
                                                                  
-                                    dt = dat_geninter.get_state_county_PE(_codtda, _pais);
+                                    dt =(_pais=="PE")? dat_geninter.get_state_county_PE(_codtda, _pais) : dat_geninter.get_state_county_EC(_codtda, _pais);
                                     if (dt != null)
                                     {
                                         if (dt.Rows.Count > 0)
@@ -537,12 +586,13 @@ namespace CapaServicioWindows.Modular
                                             }
                                             str_cadena = str.ToString();
 
-                                            name_file = "BCL_STATE_COUNTY_" + _codtda + "_" + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
+                                            name_file = "BCL_STATE_COUNTY_" + _codtda + "_" + DateTime.Today.ToString("yyyyMMdd") + "_" + codigo + ".MNT";
                                             in_maestros = _gen_ruta + "\\" + name_file;
 
                                             if (File.Exists(@in_maestros)) File.Delete(@in_maestros);
                                             File.WriteAllText(@in_maestros, str_cadena);
-                                        }
+                                        valida_genera = true;
+                                    }
                                     }
                                
 
@@ -571,12 +621,13 @@ namespace CapaServicioWindows.Modular
 
 
 
-                                            name_file = "BCL_ELECTRONIC_CORRELATIVES_" + _codtda + "_" + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
+                                            name_file = "BCL_ELECTRONIC_CORRELATIVES_" + _codtda + "_" + DateTime.Today.ToString("yyyyMMdd") + "_" + codigo + ".MNT";
                                             in_maestros = _gen_ruta + "\\" + name_file;
 
                                             if (File.Exists(@in_maestros)) File.Delete(@in_maestros);
                                             File.WriteAllText(@in_maestros, str_cadena);
-                                        }
+                                        valida_genera = true;
+                                    }
                                     }                                                             
                                 break;
                             #endregion
@@ -605,18 +656,19 @@ namespace CapaServicioWindows.Modular
                                             str_cadena = str.ToString();
 
 
-                                            name_file = "BCL_MANUAL_CORRELATIVES_" + _codtda + "_" + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
+                                            name_file = "BCL_MANUAL_CORRELATIVES_" + _codtda + "_" + DateTime.Today.ToString("yyyyMMdd") + "_" + codigo + ".MNT";
                                             in_maestros = _gen_ruta + "\\" + name_file;
 
                                             if (File.Exists(@in_maestros)) File.Delete(@in_maestros);
                                             File.WriteAllText(@in_maestros, str_cadena);
-                                        }
+                                        valida_genera = true;
+                                    }
                                     }                                                           
                                 break;
                             #endregion
                             case "TENDER_REPOSITORY":
                                 #region<TENDER_REPOSITORY>                                                          
-                                    dt = dat_geninter.get_tender_repository_PE(_codtda, _pais);
+                                    dt = (_pais=="PE")? dat_geninter.get_tender_repository_PE(_codtda, _pais): dat_geninter.get_tender_repository_EC(_codtda, _pais);
                                     if (dt != null)
                                     {
                                         if (dt.Rows.Count > 0)
@@ -637,14 +689,14 @@ namespace CapaServicioWindows.Modular
 
 
 
-                                            name_file = "TENDER_REPOSITORY_" + _codtda + "_" + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
+                                            name_file = "TENDER_REPOSITORY_" + _codtda + "_" + DateTime.Today.ToString("yyyyMMdd") + "_" + codigo + ".MNT";
                                             in_maestros = _gen_ruta + "\\" + name_file;
 
                                             if (File.Exists(@in_maestros)) File.Delete(@in_maestros);
                                             File.WriteAllText(@in_maestros, str_cadena);
                                         }
                                     }                               
-                                    dt = dat_geninter.get_tender_repository_property_PE(_codtda, _pais);
+                                    dt = (_pais=="PE")? dat_geninter.get_tender_repository_property_PE(_codtda, _pais) : dat_geninter.get_tender_repository_property_EC(_codtda, _pais);
                                     if (dt != null)
                                     {
                                         if (dt.Rows.Count > 0)
@@ -665,18 +717,19 @@ namespace CapaServicioWindows.Modular
 
 
 
-                                            name_file = "TENDER_REPOSITORY_PROPERTY_" + _codtda + "_" + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
+                                            name_file = "TENDER_REPOSITORY_PROPERTY_" + _codtda + "_" + DateTime.Today.ToString("yyyyMMdd") + "_" + codigo + ".MNT";
                                             in_maestros = _gen_ruta + "\\" + name_file;
 
                                             if (File.Exists(@in_maestros)) File.Delete(@in_maestros);
                                             File.WriteAllText(@in_maestros, str_cadena);
-                                        }
+                                        valida_genera = true;
+                                    }
                                     }                                                          
                                 break;
                             #endregion
                             case "INV_VALID_DESTINATIONS":
                                 #region<INV_VALID_DESTINATIONS>                               
-                                dt = dat_geninter.get_inv_valid_destinations_PE(_codtda, _pais);                                   
+                                dt = (_pais=="PE")? dat_geninter.get_inv_valid_destinations_PE(_codtda, _pais): dat_geninter.get_inv_valid_destinations_EC(_codtda, _pais);                                   
                                 if (dt != null)
                                 {
                                     string name_inv_valid = ""; string in_inv_valid = "";
@@ -698,17 +751,17 @@ namespace CapaServicioWindows.Modular
 
 
 
-                                        name_file = "INV_VALID_DESTINATIONS_" + _codtda + "_" + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
+                                        name_file = "INV_VALID_DESTINATIONS_" + _codtda + "_" + DateTime.Today.ToString("yyyyMMdd") + "_" + codigo + ".MNT";
                                         in_inv_valid = _gen_ruta + "\\" + name_file;
 
                                         if (File.Exists(@in_inv_valid)) File.Delete(@in_inv_valid);
                                         File.WriteAllText(@in_inv_valid, str_cadena);
-                                       
+                                        valida_genera = true;
                                     }
 
                                 }                               
                                
-                                dt= dat_geninter.get_inv_valid_destinations_property_PE(_codtda, _pais);                                
+                                dt=(_pais=="PE")? dat_geninter.get_inv_valid_destinations_property_PE(_codtda, _pais): dat_geninter.get_inv_valid_destinations_property_EC(_codtda, _pais);                                
                                 if (dt != null)
                                 {
                                     string name_inv_valid = ""; string in_inv_valid = "";
@@ -730,12 +783,12 @@ namespace CapaServicioWindows.Modular
 
 
 
-                                        name_file = "INV_VALID_DESTINATIONS_PROPERTY_" + _codtda + "_" + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
+                                        name_file = "INV_VALID_DESTINATIONS_PROPERTY_" + _codtda + "_" + DateTime.Today.ToString("yyyyMMdd") + "_" + codigo + ".MNT";
                                         in_inv_valid = _gen_ruta + "\\" + name_file;
 
                                         if (File.Exists(@in_inv_valid)) File.Delete(@in_inv_valid);
                                         File.WriteAllText(@in_inv_valid, str_cadena);
-                                       
+                                        valida_genera = true;
                                     }
 
                                 }                             
@@ -746,7 +799,7 @@ namespace CapaServicioWindows.Modular
                                 DateTime fechaIni = DateTime.UtcNow.AddMonths(-2);
                                 DateTime fecha_Fin = DateTime.UtcNow;
                                 string in_archivos = "";
-                                ds = dat_geninter.SET_XSTORE_VENTA_EXPORTAR_PE(_codtda, fechaIni, fecha_Fin);
+                                ds = (_pais=="PE") ?dat_geninter.SET_XSTORE_VENTA_EXPORTAR_PE(_codtda, fechaIni, fecha_Fin): dat_geninter.SET_XSTORE_VENTA_EXPORTAR_EC(_codtda, fechaIni, fecha_Fin);
                                 #region<TRANS_LINE_TENDER>                               
                                 dt = ds.Tables[0];
                                 if (dt != null)
@@ -769,7 +822,7 @@ namespace CapaServicioWindows.Modular
 
 
 
-                                        name_file = "TRANS_LINE_TENDER_" + _codtda + ".MNT";
+                                        name_file = "TRANS_LINE_TENDER_" + _codtda + "_" + codigo + ".MNT";
                                         in_archivos = _gen_ruta + "\\" + name_file;
 
                                         if (File.Exists(@in_archivos)) File.Delete(@in_archivos);
@@ -799,7 +852,7 @@ namespace CapaServicioWindows.Modular
 
 
 
-                                        name_file = "TRANS_TAX_" + _codtda + ".MNT";
+                                        name_file = "TRANS_TAX_" + _codtda + "_" + codigo + ".MNT";
                                         @in_archivos = _gen_ruta + "\\" + name_file;
 
                                         if (File.Exists(@in_archivos)) File.Delete(@in_archivos);
@@ -833,7 +886,7 @@ namespace CapaServicioWindows.Modular
 
 
 
-                                        name_file = "TRANS_LINE_ITEM_TAX_" + _codtda + ".MNT";
+                                        name_file = "TRANS_LINE_ITEM_TAX_" + _codtda + "_" + codigo + ".MNT";
                                         in_archivos = _gen_ruta + "\\" + name_file;
 
                                         if (File.Exists(@in_archivos)) File.Delete(@in_archivos);
@@ -863,7 +916,7 @@ namespace CapaServicioWindows.Modular
 
 
 
-                                        name_file = "TRANS_LINE_ITEM_" + _codtda + ".MNT";
+                                        name_file = "TRANS_LINE_ITEM_" + _codtda + "_" + codigo + ".MNT";
                                         in_archivos = _gen_ruta + "\\" + name_file;
 
                                         if (File.Exists(@in_archivos)) File.Delete(@in_archivos);
@@ -894,11 +947,12 @@ namespace CapaServicioWindows.Modular
 
 
 
-                                        name_file = "TRANS_HEADER_" + _codtda + ".MNT";
+                                        name_file = "TRANS_HEADER_" + _codtda + "_" + codigo + ".MNT";
                                         in_archivos = _gen_ruta + "\\" + name_file;
 
                                         if (File.Exists(@in_archivos)) File.Delete(@in_archivos);
                                         File.WriteAllText(@in_archivos, str_cadena);
+                                        valida_genera = true;
                                     }
                                 }
                                 #endregion
@@ -914,7 +968,7 @@ namespace CapaServicioWindows.Modular
                             case "ITEM_MAINTENANCE":
                                 #region<ITEM_MAINTENANCE>    
                                 if (_ITEM_MAINTENANCE) return;
-                                dt = dat_geninter.ItemMaintenance_PE();
+                                dt =(_pais=="PE") ?dat_geninter.ItemMaintenance_PE(): dat_geninter.ItemMaintenance_EC();
                                 if (dt != null)
                                 {
                                     if (dt.Rows.Count > 0)
@@ -935,13 +989,13 @@ namespace CapaServicioWindows.Modular
 
 
 
-                                        name_file = "ItemMaintenance_" + DateTime.Today.ToString("yyyyMMdd") + ".XML";
+                                        name_file = "ItemMaintenance_" + DateTime.Today.ToString("yyyyMMdd") + "_" + codigo + ".XML";
                                         in_maestros = _gen_ruta + "\\" + name_file;
 
                                         if (File.Exists(@in_maestros)) File.Delete(@in_maestros);
                                         File.WriteAllText(@in_maestros, str_cadena);
                                         _ITEM_MAINTENANCE = true;
-
+                                        valida_genera = true;
                                     }
                                 }
 
@@ -950,7 +1004,7 @@ namespace CapaServicioWindows.Modular
                             case "MERCHANDISE_HIERARCHY_MAINTENANCE":
                                 #region<MERCHANDISE_HIERARCHY_MAINTENANCE>   
                                 if (_MERCHANDISE_HIERARCHY_MAINTENANCE) return;                            
-                                dt = dat_geninter.MerchandiseHierarch_PE();
+                                dt = (_pais=="PE")? dat_geninter.MerchandiseHierarch_PE() : dat_geninter.MerchandiseHierarch_EC();
                                 if (dt != null)
                                 {
                                     if (dt.Rows.Count > 0)
@@ -969,12 +1023,13 @@ namespace CapaServicioWindows.Modular
                                         }
                                         str_cadena = str.ToString();
 
-                                        name_file = "MerchandiseHierarchyMaintenance_" + DateTime.Today.ToString("yyyyMMdd") + ".XML";
+                                        name_file = "MerchandiseHierarchyMaintenance_" + DateTime.Today.ToString("yyyyMMdd") + "_" + codigo + ".XML";
                                         in_maestros = _gen_ruta + "\\" + name_file;
 
                                         if (File.Exists(@in_maestros)) File.Delete(@in_maestros);
                                         File.WriteAllText(@in_maestros, str_cadena);
                                         _MERCHANDISE_HIERARCHY_MAINTENANCE = true;
+                                        valida_genera = true;
                                     }
                                 }
                                 break;
@@ -982,7 +1037,7 @@ namespace CapaServicioWindows.Modular
                             case "ORCE RETAIL_LOCATIONS":
                                 #region<ORCE RETAIL_LOCATIONS>      
                                 if (_ORCE_RETAIL_LOCATIONS) return;                          
-                                dt = dat_geninter.OrcRetailLocations_PE();
+                                dt =(_pais=="PE")? dat_geninter.OrcRetailLocations_PE(): dat_geninter.OrcRetailLocations_EC();
                                 if (dt != null)
                                 {
                                     if (dt.Rows.Count > 0)
@@ -1003,12 +1058,13 @@ namespace CapaServicioWindows.Modular
 
 
 
-                                        name_file = "RetailLocations_" + DateTime.Today.ToString("yyyyMMdd") + ".XML";
+                                        name_file = "RetailLocations_" + DateTime.Today.ToString("yyyyMMdd") + "_" + codigo + ".XML";
                                         in_maestros = _gen_ruta + "\\" + name_file;
 
                                         if (File.Exists(@in_maestros)) File.Delete(@in_maestros);
                                         File.WriteAllText(@in_maestros, str_cadena);
                                         _ORCE_RETAIL_LOCATIONS = true;
+                                        valida_genera = true;
                                     }
                                 }
                                 break;

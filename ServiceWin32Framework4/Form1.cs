@@ -118,7 +118,8 @@ namespace ServiceWin32Framework4
             string _error = "";
             Ftp_Xstore_Service_Send envio = new Ftp_Xstore_Service_Send();
             //envio.proc_envio_ftp();
-            envio.ejecutar_genera_file_xstore_auto(ref _error);
+            string pais = "EC";
+            envio.ejecutar_genera_file_xstore_auto(pais, ref _error);
             //Dat_Venta ejecuta_proc_venta = new Dat_Venta();
             //CapaServicioWindows.Envio_Ftp_Xstore
             //ejecuta_proc_venta.procesar_fcacb_SQL(ref _error);

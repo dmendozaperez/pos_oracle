@@ -57,6 +57,40 @@ namespace CapaServicioWindows.CapaDato.Interfaces
             return lista;
         }
 
+        public void Update_Interface_Genera(string _codigo)
+        {
+            string sqlquery = "USP_XSTORE_UPDATE_INTERFA_GEN";
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(ConexionSQL.conexion))
+                {
+                    try
+                    {
+                        if (cn.State == 0) cn.Open();
+                        using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                        {
+                            cmd.CommandTimeout = 0;
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.Parameters.AddWithValue("@CODIGO", _codigo);
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+                    catch 
+                    {
+
+                        
+                    }
+                    if (cn != null)
+                        if (cn.State == ConnectionState.Open) cn.Close();
+                }
+            }
+            catch 
+            {
+
+                
+            }
+        }
+
         public List<Ent_InterGenera_PL> lista_inter_pl_genera(string pais)
         {
             List<Ent_InterGenera_PL> lista = null;
@@ -114,6 +148,8 @@ namespace CapaServicioWindows.CapaDato.Interfaces
         #region<GENERACION DE INTERFACES MNT>
         #region<INTERFACES PERU>
         #region<XOFICCE>
+
+        #region<PROCEDURE DE PERU>
         public DataTable get_item_PE(string pais, string codtda)
         {
             DataTable dt = null;
@@ -206,6 +242,43 @@ namespace CapaServicioWindows.CapaDato.Interfaces
         public DataSet SET_XSTORE_VENTA_EXPORTAR_PE(string cod_tda, DateTime fechaIni, DateTime fechaFin)
         {
             string sqlquery = "USP_SET_XSTORE_VENTA_EXPORTAR";
+            DataSet ds = null;
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(ConexionSQL.conexion))
+                {
+                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@COD_TDA", cod_tda);
+                        cmd.Parameters.AddWithValue("@FEC_INI", fechaIni);
+                        cmd.Parameters.AddWithValue("@FEC_FIN", fechaFin);
+
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            ds = new DataSet();
+                            da.Fill(ds);
+
+                            ds.Tables[0].TableName = "TRANS_LINE_TENDER";
+                            ds.Tables[1].TableName = "TRANS_TAX";
+                            ds.Tables[2].TableName = "TRANS_LINE_ITEM_TAX";
+                            ds.Tables[3].TableName = "TRANS_LINE_ITEM";
+                            ds.Tables[4].TableName = "TRANS_HEADER";
+
+                        }
+                    }
+                }
+            }
+            catch (Exception exc)
+            {
+                ds = null;
+            }
+            return ds;
+        }
+        public DataSet SET_XSTORE_VENTA_EXPORTAR_EC(string cod_tda, DateTime fechaIni, DateTime fechaFin)
+        {
+            string sqlquery = "USP_SET_XSTORE_VENTA_EXPORTAR_ECU";
             DataSet ds = null;
             try
             {
@@ -705,6 +778,40 @@ namespace CapaServicioWindows.CapaDato.Interfaces
             return dt;
         }
         #endregion
+
+        #region<PROCEDURE DE ECUADOR>
+        #endregion
+        //public DataTable get_price_update_2_EC(string pais, string codtda)
+        //{
+        //    DataTable dt = null;
+        //    string sqlquery = "USP_XSTORE_GET_PRICE_UPDATE_2_EC";
+        //    try
+        //    {
+        //        using (SqlConnection cn = new SqlConnection(ConexionSQL.conexion))
+        //        {
+        //            using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+        //            {
+        //                cmd.CommandTimeout = 0;
+        //                cmd.CommandType = CommandType.StoredProcedure;
+        //                cmd.Parameters.AddWithValue("@PAIS", pais);
+        //                cmd.Parameters.AddWithValue("@CODTIENDA", codtda);
+
+        //                using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+        //                {
+        //                    dt = new DataTable();
+        //                    da.Fill(dt);
+        //                }
+
+        //            }
+        //        }
+        //    }
+        //    catch (Exception)
+        //    {
+        //        dt = null;
+        //    }
+        //    return dt;
+        //}
+        #endregion
         #region<ORCE>
         public DataTable ItemMaintenance_PE()
         {
@@ -790,7 +897,7 @@ namespace CapaServicioWindows.CapaDato.Interfaces
         #endregion
         #endregion
         #region<INTERFACES ECUADOR>
-        #region<XOFICCE
+        #region<XOFICCE>
         public DataTable get_item_EC(string pais, string codtda)
         {
             DataTable dt = null;
@@ -884,7 +991,7 @@ namespace CapaServicioWindows.CapaDato.Interfaces
         public DataTable get_item_images_EC(string pais, string codtda)
         {
             DataTable dt = null;
-            string sqlquery = "USP_XSTORE_GET_ITEM_EC";
+            string sqlquery = "USP_XSTORE_GET_ITEM_IMAGES_EC";
             try
             {
                 using (SqlConnection cn = new SqlConnection(ConexionSQL.conexion))
@@ -911,9 +1018,455 @@ namespace CapaServicioWindows.CapaDato.Interfaces
             }
             return dt;
         }
+        public DataSet get_retail_location_EC(string _cod_tda, string pais)
+        {
+            string sqlquery = "USP_XSTORE_GET_RETAIL_LOCATION_ECU";
+            DataSet ds = null;
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(ConexionSQL.conexion))
+                {
+                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@cod_tda", _cod_tda);
+                        cmd.Parameters.AddWithValue("@PAIS", pais);
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            ds = new DataSet();
+                            da.Fill(ds);
+
+                            ds.Tables[0].TableName = "RETAIL_LOCATION";
+                            ds.Tables[1].TableName = "RETAIL_LOCATION_PROPERTY";
+
+                        }
+                    }
+                }
+            }
+            catch (Exception exc)
+            {
+                ds = null;
+            }
+            return ds;
+        }
+        public DataTable get_item_dimension_type_EC(string pais, string codtda)
+        {
+            DataTable dt = null;
+            string sqlquery = "USP_XSTORE_GET_ITEM_DIMENSION_TYPE_EC";
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(ConexionSQL.conexion))
+                {
+                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@PAIS", pais);
+                        cmd.Parameters.AddWithValue("@cod_tda", codtda);
+
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            dt = new DataTable();
+                            da.Fill(dt);
+                        }
+
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+            return dt;
+        }
+        /// <summary>
+        /// get de la talla - bata
+        /// </summary>
+        /// <returns></returns>
+        public DataTable get_item_dimension_value_EC(string pais, string codtda)
+        {
+            DataTable dt = null;
+            string sqlquery = "USP_XSTORE_GET_ITEM_DIMENSION_VALUE_EC";
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(ConexionSQL.conexion))
+                {
+                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@PAIS", pais);
+                        cmd.Parameters.AddWithValue("@CODTIENDA", codtda);
+
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            dt = new DataTable();
+                            da.Fill(dt);
+                        }
+
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+            return dt;
+        }
+
+        public DataTable get_Party_EC(string pais, string codtda, string strCodSupl, string strCodEmpl)
+        {
+            DataTable dt = null;
+            string sqlquery = "USP_XSTORE_GET_PARTY_ECU";
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(ConexionSQL.conexion))
+                {
+                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@PAIS", pais);
+                        cmd.Parameters.AddWithValue("@CODTIENDA", codtda);
+                        cmd.Parameters.AddWithValue("@CODSPL", strCodSupl);
+                        cmd.Parameters.AddWithValue("@CODEMPL", strCodEmpl);
+
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            dt = new DataTable();
+                            da.Fill(dt);
+                        }
+
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+            return dt;
+        }
+        public DataTable get_Location_Property_EC(string pais, string codtda)
+        {
+            DataTable dt = null;
+            string sqlquery = "USP_XSTORE_GET_INV_LOCATION_PROPERTY_ECU";
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(ConexionSQL.conexion))
+                {
+                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@PAIS", pais);
+                        cmd.Parameters.AddWithValue("@cod_tda", codtda);
+
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            dt = new DataTable();
+                            da.Fill(dt);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                dt = null;
+            }
+            return dt;
+        }
+        public DataTable get_stock_ledger_EC(string fecha, string codtda, string pais)
+        {
+            DataTable dt = null;
+            string sqlquery = "USP_XSTORE_GET_STOCK_LEDGER";
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(ConexionSQL.conexion))
+                {
+                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@fecha_stk", fecha);
+                        cmd.Parameters.AddWithValue("@cod_tda", codtda);
+                        cmd.Parameters.AddWithValue("@PAIS", pais);
+
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            dt = new DataTable();
+                            da.Fill(dt);
+                        }
+
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+            return dt;
+        }
+        public DataTable get_county_city_EC(string codtda, string pais)
+        {
+            DataTable dt = null;
+            string sqlquery = "USP_XSTORE_GET_BCL_COUNTY_CITY_ECU";
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(ConexionSQL.conexion))
+                {
+                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@cod_tda", codtda);
+                        cmd.Parameters.AddWithValue("@PAIS", pais);
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            dt = new DataTable();
+                            da.Fill(dt);
+                        }
+
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+            return dt;
+        }
+        public DataTable get_state_county_EC(string codtda, string pais)
+        {
+            DataTable dt = null;
+            string sqlquery = "USP_XSTORE_GET_BCL_STATE_COUNTY_ECU";
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(ConexionSQL.conexion))
+                {
+                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@cod_tda", codtda);
+                        cmd.Parameters.AddWithValue("@PAIS", pais);
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            dt = new DataTable();
+                            da.Fill(dt);
+                        }
+
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+            return dt;
+        }
+        public DataTable get_tender_repository_EC(string codtda, string pais)
+        {
+            DataTable dt = null;
+            string sqlquery = "USP_XSTORE_GET_TENDER_REPOSITORY_ECU";
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(ConexionSQL.conexion))
+                {
+                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@cod_tda", codtda);
+                        cmd.Parameters.AddWithValue("@PAIS", pais);
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            dt = new DataTable();
+                            da.Fill(dt);
+                        }
+
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+            return dt;
+        }
+        public DataTable get_tender_repository_property_EC(string codtda, string pais)
+        {
+            DataTable dt = null;
+            string sqlquery = "USP_XSTORE_GET_TENDER_REPOSITORY_PROPERTY_ECU";
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(ConexionSQL.conexion))
+                {
+                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@cod_tda", codtda);
+                        cmd.Parameters.AddWithValue("@PAIS", pais);
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            dt = new DataTable();
+                            da.Fill(dt);
+                        }
+
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+            return dt;
+        }
+
+        public DataTable get_inv_valid_destinations_EC(string codtda, string pais)
+        {
+            DataTable dt = null;
+            string sqlquery = "USP_XSTORE_GET_INV_VALID_DESTINATIONS_ECU";
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(ConexionSQL.conexion))
+                {
+                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@cod_tda", codtda);
+                        cmd.Parameters.AddWithValue("@PAIS", pais);
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            dt = new DataTable();
+                            da.Fill(dt);
+                        }
+
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+            return dt;
+        }
+
+        public DataTable get_inv_valid_destinations_property_EC(string codtda, string pais)
+        {
+            DataTable dt = null;
+            string sqlquery = "USP_XSTORE_GET_INV_VALID_DESTINATIONS_PROPERTY_ECU";
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(ConexionSQL.conexion))
+                {
+                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@cod_tda", codtda);
+                        cmd.Parameters.AddWithValue("@PAIS", pais);
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            dt = new DataTable();
+                            da.Fill(dt);
+                        }
+
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+            return dt;
+        }
+
         #endregion
         #region<ORCE>
+        public DataTable ItemMaintenance_EC()
+        {
+            DataTable dt = null;
+            string sqlquery = "USP_ORCE_ItemMaintenance_ECU";
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(ConexionSQL.conexion))
+                {
+                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            dt = new DataTable();
+                            da.Fill(dt);
+                        }
 
+                    }
+                }
+            }
+            catch (Exception exc)
+            {
+                dt = null;
+            }
+            return dt;
+        }
+        public DataTable MerchandiseHierarch_EC()
+        {
+            DataTable dt = null;
+            string sqlquery = "USP_ORCE_MerchandiseHierarchyMaintenance_ECU";
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(ConexionSQL.conexion))
+                {
+                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            dt = new DataTable();
+                            da.Fill(dt);
+                        }
+
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+            return dt;
+        }
+        public DataTable OrcRetailLocations_EC()
+        {
+            DataTable dt = null;
+            string sqlquery = "USP_ORCE_RetailLocations_ECU";
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(ConexionSQL.conexion))
+                {
+                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            dt = new DataTable();
+                            da.Fill(dt);
+                        }
+
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+            return dt;
+        }
         #endregion
         #endregion
         #endregion

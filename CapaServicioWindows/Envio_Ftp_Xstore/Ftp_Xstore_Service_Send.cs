@@ -37,7 +37,7 @@ namespace CapaServicioWindows.Envio_Ftp_Xstore
             }
             return valida;
         }
-        public void ejecutar_genera_file_xstore_auto(ref string error)
+        public void ejecutar_genera_file_xstore_auto(string _pais,ref string error)
         {            
             try
             {
@@ -52,7 +52,7 @@ namespace CapaServicioWindows.Envio_Ftp_Xstore
 
                 /*solo filtramos los automaticos VARIABLE OPCION A*/
                 #region<AUTOMATICO DE PERU>
-                var proc_peru = lista.Where(f => f.opcion == "A" && f.pais == "PE" ).FirstOrDefault();
+                var proc_peru = lista.Where(f => f.opcion == "A" && f.pais == _pais).FirstOrDefault();
 
                 string _hora_ejecucion=proc_peru.ftp_send;
                 DateTime myDt = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc);
@@ -67,10 +67,10 @@ namespace CapaServicioWindows.Envio_Ftp_Xstore
 
                 Dat_Tienda get_tda = new Dat_Tienda();
 
-                DataTable dt_tienda = get_tda.get_tienda_xstore("PE");
+                DataTable dt_tienda = get_tda.get_tienda_xstore(_pais);
 
                 Dat_Interfaces dat_inter = null;
-                string pais = "PE";
+                //string pais = "PE";
                 DataTable dt_item = null;
                 DataTable dt_images = null;
                 DataTable dt_merch_hier = null;
@@ -79,9 +79,9 @@ namespace CapaServicioWindows.Envio_Ftp_Xstore
                 foreach (DataRow fila_tda in dt_tienda.Rows)
                 {                   
                     string cod_tda = fila_tda["cod_entid"].ToString();
-                    var env_peru_XO = lista.Where(f => f.opcion == "A" && f.pais == pais);
+                    var env_peru_XO = lista.Where(f => f.opcion == "A" && f.pais == _pais);
                     dat_inter = new Dat_Interfaces();
-                    var inter_det = dat_inter.lista_inter_pl(pais);                  
+                    var inter_det = dat_inter.lista_inter_pl(_pais);                  
                     foreach (var env_peru_det in env_peru_XO.Where(ent=>ent.entorno=="XOFICCE") )
                     {
                         var inter_det_entorno = inter_det.Where(m => m.entorno == env_peru_det.entorno);
@@ -93,12 +93,12 @@ namespace CapaServicioWindows.Envio_Ftp_Xstore
 
                             if (det_inter.inter_nom== "PRICE_UPDATE" && valida_dia)
                             {
-                                genera_automatico_inter(pais, cod_tda, env_peru_det.rut_upload, det_inter.inter_nom, det_inter.entorno,
+                                genera_automatico_inter(_pais, cod_tda, env_peru_det.rut_upload, det_inter.inter_nom, det_inter.entorno,
                                                    ref dt_item, ref dt_images, ref dt_merch_hier, ref dt_price_update);
                             }
                             if (det_inter.inter_nom != "PRICE_UPDATE")
                             {
-                                genera_automatico_inter(pais, cod_tda, env_peru_det.rut_upload, det_inter.inter_nom, det_inter.entorno,
+                                genera_automatico_inter(_pais, cod_tda, env_peru_det.rut_upload, det_inter.inter_nom, det_inter.entorno,
                                                    ref dt_item, ref dt_images, ref dt_merch_hier, ref dt_price_update);
                             }
 
@@ -109,16 +109,16 @@ namespace CapaServicioWindows.Envio_Ftp_Xstore
                 }
                 #endregion
                 #region<ENTORNO ORCE>
-                    var env_peru_CE = lista.Where(f => f.opcion == "A" && f.pais == pais);                 
+                    var env_peru_CE = lista.Where(f => f.opcion == "A" && f.pais == _pais);                 
                     dat_inter = new Dat_Interfaces();
-                    var inter_det_CE = dat_inter.lista_inter_pl(pais);
+                    var inter_det_CE = dat_inter.lista_inter_pl(_pais);
                     foreach (var env_peru_det in env_peru_CE.Where(ent => ent.entorno == "ORCE"))
                     {
                         var inter_det_entorno = inter_det_CE.Where(m => m.entorno == env_peru_det.entorno);
 
                         foreach (var det_inter in inter_det_entorno)
                         {                          
-                            genera_automatico_inter(pais, "", env_peru_det.rut_upload, det_inter.inter_nom, det_inter.entorno,
+                            genera_automatico_inter(_pais, "", env_peru_det.rut_upload, det_inter.inter_nom, det_inter.entorno,
                                                     ref dt_item,ref dt_images,ref dt_merch_hier,ref dt_price_update);
                         }
                     }
@@ -183,7 +183,7 @@ namespace CapaServicioWindows.Envio_Ftp_Xstore
                                 #region<ITEM>
                                 if (dt_item==null)
                                 {
-                                    dt = dat_geninter.get_item_PE(_pais, _codtda);
+                                    dt = (_pais=="PE") ?dat_geninter.get_item_PE(_pais, _codtda): dat_geninter.get_item_EC(_pais, _codtda);
                                     dt_item = dt;
                                 }
                                 else
@@ -228,7 +228,7 @@ namespace CapaServicioWindows.Envio_Ftp_Xstore
 
                                 if (dt_price_update == null)
                                 {
-                                    dt = dat_geninter.get_price_update_2_PE(_pais, _codtda);
+                                    dt = (_pais=="PE")? dat_geninter.get_price_update_2_PE(_pais, _codtda) : dat_geninter.get_price_update_2_EC(_pais, _codtda);
                                     dt_price_update = dt;
                                 }
                                 else
@@ -270,7 +270,7 @@ namespace CapaServicioWindows.Envio_Ftp_Xstore
 
                                 if (dt_merch_hier == null)
                                 {
-                                    dt = dat_geninter.get_merch_hier_PE(_pais, _codtda);
+                                    dt = (_pais=="PE")? dat_geninter.get_merch_hier_PE(_pais, _codtda) : dat_geninter.get_merch_hier_EC(_pais, _codtda);
                                     dt_merch_hier = dt;
                                 }
                                 else
@@ -317,7 +317,7 @@ namespace CapaServicioWindows.Envio_Ftp_Xstore
 
                                 if (dt_images == null)
                                 {
-                                    dt = dat_geninter.get_item_images_PE(_pais, _codtda);
+                                    dt = (_pais=="PE")? dat_geninter.get_item_images_PE(_pais, _codtda) : dat_geninter.get_item_images_EC(_pais, _codtda);
                                     dt_images = dt;
                                 }
                                 else
@@ -362,7 +362,7 @@ namespace CapaServicioWindows.Envio_Ftp_Xstore
                         {
                             case "ITEM_MAINTENANCE":
                                 #region<ITEM_MAINTENANCE>                                                                
-                                    dt = dat_geninter.ItemMaintenance_PE();
+                                    dt = (_pais=="PE")? dat_geninter.ItemMaintenance_PE(): dat_geninter.ItemMaintenance_EC();
                                     if (dt != null)
                                     {
                                         if (dt.Rows.Count > 0)
@@ -395,7 +395,7 @@ namespace CapaServicioWindows.Envio_Ftp_Xstore
                             #endregion
                             case "MERCHANDISE_HIERARCHY_MAINTENANCE":
                                 #region<MERCHANDISE_HIERARCHY_MAINTENANCE>                               
-                                    dt = dat_geninter.MerchandiseHierarch_PE();
+                                    dt = (_pais=="PE")? dat_geninter.MerchandiseHierarch_PE() : dat_geninter.MerchandiseHierarch_EC();
                                     if (dt != null)
                                     {
                                         if (dt.Rows.Count > 0)
@@ -425,7 +425,7 @@ namespace CapaServicioWindows.Envio_Ftp_Xstore
                             #endregion
                             case "ORCE RETAIL_LOCATIONS":
                                 #region<ORCE RETAIL_LOCATIONS>                                
-                                    dt = dat_geninter.OrcRetailLocations_PE();
+                                    dt =(_pais=="PE")? dat_geninter.OrcRetailLocations_PE() : dat_geninter.OrcRetailLocations_EC();
                                     if (dt != null)
                                     {
                                         if (dt.Rows.Count > 0)

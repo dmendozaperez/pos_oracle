@@ -178,6 +178,15 @@ namespace ServiceWinTransaction
                         ejecuta_procesos_inter.ejecutar_genera_interface_xstore(ref _error);
                         /********************************/
 
+                        if (_error.Length > 0)
+                        {
+                            TextWriter tw1 = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                            tw1.WriteLine(_error);
+                            tw1.Flush();
+                            tw1.Close();
+                            tw1.Dispose();
+                        }
+
                         //ejecuta_procesos.envio_Guias_ToxStore(ref _error);
 
                         _valida_genera_interface = 0;

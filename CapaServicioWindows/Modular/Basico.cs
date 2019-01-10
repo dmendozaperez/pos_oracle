@@ -869,7 +869,7 @@ namespace CapaServicioWindows.Modular
             try
             {
                 datUtil = new Util();
-                string carpetatienda = @"D:\TiendaPaq"; //datUtil.get_ruta_locationProcesa_dbf("SQL");
+                string carpetatienda = datUtil.get_ruta_locationProcesa_dbf("SQL");
                 string carpetadbf = carpetatienda + "\\DBF";
                 string strCodTienda = "";
                 if (!Directory.Exists(@carpetatienda)) Directory.CreateDirectory(@carpetatienda);
@@ -1535,6 +1535,7 @@ namespace CapaServicioWindows.Modular
 
                 if (_error_procesos.Length>0)
                 {
+                    _error_procesos = "error de poslog " + _error_procesos ;
                     datUtil.control_errores_transac("08", _error_procesos, ref _error_procesos);
                 }
 

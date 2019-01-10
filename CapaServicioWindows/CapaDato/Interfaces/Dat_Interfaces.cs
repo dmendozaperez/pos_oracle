@@ -77,7 +77,7 @@ namespace CapaServicioWindows.CapaDato.Interfaces
                     }
                     catch 
                     {
-
+                        throw;
                         
                     }
                     if (cn != null)
@@ -87,7 +87,7 @@ namespace CapaServicioWindows.CapaDato.Interfaces
             catch 
             {
 
-                
+                throw;
             }
         }
 
@@ -132,6 +132,7 @@ namespace CapaServicioWindows.CapaDato.Interfaces
                     }
                     catch
                     {
+                        throw;
                     }
                     if (cn != null)
                         if (cn.State == ConnectionState.Open) cn.Close();
@@ -140,6 +141,7 @@ namespace CapaServicioWindows.CapaDato.Interfaces
             catch
             {
                 lista = null;
+                throw;
             }
             return lista;
         }

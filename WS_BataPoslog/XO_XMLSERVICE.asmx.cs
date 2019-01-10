@@ -32,12 +32,12 @@ namespace WS_BataPoslog
             try
             {
 
-                //Ent_Conexion.conexion = ConfigurationManager.ConnectionStrings["SQL_PROD_PE"].ConnectionString;
-                //Ent_Conexion.conexion_posperu = ConfigurationManager.ConnectionStrings["SQL_PROD_PE"].ConnectionString;
-                //Ent_Conexion.conexion_posperu_DES = ConfigurationManager.ConnectionStrings["SQL_DES_PE"].ConnectionString;
-                //Ent_Conexion.conexion_posperu_QA = ConfigurationManager.ConnectionStrings["SQL_QA_PE"].ConnectionString;
-                //Ent_Conexion.conexion_posecuador = ConfigurationManager.ConnectionStrings["SQL_PROD_EC"].ConnectionString;
-                //Ent_Conexion.conexion_posecuador_QA = ConfigurationManager.ConnectionStrings["SQL_QA_EC"].ConnectionString;
+                Ent_Conexion.conexion =Encripta.encryption.RijndaelDecryptString(ConfigurationManager.ConnectionStrings["SQL_PROD_PE"].ConnectionString);
+                Ent_Conexion.conexion_posperu = Encripta.encryption.RijndaelDecryptString(ConfigurationManager.ConnectionStrings["SQL_PROD_PE"].ConnectionString);
+                Ent_Conexion.conexion_posperu_DES = Encripta.encryption.RijndaelDecryptString(ConfigurationManager.ConnectionStrings["SQL_DES_PE"].ConnectionString);
+                Ent_Conexion.conexion_posperu_QA = Encripta.encryption.RijndaelDecryptString(ConfigurationManager.ConnectionStrings["SQL_QA_PE"].ConnectionString);
+                Ent_Conexion.conexion_posecuador = Encripta.encryption.RijndaelDecryptString(ConfigurationManager.ConnectionStrings["SQL_PROD_EC"].ConnectionString);
+                Ent_Conexion.conexion_posecuador_QA = Encripta.encryption.RijndaelDecryptString(ConfigurationManager.ConnectionStrings["SQL_QA_EC"].ConnectionString);
 
 
 

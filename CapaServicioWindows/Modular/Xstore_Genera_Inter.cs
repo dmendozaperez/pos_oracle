@@ -1079,7 +1079,7 @@ namespace CapaServicioWindows.Modular
             }
             catch
             {
-
+                throw;
 
             }
         }

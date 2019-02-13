@@ -2388,11 +2388,11 @@ namespace InterfaceWPF
                     string codAmbiente = dwAmbienteDsp.EditValue.ToString();
                     setearAmbXoficce(codAmbiente);
 
-                    Ent_Conexion.ftp_server = Amb_Ftp_Server;
-                    Ent_Conexion.ftp_user = Amb_Ftp_User;
-                    Ent_Conexion.ftp_password = Amb_Ftp_Pass;
-                    Ent_Conexion.ftp_puerto = Amb_Ftp_Port;
-                    basico.ftp_ruta_destino = Amb_Ftp_Path;
+                    //Ent_Conexion.ftp_server = Amb_Ftp_Server;
+                    //Ent_Conexion.ftp_user = Amb_Ftp_User;
+                    //Ent_Conexion.ftp_password = Amb_Ftp_Pass;
+                    //Ent_Conexion.ftp_puerto = Amb_Ftp_Port;
+                    //basico.ftp_ruta_destino = Amb_Ftp_Path;
 
                     mensaje = "Se enviaron al ftp";
                     envio = await Task.Run(() => basico.sendftp_file_mnt());

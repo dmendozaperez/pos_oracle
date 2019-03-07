@@ -118,8 +118,12 @@ namespace ServiceWin32Framework4
             string _error = "";
             Ftp_Xstore_Service_Send envio = new Ftp_Xstore_Service_Send();
             //envio.proc_envio_ftp();
-            string pais = "EC";
-            envio.ejecutar_genera_file_xstore_auto(pais, ref _error);
+            string pais = "PE";
+            Boolean gen_per_item = false;
+            Boolean gen_ecu_item = false;
+
+            envio.ejecutar_genera_file_xstore_auto(pais, ref _error,ref gen_per_item,ref gen_ecu_item);
+            envio.update_articulo_end_xstore(pais);
             //Dat_Venta ejecuta_proc_venta = new Dat_Venta();
             //CapaServicioWindows.Envio_Ftp_Xstore
             //ejecuta_proc_venta.procesar_fcacb_SQL(ref _error);
@@ -145,6 +149,26 @@ namespace ServiceWin32Framework4
             ejecuta_procesos.ejecutar_genera_interface_xstore(ref _error);
             MessageBox.Show("Terminado");
             Cursor.Current = Cursors.Default;
+        }
+
+        private void procesar_fmc_fmd_Click(object sender, EventArgs e)
+        {
+            string _error = "";
+            Dat_Venta ejecuta_proc_venta = null;
+            ejecuta_proc_venta = new Dat_Venta();
+            #region<PROCESAMIENTO DE FMC Y FMD>
+            ejecuta_proc_venta.procesar_fmc_fmd(ref _error);
+            #endregion
+        }
+
+        private void get_fmc_insertar_fvdespc_Click(object sender, EventArgs e)
+        {
+            string _error = "";
+            Dat_Venta ejecuta_proc_venta = null;
+            ejecuta_proc_venta = new Dat_Venta();
+            #region<PROCESAMIENTO DE FVDESPC>
+            ejecuta_proc_venta.procesar_fmc_fmd_fvdespc(ref _error);
+            #endregion
         }
     }
 }

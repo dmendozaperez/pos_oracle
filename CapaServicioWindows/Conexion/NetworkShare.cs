@@ -13,19 +13,26 @@ namespace CapaServicioWindows.Conexion
         /// <returns>Null if successful, otherwise error message.</returns>
         public static string ConnectToShare(string uri, string username, string password)
         {
-            //Create netresource and point it at the share
-            NETRESOURCE nr = new NETRESOURCE();
-            nr.dwType = RESOURCETYPE_DISK;
-            nr.lpRemoteName = uri;
+            try
+            { 
+                    //Create netresource and point it at the share
+                    NETRESOURCE nr = new NETRESOURCE();
+                    nr.dwType = RESOURCETYPE_DISK;
+                    nr.lpRemoteName = uri;
 
-            //Create the share
-            int ret = WNetUseConnection(IntPtr.Zero, nr, password, username, 0, null, null, null);
+                    //Create the share
+                    int ret = WNetUseConnection(IntPtr.Zero, nr, password, username, 0, null, null, null);
 
-            //Check for errors
-            if (ret == NO_ERROR)
-                return null;
-            else
-                return GetError(ret);
+                    //Check for errors
+                    if (ret == NO_ERROR)
+                        return null;
+                    else
+                        return GetError(ret);
+            }
+            catch( Exception ec)
+            {
+                throw ec;
+            }
         }
 
         /// <summary>

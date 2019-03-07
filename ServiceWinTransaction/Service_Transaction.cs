@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using System.Timers;
 using ICSharpCode.SharpZipLib.Zip;
 using CapaServicioWindows.Envio_Ftp_Xstore;
+using CapaServicioWindows.CapaDato.Interfaces;
 
 namespace ServiceWinTransaction
 {
@@ -22,6 +23,9 @@ namespace ServiceWinTransaction
         Timer tmservicio = null;
         Timer tmservicioDBF = null;
         Timer tmservicioVentaXstore = null;
+
+        Timer tmservicio_ecu_guia = null;
+        private Int32 _valida_service_ecu_guia = 0;
 
         #region<generacion de interfaces y envio de sftp>
         Timer tmgenera_interface =null;
@@ -85,8 +89,87 @@ namespace ServiceWinTransaction
             tmenvia_sftp = new Timer(5000);
             tmenvia_sftp.Elapsed += new ElapsedEventHandler(tmenvia_sftp_Elapsed);
 
+            tmservicio_ecu_guia = new Timer(5000);
+            tmservicio_ecu_guia.Elapsed += new ElapsedEventHandler(tmservicio_ecu_guia_Elapsed);
 
         }
+        #region<REGION DE ECUADOR Y ALMACEN LURIN>
+        #region<METODO DE ENVIO DE VENTAS>
+        void tmservicio_ecu_guia_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            //string varchivov = "c://valida_hash.txt";
+            Int32 _valor = 0;
+
+            string _ruta_erro_file = @"D:\BataTransaction\ERROR_WS.txt";
+            //string _valida_proc_venta = @"D:\venta.txt";
+            Boolean proceso_venta = false;
+            try
+            {
+
+                //Boolean valida_guia_ecu = false;
+                //Boolean valida_
+
+                #region<region solo almacen ecuador>
+                if (!File.Exists(@file_almace_ecu)) return;
+                #endregion
+
+             
+                if (_valida_service_ecu_guia == 0)
+                {
+                    //string _error = "ing";
+                    _valor = 1;
+                    _valida_service_ecu_guia = 1;
+
+                    
+                    string _error_ws = "";
+                    //_error = CapaServicioWindows.Modular.Basico.retornar();
+
+                    #region<SOLO PARA ALMACEN HABILITAR ESTE PROCESO>
+                    //if (!proceso_venta)
+                    //{
+                        Basico ejecuta_procesos = null;
+                        ejecuta_procesos = new Basico();
+                        ejecuta_procesos.eje_envio_guias(ref _error_ws);
+                    //}
+                    #endregion
+
+
+
+
+
+
+                    _valida_service_ecu_guia = 0;
+
+                    if (_error_ws.Length > 0)
+                    {
+                        TextWriter tw = new StreamWriter(_ruta_erro_file, true);
+                        tw.WriteLine(_error_ws);
+                        tw.Flush();
+                        tw.Close();
+                        tw.Dispose();
+                    }               
+                }
+                //****************************************************************************
+            }
+            catch (Exception exc)
+            {
+                TextWriter tw = new StreamWriter(_ruta_erro_file, true);
+                tw.WriteLine(exc.Message);
+                tw.Flush();
+                tw.Close();
+                tw.Dispose();
+                _valida_service_ecu_guia = 0;
+            }
+
+            if (_valor == 1)
+            {
+                _valida_service_ecu_guia = 0;
+            }
+
+
+        }
+        #endregion
+        #endregion
 
         #region<envio de interfaces automatico>
         void tmenvia_sftp_Elapsed(object sender, ElapsedEventArgs e)
@@ -95,7 +178,7 @@ namespace ServiceWinTransaction
             try
             {
                 #region<region solo almacen ecuador>
-                if (File.Exists(@file_almace_ecu)) return;
+                //if (File.Exists(@file_almace_ecu)) return;
                 #endregion
 
                 if (_valida_envia_sftp == 0)
@@ -145,7 +228,7 @@ namespace ServiceWinTransaction
             try
             {
                 #region<region solo almacen ecuador>
-                if (File.Exists(@file_almace_ecu)) return;
+                //if (File.Exists(@file_almace_ecu)) return;
                 #endregion
 
                 if (_valida_genera_interface == 0)
@@ -167,16 +250,48 @@ namespace ServiceWinTransaction
                         ejecuta_procesos = new Ftp_Xstore_Service_Send();
 
                         string pais = "PE";
+                        Boolean gen_per_item = false;
+                        Boolean gen_ecu_item = false;
 
-                        ejecuta_procesos.ejecutar_genera_file_xstore_auto(pais,ref _error);
+
+                        ejecuta_procesos.ejecutar_genera_file_xstore_auto(pais,ref _error,ref gen_per_item,ref gen_ecu_item);
+
+                        Ftp_Xstore_Service_Send upd_item = new Ftp_Xstore_Service_Send();
+                        if (_error.Length == 0)
+                        {
+                            if (gen_per_item)
+                            {
+                                /*update de articulo de peru*/
+                                upd_item.update_articulo_end_xstore(pais);
+                            }
+                        }
+
 
                         pais = "EC";
-                        ejecuta_procesos.ejecutar_genera_file_xstore_auto(pais, ref _error);
+
+                        ejecuta_procesos.ejecutar_genera_file_xstore_auto(pais, ref _error,ref gen_per_item,ref gen_ecu_item);
 
                         /*GENERACION DE INTERFACE*/
                         Xstore_Genera_Inter ejecuta_procesos_inter = new Xstore_Genera_Inter();
                         ejecuta_procesos_inter.ejecutar_genera_interface_xstore(ref _error);
                         /********************************/
+                        /*UNA VEZ QUE SE HAYAN GENERADO LAS INTERFACES ENTONCES LO QUE VAMOS HACER ES UN UPDATE EN XSTORE*/
+                        /*PARA NO VOLVER A ENVIAR EL ARTICULO,  CONTROL PARA ENVIAR SOLO LOS NUEVOS Y MODIFICADOS*/
+                        if (_error.Length == 0)
+                        {
+                            //CapaServicioWindows.Envio_Ftp_Xstore
+
+
+
+                            if (gen_ecu_item)
+                            {
+
+                                /*update de articulo de ecuador*/
+                                upd_item.update_articulo_end_xstore(pais);
+                            }
+                        }
+
+                        /**/
 
                         if (_error.Length > 0)
                         {
@@ -214,7 +329,7 @@ namespace ServiceWinTransaction
             try
             {
                 #region<region solo almacen ecuador>
-                if (File.Exists(@file_almace_ecu)) return;
+                //if (File.Exists(@file_almace_ecu)) return;
                 #endregion
 
                 if (_valida_serviceGuiaToXstore == 0)
@@ -321,6 +436,9 @@ namespace ServiceWinTransaction
                 //tw.Flush();
                 //tw.Close();
                 //tw.Dispose();
+                #region<region solo almacen ecuador>
+                if (File.Exists(@file_almace_ecu)) return;
+                #endregion
 
                 /*si el archivo existe entonces ejecutar procesos de venta*/
                 if (File.Exists(@_valida_proc_venta)) proceso_venta = true;
@@ -362,6 +480,15 @@ namespace ServiceWinTransaction
                         #region<PROCESAMIENTO DE FCACB Y FDECB>
                         ejecuta_proc_venta.procesar_fcacb_SQL(ref _error_ws);
                         #endregion
+
+                        #region<PROCESAMIENTO DE FMC Y FMD>
+                        ejecuta_proc_venta.procesar_fmc_fmd(ref _error_ws);
+                        #endregion
+
+                        #region<PROCESAMIENTO DE FMC Y FMD HACIA FVDESPC>
+                        ejecuta_proc_venta.procesar_fmc_fmd_fvdespc(ref _error_ws);
+                        #endregion
+
                     }
                     #endregion
 
@@ -391,6 +518,7 @@ namespace ServiceWinTransaction
             }
             catch(Exception exc)
             {
+                _valida_service = 0;
                 TextWriter tw = new StreamWriter(_ruta_erro_file, true);
                 tw.WriteLine(exc.Message);
                 tw.Flush();
@@ -401,7 +529,7 @@ namespace ServiceWinTransaction
                 //tw.Flush();
                 //tw.Close();
                 //tw.Dispose();
-                _valida_service = 0;
+               
             }
 
             if (_valor == 1)
@@ -412,47 +540,7 @@ namespace ServiceWinTransaction
 
         }
         #endregion
-        //void tmpServicioVentaXstore_Elapsed(object sender, ElapsedEventArgs e)
-        //{
-        //    Int32 _valor = 0;
-        //    try
-        //    {
-        //        if (_valida_serviceVentaXstore == 0)
-        //        {
-        //            _valor = 1;
-        //            _valida_serviceVentaXstore = 1;
-        //            string _valida_proc_venXstore = @"D:\venta.txt";
-        //            Boolean proceso_ventaXSTORE = false;
-
-        //            if (File.Exists(_valida_proc_venXstore)) proceso_ventaXSTORE = true;
-
-        //            string _valida_proc_guiaToXstore = @"D:\XSTORE\proc_xs.txt";
-        //            if (File.Exists(_valida_proc_guiaToXstore)) proceso_ventaXSTORE = false;
-
-        //            if (proceso_ventaXSTORE)
-        //            {
-        //                _valor = 1;
-        //                string _error = "";
-        //                _valida_serviceVentaXstore = 1;
-        //                Basico ejecuta_procesos = new Basico();
-        //                ejecuta_procesos.procesar_dbf_pos(ref _error);
-        //                _valida_serviceVentaXstore = 0;
-
-        //            }
-        //        }
-
-        //    }
-        //    catch (Exception exc)
-        //    {
-        //        //string errSwc = "";
-        //        _valida_serviceVentaXstore = 0;
-        //    }
-        //    if (_valor == 1)
-        //    {
-        //        _valida_serviceVentaXstore = 0;
-        //    }
-        //}
-
+       
 
         void tmpServicioDBF_Elapsed(object sender, ElapsedEventArgs e)
         {
@@ -484,7 +572,7 @@ namespace ServiceWinTransaction
                             ejecuta_procesos.procesar_dbf_pos(ref _error);
                         _valida_ven_tmpDBF = 0;
                    
-                    }
+                    }   
                }
 
             }
@@ -542,44 +630,7 @@ namespace ServiceWinTransaction
             }
         }
 
-        //void tmpServicioScactcoDBF_Elapsed(object sender, ElapsedEventArgs e)
-        //{
-        //    Int32 _valor = 0;
-        //    try
-        //    {
-        //        if (_valida_serviceScactcoDBF == 0)
-        //        {
-        //            _valor = 1;
-        //            _valida_serviceScactcoDBF = 1;
-        //            string _valida_proc_dbf = @"D:\venta.txt";
-        //            Boolean proceso_venta = false;
-
-        //            if (File.Exists(_valida_proc_dbf)) proceso_venta = true;
-
-        //            if (!proceso_venta)
-        //            {
-        //                _valor = 1;
-        //                string _error = "";
-        //                _valida_serviceScactcoDBF = 1;
-        //                Basico ejecuta_procesos = new Basico();
-        //                ejecuta_procesos.enviar_scactco(ref _error);
-        //                _valida_serviceScactcoDBF = 0;
-
-        //            }
-        //        }
-
-        //    }
-        //    catch (Exception exc)
-        //    {
-        //        //string errSwc = "";
-        //        _valida_serviceScactcoDBF = 0;
-        //    }
-        //    if (_valor == 1)
-        //    {
-        //        _valida_serviceScactcoDBF = 0;
-        //    }
-        //}
-
+       
         protected override void OnStart(string[] args)
         {
             tmservicio.Start();
@@ -589,6 +640,7 @@ namespace ServiceWinTransaction
             tmservicio_GuiaToXstore.Start();
             tmgenera_interface.Start();
             tmenvia_sftp.Start();
+            tmservicio_ecu_guia.Start();
             //tmservicioScactcoDBF.Start();
         }
 
@@ -601,6 +653,7 @@ namespace ServiceWinTransaction
             tmservicio_GuiaToXstore.Stop();
             tmgenera_interface.Stop();
             tmenvia_sftp.Stop();
+            tmservicio_ecu_guia.Stop();
             //tmservicioScactcoDBF.Stop();
         }       
               

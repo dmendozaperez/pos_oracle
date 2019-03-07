@@ -861,6 +861,62 @@ namespace CapaServicioWindows.Modular
             }
         }
 
+        private DataSet ds_fmc_fmd(string cod_tda,string ruta_dbf,ref string error)
+        {
+            DataSet ds = null;
+            DataTable dt_fmc = null;
+            DataTable dt_fmd = null;
+            string sqlquery_fmc = "SELECT '"  + cod_tda + "' AS V_COD_TDA,V_TFOR,V_PROC,V_CFOR,V_SFOR,V_NFOR,V_FFOR,V_MONE,V_TASA,V_ALMO," + 
+	                              "V_ALMD,V_TANE,V_ANEX,V_TDOC,V_SUNA,V_SDOC,V_NDOC,V_FDOC,V_TREF,V_SREF,V_NREF," +       
+	                              "V_TIPO,V_ARTI,V_REGL,V_COLO,V_CANT,V_PRES,V_PRED,V_VVTS,V_VVTD,V_AUTO,V_PTOT," +
+                                  "V_IMPR,V_CUSE,V_MUSE,V_FCRE,V_FMOD,V_FTRX,V_CTRA,V_MEMO,V_MOTR,V_PAR1,V_PAR2,V_PAR3," + 
+                                  "V_LLE1,V_LLE2,V_LLE3 FROM FMC";
+
+            string sqlquery_fmd = "SELECT '" + cod_tda + "' AS I_COD_TDA,I_TFOR,I_PROC,I_CFOR,I_SFOR,I_NFOR,I_TIPO,I_ARTI,I_REGL,I_COLO," +
+                                  "I_ITEM,I_UNIC,I_EQU1,I_UNIM,I_CANC,I_CANM,I_PRES,I_PRED,I_VVTS,I_VVTD,I_PLIS," + 
+                                  "I_PTOT,I_IMPR,I_CUSE,I_MUSE,I_FCRE,I_FMOD FROM FMD";
+            try
+            {
+                using (OleDbConnection cn = new OleDbConnection(ConexionDBF._conexion_fmc_fmd_vfpoledb(ruta_dbf)))
+                {
+                    /*selecccionando el archivo FMC*/
+                    using (OleDbCommand cmd = new OleDbCommand(sqlquery_fmc, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        using (OleDbDataAdapter da = new OleDbDataAdapter(cmd))
+                        {
+                            dt_fmc = new DataTable();
+                            da.Fill(dt_fmc);
+                        }
+                        dt_fmc.TableName = "FMC";
+                    }
+                    /*selecccionando el archivo FMD*/
+                    using (OleDbCommand cmd = new OleDbCommand(sqlquery_fmd, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        using (OleDbDataAdapter da = new OleDbDataAdapter(cmd))
+                        {
+                            dt_fmd = new DataTable();
+                            da.Fill(dt_fmd);
+                        }
+                        dt_fmd.TableName = "FMD";
+                    }
+                }
+                if (dt_fmc!=null && dt_fmd != null)
+                {
+                    ds = new DataSet();
+                    ds.Tables.Add(dt_fmc); ds.Tables.Add(dt_fmd);
+                }               
+
+            }
+            catch (Exception exc)
+            {
+                error = exc.Message;
+                ds = null;                
+            }
+            return ds;
+        }
+       
         public void procesar_dbf_pos(ref string _error_procesos)
         {
             Util datUtil = null;
@@ -869,7 +925,7 @@ namespace CapaServicioWindows.Modular
             try
             {
                 datUtil = new Util();
-                string carpetatienda = datUtil.get_ruta_locationProcesa_dbf("SQL");
+                string carpetatienda = datUtil.get_ruta_locationProcesa_dbf("SQL");//@"D:\TiendaPaq"
                 string carpetadbf = carpetatienda + "\\DBF";
                 string strCodTienda = "";
                 if (!Directory.Exists(@carpetatienda)) Directory.CreateDirectory(@carpetatienda);
@@ -886,10 +942,18 @@ namespace CapaServicioWindows.Modular
                         File.Delete(filedetele);
 
                     String value = filespaquete[i].ToString();
-                    Char delimiter = '.';
-                    String[] substrings = value.Split(delimiter);
-                    strCodTienda = substrings[1].ToString();
-                    strCodTienda = "50" + strCodTienda;
+                    //Char delimiter = '.';
+                    //String[] substrings = value.Split(delimiter);
+                    strCodTienda =Path.GetExtension(@value).Substring(1,3);
+                    strCodTienda = "50" + strCodTienda;// + "==>" + value;
+
+                    //string _hora = DateTime.Now.ToLongTimeString() + strCodTienda;
+                    //TextWriter tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                    //tw.WriteLine(_hora);
+                    //tw.Flush();
+                    //tw.Close();
+                    //tw.Dispose();
+
                     _error = descomprimir(filespaquete[i].ToString(), @carpetadbf);
                     if (_error.Length == 0)
                     {
@@ -899,13 +963,48 @@ namespace CapaServicioWindows.Modular
                         {
 
                             venta_ing = new Dat_Venta();
-                            _error= venta_ing.inserta_venta_dbf(strCodTienda);
+                            _error =  venta_ing.inserta_venta_dbf(strCodTienda);
 
                             if (_error.Length==0)
                             {
-                                /*borramos paquete*/
-                                if (File.Exists(@value))
-                                    File.Delete(@value);
+                                /*en este caso insertamos en el fmc y fmd*/
+
+                                Boolean existe_fmc = File.Exists(@carpetadbf + "\\FMC.DBF");
+                                Boolean existe_fmd = File.Exists(@carpetadbf + "\\FMD.DBF");
+                                if (existe_fmc && existe_fmd )
+                                {
+                                    DataSet ds = ds_fmc_fmd(strCodTienda, @carpetadbf,ref  _error);
+
+                                    if (_error.Length==0)
+                                    {
+                                        _error = venta_ing.insertar_fmc_fmd(strCodTienda, ds);
+
+                                        if (_error.Length==0)
+                                        {
+                                            /**/
+                                            /*borramos paquete*/
+                                            if (File.Exists(@value))
+                                                File.Delete(@value);
+                                        }
+                                        else
+                                        {
+                                            datUtil.control_errores_transac("17", _error, ref _error);
+                                        }
+
+                                    }
+                                    else
+                                    {
+                                        datUtil.control_errores_transac("17", _error, ref _error);
+                                    }
+                                }
+                                else
+                                {
+                                    /**/
+                                    /*borramos paquete*/
+                                    if (File.Exists(@value))
+                                        File.Delete(@value);
+                                }
+                             
                             }
                             else
                             {

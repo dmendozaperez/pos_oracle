@@ -86,6 +86,7 @@ namespace CapaDato.Logistica
                         cmd.Parameters.AddWithValue("@fec_ini", fecha_ini);
                         cmd.Parameters.AddWithValue("@fec_fin", fecha_fin);
                         cmd.Parameters.AddWithValue("@cod_tda", cod_tda);
+                        cmd.Parameters.AddWithValue("@doc_gui", _nro_Doc);
 
                         using (SqlDataAdapter da = new SqlDataAdapter(cmd))
                         {

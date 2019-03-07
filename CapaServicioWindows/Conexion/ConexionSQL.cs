@@ -11,7 +11,8 @@ namespace CapaServicioWindows.Conexion
         public static string conexion
         {
             //get { return "Server=10.10.10.208;Database=BdTienda;User ID=sa;Password=Bata2013;Trusted_Connection=False;"; }
-            get { return "Server=3.16.178.73;Database=BDPOS;User ID=pos_oracle;Password=Bata2018**;Trusted_Connection=False;"; }
+            //get { return "Server=3.16.178.73;Database=BDPOS;User ID=pos_oracle;Password=Bata2018**;Trusted_Connection=False;"; }
+            get { return "Server=172.28.7.14;Database=BDPOS;User ID=pos_oracle;Password=Bata2018**;Trusted_Connection=False;"; }
         }
         #endregion
     }

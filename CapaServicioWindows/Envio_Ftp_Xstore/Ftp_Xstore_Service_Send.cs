@@ -3,6 +3,7 @@ using CapaServicioWindows.Conexion;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -37,7 +38,41 @@ namespace CapaServicioWindows.Envio_Ftp_Xstore
             }
             return valida;
         }
-        public void ejecutar_genera_file_xstore_auto(string _pais,ref string error)
+        public void update_articulo_end_xstore(string pais)
+        {
+            string sqlquery = "USP_UPD_ARTICULO_ENV_XSTORE";
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(ConexionSQL.conexion))
+                {
+                    try
+                    {
+                        if (cn.State == 0) cn.Open();
+                        using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                        {
+                            cmd.CommandTimeout = 0;
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.Parameters.AddWithValue("@PAIS", pais);
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+                    catch 
+                    {
+
+                        
+                    }
+                    if (cn != null)
+                        if (cn.State == ConnectionState.Open) cn.Close();
+                    
+                }
+            }
+            catch (Exception exc)
+            {
+
+                
+            }
+        }
+        public void ejecutar_genera_file_xstore_auto(string _pais,ref string error,ref Boolean gen_per_item,ref Boolean gen_ecu_item)
         {            
             try
             {
@@ -94,12 +129,12 @@ namespace CapaServicioWindows.Envio_Ftp_Xstore
                             if (det_inter.inter_nom== "PRICE_UPDATE" && valida_dia)
                             {
                                 genera_automatico_inter(_pais, cod_tda, env_peru_det.rut_upload, det_inter.inter_nom, det_inter.entorno,
-                                                   ref dt_item, ref dt_images, ref dt_merch_hier, ref dt_price_update);
+                                                   ref dt_item, ref dt_images, ref dt_merch_hier, ref dt_price_update,ref gen_per_item,ref gen_ecu_item);
                             }
                             if (det_inter.inter_nom != "PRICE_UPDATE")
                             {
                                 genera_automatico_inter(_pais, cod_tda, env_peru_det.rut_upload, det_inter.inter_nom, det_inter.entorno,
-                                                   ref dt_item, ref dt_images, ref dt_merch_hier, ref dt_price_update);
+                                                   ref dt_item, ref dt_images, ref dt_merch_hier, ref dt_price_update,ref gen_per_item,ref gen_ecu_item);
                             }
 
 
@@ -119,7 +154,7 @@ namespace CapaServicioWindows.Envio_Ftp_Xstore
                         foreach (var det_inter in inter_det_entorno)
                         {                          
                             genera_automatico_inter(_pais, "", env_peru_det.rut_upload, det_inter.inter_nom, det_inter.entorno,
-                                                    ref dt_item,ref dt_images,ref dt_merch_hier,ref dt_price_update);
+                                                    ref dt_item,ref dt_images,ref dt_merch_hier,ref dt_price_update,ref gen_per_item,ref gen_ecu_item);
                         }
                     }
                 #endregion
@@ -161,7 +196,7 @@ namespace CapaServicioWindows.Envio_Ftp_Xstore
         }
         private void genera_automatico_inter(string _pais,string _codtda, string _gen_ruta,string _gen_inter_name,string _entorno,
                                              ref DataTable dt_item,ref DataTable dt_images, ref DataTable dt_merch_hier,
-                                             ref DataTable dt_price_update)
+                                             ref DataTable dt_price_update,ref Boolean gen_per_item,ref Boolean gen_ecu_item)
         {
             Dat_Interfaces dat_geninter = null;
             DataTable dt = null;
@@ -183,7 +218,7 @@ namespace CapaServicioWindows.Envio_Ftp_Xstore
                                 #region<ITEM>
                                 if (dt_item==null)
                                 {
-                                    dt = (_pais=="PE") ?dat_geninter.get_item_PE(_pais, _codtda): dat_geninter.get_item_EC(_pais, _codtda);
+                                    dt = (_pais=="PE") ?dat_geninter.get_item_PE_AUTO(_pais, _codtda): dat_geninter.get_item_EC_AUTO(_pais, _codtda);
                                     dt_item = dt;
                                 }
                                 else
@@ -219,6 +254,9 @@ namespace CapaServicioWindows.Envio_Ftp_Xstore
 
                                         if (File.Exists(@in_maestros)) File.Delete(@in_maestros);
                                         File.WriteAllText(@in_maestros, str_cadena);
+                                        if (_pais=="PE") gen_per_item = true;
+                                        if (_pais == "EC") gen_ecu_item= true;
+
                                     }
                                 }
                                 break;

@@ -152,6 +152,38 @@ namespace CapaServicioWindows.CapaDato.Interfaces
         #region<XOFICCE>
 
         #region<PROCEDURE DE PERU>
+
+        public DataTable get_item_PE_AUTO(string pais, string codtda)
+        {
+            DataTable dt = null;
+            string sqlquery = "USP_XSTORE_GET_ITEM_AUTO";
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(ConexionSQL.conexion))
+                {
+                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@PAIS", pais);
+                        cmd.Parameters.AddWithValue("@CODTIENDA", codtda);
+
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            dt = new DataTable();
+                            da.Fill(dt);
+                        }
+
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+            return dt;
+        }
+
         public DataTable get_item_PE(string pais, string codtda)
         {
             DataTable dt = null;
@@ -900,6 +932,36 @@ namespace CapaServicioWindows.CapaDato.Interfaces
         #endregion
         #region<INTERFACES ECUADOR>
         #region<XOFICCE>
+        public DataTable get_item_EC_AUTO(string pais, string codtda)
+        {
+            DataTable dt = null;
+            string sqlquery = "USP_XSTORE_GET_ITEM_EC_AUTO";
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(ConexionSQL.conexion))
+                {
+                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@PAIS", pais);
+                        cmd.Parameters.AddWithValue("@CODTIENDA", codtda);
+
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            dt = new DataTable();
+                            da.Fill(dt);
+                        }
+
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+            return dt;
+        }
         public DataTable get_item_EC(string pais, string codtda)
         {
             DataTable dt = null;

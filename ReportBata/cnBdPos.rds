@@ -2,7 +2,7 @@
 <RptDataSource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="cnBdPos">
   <ConnectionProperties>
     <Extension>SQL</Extension>
-    <ConnectString>Data Source=posperu.bgr.pe;Initial Catalog=BDPOS</ConnectString>
+    <ConnectString>Data Source=posperubd.bgr.pe;Initial Catalog=BDPOS</ConnectString>
   </ConnectionProperties>
   <DataSourceID>82bc862d-166c-4fd7-ab23-d788d96d0830</DataSourceID>
 </RptDataSource>

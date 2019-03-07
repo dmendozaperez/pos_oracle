@@ -47,6 +47,110 @@ namespace CapaServicioWindows.CapaDato.Venta
         
         }
 
+        public string insertar_fmc_fmd(string cod_tda,DataSet ds)
+        {
+            string error = "";
+            DataTable dt_fmc = null;
+            DataTable dt_fmd = null;
+            string sqlquery = "USP_INSERTAR_TEMP_FMC_FMD";
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(ConexionSQL.conexion))
+                {
+                    try
+                    {
+                        if (cn.State == 0) cn.Open();
+                        using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                        {
+                            dt_fmc = ds.Tables[0];dt_fmd = ds.Tables[1];
+                            cmd.CommandTimeout = 0;
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.Parameters.AddWithValue("@COD_TDA", cod_tda);
+                            cmd.Parameters.AddWithValue("@FMC", dt_fmc);
+                            cmd.Parameters.AddWithValue("@FMD", dt_fmd);
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+                    catch (Exception exc)
+                    {
+                        error = exc.Message;                        
+                    }
+
+                    if (cn != null)
+                        if (cn.State == ConnectionState.Open) cn.Close();
+
+                }
+            }
+            catch (Exception exc)
+            {
+                error = exc.Message;
+            }
+            return error;
+        }
+
+        public void procesar_fmc_fmd_fvdespc(ref string error)
+        {
+            string sqlquery = "USP_INSERTAR_FMC_FMD_FVDESCP";
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(ConexionSQL.conexion))
+                {
+                    try
+                    {
+                        if (cn.State == 0) cn.Open();
+                        using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                        {
+                            cmd.CommandTimeout = 0;
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+                    catch (Exception exc)
+                    {
+                        error = exc.Message;   
+                    }
+                    if (cn != null)
+                        if (cn.State == ConnectionState.Open) cn.Close();
+                }
+            }
+            catch (Exception exc)
+            {
+                error = exc.Message;                
+            }
+        }
+        public void procesar_fmc_fmd(ref string error)
+        {
+            string sqlquery = "USP_PROCESAR_FMC_FMD";
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(ConexionSQL.conexion))
+                {
+                    try
+                    {
+                        if (cn.State == 0) cn.Open();
+                        using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                        {
+                            cmd.CommandTimeout = 0;
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.ExecuteNonQuery();
+                        }
+
+                    }
+                    catch (Exception exc)
+                    {
+                        error = exc.Message;
+                        
+                    }
+                    if (cn != null)
+                        if (cn.State == ConnectionState.Open) cn.Close();
+                }
+            }
+            catch (Exception exc)
+            {
+                error = exc.Message;
+                
+            }
+        }
         public void procesar_fcacb_SQL(ref string error)
         {
             string sqlquery = "USP_INSERTAR_FCACB_FDECB";

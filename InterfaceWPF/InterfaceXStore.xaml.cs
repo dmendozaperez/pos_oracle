@@ -28,6 +28,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Xml.Linq;
+using System.Configuration;
 
 namespace InterfaceWPF
 {
@@ -45,8 +46,10 @@ namespace InterfaceWPF
         private Basico basico = null;
         private DataTable gdt_Orce = new DataTable();
         private DataTable gdt_Xoficce = new DataTable();
+        
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            Ent_Conexion.conexion_posperu = ConfigurationManager.ConnectionStrings["SQL_PE"].ConnectionString;
             LoadIniWPF();
             LoadAmbiente();
         }
@@ -67,7 +70,7 @@ namespace InterfaceWPF
             dwtienda.Focus();
 
             /*maestros de tienda*/
-            dwtienda_M.ItemsSource = _tienda.get_tienda("EC", true);
+            dwtienda_M.ItemsSource = _tienda.get_tienda("PE", true);
             dwtienda_M.DisplayMember = "des_entid";
             dwtienda_M.ValueMember = "cod_entid";
             dwtienda_M.SelectedIndex = 0;
@@ -1599,7 +1602,7 @@ namespace InterfaceWPF
                 ProgressAlert = await this.ShowProgressAsync(Ent_Msg.msgcargando, "Consultando Guias de Transpasos");  //show message
                 ProgressAlert.SetIndeterminate();
                 string _cod_tda = dwtiendatrans1.EditValue.ToString();
-                string _nro_Doc = "";// Docu.Text;
+                string _nro_Doc =  Docu.Text;
                 DateTime _fec_ini =Convert.ToDateTime(dtpdesde.Text);
                 DateTime _fec_fin = Convert.ToDateTime(dtphasta.Text);
                 con_guia = new Dat_GuiasDespacho();                
@@ -2388,11 +2391,11 @@ namespace InterfaceWPF
                     string codAmbiente = dwAmbienteDsp.EditValue.ToString();
                     setearAmbXoficce(codAmbiente);
 
-                    Ent_Conexion.ftp_server = Amb_Ftp_Server;
-                    Ent_Conexion.ftp_user = Amb_Ftp_User;
-                    Ent_Conexion.ftp_password = Amb_Ftp_Pass;
-                    Ent_Conexion.ftp_puerto = Amb_Ftp_Port;
-                    basico.ftp_ruta_destino = Amb_Ftp_Path;
+                    //Ent_Conexion.ftp_server = Amb_Ftp_Server;
+                    //Ent_Conexion.ftp_user = Amb_Ftp_User;
+                    //Ent_Conexion.ftp_password = Amb_Ftp_Pass;
+                    //Ent_Conexion.ftp_puerto = Amb_Ftp_Port;
+                    //basico.ftp_ruta_destino = Amb_Ftp_Path;
 
                     mensaje = "Se enviaron al ftp";
                     envio = await Task.Run(() => basico.sendftp_file_mnt());

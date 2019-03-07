@@ -307,7 +307,7 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>0.44319in</Width>
+                  <Width>1.36661in</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>1.31493in</Width>
@@ -2061,6 +2061,7 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
+                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell>
@@ -2777,6 +2778,7 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
+                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell>
@@ -3465,6 +3467,7 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
+                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell>
@@ -4238,14 +4241,14 @@ FROM            TSUBCATE3 where cod_cate3 in (@Categoria)</CommandText>
             </TablixRowHierarchy>
             <DataSetName>DataPlanilla</DataSetName>
             <Height>1.70417in</Height>
-            <Width>7.26662in</Width>
+            <Width>8.19004in</Width>
             <Style />
           </Tablix>
         </ReportItems>
         <Height>1.75916in</Height>
         <Style />
       </Body>
-      <Width>7.29854in</Width>
+      <Width>8.19004in</Width>
       <Page>
         <PageHeader>
           <Height>1.19791in</Height>

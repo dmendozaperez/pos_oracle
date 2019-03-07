@@ -39,6 +39,8 @@
             this.ws_get_xstore_carpeta_upload = new System.Windows.Forms.Button();
             this.envio_Guias_ToxStore = new System.Windows.Forms.Button();
             this.ejecutar_genera_interface_xstore = new System.Windows.Forms.Button();
+            this.procesar_fmc_fmd = new System.Windows.Forms.Button();
+            this.get_fmc_insertar_fvdespc = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn_servicewin
@@ -150,7 +152,7 @@
             // ejecutar_genera_interface_xstore
             // 
             this.ejecutar_genera_interface_xstore.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ejecutar_genera_interface_xstore.Location = new System.Drawing.Point(512, 182);
+            this.ejecutar_genera_interface_xstore.Location = new System.Drawing.Point(512, 139);
             this.ejecutar_genera_interface_xstore.Name = "ejecutar_genera_interface_xstore";
             this.ejecutar_genera_interface_xstore.Size = new System.Drawing.Size(280, 39);
             this.ejecutar_genera_interface_xstore.TabIndex = 14;
@@ -158,11 +160,35 @@
             this.ejecutar_genera_interface_xstore.UseVisualStyleBackColor = true;
             this.ejecutar_genera_interface_xstore.Click += new System.EventHandler(this.ejecutar_genera_interface_xstore_Click);
             // 
+            // procesar_fmc_fmd
+            // 
+            this.procesar_fmc_fmd.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.procesar_fmc_fmd.Location = new System.Drawing.Point(512, 198);
+            this.procesar_fmc_fmd.Name = "procesar_fmc_fmd";
+            this.procesar_fmc_fmd.Size = new System.Drawing.Size(217, 28);
+            this.procesar_fmc_fmd.TabIndex = 15;
+            this.procesar_fmc_fmd.Text = "procesar_fmc_fmd";
+            this.procesar_fmc_fmd.UseVisualStyleBackColor = true;
+            this.procesar_fmc_fmd.Click += new System.EventHandler(this.procesar_fmc_fmd_Click);
+            // 
+            // get_fmc_insertar_fvdespc
+            // 
+            this.get_fmc_insertar_fvdespc.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.get_fmc_insertar_fvdespc.Location = new System.Drawing.Point(512, 245);
+            this.get_fmc_insertar_fvdespc.Name = "get_fmc_insertar_fvdespc";
+            this.get_fmc_insertar_fvdespc.Size = new System.Drawing.Size(196, 36);
+            this.get_fmc_insertar_fvdespc.TabIndex = 16;
+            this.get_fmc_insertar_fvdespc.Text = "get_fmc_insertar_fvdespc";
+            this.get_fmc_insertar_fvdespc.UseVisualStyleBackColor = true;
+            this.get_fmc_insertar_fvdespc.Click += new System.EventHandler(this.get_fmc_insertar_fvdespc_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(826, 313);
+            this.Controls.Add(this.get_fmc_insertar_fvdespc);
+            this.Controls.Add(this.procesar_fmc_fmd);
             this.Controls.Add(this.ejecutar_genera_interface_xstore);
             this.Controls.Add(this.envio_Guias_ToxStore);
             this.Controls.Add(this.ws_get_xstore_carpeta_upload);
@@ -194,6 +220,8 @@
         private System.Windows.Forms.Button ws_get_xstore_carpeta_upload;
         private System.Windows.Forms.Button envio_Guias_ToxStore;
         private System.Windows.Forms.Button ejecutar_genera_interface_xstore;
+        private System.Windows.Forms.Button procesar_fmc_fmd;
+        private System.Windows.Forms.Button get_fmc_insertar_fvdespc;
     }
 }
 

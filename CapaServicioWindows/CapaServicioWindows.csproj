@@ -61,6 +61,7 @@
     <Compile Include="Entidad\Ent_InterAuto_PL.cs" />
     <Compile Include="Entidad\Ent_InterGenera_PL.cs" />
     <Compile Include="Entidad\SCDDDES.cs" />
+    <Compile Include="Envio_AQ\Envio_Ventas.cs" />
     <Compile Include="Envio_Ftp_Xstore\Ftp_Xstore_Service_Send.cs" />
     <Compile Include="Envio_Ws\Envio_Scactco.cs" />
     <Compile Include="Envio_Ws\Envio_Guias.cs" />

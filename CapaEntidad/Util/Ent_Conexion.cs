@@ -58,6 +58,7 @@ namespace CapaEntidad.Util
         public static string conexion_posperu_DES { get; set; }
         public static string conexion_posperu_QA { get; set; }
 
+        public static string conexion_posperu { get; set; }
         //public static string conexion
         //{
         //    //get { return "Server=10.10.10.208;Database=BdTienda;User ID=sa;Password=Bata2013;Trusted_Connection=False;"; }
@@ -66,10 +67,10 @@ namespace CapaEntidad.Util
         #endregion
 
         #region<CONEXION DE BASE DE DATOS NUBE POS PERU>
-        public static string conexion_posperu
-        {
-            get { return "Server=posperubd.bgr.pe;Database=BDPOS;User ID=pos_oracle;Password=Bata2018**;Trusted_Connection=False;"; }
-        }
+        //public static string conexion_posperu
+        //{
+        //    get { return "Server=posperubd.bgr.pe;Database=BDPOS;User ID=pos_oracle;Password=Bata2018**;Trusted_Connection=False;"; }
+        //}
 
         public static string conexion_DBF_POS
         {

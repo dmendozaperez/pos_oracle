@@ -24,6 +24,9 @@ namespace ServiceWinTransaction
         Timer tmservicioDBF = null;
         Timer tmservicioVentaXstore = null;
 
+        Timer tmservicioAQ = null;
+        private Int32 _valida_AQ = 0;
+
         Timer tmservicio_ecu_guia = null;
         private Int32 _valida_service_ecu_guia = 0;
 
@@ -92,7 +95,89 @@ namespace ServiceWinTransaction
             tmservicio_ecu_guia = new Timer(5000);
             tmservicio_ecu_guia.Elapsed += new ElapsedEventHandler(tmservicio_ecu_guia_Elapsed);
 
+            tmservicioAQ = new Timer(5000);
+            tmservicioAQ.Elapsed += new ElapsedEventHandler(tmservicioAQ_Elapsed);
         }
+
+        #region<PROCESOS DE AQUARELLA>
+        void tmservicioAQ_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            //string varchivov = "c://valida_hash.txt";
+            Int32 _valor = 0;
+
+            string _ruta_erro_file = @"D:\BataTransaction\ERROR_WS.txt";
+            //string _valida_proc_venta = @"D:\venta.txt";
+            Boolean proceso_venta = false;
+            try
+            {
+
+                //Boolean valida_guia_ecu = false;
+                //Boolean valida_
+
+                #region<region solo almacen ecuador>
+                if (!File.Exists(@file_almace_ecu)) return;
+                #endregion
+
+
+                if (_valida_AQ == 0)
+                {
+                    //string _error = "ing";
+                    _valor = 1;
+                    _valida_AQ = 1;
+
+
+                    string _error_ws = "";
+                    //_error = CapaServicioWindows.Modular.Basico.retornar();
+
+                    #region<SOLO PARA AQUARELLA>
+                    //if (!proceso_venta)
+                    //{
+
+                    CapaServicioWindows.Envio_AQ.Envio_Ventas envia = new CapaServicioWindows.Envio_AQ.Envio_Ventas();
+                    _error_ws= envia.envio_ventas_aq();
+                    //Basico ejecuta_procesos = null;
+                    //ejecuta_procesos = new Basico();
+                    //ejecuta_procesos.eje_envio_guias(ref _error_ws);
+                    //}
+                    #endregion
+
+
+
+
+
+
+                    _valida_AQ = 0;
+
+                    if (_error_ws.Length > 0)
+                    {
+                        TextWriter tw = new StreamWriter(_ruta_erro_file, true);
+                        tw.WriteLine(_error_ws);
+                        tw.Flush();
+                        tw.Close();
+                        tw.Dispose();
+                    }
+                }
+                //****************************************************************************
+            }
+            catch (Exception exc)
+            {
+                TextWriter tw = new StreamWriter(_ruta_erro_file, true);
+                tw.WriteLine(exc.Message);
+                tw.Flush();
+                tw.Close();
+                tw.Dispose();
+                _valida_AQ = 0;
+            }
+
+            if (_valor == 1)
+            {
+                _valida_AQ = 0;
+            }
+
+
+        }
+        #endregion
+
         #region<REGION DE ECUADOR Y ALMACEN LURIN>
         #region<METODO DE ENVIO DE VENTAS>
         void tmservicio_ecu_guia_Elapsed(object sender, ElapsedEventArgs e)
@@ -641,6 +726,7 @@ namespace ServiceWinTransaction
             tmgenera_interface.Start();
             tmenvia_sftp.Start();
             tmservicio_ecu_guia.Start();
+            tmservicioAQ.Start();
             //tmservicioScactcoDBF.Start();
         }
 
@@ -654,6 +740,7 @@ namespace ServiceWinTransaction
             tmgenera_interface.Stop();
             tmenvia_sftp.Stop();
             tmservicio_ecu_guia.Stop();
+            tmservicioAQ.Stop();
             //tmservicioScactcoDBF.Stop();
         }       
               

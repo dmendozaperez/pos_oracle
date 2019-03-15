@@ -28,6 +28,11 @@ namespace CapaServicioWindows.Conexion
             return "Provider=VFPOLEDB;Data Source=" + _path + ";Exclusive=No";
             //return "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + _path_default + ";Extended Properties=dBASE IV;";
         }
+        public static string _conexion_vfpoledb_1(string _path)
+        {
+            return "Provider=vfpoledb.1;Data Source=" + _path + ";Exclusive=No;Collating Sequence=general";
+            //return "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + _path_default + ";Extended Properties=dBASE IV;";
+        }
 
         public static string _conexion_oledb(string _path)
         {

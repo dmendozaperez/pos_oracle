@@ -170,5 +170,13 @@ namespace ServiceWin32Framework4
             ejecuta_proc_venta.procesar_fmc_fmd_fvdespc(ref _error);
             #endregion
         }
+
+        private void BTNENVIONOV_Click(object sender, EventArgs e)
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            CapaServicioWindows.Envio_AQ.Envio_Ventas env = new CapaServicioWindows.Envio_AQ.Envio_Ventas();
+            env.envio_ventas_aq();
+            Cursor.Current = Cursors.Default;
+        }
     }
 }

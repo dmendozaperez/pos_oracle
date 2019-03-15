@@ -41,6 +41,7 @@
             this.ejecutar_genera_interface_xstore = new System.Windows.Forms.Button();
             this.procesar_fmc_fmd = new System.Windows.Forms.Button();
             this.get_fmc_insertar_fvdespc = new System.Windows.Forms.Button();
+            this.BTNENVIONOV = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn_servicewin
@@ -120,7 +121,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(530, 95);
+            this.button3.Location = new System.Drawing.Point(530, 61);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(152, 23);
             this.button3.TabIndex = 11;
@@ -152,7 +153,7 @@
             // ejecutar_genera_interface_xstore
             // 
             this.ejecutar_genera_interface_xstore.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ejecutar_genera_interface_xstore.Location = new System.Drawing.Point(512, 139);
+            this.ejecutar_genera_interface_xstore.Location = new System.Drawing.Point(512, 105);
             this.ejecutar_genera_interface_xstore.Name = "ejecutar_genera_interface_xstore";
             this.ejecutar_genera_interface_xstore.Size = new System.Drawing.Size(280, 39);
             this.ejecutar_genera_interface_xstore.TabIndex = 14;
@@ -163,7 +164,7 @@
             // procesar_fmc_fmd
             // 
             this.procesar_fmc_fmd.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.procesar_fmc_fmd.Location = new System.Drawing.Point(512, 198);
+            this.procesar_fmc_fmd.Location = new System.Drawing.Point(512, 164);
             this.procesar_fmc_fmd.Name = "procesar_fmc_fmd";
             this.procesar_fmc_fmd.Size = new System.Drawing.Size(217, 28);
             this.procesar_fmc_fmd.TabIndex = 15;
@@ -174,7 +175,7 @@
             // get_fmc_insertar_fvdespc
             // 
             this.get_fmc_insertar_fvdespc.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.get_fmc_insertar_fvdespc.Location = new System.Drawing.Point(512, 245);
+            this.get_fmc_insertar_fvdespc.Location = new System.Drawing.Point(512, 211);
             this.get_fmc_insertar_fvdespc.Name = "get_fmc_insertar_fvdespc";
             this.get_fmc_insertar_fvdespc.Size = new System.Drawing.Size(196, 36);
             this.get_fmc_insertar_fvdespc.TabIndex = 16;
@@ -182,11 +183,23 @@
             this.get_fmc_insertar_fvdespc.UseVisualStyleBackColor = true;
             this.get_fmc_insertar_fvdespc.Click += new System.EventHandler(this.get_fmc_insertar_fvdespc_Click);
             // 
+            // BTNENVIONOV
+            // 
+            this.BTNENVIONOV.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BTNENVIONOV.Location = new System.Drawing.Point(413, 278);
+            this.BTNENVIONOV.Name = "BTNENVIONOV";
+            this.BTNENVIONOV.Size = new System.Drawing.Size(283, 23);
+            this.BTNENVIONOV.TabIndex = 17;
+            this.BTNENVIONOV.Text = "ENVIO VENTAS AQ NOVELL";
+            this.BTNENVIONOV.UseVisualStyleBackColor = true;
+            this.BTNENVIONOV.Click += new System.EventHandler(this.BTNENVIONOV_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(826, 313);
+            this.ClientSize = new System.Drawing.Size(860, 313);
+            this.Controls.Add(this.BTNENVIONOV);
             this.Controls.Add(this.get_fmc_insertar_fvdespc);
             this.Controls.Add(this.procesar_fmc_fmd);
             this.Controls.Add(this.ejecutar_genera_interface_xstore);
@@ -222,6 +235,7 @@
         private System.Windows.Forms.Button ejecutar_genera_interface_xstore;
         private System.Windows.Forms.Button procesar_fmc_fmd;
         private System.Windows.Forms.Button get_fmc_insertar_fvdespc;
+        private System.Windows.Forms.Button BTNENVIONOV;
     }
 }
 

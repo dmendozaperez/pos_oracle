@@ -652,7 +652,11 @@ namespace CapaServicioWindows.Modular
                     tw.Dispose();
                     #endregion
                     /**/
+                    string DESC_ALMACEN = "";
+                    string rutloc_location = "";
+                    List<string> listGuias = new List<string>();
 
+                    #region<ENVIAMOS GUIAS POR WEBSERVICE>
                     foreach (BataTransac.Ent_Scdddes filaC in _lista_guiasC)
                     {
                       
@@ -785,8 +789,12 @@ namespace CapaServicioWindows.Modular
                                                 NetworkShare.ConnectToShare(_locatio_scdddes_edit.rutloc_location, ConexionDBF.user_novell, ConexionDBF.password_novell);
                                             }
                                             #endregion
+                                                                                      
+                                            listGuias.Add(fvdespc.DESC_GUDIS);
+                                            DESC_ALMACEN = fvdespc.DESC_ALMAC;
+                                            rutloc_location = _locatio_scdddes_edit.rutloc_location;
 
-                                            edit_scdddes(fvdespc.DESC_ALMAC, fvdespc.DESC_GUDIS, _locatio_scdddes_edit.rutloc_location,ref _error_ws);
+                                            //edit_scdddes(fvdespc.DESC_ALMAC, fvdespc.DESC_GUDIS, _locatio_scdddes_edit.rutloc_location,ref _error_ws);
                                             _hora = DateTime.Now.ToLongTimeString() + "==>fin de update scddes " + _error_ws + "  "  + filaC.DDES_GUIRE;
                                             tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
                                             tw.WriteLine(_hora);
@@ -810,6 +818,19 @@ namespace CapaServicioWindows.Modular
                         }
                     //}
                     }
+                    #endregion
+
+                    if (listGuias.Count>0) {
+
+                        edit_list_scdddes(DESC_ALMACEN, listGuias, rutloc_location, ref _error_ws);
+                        _hora = DateTime.Now.ToLongTimeString() + "==>fin de update list scddes " + _error_ws;
+                        tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                        tw.WriteLine(_hora);
+                        tw.Flush();
+                        tw.Close();
+                        tw.Dispose();
+                    }
+
                 }
 
             }
@@ -856,6 +877,51 @@ namespace CapaServicioWindows.Modular
 
             }
             catch(Exception exc)
+            {
+                _error_ws = exc.Message;
+            }
+        }
+
+        private void edit_list_scdddes(string cod_alm, List<string> listGuia, string _path, ref string _error_ws)
+        {
+
+            string strListGuia = "";
+
+            foreach (string strguia in listGuia)
+            {
+                strListGuia += "'" + strguia + "',";
+            }
+            
+            strListGuia = strListGuia.TrimEnd(',');
+           
+            string sqlquery = "UPDATE SCDDDES SET DDES_FTXTD='X' WHERE DDES_ALMAC='" + cod_alm + "' AND DDES_GUIRE in (" + strListGuia + ")";
+            try
+            {
+                using (OleDbConnection cn = new OleDbConnection(ConexionDBF._conexion_fvdes_oledb(_path)))
+                {
+                    try
+                    {
+                        if (cn.State == 0) cn.Open();
+                        using (OleDbCommand cmd = new OleDbCommand(sqlquery, cn))
+                        {
+                            cmd.CommandTimeout = 0;
+                            cmd.CommandType = CommandType.Text;
+                            cmd.ExecuteNonQuery();
+                        }
+
+                    }
+                    catch (Exception exc)
+                    {
+                        _error_ws = exc.Message;
+                        if (cn != null)
+                            if (cn.State == ConnectionState.Open) cn.Close();
+                    }
+                    if (cn != null)
+                        if (cn.State == ConnectionState.Open) cn.Close();
+                }
+
+            }
+            catch (Exception exc)
             {
                 _error_ws = exc.Message;
             }
@@ -927,6 +993,10 @@ namespace CapaServicioWindows.Modular
                 datUtil = new Util();
                 string carpetatienda = datUtil.get_ruta_locationProcesa_dbf("SQL");//@"D:\TiendaPaq"
                 string carpetadbf = carpetatienda + "\\DBF";
+
+                //string carpetatienda = @"D:\TiendaPaq";
+                //string carpetadbf = carpetatienda + "\\DBF";
+
                 string strCodTienda = "";
                 if (!Directory.Exists(@carpetatienda)) Directory.CreateDirectory(@carpetatienda);
                 if (!Directory.Exists(@carpetadbf)) Directory.CreateDirectory(@carpetadbf);
@@ -1033,7 +1103,7 @@ namespace CapaServicioWindows.Modular
 
 
             }
-            catch (Exception)
+            catch (Exception EX)
             {
 
                

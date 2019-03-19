@@ -886,15 +886,42 @@ namespace CapaServicioWindows.Modular
         {
 
             string strListGuia = "";
-
-            foreach (string strguia in listGuia)
+            int limite = 20;
+            int contador = 0;
+            try
             {
-                strListGuia += "'" + strguia + "',";
+                foreach (string strguia in listGuia)
+                {
+                    contador++;
+
+                    strListGuia += "'" + strguia + "',";
+
+                    if (contador == limite)
+                    {
+
+                        strListGuia = strListGuia.TrimEnd(',');
+
+                        string sqlquery = "UPDATE SCDDDES SET DDES_FTXTD='X' WHERE DDES_ALMAC='" + cod_alm + "' AND DDES_GUIRE in (" + strListGuia + ")";
+
+                        strListGuia = "";
+                        contador = 0;
+
+                        update_list_scdddes(sqlquery, _path, ref _error_ws);
+
+                    }
+                  
+
+                }
             }
-            
-            strListGuia = strListGuia.TrimEnd(',');
+            catch (Exception exc)
+            {
+                _error_ws = exc.Message;
+            }            
+        }
+
+        private void update_list_scdddes(string sqlquery, string _path, ref string _error_ws)
+        {
            
-            string sqlquery = "UPDATE SCDDDES SET DDES_FTXTD='X' WHERE DDES_ALMAC='" + cod_alm + "' AND DDES_GUIRE in (" + strListGuia + ")";
             try
             {
                 using (OleDbConnection cn = new OleDbConnection(ConexionDBF._conexion_fvdes_oledb(_path)))
@@ -926,6 +953,8 @@ namespace CapaServicioWindows.Modular
                 _error_ws = exc.Message;
             }
         }
+
+
 
         private DataSet ds_fmc_fmd(string cod_tda,string ruta_dbf,ref string error)
         {

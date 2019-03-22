@@ -90,16 +90,34 @@ namespace CapaServicioWindows.Envio_AQ
 
                  if (fila_cab.Length>0)
                 {
-                    string sqlquery_borrar_cab = "DELETE FROM VMAFC WHERE FC_TDOC='" + fc_tdoc + "' AND FC_NDOC='" + fc_ndoc +"'";
-                    string sqlquery_borrar_det = "DELETE FROM VMAFD WHERE FD_TDOC='" + fc_tdoc + "' AND FD_NDOC='" + fc_ndoc + "'";
-                    NetworkShare.ConnectToShare(ruta_VMAFC, ConexionDBF.user_novell, ConexionDBF.password_novell);
-                    //using (OleDbConnection cn_dbf = new OleDbConnection(ConexionDBF._conexion_oledb(ruta_VMAFC)))
+
+                    //string vfpScript = @"
+                    //SET DELETED ON
+                    //SET TALK OFF
+                    //SET ECHO OFF
+                    //USE D:\AQ_EXPORTA_SIS\vmafc.DBF
+                    //IF SEEK('BOB03100002871', 'VMAFC', 'LLAVE1') 
+                    //    DELETE IN VMAFC 
+                    //ENDIF";
+
+                    //string sqlquery_borrar_cab = "DELETE FROM VMAFC WHERE FC_TDOC='" + fc_tdoc + "' AND FC_NDOC='" + fc_ndoc +"'";
+                    //string sqlquery_borrar_det = "DELETE FROM VMAFD WHERE FD_TDOC='" + fc_tdoc + "' AND FD_NDOC='" + fc_ndoc + "'";
+                    //NetworkShare.ConnectToShare(ruta_VMAFC, ConexionDBF.user_novell, ConexionDBF.password_novell);
+                    //string sqlquery_fox1 = "SET DELETED ON ";
+                    //string sqlquery_fox2 = "SET TALK OFF ";
+                    //string sqlquery_fox3 = "SET ECHO OFF ";
+                    //string sqlquery_fox4 = "USE  " + @ruta_VMAFC + "\vmafc.DBF ";
+                    //string sqlquery_fox5 = "IF SEEK(" + fc_tdoc + fc_ndoc + ", 'VMAFC', 'LLAVE1') " + 
+                    //                       "    DELETE IN VMAFC " + 
+                    //                       " ENDIF";
+
+                    //using (OleDbConnection cn_dbf = new OleDbConnection(ConexionDBF._conexion_vfpoledb_1(ruta_VMAFC)))
                     //{
-                    //if (cn_dbf.State == 0) cn_dbf.Open();
-                    //using (OleDbCommand cmd_VMAFC = new OleDbCommand(sqlquery_borrar_cab, cn_dbf))
+                    //    if (cn_dbf.State == 0) cn_dbf.Open();
+                    //    using (OleDbCommand cmd_VMAFC = new OleDbCommand(/*sqlquery_borrar_cab*/vfpScript, cn_dbf))
                     //    {
                     //        tw = new StreamWriter(_ruta_erro_file, true);
-                    //        str =DateTime.Today.ToString() + " " + DateTime.Now.ToString("HH:mm:ss") +  "  entrando delete VMAFC";
+                    //        str = DateTime.Today.ToString() + " " + DateTime.Now.ToString("HH:mm:ss") + "  entrando delete VMAFC";
                     //        tw.WriteLine(str);
                     //        tw.Flush();
                     //        tw.Close();
@@ -136,7 +154,7 @@ namespace CapaServicioWindows.Envio_AQ
                     //        tw.Close();
                     //        tw.Dispose();
                     //    }
-
+                    //}
                         /*fin*/
                         /*inicio de conexion insert*/
                         using (OleDbConnection cn_dbf_insert = new OleDbConnection(ConexionDBF._conexion_vfpoledb_1(ruta_VMAFC)))
@@ -570,7 +588,7 @@ namespace CapaServicioWindows.Envio_AQ
                     }
 
                     var result = dt_VMAFC.AsEnumerable().Select(row => (string)row["FC_TDOC"] + row["FC_NDOC"]).Except(dt_existe.AsEnumerable().Select(row => (string)row["FC_TDOC"] + row["FC_NDOC"]));
-
+                    //var result = dt_VMAFC.AsEnumerable().Select(row => (string)row["FC_TDOC"] + row["FC_NDOC"]);
                     /*EN ESTE CASO VAMOS A INSERTAR LOS DATOS QUE YA EXISTE PARA NO REALIZAR CONSULTAS SOBRE DATOS QUE YA EXISTE */
                     //var result = dt_VMAFC.AsEnumerable().Select(row => (string)row["FC_TDOC"] + row["FC_NDOC"]).Except(dt_existe.AsEnumerable().Select(row => (string)row["FC_TDOC"] + row["FC_NDOC"]));
 

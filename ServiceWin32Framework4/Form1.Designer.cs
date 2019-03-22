@@ -42,6 +42,7 @@
             this.procesar_fmc_fmd = new System.Windows.Forms.Button();
             this.get_fmc_insertar_fvdespc = new System.Windows.Forms.Button();
             this.BTNENVIONOV = new System.Windows.Forms.Button();
+            this.btnenvio_prescripciones = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn_servicewin
@@ -57,7 +58,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(43, 139);
+            this.button1.Location = new System.Drawing.Point(53, 114);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 5;
@@ -194,11 +195,23 @@
             this.BTNENVIONOV.UseVisualStyleBackColor = true;
             this.BTNENVIONOV.Click += new System.EventHandler(this.BTNENVIONOV_Click);
             // 
+            // btnenvio_prescripciones
+            // 
+            this.btnenvio_prescripciones.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnenvio_prescripciones.Location = new System.Drawing.Point(12, 168);
+            this.btnenvio_prescripciones.Name = "btnenvio_prescripciones";
+            this.btnenvio_prescripciones.Size = new System.Drawing.Size(272, 23);
+            this.btnenvio_prescripciones.TabIndex = 18;
+            this.btnenvio_prescripciones.Text = "ENVIO DE PRESCRIPCIONES";
+            this.btnenvio_prescripciones.UseVisualStyleBackColor = true;
+            this.btnenvio_prescripciones.Click += new System.EventHandler(this.btnenvio_prescripciones_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(860, 313);
+            this.Controls.Add(this.btnenvio_prescripciones);
             this.Controls.Add(this.BTNENVIONOV);
             this.Controls.Add(this.get_fmc_insertar_fvdespc);
             this.Controls.Add(this.procesar_fmc_fmd);
@@ -236,6 +249,7 @@
         private System.Windows.Forms.Button procesar_fmc_fmd;
         private System.Windows.Forms.Button get_fmc_insertar_fvdespc;
         private System.Windows.Forms.Button BTNENVIONOV;
+        private System.Windows.Forms.Button btnenvio_prescripciones;
     }
 }
 

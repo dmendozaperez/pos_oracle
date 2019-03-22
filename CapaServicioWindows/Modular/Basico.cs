@@ -487,6 +487,360 @@ namespace CapaServicioWindows.Modular
                
             }
         }
+        #region<ENVIO DE PRESCRIPCIONES>
+        public void eje_envio_prescripcion(ref string _error_ws)
+        {
+            string _error_transac = "";
+            List<BataTransac.Ent_Scdddes> _lista_guiasC = null;
+
+            List<BataTransac.Ent_PathDBF> listar_location_dbf = null;
+
+            try
+            {
+                /*segundos para ejecutar*/
+                //_espera_ejecuta(20);
+                /***********************/
+
+                #region<CAPTURAR EL PATH DE LOS DBF>
+                Util locationdbf = new Util();
+                listar_location_dbf = locationdbf.get_location_dbf(ref _error_ws);
+                #endregion
+
+                if (listar_location_dbf == null) return;
+
+                /*VALIDACION DE EJECUCION */
+                #region<VALIDA ARCHIVO SI EXISTE PARA NO REALIZAR NINGUNA ACCCION POR SEGURIDAD DE REINDEXACION DEL FOX>
+                string name_txt = "NOPOS";
+                var _locatio_noservicio = listar_location_dbf.Where(x => x.rutloc_namedbf == name_txt).FirstOrDefault();
+
+                //Boolean valida_exists_txt = false;
+                string ruta_validacion = "";
+                if (_locatio_noservicio != null)
+                {
+
+                    ruta_validacion = _locatio_noservicio.rutloc_location + "\\" + _locatio_noservicio.rutloc_namedbf + ".txt";
+                    /* if (File.Exists(@ruta_validacion)) return;*/ //valida_exists_txt = true;
+
+                }
+                //ruta_validacion = @"D:\FVT\SISTEMAS\NOPOS.TXT";
+                forzar_delete_nopos(ruta_validacion);
+                #endregion
+
+                #region<EN ESTE PASO TRATAMOS DE ENTRAR AL NOVELL PARA TRAERME LA INFO>
+                if (valida_file_ecu())
+                {
+                    NetworkShare.ConnectToShare(_locatio_noservicio.rutloc_location, ConexionDBF.user_novell, ConexionDBF.password_novell);
+                }
+                #endregion
+
+                //if (valida_exists_txt) return;
+
+
+
+                string name_dbf = "SCDDDES";
+                var _locatio_scdddes = listar_location_dbf.Where(x => x.rutloc_namedbf == name_dbf).FirstOrDefault();
+
+                string _error = "";
+                /*ya no entra a consultar*/
+                if (File.Exists(@ruta_validacion)) return;
+                string _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "==>INGRESO PASO1";
+                TextWriter tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                tw.WriteLine(_hora);
+                tw.Flush();
+                tw.Close();
+                tw.Dispose();
+                /**/
+
+
+                #region<EN ESTE PASO TRATAMOS DE ENTRAR AL NOVELL PARA TRAERME LA INFO>
+                if (valida_file_ecu())
+                {
+                    NetworkShare.ConnectToShare(_locatio_noservicio.rutloc_location, ConexionDBF.user_novell, ConexionDBF.password_novell);
+                }
+                else
+                {
+                    NetworkShare.ConnectToShare(_locatio_scdddes.rutloc_location, @".\Tareas", "tareas");
+                }
+                #endregion
+
+                _lista_guiasC = get_scdddes(_locatio_scdddes.rutloc_location, ref _error);
+
+
+                _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "==>get_scdddes ==>" + _error + _lista_guiasC.Count().ToString();
+                tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                tw.WriteLine(_hora);
+                tw.Flush();
+                tw.Close();
+                tw.Dispose();
+
+                /*VERIFICAR SI HAY ERROR*/
+                if (_error.Length > 0)
+                {
+                    _error += " ==>TABLA [SCDDDES]";
+                    Util ws_error_transac = new Util();
+                    /*si hay un error entonces 03 error de lectura dbf*/
+                    ws_error_transac.control_errores_transac("03", _error, ref _error_ws);
+                }
+                /**/
+
+                if (_lista_guiasC != null)
+                {
+                    #region<METODO GRUPO CONSULTA>
+                    if (File.Exists(@ruta_validacion)) return;
+                    /*en este caso */
+                    _error = "";
+                    name_dbf = "FVDESPC";
+                    Boolean existe_data = false;
+                    var _location_fvdespc = listar_location_dbf.Where(x => x.rutloc_namedbf == name_dbf).FirstOrDefault();
+
+                    _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "inicio==>acceso dbf ";
+                    tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                    tw.WriteLine(_hora);
+                    tw.Flush();
+                    tw.Close();
+                    tw.Dispose();
+
+                    #region<EN ESTE PASO TRATAMOS DE ENTRAR AL NOVELL PARA TRAERME LA INFO>
+                    if (valida_file_ecu())
+                    {
+                        NetworkShare.ConnectToShare(_location_fvdespc.rutloc_location, ConexionDBF.user_novell, ConexionDBF.password_novell);
+                    }
+                    #endregion
+
+                    List<BataTransac.Ent_Fvdespc> fvdespc_lista = get_fvdespc("", "", _location_fvdespc.rutloc_location, ref _error, ref existe_data, _locatio_scdddes.rutloc_location);
+                    _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "get_fvdespc==>>" + _error + " " + fvdespc_lista.Count().ToString();
+                    tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                    tw.WriteLine(_hora);
+                    tw.Flush();
+                    tw.Close();
+                    tw.Dispose();
+
+                    name_dbf = "FVDESPD";
+                    var _location_fvdespd = listar_location_dbf.Where(x => x.rutloc_namedbf == name_dbf).FirstOrDefault();
+                    if (File.Exists(@ruta_validacion)) return;
+                    #region<EN ESTE PASO TRATAMOS DE ENTRAR AL NOVELL PARA TRAERME LA INFO>
+                    if (valida_file_ecu())
+                    {
+                        NetworkShare.ConnectToShare(_location_fvdespd.rutloc_location, ConexionDBF.user_novell, ConexionDBF.password_novell);
+                    }
+                    #endregion
+
+                    DataTable fvdespd_lista = get_fvdespd("", "", _location_fvdespd.rutloc_location, ref _error, _locatio_scdddes.rutloc_location);
+                    _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "get_fvdespd==>>" + _error + " " + fvdespd_lista.Rows.Count.ToString();
+                    tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                    tw.WriteLine(_hora);
+                    tw.Flush();
+                    tw.Close();
+                    tw.Dispose();
+
+
+                    _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "fin==>acceso dbf ";
+                    tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                    tw.WriteLine(_hora);
+                    tw.Flush();
+                    tw.Close();
+                    tw.Dispose();
+
+                    _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "fin==>acceso dbf ";
+                    tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                    tw.WriteLine(_hora);
+                    tw.Flush();
+                    tw.Close();
+                    tw.Dispose();
+                    #endregion
+                    /**/
+                    string DESC_ALMACEN = "";
+                    string rutloc_location = "";
+                    List<string> listGuias = new List<string>();
+
+                    #region<ENVIAMOS GUIAS POR WEBSERVICE>
+                    foreach (BataTransac.Ent_Scdddes filaC in _lista_guiasC)
+                    {
+
+                        var fvdespc_tmp = fvdespc_lista.Where(d => d.DESC_ALMAC == filaC.DDES_ALMAC && d.DESC_GUDIS == filaC.DDES_GUIRE).ToList(); // get_fvdespc(filaC.DDES_ALMAC, filaC.DDES_GUIRE, _location_fvdespc.rutloc_location, ref _error, ref existe_data);
+
+                        BataTransac.Ent_Fvdespc fvdespc = new BataTransac.Ent_Fvdespc();
+                        fvdespc = fvdespc_tmp[0];
+
+
+                        _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "==>get_fvdespc " + filaC.DDES_GUIRE;
+                        tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                        tw.WriteLine(_hora);
+                        tw.Flush();
+                        tw.Close();
+                        tw.Dispose();
+                        /*si existe data entonces entra a la condicion*/
+                        if (existe_data)
+                        {
+                            /*validando fechas de despacho*/
+                            if (fvdespc != null)
+                            {
+                                fvdespc.DESC_FDESP = filaC.DDES_FDESP;
+                                fvdespc.DESC_FECHA = filaC.DDES_FECHA;
+                                fvdespc.DESC_FTRA = filaC.DDES_FECHA;
+                            }
+
+                            /*VERIFICAR SI HAY ERROR*/
+                            if (_error.Length > 0)
+                            {
+                                _error += " ==>TABLA [FVDESPC]";
+                                Util ws_error_transac = new Util();
+                                /*si hay un error entonces 03 error de lectura dbf*/
+                                ws_error_transac.control_errores_transac("03", _error, ref _error_ws);
+                            }
+                            /**/
+
+                            /*captura la cebecera de la guia*/
+                            if (fvdespc != null)
+                            {
+                                _error = "";
+                                name_dbf = "FVDESPD";
+
+
+
+                                _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "inicio==>get_fvdespd " + filaC.DDES_GUIRE;
+                                tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                                tw.WriteLine(_hora);
+                                tw.Flush();
+                                tw.Close();
+                                tw.Dispose();
+
+
+                                DataTable fvdespd = new DataTable();
+                                fvdespd = fvdespd_lista.Clone();
+                                DataRow[] filas_fvdespd = null;
+                                filas_fvdespd = fvdespd_lista.Select("DESD_ALMAC='" + filaC.DDES_ALMAC + "' and DESD_GUDIS='" + filaC.DDES_GUIRE + "'"); // get_fvdespd(filaC.DDES_ALMAC, filaC.DDES_GUIRE, _location_fvdespd.rutloc_location, ref _error);
+
+                                foreach (DataRow fila in filas_fvdespd)
+                                {
+                                    fvdespd.ImportRow(fila);
+                                }
+
+                                _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "fin==>get_fvdespd " + filaC.DDES_GUIRE;
+                                tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                                tw.WriteLine(_hora);
+                                tw.Flush();
+                                tw.Close();
+                                tw.Dispose();
+
+                                /*VERIFICAR SI HAY ERROR*/
+                                if (_error.Length > 0)
+                                {
+                                    _error += " ==>TABLA [FVDESPD]";
+                                    Util ws_error_transac = new Util();
+                                    /*si hay un error entonces 03 error de lectura dbf*/
+                                    ws_error_transac.control_errores_transac("03", _error, ref _error_ws);
+                                }
+                                /**/
+
+                                /*verifica que el detalle de la guia tenga filas*/
+                                /*si la guias tiene detalle se envia por ws*/
+
+                                if (fvdespd != null)
+                                {
+                                    if (fvdespd.Rows.Count > 0)
+                                    {
+                                        /*enviar el datatable*/
+                                        fvdespc.DT_FVDESPD_TREGMEDIDA = fvdespd;
+
+                                        BataTransac.Ent_Scdddes scdddes = new BataTransac.Ent_Scdddes();
+                                        scdddes = filaC;
+
+                                        _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "==>inicio de envio web service " + filaC.DDES_GUIRE;
+                                        tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                                        tw.WriteLine(_hora);
+                                        tw.Flush();
+                                        tw.Close();
+                                        tw.Dispose();
+                                        /***********************************/
+                                        Envio_Guias ws_envio = new Envio_Guias();
+                                        string envio_guias_ws = ws_envio.envio_ws_guias(fvdespc, scdddes);
+
+                                        _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "==>envio web service " + filaC.DDES_GUIRE;
+                                        tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                                        tw.WriteLine(_hora);
+                                        tw.Flush();
+                                        tw.Close();
+                                        tw.Dispose();
+
+                                        //si return es true entonces validamos los dbf
+                                        if (envio_guias_ws.Length == 0)
+                                        {
+                                            name_dbf = "SCDDDES";
+                                            var _locatio_scdddes_edit = listar_location_dbf.Where(x => x.rutloc_namedbf == name_dbf).FirstOrDefault();
+                                            /*si es que las guias se grabaron correctamente entonces vamos a setear el valor en el dbf*/
+
+                                            /*ya no entra a consultar*/
+                                            if (File.Exists(@ruta_validacion)) return;
+                                            /**/
+                                            _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "==>inicio de update scddes " + filaC.DDES_GUIRE;
+                                            tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                                            tw.WriteLine(_hora);
+                                            tw.Flush();
+                                            tw.Close();
+                                            tw.Dispose();
+
+                                            #region<EN ESTE PASO TRATAMOS DE ENTRAR AL NOVELL PARA TRAERME LA INFO>
+                                            if (valida_file_ecu())
+                                            {
+                                                NetworkShare.ConnectToShare(_locatio_scdddes_edit.rutloc_location, ConexionDBF.user_novell, ConexionDBF.password_novell);
+                                            }
+                                            #endregion
+
+                                            listGuias.Add(fvdespc.DESC_GUDIS);
+                                            DESC_ALMACEN = fvdespc.DESC_ALMAC;
+                                            rutloc_location = _locatio_scdddes_edit.rutloc_location;
+
+                                            //edit_scdddes(fvdespc.DESC_ALMAC, fvdespc.DESC_GUDIS, _locatio_scdddes_edit.rutloc_location,ref _error_ws);
+                                            _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "==>fin de update scddes " + _error_ws + "  " + filaC.DDES_GUIRE;
+                                            tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                                            tw.WriteLine(_hora);
+                                            tw.Flush();
+                                            tw.Close();
+                                            tw.Dispose();
+
+
+                                        }
+                                        else
+                                        {
+                                            Util ws_error_transac = new Util();
+                                            _error_ws = envio_guias_ws.ToString();
+                                            /*si hay un error entonces 02 error de transaction*/
+                                            ws_error_transac.control_errores_transac("02", envio_guias_ws, ref _error_ws);
+                                        }
+                                    }
+                                }
+
+                            }
+                        }
+                        //}
+                    }
+                    #endregion
+
+                    if (listGuias.Count > 0)
+                    {
+
+                        edit_list_scdddes(DESC_ALMACEN, listGuias, rutloc_location, ref _error_ws);
+                        _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "==>fin de update list scddes " + _error_ws;
+                        tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                        tw.WriteLine(_hora);
+                        tw.Flush();
+                        tw.Close();
+                        tw.Dispose();
+                    }
+
+                }
+
+            }
+            catch (Exception exc)
+            {
+                _error_ws = exc.Message + " error de metodo";
+                _error_transac = exc.Message + " error de metodo";
+                //_envio_guias = "";
+            }
+            //return _error_transac;
+        }
+        #endregion
         /// <summary>
         ///ejecutar proceso de envios de guias
         /// </summary>
@@ -546,7 +900,7 @@ namespace CapaServicioWindows.Modular
                 string _error = "";
                 /*ya no entra a consultar*/
                 if (File.Exists(@ruta_validacion)) return;
-                string _hora = DateTime.Now.ToLongTimeString() + "==>INGRESO PASO1";
+                string _hora =DateTime.Today.ToString() + " " +  DateTime.Now.ToLongTimeString() + "==>INGRESO PASO1";
                 TextWriter tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
                 tw.WriteLine(_hora);
                 tw.Flush();
@@ -566,10 +920,17 @@ namespace CapaServicioWindows.Modular
                 }
                 #endregion
 
+                _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "==> saliendo del objecto NetworkShare y entrando al metodo get_scdddes";
+                tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                tw.WriteLine(_hora);
+                tw.Flush();
+                tw.Close();
+                tw.Dispose();
+
                 _lista_guiasC = get_scdddes(_locatio_scdddes.rutloc_location,ref _error);
                
 
-                _hora = DateTime.Now.ToLongTimeString() + "==>get_scdddes ==>" + _error + _lista_guiasC.Count().ToString();
+                _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "==>get_scdddes ==>" + _error + _lista_guiasC.Count().ToString();
                 tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
                 tw.WriteLine(_hora);
                 tw.Flush();
@@ -596,7 +957,7 @@ namespace CapaServicioWindows.Modular
                     Boolean existe_data = false;
                     var _location_fvdespc = listar_location_dbf.Where(x => x.rutloc_namedbf == name_dbf).FirstOrDefault();
 
-                    _hora = DateTime.Now.ToLongTimeString() + "inicio==>acceso dbf ";
+                    _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "inicio==>acceso dbf ";
                     tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
                     tw.WriteLine(_hora);
                     tw.Flush();
@@ -611,7 +972,7 @@ namespace CapaServicioWindows.Modular
                     #endregion
 
                     List<BataTransac.Ent_Fvdespc> fvdespc_lista = get_fvdespc("","", _location_fvdespc.rutloc_location, ref _error, ref existe_data, _locatio_scdddes.rutloc_location);
-                    _hora = DateTime.Now.ToLongTimeString() + "get_fvdespc==>>" + _error + " " + fvdespc_lista.Count().ToString();
+                    _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "get_fvdespc==>>" + _error + " " + fvdespc_lista.Count().ToString();
                     tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
                     tw.WriteLine(_hora);
                     tw.Flush();
@@ -629,7 +990,7 @@ namespace CapaServicioWindows.Modular
                     #endregion
 
                     DataTable fvdespd_lista = get_fvdespd("", "", _location_fvdespd.rutloc_location, ref _error, _locatio_scdddes.rutloc_location);
-                    _hora = DateTime.Now.ToLongTimeString() + "get_fvdespd==>>" + _error + " " + fvdespd_lista.Rows.Count.ToString();
+                    _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "get_fvdespd==>>" + _error + " " + fvdespd_lista.Rows.Count.ToString();
                     tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
                     tw.WriteLine(_hora);
                     tw.Flush();
@@ -637,14 +998,14 @@ namespace CapaServicioWindows.Modular
                     tw.Dispose();
 
 
-                    _hora = DateTime.Now.ToLongTimeString() + "fin==>acceso dbf ";
+                    _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "fin==>acceso dbf ";
                     tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
                     tw.WriteLine(_hora);
                     tw.Flush();
                     tw.Close();
                     tw.Dispose();
 
-                    _hora = DateTime.Now.ToLongTimeString() + "fin==>acceso dbf ";
+                    _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "fin==>acceso dbf ";
                     tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
                     tw.WriteLine(_hora);
                     tw.Flush();
@@ -666,7 +1027,7 @@ namespace CapaServicioWindows.Modular
                         fvdespc = fvdespc_tmp[0];
                       
 
-                        _hora = DateTime.Now.ToLongTimeString() + "==>get_fvdespc " + filaC.DDES_GUIRE; 
+                        _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "==>get_fvdespc " + filaC.DDES_GUIRE; 
                         tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
                         tw.WriteLine(_hora);
                         tw.Flush();
@@ -701,7 +1062,7 @@ namespace CapaServicioWindows.Modular
                               
                          
 
-                                _hora = DateTime.Now.ToLongTimeString() + "inicio==>get_fvdespd " + filaC.DDES_GUIRE;
+                                _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "inicio==>get_fvdespd " + filaC.DDES_GUIRE;
                                 tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
                                 tw.WriteLine(_hora);
                                 tw.Flush();
@@ -719,7 +1080,7 @@ namespace CapaServicioWindows.Modular
                                     fvdespd.ImportRow(fila);
                                 }
 
-                                _hora = DateTime.Now.ToLongTimeString() + "fin==>get_fvdespd " + filaC.DDES_GUIRE;
+                                _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "fin==>get_fvdespd " + filaC.DDES_GUIRE;
                                 tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
                                 tw.WriteLine(_hora);
                                 tw.Flush();
@@ -749,7 +1110,7 @@ namespace CapaServicioWindows.Modular
                                         BataTransac.Ent_Scdddes scdddes = new BataTransac.Ent_Scdddes();
                                         scdddes = filaC;
 
-                                        _hora = DateTime.Now.ToLongTimeString() + "==>inicio de envio web service " + filaC.DDES_GUIRE;
+                                        _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "==>inicio de envio web service " + filaC.DDES_GUIRE;
                                         tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
                                         tw.WriteLine(_hora);
                                         tw.Flush();
@@ -759,7 +1120,7 @@ namespace CapaServicioWindows.Modular
                                         Envio_Guias ws_envio = new Envio_Guias();
                                         string envio_guias_ws = ws_envio.envio_ws_guias(fvdespc, scdddes);
 
-                                        _hora = DateTime.Now.ToLongTimeString() + "==>envio web service " + filaC.DDES_GUIRE;
+                                        _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "==>envio web service " + filaC.DDES_GUIRE;
                                         tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
                                         tw.WriteLine(_hora);
                                         tw.Flush();
@@ -776,7 +1137,7 @@ namespace CapaServicioWindows.Modular
                                             /*ya no entra a consultar*/
                                             if (File.Exists(@ruta_validacion)) return;
                                             /**/
-                                            _hora = DateTime.Now.ToLongTimeString() + "==>inicio de update scddes " + filaC.DDES_GUIRE;
+                                            _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "==>inicio de update scddes " + filaC.DDES_GUIRE;
                                             tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
                                             tw.WriteLine(_hora);
                                             tw.Flush();
@@ -795,7 +1156,7 @@ namespace CapaServicioWindows.Modular
                                             rutloc_location = _locatio_scdddes_edit.rutloc_location;
 
                                             //edit_scdddes(fvdespc.DESC_ALMAC, fvdespc.DESC_GUDIS, _locatio_scdddes_edit.rutloc_location,ref _error_ws);
-                                            _hora = DateTime.Now.ToLongTimeString() + "==>fin de update scddes " + _error_ws + "  "  + filaC.DDES_GUIRE;
+                                            _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "==>fin de update scddes " + _error_ws + "  "  + filaC.DDES_GUIRE;
                                             tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
                                             tw.WriteLine(_hora);
                                             tw.Flush();
@@ -823,7 +1184,7 @@ namespace CapaServicioWindows.Modular
                     if (listGuias.Count>0) {
 
                         edit_list_scdddes(DESC_ALMACEN, listGuias, rutloc_location, ref _error_ws);
-                        _hora = DateTime.Now.ToLongTimeString() + "==>fin de update list scddes " + _error_ws;
+                        _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "==>fin de update list scddes " + _error_ws;
                         tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
                         tw.WriteLine(_hora);
                         tw.Flush();
@@ -906,7 +1267,33 @@ namespace CapaServicioWindows.Modular
                         strListGuia = "";
                         contador = 0;
 
-                        update_list_scdddes(sqlquery, _path, ref _error_ws);
+                        String error_cursor ="";
+
+                        update_list_scdddes(sqlquery, _path, ref error_cursor);
+
+                        
+
+                        if (error_cursor.Length>0)
+                        {
+
+                            string _hora = DateTime.Today.ToString() + " " +DateTime.Now.ToLongTimeString() + " Error de update registros==>" +  error_cursor;
+                            TextWriter tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                            tw.WriteLine(_hora);
+                            tw.Flush();
+                            tw.Close();
+                            tw.Dispose();
+
+                         
+                        }
+                        else
+                        {
+                            string _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " Update registros correctamente.." ;
+                            TextWriter tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                            tw.WriteLine(_hora);
+                            tw.Flush();
+                            tw.Close();
+                            tw.Dispose();
+                        }
 
                     }
                   

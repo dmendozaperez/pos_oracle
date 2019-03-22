@@ -582,7 +582,7 @@ namespace CapaServicioWindows.CapaDato.Interfaces
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception EXC)
             {
                 dt = null;
             }

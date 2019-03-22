@@ -150,11 +150,21 @@ namespace CapaServicioWindows.Conexion
 
         private static string GetError(int errNum)
         {
-            foreach (ErrorClass er in ERROR_LIST)
+            try
             {
-                if (er.num == errNum) return er.message;
+                foreach (ErrorClass er in ERROR_LIST)
+                {
+                    if (er.num == errNum) return er.message;
+                }
+                return "Error: Unknown, " + errNum;
             }
-            return "Error: Unknown, " + errNum;
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            
         }
         #endregion
 

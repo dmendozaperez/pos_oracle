@@ -118,7 +118,7 @@ namespace ServiceWin32Framework4
             string _error = "";
             Ftp_Xstore_Service_Send envio = new Ftp_Xstore_Service_Send();
             //envio.proc_envio_ftp();
-            string pais = "PE";
+            string pais = "EC";
             Boolean gen_per_item = false;
             Boolean gen_ecu_item = false;
 
@@ -176,6 +176,23 @@ namespace ServiceWin32Framework4
             Cursor.Current = Cursors.WaitCursor;
             CapaServicioWindows.Envio_AQ.Envio_Ventas env = new CapaServicioWindows.Envio_AQ.Envio_Ventas();
             env.envio_ventas_aq();
+            Cursor.Current = Cursors.Default;
+        }
+
+        private void btnenvio_prescripciones_Click(object sender, EventArgs e)
+        {
+            string _error = "ing";
+            TextWriter tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+            tw.WriteLine(_error);
+            tw.Flush();
+            tw.Close();
+            tw.Dispose();
+            Cursor.Current = Cursors.WaitCursor;
+            string _erro = "";
+            Basico cc = new Basico();
+            // cc.procesar_dbf_pos(ref _erro);
+            cc.eje_envio_prescripcion(ref _erro);
+            MessageBox.Show("termino");
             Cursor.Current = Cursors.Default;
         }
     }

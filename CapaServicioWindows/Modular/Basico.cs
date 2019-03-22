@@ -1299,6 +1299,20 @@ namespace CapaServicioWindows.Modular
                   
 
                 }
+
+                if (contador > 0) { 
+                     strListGuia = strListGuia.TrimEnd(',');
+
+                    string sqlquery = "UPDATE SCDDDES SET DDES_FTXTD='X' WHERE DDES_ALMAC='" + cod_alm + "' AND DDES_GUIRE in (" + strListGuia + ")";
+
+                    strListGuia = "";
+                    contador = 0;
+
+                    String error_cursor = "";
+
+                    update_list_scdddes(sqlquery, _path, ref error_cursor);
+                }
+
             }
             catch (Exception exc)
             {
@@ -1307,8 +1321,7 @@ namespace CapaServicioWindows.Modular
         }
 
         private void update_list_scdddes(string sqlquery, string _path, ref string _error_ws)
-        {
-           
+        {  
             try
             {
                 using (OleDbConnection cn = new OleDbConnection(ConexionDBF._conexion_fvdes_oledb(_path)))

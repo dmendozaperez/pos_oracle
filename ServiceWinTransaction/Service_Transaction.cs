@@ -24,6 +24,10 @@ namespace ServiceWinTransaction
         Timer tmservicioDBF = null;
         Timer tmservicioVentaXstore = null;
 
+
+        Timer tmpprescripcion = null;
+        private Int32 _valida_PRES = 0;
+
         Timer tmservicioAQ = null;
         private Int32 _valida_AQ = 0;
 
@@ -97,7 +101,106 @@ namespace ServiceWinTransaction
 
             tmservicioAQ = new Timer(5000);
             tmservicioAQ.Elapsed += new ElapsedEventHandler(tmservicioAQ_Elapsed);
+
+            tmpprescripcion = new Timer(5000);
+            tmpprescripcion.Elapsed += new ElapsedEventHandler(tmpprescripcion_Elapsed);
         }
+        #region<PROCESO DE PRESCRIPCION>
+
+        /*variable private para la ejecucion del proceso de prescripcion*/
+        private string fecha_hora_actual = DateTime.Now.ToShortTimeString().Substring(0, 5);
+        private string fecha_hora_add = DateTime.Now.ToShortTimeString().Substring(0, 5);
+        private Int32 sum_horas = 4;
+        void tmpprescripcion_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            //string varchivov = "c://valida_hash.txt";
+            Int32 _valor = 0;
+
+            string _ruta_erro_file = @"D:\Almacen\log_pres.txt";
+            //string _valida_proc_venta = @"D:\venta.txt";
+            Boolean proceso_venta = false;
+            try
+            {
+                fecha_hora_actual = DateTime.Now.ToShortTimeString().Substring(0, 5);
+                //Boolean valida_guia_ecu = false;
+                //Boolean valida_
+
+                #region<region solo almacen ecuador>
+                if (!File.Exists(@file_almace_ecu)) return;
+                #endregion
+
+
+                if (_valida_PRES == 0)
+                {
+                    //string _error = "ing";
+                    _valor = 1;
+                    _valida_PRES = 1;
+
+
+                    string _error_ws = "";
+                    //_error = CapaServicioWindows.Modular.Basico.retornar();
+
+                    #region<SOLO PARA PRESCRIPCION>
+
+                    if (fecha_hora_actual != fecha_hora_add)
+                    {
+                        _valor = 0;
+                        _valida_PRES = 0;
+                        return;
+                    }
+
+                        
+
+                        //if (!proceso_venta)
+                        //{
+                    Basico envia_pres = new Basico();
+                    envia_pres.eje_envio_prescripcion(ref _error_ws);
+                    fecha_hora_add = DateTime.Now.AddHours(sum_horas).ToShortTimeString().Substring(0, 5);
+                    //CapaServicioWindows.Envio_AQ.Envio_Ventas envia = new CapaServicioWindows.Envio_AQ.Envio_Ventas();
+                    //_error_ws = envia.envio_ventas_aq();
+                    //Basico ejecuta_procesos = null;
+                    //ejecuta_procesos = new Basico();
+                    //ejecuta_procesos.eje_envio_guias(ref _error_ws);
+                    //}
+                    #endregion
+
+
+
+
+
+
+                    _valida_PRES = 0;
+
+                    if (_error_ws.Length > 0)
+                    {
+                        TextWriter tw = new StreamWriter(_ruta_erro_file, true);
+                        tw.WriteLine(_error_ws);
+                        tw.Flush();
+                        tw.Close();
+                        tw.Dispose();
+                    }
+                }
+                //****************************************************************************
+            }
+            catch (Exception exc)
+            {
+                fecha_hora_add = DateTime.Now.AddHours(sum_horas).ToShortTimeString().Substring(0, 5);
+                TextWriter tw = new StreamWriter(_ruta_erro_file, true);
+                tw.WriteLine(exc.Message);
+                tw.Flush();
+                tw.Close();
+                tw.Dispose();
+                _valida_PRES = 0;
+            }
+
+            if (_valor == 1)
+            {
+                _valida_PRES = 0;
+            }
+
+
+        }
+        #endregion
 
         #region<PROCESOS DE AQUARELLA>
         void tmservicioAQ_Elapsed(object sender, ElapsedEventArgs e)
@@ -727,6 +830,7 @@ namespace ServiceWinTransaction
             tmenvia_sftp.Start();
             tmservicio_ecu_guia.Start();
             tmservicioAQ.Start();
+            tmpprescripcion.Start();
             //tmservicioScactcoDBF.Start();
         }
 
@@ -741,6 +845,7 @@ namespace ServiceWinTransaction
             tmenvia_sftp.Stop();
             tmservicio_ecu_guia.Stop();
             tmservicioAQ.Stop();
+            tmpprescripcion.Stop();
             //tmservicioScactcoDBF.Stop();
         }       
               

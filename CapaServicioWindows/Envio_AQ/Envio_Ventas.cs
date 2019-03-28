@@ -78,7 +78,8 @@ namespace CapaServicioWindows.Envio_AQ
         }
 
         private Boolean update_dbf(string fc_tdoc,string fc_ndoc,DataTable dt_VMAFC,DataTable dt_VMAFD,
-                                   /*OleDbConnection cn_dbf,*/string ruta_VMAFC,string ruta_VMAFD,ref string error)
+                                   /*OleDbConnection cn_dbf,*/string ruta_VMAFC,string ruta_VMAFD,
+                                   ref string error,Boolean solo_detalle=false)
         {
             Boolean valida = false;
             string _ruta_erro_file = @"D:\BataTransaction\LOG_AQ.txt";
@@ -320,7 +321,10 @@ namespace CapaServicioWindows.Envio_AQ
                             tw.Close();
                             tw.Dispose();
 
-                            cmd_VMAFC.ExecuteNonQuery();
+                            if (!solo_detalle)
+                            { 
+                                cmd_VMAFC.ExecuteNonQuery();
+                            }
 
                             tw = new StreamWriter(_ruta_erro_file, true);
                             str = DateTime.Today.ToString() + " " + DateTime.Now.ToString("HH:mm:ss") + "  saliendo a insert VMAFC";
@@ -554,7 +558,9 @@ namespace CapaServicioWindows.Envio_AQ
                     //ruta_VMAFC = @"D:\AQ_EXPORTA_SIS";
                     //ruta_VMAFD = @"D:\AQ_EXPORTA_SIS";
 
-                    DataTable dt_existe = null;
+                    DataTable dt_existe_cab = null;
+                    DataTable dt_existe_det = null;
+                    /*VALIDAR SI EXISTE EN DETALLE SI NO EXISTE POR AL ERROR ENTONCES */
 
                     using (OleDbConnection cn_dbf = new OleDbConnection(ConexionDBF._conexion_fmc_fmd_vfpoledb(ruta_VMAFC)))
                     {
@@ -566,7 +572,7 @@ namespace CapaServicioWindows.Envio_AQ
                             cmd_query.Parameters.Add("DATE", OleDbType.Date).Value = _fecha_ffac;
                             using (OleDbDataAdapter da_query = new OleDbDataAdapter(cmd_query))
                             {
-                                dt_existe = new DataTable();
+                                dt_existe_cab = new DataTable();
 
                                 tw = new StreamWriter(_ruta_erro_file, true);
                                 str = DateTime.Today.ToString() + " " + DateTime.Now.ToString("HH:mm:ss") + "  entrando al query select VMAFC";
@@ -575,7 +581,7 @@ namespace CapaServicioWindows.Envio_AQ
                                 tw.Close();
                                 tw.Dispose();
 
-                                da_query.Fill(dt_existe);
+                                da_query.Fill(dt_existe_cab);
 
                                 tw = new StreamWriter(_ruta_erro_file, true);
                                 str = DateTime.Today.ToString() + " " + DateTime.Now.ToString("HH:mm:ss") + "  saliendo al query select VMAFC";
@@ -587,15 +593,49 @@ namespace CapaServicioWindows.Envio_AQ
                         }
                     }
 
-                    var result = dt_VMAFC.AsEnumerable().Select(row => (string)row["FC_TDOC"] + row["FC_NDOC"]).Except(dt_existe.AsEnumerable().Select(row => (string)row["FC_TDOC"] + row["FC_NDOC"]));
+                    /*select al detalle*/
+                    using (OleDbConnection cn_dbf = new OleDbConnection(ConexionDBF._conexion_fmc_fmd_vfpoledb(ruta_VMAFC)))
+                    {
+                        DateTime _fecha_ffac = DateTime.Today.AddDays(-7);
+                        string sqlquery_consulta = "SELECT FC_TDOC,FC_NDOC FROM VMAFC WHERE FC_CANAL='6' AND FC_CADEN='CA'  AND FC_FFACT>=? AND " +                            
+                                                   "FC_TDOC + FC_NDOC NOT IN (SELECT FD_TDOC + FD_NDOC FROM VMAFD)";
+                        using (OleDbCommand cmd_query = new OleDbCommand(sqlquery_consulta, cn_dbf))
+                        {
+                            cmd_query.CommandTimeout = 0;
+                            cmd_query.Parameters.Add("DATE", OleDbType.Date).Value = _fecha_ffac;
+                            using (OleDbDataAdapter da_query = new OleDbDataAdapter(cmd_query))
+                            {
+                                dt_existe_det = new DataTable();
+
+                                tw = new StreamWriter(_ruta_erro_file, true);
+                                str = DateTime.Today.ToString() + " " + DateTime.Now.ToString("HH:mm:ss") + "  entrando al query select VMAFD";
+                                tw.WriteLine(str);
+                                tw.Flush();
+                                tw.Close();
+                                tw.Dispose();
+
+                                da_query.Fill(dt_existe_det);
+
+                                tw = new StreamWriter(_ruta_erro_file, true);
+                                str = DateTime.Today.ToString() + " " + DateTime.Now.ToString("HH:mm:ss") + "  saliendo al query select VMAFD";
+                                tw.WriteLine(str);
+                                tw.Flush();
+                                tw.Close();
+                                tw.Dispose();
+                            }
+                        }
+                    }
+
+
+
+                    var result = dt_VMAFC.AsEnumerable().Select(row => (string)row["FC_TDOC"] + row["FC_NDOC"]).Except(dt_existe_cab.AsEnumerable().Select(row => (string)row["FC_TDOC"] + row["FC_NDOC"]));
                     //var result = dt_VMAFC.AsEnumerable().Select(row => (string)row["FC_TDOC"] + row["FC_NDOC"]);
                     /*EN ESTE CASO VAMOS A INSERTAR LOS DATOS QUE YA EXISTE PARA NO REALIZAR CONSULTAS SOBRE DATOS QUE YA EXISTE */
                     //var result = dt_VMAFC.AsEnumerable().Select(row => (string)row["FC_TDOC"] + row["FC_NDOC"]).Except(dt_existe.AsEnumerable().Select(row => (string)row["FC_TDOC"] + row["FC_NDOC"]));
 
 
                     //.Except(da_query.AsEnumerable().Select(r => r.Field<string>("crs_name"), r.Field<string>("name")));
-
-
+                    #region<METODO DE VENTAS PARA LA INSERCION DE CABECERA Y DETALLE>
 
                     //if (cn_dbf.State == 0) cn_dbf.Open();
                     foreach (var fila in result)
@@ -640,8 +680,56 @@ namespace CapaServicioWindows.Envio_AQ
                             }
 
                         }
+                    #endregion
                     //    if (cn_dbf.State == ConnectionState.Open) cn_dbf.Close();
                     //}
+                    #region<INSERCION DEL DETALLE SI ES QUE NO SE GRABO>
+                    var result_det = dt_existe_det.AsEnumerable().Select(row => (string)row["FC_TDOC"] + row["FC_NDOC"]);
+                    foreach (var fila in result_det)
+                    {
+                        string error_proc = "";
+                        string _FC_TDOC = fila.Substring(0, 2);
+                        String _FC_NDOC = fila.Substring(2, 12);
+                        tw = new StreamWriter(_ruta_erro_file, true);
+                        str = DateTime.Today.ToString() + "==>" + "entrando al metodo update_dbf detalle";
+                        tw.WriteLine(str);
+                        tw.Flush();
+                        tw.Close();
+                        tw.Dispose();
+
+
+                        /*solo detalle*/
+                        Boolean upd = update_dbf(_FC_TDOC, _FC_NDOC, dt_VMAFC, dt_VMAFD, /*cn_dbf,*/ ruta_VMAFC, ruta_VMAFD, ref error_proc,true);
+
+                        tw = new StreamWriter(_ruta_erro_file, true);
+                        str = DateTime.Today.ToString() + "==> terminando update detalle dbf";
+                        tw.WriteLine(str);
+                        tw.Flush();
+                        tw.Close();
+                        tw.Dispose();
+
+
+                        if (upd)
+                        {
+                            dt_update.Rows.Add(_FC_TDOC, _FC_NDOC);
+                            //string _ruta_erro_file = @"D:\BataTransaction\LOG_AQ.txt";
+                            tw = new StreamWriter(_ruta_erro_file, true);
+                            str = DateTime.Today.ToString() + "==>" + "insertando datos detalle tipo:" + _FC_TDOC + " numero:" + _FC_NDOC;
+                            tw.WriteLine(str);
+                            tw.Flush();
+                            tw.Close();
+                            tw.Dispose();
+                        }
+                        else
+                        {
+                            if (error_proc.Length > 0)
+                                insertar_error_aq(error_proc + " TIPO:" + _FC_TDOC + " NUMERO:" + _FC_NDOC);
+                        }
+
+                    }
+
+
+                    #endregion
                     if (dt_update.Rows.Count>0)
                     {
                         update_envio_sis_sql(dt_update);

@@ -12,6 +12,7 @@ using System.IO;
 using ICSharpCode.SharpZipLib.Zip;
 using CapaServicioWindows.CapaDato.Venta;
 using WinSCP;
+using CapaServicioWindows.CapaDato.Novell;
 
 namespace CapaServicioWindows.Modular
 {
@@ -123,6 +124,232 @@ namespace CapaServicioWindows.Modular
             }
             return _lista_scdddes;
         }
+        #region<METODOS PARA LAS PRESCRIPCIONES>
+        private DataTable get_scddgud(string codalm, string nroguia, string _path, ref string error, string ruta_scccgud)
+        {
+            DataTable SCDDGUD = null;
+            //string sqlquery_fvdespd = "SELECT DESD_TIPO,DESD_GUDIS,DESD_NDESP,DESD_ALMAC,DESD_ARTIC,DESD_CALID," +
+            //                           "DESD_ME00,DESD_ME01,DESD_ME02,DESD_ME03,DESD_ME04,DESD_ME05,DESD_ME06,DESD_ME07,DESD_ME08," + 
+            //                           "DESD_ME09,DESD_ME10,DESD_ME11,DESD_CLASE,DESD_MERC,DESD_CATEG,DESD_SUBCA," + 
+            //                           "DESD_MARCA,DESD_MERC3,DESD_CATE3,DESD_SUBC3,DESD_MARC3,DESD_CNDME," + 
+            //                           "DESD_EMPRE,DESD_SECCI,DESD_CANAL," +
+            //                           "DESD_CADEN,DESD_GGUIA,DESD_ESTAD,DESD_PRVTA,DESD_COSTO FROM FVDESPD WHERE DESD_GUDIS='" + nroguia + "'" +
+            //                           " AND DESD_ALMAC='" + codalm + "'";
+            string sqlquery_fvdespd = "SELECT dgud_gudis,dgud_artic,dgud_calid,dgud_prvta,dgud_costo,dgud_codpp,dgud_cpack," + 
+                                      "dgud_ppack,dgud_touni,dgud_med00,dgud_med01,dgud_med02,dgud_med03,dgud_med04," + 
+	                                  "dgud_med05,dgud_med06,dgud_med07,dgud_med08,dgud_med09,dgud_med10,dgud_med11," +
+	                                  "dgud_merc,dgud_clase,dgud_categ,dgud_subca,dgud_marca,dgud_merc3,dgud_cate3," + 
+	                                  "dgud_subc3,dgud_marc3,dgud_rmed,dgud_condm,dgud_orige,dgud_u_med," +
+                                      "dgud_log FROM SCDDGUD WHERE  dgud_gudis IN (SELECT cgud_gudis FROM " + ruta_scccgud + "/SCCCGUD WHERE cgud_femis>=CTOD('" + fecha_despacho.ToString("MM/dd/yy") + "')  AND EMPTY(FLAG_XSTOR))";
+            try
+            {
+                using (OleDbConnection cn = new OleDbConnection(ConexionDBF._conexion_fvdes_oledb(_path)))
+                {
+                    using (OleDbCommand cmd = new OleDbCommand(sqlquery_fvdespd, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        using (OleDbDataAdapter da = new OleDbDataAdapter(cmd))
+                        {
+                            SCDDGUD = new DataTable();
+                            da.Fill(SCDDGUD);
+                            SCDDGUD.TableName = "SCDDGUD";
+                        }
+                    }
+                }
+            }
+            catch (Exception exc)
+            {
+                error = exc.Message;
+                SCDDGUD = null;
+            }
+            return SCDDGUD;
+        }
+        private void edit_list_scccgud(string cod_alm, List<string> listGuia, string _path, ref string _error_ws)
+        {
+
+            string strListGuia = "";
+            int limite = 20;
+            int contador = 0;
+            try
+            {
+                foreach (string strguia in listGuia)
+                {
+                    contador++;
+
+                    strListGuia += "'" + strguia + "',";
+
+                    if (contador == limite)
+                    {
+
+                        strListGuia = strListGuia.TrimEnd(',');
+
+                        string sqlquery = "UPDATE scccgud SET flag_xstor='X' WHERE CGUD_GUDIS in (" + strListGuia + ")";
+
+                        strListGuia = "";
+                        contador = 0;
+
+                        String error_cursor = "";
+
+                        update_list_scccgud(sqlquery, _path, ref error_cursor);
+
+
+
+                        if (error_cursor.Length > 0)
+                        {
+
+                            string _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " Error de update registros==>" + error_cursor;
+                            TextWriter tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                            tw.WriteLine(_hora);
+                            tw.Flush();
+                            tw.Close();
+                            tw.Dispose();
+
+
+                        }
+                        else
+                        {
+                            string _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " Update registros correctamente..";
+                            TextWriter tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                            tw.WriteLine(_hora);
+                            tw.Flush();
+                            tw.Close();
+                            tw.Dispose();
+                        }
+
+                    }
+
+
+                }
+
+                if (contador > 0)
+                {
+                    strListGuia = strListGuia.TrimEnd(',');
+
+                    //string sqlquery = "UPDATE SCDDDES SET DDES_FTXTD='X' WHERE DDES_ALMAC='" + cod_alm + "' AND DDES_GUIRE in (" + strListGuia + ")";
+                    //string sqlquery = "UPDATE SCDDDES SET DDES_FTXTD='X' WHERE DDES_ALMAC + DDES_GUIRE in (" + strListGuia + ")";
+                    string sqlquery = "UPDATE scccgud SET flag_xstor='X' WHERE CGUD_GUDIS in (" + strListGuia + ")";
+
+                    strListGuia = "";
+                    contador = 0;
+
+                    String error_cursor = "";
+
+                    update_list_scccgud(sqlquery, _path, ref error_cursor);
+                }
+
+            }
+            catch (Exception exc)
+            {
+                _error_ws = exc.Message;
+            }
+        }
+        private List<SCCCGUD> get_scccgud(string _path, ref string error,ref Boolean fila_existe)
+        {
+            /*fecha para traer los pedido cerrados desde una fecha*/
+            List<SCCCGUD> _lista_scccgud = null;
+            String sqlquery_scdddes = "SELECT cgud_gudis,cgud_tndcl,cgud_calid,cgud_empre,cgud_canal,cgud_caden " +
+                                      ", cgud_almac, cgud_secci, cgud_estad, cgud_ftnda, cgud_nomtc, cgud_ructc " +
+                                      ", cgud_vorca, cgud_vornc, cgud_unoca, cgud_unonc, cgud_uneca, cgud_unenc " +
+                                      ", cgud_ftx, cgud_dspch, cgud_ssd, cgud_semre, cgud_anore, cgud_frect " +
+                                      ", cgud_fecre, cgud_scal, cgud_scalm, cgud_sacc, cgud_saccm, cgud_ccal " +
+                                      ", cgud_ccalm, cgud_cacc, cgud_caccm, cgud_caj, cgud_cajm, cgud_ftda, cgud_subgr " +
+                                      ", cgud_ftxtd, cgud_ftxan, cgud_ano, cgud_seman, cgud_user, cgud_femis, cgud_hemis " +
+                                      ", cgud_conce, cgud_flsf, cgud_aorig, cgud_pedid, cgud_deliv, log_ultmod " +
+                                      "FROM SCCCGUD WHERE cgud_femis>=CTOD('" + fecha_despacho.ToString("MM/dd/yy") + "')  AND EMPTY(FLAG_XSTOR)  " ;
+            try
+            {
+                //Util dd = new Util();
+                //dd.get_location_dbf();
+
+                using (OleDbConnection cn = new OleDbConnection(ConexionDBF._conexion_fvdes_oledb(_path)))
+                {
+                    using (OleDbCommand cmd = new OleDbCommand(sqlquery_scdddes, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        //cmd.Parameters.Add("DATE", OleDbType.Date).Value = fecha_despacho;
+                        using (OleDbDataAdapter da = new OleDbDataAdapter(cmd))
+                        {
+                            DataTable dt = new DataTable();
+                            da.Fill(dt);
+                            _lista_scccgud = new List<SCCCGUD>();
+                            _lista_scccgud = (from DataRow dr in dt.Rows
+                                              select new SCCCGUD()
+                                              {
+                                                  cgud_gudis = dr["cgud_gudis"].ToString(),
+                                                  cgud_tndcl = dr["cgud_tndcl"].ToString(),
+                                                  cgud_calid = dr["cgud_calid"].ToString(),
+                                                  cgud_empre = dr["cgud_empre"].ToString(),
+                                                  cgud_canal = dr["cgud_canal"].ToString(),
+                                                  cgud_caden = dr["cgud_caden"].ToString(),
+                                                  cgud_almac = dr["cgud_almac"].ToString(),
+                                                  cgud_secci = dr["cgud_secci"].ToString(),
+                                                  cgud_estad = dr["cgud_estad"].ToString(),
+                                                  cgud_ftnda = dr["cgud_ftnda"].ToString(),
+                                                  cgud_nomtc = dr["cgud_nomtc"].ToString(),
+                                                  cgud_ructc = dr["cgud_ructc"].ToString(),
+                                                  cgud_vorca =Convert.ToDecimal(dr["cgud_vorca"]),
+                                                  cgud_vornc =Convert.ToDecimal(dr["cgud_vornc"]),
+                                                  cgud_unoca =Convert.ToDecimal(dr["cgud_unoca"]),
+                                                  cgud_unonc = Convert.ToDecimal(dr["cgud_unonc"]),
+                                                  cgud_uneca = Convert.ToDecimal(dr["cgud_uneca"]),
+                                                  cgud_unenc = Convert.ToDecimal(dr["cgud_unenc"]),
+                                                  cgud_ftx = dr["cgud_ftx"].ToString(),
+                                                  cgud_dspch = dr["cgud_dspch"].ToString(),
+                                                  cgud_ssd = dr["cgud_ssd"].ToString(),
+                                                  cgud_semre = dr["cgud_semre"].ToString(),
+                                                  cgud_anore = dr["cgud_anore"].ToString(),
+                                                  cgud_frect =Convert.ToDateTime(dr["cgud_frect"]),
+                                                  cgud_fecre = Convert.ToDateTime(dr["cgud_fecre"]),
+                                                  cgud_scal = Convert.ToDecimal(dr["cgud_scal"]),
+                                                  cgud_scalm = Convert.ToDecimal(dr["cgud_scalm"]),
+                                                  cgud_sacc = Convert.ToDecimal(dr["cgud_sacc"]),
+                                                  cgud_saccm = Convert.ToDecimal(dr["cgud_saccm"]),
+                                                  cgud_ccal = Convert.ToDecimal(dr["cgud_ccal"]),
+                                                  cgud_ccalm = Convert.ToDecimal(dr["cgud_ccalm"]),
+                                                  cgud_cacc = Convert.ToDecimal(dr["cgud_cacc"]),
+                                                  cgud_caccm = Convert.ToDecimal(dr["cgud_caccm"]),
+                                                  cgud_caj = Convert.ToDecimal(dr["cgud_caj"]),
+                                                  cgud_cajm = Convert.ToDecimal(dr["cgud_cajm"]),
+                                                  cgud_ftda = dr["cgud_ftda"].ToString(),
+                                                  cgud_subgr = dr["cgud_subgr"].ToString(),
+                                                  cgud_ftxtd = dr["cgud_ftxtd"].ToString(),
+                                                  cgud_ftxan = dr["cgud_ftxan"].ToString(),
+                                                  cgud_ano = dr["cgud_ano"].ToString(),
+                                                  cgud_seman = dr["cgud_seman"].ToString(),
+                                                  cgud_user = dr["cgud_user"].ToString(),
+                                                  cgud_femis = Convert.ToDateTime(dr["cgud_femis"]),
+                                                  cgud_hemis = dr["cgud_hemis"].ToString(),
+                                                  cgud_conce = dr["cgud_conce"].ToString(),
+                                                  cgud_flsf = dr["cgud_flsf"].ToString(),
+                                                  cgud_aorig = dr["cgud_aorig"].ToString(),
+                                                  cgud_pedid = dr["cgud_pedid"].ToString(),
+                                                  cgud_deliv = dr["cgud_deliv"].ToString(),
+                                                  log_ultmod = dr["log_ultmod"].ToString(),                                               
+                                              }).ToList();
+                        }
+
+                        if (_lista_scccgud.Count == 0)
+                        {
+                            fila_existe = false;
+                        }
+                        else
+                        {
+                            fila_existe = true;                           
+                        }
+                    }
+
+                }
+
+            }
+            catch (Exception exc)
+            {
+                throw;
+                //error = exc.Message;
+                _lista_scccgud = null;
+            }
+            return _lista_scccgud;
+        }
+        #endregion
 
         private List<BataTransac.Ent_Scdremb> get_scdremb(string _path, ref string error)
         {
@@ -395,6 +622,8 @@ namespace CapaServicioWindows.Modular
             }
             return fvdespd;
         }
+
+
        
         public string get_query_alm_ecu()
         {
@@ -488,18 +717,59 @@ namespace CapaServicioWindows.Modular
             }
         }
         #region<ENVIO DE PRESCRIPCIONES>
+        private void update_list_scccgud(string sqlquery, string _path, ref string _error_ws)
+        {
+            try
+            {
+                using (OleDbConnection cn = new OleDbConnection(ConexionDBF._conexion_fvdes_oledb(_path)))
+                {
+                    try
+                    {
+                        if (cn.State == 0) cn.Open();
+                        using (OleDbCommand cmd = new OleDbCommand(sqlquery, cn))
+                        {
+                            cmd.CommandTimeout = 0;
+                            cmd.CommandType = CommandType.Text;
+                            cmd.ExecuteNonQuery();
+                        }
+
+                    }
+                    catch (Exception exc)
+                    {
+                        _error_ws = exc.Message;
+                        if (cn != null)
+                            if (cn.State == ConnectionState.Open) cn.Close();
+                    }
+                    if (cn != null)
+                        if (cn.State == ConnectionState.Open) cn.Close();
+                }
+
+            }
+            catch (Exception exc)
+            {
+                _error_ws = exc.Message;
+            }
+        }
         public void eje_envio_prescripcion(ref string _error_ws)
         {
             string _error_transac = "";
-            List<BataTransac.Ent_Scdddes> _lista_guiasC = null;
+            List<SCCCGUD> _lista_guiasC = null;
 
             List<BataTransac.Ent_PathDBF> listar_location_dbf = null;
+
+            //string fecha_hora_actual = DateTime.Now.ToShortTimeString().Substring(0, 5);
+            //string fecha_hora_add = DateTime.Now.ToShortTimeString().Substring(0, 5);
+            //Int32 sum_horas = 4;
 
             try
             {
                 /*segundos para ejecutar*/
                 //_espera_ejecuta(20);
                 /***********************/
+                //if (fecha_hora_actual == fecha_hora_add)
+                //{
+                //    fecha_hora_add = DateTime.Now.AddHours(sum_horas).ToShortTimeString().Substring(0, 5);
+                //}
 
                 #region<CAPTURAR EL PATH DE LOS DBF>
                 Util locationdbf = new Util();
@@ -537,14 +807,14 @@ namespace CapaServicioWindows.Modular
 
 
 
-                string name_dbf = "SCDDDES";
-                var _locatio_scdddes = listar_location_dbf.Where(x => x.rutloc_namedbf == name_dbf).FirstOrDefault();
+                string name_dbf = "SCCCGUD";
+                var _locatio_scccgud = listar_location_dbf.Where(x => x.rutloc_namedbf == name_dbf).FirstOrDefault();
 
                 string _error = "";
                 /*ya no entra a consultar*/
                 if (File.Exists(@ruta_validacion)) return;
                 string _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "==>INGRESO PASO1";
-                TextWriter tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                TextWriter tw = new StreamWriter(@"D:\ALMACEN\log_pres.txt", true);
                 tw.WriteLine(_hora);
                 tw.Flush();
                 tw.Close();
@@ -559,15 +829,22 @@ namespace CapaServicioWindows.Modular
                 }
                 else
                 {
-                    NetworkShare.ConnectToShare(_locatio_scdddes.rutloc_location, @".\Tareas", "tareas");
+                    NetworkShare.ConnectToShare(_locatio_scccgud.rutloc_location, @".\Tareas", "tareas");
                 }
                 #endregion
 
-                _lista_guiasC = get_scdddes(_locatio_scdddes.rutloc_location, ref _error);
+                _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "==> saliendo del objecto NetworkShare y entrando al metodo get_scccgud";
+                tw = new StreamWriter(@"D:\ALMACEN\log_pres.txt", true);
+                tw.WriteLine(_hora);
+                tw.Flush();
+                tw.Close();
+                tw.Dispose();
+                Boolean existe_data = false;
+                _lista_guiasC = get_scccgud(_locatio_scccgud.rutloc_location, ref _error,ref existe_data);
 
 
-                _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "==>get_scdddes ==>" + _error + _lista_guiasC.Count().ToString();
-                tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "==>get_scccgud ==>" + _error + _lista_guiasC.Count().ToString();
+                tw = new StreamWriter(@"D:\ALMACEN\log_pres.txt", true);
                 tw.WriteLine(_hora);
                 tw.Flush();
                 tw.Close();
@@ -576,7 +853,7 @@ namespace CapaServicioWindows.Modular
                 /*VERIFICAR SI HAY ERROR*/
                 if (_error.Length > 0)
                 {
-                    _error += " ==>TABLA [SCDDDES]";
+                    _error += " ==>TABLA [scccgud]";
                     Util ws_error_transac = new Util();
                     /*si hay un error entonces 03 error de lectura dbf*/
                     ws_error_transac.control_errores_transac("03", _error, ref _error_ws);
@@ -585,49 +862,60 @@ namespace CapaServicioWindows.Modular
 
                 if (_lista_guiasC != null)
                 {
+                    if (_lista_guiasC.Count == 0)
+                    {
+                        _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "ningun registro encontrado,  ";
+                        tw = new StreamWriter(@"D:\ALMACEN\log_pres.txt", true);
+                        tw.WriteLine(_hora);
+                        tw.Flush();
+                        tw.Close();
+                        tw.Dispose();
+                        return;
+                    }
+
                     #region<METODO GRUPO CONSULTA>
                     if (File.Exists(@ruta_validacion)) return;
                     /*en este caso */
                     _error = "";
-                    name_dbf = "FVDESPC";
-                    Boolean existe_data = false;
-                    var _location_fvdespc = listar_location_dbf.Where(x => x.rutloc_namedbf == name_dbf).FirstOrDefault();
+                    ////name_dbf = "FVDESPC";
+                  
+                    ////var _location_fvdespc = listar_location_dbf.Where(x => x.rutloc_namedbf == name_dbf).FirstOrDefault();
 
-                    _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "inicio==>acceso dbf ";
-                    tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
-                    tw.WriteLine(_hora);
-                    tw.Flush();
-                    tw.Close();
-                    tw.Dispose();
+                    ////_hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "inicio==>acceso dbf ";
+                    ////tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                    ////tw.WriteLine(_hora);
+                    ////tw.Flush();
+                    ////tw.Close();
+                    ////tw.Dispose();
 
-                    #region<EN ESTE PASO TRATAMOS DE ENTRAR AL NOVELL PARA TRAERME LA INFO>
-                    if (valida_file_ecu())
-                    {
-                        NetworkShare.ConnectToShare(_location_fvdespc.rutloc_location, ConexionDBF.user_novell, ConexionDBF.password_novell);
-                    }
-                    #endregion
+                    ////#region<EN ESTE PASO TRATAMOS DE ENTRAR AL NOVELL PARA TRAERME LA INFO>
+                    ////if (valida_file_ecu())
+                    ////{
+                    ////    NetworkShare.ConnectToShare(_location_fvdespc.rutloc_location, ConexionDBF.user_novell, ConexionDBF.password_novell);
+                    ////}
+                    ////#endregion
 
-                    List<BataTransac.Ent_Fvdespc> fvdespc_lista = get_fvdespc("", "", _location_fvdespc.rutloc_location, ref _error, ref existe_data, _locatio_scdddes.rutloc_location);
-                    _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "get_fvdespc==>>" + _error + " " + fvdespc_lista.Count().ToString();
-                    tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
-                    tw.WriteLine(_hora);
-                    tw.Flush();
-                    tw.Close();
-                    tw.Dispose();
+                    ////List<BataTransac.Ent_Fvdespc> fvdespc_lista = get_fvdespc("", "", _location_fvdespc.rutloc_location, ref _error, ref existe_data, _locatio_scdddes.rutloc_location);
+                    ////_hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "get_fvdespc==>>" + _error + " " + fvdespc_lista.Count().ToString();
+                    ////tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                    ////tw.WriteLine(_hora);
+                    ////tw.Flush();
+                    ////tw.Close();
+                    ////tw.Dispose();
 
-                    name_dbf = "FVDESPD";
-                    var _location_fvdespd = listar_location_dbf.Where(x => x.rutloc_namedbf == name_dbf).FirstOrDefault();
+                    name_dbf = "SCDDGUD";
+                    var _location_scddgud = listar_location_dbf.Where(x => x.rutloc_namedbf == name_dbf).FirstOrDefault();
                     if (File.Exists(@ruta_validacion)) return;
                     #region<EN ESTE PASO TRATAMOS DE ENTRAR AL NOVELL PARA TRAERME LA INFO>
                     if (valida_file_ecu())
                     {
-                        NetworkShare.ConnectToShare(_location_fvdespd.rutloc_location, ConexionDBF.user_novell, ConexionDBF.password_novell);
+                        NetworkShare.ConnectToShare(_location_scddgud.rutloc_location, ConexionDBF.user_novell, ConexionDBF.password_novell);
                     }
                     #endregion
 
-                    DataTable fvdespd_lista = get_fvdespd("", "", _location_fvdespd.rutloc_location, ref _error, _locatio_scdddes.rutloc_location);
-                    _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "get_fvdespd==>>" + _error + " " + fvdespd_lista.Rows.Count.ToString();
-                    tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                    DataTable scddgud_lista = get_scddgud("", "", _location_scddgud.rutloc_location, ref _error, _location_scddgud.rutloc_location);
+                    _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "get_scddgud==>>" + _error + " " + scddgud_lista.Rows.Count.ToString();
+                    tw = new StreamWriter(@"D:\ALMACEN\log_pres.txt", true);
                     tw.WriteLine(_hora);
                     tw.Flush();
                     tw.Close();
@@ -635,14 +923,14 @@ namespace CapaServicioWindows.Modular
 
 
                     _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "fin==>acceso dbf ";
-                    tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                    tw = new StreamWriter(@"D:\ALMACEN\log_pres.txt", true);
                     tw.WriteLine(_hora);
                     tw.Flush();
                     tw.Close();
                     tw.Dispose();
 
                     _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "fin==>acceso dbf ";
-                    tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                    tw = new StreamWriter(@"D:\ALMACEN\log_pres.txt", true);
                     tw.WriteLine(_hora);
                     tw.Flush();
                     tw.Close();
@@ -654,17 +942,17 @@ namespace CapaServicioWindows.Modular
                     List<string> listGuias = new List<string>();
 
                     #region<ENVIAMOS GUIAS POR WEBSERVICE>
-                    foreach (BataTransac.Ent_Scdddes filaC in _lista_guiasC)
+                    foreach (SCCCGUD filaC in _lista_guiasC)
                     {
 
-                        var fvdespc_tmp = fvdespc_lista.Where(d => d.DESC_ALMAC == filaC.DDES_ALMAC && d.DESC_GUDIS == filaC.DDES_GUIRE).ToList(); // get_fvdespc(filaC.DDES_ALMAC, filaC.DDES_GUIRE, _location_fvdespc.rutloc_location, ref _error, ref existe_data);
+                        var fscccgud_tmp = _lista_guiasC.Where(d => d.cgud_gudis== filaC.cgud_gudis).ToList(); 
 
-                        BataTransac.Ent_Fvdespc fvdespc = new BataTransac.Ent_Fvdespc();
-                        fvdespc = fvdespc_tmp[0];
+                        SCCCGUD scccgud = new SCCCGUD();
+                        scccgud = fscccgud_tmp[0];
 
 
-                        _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "==>get_fvdespc " + filaC.DDES_GUIRE;
-                        tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                        _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "==>get_scccgud " + filaC.cgud_gudis;
+                        tw = new StreamWriter(@"D:\ALMACEN\log_pres.txt", true);
                         tw.WriteLine(_hora);
                         tw.Flush();
                         tw.Close();
@@ -673,17 +961,17 @@ namespace CapaServicioWindows.Modular
                         if (existe_data)
                         {
                             /*validando fechas de despacho*/
-                            if (fvdespc != null)
-                            {
-                                fvdespc.DESC_FDESP = filaC.DDES_FDESP;
-                                fvdespc.DESC_FECHA = filaC.DDES_FECHA;
-                                fvdespc.DESC_FTRA = filaC.DDES_FECHA;
-                            }
+                            //if (fvdespc != null)
+                            //{
+                            //    fvdespc.DESC_FDESP = filaC.DDES_FDESP;
+                            //    fvdespc.DESC_FECHA = filaC.DDES_FECHA;
+                            //    fvdespc.DESC_FTRA = filaC.DDES_FECHA;
+                            //}
 
                             /*VERIFICAR SI HAY ERROR*/
                             if (_error.Length > 0)
                             {
-                                _error += " ==>TABLA [FVDESPC]";
+                                _error += " ==>TABLA [SCCCGUD]";
                                 Util ws_error_transac = new Util();
                                 /*si hay un error entonces 03 error de lectura dbf*/
                                 ws_error_transac.control_errores_transac("03", _error, ref _error_ws);
@@ -691,33 +979,33 @@ namespace CapaServicioWindows.Modular
                             /**/
 
                             /*captura la cebecera de la guia*/
-                            if (fvdespc != null)
+                            if (scccgud != null)
                             {
                                 _error = "";
-                                name_dbf = "FVDESPD";
+                                name_dbf = "SCDDGUD";
 
 
 
-                                _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "inicio==>get_fvdespd " + filaC.DDES_GUIRE;
-                                tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                                _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "inicio==>get_SCDDGUD " + filaC.cgud_gudis;
+                                tw = new StreamWriter(@"D:\ALMACEN\log_pres.txt", true);
                                 tw.WriteLine(_hora);
                                 tw.Flush();
                                 tw.Close();
                                 tw.Dispose();
 
 
-                                DataTable fvdespd = new DataTable();
-                                fvdespd = fvdespd_lista.Clone();
-                                DataRow[] filas_fvdespd = null;
-                                filas_fvdespd = fvdespd_lista.Select("DESD_ALMAC='" + filaC.DDES_ALMAC + "' and DESD_GUDIS='" + filaC.DDES_GUIRE + "'"); // get_fvdespd(filaC.DDES_ALMAC, filaC.DDES_GUIRE, _location_fvdespd.rutloc_location, ref _error);
+                                DataTable scddgud = new DataTable();
+                                scddgud = scddgud_lista.Clone();
+                                DataRow[] filas_scddgud = null;
+                                filas_scddgud = scddgud_lista.Select("DGUD_GUDIS='" + filaC.cgud_gudis + "'"); // get_fvdespd(filaC.DDES_ALMAC, filaC.DDES_GUIRE, _location_fvdespd.rutloc_location, ref _error);
 
-                                foreach (DataRow fila in filas_fvdespd)
+                                foreach (DataRow fila in filas_scddgud)
                                 {
-                                    fvdespd.ImportRow(fila);
+                                    scddgud.ImportRow(fila);
                                 }
 
-                                _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "fin==>get_fvdespd " + filaC.DDES_GUIRE;
-                                tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                                _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "fin==>get_scccgud " + filaC.cgud_gudis;
+                                tw = new StreamWriter(@"D:\ALMACEN\log_pres.txt", true);
                                 tw.WriteLine(_hora);
                                 tw.Flush();
                                 tw.Close();
@@ -726,7 +1014,7 @@ namespace CapaServicioWindows.Modular
                                 /*VERIFICAR SI HAY ERROR*/
                                 if (_error.Length > 0)
                                 {
-                                    _error += " ==>TABLA [FVDESPD]";
+                                    _error += " ==>TABLA [SCDDGUD]";
                                     Util ws_error_transac = new Util();
                                     /*si hay un error entonces 03 error de lectura dbf*/
                                     ws_error_transac.control_errores_transac("03", _error, ref _error_ws);
@@ -736,28 +1024,29 @@ namespace CapaServicioWindows.Modular
                                 /*verifica que el detalle de la guia tenga filas*/
                                 /*si la guias tiene detalle se envia por ws*/
 
-                                if (fvdespd != null)
+                                if (scddgud != null)
                                 {
-                                    if (fvdespd.Rows.Count > 0)
+                                    if (scddgud.Rows.Count > 0)
                                     {
                                         /*enviar el datatable*/
-                                        fvdespc.DT_FVDESPD_TREGMEDIDA = fvdespd;
+                                        scccgud.dt_SCDDGUD = scddgud;
 
-                                        BataTransac.Ent_Scdddes scdddes = new BataTransac.Ent_Scdddes();
+                                        SCCCGUD  scdddes = new SCCCGUD();
                                         scdddes = filaC;
 
-                                        _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "==>inicio de envio web service " + filaC.DDES_GUIRE;
-                                        tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                                        _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "==>inicio de envio web service " + filaC.cgud_gudis;
+                                        tw = new StreamWriter(@"D:\ALMACEN\log_pres.txt", true);
                                         tw.WriteLine(_hora);
                                         tw.Flush();
                                         tw.Close();
                                         tw.Dispose();
-                                        /***********************************/
-                                        Envio_Guias ws_envio = new Envio_Guias();
-                                        string envio_guias_ws = ws_envio.envio_ws_guias(fvdespc, scdddes);
+                                        /***********************************/                                        
+                                        Dat_Prescripcion envio_pres = new Dat_Prescripcion();
 
-                                        _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "==>envio web service " + filaC.DDES_GUIRE;
-                                        tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                                        string envio_guias_ws = envio_pres.insertar_prescripcion(scdddes);
+
+                                        _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "==>envio web service " + filaC.cgud_gudis;
+                                        tw = new StreamWriter(@"D:\ALMACEN\log_pres.txt", true);
                                         tw.WriteLine(_hora);
                                         tw.Flush();
                                         tw.Close();
@@ -766,15 +1055,15 @@ namespace CapaServicioWindows.Modular
                                         //si return es true entonces validamos los dbf
                                         if (envio_guias_ws.Length == 0)
                                         {
-                                            name_dbf = "SCDDDES";
-                                            var _locatio_scdddes_edit = listar_location_dbf.Where(x => x.rutloc_namedbf == name_dbf).FirstOrDefault();
+                                            name_dbf = "SCCCGUD";
+                                            var _locatio_scccgud_edit = listar_location_dbf.Where(x => x.rutloc_namedbf == name_dbf).FirstOrDefault();
                                             /*si es que las guias se grabaron correctamente entonces vamos a setear el valor en el dbf*/
 
                                             /*ya no entra a consultar*/
                                             if (File.Exists(@ruta_validacion)) return;
                                             /**/
-                                            _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "==>inicio de update scddes " + filaC.DDES_GUIRE;
-                                            tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                                            _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "==>inicio de update scccgud " + filaC.cgud_gudis;
+                                            tw = new StreamWriter(@"D:\ALMACEN\log_pres.txt", true);
                                             tw.WriteLine(_hora);
                                             tw.Flush();
                                             tw.Close();
@@ -783,17 +1072,17 @@ namespace CapaServicioWindows.Modular
                                             #region<EN ESTE PASO TRATAMOS DE ENTRAR AL NOVELL PARA TRAERME LA INFO>
                                             if (valida_file_ecu())
                                             {
-                                                NetworkShare.ConnectToShare(_locatio_scdddes_edit.rutloc_location, ConexionDBF.user_novell, ConexionDBF.password_novell);
+                                                NetworkShare.ConnectToShare(_locatio_scccgud_edit.rutloc_location, ConexionDBF.user_novell, ConexionDBF.password_novell);
                                             }
                                             #endregion
 
-                                            listGuias.Add(fvdespc.DESC_GUDIS);
-                                            DESC_ALMACEN = fvdespc.DESC_ALMAC;
-                                            rutloc_location = _locatio_scdddes_edit.rutloc_location;
+                                            listGuias.Add(scdddes.cgud_gudis);
+                                            //DESC_ALMACEN = fvdespc.DESC_ALMAC;
+                                            rutloc_location = _locatio_scccgud_edit.rutloc_location;
 
                                             //edit_scdddes(fvdespc.DESC_ALMAC, fvdespc.DESC_GUDIS, _locatio_scdddes_edit.rutloc_location,ref _error_ws);
-                                            _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "==>fin de update scddes " + _error_ws + "  " + filaC.DDES_GUIRE;
-                                            tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                                            _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "==>fin de update scccgud " + _error_ws + "  " + filaC.cgud_gudis;
+                                            tw = new StreamWriter(@"D:\ALMACEN\log_pres.txt", true);
                                             tw.WriteLine(_hora);
                                             tw.Flush();
                                             tw.Close();
@@ -820,9 +1109,9 @@ namespace CapaServicioWindows.Modular
                     if (listGuias.Count > 0)
                     {
 
-                        edit_list_scdddes(DESC_ALMACEN, listGuias, rutloc_location, ref _error_ws);
-                        _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "==>fin de update list scddes " + _error_ws;
-                        tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                        edit_list_scccgud(DESC_ALMACEN, listGuias, rutloc_location, ref _error_ws);
+                        _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "==>fin de update list scccgud " + _error_ws;
+                        tw = new StreamWriter(@"D:\ALMACEN\log_pres.txt", true);
                         tw.WriteLine(_hora);
                         tw.Flush();
                         tw.Close();
@@ -949,6 +1238,17 @@ namespace CapaServicioWindows.Modular
                
                 if (_lista_guiasC!=null)
                 {
+                    if (_lista_guiasC.Count==0)
+                    {
+                        _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "ningun registro encontrado,  ";
+                        tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                        tw.WriteLine(_hora);
+                        tw.Flush();
+                        tw.Close();
+                        tw.Dispose();
+                        return;
+                    }
+
                     #region<METODO GRUPO CONSULTA>
                     if (File.Exists(@ruta_validacion)) return;
                     /*en este caso */
@@ -1151,7 +1451,7 @@ namespace CapaServicioWindows.Modular
                                             }
                                             #endregion
                                                                                       
-                                            listGuias.Add(fvdespc.DESC_GUDIS);
+                                            listGuias.Add(fvdespc.DESC_ALMAC +  fvdespc.DESC_GUDIS);
                                             DESC_ALMACEN = fvdespc.DESC_ALMAC;
                                             rutloc_location = _locatio_scdddes_edit.rutloc_location;
 
@@ -1262,7 +1562,7 @@ namespace CapaServicioWindows.Modular
 
                         strListGuia = strListGuia.TrimEnd(',');
 
-                        string sqlquery = "UPDATE SCDDDES SET DDES_FTXTD='X' WHERE DDES_ALMAC='" + cod_alm + "' AND DDES_GUIRE in (" + strListGuia + ")";
+                        string sqlquery = "UPDATE SCDDDES SET DDES_FTXTD='X' WHERE DDES_ALMAC + DDES_GUIRE in (" + strListGuia + ")";
 
                         strListGuia = "";
                         contador = 0;
@@ -1303,7 +1603,8 @@ namespace CapaServicioWindows.Modular
                 if (contador > 0) { 
                      strListGuia = strListGuia.TrimEnd(',');
 
-                    string sqlquery = "UPDATE SCDDDES SET DDES_FTXTD='X' WHERE DDES_ALMAC='" + cod_alm + "' AND DDES_GUIRE in (" + strListGuia + ")";
+                    //string sqlquery = "UPDATE SCDDDES SET DDES_FTXTD='X' WHERE DDES_ALMAC='" + cod_alm + "' AND DDES_GUIRE in (" + strListGuia + ")";
+                    string sqlquery = "UPDATE SCDDDES SET DDES_FTXTD='X' WHERE DDES_ALMAC + DDES_GUIRE in (" + strListGuia + ")";
 
                     strListGuia = "";
                     contador = 0;

@@ -57,6 +57,7 @@
     <Compile Include="Basico\Dat_Util.cs" />
     <Compile Include="Control\Dat_Acceso.cs" />
     <Compile Include="Control\Dat_Error_Transac.cs" />
+    <Compile Include="Ecommerce\Dat_Cliente_Bata.cs" />
     <Compile Include="Ecommerce\Dat_Stock_Tienda.cs" />
     <Compile Include="Interfaces\Dat_Interface.cs" />
     <Compile Include="Interfaces\Dat_RecepcionGuias.cs" />

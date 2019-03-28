@@ -1,6 +1,7 @@
 ﻿using CapaBasico.Util;
 using CapaDato.Ecommerce;
 using CapaEntidad.Ecommerce;
+using CapaEntidad.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -65,6 +66,49 @@ namespace WS_Ecommerce
             }
             return result;
         }
+
+        [SoapHeader("Authentication", Required = true)]
+        [WebMethod(Description = "Enviar los datos del cliente")]
+        public Ent_MsgTransac ws_registrar_Cliente(Ent_Cliente_BataClub Cliente)
+        {
+            Ent_MsgTransac result = new Ent_MsgTransac();
+            autentication_ws = new Ba_WsConexion();
+            Dat_Cliente_Bata DaCliente = null; ;
+
+            try
+            {
+
+                if (Cliente.dni.Trim().Length==0) { result.codigo = "-1"; result.descripcion = result.descripcion + "DNI es obligatorio."; };
+                if (Cliente.canal.Trim().Length == 0) { result.codigo = "-1"; result.descripcion = result.descripcion + "Canal es obligatorio."; };
+                if (Cliente.correo.Trim().Length == 0) { result.codigo = "-1"; result.descripcion = result.descripcion + "Correo es obligatorio."; };
+                if (Cliente.primerNombre.Trim().Length == 0) { result.codigo = "-1"; result.descripcion = result.descripcion + "Nombre es obligatorio."; };
+                if (Cliente.apellidoPater.Trim().Length == 0) { result.codigo = "-1"; result.descripcion = result.descripcion + "Aplellido paterno es obligatorio."; };
+
+               
+                if (result.codigo != "-1") { 
+                    Boolean valida_ws = autentication_ws.ckeckAuthentication_ws("03", Authentication.Username, Authentication.Password);
+                    if (valida_ws)
+                    {
+                        DaCliente = new Dat_Cliente_Bata();
+                        result = DaCliente.Resgistrar_ClienteBtaclub(Cliente, Authentication.Username);
+
+                    } else {
+                        result.codigo = "-1";
+                        result.descripcion = "Error de autentificacion";
+                  
+                    }
+                }
+            }
+            catch (Exception exc)
+            {
+                result.codigo = "-1";
+                result.descripcion = exc.Message;
+
+            }
+            return result;
+        }
+
+
         public class ValidateAcceso : SoapHeader
         {
             public string Username;

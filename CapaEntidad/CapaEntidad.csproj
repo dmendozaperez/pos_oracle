@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Ecommerce\Ent_Cliente_BataClub.cs" />
     <Compile Include="Ecommerce\Ent_Stock_Tienda.cs" />
     <Compile Include="Interfaces\Ent_Fvdespc.cs" />
     <Compile Include="Interfaces\Ent_Fvdespd.cs" />

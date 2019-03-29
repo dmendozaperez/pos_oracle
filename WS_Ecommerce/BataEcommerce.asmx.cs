@@ -78,7 +78,7 @@ namespace WS_Ecommerce
             try
             {
 
-                //if (Cliente.dni.Trim().Length==0) { result.codigo = "-1"; result.descripcion = result.descripcion + "DNI es obligatorio."; };
+                if (Cliente.dni.Trim().Length == 0) { result.codigo = "-1"; result.descripcion = result.descripcion + "DNI es obligatorio."; };
                 if (Cliente.canal.Trim().Length == 0) { result.codigo = "-1"; result.descripcion = result.descripcion + "Canal es obligatorio."; };
                 if (Cliente.correo.Trim().Length == 0) { result.codigo = "-1"; result.descripcion = result.descripcion + "Correo es obligatorio."; };
                 if (Cliente.primerNombre.Trim().Length == 0) { result.codigo = "-1"; result.descripcion = result.descripcion + "Nombre es obligatorio."; };

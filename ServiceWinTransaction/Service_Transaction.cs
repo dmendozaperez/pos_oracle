@@ -413,6 +413,7 @@ namespace ServiceWinTransaction
         void tmgenera_interface_Elapsed(object sender, ElapsedEventArgs e)
         {
             Int32 _valor = 0;
+            TextWriter tw1 = null;
             try
             {
                 #region<region solo almacen ecuador>
@@ -441,27 +442,72 @@ namespace ServiceWinTransaction
                         Boolean gen_per_item = false;
                         Boolean gen_ecu_item = false;
 
+                        /*log de ingreso de procesos ejecutar_genera_file_xstore_auto */
+                        tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                        tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " INGRESANDO AL SERVICIO DE GENERACION DE INTERFACE METODO (ejecutar_genera_file_xstore_auto) PERU");
+                        tw1.Flush();
+                        tw1.Close();
+                        tw1.Dispose();
+                        /******/
 
                         ejecuta_procesos.ejecutar_genera_file_xstore_auto(pais,ref _error,ref gen_per_item,ref gen_ecu_item);
+
+                        tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                        tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " SALIENDO DEL SERVICIO DE GENERACION DE INTERFACE METODO (ejecutar_genera_file_xstore_auto) PERU");
+                        tw1.Flush();
+                        tw1.Close();
+                        tw1.Dispose();
 
                         Ftp_Xstore_Service_Send upd_item = new Ftp_Xstore_Service_Send();
                         if (_error.Length == 0)
                         {
                             if (gen_per_item)
                             {
+                                tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                                tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " INGRESANDO EL SERVICIO DE GENERACION DE INTERFACE METODO (update_articulo_end_xstore) PERU");
+                                tw1.Flush();
+                                tw1.Close();
+                                tw1.Dispose();
                                 /*update de articulo de peru*/
                                 upd_item.update_articulo_end_xstore(pais);
+                                tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                                tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " SALIENDO DEL SERVICIO DE GENERACION DE INTERFACE METODO (update_articulo_end_xstore) PERU");
+                                tw1.Flush();
+                                tw1.Close();
+                                tw1.Dispose();
                             }
                         }
 
 
                         pais = "EC";
 
+                        tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                        tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " ENTRANDO DEL SERVICIO DE GENERACION DE INTERFACE METODO (ejecutar_genera_file_xstore_auto) ECUADOR");
+                        tw1.Flush();
+                        tw1.Close();
+                        tw1.Dispose();
+
                         ejecuta_procesos.ejecutar_genera_file_xstore_auto(pais, ref _error,ref gen_per_item,ref gen_ecu_item);
 
+                        tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                        tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " SALIENDO DEL SERVICIO DE GENERACION DE INTERFACE METODO (ejecutar_genera_file_xstore_auto) ECUADOR");
+                        tw1.Flush();
+                        tw1.Close();
+                        tw1.Dispose();
+
                         /*GENERACION DE INTERFACE*/
+                        tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                        tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " ENTRANDO AL SERVICIO DE GENERACION DE INTERFACE METODO (ejecutar_genera_interface_xstore)");
+                        tw1.Flush();
+                        tw1.Close();
+                        tw1.Dispose();
                         Xstore_Genera_Inter ejecuta_procesos_inter = new Xstore_Genera_Inter();
                         ejecuta_procesos_inter.ejecutar_genera_interface_xstore(ref _error);
+                        tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                        tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " SALIENDO AL SERVICIO DE GENERACION DE INTERFACE METODO (ejecutar_genera_interface_xstore)");
+                        tw1.Flush();
+                        tw1.Close();
+                        tw1.Dispose();
                         /********************************/
                         /*UNA VEZ QUE SE HAYAN GENERADO LAS INTERFACES ENTONCES LO QUE VAMOS HACER ES UN UPDATE EN XSTORE*/
                         /*PARA NO VOLVER A ENVIAR EL ARTICULO,  CONTROL PARA ENVIAR SOLO LOS NUEVOS Y MODIFICADOS*/
@@ -473,9 +519,18 @@ namespace ServiceWinTransaction
 
                             if (gen_ecu_item)
                             {
-
+                                tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                                tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " ENTRANDO AL SERVICIO DE GENERACION DE INTERFACE METODO (update_articulo_end_xstore) ECUADOR");
+                                tw1.Flush();
+                                tw1.Close();
+                                tw1.Dispose();
                                 /*update de articulo de ecuador*/
                                 upd_item.update_articulo_end_xstore(pais);
+                                tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                                tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " SALIENDO DEL SERVICIO DE GENERACION DE INTERFACE METODO (update_articulo_end_xstore) ECUADOR");
+                                tw1.Flush();
+                                tw1.Close();
+                                tw1.Dispose();
                             }
                         }
 
@@ -483,8 +538,8 @@ namespace ServiceWinTransaction
 
                         if (_error.Length > 0)
                         {
-                            TextWriter tw1 = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
-                            tw1.WriteLine(_error);
+                            tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                            tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " " + _error);
                             tw1.Flush();
                             tw1.Close();
                             tw1.Dispose();

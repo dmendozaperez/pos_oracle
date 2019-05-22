@@ -11,6 +11,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+//using TaskScheduler;
+using Microsoft.Win32.TaskScheduler;
 
 namespace ServiceWin32Framework4
 {
@@ -118,7 +120,7 @@ namespace ServiceWin32Framework4
             string _error = "";
             Ftp_Xstore_Service_Send envio = new Ftp_Xstore_Service_Send();
             //envio.proc_envio_ftp();
-            string pais = "EC";
+            string pais = "PE";
             Boolean gen_per_item = false;
             Boolean gen_ecu_item = false;
 
@@ -194,6 +196,55 @@ namespace ServiceWin32Framework4
             cc.eje_envio_prescripcion(ref _erro);
             MessageBox.Show("termino");
             Cursor.Current = Cursors.Default;
+        }
+
+        private void btntarea_Click(object sender, EventArgs e)
+        {
+
+
+            using (TaskService ts = new TaskService())
+            {
+                TaskDefinition td = ts.NewTask();
+
+            }
+
+            //using (ScheduledTasks Tareas = new ScheduledTasks())
+
+            //{
+
+            //    Task tarea = Tareas.CreateTask("Prueba");
+
+            //    // archivo que vamos a ejecutar, escribimos la ruta completa
+
+            //    tarea.ApplicationName = @"C:\Windows\System32\calc.exe";
+
+            //    tarea.Comment = "Tarea que abre la calculadora";
+
+            //    // configurar la cuenta con la que se ejecutara la tarea
+
+            //    //tarea.SetAccountInformation("usuario", "password");
+
+            //    // limitar la duración de la tarea programada
+
+            //    tarea.MaxRunTime = new TimeSpan(0, 15, 0);
+
+            //    tarea.Creator = "David Mendoza";
+
+            //    // prioridad de la tarea
+
+            //    tarea.Priority = System.Diagnostics.ProcessPriorityClass.High;
+
+            //    // agregamos el disparador, la tarea se ejecutara diariamente a las 6 y 15 pm
+
+            //    //tarea.Triggers.Add(new DailyTrigger(18, 15));
+
+            //    int[] dias = new int[] { 1, 15 };
+
+            //    tarea.Triggers.Add(new MonthlyTrigger(18, 15, dias));
+
+            //    tarea.Save();
+
+            //}
         }
     }
 }

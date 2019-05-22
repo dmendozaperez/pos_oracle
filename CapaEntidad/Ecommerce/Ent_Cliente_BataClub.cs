@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CapaEntidad.Util;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,7 +21,12 @@ namespace CapaEntidad.Ecommerce
         public string fecNac { get; set; }
         public string telefono { get; set; }
         public string ubigeo { get; set; }
+        
+        public Boolean registrado { get; set; }
+        public Boolean miembro_bataclub { get; set; }       
 
+        public Boolean existe_cliente { get; set; } 
+        public string descripcion_error { get; set; }
     }
    
 }

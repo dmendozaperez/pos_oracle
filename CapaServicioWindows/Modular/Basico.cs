@@ -504,7 +504,7 @@ namespace CapaServicioWindows.Modular
                           "DESC_ESTAD,DESC_TIPO,DESC_TORI,DESC_FEMI,DESC_SEMI,DESC_FTRA,DESC_NUME," +
                           "DESC_CONCE,DESC_NMOVC,DESC_EMPRE,DESC_SECCI,DESC_CANAL,DESC_CADEN,DESC_FTX," +
                           "DESC_TXPOS,DESC_UNCA,DESC_UNNC,DESC_CAJA,DESC_VACA,DESC_VANC,DESC_VCAJ " +
-                          "FROM FVDESPC WHERE   DESC_GUDIS + DESC_ALMAC IN (SELECT DDES_GUIRE + DDES_ALMAC FROM " + ruta_scdddes + "/SCDDDES WHERE DDES_FDESP>=CTOD('" + fecha_despacho.ToString("MM/dd/yy") + "') and DDES_TIPO='DES' and DDES_ESTAD<>'A' AND EMPTY(DDES_FTXTD) AND (NOT EMPTY(DDES_CADEN)))";
+                          "FROM FVDESPC WHERE   DESC_GUDIS + DESC_ALMAC IN (SELECT DDES_GUIRE + DDES_ALMAC FROM " + ruta_scdddes + "/SCDDDES WHERE DDES_FDESP>=CTOD('" + fecha_despacho.ToString("MM/dd/yy") + "') and DDES_TIPO='DES' and DDES_ESTAD<>'A' AND EMPTY(DDES_FTXTD) AND (NOT EMPTY(DDES_CADEN))" + get_query_alm_ecu() + ")";
             try
             {
                 //_path = @"D:\FVT\SISTEMAS";
@@ -598,7 +598,7 @@ namespace CapaServicioWindows.Modular
                                       "DESD_ME09,DESD_ME10,DESD_ME11,DESD_CLASE,DESD_MERC,DESD_CATEG,DESD_SUBCA," +
                                       "DESD_MARCA,DESD_MERC3,DESD_CATE3,DESD_SUBC3,DESD_MARC3,DESD_CNDME," +
                                       "DESD_EMPRE,DESD_SECCI,DESD_CANAL," +
-                                      "DESD_CADEN,DESD_GGUIA,DESD_ESTAD,DESD_PRVTA,DESD_COSTO FROM FVDESPD WHERE  DESD_GUDIS + DESD_ALMAC IN (SELECT DDES_GUIRE + DDES_ALMAC FROM " + ruta_scdddes + "/SCDDDES WHERE DDES_FDESP>=CTOD('" + fecha_despacho.ToString("MM/dd/yy") + "') and DDES_TIPO='DES' and DDES_ESTAD<>'A' AND EMPTY(DDES_FTXTD) AND (NOT EMPTY(DDES_CADEN)))";
+                                      "DESD_CADEN,DESD_GGUIA,DESD_ESTAD,DESD_PRVTA,DESD_COSTO FROM FVDESPD WHERE  DESD_GUDIS + DESD_ALMAC IN (SELECT DDES_GUIRE + DDES_ALMAC FROM " + ruta_scdddes + "/SCDDDES WHERE DDES_FDESP>=CTOD('" + fecha_despacho.ToString("MM/dd/yy") + "') and DDES_TIPO='DES' and DDES_ESTAD<>'A' AND EMPTY(DDES_FTXTD) AND (NOT EMPTY(DDES_CADEN))" + get_query_alm_ecu() + ")";
             try
             {
                 using (OleDbConnection cn = new OleDbConnection(ConexionDBF._conexion_fvdes_oledb(_path)))

@@ -43,6 +43,7 @@
             this.get_fmc_insertar_fvdespc = new System.Windows.Forms.Button();
             this.BTNENVIONOV = new System.Windows.Forms.Button();
             this.btnenvio_prescripciones = new System.Windows.Forms.Button();
+            this.btntarea = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn_servicewin
@@ -101,7 +102,7 @@
             // btnposlog
             // 
             this.btnposlog.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnposlog.Location = new System.Drawing.Point(530, 32);
+            this.btnposlog.Location = new System.Drawing.Point(530, 47);
             this.btnposlog.Name = "btnposlog";
             this.btnposlog.Size = new System.Drawing.Size(166, 23);
             this.btnposlog.TabIndex = 9;
@@ -122,7 +123,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(530, 61);
+            this.button3.Location = new System.Drawing.Point(530, 74);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(152, 23);
             this.button3.TabIndex = 11;
@@ -206,11 +207,23 @@
             this.btnenvio_prescripciones.UseVisualStyleBackColor = true;
             this.btnenvio_prescripciones.Click += new System.EventHandler(this.btnenvio_prescripciones_Click);
             // 
+            // btntarea
+            // 
+            this.btntarea.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btntarea.Location = new System.Drawing.Point(433, 12);
+            this.btntarea.Name = "btntarea";
+            this.btntarea.Size = new System.Drawing.Size(249, 23);
+            this.btntarea.TabIndex = 19;
+            this.btntarea.Text = "Crear Tarea Programada";
+            this.btntarea.UseVisualStyleBackColor = true;
+            this.btntarea.Click += new System.EventHandler(this.btntarea_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(860, 313);
+            this.Controls.Add(this.btntarea);
             this.Controls.Add(this.btnenvio_prescripciones);
             this.Controls.Add(this.BTNENVIONOV);
             this.Controls.Add(this.get_fmc_insertar_fvdespc);
@@ -250,6 +263,7 @@
         private System.Windows.Forms.Button get_fmc_insertar_fvdespc;
         private System.Windows.Forms.Button BTNENVIONOV;
         private System.Windows.Forms.Button btnenvio_prescripciones;
+        private System.Windows.Forms.Button btntarea;
     }
 }
 

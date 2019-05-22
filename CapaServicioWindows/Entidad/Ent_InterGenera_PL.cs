@@ -16,5 +16,6 @@ namespace CapaServicioWindows.Entidad
         public string rut_gen { get; set; }
         public string pl_pe { get; set; }
         public string pl_ec { get; set; }
+        public Boolean outlet { get; set; }
     }
 }

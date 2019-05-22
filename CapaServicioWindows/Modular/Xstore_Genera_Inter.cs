@@ -14,6 +14,7 @@ namespace CapaServicioWindows.Modular
         public void ejecutar_genera_interface_xstore(ref string error)
         {
             Dat_Interfaces get_inter = null;
+            StreamWriter tw1 = null;
             try
             {
                 String pais = "PE";
@@ -23,7 +24,17 @@ namespace CapaServicioWindows.Modular
                 DataTable dt_merch_hier = null;
                 DataTable dt_price_update = null;
                 get_inter = new Dat_Interfaces();
+                tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " ENTRANDO AL SERVICIO DE GENERACION DE INTERFACE METODO (lista_inter_pl_genera) PERU");
+                tw1.Flush();
+                tw1.Close();
+                tw1.Dispose();
                 List<Ent_InterGenera_PL> list_gen = get_inter.lista_inter_pl_genera(pais);
+                tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " SALIENDO AL SERVICIO DE GENERACION DE INTERFACE METODO (lista_inter_pl_genera) PERU");
+                tw1.Flush();
+                tw1.Close();
+                tw1.Dispose();
 
                 Boolean _ITEM_MAINTENANCE = false;
                 Boolean _ORCE_RETAIL_LOCATIONS = false;
@@ -35,13 +46,33 @@ namespace CapaServicioWindows.Modular
                     {
                         string codigo = item.int_cab_cod.ToString() + item.int_id.ToString();
                         Boolean valida_genera = false;
+                        tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                        tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " ENTRANDO AL SERVICIO DE GENERACION DE INTERFACE METODO (genera_automatico_inter) PERU");
+                        tw1.Flush();
+                        tw1.Close();
+                        tw1.Dispose();
                         genera_automatico_inter(codigo, item.pais, item.cod_tda, item.rut_gen, item.int_nom, item.entorno,
                                                 ref dt_item, ref dt_images, ref dt_merch_hier, ref dt_price_update,
                                                 ref _ITEM_MAINTENANCE,ref _ORCE_RETAIL_LOCATIONS,ref _MERCHANDISE_HIERARCHY_MAINTENANCE,
-                                                ref valida_genera);
+                                                ref valida_genera,item.outlet);
+                        tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                        tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " SALIENDO AL SERVICIO DE GENERACION DE INTERFACE METODO (genera_automatico_inter) PERU");
+                        tw1.Flush();
+                        tw1.Close();
+                        tw1.Dispose();
                         if (valida_genera)
                         {
+                            tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                            tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " ENTRANDO AL SERVICIO DE GENERACION DE INTERFACE METODO (Update_Interface_Genera) PERU");
+                            tw1.Flush();
+                            tw1.Close();
+                            tw1.Dispose();
                             get_inter.Update_Interface_Genera(codigo);
+                            tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                            tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " SALIENDO AL SERVICIO DE GENERACION DE INTERFACE METODO (Update_Interface_Genera) PERU");
+                            tw1.Flush();
+                            tw1.Close();
+                            tw1.Dispose();
                         }
                     }
                 }
@@ -53,8 +84,17 @@ namespace CapaServicioWindows.Modular
                 dt_merch_hier = null;
                 dt_price_update = null;
                 get_inter = new Dat_Interfaces();
+                tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " SALIENDO AL SERVICIO DE GENERACION DE INTERFACE METODO (lista_inter_pl_genera) ECUADOR");
+                tw1.Flush();
+                tw1.Close();
+                tw1.Dispose();
                 list_gen = get_inter.lista_inter_pl_genera(pais);
-
+                tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " SALIENDO AL SERVICIO DE GENERACION DE INTERFACE METODO (lista_inter_pl_genera) ECUADOR");
+                tw1.Flush();
+                tw1.Close();
+                tw1.Dispose();
                 _ITEM_MAINTENANCE = false;
                 _ORCE_RETAIL_LOCATIONS = false;
                 _MERCHANDISE_HIERARCHY_MAINTENANCE = false;
@@ -65,13 +105,33 @@ namespace CapaServicioWindows.Modular
                     {
                         string codigo = item.int_cab_cod.ToString() + item.int_id.ToString();
                         Boolean valida_genera = false;
+                        tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                        tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " ENTRANDO AL SERVICIO DE GENERACION DE INTERFACE METODO (genera_automatico_inter) ECUADOR");
+                        tw1.Flush();
+                        tw1.Close();
+                        tw1.Dispose();
                         genera_automatico_inter(codigo, item.pais, item.cod_tda, item.rut_gen, item.int_nom, item.entorno,
                                                 ref dt_item, ref dt_images, ref dt_merch_hier, ref dt_price_update,
                                                 ref _ITEM_MAINTENANCE, ref _ORCE_RETAIL_LOCATIONS, ref _MERCHANDISE_HIERARCHY_MAINTENANCE,
                                                 ref valida_genera);
+                        tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                        tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " SALIENDO AL SERVICIO DE GENERACION DE INTERFACE METODO (genera_automatico_inter) ECUADOR");
+                        tw1.Flush();
+                        tw1.Close();
+                        tw1.Dispose();
                         if (valida_genera)
                         {
+                            tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                            tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " ENTRANDO AL SERVICIO DE GENERACION DE INTERFACE METODO (Update_Interface_Genera) ECUADOR");
+                            tw1.Flush();
+                            tw1.Close();
+                            tw1.Dispose();
                             get_inter.Update_Interface_Genera(codigo);
+                            tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                            tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " SALIENDO AL SERVICIO DE GENERACION DE INTERFACE METODO (Update_Interface_Genera) ECUADOR");
+                            tw1.Flush();
+                            tw1.Close();
+                            tw1.Dispose();
                         }
 
                     }
@@ -114,11 +174,12 @@ namespace CapaServicioWindows.Modular
                                             ref DataTable dt_item, ref DataTable dt_images, ref DataTable dt_merch_hier,
                                             ref DataTable dt_price_update,
                                             ref Boolean _ITEM_MAINTENANCE,ref Boolean _ORCE_RETAIL_LOCATIONS,
-                                            ref Boolean _MERCHANDISE_HIERARCHY_MAINTENANCE,ref Boolean valida_genera)
+                                            ref Boolean _MERCHANDISE_HIERARCHY_MAINTENANCE,ref Boolean valida_genera, Boolean out_let = false)
         {
             Dat_Interfaces dat_geninter = null;
             DataTable dt = null;
             DataSet ds = null;
+            TextWriter tw1 = null;
             try
             {
                 dt = new DataTable();
@@ -133,10 +194,17 @@ namespace CapaServicioWindows.Modular
                     case "XOFICCE":
                         switch (_gen_inter_name)
                         {
+
                             case "ITEM":
+                                tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                                tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " INICIANDO GENERACION DE INTERFACE ITEM");
+                                tw1.Flush();
+                                tw1.Close();
+                                tw1.Dispose();
                                 #region<ITEM>
                                 if (dt_item == null)
                                 {
+
                                     dt = (_pais=="PE")? dat_geninter.get_item_PE(_pais, _codtda): dat_geninter.get_item_EC(_pais, _codtda);
                                     dt_item = dt;
                                 }
@@ -176,9 +244,20 @@ namespace CapaServicioWindows.Modular
                                         valida_genera = true;
                                     }
                                 }
+                              
+                                #endregion
+                                tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                                tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " TERMINANDO GENERACION DE INTERFACE ITEM");
+                                tw1.Flush();
+                                tw1.Close();
+                                tw1.Dispose();
                                 break;
-                            #endregion
                             case "PRICE_UPDATE":
+                                tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                                tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " INICIANDO GENERACION DE INTERFACE PRICE_UPDATE");
+                                tw1.Flush();
+                                tw1.Close();
+                                tw1.Dispose();
                                 #region<PRICE_UPDATE> 
 
                                 if (dt_price_update == null)
@@ -219,9 +298,69 @@ namespace CapaServicioWindows.Modular
                                     }
                                 }
 
+                                
+                                #endregion
+                                tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                                tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " TERMINANDO GENERACION DE INTERFACE PRICE_UPDATE");
+                                tw1.Flush();
+                                tw1.Close();
+                                tw1.Dispose();
                                 break;
-                            #endregion
+                            case "PRICE_UPDATE_OUTLET":
+                                tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                                tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " INICIANDO GENERACION DE INTERFACE PRICE_UPDATE_OUTLET");
+                                tw1.Flush();
+                                tw1.Close();
+                                tw1.Dispose();
+                                #region<PRICE_UPDATE_OUTLET> 
+                               
+                                if (out_let)
+                                { 
+                                    dt = (_pais == "PE") ? dat_geninter.get_price_update_2_OUTLET_PE(_pais, _codtda) : null;
+                                }
+                                else
+                                {
+                                    dt = null;
+                                }                               
+                                if (dt != null)
+                                {
+                                    if (dt.Rows.Count > 0)
+                                    {
+                                        str = new StringBuilder();
+                                        for (Int32 i = 0; i < dt.Rows.Count; ++i)
+                                        {
+                                            str.Append(dt.Rows[i]["PRICE_UPDATE_2"].ToString());
+
+                                            if (i < dt.Rows.Count - 1)
+                                            {
+                                                str.Append("\r\n");
+
+                                            }
+
+                                        }
+                                        str_cadena = str.ToString();
+
+                                        name_file = "PRICE_UPDATE_2_OUTLET_" + sufijoNombre + DateTime.Today.ToString("yyyyMMdd") + "_" + codigo + ".MNT";
+                                        in_maestros = _gen_ruta + "\\" + name_file;
+
+                                        if (File.Exists(@in_maestros)) File.Delete(@in_maestros);
+                                        File.WriteAllText(@in_maestros, str_cadena);
+                                        valida_genera = true;
+                                    }
+                                }                              
+                                #endregion
+                                tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                                tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " TERMINANDO GENERACION DE INTERFACE PRICE_UPDATE_OUTLET");
+                                tw1.Flush();
+                                tw1.Close();
+                                tw1.Dispose();
+                                break;
                             case "MERCH_HIER":
+                                tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                                tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " INICIANDO GENERACION DE INTERFACE MERCH_HIER");
+                                tw1.Flush();
+                                tw1.Close();
+                                tw1.Dispose();
                                 #region<MERCH_HIER>     
 
                                 if (dt_merch_hier == null)
@@ -267,9 +406,20 @@ namespace CapaServicioWindows.Modular
                                         valida_genera = true;
                                     }
                                 }
+                               
+                                #endregion
+                                tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                                tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " TERMINANDO GENERACION DE INTERFACE MERCH_HIER");
+                                tw1.Flush();
+                                tw1.Close();
+                                tw1.Dispose();
                                 break;
-                            #endregion
                             case "ITEM_IMAGES":
+                                tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                                tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " INICIANDO GENERACION DE INTERFACE ITEM_IMAGES");
+                                tw1.Flush();
+                                tw1.Close();
+                                tw1.Dispose();
                                 #region<ITEM_IMAGES>    
 
                                 if (dt_images == null)
@@ -310,10 +460,20 @@ namespace CapaServicioWindows.Modular
                                         File.WriteAllText(@in_maestros, str_cadena);
                                         valida_genera = true;
                                     }
-                                }
+                                }                               
+                                #endregion
+                                tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                                tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " TERMINANDO GENERACION DE INTERFACE ITEM_IMAGES");
+                                tw1.Flush();
+                                tw1.Close();
+                                tw1.Dispose();
                                 break;
-                            #endregion
                             case "RETAIL_LOCATION":
+                                tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                                tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " INICIANDO GENERACION DE INTERFACE RETAIL_LOCATION");
+                                tw1.Flush();
+                                tw1.Close();
+                                tw1.Dispose();
                                 #region<RETAIL_LOCATION>
                                 ds = (_pais=="PE")? dat_geninter.get_retail_location_PE(_codtda,_pais): dat_geninter.get_retail_location_EC(_codtda, _pais); 
                                 str = new StringBuilder();                               
@@ -370,9 +530,20 @@ namespace CapaServicioWindows.Modular
                                     }
 
                                 }
+                                
+                                #endregion
+                                tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                                tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " TERMINANDO GENERACION DE INTERFACE RETAIL_LOCATION");
+                                tw1.Flush();
+                                tw1.Close();
+                                tw1.Dispose();
                                 break;
-                            #endregion
                             case "ITEM_DIMENSION":
+                                tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                                tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " INICIANDO GENERACION DE INTERFACE ITEM_DIMENSION");
+                                tw1.Flush();
+                                tw1.Close();
+                                tw1.Dispose();
                                 #region<ITEM_DIMENSION> 
 
                                 dt = (_pais=="PE")? dat_geninter.get_item_dimension_type_PE(_pais, _codtda): dat_geninter.get_item_dimension_type_EC(_pais, _codtda); 
@@ -432,12 +603,22 @@ namespace CapaServicioWindows.Modular
                                         File.WriteAllText(@in_maestros, str_cadena);
                                         valida_genera = true;
                                     }
-                                }
+                                }                               
+                                #endregion
+                                tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                                tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " TERMINANDO GENERACION DE INTERFACE ITEM_DIMENSION");
+                                tw1.Flush();
+                                tw1.Close();
+                                tw1.Dispose();
                                 break;
-                            #endregion
                             case "PARTY":
+                                tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                                tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " INICIANDO GENERACION DE INTERFACE PARTY");
+                                tw1.Flush();
+                                tw1.Close();
+                                tw1.Dispose();
                                 #region<PARTY>                                                             
-                                    string strCodEmpl = "S";
+                                string strCodEmpl = "S";
                                     string strCodSupl = "S";                                 
 
                                      dt = (_pais=="PE")? dat_geninter.get_Party_PE(_pais, _codtda, strCodSupl, strCodEmpl): dat_geninter.get_Party_EC(_pais, _codtda, strCodSupl, strCodEmpl);
@@ -471,12 +652,22 @@ namespace CapaServicioWindows.Modular
                                             File.WriteAllText(@in_maestros, str_cadena);
                                         valida_genera = true;
                                     }
-                                    }                                                           
+                                    }                                                                                           
+                                #endregion
+                                tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                                tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " TERMINANDO GENERACION DE INTERFACE PARTY");
+                                tw1.Flush();
+                                tw1.Close();
+                                tw1.Dispose();
                                 break;
-                            #endregion
                             case "INV_LOCATION_PROPERTY":
+                                tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                                tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " INICIANDO GENERACION DE INTERFACE INV_LOCATION_PROPERTY");
+                                tw1.Flush();
+                                tw1.Close();
+                                tw1.Dispose();
                                 #region<INV_LOCATION_PROPERTY>                                
-                                    dt = (_pais=="PE")? dat_geninter.get_Location_Property_PE(_pais, _codtda) : dat_geninter.get_Location_Property_EC(_pais, _codtda);
+                                dt = (_pais=="PE")? dat_geninter.get_Location_Property_PE(_pais, _codtda) : dat_geninter.get_Location_Property_EC(_pais, _codtda);
                                     if (dt != null)
                                     {
                                         if (dt.Rows.Count > 0)
@@ -506,9 +697,20 @@ namespace CapaServicioWindows.Modular
                                         valida_genera = true;
                                     }
                                     }                                
+                               
+                                #endregion
+                                tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                                tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " TERMINANDO GENERACION DE INTERFACE INV_LOCATION_PROPERTY");
+                                tw1.Flush();
+                                tw1.Close();
+                                tw1.Dispose();
                                 break;
-                            #endregion
                             case "STOCK_LEDGER":
+                                tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                                tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " INICIANDO GENERACION DE INTERFACE STOCK_LEDGER");
+                                tw1.Flush();
+                                tw1.Close();
+                                tw1.Dispose();
                                 #region<STOCK_LEDGER>
                                 dt = (_pais=="PE")? dat_geninter.get_stock_ledger_PE("", _codtda, _pais): dat_geninter.get_stock_ledger_EC("", _codtda, _pais);                                
                                 if (dt != null)
@@ -536,11 +738,22 @@ namespace CapaServicioWindows.Modular
                                         valida_genera = true;
                                     }
                                 }
+                               
+                                #endregion
+                                tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                                tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " TERMINANDO GENERACION DE INTERFACE STOCK_LEDGER");
+                                tw1.Flush();
+                                tw1.Close();
+                                tw1.Dispose();
                                 break;
-                            #endregion
                             case "COUNTRY_CITY":
+                                tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                                tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " INICIANDO GENERACION DE INTERFACE COUNTRY_CITY");
+                                tw1.Flush();
+                                tw1.Close();
+                                tw1.Dispose();
                                 #region<COUNTRY_CITY>                                                             
-                                    dt =(_pais=="PE")? dat_geninter.get_county_city_PE(_codtda, _pais): dat_geninter.get_county_city_EC(_codtda, _pais);
+                                dt =(_pais=="PE")? dat_geninter.get_county_city_PE(_codtda, _pais): dat_geninter.get_county_city_EC(_codtda, _pais);
                                     if (dt != null)
                                     {
                                         if (dt.Rows.Count > 0)
@@ -596,11 +809,22 @@ namespace CapaServicioWindows.Modular
                                     }
                                
 
+                                
+                                #endregion
+                                tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                                tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " TERMINANDO GENERACION DE INTERFACE COUNTRY_CITY");
+                                tw1.Flush();
+                                tw1.Close();
+                                tw1.Dispose();
                                 break;
-                            #endregion
                             case "ELECTRONIC_CORRELATIVES":
+                                tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                                tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " INICIANDO GENERACION DE INTERFACE ELECTRONIC_CORRELATIVES");
+                                tw1.Flush();
+                                tw1.Close();
+                                tw1.Dispose();
                                 #region<ELECTRONIC_CORRELATIVES>                                                      
-                                    dt = dat_geninter.get_electronic_correlatives_PE(_codtda, _pais);
+                                dt = dat_geninter.get_electronic_correlatives_PE(_codtda, _pais);
                                     if (dt != null)
                                     {
                                         if (dt.Rows.Count > 0)
@@ -629,11 +853,22 @@ namespace CapaServicioWindows.Modular
                                         valida_genera = true;
                                     }
                                     }                                                             
+                               
+                                #endregion
+                                tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                                tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " TERMINANDO GENERACION DE INTERFACE ELECTRONIC_CORRELATIVES");
+                                tw1.Flush();
+                                tw1.Close();
+                                tw1.Dispose();
                                 break;
-                            #endregion
                             case "MANUAL_CORRELATIVES":
+                                tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                                tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " INICIANDO GENERACION DE INTERFACE MANUAL_CORRELATIVES");
+                                tw1.Flush();
+                                tw1.Close();
+                                tw1.Dispose();
                                 #region<MANUAL_CORRELATIVES>                                                            
-                                    dt = dat_geninter.get_manual_correlatives_PE(_codtda, _pais);
+                                dt = dat_geninter.get_manual_correlatives_PE(_codtda, _pais);
                                     if (dt != null)
                                     {
                                         if (dt.Rows.Count > 0)
@@ -664,11 +899,22 @@ namespace CapaServicioWindows.Modular
                                         valida_genera = true;
                                     }
                                     }                                                           
+                                
+                                #endregion
+                                tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                                tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " TERMINANDO GENERACION DE INTERFACE MANUAL_CORRELATIVES");
+                                tw1.Flush();
+                                tw1.Close();
+                                tw1.Dispose();
                                 break;
-                            #endregion
                             case "TENDER_REPOSITORY":
+                                tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                                tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " INICIANDO GENERACION DE INTERFACE TENDER_REPOSITORY");
+                                tw1.Flush();
+                                tw1.Close();
+                                tw1.Dispose();
                                 #region<TENDER_REPOSITORY>                                                          
-                                    dt = (_pais=="PE")? dat_geninter.get_tender_repository_PE(_codtda, _pais): dat_geninter.get_tender_repository_EC(_codtda, _pais);
+                                dt = (_pais=="PE")? dat_geninter.get_tender_repository_PE(_codtda, _pais): dat_geninter.get_tender_repository_EC(_codtda, _pais);
                                     if (dt != null)
                                     {
                                         if (dt.Rows.Count > 0)
@@ -725,9 +971,20 @@ namespace CapaServicioWindows.Modular
                                         valida_genera = true;
                                     }
                                     }                                                          
+                               
+                                #endregion
+                                tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                                tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " TERMINANDO GENERACION DE INTERFACE TENDER_REPOSITORY");
+                                tw1.Flush();
+                                tw1.Close();
+                                tw1.Dispose();
                                 break;
-                            #endregion
                             case "INV_VALID_DESTINATIONS":
+                                tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                                tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " INICIANDO GENERACION DE INTERFACE INV_VALID_DESTINATIONS");
+                                tw1.Flush();
+                                tw1.Close();
+                                tw1.Dispose();
                                 #region<INV_VALID_DESTINATIONS>                               
                                 dt = (_pais=="PE")? dat_geninter.get_inv_valid_destinations_PE(_codtda, _pais): dat_geninter.get_inv_valid_destinations_EC(_codtda, _pais);                                   
                                 if (dt != null)
@@ -792,9 +1049,20 @@ namespace CapaServicioWindows.Modular
                                     }
 
                                 }                             
+                               
+                                #endregion
+                                tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                                tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " TERMINANDO GENERACION DE INTERFACE INV_VALID_DESTINATIONS");
+                                tw1.Flush();
+                                tw1.Close();
+                                tw1.Dispose();
                                 break;
-                            #endregion
                             case "VENTAS HISTORICAS":
+                                tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                                tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " INICIANDO GENERACION DE INTERFACE VENTAS HISTORICAS");
+                                tw1.Flush();
+                                tw1.Close();
+                                tw1.Dispose();
                                 #region<VENTAS HISTORICAS>
                                 DateTime fechaIni = DateTime.UtcNow.AddMonths(-2);
                                 DateTime fecha_Fin = DateTime.UtcNow;
@@ -956,16 +1224,25 @@ namespace CapaServicioWindows.Modular
                                     }
                                 }
                                 #endregion
-                                break;
+                              
                                 #endregion
-
-
+                                tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                                tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " TERMINANDO GENERACION DE INTERFACE VENTAS HISTORICAS");
+                                tw1.Flush();
+                                tw1.Close();
+                                tw1.Dispose();
+                                break;
                         }
                         break;
                     case "ORCE":
                         switch (_gen_inter_name)
                         {
                             case "ITEM_MAINTENANCE":
+                                tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                                tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " INICIANDO GENERACION DE INTERFACE ITEM_MAINTENANCE");
+                                tw1.Flush();
+                                tw1.Close();
+                                tw1.Dispose();
                                 #region<ITEM_MAINTENANCE>    
                                 if (_ITEM_MAINTENANCE) return;
                                 dt =(_pais=="PE") ?dat_geninter.ItemMaintenance_PE(): dat_geninter.ItemMaintenance_EC();
@@ -999,9 +1276,20 @@ namespace CapaServicioWindows.Modular
                                     }
                                 }
 
+                                
+                                #endregion
+                                tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                                tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " TERMINANDO GENERACION DE INTERFACE ITEM_MAINTENANCE");
+                                tw1.Flush();
+                                tw1.Close();
+                                tw1.Dispose();
                                 break;
-                            #endregion
                             case "MERCHANDISE_HIERARCHY_MAINTENANCE":
+                                tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                                tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " INICIANDO GENERACION DE INTERFACE MERCHANDISE_HIERARCHY_MAINTENANCE");
+                                tw1.Flush();
+                                tw1.Close();
+                                tw1.Dispose();
                                 #region<MERCHANDISE_HIERARCHY_MAINTENANCE>   
                                 if (_MERCHANDISE_HIERARCHY_MAINTENANCE) return;                            
                                 dt = (_pais=="PE")? dat_geninter.MerchandiseHierarch_PE() : dat_geninter.MerchandiseHierarch_EC();
@@ -1032,9 +1320,20 @@ namespace CapaServicioWindows.Modular
                                         valida_genera = true;
                                     }
                                 }
+                               
+                                #endregion
+                                tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                                tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " TERMINANDO GENERACION DE INTERFACE MERCHANDISE_HIERARCHY_MAINTENANCE");
+                                tw1.Flush();
+                                tw1.Close();
+                                tw1.Dispose();
                                 break;
-                            #endregion
                             case "ORCE RETAIL_LOCATIONS":
+                                tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                                tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " INICIANDO GENERACION DE INTERFACE ORCE RETAIL_LOCATIONS");
+                                tw1.Flush();
+                                tw1.Close();
+                                tw1.Dispose();
                                 #region<ORCE RETAIL_LOCATIONS>      
                                 if (_ORCE_RETAIL_LOCATIONS) return;                          
                                 dt =(_pais=="PE")? dat_geninter.OrcRetailLocations_PE(): dat_geninter.OrcRetailLocations_EC();
@@ -1067,8 +1366,14 @@ namespace CapaServicioWindows.Modular
                                         valida_genera = true;
                                     }
                                 }
-                                break;
+                              
                                 #endregion
+                                tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                                tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " TERMINANDO GENERACION DE INTERFACE ORCE RETAIL_LOCATIONS");
+                                tw1.Flush();
+                                tw1.Close();
+                                tw1.Dispose();
+                                break;
                         }
                         break;
                 }
@@ -1077,8 +1382,13 @@ namespace CapaServicioWindows.Modular
 
 
             }
-            catch
+            catch(Exception exc)
             {
+                tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                tw1.WriteLine(exc.Message);
+                tw1.Flush();
+                tw1.Close();
+                tw1.Dispose();
                 throw;
 
             }

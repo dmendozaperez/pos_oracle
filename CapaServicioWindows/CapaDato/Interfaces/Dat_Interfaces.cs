@@ -124,7 +124,7 @@ namespace CapaServicioWindows.CapaDato.Interfaces
                                     inter.pl_pe = dr["pl_pe"].ToString();
                                     inter.pl_ec = dr["pl_ec"].ToString();
                                     inter.entorno= dr["entorno"].ToString();
-
+                                    inter.outlet =Convert.ToBoolean(dr["OUTLET"]);
                                     lista.Add(inter);
                                 }
                             }
@@ -720,6 +720,36 @@ namespace CapaServicioWindows.CapaDato.Interfaces
                 ds = null;
             }
             return ds;
+        }
+        public DataTable get_price_update_2_OUTLET_PE(string pais, string codtda)
+        {
+            DataTable dt = null;
+            string sqlquery = "USP_XSTORE_GET_PRICE_UPDATE_2_OUTLET";
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(ConexionSQL.conexion))
+                {
+                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@PAIS", pais);
+                        cmd.Parameters.AddWithValue("@CODTIENDA", codtda);
+
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            dt = new DataTable();
+                            da.Fill(dt);
+                        }
+
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+            return dt;
         }
         public DataTable get_price_update_2_PE(string pais, string codtda)
         {

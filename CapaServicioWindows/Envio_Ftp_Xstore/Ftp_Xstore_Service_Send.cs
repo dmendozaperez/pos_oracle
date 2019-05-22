@@ -73,7 +73,8 @@ namespace CapaServicioWindows.Envio_Ftp_Xstore
             }
         }
         public void ejecutar_genera_file_xstore_auto(string _pais,ref string error,ref Boolean gen_per_item,ref Boolean gen_ecu_item)
-        {            
+        {
+            StreamWriter tw1 = null;
             try
             {
                 /*acceso header user y pass clave de acceso a ws*/
@@ -83,7 +84,18 @@ namespace CapaServicioWindows.Envio_Ftp_Xstore
                 /****************************************************************/
 
                 BataTransac.Bata_TransactionSoapClient bata_trans = new BataTransac.Bata_TransactionSoapClient();
+                tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " INICIANDO DE CONSUMIR LA WEBSERVICE (ws_get_xstore_carpeta_upload)");
+                tw1.Flush();
+                tw1.Close();
+                tw1.Dispose();
                 var lista= bata_trans.ws_get_xstore_carpeta_upload(header_user);
+
+                tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " TERMINANDO DE CONSUMIR LA WEBSERVICE (ws_get_xstore_carpeta_upload)");
+                tw1.Flush();
+                tw1.Close();
+                tw1.Dispose();
 
                 /*solo filtramos los automaticos VARIABLE OPCION A*/
                 #region<AUTOMATICO DE PERU>
@@ -98,11 +110,23 @@ namespace CapaServicioWindows.Envio_Ftp_Xstore
 
                 if (_hora_actual != _hora_ejecucion) return;
 
+                tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " EMPEZANDO DE EJECUTAR EL METODO (get_tienda_xstore)");
+                tw1.Flush();
+                tw1.Close();
+                tw1.Dispose();
+
                 #region<SI LA HORA DE EJECUCION ES LA CORRECTA EJECUTA LAS INTERFACES XOFICCE U ORCE>
 
                 Dat_Tienda get_tda = new Dat_Tienda();
 
                 DataTable dt_tienda = get_tda.get_tienda_xstore(_pais);
+
+                tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " TERMINANDO DE EJECUTAR EL METODO (get_tienda_xstore)");
+                tw1.Flush();
+                tw1.Close();
+                tw1.Dispose();
 
                 Dat_Interfaces dat_inter = null;
                 //string pais = "PE";
@@ -114,9 +138,22 @@ namespace CapaServicioWindows.Envio_Ftp_Xstore
                 foreach (DataRow fila_tda in dt_tienda.Rows)
                 {                   
                     string cod_tda = fila_tda["cod_entid"].ToString();
+                    Boolean out_let=Convert.ToBoolean(fila_tda["outlet"]);
                     var env_peru_XO = lista.Where(f => f.opcion == "A" && f.pais == _pais);
                     dat_inter = new Dat_Interfaces();
-                    var inter_det = dat_inter.lista_inter_pl(_pais);                  
+
+                    tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                    tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " EMPEZANDO DE EJECUTAR EL METODO (lista_inter_pl) XOFICCE");
+                    tw1.Flush();
+                    tw1.Close();
+                    tw1.Dispose();
+
+                    var inter_det = dat_inter.lista_inter_pl(_pais);
+                    tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                    tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " TERMINANDO DE EJECUTAR EL METODO (lista_inter_pl) XOFICCE");
+                    tw1.Flush();
+                    tw1.Close();
+                    tw1.Dispose();
                     foreach (var env_peru_det in env_peru_XO.Where(ent=>ent.entorno=="XOFICCE") )
                     {
                         var inter_det_entorno = inter_det.Where(m => m.entorno == env_peru_det.entorno);
@@ -128,13 +165,33 @@ namespace CapaServicioWindows.Envio_Ftp_Xstore
 
                             if (det_inter.inter_nom== "PRICE_UPDATE" && valida_dia)
                             {
+                                tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                                tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " EMPEZANDO DE EJECUTAR EL METODO (genera_automatico_inter) PRICE_UPDATE XOFICCE");
+                                tw1.Flush();
+                                tw1.Close();
+                                tw1.Dispose();
                                 genera_automatico_inter(_pais, cod_tda, env_peru_det.rut_upload, det_inter.inter_nom, det_inter.entorno,
-                                                   ref dt_item, ref dt_images, ref dt_merch_hier, ref dt_price_update,ref gen_per_item,ref gen_ecu_item);
+                                                   ref dt_item, ref dt_images, ref dt_merch_hier, ref dt_price_update,ref gen_per_item,ref gen_ecu_item,out_let);
+                                tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                                tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " TERMINANDO DE EJECUTAR EL METODO (genera_automatico_inter) PRICE_UPDATE XOFICCE");
+                                tw1.Flush();
+                                tw1.Close();
+                                tw1.Dispose();
                             }
                             if (det_inter.inter_nom != "PRICE_UPDATE")
                             {
+                                tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                                tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " EMPEZANDO DE EJECUTAR EL METODO (genera_automatico_inter) !=PRICE_UPDATE XOFICCE");
+                                tw1.Flush();
+                                tw1.Close();
+                                tw1.Dispose();
                                 genera_automatico_inter(_pais, cod_tda, env_peru_det.rut_upload, det_inter.inter_nom, det_inter.entorno,
-                                                   ref dt_item, ref dt_images, ref dt_merch_hier, ref dt_price_update,ref gen_per_item,ref gen_ecu_item);
+                                                   ref dt_item, ref dt_images, ref dt_merch_hier, ref dt_price_update,ref gen_per_item,ref gen_ecu_item, out_let);
+                                tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                                tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " EMPEZANDO DE EJECUTAR EL METODO (genera_automatico_inter) !=PRICE_UPDATE XOFICCE");
+                                tw1.Flush();
+                                tw1.Close();
+                                tw1.Dispose();
                             }
 
 
@@ -146,16 +203,36 @@ namespace CapaServicioWindows.Envio_Ftp_Xstore
                 #region<ENTORNO ORCE>
                     var env_peru_CE = lista.Where(f => f.opcion == "A" && f.pais == _pais);                 
                     dat_inter = new Dat_Interfaces();
+                    tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                    tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " EMPEZANDO DE EJECUTAR EL METODO (lista_inter_pl)  ORCE");
+                    tw1.Flush();
+                    tw1.Close();
+                    tw1.Dispose();
                     var inter_det_CE = dat_inter.lista_inter_pl(_pais);
-                    foreach (var env_peru_det in env_peru_CE.Where(ent => ent.entorno == "ORCE"))
+                    tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                    tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " TERMINANDO DE EJECUTAR EL METODO (lista_inter_pl)  ORCE");
+                    tw1.Flush();
+                    tw1.Close();
+                    tw1.Dispose();
+                foreach (var env_peru_det in env_peru_CE.Where(ent => ent.entorno == "ORCE"))
                     {
                         var inter_det_entorno = inter_det_CE.Where(m => m.entorno == env_peru_det.entorno);
 
                         foreach (var det_inter in inter_det_entorno)
-                        {                          
-                            genera_automatico_inter(_pais, "", env_peru_det.rut_upload, det_inter.inter_nom, det_inter.entorno,
+                        {
+                                tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                                tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " EMPEZANDO DE EJECUTAR EL METODO (genera_automatico_inter)  ORCE");
+                                tw1.Flush();
+                                tw1.Close();
+                                tw1.Dispose();
+                                genera_automatico_inter(_pais, "", env_peru_det.rut_upload, det_inter.inter_nom, det_inter.entorno,
                                                     ref dt_item,ref dt_images,ref dt_merch_hier,ref dt_price_update,ref gen_per_item,ref gen_ecu_item);
-                        }
+                                tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                                tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " TERMINANDO DE EJECUTAR EL METODO (genera_automatico_inter)  ORCE");
+                                tw1.Flush();
+                                tw1.Close();
+                                tw1.Dispose();
+                    }
                     }
                 #endregion
 
@@ -196,7 +273,7 @@ namespace CapaServicioWindows.Envio_Ftp_Xstore
         }
         private void genera_automatico_inter(string _pais,string _codtda, string _gen_ruta,string _gen_inter_name,string _entorno,
                                              ref DataTable dt_item,ref DataTable dt_images, ref DataTable dt_merch_hier,
-                                             ref DataTable dt_price_update,ref Boolean gen_per_item,ref Boolean gen_ecu_item)
+                                             ref DataTable dt_price_update,ref Boolean gen_per_item,ref Boolean gen_ecu_item,Boolean out_let=false)
         {
             Dat_Interfaces dat_geninter = null;
             DataTable dt = null;
@@ -294,6 +371,45 @@ namespace CapaServicioWindows.Envio_Ftp_Xstore
                                         str_cadena = str.ToString();
 
                                         name_file = "PRICE_UPDATE_2_" + sufijoNombre + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
+                                        in_maestros = _gen_ruta + "\\" + name_file;
+
+                                        if (File.Exists(@in_maestros)) File.Delete(@in_maestros);
+                                        File.WriteAllText(@in_maestros, str_cadena);
+                                    }
+                                }
+
+                                break;
+                            #endregion
+                            case "PRICE_UPDATE_OUTLET" :
+                                #region<PRICE_UPDATE_OUTLET>
+                                    if (out_let)
+                                    { 
+                                        dt = (_pais == "PE") ? dat_geninter.get_price_update_2_OUTLET_PE(_pais, _codtda) : null;
+                                    }
+                                    else
+                                    {
+                                         dt = null;
+                                    }
+
+                                if (dt != null)
+                                {
+                                    if (dt.Rows.Count > 0)
+                                    {
+                                        str = new StringBuilder();
+                                        for (Int32 i = 0; i < dt.Rows.Count; ++i)
+                                        {
+                                            str.Append(dt.Rows[i]["PRICE_UPDATE_2"].ToString());
+
+                                            if (i < dt.Rows.Count - 1)
+                                            {
+                                                str.Append("\r\n");
+
+                                            }
+
+                                        }
+                                        str_cadena = str.ToString();
+
+                                        name_file = "PRICE_UPDATE_2_OUTLET_" + sufijoNombre + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
                                         in_maestros = _gen_ruta + "\\" + name_file;
 
                                         if (File.Exists(@in_maestros)) File.Delete(@in_maestros);

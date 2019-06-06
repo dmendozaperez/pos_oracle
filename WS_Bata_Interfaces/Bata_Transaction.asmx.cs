@@ -12,6 +12,7 @@ using CapaEntidad.Util;
 using CapaEntidad.Venta;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Web;
@@ -30,9 +31,15 @@ namespace WS_Bata_Interfaces
     // [System.Web.Script.Services.ScriptService]
     public class Bata_Transaction : System.Web.Services.WebService
     {
-        public ValidateAcceso Authentication;
+        public ValidateAcceso Authentication;      
+        //CapaEntidad.Util.Ent_Conexion.conexion_posperu = ConfigurationManager.ConnectionStrings["SQL_PE"].ConnectionString;
+        
+        public Bata_Transaction()
+        {
+            CapaEntidad.Util.Ent_Conexion.conexion_posperu = ConfigurationManager.ConnectionStrings["SQL_PE"].ConnectionString;
+            CapaEntidad.Util.Ent_Conexion.conexion = ConfigurationManager.ConnectionStrings["SQL_PE"].ConnectionString;
+        }
 
-       
 
         Ba_WsConexion autentication_ws;
         [SoapHeader("Authentication", Required = true)]
@@ -73,6 +80,7 @@ namespace WS_Bata_Interfaces
         [WebMethod]
         public Ent_Fvdespc fvdespc()
         {
+            //CapaEntidad.Util.Ent_Conexion.conexion= ConfigurationManager.ConnectionStrings["SQL_PE"].ConnectionString;
             return new Ent_Fvdespc(); 
         }
         [WebMethod]
@@ -410,6 +418,44 @@ namespace WS_Bata_Interfaces
             return msg_transac;
         }
 
+        #region<ENVIO DE STOCK DE ALMACEN>
+        [SoapHeader("Authentication", Required = true)]
+        [WebMethod(Description = "Enviar Stock de almacen servicio transaction")]
+        public Ent_MsgTransac ws_envia_stock_almacen(Ent_Lista_Stock_Almacen lista_stk)
+        {
+            Ent_MsgTransac msg_transac = null;
+            autentication_ws = new Ba_WsConexion();
+            Dat_Stock update_stock = null;
+            try
+            {
+                msg_transac = new Ent_MsgTransac();
+                /*valida acceso a web service*/
+                Boolean valida_ws = autentication_ws.ckeckAuthentication_ws("01", Authentication.Username, Authentication.Password);
+                if (valida_ws)
+                {
+                    /*en esta validaion entonce sya verifico y va aconsumir la base de datos 
+                     para la inyeccion el stock*/
+                    update_stock = new Dat_Stock();
+                    msg_transac = update_stock.insertar_stock_tda_almacen(lista_stk);
+                    /*********************************************************/
+                }
+                else
+                {
+                    msg_transac.codigo = "1";
+                    msg_transac.descripcion = "Conexión sin exito";
+                }
+
+            }
+            catch (Exception exc)
+            {
+
+                msg_transac.codigo = "1";
+                msg_transac.descripcion = exc.Message;
+            }
+            return msg_transac;
+        }
+        #endregion
+
         [SoapHeader("Authentication", Required = true)]
         [WebMethod(Description = "Enviar Ventas de tienda")]
         public Ent_MsgTransac ws_envia_venta_tda(string cod_tda, DataSet ds_transac_tda)
@@ -729,6 +775,329 @@ namespace WS_Bata_Interfaces
             }
             return msg_transac;
         }
+
+        #region<SOSTIC>
+        /*sostic 05/2019*/
+        [WebMethod(Description = "Consultar disponibilidad de stock en otra tienda")]
+        public string[] ws_consulta_stock_otra_tda(string cod_tda, string cod_art, string calidad, string talla, double cant, string cod_tda_b)
+        {
+            Ent_MsgTransac msg_transac = null;
+            string[] _result = null;
+            autentication_ws = new Ba_WsConexion();
+            Dat_Venta consulta_stock = null;
+            try
+            {
+                msg_transac = new Ent_MsgTransac();
+                //Boolean valida_ws = autentication_ws.ckeckAuthentication_ws("01", Authentication.Username, Authentication.Password);
+                Boolean valida_ws = true;
+                if (valida_ws)
+                {
+                    consulta_stock = new Dat_Venta();
+                    //Ent_Conexion.conexion_posperu = "Server=201.240.53.68;Database=BDPOS;User ID=sa;Password=S0stic04052011;Trusted_Connection=False;";
+                    msg_transac = consulta_stock.consultar_stock_otra_tienda(cod_art, calidad, talla, cant, cod_tda_b);
+
+
+                    if (msg_transac.codigo != "0")
+                    {
+                        /*transaccione de tiendas*/
+                        String tip_error = "04";
+                        Dat_Error_Transac error_transac = new Dat_Error_Transac();
+                        error_transac.insertar_errores_transac(tip_error, msg_transac.descripcion, cod_tda);
+                    }
+                }
+                else
+                {
+                    msg_transac.codigo = "1";
+                    msg_transac.descripcion = "Conexión sin exito";
+                }
+            }
+            catch (Exception ex)
+            {
+                msg_transac.codigo = "1";
+                msg_transac.descripcion = ex.ToString() + " ____error";
+            }
+            _result = new string[] { msg_transac.codigo, msg_transac.descripcion };
+            return _result;
+        }
+        /*sostic 05/2019*/
+        [WebMethod(Description = "Enviar guia")]
+        public string[] ws_insertar_guia_cvt(string cod_tda, DataSet dsGuia)
+        {
+            Ent_MsgTransac msg_transac = null;
+            autentication_ws = new Ba_WsConexion();
+            Dat_Venta update_venta = null;
+            try
+            {
+                msg_transac = new Ent_MsgTransac();
+                /**/
+                //Boolean valida_ws = autentication_ws.ckeckAuthentication_ws("01", Authentication.Username, Authentication.Password);
+                Boolean valida_ws = true;
+
+                if (valida_ws)
+                {
+                    update_venta = new Dat_Venta();
+                    //Ent_Conexion.conexion_posperu = "Server=201.240.53.68;Database=BDPOS;User ID=sa;Password=S0stic04052011;Trusted_Connection=False;";
+                    msg_transac = update_venta.insertar_guia(cod_tda, dsGuia.Tables[0], dsGuia.Tables[1]);
+
+
+                    if (msg_transac.codigo != "0")
+                    {
+                        /*transaccione de tiendas*/
+                        String tip_error = "04";
+                        Dat_Error_Transac error_transac = new Dat_Error_Transac();
+                        error_transac.insertar_errores_transac(tip_error, msg_transac.descripcion, cod_tda);
+                    }
+                }
+                else
+                {
+                    msg_transac.codigo = "1";
+                    msg_transac.descripcion = "Conexión sin exito";
+                }
+
+            }
+            catch (Exception exc)
+            {
+                msg_transac.codigo = "1";
+                msg_transac.descripcion = exc.Message;
+            }
+            return new string[] { msg_transac.codigo, msg_transac.descripcion };
+        }
+
+        /*sostic 05/2019*/
+        [WebMethod(Description = "Actualizar guia con la serie y numero")]
+        public string[] ws_actualizar_guia(string cod_tda, string serie, string numero, int id)
+        {
+            Ent_MsgTransac msg_transac = null;
+            autentication_ws = new Ba_WsConexion();
+            Dat_Venta update_venta = null;
+            try
+            {
+                msg_transac = new Ent_MsgTransac();
+                /**/
+                //Boolean valida_ws = autentication_ws.ckeckAuthentication_ws("01", Authentication.Username, Authentication.Password);
+                Boolean valida_ws = true;
+
+                if (valida_ws)
+                {
+                    update_venta = new Dat_Venta();
+                    //Ent_Conexion.conexion_posperu = "Server=201.240.53.68;Database=BDPOS;User ID=sa;Password=S0stic04052011;Trusted_Connection=False;";
+                    msg_transac = update_venta.actualizar_guia(cod_tda, serie, numero, id);
+
+
+                    if (msg_transac.codigo != "0")
+                    {
+                        /*transaccione de tiendas*/
+                        String tip_error = "04";
+                        Dat_Error_Transac error_transac = new Dat_Error_Transac();
+                        error_transac.insertar_errores_transac(tip_error, msg_transac.descripcion, cod_tda);
+                    }
+                }
+                else
+                {
+                    msg_transac.codigo = "1";
+                    msg_transac.descripcion = "Conexión sin exito";
+                }
+
+            }
+            catch (Exception exc)
+            {
+                msg_transac.codigo = "1";
+                msg_transac.descripcion = exc.Message;
+            }
+            return new string[] { msg_transac.codigo, msg_transac.descripcion };
+        }
+        /*sostic 05/2019*/
+        [WebMethod(Description = "Insertar registro en historial_estados_cv")]
+        public string[] ws_insertar_historial_estado_cv(string cod_tda, string cod_entid, string fc_nint, string id_estado, string cod_usuario, string descripcion, string cod_vendedor, string serie_numero)
+        {
+
+            Ent_MsgTransac msg_transac = null;
+            autentication_ws = new Ba_WsConexion();
+            Dat_Venta update_venta = null;
+            try
+            {
+                msg_transac = new Ent_MsgTransac();
+                /**/
+                //Boolean valida_ws = autentication_ws.ckeckAuthentication_ws("01", Authentication.Username, Authentication.Password);
+                Boolean valida_ws = true;
+
+                if (valida_ws)
+                {
+                    update_venta = new Dat_Venta();
+                    //Ent_Conexion.conexion_posperu = "Server=201.240.53.68;Database=BDPOS;User ID=sa;Password=S0stic04052011;Trusted_Connection=False;";
+                    msg_transac = update_venta.insertar_historial_estado_cv(cod_tda, cod_entid, fc_nint, id_estado, cod_usuario, descripcion, cod_vendedor, serie_numero);
+                    if (msg_transac.codigo != "0")
+                    {
+                        /*transaccione de tiendas*/
+                        String tip_error = "04";
+                        Dat_Error_Transac error_transac = new Dat_Error_Transac();
+                        error_transac.insertar_errores_transac(tip_error, msg_transac.descripcion, cod_tda);
+                    }
+                }
+                else
+                {
+                    msg_transac.codigo = "1";
+                    msg_transac.descripcion = "Conexión sin exito";
+                }
+
+            }
+            catch (Exception exc)
+            {
+                msg_transac.codigo = "1";
+                msg_transac.descripcion = exc.Message;
+            }
+            return new string[] { msg_transac.codigo, msg_transac.descripcion };
+        }
+
+        /*sostic 05/2019*/
+        [WebMethod(Description = "Consultar guias")]
+        public DataSet ws_consultar_guias(string cod_tda)
+        {
+            DataSet result = null;
+            autentication_ws = new Ba_WsConexion();
+            Dat_Venta consulta_stock = null;
+            try
+            {
+                result = new DataSet();
+                //Boolean valida_ws = autentication_ws.ckeckAuthentication_ws("01", Authentication.Username, Authentication.Password);
+                Boolean valida_ws = true;
+                if (valida_ws)
+                {
+                    consulta_stock = new Dat_Venta();
+                    //Ent_Conexion.conexion_posperu = "Server=201.240.53.68;Database=BDPOS;User ID=sa;Password=S0stic04052011;Trusted_Connection=False;";
+                    result = consulta_stock.consultar_guias(cod_tda);
+
+
+                    //if (msg_transac.codigo != "0")
+                    //{
+                    //    /*transaccione de tiendas*/
+                    //    String tip_error = "04";
+                    //    Dat_Error_Transac error_transac = new Dat_Error_Transac();
+                    //    error_transac.insertar_errores_transac(tip_error, msg_transac.descripcion, cod_tda);
+                    //}
+                }
+                else
+                {
+                    result = new DataSet();
+                    DataTable dt = new DataTable();
+                    dt.Columns.Add("codigo");
+                    dt.Columns.Add("descripcion");
+                    dt.Rows.Add("1", "Conexión sin exito");
+                    result.Tables.Add(dt);
+                }
+            }
+            catch (Exception ex)
+            {
+                result = new DataSet();
+                DataTable dt = new DataTable();
+                dt.Columns.Add("codigo");
+                dt.Columns.Add("descripcion");
+                dt.Rows.Add("1", ex.ToString() + " ==> Error");
+                result.Tables.Add(dt);
+            }
+            //_result = new string[] { msg_transac.codigo, msg_transac.descripcion };
+            return result;
+        }
+        /*sostic 05/2019*/
+        [WebMethod(Description = "Consultar guias actualizadas con el correlativo")]
+        public DataSet ws_consultar_guias_actualizadas(string cod_tda, int id)
+        {
+            DataTable result = null;
+            string[] _result = null;
+            autentication_ws = new Ba_WsConexion();
+            Dat_Venta consulta_stock = null;
+            try
+            {
+                result = new DataTable();
+                //Boolean valida_ws = autentication_ws.ckeckAuthentication_ws("01", Authentication.Username, Authentication.Password);
+                Boolean valida_ws = true;
+                if (valida_ws)
+                {
+                    consulta_stock = new Dat_Venta();
+                    //Ent_Conexion.conexion_posperu = "Server=201.240.53.68;Database=BDPOS;User ID=sa;Password=S0stic04052011;Trusted_Connection=False;";
+                    result = consulta_stock.consultar_guias_actualizadas(id);
+
+
+                    if (result.Columns[0].ColumnName == "codigo")
+                    {
+                        /*transaccione de tiendas*/
+                        String tip_error = "04";
+                        Dat_Error_Transac error_transac = new Dat_Error_Transac();
+                        error_transac.insertar_errores_transac(tip_error, result.Rows[0][1].ToString(), cod_tda);
+                    }
+                }
+                else
+                {
+                    result = new DataTable();
+                    result.Columns.Add("codigo");
+                    result.Columns.Add("descripcion");
+                    result.Rows.Add("1", "Conexión sin exito");
+                }
+            }
+            catch (Exception ex)
+            {
+                result = new DataTable();
+                result.Columns.Add("codigo");
+                result.Columns.Add("descripcion");
+                result.Rows.Add("1", ex.ToString() + " ==> Error");
+            }
+            DataSet ds = new DataSet();
+            ds.Tables.Add(result);
+            //_result = new string[] { msg_transac.codigo, msg_transac.descripcion };
+            return ds;
+        }
+        /*sostic 05/2019*/
+        [WebMethod(Description = "consultar tiendas disponibles para el canal de ventas.")]
+        public DataSet ws_consultar_tiendas_disponibles_cv(string cod_tda)
+        {
+            DataTable result = null;
+            autentication_ws = new Ba_WsConexion();
+            Dat_Venta consulta_stock = null;
+            DataSet ds = null;
+            try
+            {
+                result = new DataTable();
+                //Boolean valida_ws = autentication_ws.ckeckAuthentication_ws("01", Authentication.Username, Authentication.Password);
+                Boolean valida_ws = true;
+                if (valida_ws)
+                {
+                    consulta_stock = new Dat_Venta();
+                    result = new DataTable();
+                    //Ent_Conexion.conexion_posperu = "Server=201.240.53.68;Database=BDPOS;User ID=sa;Password=S0stic04052011;Trusted_Connection=False;";
+                    result = consulta_stock.consultar_tiendas_disponibles_cv();
+
+
+                    if (result.Columns[0].ColumnName == "codigo")
+                    {
+                        /*transaccione de tiendas*/
+                        String tip_error = "04";
+                        Dat_Error_Transac error_transac = new Dat_Error_Transac();
+                        error_transac.insertar_errores_transac(tip_error, result.Rows[0][1].ToString(), cod_tda);
+                    }
+                }
+                else
+                {
+
+                    result = new DataTable();
+                    result.Columns.Add("codigo");
+                    result.Columns.Add("descripcion");
+                    result.Rows.Add("1", "Conexión sin exito");
+                }
+            }
+            catch (Exception ex)
+            {
+
+                result = new DataTable();
+                result.Columns.Add("codigo");
+                result.Columns.Add("descripcion");
+                result.Rows.Add("1", ex.ToString() + " ==> Error");
+            }
+            //_result = new string[] { msg_transac.codigo, msg_transac.descripcion };
+            ds = new DataSet();
+            ds.Tables.Add(result.Copy());
+            return ds;
+        }
+        #endregion
     }
 
     public class ValidateAcceso:SoapHeader

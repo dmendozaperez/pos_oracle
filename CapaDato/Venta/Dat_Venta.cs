@@ -344,7 +344,15 @@ namespace CapaDato.Venta
                 table.Columns.Add("fc_sexo", typeof(string));
                 table.Columns.Add("fc_mpub", typeof(string));
                 table.Columns.Add("fc_edad", typeof(string));
-                table.Columns.Add("fc_regv", typeof(string));               
+                table.Columns.Add("fc_regv", typeof(string));
+
+                /*sostic 05/2019*/
+                table.Columns.Add("fc_idtda", typeof(string));
+                table.Columns.Add("fc_id_est", typeof(string));
+                table.Columns.Add("fc_id_tcv", typeof(string));
+                table.Columns.Add("fc_refere", typeof(string));
+                table.Columns.Add("fc_ubi", typeof(string));
+                /*sostic 05/2019*/
 
                 foreach (var item in list.lista_ffactc)
                 {
@@ -416,7 +424,14 @@ namespace CapaDato.Venta
                                        item.fc_sexo,
                                        item.fc_mpub,
                                        item.fc_edad,
-                                       item.fc_regv
+                                       item.fc_regv,
+                                       /*sostic 05-2019*/
+                                       (item.fc_idtda_b==null)?"": item.fc_idtda_b,
+                                       (item.fc_id_est == null) ? "" : item.fc_id_est,
+                                       (item.fc_id_tcv == null)?"": item.fc_id_tcv,
+                                       (item.fc_refere == null)?"": item.fc_refere,
+                                       (item.fc_ubi == null)?"": item.fc_ubi
+                                       /*sostic 05-2019*/
                                        );
                 }
             }
@@ -652,7 +667,345 @@ namespace CapaDato.Venta
             return ds;
         }
 
-       
 
+        /*sostic 05/2019*/
+        public DataSet consultar_guias(string cod_tda)
+        {
+            string sqlquery = "USP_CONSULTAR_GUIAS";
+            Ent_MsgTransac msg = null;
+            DataSet ds = null;
+            try
+            {
+                msg = new Ent_MsgTransac();
+                ds = new DataSet();
+                using (SqlConnection cn = new SqlConnection(Ent_Conexion.conexion_posperu))
+                {
+                    try
+                    {
+                        if (cn.State == 0) cn.Open();
+                        using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                        {
+                            cmd.CommandTimeout = 120;
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.Parameters.AddWithValue("@cod_tda", cod_tda);
+                            SqlDataAdapter da = new SqlDataAdapter(cmd);
+                            da.Fill(ds);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        ds = new DataSet();
+                        DataTable dt = new DataTable();
+                        dt.Columns.Add("codigo");
+                        dt.Columns.Add("descripcion");
+                        dt.Rows.Add("1", ex.Message + " ==> SQL");
+                        ds.Tables.Add(dt);
+                    }
+                    if (cn != null)
+                        if (cn.State == ConnectionState.Open) cn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                ds = new DataSet();
+                DataTable dt = new DataTable();
+                dt.Columns.Add("codigo");
+                dt.Columns.Add("descripcion");
+                dt.Rows.Add("1", ex.Message + " ==> SQL");
+                ds.Tables.Add(dt);
+            }
+            return ds;
+        }
+        /*sostic 05/2019*/
+        public DataTable consultar_guias_actualizadas(int id)
+        {
+            string sqlquery = "usp_consultar_guias_actualizada";
+            Ent_MsgTransac msg = null;
+            DataTable dt = null;
+            try
+            {
+                msg = new Ent_MsgTransac();
+                dt = new DataTable();
+                using (SqlConnection cn = new SqlConnection(Ent_Conexion.conexion_posperu))
+                {
+                    try
+                    {
+                        if (cn.State == 0) cn.Open();
+                        using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                        {
+                            cmd.CommandTimeout = 120;
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.Parameters.AddWithValue("@id", id);
+                            SqlDataAdapter da = new SqlDataAdapter(cmd);
+                            da.Fill(dt);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        dt = new DataTable();
+                        dt.Columns.Add("codigo");
+                        dt.Columns.Add("descripcion");
+                        dt.Rows.Add("1", ex.Message + " ==> SQL");
+                    }
+                    if (cn != null)
+                        if (cn.State == ConnectionState.Open) cn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                dt = new DataTable();
+                dt.Columns.Add("codigo");
+                dt.Columns.Add("descripcion");
+                dt.Rows.Add("1", ex.Message + " ==> SQL");
+            }
+            return dt;
+        }
+
+        /*sostic 05/2019*/
+        public Ent_MsgTransac consultar_stock_otra_tienda(string cod_art, string calidad, string talla, double cant, string cod_tda_b)
+        {
+            string sqlquery = "USP_CONSULTAR_STOCK_OTRA_TDA";
+            Ent_MsgTransac msg = null;
+            try
+            {
+                msg = new Ent_MsgTransac();
+                using (SqlConnection cn = new SqlConnection(Ent_Conexion.conexion_posperu))
+                {
+
+                    try
+                    {
+                        if (cn.State == 0) cn.Open();
+                        using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                        {
+                            cmd.CommandTimeout = 120;
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.Parameters.AddWithValue("@COD_ART", cod_art);
+                            cmd.Parameters.AddWithValue("@CALIDAD", calidad);
+                            cmd.Parameters.AddWithValue("@TALLA", talla);
+                            cmd.Parameters.AddWithValue("@CANT", cant);
+                            cmd.Parameters.AddWithValue("@COD_TDA", cod_tda_b);
+                            int filas = Convert.ToInt32(cmd.ExecuteScalar());
+                            msg.codigo = "0";
+                            msg.descripcion = filas.ToString();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        msg.codigo = "1";
+                        msg.descripcion = ex.Message + "==> SQL";
+                    }
+                    if (cn != null)
+                        if (cn.State == ConnectionState.Open) cn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                msg.codigo = "1";
+                msg.descripcion = ex.Message + "==error";
+            }
+            return msg;
+        }
+
+        /*sostic 05/2019*/
+        public Ent_MsgTransac insertar_guia(string cod_tda,
+                                                   DataTable fmc,
+                                                   DataTable fmd)
+        {
+            string sqlquery = "[USP_INSERTAR_GUIAT_TEMP]";
+            Ent_MsgTransac msg = null;
+            string id = "";
+            try
+            {
+                msg = new Ent_MsgTransac();
+
+                if (fmc.Rows.Count > 0)
+                {
+                    using (SqlConnection cn = new SqlConnection(Ent_Conexion.conexion_posperu))
+                    {
+                        try
+                        {
+                            if (cn.State == 0) cn.Open();
+                            using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                            {
+                                cmd.CommandTimeout = 120;
+                                cmd.CommandType = CommandType.StoredProcedure;
+                                cmd.Parameters.AddWithValue("@TMPFMC", fmc);
+                                cmd.Parameters.AddWithValue("@TMPFMD", fmd);
+                                id = cmd.ExecuteScalar().ToString();
+                                msg.codigo = "0";
+                                msg.descripcion = id;
+                            }
+                        }
+                        catch (Exception exc)
+                        {
+                            msg.codigo = "1";
+                            msg.descripcion = exc.Message + "==> SQL";
+                        }
+                        if (cn != null)
+                            if (cn.State == ConnectionState.Open) cn.Close();
+                    }
+                }
+                else
+                {
+                    msg.codigo = "0";
+                    msg.descripcion = "No hay trasacciones para actualizar";
+                }
+            }
+            catch (Exception exc)
+            {
+                msg.codigo = "1";
+                msg.descripcion = exc.Message + "==error";
+            }
+            return msg;
+        }
+        /*sostic 05/2019*/
+        public Ent_MsgTransac insertar_historial_estado_cv(string cod_tda, string cod_entid, string fc_nint, string id_estado, string cod_usuario, string descripcion, string cod_vendedor, string serie_numero)
+        {
+            string sqlquery = "[usp_insertar_historial_estados_cv]";
+            Ent_MsgTransac msg = null;
+            int _filas = 0;
+            try
+            {
+                msg = new Ent_MsgTransac();
+
+                //if ( != null)
+                // {
+                using (SqlConnection cn = new SqlConnection(Ent_Conexion.conexion_posperu))
+                {
+                    try
+                    {
+                        if (cn.State == 0) cn.Open();
+                        using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                        {
+                            cmd.CommandTimeout = 120;
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.Parameters.AddWithValue("@cod_entid", cod_entid);
+                            cmd.Parameters.AddWithValue("@fc_nint", fc_nint);
+                            cmd.Parameters.AddWithValue("@id_estado", id_estado);
+                            cmd.Parameters.AddWithValue("@cod_usuario", cod_usuario);
+                            cmd.Parameters.AddWithValue("@descripcion", descripcion);
+                            cmd.Parameters.AddWithValue("@cod_vendedor", cod_vendedor);
+                            cmd.Parameters.AddWithValue("@serie_numero", serie_numero);
+                            _filas = cmd.ExecuteNonQuery();
+                            msg.codigo = "0";
+                            msg.descripcion = (_filas > 0 ? "Se actualizó el estado de la venta." : "No se actualizó el estado");
+                        }
+                    }
+                    catch (Exception exc)
+                    {
+                        msg.codigo = "1";
+                        msg.descripcion = exc.Message + "==> SQL";
+                    }
+                    if (cn != null)
+                        if (cn.State == ConnectionState.Open) cn.Close();
+                }
+                //}
+                //else
+                //{
+                //    msg.codigo = "0";
+                //    msg.descripcion = "No hay trasacciones para actualizar";
+                //}
+            }
+            catch (Exception exc)
+            {
+                msg.codigo = "1";
+                msg.descripcion = exc.Message + "==error";
+            }
+            return msg;
+        }
+        /*sostic 05/2019*/
+        public Ent_MsgTransac actualizar_guia(string cod_tda, string serie, string numero, int id)
+        {
+            string sqlquery = "usp_actualizar_guia";
+            Ent_MsgTransac msg = null;
+            try
+            {
+                msg = new Ent_MsgTransac();
+
+
+                using (SqlConnection cn = new SqlConnection(Ent_Conexion.conexion_posperu))
+                {
+                    try
+                    {
+                        if (cn.State == 0) cn.Open();
+                        using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                        {
+                            cmd.CommandTimeout = 120;
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.Parameters.AddWithValue("@serie", serie);
+                            cmd.Parameters.AddWithValue("@numero", numero);
+                            cmd.Parameters.AddWithValue("@id", id);
+
+                            cmd.ExecuteNonQuery();
+                            msg.codigo = "0";
+                            msg.descripcion = "Se actualizo correctamente";
+                        }
+                    }
+                    catch (Exception exc)
+                    {
+                        msg.codigo = "1";
+                        msg.descripcion = exc.Message + "==> SQL";
+                    }
+                    if (cn != null)
+                        if (cn.State == ConnectionState.Open) cn.Close();
+                }
+
+            }
+            catch (Exception exc)
+            {
+                msg.codigo = "1";
+                msg.descripcion = exc.Message + "==error";
+            }
+            return msg;
+        }
+        /*sostic 05/2019*/
+        public DataTable consultar_tiendas_disponibles_cv()
+        {
+            string sqlquery = "usp_get_lsita_tiendas_cv";
+            Ent_MsgTransac msg = null;
+            DataTable dt = null;
+            try
+            {
+                msg = new Ent_MsgTransac();
+                dt = new DataTable();
+                using (SqlConnection cn = new SqlConnection(Ent_Conexion.conexion_posperu))
+                {
+                    try
+                    {
+                        if (cn.State == 0) cn.Open();
+                        using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                        {
+                            cmd.CommandTimeout = 120;
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            SqlDataAdapter da = new SqlDataAdapter(cmd);
+                            DataSet ds = new DataSet();
+                            da.Fill(ds);
+                            dt = ds.Tables[0];
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+
+                        dt = new DataTable();
+                        dt.Columns.Add("codigo");
+                        dt.Columns.Add("descripcion");
+                        dt.Rows.Add("1", ex.Message + " ==> SQL");
+
+                    }
+                    if (cn != null)
+                        if (cn.State == ConnectionState.Open) cn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                dt = new DataTable();
+                dt.Columns.Add("codigo");
+                dt.Columns.Add("descripcion");
+                dt.Rows.Add("1", ex.Message + " ==> SQL");
+
+            }
+            return dt;
+        }
     }
 }

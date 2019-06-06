@@ -15,6 +15,7 @@ using System.Timers;
 using ICSharpCode.SharpZipLib.Zip;
 using CapaServicioWindows.Envio_Ftp_Xstore;
 using CapaServicioWindows.CapaDato.Interfaces;
+using CapaServicioWindows.Bataclub;
 
 namespace ServiceWinTransaction
 {
@@ -23,7 +24,11 @@ namespace ServiceWinTransaction
         Timer tmservicio = null;
         Timer tmservicioDBF = null;
         Timer tmservicioVentaXstore = null;
-
+       
+        #region<REGION PARA BATACLUB VARIABLES>
+        Timer tmbataclub = null;
+        private Int32 _valida_bataclub = 0;
+        #endregion
 
         Timer tmpprescripcion = null;
         private Int32 _valida_PRES = 0;
@@ -67,6 +72,12 @@ namespace ServiceWinTransaction
 
         private Int32 _valida_serviceGuiaToXstore = 0;
 
+        #region<REGION DE ENVIO DE STOCK DE ALMACEN>
+        Timer tmstock_alm = null;
+        private Int32 _valida_stk = 0;
+
+        #endregion
+
         public Service_Transaction()
         {
             InitializeComponent();
@@ -104,7 +115,175 @@ namespace ServiceWinTransaction
 
             tmpprescripcion = new Timer(5000);
             tmpprescripcion.Elapsed += new ElapsedEventHandler(tmpprescripcion_Elapsed);
+
+            /*PROCESO DE BATACLUB*/
+            tmbataclub = new Timer(5000);
+            tmbataclub.Elapsed += new ElapsedEventHandler(tmpbataclub_Elapsed);
+
+            /*PROCESO DE ENVIO DE STOCK DE ALMACEN*/
+            //5 minutos
+
+            tmstock_alm = new Timer(1500000);
+            tmstock_alm.Elapsed += new ElapsedEventHandler(tmstock_alm_Elapsed);
         }
+        #region <REGION DE STOCK DE ALMACEN>
+        void tmstock_alm_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            //string varchivov = "c://valida_hash.txt";
+            Int32 _valor = 0;
+
+            //string _ruta_erro_file = @"D:\ALMACEN\STOCK.txt";
+            string _valida_proc_venta = @"D:\venta.txt";
+            Boolean proceso_venta = false;
+            TextWriter tw = null;
+            string _hora = "";
+            try
+            {                
+                #region<region solo almacen ecuador>
+                if (File.Exists(@file_almace_ecu)) return;
+                #endregion
+
+                /*si el archivo existe entonces ejecutar procesos de venta*/
+                if (File.Exists(@_valida_proc_venta)) proceso_venta = true;
+
+                string _valida_proc_guiaToXstore = @"D:\XSTORE\proc_xs.txt";
+                if (File.Exists(_valida_proc_guiaToXstore)) return; //proceso_venta = false;
+
+                if (_valida_stk == 0)
+                {
+                    //string _error = "ing";
+                    _valor = 1;
+                    _valida_stk = 1;
+                   
+                    string _error_ws = "";
+                    //_error = CapaServicioWindows.Modular.Basico.retornar();
+
+                    #region<SOLO PARA ALMACEN HABILITAR ESTE PROCESO>
+                    if (!proceso_venta)
+                    {
+                        Basico ejecuta_procesos = null;
+                        ejecuta_procesos = new Basico();
+                        ejecuta_procesos.eje_envio_stk_almacen(ref _error_ws);
+                    }
+                    #endregion
+
+
+                    _valida_stk = 0;
+
+                    if (_error_ws.Length > 0)
+                    {
+                        _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "==> (servicio windows)" + _error_ws;
+                        tw = new StreamWriter(@"D:\ALMACEN\STOCK.txt", true);
+                        tw.WriteLine(_hora);
+                        tw.Flush();
+                        tw.Close();
+                        tw.Dispose();
+                        //TextWriter tw = new StreamWriter(_ruta_erro_file, true);
+                        //tw.WriteLine(_error_ws);
+                        //tw.Flush();
+                        //tw.Close();
+                        //tw.Dispose();
+                    }               
+                }
+                //****************************************************************************
+            }
+            catch (Exception exc)
+            {
+                _valida_stk = 0;
+                _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "==> (servicio windows)" + exc.Message;
+                tw = new StreamWriter(@"D:\ALMACEN\STOCK.txt", true);
+                tw.WriteLine(_hora);
+                tw.Flush();
+                tw.Close();
+                tw.Dispose();
+
+            }
+
+            if (_valor == 1)
+            {
+                _valida_stk = 0;
+            }
+
+
+        }
+        #endregion
+        #region<REGION DE BATACLUB METODOS>
+        void tmpbataclub_Elapsed(object sender, ElapsedEventArgs e)
+        {           
+            Int32 _valor = 0;
+
+            string _ruta_erro_file = @"D:\BataTransaction\log_bataclub.txt";
+            string str = "";
+            Boolean proceso_venta = false;
+            try
+            {                  
+
+                #region<region solo almacen ecuador>
+                if (!File.Exists(@file_almace_ecu)) return;
+                #endregion
+
+
+                if (_valida_bataclub == 0)
+                {
+                    //string _error = "ing";
+                    _valor = 1;
+                    _valida_bataclub = 1;
+
+
+                    string _error_ws = "";
+                    BataClub batacl = new BataClub();
+                    _error_ws = batacl.genera_miembro_bataclub();
+                    
+                    if (_error_ws.Length > 0)
+                    {                        
+                        TextWriter tw = new StreamWriter(_ruta_erro_file, true);
+                        tw = new StreamWriter(_ruta_erro_file, true);
+                        str = DateTime.Today.ToString() + " " + DateTime.Now.ToString("HH:mm:ss") + "==>genera_miembro_bataclub==>" + _error_ws;
+                        tw.WriteLine(str);
+                        tw.Flush();
+                        tw.Close();
+                        tw.Dispose();
+                    }
+                    _error_ws = batacl.genera_envio_correo_bataclub();
+                    if (_error_ws.Length > 0)
+                    {
+                        TextWriter tw = new StreamWriter(_ruta_erro_file, true);
+                        tw = new StreamWriter(_ruta_erro_file, true);
+                        str = DateTime.Today.ToString() + " " + DateTime.Now.ToString("HH:mm:ss") + "==> genera_miembro_bataclub==>" + _error_ws;
+                        tw.WriteLine(str);
+                        tw.Flush();
+                        tw.Close();
+                        tw.Dispose();
+                    }
+
+                    //_error = CapaServicioWindows.Modular.Basico.retornar();
+
+                    _valida_bataclub = 0;
+                   
+                }
+                //****************************************************************************
+            }
+            catch (Exception exc)
+            {
+                TextWriter tw = new StreamWriter(_ruta_erro_file, true);
+                tw = new StreamWriter(_ruta_erro_file, true);
+                str = DateTime.Today.ToString() + " " + DateTime.Now.ToString("HH:mm:ss") + "==> catch ==>" + exc.Message;
+                tw.WriteLine(str);
+                tw.Flush();
+                tw.Close();
+                tw.Dispose();
+                _valida_bataclub = 0;
+            }
+
+            if (_valor == 1)
+            {
+                _valida_bataclub = 0;
+            }
+
+
+        }
+        #endregion
+
         #region<PROCESO DE PRESCRIPCION>
 
         /*variable private para la ejecucion del proceso de prescripcion*/
@@ -783,6 +962,7 @@ namespace ServiceWinTransaction
 
         }
         #endregion
+
        
 
         void tmpServicioDBF_Elapsed(object sender, ElapsedEventArgs e)
@@ -886,6 +1066,8 @@ namespace ServiceWinTransaction
             tmservicio_ecu_guia.Start();
             tmservicioAQ.Start();
             tmpprescripcion.Start();
+            tmbataclub.Start();
+            tmstock_alm.Start();
             //tmservicioScactcoDBF.Start();
         }
 
@@ -901,6 +1083,8 @@ namespace ServiceWinTransaction
             tmservicio_ecu_guia.Stop();
             tmservicioAQ.Stop();
             tmpprescripcion.Stop();
+            tmbataclub.Stop();
+            tmstock_alm.Stop();
             //tmservicioScactcoDBF.Stop();
         }       
               

@@ -13,6 +13,8 @@ using System.Text;
 using System.Windows.Forms;
 //using TaskScheduler;
 using Microsoft.Win32.TaskScheduler;
+using System.Data.SqlClient;
+using System.Reflection;
 
 namespace ServiceWin32Framework4
 {
@@ -119,7 +121,7 @@ namespace ServiceWin32Framework4
         {
             string _error = "";
             Ftp_Xstore_Service_Send envio = new Ftp_Xstore_Service_Send();
-            //envio.proc_envio_ftp();
+            envio.proc_envio_ftp();
             string pais = "PE";
             Boolean gen_per_item = false;
             Boolean gen_ecu_item = false;
@@ -245,6 +247,132 @@ namespace ServiceWin32Framework4
             //    tarea.Save();
 
             //}
+        }
+        public String ruta_temp_interface = System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "//tmpinterface";
+        private void btn_item_deal_Click(object sender, EventArgs e)
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            string sqlquery = "USP_XSTORE_GET_ITEM_DEAL_PROPERTY";
+            DataTable dt = null;
+            try
+            {
+                DataTable dttienda=  get_tienda();
+
+                foreach (DataRow fila in dttienda.Rows)
+                {
+                    using (SqlConnection cn = new SqlConnection(conexion))
+                    {
+
+                        using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                        {
+                            cmd.CommandTimeout = 0;
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.Parameters.AddWithValue("@CODTIENDA", fila["cod_entid"].ToString());
+                            cmd.Parameters.AddWithValue("@OUTLET", Convert.ToBoolean(fila["OUTLET"]));
+
+                            using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                            {
+                                dt = new DataTable();
+                                da.Fill(dt);
+                                #region<GET_ITEM_DEAL_PROPERTY>
+                                StringBuilder str = null;
+                                string str_cadena = "";
+                                string name_maestros = ""; string in_maestros = "";
+                                if (dt!=null)
+                                {
+                                    string ruta_interface = ruta_temp_interface;
+                                    if (!Directory.Exists(@ruta_interface)) Directory.CreateDirectory(@ruta_interface);
+                                    if (dt.Rows.Count>0)
+                                    {
+                                                                                                                                                                                                                     
+                                                    str = new StringBuilder();
+                                                    for (Int32 i = 0; i < dt.Rows.Count; ++i)
+                                                    {
+                                                        str.Append(dt.Rows[i]["ITEM_DEAL_PROPERTY"].ToString());
+
+                                                        if (i < dt.Rows.Count - 1)
+                                                        {
+                                                            str.Append("\r\n");
+
+                                                        }
+
+                                                    }
+                                                    str_cadena = str.ToString();
+
+
+
+                                                    name_maestros = "ITEM_DEAL_PROPERTY_" + fila["cod_entid"].ToString() + "_" + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
+                                                    in_maestros = ruta_interface + "\\" + name_maestros;
+
+                                                    if (File.Exists(@in_maestros)) File.Delete(@in_maestros);
+                                                    File.WriteAllText(@in_maestros, str_cadena);
+                                                                                                                             
+                                        
+                                    }
+                                }
+                                #endregion
+
+
+                            }
+                        }
+                    }
+
+                }
+                MessageBox.Show("se generaron las interfaces", "aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show(exc.Message, "aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            }
+            
+            Cursor.Current = Cursors.Default;
+        }
+        string conexion = "Server=172.28.7.14;Database=BDPOS;User ID=pos_oracle;Password=Bata2018**;Trusted_Connection=False;";
+        private DataTable get_tienda()
+        {
+            DataTable dt = null;
+            string sqlquery = "select cod_entid,OUTLET=dbo.FTIENDA_OUTLET(cod_entid) from tentidad_tienda where xstore=1 and cod_pais='PE' and dbo.FTIENDA_OUTLET(cod_entid)=0";
+            //string sqlquery = "select cod_entid,OUTLET=dbo.FTIENDA_OUTLET(cod_entid) from tentidad_tienda where cod_pais='PE' and cod_entid='50102'";
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(conexion))
+                {
+                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        cmd.CommandType = CommandType.Text;
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            dt = new DataTable();
+                            da.Fill(dt);
+                        }
+                    }
+                }
+            }
+            catch 
+            {
+
+                
+            }
+            return dt;
+        }
+
+        private void btnsk_almacen_Click(object sender, EventArgs e)
+        {
+            string _error = "ing";
+            TextWriter tw = new StreamWriter(@"D:\ALMACEN\STOCK.txt", true);
+            tw.WriteLine(_error);
+            tw.Flush();
+            tw.Close();
+            tw.Dispose();
+            Cursor.Current = Cursors.WaitCursor;
+            string _erro = "";
+            Basico cc = new Basico();
+            // cc.procesar_dbf_pos(ref _erro);
+            cc.eje_envio_stk_almacen(ref _erro);
+            MessageBox.Show("termino");
+            Cursor.Current = Cursors.Default;
         }
     }
 }

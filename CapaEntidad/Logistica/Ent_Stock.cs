@@ -36,4 +36,22 @@ namespace CapaEntidad.Logistica
     {
         public Ent_Stock[] lista_stock { get; set; } 
     }
+    public class Ent_Stock_Almacen
+    {
+        public string cod_tda { get; set; }
+        public string cd { get; set; }
+        public string art_cod { get; set; }
+        public string art_cal { get; set; }
+        public string cod_rgmed { get; set; }
+        public string cod_med_per { get; set; }
+        public string cod_med_lat { get; set; }
+        public Int32 art_pares { get; set; }
+        public string secci { get; set; }
+        public string ano { get; set; }
+        public string sem { get; set; }
+    }
+    public class Ent_Lista_Stock_Almacen
+    {
+        public Ent_Stock_Almacen[] lista_stock { get; set; }
+    }
 }

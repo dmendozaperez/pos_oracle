@@ -44,6 +44,8 @@
             this.BTNENVIONOV = new System.Windows.Forms.Button();
             this.btnenvio_prescripciones = new System.Windows.Forms.Button();
             this.btntarea = new System.Windows.Forms.Button();
+            this.btn_item_deal = new System.Windows.Forms.Button();
+            this.btnsk_almacen = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn_servicewin
@@ -218,11 +220,35 @@
             this.btntarea.UseVisualStyleBackColor = true;
             this.btntarea.Click += new System.EventHandler(this.btntarea_Click);
             // 
+            // btn_item_deal
+            // 
+            this.btn_item_deal.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_item_deal.Location = new System.Drawing.Point(734, 16);
+            this.btn_item_deal.Name = "btn_item_deal";
+            this.btn_item_deal.Size = new System.Drawing.Size(264, 81);
+            this.btn_item_deal.TabIndex = 20;
+            this.btn_item_deal.Text = "ITEM_DEAL_PROPERTY (INTERFACE)";
+            this.btn_item_deal.UseVisualStyleBackColor = true;
+            this.btn_item_deal.Click += new System.EventHandler(this.btn_item_deal_Click);
+            // 
+            // btnsk_almacen
+            // 
+            this.btnsk_almacen.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnsk_almacen.Location = new System.Drawing.Point(765, 165);
+            this.btnsk_almacen.Name = "btnsk_almacen";
+            this.btnsk_almacen.Size = new System.Drawing.Size(194, 67);
+            this.btnsk_almacen.TabIndex = 21;
+            this.btnsk_almacen.Text = "ENVIO DE STOCK DE ALMACEN";
+            this.btnsk_almacen.UseVisualStyleBackColor = true;
+            this.btnsk_almacen.Click += new System.EventHandler(this.btnsk_almacen_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(860, 313);
+            this.ClientSize = new System.Drawing.Size(1031, 313);
+            this.Controls.Add(this.btnsk_almacen);
+            this.Controls.Add(this.btn_item_deal);
             this.Controls.Add(this.btntarea);
             this.Controls.Add(this.btnenvio_prescripciones);
             this.Controls.Add(this.BTNENVIONOV);
@@ -264,6 +290,8 @@
         private System.Windows.Forms.Button BTNENVIONOV;
         private System.Windows.Forms.Button btnenvio_prescripciones;
         private System.Windows.Forms.Button btntarea;
+        private System.Windows.Forms.Button btn_item_deal;
+        private System.Windows.Forms.Button btnsk_almacen;
     }
 }
 

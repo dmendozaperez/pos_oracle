@@ -716,6 +716,504 @@ namespace CapaServicioWindows.Modular
                
             }
         }
+
+        #region<ENVIO DE STOCK DE ALMACEN>
+        public void eje_envio_stk_almacen(ref string _error_ws)
+        {
+            string _error_transac = "";
+            //List<BataTransac.Ent_Scdddes> _lista_guiasC = null;
+
+            List<BataTransac.Ent_PathDBF> listar_location_dbf = null;
+            DataTable dtStock = null;
+            TextWriter tw = null;
+            try
+            {
+                /*segundos para ejecutar*/
+                //_espera_ejecuta(20);
+                /***********************/
+
+                #region<CAPTURAR EL PATH DE LOS DBF>
+                Util locationdbf = new Util();
+                listar_location_dbf = locationdbf.get_location_dbf(ref _error_ws);
+                #endregion
+
+                if (listar_location_dbf == null) return;
+
+                /*VALIDACION DE EJECUCION */
+                #region<VALIDA ARCHIVO SI EXISTE PARA NO REALIZAR NINGUNA ACCCION POR SEGURIDAD DE REINDEXACION DEL FOX>
+                string name_txt = "NOPOS";
+                var _locatio_noservicio = listar_location_dbf.Where(x => x.rutloc_namedbf == name_txt).FirstOrDefault();
+
+                //Boolean valida_exists_txt = false;
+                string ruta_validacion = "";
+                if (_locatio_noservicio != null)
+                {
+
+                    ruta_validacion = _locatio_noservicio.rutloc_location + "\\" + _locatio_noservicio.rutloc_namedbf + ".txt";
+                    /* if (File.Exists(@ruta_validacion)) return;*/ //valida_exists_txt = true;
+
+                }
+                //ruta_validacion = @"D:\FVT\SISTEMAS\NOPOS.TXT";
+                forzar_delete_nopos(ruta_validacion);
+                #endregion
+
+                #region<EN ESTE PASO TRATAMOS DE ENTRAR AL NOVELL PARA TRAERME LA INFO>
+                if (valida_file_ecu())
+                {
+                    NetworkShare.ConnectToShare(_locatio_noservicio.rutloc_location, ConexionDBF.user_novell, ConexionDBF.password_novell);
+                }
+                #endregion
+
+                //if (valida_exists_txt) return;
+
+
+
+                string name_dbf = "SCACSAL";
+                var _locatio_scdddes = listar_location_dbf.Where(x => x.rutloc_namedbf == name_dbf).FirstOrDefault();
+
+                //string _error = "";
+                /*ya no entra a consultar*/
+                if (File.Exists(@ruta_validacion)) return;
+                string _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "==>INGRESO PASO1 ALMACEN";
+                tw = new StreamWriter(@"D:\ALMACEN\STOCK.txt", true);
+                tw.WriteLine(_hora);
+                tw.Flush();
+                tw.Close();
+                tw.Dispose();
+                /**/
+
+
+                #region<EN ESTE PASO TRATAMOS DE ENTRAR AL NOVELL PARA TRAERME LA INFO>
+                if (valida_file_ecu())
+                {
+                    NetworkShare.ConnectToShare(_locatio_noservicio.rutloc_location, ConexionDBF.user_novell, ConexionDBF.password_novell);
+                }
+                else
+                {
+                    NetworkShare.ConnectToShare(_locatio_scdddes.rutloc_location, @".\Tareas", "tareas");
+                }
+                #endregion
+
+                #region<ENVIO DE STOCK DE ALMACEN>
+                /*user y password*/
+                BataTransac.ValidateAcceso header_user = new BataTransac.ValidateAcceso();
+                header_user.Username = "3D4F4673-98EB-4EB5-A468-4B7FAEC0C721";
+                header_user.Password = "566FDFF1-5311-4FE2-B3FC-0346923FE4B4";
+
+                BataTransac.Bata_TransactionSoapClient batatran = new BataTransac.Bata_TransactionSoapClient();
+                List<BataTransac.Ent_Stock_Almacen> result = new List<BataTransac.Ent_Stock_Almacen>();
+                //get_scdddes
+                    
+                using (System.Data.OleDb.OleDbConnection dbConn = new System.Data.OleDb.OleDbConnection(ConexionDBF._conexion_oledb(_locatio_scdddes.rutloc_location)))
+                {
+                    try
+                    {
+
+                        //string sql_sem_ano = "SELECT MAX(csal_ano),MAX(csal_seman) FROM SCACSAL";
+
+                        //System.Data.OleDb.OleDbCommand dat_cierre_sem = new System.Data.OleDb.OleDbCommand(sql_sem_ano, dbConn);
+                        //System.Data.OleDb.OleDbDataAdapter ada_cierre_sem = new System.Data.OleDb.OleDbDataAdapter(dat_cierre_sem);
+                        //DataTable tabla_sem = new DataTable();
+                        //if (File.Exists(@ruta_validacion)) return;
+
+                        //_hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "==>INGRESO CAPTURA MAX ANO Y SEM SCACSAL ";
+                        //tw = new StreamWriter(@"D:\ALMACEN\STOCK.txt", true);
+                        //tw.WriteLine(_hora);
+                        //tw.Flush();
+                        //tw.Close();
+                        //tw.Dispose();
+
+                        //ada_cierre_sem.Fill(tabla_sem);
+
+                        //if (tabla_sem != null)
+                        //{
+                        //    if (tabla_sem.Rows.Count>0)
+                        //    {
+
+                        //    }
+                        //}
+
+                        _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "==>FIN CAPTURA MAX ANO Y SEM SCACSAL ";
+                        tw = new StreamWriter(@"D:\ALMACEN\STOCK.txt", true);
+                        tw.WriteLine(_hora);
+                        tw.Flush();
+                        tw.Close();
+                        tw.Dispose();
+
+
+
+                        //-- Obtenemos datos abierto o ultimo cerrado
+                        string sql_cierre = "SELECT * FROM SCACSAL WHERE csal_ano= (SELECT MAX(csal_ano) FROM SCACSAL) AND csal_seman= (SELECT MAX(csal_seman) FROM SCACSAL WHERE csal_ano= (SELECT MAX(csal_ano) FROM SCACSAL))";
+                        System.Data.OleDb.OleDbCommand dat_cierre = new System.Data.OleDb.OleDbCommand(sql_cierre, dbConn);
+                        System.Data.OleDb.OleDbDataAdapter ada_cierre = new System.Data.OleDb.OleDbDataAdapter(dat_cierre);
+                        DataTable tabla = new DataTable();
+                        if (File.Exists(@ruta_validacion)) return;
+
+                         _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "==>INGRESO CONSULTA TABLA SCACSAL ";
+                        tw = new StreamWriter(@"D:\ALMACEN\STOCK.txt", true);
+                        tw.WriteLine(_hora);
+                        tw.Flush();
+                        tw.Close();
+                        tw.Dispose();
+
+                        ada_cierre.Fill(tabla);
+
+                        _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "==>TERMINANDO DE CONSULTAR TABLA SCACSAL ";
+                        tw = new StreamWriter(@"D:\ALMACEN\STOCK.txt", true);
+                        tw.WriteLine(_hora);
+                        tw.Flush();
+                        tw.Close();
+                        tw.Dispose();
+
+                        dtStock = new DataTable();
+
+
+
+                        //---------  ceracion de tabla ----------//
+                        dtStock.Columns.Add("Csal_almac", typeof(string));
+                        dtStock.Columns.Add("Csal_cd", typeof(string));
+                        dtStock.Columns.Add("Csal_artic", typeof(string));
+                        dtStock.Columns.Add("Csal_calid", typeof(string));
+                        dtStock.Columns.Add("Csal_codRgmd", typeof(string));
+                        dtStock.Columns.Add("Csal_MedPer", typeof(string));
+                        dtStock.Columns.Add("Csal_MedLat", typeof(string));
+                        dtStock.Columns.Add("Csal_cantidad", typeof(string));
+                        dtStock.Columns.Add("Csal_secci", typeof(string));
+                        dtStock.Columns.Add("Csal_ano", typeof(string));
+                        dtStock.Columns.Add("Csal_seman", typeof(string));
+
+                        string centro_dis = "50001";
+
+                        for (Int32 i = 0; i < tabla.Rows.Count; i++)
+                        {
+                            if (Convert.ToInt32(tabla.Rows[i]["Csal_med00"]) != 0 || Convert.ToInt32(tabla.Rows[i]["Csal_med01"]) != 0
+                                || Convert.ToInt32(tabla.Rows[i]["Csal_med02"]) != 0 || Convert.ToInt32(tabla.Rows[i]["Csal_med03"]) != 0
+                                || Convert.ToInt32(tabla.Rows[i]["Csal_med04"]) != 0 || Convert.ToInt32(tabla.Rows[i]["Csal_med05"]) != 0
+                                || Convert.ToInt32(tabla.Rows[i]["Csal_med06"]) != 0 || Convert.ToInt32(tabla.Rows[i]["Csal_med07"]) != 0
+                                || Convert.ToInt32(tabla.Rows[i]["Csal_med08"]) != 0 || Convert.ToInt32(tabla.Rows[i]["Csal_med09"]) != 0
+                                || Convert.ToInt32(tabla.Rows[i]["Csal_med10"]) != 0 || Convert.ToInt32(tabla.Rows[i]["Csal_med11"]) != 0)
+                            {
+                                if (Convert.ToInt32(tabla.Rows[i]["Csal_med00"]) != 0)
+                                {
+                                    string Csal_secci = tabla.Rows[i]["Csal_secci"].ToString();
+                                    string Csal_ano = tabla.Rows[i]["Csal_ano"].ToString();
+                                    string Csal_seman = tabla.Rows[i]["Csal_seman"].ToString();
+                                    string Csal_alm = tabla.Rows[i]["Csal_almac"].ToString();
+                                    string Csal_artic = tabla.Rows[i]["Csal_artic"].ToString();
+                                    string Csal_calid = tabla.Rows[i]["Csal_calid"].ToString();
+
+                                    Int32 Csal_cantidad = Convert.ToInt32(tabla.Rows[i]["Csal_med00"]);// cantidad o valor de la posicion
+                                    string Csal_codRgmd = tabla.Rows[i]["Csal_rmed"].ToString(); //
+                                    string Csal_MedPer = "00"; //nombre de columna (posicion)
+                                    string Csal_MedLat = "01";
+
+                                    //FuncionInsertar(Csal_secci, Csal_ano, Csal_seman, Csal_alm, Csal_artic, Csal_calid, Csal_cantidad, Csal_codRgmd, Csal_MedPer, Csal_MedLat);
+                                   // dtStock.Rows.Add(Csal_secci, Csal_ano, Csal_seman, Csal_alm, Csal_artic, Csal_calid, Csal_cantidad, Csal_codRgmd, Csal_MedPer, Csal_MedLat);
+
+                                    dtStock.Rows.Add(Csal_alm, centro_dis, Csal_artic, Csal_calid, Csal_codRgmd, Csal_MedPer, Csal_MedLat, Csal_cantidad, Csal_secci, Csal_ano, Csal_seman);                                    
+                                }
+
+                                if (Convert.ToInt32(tabla.Rows[i]["Csal_med01"]) != 0)
+                                {
+                                    string Csal_secci = tabla.Rows[i]["Csal_secci"].ToString();
+                                    string Csal_ano = tabla.Rows[i]["Csal_ano"].ToString();
+                                    string Csal_seman = tabla.Rows[i]["Csal_seman"].ToString();
+                                    string Csal_alm = tabla.Rows[i]["Csal_almac"].ToString();
+                                    string Csal_artic = tabla.Rows[i]["Csal_artic"].ToString();
+                                    string Csal_calid = tabla.Rows[i]["Csal_calid"].ToString();
+
+                                    Int32 Csal_cantidad = Convert.ToInt32(tabla.Rows[i]["Csal_med01"]);// cantidad o valor de la posicion
+                                    string Csal_codRgmd = tabla.Rows[i]["Csal_rmed"].ToString(); //
+                                    string Csal_MedPer = "01"; //nombre de columna (posicion)
+                                    string Csal_MedLat = "02";
+
+                                    //FuncionInsertar(Csal_secci, Csal_ano, Csal_seman, Csal_alm, Csal_artic, Csal_calid, Csal_cantidad, Csal_codRgmd, Csal_MedPer, Csal_MedLat);
+                                    dtStock.Rows.Add(Csal_alm, centro_dis, Csal_artic, Csal_calid, Csal_codRgmd, Csal_MedPer, Csal_MedLat, Csal_cantidad, Csal_secci, Csal_ano, Csal_seman);
+
+                                }
+
+                                if (Convert.ToInt32(tabla.Rows[i]["Csal_med02"]) != 0)
+                                {
+                                    string Csal_secci = tabla.Rows[i]["Csal_secci"].ToString();
+                                    string Csal_ano = tabla.Rows[i]["Csal_ano"].ToString();
+                                    string Csal_seman = tabla.Rows[i]["Csal_seman"].ToString();
+                                    string Csal_alm = tabla.Rows[i]["Csal_almac"].ToString();
+                                    string Csal_artic = tabla.Rows[i]["Csal_artic"].ToString();
+                                    string Csal_calid = tabla.Rows[i]["Csal_calid"].ToString();
+
+                                    Int32 Csal_cantidad = Convert.ToInt32(tabla.Rows[i]["Csal_med02"]);// cantidad o valor de la posicion
+                                    string Csal_codRgmd = tabla.Rows[i]["Csal_rmed"].ToString(); //
+                                    string Csal_MedPer = "02"; //nombre de columna (posicion)
+                                    string Csal_MedLat = "03";
+
+                                    //FuncionInsertar(Csal_secci, Csal_ano, Csal_seman, Csal_alm, Csal_artic, Csal_calid, Csal_cantidad, Csal_codRgmd, Csal_MedPer, Csal_MedLat);
+                                    dtStock.Rows.Add(Csal_alm, centro_dis, Csal_artic, Csal_calid, Csal_codRgmd, Csal_MedPer, Csal_MedLat, Csal_cantidad, Csal_secci, Csal_ano, Csal_seman);
+                                }
+
+                                if (Convert.ToInt32(tabla.Rows[i]["Csal_med03"]) != 0)
+                                {
+                                    string Csal_secci = tabla.Rows[i]["Csal_secci"].ToString();
+                                    string Csal_ano = tabla.Rows[i]["Csal_ano"].ToString();
+                                    string Csal_seman = tabla.Rows[i]["Csal_seman"].ToString();
+                                    string Csal_alm = tabla.Rows[i]["Csal_almac"].ToString();
+                                    string Csal_artic = tabla.Rows[i]["Csal_artic"].ToString();
+                                    string Csal_calid = tabla.Rows[i]["Csal_calid"].ToString();
+
+                                    Int32 Csal_cantidad = Convert.ToInt32(tabla.Rows[i]["Csal_med03"]);// cantidad o valor de la posicion
+                                    string Csal_codRgmd = tabla.Rows[i]["Csal_rmed"].ToString(); //
+                                    string Csal_MedPer = "03"; //nombre de columna (posicion)
+                                    string Csal_MedLat = "04";
+
+                                    //FuncionInsertar(Csal_secci, Csal_ano, Csal_seman, Csal_alm, Csal_artic, Csal_calid, Csal_cantidad, Csal_codRgmd, Csal_MedPer, Csal_MedLat);
+                                    dtStock.Rows.Add(Csal_alm, centro_dis, Csal_artic, Csal_calid, Csal_codRgmd, Csal_MedPer, Csal_MedLat, Csal_cantidad, Csal_secci, Csal_ano, Csal_seman);
+                                }
+
+                                if (Convert.ToInt32(tabla.Rows[i]["Csal_med04"]) != 0)
+                                {
+                                    string Csal_secci = tabla.Rows[i]["Csal_secci"].ToString();
+                                    string Csal_ano = tabla.Rows[i]["Csal_ano"].ToString();
+                                    string Csal_seman = tabla.Rows[i]["Csal_seman"].ToString();
+                                    string Csal_alm = tabla.Rows[i]["Csal_almac"].ToString();
+                                    string Csal_artic = tabla.Rows[i]["Csal_artic"].ToString();
+                                    string Csal_calid = tabla.Rows[i]["Csal_calid"].ToString();
+
+                                    Int32 Csal_cantidad = Convert.ToInt32(tabla.Rows[i]["Csal_med04"]);// cantidad o valor de la posicion
+                                    string Csal_codRgmd = tabla.Rows[i]["Csal_rmed"].ToString(); //
+                                    string Csal_MedPer = "04"; //nombre de columna (posicion)
+                                    string Csal_MedLat = "05";
+
+                                    //FuncionInsertar(Csal_secci, Csal_ano, Csal_seman, Csal_alm, Csal_artic, Csal_calid, Csal_cantidad, Csal_codRgmd, Csal_MedPer, Csal_MedLat);
+                                    dtStock.Rows.Add(Csal_alm, centro_dis, Csal_artic, Csal_calid, Csal_codRgmd, Csal_MedPer, Csal_MedLat, Csal_cantidad, Csal_secci, Csal_ano, Csal_seman);
+                                }
+
+                                if (Convert.ToInt32(tabla.Rows[i]["Csal_med05"]) != 0)
+                                {
+                                    string Csal_secci = tabla.Rows[i]["Csal_secci"].ToString();
+                                    string Csal_ano = tabla.Rows[i]["Csal_ano"].ToString();
+                                    string Csal_seman = tabla.Rows[i]["Csal_seman"].ToString();
+                                    string Csal_alm = tabla.Rows[i]["Csal_almac"].ToString();
+                                    string Csal_artic = tabla.Rows[i]["Csal_artic"].ToString();
+                                    string Csal_calid = tabla.Rows[i]["Csal_calid"].ToString();
+
+                                    Int32 Csal_cantidad = Convert.ToInt32(tabla.Rows[i]["Csal_med05"]);// cantidad o valor de la posicion
+                                    string Csal_codRgmd = tabla.Rows[i]["Csal_rmed"].ToString(); //
+                                    string Csal_MedPer = "05"; //nombre de columna (posicion)
+                                    string Csal_MedLat = "06";
+
+                                    //FuncionInsertar(Csal_secci, Csal_ano, Csal_seman, Csal_alm, Csal_artic, Csal_calid, Csal_cantidad, Csal_codRgmd, Csal_MedPer, Csal_MedLat);
+                                    dtStock.Rows.Add(Csal_alm, centro_dis, Csal_artic, Csal_calid, Csal_codRgmd, Csal_MedPer, Csal_MedLat, Csal_cantidad, Csal_secci, Csal_ano, Csal_seman);
+                                }
+                                //dtStock.Rows.Add();
+
+                                if (Convert.ToInt32(tabla.Rows[i]["Csal_med06"]) != 0)
+                                {
+                                    string Csal_secci = tabla.Rows[i]["Csal_secci"].ToString();
+                                    string Csal_ano = tabla.Rows[i]["Csal_ano"].ToString();
+                                    string Csal_seman = tabla.Rows[i]["Csal_seman"].ToString();
+                                    string Csal_alm = tabla.Rows[i]["Csal_almac"].ToString();
+                                    string Csal_artic = tabla.Rows[i]["Csal_artic"].ToString();
+                                    string Csal_calid = tabla.Rows[i]["Csal_calid"].ToString();
+
+                                    Int32 Csal_cantidad = Convert.ToInt32(tabla.Rows[i]["Csal_med06"]);// cantidad o valor de la posicion
+                                    string Csal_codRgmd = tabla.Rows[i]["Csal_rmed"].ToString(); //
+                                    string Csal_MedPer = "06"; //nombre de columna (posicion)
+                                    string Csal_MedLat = "07";
+
+                                    //FuncionInsertar(Csal_secci, Csal_ano, Csal_seman, Csal_alm, Csal_artic, Csal_calid, Csal_cantidad, Csal_codRgmd, Csal_MedPer, Csal_MedLat);
+                                    dtStock.Rows.Add(Csal_alm, centro_dis, Csal_artic, Csal_calid, Csal_codRgmd, Csal_MedPer, Csal_MedLat, Csal_cantidad, Csal_secci, Csal_ano, Csal_seman);
+                                }
+                                if (Convert.ToInt32(tabla.Rows[i]["Csal_med07"]) != 0)
+                                {
+                                    string Csal_secci = tabla.Rows[i]["Csal_secci"].ToString();
+                                    string Csal_ano = tabla.Rows[i]["Csal_ano"].ToString();
+                                    string Csal_seman = tabla.Rows[i]["Csal_seman"].ToString();
+                                    string Csal_alm = tabla.Rows[i]["Csal_almac"].ToString();
+                                    string Csal_artic = tabla.Rows[i]["Csal_artic"].ToString();
+                                    string Csal_calid = tabla.Rows[i]["Csal_calid"].ToString();
+
+                                    Int32 Csal_cantidad = Convert.ToInt32(tabla.Rows[i]["Csal_med07"]);// cantidad o valor de la posicion
+                                    string Csal_codRgmd = tabla.Rows[i]["Csal_rmed"].ToString(); //
+                                    string Csal_MedPer = "07"; //nombre de columna (posicion)
+                                    string Csal_MedLat = "08";
+
+                                    //FuncionInsertar(Csal_secci, Csal_ano, Csal_seman, Csal_alm, Csal_artic, Csal_calid, Csal_cantidad, Csal_codRgmd, Csal_MedPer, Csal_MedLat);
+                                    dtStock.Rows.Add(Csal_alm, centro_dis, Csal_artic, Csal_calid, Csal_codRgmd, Csal_MedPer, Csal_MedLat, Csal_cantidad, Csal_secci, Csal_ano, Csal_seman);
+                                }
+
+                                if (Convert.ToInt32(tabla.Rows[i]["Csal_med08"]) != 0)
+                                {
+                                    string Csal_secci = tabla.Rows[i]["Csal_secci"].ToString();
+                                    string Csal_ano = tabla.Rows[i]["Csal_ano"].ToString();
+                                    string Csal_seman = tabla.Rows[i]["Csal_seman"].ToString();
+                                    string Csal_alm = tabla.Rows[i]["Csal_almac"].ToString();
+                                    string Csal_artic = tabla.Rows[i]["Csal_artic"].ToString();
+                                    string Csal_calid = tabla.Rows[i]["Csal_calid"].ToString();
+
+                                    Int32 Csal_cantidad = Convert.ToInt32(tabla.Rows[i]["Csal_med08"]);// cantidad o valor de la posicion
+                                    string Csal_codRgmd = tabla.Rows[i]["Csal_rmed"].ToString(); //
+                                    string Csal_MedPer = "08"; //nombre de columna (posicion)
+                                    string Csal_MedLat = "09";
+
+                                    //FuncionInsertar(Csal_secci, Csal_ano, Csal_seman, Csal_alm, Csal_artic, Csal_calid, Csal_cantidad, Csal_codRgmd, Csal_MedPer, Csal_MedLat);
+                                    dtStock.Rows.Add(Csal_alm, centro_dis, Csal_artic, Csal_calid, Csal_codRgmd, Csal_MedPer, Csal_MedLat, Csal_cantidad, Csal_secci, Csal_ano, Csal_seman);
+                                }
+
+                                if (Convert.ToInt32(tabla.Rows[i]["Csal_med09"]) != 0)
+                                {
+                                    string Csal_secci = tabla.Rows[i]["Csal_secci"].ToString();
+                                    string Csal_ano = tabla.Rows[i]["Csal_ano"].ToString();
+                                    string Csal_seman = tabla.Rows[i]["Csal_seman"].ToString();
+                                    string Csal_alm = tabla.Rows[i]["Csal_almac"].ToString();
+                                    string Csal_artic = tabla.Rows[i]["Csal_artic"].ToString();
+                                    string Csal_calid = tabla.Rows[i]["Csal_calid"].ToString();
+
+                                    Int32 Csal_cantidad = Convert.ToInt32(tabla.Rows[i]["Csal_med09"]);// cantidad o valor de la posicion
+                                    string Csal_codRgmd = tabla.Rows[i]["Csal_rmed"].ToString(); //
+                                    string Csal_MedPer = "09"; //nombre de columna (posicion)
+                                    string Csal_MedLat = "10";
+
+                                    //FuncionInsertar(Csal_secci, Csal_ano, Csal_seman, Csal_alm, Csal_artic, Csal_calid, Csal_cantidad, Csal_codRgmd, Csal_MedPer, Csal_MedLat);
+                                    dtStock.Rows.Add(Csal_alm, centro_dis, Csal_artic, Csal_calid, Csal_codRgmd, Csal_MedPer, Csal_MedLat, Csal_cantidad, Csal_secci, Csal_ano, Csal_seman);
+                                }
+
+                                if (Convert.ToInt32(tabla.Rows[i]["Csal_med10"]) != 0)
+                                {
+                                    string Csal_secci = tabla.Rows[i]["Csal_secci"].ToString();
+                                    string Csal_ano = tabla.Rows[i]["Csal_ano"].ToString();
+                                    string Csal_seman = tabla.Rows[i]["Csal_seman"].ToString();
+                                    string Csal_alm = tabla.Rows[i]["Csal_almac"].ToString();
+                                    string Csal_artic = tabla.Rows[i]["Csal_artic"].ToString();
+                                    string Csal_calid = tabla.Rows[i]["Csal_calid"].ToString();
+
+                                    Int32 Csal_cantidad = Convert.ToInt32(tabla.Rows[i]["Csal_med10"]);// cantidad o valor de la posicion
+                                    string Csal_codRgmd = tabla.Rows[i]["Csal_rmed"].ToString(); //
+                                    string Csal_MedPer = "10"; //nombre de columna (posicion)
+                                    string Csal_MedLat = "11";
+
+                                    //FuncionInsertar(Csal_secci, Csal_ano, Csal_seman, Csal_alm, Csal_artic, Csal_calid, Csal_cantidad, Csal_codRgmd, Csal_MedPer, Csal_MedLat);
+                                    dtStock.Rows.Add(Csal_alm, centro_dis, Csal_artic, Csal_calid, Csal_codRgmd, Csal_MedPer, Csal_MedLat, Csal_cantidad, Csal_secci, Csal_ano, Csal_seman);
+                                }
+
+                                if (Convert.ToInt32(tabla.Rows[i]["Csal_med11"]) != 0)
+                                {
+                                    string Csal_secci = tabla.Rows[i]["Csal_secci"].ToString();
+                                    string Csal_ano = tabla.Rows[i]["Csal_ano"].ToString();
+                                    string Csal_seman = tabla.Rows[i]["Csal_seman"].ToString();
+                                    string Csal_alm = tabla.Rows[i]["Csal_almac"].ToString();
+                                    string Csal_artic = tabla.Rows[i]["Csal_artic"].ToString();
+                                    string Csal_calid = tabla.Rows[i]["Csal_calid"].ToString();
+
+                                    Int32 Csal_cantidad = Convert.ToInt32(tabla.Rows[i]["Csal_med11"]);// cantidad o valor de la posicion
+                                    string Csal_codRgmd = tabla.Rows[i]["Csal_rmed"].ToString(); //
+                                    string Csal_MedPer = "11"; //nombre de columna (posicion)
+                                    string Csal_MedLat = "12";
+
+
+                                    //FuncionInsertar(Csal_secci, Csal_ano, Csal_seman, Csal_alm, Csal_artic, Csal_calid, Csal_cantidad, Csal_codRgmd, Csal_MedPer, Csal_MedLat);
+                                    dtStock.Rows.Add(Csal_alm, centro_dis, Csal_artic, Csal_calid, Csal_codRgmd, Csal_MedPer, Csal_MedLat, Csal_cantidad, Csal_secci, Csal_ano, Csal_seman);
+                                }
+                            }
+                        }
+                        
+                        if (dtStock!=null)
+                        {
+                            if (dtStock.Rows.Count>0)
+                            {
+                                _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "==>CAPTURAR DATOS DE DATATABLE A OBJETO DE WS ";
+                                tw = new StreamWriter(@"D:\ALMACEN\STOCK.txt", true);
+                                tw.WriteLine(_hora);
+                                tw.Flush();
+                                tw.Close();
+                                tw.Dispose();
+                                result = (from DataRow row in dtStock.Rows
+                                          select new BataTransac.Ent_Stock_Almacen()
+                                          {
+                                              cod_tda = row["Csal_almac"].ToString(),
+                                              cd= row["Csal_cd"].ToString(),                                              
+                                              art_cod = row["Csal_artic"].ToString(),
+                                              art_cal = row["Csal_calid"].ToString(),
+                                              cod_rgmed= row["Csal_codRgmd"].ToString(),
+                                              cod_med_per= row["Csal_MedPer"].ToString(),
+                                              cod_med_lat= row["Csal_MedLat"].ToString(),
+                                              //art_talla ="",// row["SG_REGL"].ToString(),
+                                              art_pares = Convert.ToInt32(row["Csal_cantidad"]),
+                                              secci= row["Csal_secci"].ToString(),
+                                              ano= row["Csal_ano"].ToString(),
+                                              sem= row["Csal_seman"].ToString()
+                                          }).ToList();
+
+                                _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "==>DATOS EN COLECCION A OBJETO DE WS ";
+                                tw = new StreamWriter(@"D:\ALMACEN\STOCK.txt", true);
+                                tw.WriteLine(_hora);
+                                tw.Flush();
+                                tw.Close();
+                                tw.Dispose();
+
+                                if (result.Count > 0)
+                                {
+                                    var array = new BataTransac.Ent_Lista_Stock_Almacen();
+                                    array.lista_stock = result.ToArray();
+
+                                    _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "==>ENVIAR STOCK POR WS ";
+                                    tw = new StreamWriter(@"D:\ALMACEN\STOCK.txt", true);
+                                    tw.WriteLine(_hora);
+                                    tw.Flush();
+                                    tw.Close();
+                                    tw.Dispose();
+
+                                    BataTransac.Ent_MsgTransac msg = batatran.ws_envia_stock_almacen(header_user, array);
+
+                                    _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "==>SALIENDO DE ENVIAR STOCK DE WS ";
+                                    tw = new StreamWriter(@"D:\ALMACEN\STOCK.txt", true);
+                                    tw.WriteLine(_hora);
+                                    tw.Flush();
+                                    tw.Close();
+                                    tw.Dispose();
+
+
+                                    /*Nota*/
+                                    //msg.codigo = "0";
+                                    //msg.descripcion = "Se actualizo correctamente";
+
+                                    if (msg.codigo == "1")
+                                        _error_ws = msg.descripcion;
+
+                                    //msg.codigo = "1";
+                                    //msg.descripcion = "descripcion de error";
+                                }
+
+                            }
+                        }
+
+                    }
+                    catch (Exception ex)
+                    {
+                        _error_ws = ex.Message;
+                        //TextWriter tw1 = new StreamWriter(@"D:\POS\Transmision.net\ERROR.txt", true);
+                        //tw1.WriteLine(ex.Message);
+                        //tw1.Flush();
+                        //tw1.Close();
+                        //tw1.Dispose();
+                    }
+
+                }
+
+              
+                #endregion
+
+              
+            }
+            catch (Exception exc)
+            {
+                //dtStock = null;
+                _error_ws = exc.Message + " error de metodo";
+                _error_transac = exc.Message + " error de metodo";
+                //_envio_guias = "";
+            }
+            //return _error_transac;
+        }
+
+        #endregion
         #region<ENVIO DE PRESCRIPCIONES>
         private void update_list_scccgud(string sqlquery, string _path, ref string _error_ws)
         {

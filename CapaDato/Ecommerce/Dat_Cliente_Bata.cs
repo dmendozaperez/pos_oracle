@@ -42,7 +42,7 @@ namespace CapaDato.Ecommerce
                             cmd.Parameters.AddWithValue("@telefono", Cliente.telefono);
                             cmd.Parameters.AddWithValue("@ubigeo", Cliente.ubigeo);
                             cmd.Parameters.AddWithValue("@usuario", usuario);
-
+                            cmd.Parameters.AddWithValue("@cod_tda", Cliente.tienda);
 
 
                             cmd.ExecuteNonQuery();

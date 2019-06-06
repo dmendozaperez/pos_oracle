@@ -1,5 +1,6 @@
 ﻿using AForge;
 using AForge.Imaging.Filters;
+using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -8,6 +9,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
 using Tesseract;
@@ -298,7 +300,32 @@ namespace Ws_ConsultReniecSunat.Bll
                 throw;
             }
         }
+        private readonly CookieContainer a = new CookieContainer();
+        public string getRawResponseAsync(string url, params object[] parameters)
+        {
+            string str = Convert.ToString(parameters[0]);
+            string s = "hTipo=2&hDni=" + str + "&hApPat=&hApMat=&hNombre=";
+            byte[] bytes = Encoding.ASCII.GetBytes(s);
+            HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
+            httpWebRequest.Method = "POST";
+            httpWebRequest.Referer = "http://clientes.reniec.gob.pe/padronElectoral2012/padronPEMDistrito.htm";
+            httpWebRequest.CookieContainer = this.a;
+            httpWebRequest.ContentType = "application/x-www-form-urlencoded";
+            using (Stream j = httpWebRequest.GetRequestStream())
+                j.Write(bytes, 0, bytes.Length);
+            string endAsync =  new StreamReader(httpWebRequest.GetResponse().GetResponseStream()).ReadToEnd();
 
+            return endAsync;
+        }
+        private  string[] splitString(string _textString, char _character)
+        {
+            string[] split = null;
+            if (!string.IsNullOrEmpty(_textString))
+            {
+                split = _textString.Split(new Char[] { _character });
+            }
+            return split;
+        }
         public void GetInfo(string numDni, string ImgCapcha)
         {
             try
@@ -306,8 +333,42 @@ namespace Ws_ConsultReniecSunat.Bll
 
 
 
-
                 this._estado = null;
+
+                #region<NUEVA CONSULTA DNI>
+                string str =  this.getRawResponseAsync("http://clientes.reniec.gob.pe/padronElectoral2012/consulta.htm", (object)numDni);
+                string html = str;
+                str = (string)null;
+                HtmlDocument htmlDocument = new HtmlDocument();
+                htmlDocument.LoadHtml(html);
+                HtmlNodeCollection htmlNodeCollection1 = htmlDocument.DocumentNode.SelectNodes("//table");
+                if (htmlNodeCollection1.Count != 7)
+                    throw new InvalidOperationException("No se pudo conectar con el servidor RENIEC.");
+                //Persona persona = new Persona()
+                //{
+                //    Dni = dni.Trim()
+                //};
+                HtmlNodeCollection htmlNodeCollection2 = htmlNodeCollection1[4].SelectNodes("tr/td");
+                string[] strArray = htmlNodeCollection2[1].InnerHtml.Split(',');
+                this._Nombres = strArray[1].TrimEnd(Array.Empty<char>());
+                this._Nombres = this._Nombres.TrimStart().TrimEnd().Trim();
+                this._ApeMaterno = strArray[0].TrimEnd(Array.Empty<char>());
+                string[] apellidos = splitString(this._ApeMaterno, ' ');
+
+                this._ApePaterno = apellidos[0].ToString();
+                this._ApePaterno = this._ApePaterno.TrimStart().TrimEnd().Trim();
+                this._ApeMaterno = apellidos[1].ToString();
+                this._ApeMaterno = this._ApeMaterno.TrimStart().TrimEnd().Trim();
+
+                estado_reniec = 231;
+                state = Resul.Ok;
+                //this._Nombres = nombres_onp[2].ToString().Trim();
+                //this._ApePaterno = nombres_onp[0].ToString().Trim();
+                //this._ApeMaterno = nombres_onp[1].ToString().Trim();
+                return;
+
+
+                #endregion
 
                 #region<CONSULTA DE DATA ONPE POR DNI>
                 String myurl_onpe = string.Format("http://aplicaciones007.jne.gob.pe/srop_publico/Consulta/Afiliado/GetNombresCiudadano?DNI={0}", numDni);

@@ -78,6 +78,15 @@ namespace CapaEntidad.Venta
         public string fc_mpub { get; set; }
         public string fc_edad { get; set; }
         public string fc_regv { get; set; }
+
+        /*sostic 05-2019*/
+        /*Campos para el canal de venta*/
+        public string fc_idtda_b { get; set; }
+        public string fc_id_est { get; set; }
+        public string fc_id_tcv { get; set; }
+        public string fc_refere { get; set; }
+        public string fc_ubi { get; set; }
+
         #endregion
 
     }

@@ -86,6 +86,9 @@
     <None Include="Service References\BataTransac\ServiceWinTransaction.BataTransac.Ent_Alma_Ecu.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\BataTransac\ServiceWinTransaction.BataTransac.Ent_CarpetaUpload_Xstore.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\BataTransac\ServiceWinTransaction.BataTransac.Ent_Config_Service.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

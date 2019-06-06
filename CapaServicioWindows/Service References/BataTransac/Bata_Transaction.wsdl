@@ -389,6 +389,45 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="ws_envia_stock_almacen">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="lista_stk" type="tns:Ent_Lista_Stock_Almacen" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Ent_Lista_Stock_Almacen">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="lista_stock" type="tns:ArrayOfEnt_Stock_Almacen" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfEnt_Stock_Almacen">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Ent_Stock_Almacen" nillable="true" type="tns:Ent_Stock_Almacen" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Ent_Stock_Almacen">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="cod_tda" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="cd" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="art_cod" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="art_cal" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="cod_rgmed" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="cod_med_per" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="cod_med_lat" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="art_pares" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="secci" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ano" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="sem" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ws_envia_stock_almacenResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ws_envia_stock_almacenResult" type="tns:Ent_MsgTransac" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="ws_envia_venta_tda">
         <s:complexType>
           <s:sequence>
@@ -914,6 +953,15 @@
   <wsdl:message name="ws_envia_stock_tdaValidateAcceso">
     <wsdl:part name="ValidateAcceso" element="tns:ValidateAcceso" />
   </wsdl:message>
+  <wsdl:message name="ws_envia_stock_almacenSoapIn">
+    <wsdl:part name="parameters" element="tns:ws_envia_stock_almacen" />
+  </wsdl:message>
+  <wsdl:message name="ws_envia_stock_almacenSoapOut">
+    <wsdl:part name="parameters" element="tns:ws_envia_stock_almacenResponse" />
+  </wsdl:message>
+  <wsdl:message name="ws_envia_stock_almacenValidateAcceso">
+    <wsdl:part name="ValidateAcceso" element="tns:ValidateAcceso" />
+  </wsdl:message>
   <wsdl:message name="ws_envia_venta_tdaSoapIn">
     <wsdl:part name="parameters" element="tns:ws_envia_venta_tda" />
   </wsdl:message>
@@ -1057,6 +1105,11 @@
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Enviar Stock de tienda servicio transmision net</wsdl:documentation>
       <wsdl:input message="tns:ws_envia_stock_tdaSoapIn" />
       <wsdl:output message="tns:ws_envia_stock_tdaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ws_envia_stock_almacen">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Enviar Stock de almacen servicio transaction</wsdl:documentation>
+      <wsdl:input message="tns:ws_envia_stock_almacenSoapIn" />
+      <wsdl:output message="tns:ws_envia_stock_almacenSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="ws_envia_venta_tda">
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Enviar Ventas de tienda</wsdl:documentation>
@@ -1242,6 +1295,16 @@
       <wsdl:input>
         <soap:body use="literal" />
         <soap:header message="tns:ws_envia_stock_tdaValidateAcceso" part="ValidateAcceso" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_envia_stock_almacen">
+      <soap:operation soapAction="http://bataperu.com.pe/ws_envia_stock_almacen" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ws_envia_stock_almacenValidateAcceso" part="ValidateAcceso" use="literal" />
       </wsdl:input>
       <wsdl:output>
         <soap:body use="literal" />
@@ -1471,6 +1534,16 @@
       <wsdl:input>
         <soap12:body use="literal" />
         <soap12:header message="tns:ws_envia_stock_tdaValidateAcceso" part="ValidateAcceso" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_envia_stock_almacen">
+      <soap12:operation soapAction="http://bataperu.com.pe/ws_envia_stock_almacen" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ws_envia_stock_almacenValidateAcceso" part="ValidateAcceso" use="literal" />
       </wsdl:input>
       <wsdl:output>
         <soap12:body use="literal" />

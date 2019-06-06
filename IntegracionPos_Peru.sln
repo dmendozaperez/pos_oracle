@@ -49,6 +49,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICSharpCode.SharpZLib", "ICSharpCode.SharpZLib\ICSharpCode.SharpZLib.csproj", "{A219098E-4077-470F-A709-F5F0142845BE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceWin32Framework4", "ServiceWin32Framework4\ServiceWin32Framework4.csproj", "{41752765-DC34-4560-B4B0-3FFDB497CEB8}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9C787199-FBAD-4BEA-8332-73B204FC84E9} = {9C787199-FBAD-4BEA-8332-73B204FC84E9}
+	EndProjectSection
 EndProject
 Project("{F14B399A-7131-4C87-9E4B-1186C45EF12D}") = "ReportBata", "ReportBata\ReportBata.rptproj", "{1679C743-9F84-4303-8B37-0910BF20532F}"
 EndProject

@@ -1,10 +1,12 @@
-﻿using CapaBasico.Util;
+﻿using BarcodeLib;
+using CapaBasico.Util;
 using CapaDato.Ecommerce;
 using CapaEntidad.Ecommerce;
 using CapaEntidad.Util;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Drawing;
 using System.Linq;
 using System.Web;
 using System.Web.Services;
@@ -151,6 +153,78 @@ namespace WS_Ecommerce
             return result;
         }
 
+        //[SoapHeader("Authentication", Required = true)]
+        //[WebMethod(Description = "Generar Codigo de barra")]
+        [WebMethod]
+        public Ent_MsgTransacBarra ws_genera_barra(string user,string password,string barra)
+        {
+            //Autenticacion
+            Ent_MsgTransacBarra res = new Ent_MsgTransacBarra();
+            autentication_ws = new Ba_WsConexion();
+            Authentication = new ValidateAcceso();
+            if (user.Length>0 && password.Length>0)
+            {
+                Authentication.Username = user;
+                Authentication.Password = password;
+            }
+            Ent_Conexion.conexion_posperu = ConfigurationManager.ConnectionStrings["SQL_PE"].ConnectionString; //ConfigurationManager.ConnectionStrings["SQL_PE"].ConnectionString;
+            Ent_Conexion.conexion = ConfigurationManager.ConnectionStrings["SQL_PE"].ConnectionString; //ConfigurationManager.ConnectionStrings["SQL_PE"].ConnectionString;
+            Ba_DownloadFile DaBarra = null;
+            string result = "";
+            string ubi_Archivo = "";                     
+            try
+            {
+                if (barra.Trim().Length == 0) { res.estado = "-1"; res.descripcion = res.descripcion + "Código de barra es obligatorio."; };
+
+                if (res.estado != "-1")
+                {
+                    Boolean valida_ws = autentication_ws.ckeckAuthentication_ws("03", Authentication.Username, Authentication.Password);
+                    if (valida_ws)
+                    {
+                        Barcode bc_code = new Barcode();
+                        bc_code.IncludeLabel = true;
+                        Image img_barra = bc_code.Encode(TYPE.CODE128, barra, Color.Black, Color.White, 400, 100);
+
+
+
+                        //dynamicPanel.BackgroundImage = Codigo.Encode(TYPE.CODE128, barra, Color.Black, Color.White, 400, 100);
+                        //System.Drawing.Image imgFinal = (System.Drawing.Image)dynamicPanel.BackgroundImage.Clone();
+                        DaBarra = new Ba_DownloadFile();
+
+                        byte[] img_bytes= DaBarra.imageToByteArray(img_barra);
+
+                        result = DaBarra.genera_img_barra(img_bytes, barra, ref ubi_Archivo);
+
+                        if (result == "Ok")
+                        {
+                            res.estado = "0";
+                            res.descripcion =  "Se generó correctamente el código de barras y se guardó en " + ubi_Archivo;
+                            res.uri = ubi_Archivo;
+                        }
+                        else
+                        {
+                            res.estado = "-1";
+                            res.descripcion = "Hubo un problema al generar el código de barras";
+                            res.uri = ubi_Archivo;
+                        }
+
+                    }
+                    else
+                    {
+                        res.estado = "-1";
+                        res.descripcion = "Error de autentificacion";
+                    }
+                }
+               
+            }
+
+            catch (Exception ex)
+            {
+                res.estado = "-1";
+                res.descripcion = ex.Message;
+            }
+            return res;
+        }
 
         public class ValidateAcceso : SoapHeader
         {

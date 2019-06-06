@@ -58,6 +58,7 @@
     <Compile Include="Util\Ent_Msg.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\Ent_MsgTransac.cs" />
+    <Compile Include="Util\Ent_MsgTransacBarra.cs" />
     <Compile Include="Util\Ent_PathDBF.cs" />
     <Compile Include="Venta\Ent_Ffactc.cs" />
     <Compile Include="Venta\Ent_Ffactd.cs" />

@@ -90,12 +90,24 @@ namespace WS_Ecommerce
                 if (Cliente.primerNombre.Trim().Length == 0) { result.codigo = "-1"; result.descripcion = result.descripcion + "Nombre es obligatorio."; };
                 if (Cliente.apellidoPater.Trim().Length == 0) { result.codigo = "-1"; result.descripcion = result.descripcion + "Apellido paterno es obligatorio."; };
 
-               
+                DaCliente = new Dat_Cliente_Bata();
+                #region<EXISTE EMAIL>
+                result = DaCliente.Existe_Email_BataClub(Cliente);
+                Cliente.ubigeo_distrito = (Cliente.ubigeo_distrito == null) ? "" : Cliente.ubigeo_distrito;
+                Cliente.ubigeo = (Cliente.ubigeo == null) ? "" : Cliente.ubigeo;
+
+                //if (result.codigo=="-1")
+                //{
+
+                //}
+
+                #endregion
+
                 if (result.codigo != "-1") { 
                     Boolean valida_ws = autentication_ws.ckeckAuthentication_ws("03", Authentication.Username, Authentication.Password);
                     if (valida_ws)
                     {
-                        DaCliente = new Dat_Cliente_Bata();
+                      
                         result = DaCliente.Resgistrar_ClienteBtaclub(Cliente, Authentication.Username);
 
                     } else {
@@ -116,7 +128,7 @@ namespace WS_Ecommerce
 
         [SoapHeader("Authentication", Required = true)]
         [WebMethod(Description = "Consultar los datos del cliente")]
-        public Ent_Cliente_BataClub ws_consultar_Cliente(string dni)
+        public Ent_Cliente_BataClub ws_consultar_Cliente(Cliente_Parameter_Bataclub dni)
         {
             Ent_Cliente_BataClub result = new Ent_Cliente_BataClub();
             autentication_ws = new Ba_WsConexion();
@@ -128,8 +140,28 @@ namespace WS_Ecommerce
             {
                 result.descripcion_error = "";
                 result.existe_cliente = false;
-                if (dni.Trim().Length == 0) { result.descripcion_error = "Ingrese el numero de DNI"; }
+                if (dni==null) { result.descripcion_error = "Ingrese el numero de DNI"; }
+                string str_dni = "";
+                //string str_barra_dni = "";
+                Boolean valida_dni = false;
+                if (dni.dni!=null)
+                {
+                    if (dni.dni.Length>0)
+                    {
+                        str_dni = dni.dni;
+                        valida_dni = true;
+                    }
+                }
+                if (dni.dni_barra != null)
+                {
+                    if (dni.dni_barra.Length > 0)
+                    {
+                        valida_dni = true;
+                        str_dni = dni.dni_barra;
+                    }
+                }
 
+                if (!valida_dni) { result.descripcion_error = "Ingrese el numero de DNI"; }
 
                 if (result.descripcion_error.Length == 0)
                 {
@@ -137,7 +169,7 @@ namespace WS_Ecommerce
                     if (valida_ws)
                     {
                         DaCliente = new Dat_Cliente_Bata();
-                        result = DaCliente.Consultar_ClienteBataclub(dni);
+                        result = DaCliente.Consultar_ClienteBataclub(str_dni);
                     }
                     else
                     {                        

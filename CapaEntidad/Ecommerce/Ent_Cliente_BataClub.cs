@@ -21,6 +21,7 @@ namespace CapaEntidad.Ecommerce
         public string fecNac { get; set; }
         public string telefono { get; set; }
         public string ubigeo { get; set; }
+        public string ubigeo_distrito { get; set; }
         public string tienda { get; set; }
         public Boolean registrado { get; set; }
         public Boolean miembro_bataclub { get; set; }       
@@ -28,5 +29,9 @@ namespace CapaEntidad.Ecommerce
         public Boolean existe_cliente { get; set; } 
         public string descripcion_error { get; set; }
     }
-   
+   public class Cliente_Parameter_Bataclub
+    {
+        public string dni { get; set; }
+        public string dni_barra { get; set; }
+    }
 }

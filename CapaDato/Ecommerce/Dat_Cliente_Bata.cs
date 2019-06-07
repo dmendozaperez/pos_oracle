@@ -43,7 +43,7 @@ namespace CapaDato.Ecommerce
                             cmd.Parameters.AddWithValue("@ubigeo", Cliente.ubigeo);
                             cmd.Parameters.AddWithValue("@usuario", usuario);
                             cmd.Parameters.AddWithValue("@cod_tda", Cliente.tienda);
-
+                            cmd.Parameters.AddWithValue("@ubigeo_distrito", Cliente.ubigeo_distrito);
 
                             cmd.ExecuteNonQuery();
                             result.codigo = "0";
@@ -67,6 +67,54 @@ namespace CapaDato.Ecommerce
                 result.codigo = "-1";
                 result.descripcion = exc.Message;
 
+            }
+            return result;
+        }
+        public Ent_MsgTransac Existe_Email_BataClub(Ent_Cliente_BataClub cliente)
+        {
+            string sqlquery = "USP_BATACLUB_EXISTE_CORREO";
+            Ent_MsgTransac result = null;
+            try
+            {
+                result = new Ent_MsgTransac();
+                result.codigo = "";
+                result.descripcion = "";
+                using (SqlConnection cn = new SqlConnection(Ent_Conexion.conexion))
+                {
+                    try
+                    {
+                        if (cn.State == 0) cn.Open();
+                        using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                        {
+                            cmd.CommandTimeout = 0;
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.Parameters.AddWithValue("@dni", cliente.dni);
+                            cmd.Parameters.AddWithValue("@correo", cliente.correo);
+                            cmd.Parameters.Add("@valida", SqlDbType.Bit);
+                            cmd.Parameters["@valida"].Direction = ParameterDirection.Output;
+                            cmd.ExecuteNonQuery();
+
+                            Boolean existe =Convert.ToBoolean(cmd.Parameters["@valida"].Value);
+                            if (existe)
+                            {
+                                result.codigo = "-1";
+                                result.descripcion = "El correo ya existe en la base de datos";
+                            }
+
+                        }
+                    }
+                    catch 
+                    {
+                        
+                    }
+                    if (cn != null)
+                        if (cn.State == ConnectionState.Open) cn.Close();
+                }
+
+            }
+            catch (Exception)
+            {
+                                
             }
             return result;
         }
@@ -108,6 +156,8 @@ namespace CapaDato.Ecommerce
                                     result.telefono = dr["TELEFONO"].ToString();
                                     result.registrado =Convert.ToBoolean(dr["REGISTRADO"]);
                                     result.miembro_bataclub =Convert.ToBoolean(dr["MIEMBRO_BATACLUB"]);
+                                    result.ubigeo = dr["UBIGEO"].ToString();
+                                    result.ubigeo_distrito = dr["UBIGEO_DISTRITO"].ToString();
                                     result.existe_cliente = true;
                                 }
                             }

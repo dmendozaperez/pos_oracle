@@ -20,10 +20,11 @@ namespace CapaBasico.Util
         /// <param name="bytes archivos"></param>
         /// <param name="nombre del archivo"></param>
         /// <param name="tipo de archivo"></param>
-        public void download_files(Byte[] file,string name,string tipofilecod)
+        public string download_files(Byte[] file,string name,string tipofilecod, string file_creacion, string file_update)
         {
             //Boolean valida = false;
             Dat_File path_dest = null;
+            string error = "";
             try
             {
                 /*verificar las archivos destinos*/
@@ -38,16 +39,18 @@ namespace CapaBasico.Util
                     if (valida)
                     {
                         Dat_File upd_file_bd = new Dat_File();
-                        upd_file_bd.insert_update_fileBD(tipofilecod, name);
+                        upd_file_bd.insert_update_fileBD(tipofilecod, name,file_creacion,file_update);
                     }
                 }
 
 
             }
-            catch (Exception)
+            catch (Exception exc)
             {
+                error = exc.Message;
                 //valida = false;                
             }
+            return error;
             //return valida;
         }
         /// <summary>
@@ -65,14 +68,18 @@ namespace CapaBasico.Util
                 if (!Directory.Exists(@destino)) Directory.CreateDirectory(@destino);
 
                 string destino_file = destino + "\\" + name;
+
+                if (File.Exists(@destino_file)) File.Delete(@destino_file);
+
                 /*copia los archivos al destino*/
                 File.WriteAllBytes(destino_file, file);
                 valida = true;
 
             }
-            catch (Exception)
+            catch (Exception exc)
             {
-                valida = false;                
+                valida = false;
+                throw exc;               
             }
             return valida;
         }

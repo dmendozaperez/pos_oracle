@@ -142,8 +142,29 @@ namespace WS_Ecommerce
                 result.existe_cliente = false;
                 if (dni==null) { result.descripcion_error = "Ingrese el numero de DNI"; }
                 string str_dni = "";
+
+                Boolean envia_email = false;
+
+
+                if (dni.envia_correo==null)
+                {
+                    /*enviar correo*/                    
+                    dni.envia_correo = "1";
+                    envia_email = true;
+                }
+                else
+                {
+                    if (dni.envia_correo.Length==0)
+                    {
+                        envia_email = true;
+                        /*enviar correo*/
+                        dni.envia_correo = "1";
+                    }
+                }
+
+
                 //string str_barra_dni = "";
-                Boolean valida_dni = false;
+                    Boolean valida_dni = false;
                 if (dni.dni!=null)
                 {
                     if (dni.dni.Length>0)
@@ -156,6 +177,7 @@ namespace WS_Ecommerce
                 {
                     if (dni.dni_barra.Length > 0)
                     {
+                        envia_email = false;
                         valida_dni = true;
                         str_dni = dni.dni_barra;
                     }
@@ -170,6 +192,23 @@ namespace WS_Ecommerce
                     {
                         DaCliente = new Dat_Cliente_Bata();
                         result = DaCliente.Consultar_ClienteBataclub(str_dni);
+
+
+
+                        /*si el cliente existe */
+                        if (result.existe_cliente)
+                        {
+                            if (result.correo.Length>0)
+                            { 
+                                /*si se quiere enviar email al correo*/
+                                if (envia_email)
+                                {
+                                    /*03	ENVIO DE CORREO ACTUALIZACION DE DATOS*/
+                                    DaCliente.Insert_Envio_Correo(result.correo, result.dni, "03");
+                                }
+                            }
+                        }
+
                     }
                     else
                     {                        

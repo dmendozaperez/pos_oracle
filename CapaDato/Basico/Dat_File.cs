@@ -29,10 +29,12 @@ namespace CapaDato.Basico
                     {
                         dtin = new DataTable();
                         dtin.Columns.Add("file", typeof(string));
+                        dtin.Columns.Add("file_cre", typeof(string));
+                        dtin.Columns.Add("file_mod", typeof(string));
 
-                        foreach(var item in lista_in.lista_file_name)
+                        foreach (var item in lista_in.lista_file_name)
                         {
-                            dtin.Rows.Add(item.file_name);
+                            dtin.Rows.Add(item.file_name,item.file_creacion,item.file_update);
                         }                        
                         cmd.CommandTimeout = 0;
                         cmd.CommandType =CommandType.StoredProcedure;
@@ -47,12 +49,14 @@ namespace CapaDato.Basico
                                          select new Ent_File
                                          {
                                              file_name = dr["FILE"].ToString(),
+                                             file_creacion= dr["FILE_CREA"].ToString(),
+                                             file_update= dr["FILE_MOD"].ToString(),
                                          }).ToList();
                         }
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception exc)
             {
                 lista_out = null;
             }
@@ -103,9 +107,10 @@ namespace CapaDato.Basico
                 }
 
             }
-            catch (Exception)
-            {
-                file = null;                
+            catch (Exception exc)
+            {                
+                file = null;
+                throw exc;
             }
             return file;
         }
@@ -114,7 +119,7 @@ namespace CapaDato.Basico
         /// </summary>
         /// <param name="tipo_file_cod"></param>
         /// <param name="nombre"></param>
-        public void insert_update_fileBD(string tipo_file_cod,string name_file)
+        public void insert_update_fileBD(string tipo_file_cod,string name_file, string file_creacion, string file_update)
         {
             string sqlquery = "USP_INSERTAR_UPLOAD_FILE";
             try
@@ -130,21 +135,22 @@ namespace CapaDato.Basico
                             cmd.CommandType = CommandType.StoredProcedure;
                             cmd.Parameters.AddWithValue("@TIP_CODFILE", tipo_file_cod);
                             cmd.Parameters.AddWithValue("@NOM_FILE", name_file);
+                            cmd.Parameters.AddWithValue("@FILE_CREA", file_creacion);
+                            cmd.Parameters.AddWithValue("@FILE_MOD", file_update);
                             cmd.ExecuteNonQuery();
                         }
                     }
-                    catch (Exception)
+                    catch (Exception exc)
                     {
-                        
+                        throw exc;
                     }
                     if (cn!=null)
                     if (cn.State == ConnectionState.Open) cn.Close();
                 }
             }
-            catch (Exception)
+            catch (Exception exc)
             {
-
-                
+                throw exc;                
             }
         }
     }

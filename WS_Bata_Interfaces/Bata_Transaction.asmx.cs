@@ -329,8 +329,9 @@ namespace WS_Bata_Interfaces
         /// <param name="tipo de archivo"></param>
         [SoapHeader("Authentication", Required = true)]
         [WebMethod(Description = "Subir archivos al server")]
-        public void ws_download_file(Byte[] file,string file_name,string file_tipo)
+        public string ws_download_file(Byte[] file,string file_name,string file_tipo,string file_creacion,string file_update)
         {
+            string error = "";
             autentication_ws = new Ba_WsConexion();
             Ba_DownloadFile dow_file = null;
             try
@@ -339,13 +340,14 @@ namespace WS_Bata_Interfaces
                 Boolean valida_ws = autentication_ws.ckeckAuthentication_ws("01", Authentication.Username, Authentication.Password);
                 if (valida_ws)
                 {
-                    dow_file.download_files(file, file_name, file_tipo);
+                    dow_file.download_files(file, file_name, file_tipo, file_creacion,file_update);
                 }
             }
-            catch
-            {    
-                            
+            catch( Exception exc)
+            {
+                error = exc.Message;                            
             }
+            return error;
         }
 
         /// <summary>

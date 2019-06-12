@@ -33,5 +33,6 @@ namespace CapaEntidad.Ecommerce
     {
         public string dni { get; set; }
         public string dni_barra { get; set; }
+        public string envia_correo { get; set; }
     }
 }

@@ -185,5 +185,41 @@ namespace CapaDato.Ecommerce
             }
             return result;
         }
+
+        public string Insert_Envio_Correo(string email,string dni,string tip_env_cod)
+        {
+            string sqlquery = "USP_BATACLUB_INSERT_EMAIL_ENVIAR";
+            string result = "";
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(Ent_Conexion.conexion))
+                {
+                    try
+                    {
+                        if (cn.State == 0) cn.Open();
+                        using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                        {
+                            cmd.CommandTimeout = 0;
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.Parameters.AddWithValue("@email", email);
+                            cmd.Parameters.AddWithValue("@dni", dni);
+                            cmd.Parameters.AddWithValue("@tip_env_cod",tip_env_cod);
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+                    catch (Exception exc)
+                    {
+                        result = exc.Message;
+                    }
+                    if (cn != null)
+                        if (cn.State == ConnectionState.Open) cn.Close();
+                }
+            }
+            catch (Exception exc)
+            {
+                result = exc.Message;
+            }
+            return result;
+        }
     }
 }

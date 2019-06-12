@@ -9,6 +9,8 @@ namespace CapaEntidad.Util
     public class Ent_File
     {
         public string file_name { get; set; }
+        public string file_creacion { get; set; }
+        public string file_update { get; set; }
     }
     public class Ent_Lista_File
     {

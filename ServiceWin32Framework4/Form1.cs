@@ -332,7 +332,7 @@ namespace ServiceWin32Framework4
         private DataTable get_tienda()
         {
             DataTable dt = null;
-            string sqlquery = "select cod_entid,OUTLET=dbo.FTIENDA_OUTLET(cod_entid) from tentidad_tienda where xstore=1 and cod_pais='PE' and dbo.FTIENDA_OUTLET(cod_entid)=0";
+            string sqlquery = "select cod_entid,OUTLET=dbo.FTIENDA_OUTLET(cod_entid) from tentidad_tienda where xstore=1 and cod_pais='PE' and cod_cadena='BG' and dbo.FTIENDA_OUTLET(cod_entid)=0";
             //string sqlquery = "select cod_entid,OUTLET=dbo.FTIENDA_OUTLET(cod_entid) from tentidad_tienda where cod_pais='PE' and cod_entid='50102'";
             try
             {

@@ -121,7 +121,7 @@ namespace ServiceWin32Framework4
         {
             string _error = "";
             Ftp_Xstore_Service_Send envio = new Ftp_Xstore_Service_Send();
-            envio.proc_envio_ftp();
+            //envio.proc_envio_ftp();
             string pais = "PE";
             Boolean gen_per_item = false;
             Boolean gen_ecu_item = false;
@@ -249,6 +249,33 @@ namespace ServiceWin32Framework4
             //}
         }
         public String ruta_temp_interface = System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "//tmpinterface";
+
+        private DataTable dt_replace_tda(DataTable dt, string cod_tda)
+        {
+            DataTable dt_replace = null;
+            try
+            {
+
+                if (dt != null)
+                {
+                    dt_replace = dt;
+                    string file_cab = dt.Rows[0][0].ToString();
+
+                    string str_tda_ant = file_cab.Substring(file_cab.IndexOf(':') - 6, 13);
+
+                    string str_tda_new = "\"" + str_tda_ant.Replace(str_tda_ant, "STORE:" + cod_tda) + "\"";
+
+                    file_cab = file_cab.Replace(str_tda_ant, str_tda_new);
+                    dt_replace.Rows[0][0] = file_cab.ToString();
+
+                }
+            }
+            catch
+            {
+                dt_replace = null;
+            }
+            return dt_replace;
+        }
         private void btn_item_deal_Click(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;
@@ -272,8 +299,15 @@ namespace ServiceWin32Framework4
 
                             using (SqlDataAdapter da = new SqlDataAdapter(cmd))
                             {
-                                dt = new DataTable();
-                                da.Fill(dt);
+                                if (dt==null)
+                                { 
+                                    dt = new DataTable();
+                                    da.Fill(dt);
+                                }
+                                else
+                                {
+                                    dt = dt_replace_tda(dt, fila["cod_entid"].ToString());
+                                }
                                 #region<GET_ITEM_DEAL_PROPERTY>
                                 StringBuilder str = null;
                                 string str_cadena = "";
@@ -332,7 +366,7 @@ namespace ServiceWin32Framework4
         private DataTable get_tienda()
         {
             DataTable dt = null;
-            string sqlquery = "select cod_entid,OUTLET=dbo.FTIENDA_OUTLET(cod_entid) from tentidad_tienda where xstore=1 and cod_pais='PE' and cod_cadena='BG' and dbo.FTIENDA_OUTLET(cod_entid)=0";
+            string sqlquery = "select cod_entid,OUTLET=dbo.FTIENDA_OUTLET(cod_entid) from tentidad_tienda where xstore=1 and cod_pais='PE' and cod_cadena='BA' ";
             //string sqlquery = "select cod_entid,OUTLET=dbo.FTIENDA_OUTLET(cod_entid) from tentidad_tienda where cod_pais='PE' and cod_entid='50102'";
             try
             {

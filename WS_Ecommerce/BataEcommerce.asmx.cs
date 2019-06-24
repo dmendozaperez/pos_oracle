@@ -92,10 +92,12 @@ namespace WS_Ecommerce
 
                 DaCliente = new Dat_Cliente_Bata();
                 #region<EXISTE EMAIL>
-                result = DaCliente.Existe_Email_BataClub(Cliente);
-                Cliente.ubigeo_distrito = (Cliente.ubigeo_distrito == null) ? "" : Cliente.ubigeo_distrito;
-                Cliente.ubigeo = (Cliente.ubigeo == null) ? "" : Cliente.ubigeo;
-
+                if (result.codigo!="-1")
+                { 
+                    result = DaCliente.Existe_Email_BataClub(Cliente);
+                    Cliente.ubigeo_distrito = (Cliente.ubigeo_distrito == null) ? "" : Cliente.ubigeo_distrito;
+                    Cliente.ubigeo = (Cliente.ubigeo == null) ? "" : Cliente.ubigeo;
+                }
                 //if (result.codigo=="-1")
                 //{
 

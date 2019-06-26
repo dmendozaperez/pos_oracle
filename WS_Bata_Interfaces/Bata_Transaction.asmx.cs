@@ -1099,6 +1099,54 @@ namespace WS_Bata_Interfaces
             ds.Tables.Add(result.Copy());
             return ds;
         }
+        /*sostic 06.2018*/
+        [WebMethod(Description = "consultar comprobantes Nota de credito multitiendas")]
+        public DataSet ws_consultar_comprobantes(string cod_tda, string tipo, string serie, string numero, string cod_entid)
+        {
+            DataSet result = null;
+            autentication_ws = new Ba_WsConexion();
+            Dat_Venta consulta_stock = null;
+            try
+            {
+                result = new DataSet();
+                //Boolean valida_ws = autentication_ws.ckeckAuthentication_ws("01", Authentication.Username, Authentication.Password);
+                Boolean valida_ws = true;
+                if (valida_ws)
+                {
+                    consulta_stock = new Dat_Venta();
+                    Ent_Conexion.conexion_posperu = "Server=sostic.dyndns.org,10015;Database=BDPOS;User ID=sa;Password=S0stic04052011;Trusted_Connection=False;";
+                    result = consulta_stock.consultar_comprobantes_nc(tipo, serie, numero, cod_entid);
+                    //if (result.Tables[0].Rows[0][0].ToString() != "0")
+                    //{
+                    //    /*transaccione de tiendas*/
+                    //    String tip_error = "04";
+                    //    Dat_Error_Transac error_transac = new Dat_Error_Transac();
+                    //    error_transac.insertar_errores_transac(tip_error, result.Tables[0].Rows[0][1].ToString(), cod_tda);
+                    //}
+                }
+                else
+                {
+                    result = new DataSet();
+                    DataTable dt = new DataTable();
+                    dt.Columns.Add("codigo");
+                    dt.Columns.Add("descripcion");
+                    dt.Rows.Add("1", "Conexión sin exito");
+                    result.Tables.Add(dt);
+                }
+            }
+            catch (Exception ex)
+            {
+                result = new DataSet();
+                DataTable dt = new DataTable();
+                dt.Columns.Add("codigo");
+                dt.Columns.Add("descripcion");
+                dt.Rows.Add("1", ex.ToString() + " ==> Error");
+                result.Tables.Add(dt);
+            }
+            //_result = new string[] { msg_transac.codigo, msg_transac.descripcion };
+            return result;
+        }
+        /*sostic 06.2018*/
         #endregion
     }
 

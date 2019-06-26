@@ -198,7 +198,58 @@ namespace CapaDato.Venta
             }
             return msg;
         }
-
+        /*sostic 06.2018*/
+        public DataSet consultar_comprobantes_nc(string tipo, string serie, string numero, string cod_entid)
+        {
+            string sqlquery = "[USP_POS_NCREDITO]";
+            Ent_MsgTransac msg = null;
+            DataSet ds = null;
+            try
+            {
+                msg = new Ent_MsgTransac();
+                ds = new DataSet();
+                using (SqlConnection cn = new SqlConnection(Ent_Conexion.conexion_posperu))
+                {
+                    try
+                    {
+                        if (cn.State == 0) cn.Open();
+                        using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                        {
+                            cmd.CommandTimeout = 120;
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.Parameters.AddWithValue("@TIPO", tipo);
+                            cmd.Parameters.AddWithValue("@SERIE", serie);
+                            cmd.Parameters.AddWithValue("@NUMERO", numero);
+                            cmd.Parameters.AddWithValue("@COD_ENTID", cod_entid);
+                            SqlDataAdapter da = new SqlDataAdapter(cmd);
+                            da.Fill(ds);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        ds = new DataSet();
+                        DataTable dt = new DataTable();
+                        dt.Columns.Add("codigo");
+                        dt.Columns.Add("descripcion");
+                        dt.Rows.Add("1", ex.Message + " ==> SQL");
+                        ds.Tables.Add(dt);
+                    }
+                    if (cn != null)
+                        if (cn.State == ConnectionState.Open) cn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                ds = new DataSet();
+                DataTable dt = new DataTable();
+                dt.Columns.Add("codigo");
+                dt.Columns.Add("descripcion");
+                dt.Rows.Add("1", ex.Message + " ==> SQL");
+                ds.Tables.Add(dt);
+            }
+            return ds;
+        }
+        /*sostic 05/2019*/
         public Ent_MsgTransac inserta_venta_list(string cod_tda, Ent_Venta_List lista_venta)
         {
             string sqlquery = "[USP_INSERTAR_VENTAS_TDA_LIST]";
@@ -858,7 +909,7 @@ namespace CapaDato.Venta
             }
             return msg;
         }
-        /*sostic 05/2019*/
+        /*sostic 06.2019*/
         public Ent_MsgTransac insertar_historial_estado_cv(string cod_tda, string cod_entid, string fc_nint, string id_estado, string cod_usuario, string descripcion, string cod_vendedor, string serie_numero)
         {
             string sqlquery = "[usp_insertar_historial_estados_cv]";
@@ -885,7 +936,8 @@ namespace CapaDato.Venta
                             cmd.Parameters.AddWithValue("@cod_usuario", cod_usuario);
                             cmd.Parameters.AddWithValue("@descripcion", descripcion);
                             cmd.Parameters.AddWithValue("@cod_vendedor", cod_vendedor);
-                            cmd.Parameters.AddWithValue("@serie_numero", serie_numero);
+                            cmd.Parameters.AddWithValue("@serie_numero", serie_numero);/*sostic 06.2019*/
+                            cmd.Parameters.AddWithValue("@cod_tda", cod_tda);
                             _filas = cmd.ExecuteNonQuery();
                             msg.codigo = "0";
                             msg.descripcion = (_filas > 0 ? "Se actualizó el estado de la venta." : "No se actualizó el estado");
@@ -961,7 +1013,7 @@ namespace CapaDato.Venta
         /*sostic 05/2019*/
         public DataTable consultar_tiendas_disponibles_cv()
         {
-            string sqlquery = "usp_get_lsita_tiendas_cv";
+            string sqlquery = "usp_get_lista_tiendas_cv";
             Ent_MsgTransac msg = null;
             DataTable dt = null;
             try

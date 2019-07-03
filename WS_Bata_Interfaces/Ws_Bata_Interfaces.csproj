@@ -48,6 +48,8 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -68,6 +70,49 @@
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Properties\PublishProfiles\BATAPOS.pubxml" />
+    <None Include="Service References\FEBata\Online.wsdl" />
+    <Content Include="Service References\FEBata\WS_Bata_Interfaces.FEBata.AddDocInfoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\FEBata\WS_Bata_Interfaces.FEBata.CargaInformeBajasResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\FEBata\WS_Bata_Interfaces.FEBata.ConsultaInformeReversionesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\FEBata\WS_Bata_Interfaces.FEBata.ConsultResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\FEBata\WS_Bata_Interfaces.FEBata.GenInformeReversionesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\FEBata\WS_Bata_Interfaces.FEBata.InformeResBoletasDiarioResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\FEBata\WS_Bata_Interfaces.FEBata.listarAdjuntosRecibidosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\FEBata\WS_Bata_Interfaces.FEBata.OnlineARCResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\FEBata\WS_Bata_Interfaces.FEBata.OnlineConsultaEstadoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\FEBata\WS_Bata_Interfaces.FEBata.OnlineEventosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\FEBata\WS_Bata_Interfaces.FEBata.OnlineGenerationResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\FEBata\WS_Bata_Interfaces.FEBata.OnlineRecoveryRecListResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\FEBata\WS_Bata_Interfaces.FEBata.OnlineRecoveryRecResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\FEBata\WS_Bata_Interfaces.FEBata.OnlineRecoveryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -77,6 +122,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Bata_Transaction.asmx" />
+    <None Include="Service References\FEBata\configuration91.svcinfo" />
+    <None Include="Service References\FEBata\configuration.svcinfo" />
+    <None Include="Service References\FEBata\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -84,7 +135,13 @@
       <DependentUpon>Bata_Transaction.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Paperless\FE.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\FEBata\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CapaBasico\CapaBasico.csproj">
@@ -99,6 +156,12 @@
       <Project>{c24d20c9-781b-4fd8-b956-dbb16280e929}</Project>
       <Name>CapaEntidad</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\FEBata\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

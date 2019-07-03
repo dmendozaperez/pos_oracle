@@ -6,6 +6,7 @@ using CapaDato.Logistica;
 using CapaDato.Tienda;
 using CapaDato.Util;
 using CapaDato.Venta;
+using CapaEntidad.FE;
 using CapaEntidad.Interfaces;
 using CapaEntidad.Logistica;
 using CapaEntidad.Util;
@@ -18,6 +19,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Services;
 using System.Web.Services.Protocols;
+using WS_Bata_Interfaces.Paperless;
 
 namespace WS_Bata_Interfaces
 {
@@ -1147,6 +1149,37 @@ namespace WS_Bata_Interfaces
             return result;
         }
         /*sostic 06.2018*/
+        #endregion
+
+        #region<consulta facturacion electronica PAPERLESS>
+        [WebMethod(Description = "consultar facturacion electronica PAPERLESS")]
+        public Ent_Paperless_Return ws_get_FE(string ruc,string login,string password,string tipodoc,string folio,string tipoRetorno)
+        {
+            Ent_Paperless_Envio env = null;
+            Ent_Paperless_Return rt = null;
+            FE fe_return = null;
+            try
+            {
+                env = new Ent_Paperless_Envio();
+                env.ruc = ruc;
+                env.login = login;
+                env.password = password;
+                env.tipodoc = tipodoc;
+                env.folio = folio;
+                env.tipoRetorno = tipoRetorno;
+                fe_return = new FE();
+                rt = fe_return.get_docuento(env);
+
+            }
+            catch (Exception exc)
+            {
+                rt = new Ent_Paperless_Return();
+                rt.codigo = "-x";
+                rt.respuesta = exc.Message;
+            }
+            return rt;
+        }
+
         #endregion
     }
 

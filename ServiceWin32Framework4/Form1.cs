@@ -408,5 +408,10 @@ namespace ServiceWin32Framework4
             MessageBox.Show("termino");
             Cursor.Current = Cursors.Default;
         }
+
+        private void btnpaperless_Click(object sender, EventArgs e)
+        {
+            
+        }
     }
 }

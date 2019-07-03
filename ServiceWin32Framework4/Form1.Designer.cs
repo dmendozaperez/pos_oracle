@@ -46,6 +46,7 @@
             this.btntarea = new System.Windows.Forms.Button();
             this.btn_item_deal = new System.Windows.Forms.Button();
             this.btnsk_almacen = new System.Windows.Forms.Button();
+            this.btnpaperless = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn_servicewin
@@ -242,11 +243,23 @@
             this.btnsk_almacen.UseVisualStyleBackColor = true;
             this.btnsk_almacen.Click += new System.EventHandler(this.btnsk_almacen_Click);
             // 
+            // btnpaperless
+            // 
+            this.btnpaperless.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnpaperless.Location = new System.Drawing.Point(734, 262);
+            this.btnpaperless.Name = "btnpaperless";
+            this.btnpaperless.Size = new System.Drawing.Size(264, 39);
+            this.btnpaperless.TabIndex = 22;
+            this.btnpaperless.Text = "CONSUMIR WS PAPERLESS";
+            this.btnpaperless.UseVisualStyleBackColor = true;
+            this.btnpaperless.Click += new System.EventHandler(this.btnpaperless_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1031, 313);
+            this.Controls.Add(this.btnpaperless);
             this.Controls.Add(this.btnsk_almacen);
             this.Controls.Add(this.btn_item_deal);
             this.Controls.Add(this.btntarea);
@@ -292,6 +305,7 @@
         private System.Windows.Forms.Button btntarea;
         private System.Windows.Forms.Button btn_item_deal;
         private System.Windows.Forms.Button btnsk_almacen;
+        private System.Windows.Forms.Button btnpaperless;
     }
 }
 

@@ -28,7 +28,7 @@ namespace CapaOracleTda
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
-                string tienda = "50290";
+                string tienda = "50345";
                 Dat_Ora_Conexion dcon = new Dat_Ora_Conexion();
                 Ent_Ora_Conexion ora_conexion = dcon.get_conexion_ora(tienda);
 

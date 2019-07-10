@@ -18,7 +18,8 @@ namespace CapaEntidad.FE
                                             //08 = Nota de Débito
                                             //09 = Guía de Remisión Remitente
                                             //720 = Comprobante de Retención
-                                            //40 = Comprobante de Percepción        public string folio { get; set; }// F001-1
+                                            //40 = Comprobante de Percepción
+        public string folio { get; set; }// F001-1
         public string tipoRetorno { get; set; }//
         //0 = ID asignado
         //1 = URL del XML

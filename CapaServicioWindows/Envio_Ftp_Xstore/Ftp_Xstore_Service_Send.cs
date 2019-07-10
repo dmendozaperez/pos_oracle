@@ -236,6 +236,42 @@ namespace CapaServicioWindows.Envio_Ftp_Xstore
                     }
                 #endregion
 
+                #region<ENTORNO OROB>
+                var env_peru_ORB = lista.Where(f => f.opcion == "A" && f.pais == _pais);
+                dat_inter = new Dat_Interfaces();
+                tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " EMPEZANDO DE EJECUTAR EL METODO (lista_inter_pl)  OROB");
+                tw1.Flush();
+                tw1.Close();
+                tw1.Dispose();
+                var inter_det_OROB = dat_inter.lista_inter_pl(_pais);
+                tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " TERMINANDO DE EJECUTAR EL METODO (lista_inter_pl)  OROB");
+                tw1.Flush();
+                tw1.Close();
+                tw1.Dispose();
+                foreach (var env_peru_det in env_peru_ORB.Where(ent => ent.entorno == "OROB"))
+                {
+                    var inter_det_entorno = inter_det_OROB.Where(m => m.entorno == env_peru_det.entorno);
+
+                    foreach (var det_inter in inter_det_entorno)
+                    {
+                        tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                        tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " EMPEZANDO DE EJECUTAR EL METODO (genera_automatico_inter)  OROB");
+                        tw1.Flush();
+                        tw1.Close();
+                        tw1.Dispose();
+                        genera_automatico_inter(_pais, "", env_peru_det.rut_upload, det_inter.inter_nom, det_inter.entorno,
+                                            ref dt_item, ref dt_images, ref dt_merch_hier, ref dt_price_update, ref gen_per_item, ref gen_ecu_item);
+                        tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                        tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " TERMINANDO DE EJECUTAR EL METODO (genera_automatico_inter)  OROB");
+                        tw1.Flush();
+                        tw1.Close();
+                        tw1.Dispose();
+                    }
+                }
+                #endregion
+
                 #endregion
 
                 #endregion
@@ -611,6 +647,107 @@ namespace CapaServicioWindows.Envio_Ftp_Xstore
                                 #endregion
                         }
                         break;
+                    case "OROB":
+                        switch (_gen_inter_name)
+                        {
+                            case "PRODUCT_LOCATION":
+                                DataSet ds_orb = null;
+                                #region<PRODUCT_LOCATION>
+                                ds_orb = dat_geninter.ds_orob();
+                                
+                                if (ds_orb!=null)
+                                {
+
+                                    if (ds_orb.Tables.Count>0)
+                                    {
+                                        DataTable dt_production_location = ds_orb.Tables[0];
+                                        DataTable dt_product= ds_orb.Tables[1];
+
+                                        if (dt_production_location.Rows.Count>0)
+                                        {
+                                            str = new StringBuilder();
+                                            for (Int32 i = 0; i < dt_production_location.Rows.Count; ++i)
+                                            {
+                                                str.Append(dt_production_location.Rows[i]["PRODUCT_LOCATION"].ToString());
+
+                                                if (i < dt_production_location.Rows.Count - 1)
+                                                {
+                                                    str.Append("\r\n");
+
+                                                }
+
+                                            }
+                                            str_cadena = str.ToString();
+
+
+                                            name_file = "Product_Location_" + DateTime.Today.ToString("yyyyMMdd") + ".TXT";
+                                            in_maestros = _gen_ruta + "\\" + name_file;
+
+                                            if (File.Exists(@in_maestros)) File.Delete(@in_maestros);
+                                            File.WriteAllText(@in_maestros, str_cadena);
+                                        }
+
+                                        if (dt_product.Rows.Count > 0)
+                                        {
+                                            str = new StringBuilder();
+                                            for (Int32 i = 0; i < dt_product.Rows.Count; ++i)
+                                            {
+                                                str.Append(dt_product.Rows[i]["PRODUCT"].ToString());
+
+                                                if (i < dt_product.Rows.Count - 1)
+                                                {
+                                                    str.Append("\r\n");
+
+                                                }
+
+                                            }
+                                            str_cadena = str.ToString();
+
+
+
+                                            name_file = "Product_" + DateTime.Today.ToString("yyyyMMdd") + ".TXT";
+                                            in_maestros = _gen_ruta + "\\" + name_file;
+
+                                            if (File.Exists(@in_maestros)) File.Delete(@in_maestros);
+                                            File.WriteAllText(@in_maestros, str_cadena);
+                                        }
+
+                                    }
+                                }
+                                                                
+                                //dt = (_pais == "PE") ? dat_geninter.OrcRetailLocations_PE() : dat_geninter.OrcRetailLocations_EC();
+                                //if (dt != null)
+                                //{
+                                //    if (dt.Rows.Count > 0)
+                                //    {
+                                //        str = new StringBuilder();
+                                //        for (Int32 i = 0; i < dt.Rows.Count; ++i)
+                                //        {
+                                //            str.Append(dt.Rows[i]["strXml"].ToString());
+
+                                //            if (i < dt.Rows.Count - 1)
+                                //            {
+                                //                str.Append("\r\n");
+
+                                //            }
+
+                                //        }
+                                //        str_cadena = str.ToString();
+
+
+
+                                //        name_file = "RetailLocations_" + DateTime.Today.ToString("yyyyMMdd") + ".XML";
+                                //        in_maestros = _gen_ruta + "\\" + name_file;
+
+                                //        if (File.Exists(@in_maestros)) File.Delete(@in_maestros);
+                                //        File.WriteAllText(@in_maestros, str_cadena);
+                                //    }
+                                //}
+                                break;
+                                #endregion
+                        }
+
+                        break;
                 }
 
                
@@ -641,7 +778,21 @@ namespace CapaServicioWindows.Envio_Ftp_Xstore
 
                 foreach(var item in lista)
                 {
-                    tipo_file = (item.entorno == "ORCE") ? "*.xml*" : "*.mnt*";
+                    //tipo_file = (item.entorno == "ORCE") ? "*.xml*" : "*.mnt*";
+                    switch(item.entorno)
+                    {
+                        case "ORCE":
+                            tipo_file = "*.xml*";
+                            break;
+                        case "XOFICCE":
+                            tipo_file = "*.mnt*";
+                            break;
+                        case "OROB":
+                            tipo_file = "*.txt*";
+                            break;
+                    }
+
+
 
                     if (!Directory.Exists(@item.rut_upload)) Directory.CreateDirectory(@item.rut_upload);
 

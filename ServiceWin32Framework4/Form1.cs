@@ -121,7 +121,7 @@ namespace ServiceWin32Framework4
         {
             string _error = "";
             Ftp_Xstore_Service_Send envio = new Ftp_Xstore_Service_Send();
-            //envio.proc_envio_ftp();
+            envio.proc_envio_ftp();
             string pais = "PE";
             Boolean gen_per_item = false;
             Boolean gen_ecu_item = false;

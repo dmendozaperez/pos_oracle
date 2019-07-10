@@ -931,6 +931,34 @@ namespace CapaServicioWindows.CapaDato.Interfaces
             }
             return dt;
         }
+        #region<ORDER BROCKER>
+        public DataSet ds_orob()
+        {
+            DataSet ds = null;
+            string sqlquery = "USP_OROB_PRODUCT_LOCATION";
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(ConexionSQL.conexion))
+                {
+                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            ds = new DataSet();
+                            da.Fill(ds);
+                        }
+                    }
+                }
+            }
+            catch 
+            {
+                ds = null;                
+            }
+            return ds;
+        }
+        #endregion
         public DataTable OrcRetailLocations_PE()
         {
             DataTable dt = null;

@@ -140,6 +140,8 @@ namespace WS_Ecommerce
 
             try
             {
+                string correo_update = dni.correo_update;
+
                 result.descripcion_error = "";
                 result.existe_cliente = false;
                 if (dni==null) { result.descripcion_error = "Ingrese el numero de DNI"; }
@@ -200,15 +202,41 @@ namespace WS_Ecommerce
                         /*si el cliente existe */
                         if (result.existe_cliente)
                         {
-                            if (result.correo.Length>0)
-                            { 
-                                /*si se quiere enviar email al correo*/
-                                if (envia_email)
+                            if (correo_update!=null)
+                            {
+                                if (correo_update.Length>0)
                                 {
-                                    /*03	ENVIO DE CORREO ACTUALIZACION DE DATOS*/
-                                    DaCliente.Insert_Envio_Correo(result.correo, result.dni, "03");
+                                    /*si se quiere enviar email al correo*/
+                                    if (envia_email)
+                                    {
+                                        /*03	ENVIO DE CORREO ACTUALIZACION DE DATOS*/
+                                        DaCliente.Insert_Envio_Correo(correo_update/*result.correo*/, result.dni, "03");
+                                    }
                                 }
                             }
+                            else
+                            {
+
+                                if (result.correo.Length > 0)
+                                {
+                                    /*si se quiere enviar email al correo*/
+                                    if (envia_email)
+                                    {
+                                        /*03	ENVIO DE CORREO ACTUALIZACION DE DATOS*/
+                                        DaCliente.Insert_Envio_Correo(result.correo, result.dni, "03");
+                                    }
+                                }
+                            }
+
+                            //if (result.correo.Length>0)
+                            //{ 
+                            //    /*si se quiere enviar email al correo*/
+                            //    if (envia_email)
+                            //    {
+                            //        /*03	ENVIO DE CORREO ACTUALIZACION DE DATOS*/
+                            //        DaCliente.Insert_Envio_Correo(result.correo, result.dni, "03");
+                            //    }
+                            //}
                         }
 
                     }

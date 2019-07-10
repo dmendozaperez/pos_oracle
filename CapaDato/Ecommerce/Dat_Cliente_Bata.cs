@@ -158,6 +158,7 @@ namespace CapaDato.Ecommerce
                                     result.miembro_bataclub =Convert.ToBoolean(dr["MIEMBRO_BATACLUB"]);
                                     result.ubigeo = dr["UBIGEO"].ToString();
                                     result.ubigeo_distrito = dr["UBIGEO_DISTRITO"].ToString();
+                                    result.barra_cliente = dr["DNI_BARRA"].ToString();
                                     result.existe_cliente = true;
                                 }
                             }

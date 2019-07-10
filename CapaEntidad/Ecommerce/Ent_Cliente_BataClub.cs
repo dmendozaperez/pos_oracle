@@ -28,6 +28,7 @@ namespace CapaEntidad.Ecommerce
 
         public Boolean existe_cliente { get; set; } 
         public string descripcion_error { get; set; }
+        public string barra_cliente { get; set; }
     }
    public class Cliente_Parameter_Bataclub
     {

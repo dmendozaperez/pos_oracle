@@ -1059,5 +1059,149 @@ namespace CapaDato.Venta
             }
             return dt;
         }
+        /*sostic 07-2019*/
+        public DataTable consultar_ganador_ruleta_bata(string cod_tda)
+        {
+            string sqlquery = "usp_get_ultimo_ganador_tienda";
+            Ent_MsgTransac msg = null;
+            DataTable dt = null;
+            try
+            {
+                msg = new Ent_MsgTransac();
+                dt = new DataTable();
+                using (SqlConnection cn = new SqlConnection(Ent_Conexion.conexion_posperu))
+                {
+                    try
+                    {
+                        if (cn.State == 0) cn.Open();
+                        using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                        {
+                            cmd.CommandTimeout = 120;
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.Parameters.AddWithValue("@cod_tda", cod_tda);
+                            SqlDataAdapter da = new SqlDataAdapter(cmd);
+                            DataSet ds = new DataSet();
+                            da.Fill(ds);
+                            dt = ds.Tables[0];
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+
+                        dt = new DataTable();
+                        dt.Columns.Add("codigo");
+                        dt.Columns.Add("descripcion");
+                        dt.Rows.Add("1", ex.Message + " ==> SQL");
+
+                    }
+                    if (cn != null)
+                        if (cn.State == ConnectionState.Open) cn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                dt = new DataTable();
+                dt.Columns.Add("codigo");
+                dt.Columns.Add("descripcion");
+                dt.Rows.Add("1", ex.Message + " ==> SQL");
+
+            }
+            return dt;
+        }
+        /*sostic 07-2019*/
+        public Ent_MsgTransac actualizar_cupon_ruleta(string cod_tda, string codigo, string estado, string doc_vta)
+        {
+            string sqlquery = "usp_actualizar_estado_ganador_ruleta_bata";
+            Ent_MsgTransac msg = null;
+            try
+            {
+                msg = new Ent_MsgTransac();
+                using (SqlConnection cn = new SqlConnection(Ent_Conexion.conexion_posperu))
+                {
+                    try
+                    {
+                        if (cn.State == 0) cn.Open();
+                        using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                        {
+                            cmd.CommandTimeout = 120;
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.Parameters.AddWithValue("@cod_tda", cod_tda);
+                            cmd.Parameters.AddWithValue("@codigo", codigo);
+                            cmd.Parameters.AddWithValue("@estado", estado);
+                            cmd.Parameters.AddWithValue("@doc_vta", doc_vta);
+                            cmd.ExecuteNonQuery();
+                            msg.codigo = "0";
+                            msg.descripcion = "Se actualizo correctamente";
+                        }
+                    }
+                    catch (Exception exc)
+                    {
+                        msg.codigo = "1";
+                        msg.descripcion = exc.Message + "==> SQL";
+                    }
+                    if (cn != null)
+                        if (cn.State == ConnectionState.Open) cn.Close();
+                }
+
+            }
+            catch (Exception exc)
+            {
+                msg.codigo = "1";
+                msg.descripcion = exc.Message + "==error";
+            }
+            return msg;
+        }
+        /*sostic 07-2019*/
+        public DataTable validar_cupon_ruleta_bata(string cod_tda, string codigo)
+        {
+            string sqlquery = "usp_validar_cupon_ruleta_bata";
+            Ent_MsgTransac msg = null;
+            DataTable dt = null;
+            try
+            {
+                msg = new Ent_MsgTransac();
+                dt = new DataTable();
+                using (SqlConnection cn = new SqlConnection(Ent_Conexion.conexion_posperu))
+                {
+                    try
+                    {
+                        if (cn.State == 0) cn.Open();
+                        using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                        {
+                            cmd.CommandTimeout = 120;
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.Parameters.AddWithValue("@cod_tda", cod_tda);
+                            cmd.Parameters.AddWithValue("@codigo", codigo);
+                            SqlDataAdapter da = new SqlDataAdapter(cmd);
+                            DataSet ds = new DataSet();
+                            da.Fill(ds);
+                            dt = ds.Tables[0];
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+
+                        dt = new DataTable();
+                        dt.Columns.Add("codigo");
+                        dt.Columns.Add("descripcion");
+                        dt.Rows.Add("1", ex.Message + " ==> SQL");
+
+                    }
+                    if (cn != null)
+                        if (cn.State == ConnectionState.Open) cn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                dt = new DataTable();
+                dt.Columns.Add("codigo");
+                dt.Columns.Add("descripcion");
+                dt.Rows.Add("1", ex.Message + " ==> SQL");
+
+            }
+            return dt;
+        }
     }
 }

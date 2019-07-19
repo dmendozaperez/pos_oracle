@@ -1116,7 +1116,7 @@ namespace WS_Bata_Interfaces
                 if (valida_ws)
                 {
                     consulta_stock = new Dat_Venta();
-                    Ent_Conexion.conexion_posperu = "Server=sostic.dyndns.org,10015;Database=BDPOS;User ID=sa;Password=S0stic04052011;Trusted_Connection=False;";
+                    //Ent_Conexion.conexion_posperu = "Server=sostic.dyndns.org,10015;Database=BDPOS;User ID=sa;Password=S0stic04052011;Trusted_Connection=False;";
                     result = consulta_stock.consultar_comprobantes_nc(tipo, serie, numero, cod_entid);
                     //if (result.Tables[0].Rows[0][0].ToString() != "0")
                     //{
@@ -1178,6 +1178,149 @@ namespace WS_Bata_Interfaces
                 rt.respuesta = exc.Message;
             }
             return rt;
+        }
+        /*sostic 07-2019*/
+        [WebMethod(Description = "Consultar si hay algun ganador de la ruleta en la tienda")]
+        public DataSet ws_consultar_ganador_ruleta_bata(string cod_tda)
+        {
+            DataTable result = null;
+            autentication_ws = new Ba_WsConexion();
+            Dat_Venta datos = null;
+            DataSet ds = null;
+            try
+            {
+                result = new DataTable();
+                //Boolean valida_ws = autentication_ws.ckeckAuthentication_ws("01", Authentication.Username, Authentication.Password);
+                Boolean valida_ws = true;
+                if (valida_ws)
+                {
+                    datos = new Dat_Venta();
+                    result = new DataTable();
+                    //Ent_Conexion.conexion_posperu = "Server=sostic.dyndns.org,10015;Database=BDPOS;User ID=sa;Password=S0stic04052011;Trusted_Connection=False;";
+                    result = datos.consultar_ganador_ruleta_bata(cod_tda);
+
+
+                    if (result.Columns[0].ColumnName == "codigo")
+                    {
+                        /*transaccione de tiendas*/
+                        String tip_error = "04";
+                        Dat_Error_Transac error_transac = new Dat_Error_Transac();
+                        error_transac.insertar_errores_transac(tip_error, result.Rows[0][1].ToString(), cod_tda);
+                    }
+                }
+                else
+                {
+
+                    result = new DataTable();
+                    result.Columns.Add("codigo");
+                    result.Columns.Add("descripcion");
+                    result.Rows.Add("1", "Conexión sin exito");
+                }
+            }
+            catch (Exception ex)
+            {
+
+                result = new DataTable();
+                result.Columns.Add("codigo");
+                result.Columns.Add("descripcion");
+                result.Rows.Add("1", ex.ToString() + " ==> Error");
+            }
+            //_result = new string[] { msg_transac.codigo, msg_transac.descripcion };
+            ds = new DataSet();
+            ds.Tables.Add(result.Copy());
+            return ds;
+        }
+        /*sostic 07-2019*/
+        [WebMethod(Description = "Actualizar el estado del cupon de ruleta bata")]
+        public string[] ws_actualizar_cupon_ruleta(string cod_tda, string codigo, string estado, string doc_vta)
+        {
+            Ent_MsgTransac msg_transac = null;
+            autentication_ws = new Ba_WsConexion();
+            Dat_Venta update_venta = null;
+            try
+            {
+                msg_transac = new Ent_MsgTransac();
+                /**/
+                //Boolean valida_ws = autentication_ws.ckeckAuthentication_ws("01", Authentication.Username, Authentication.Password);
+                Boolean valida_ws = true;
+
+                if (valida_ws)
+                {
+                    update_venta = new Dat_Venta();
+                   // Ent_Conexion.conexion_posperu = "Server=sostic.dyndns.org,10015;Database=BDPOS;User ID=sa;Password=S0stic04052011;Trusted_Connection=False;";
+                    msg_transac = update_venta.actualizar_cupon_ruleta(cod_tda, codigo, estado, doc_vta);
+
+                    if (msg_transac.codigo != "0")
+                    {
+                        /*transaccione de tiendas*/
+                        String tip_error = "04";
+                        Dat_Error_Transac error_transac = new Dat_Error_Transac();
+                        error_transac.insertar_errores_transac(tip_error, msg_transac.descripcion, cod_tda);
+                    }
+                }
+                else
+                {
+                    msg_transac.codigo = "1";
+                    msg_transac.descripcion = "Conexión sin exito";
+                }
+            }
+            catch (Exception exc)
+            {
+                msg_transac.codigo = "1";
+                msg_transac.descripcion = exc.Message;
+            }
+            return new string[] { msg_transac.codigo, msg_transac.descripcion };
+        }
+        /*sostic 07-2019*/
+        [WebMethod(Description = "Validar cupon ruleta bata")]
+        public DataSet ws_validar_cupon_ruleta_bata(string cod_tda, string codigo)
+        {
+            DataTable result = null;
+            autentication_ws = new Ba_WsConexion();
+            Dat_Venta datos = null;
+            DataSet ds = null;
+            try
+            {
+                result = new DataTable();
+                //Boolean valida_ws = autentication_ws.ckeckAuthentication_ws("01", Authentication.Username, Authentication.Password);
+                Boolean valida_ws = true;
+                if (valida_ws)
+                {
+                    datos = new Dat_Venta();
+                    result = new DataTable();
+                    //Ent_Conexion.conexion_posperu = "Server=sostic.dyndns.org,10015;Database=BDPOS;User ID=sa;Password=S0stic04052011;Trusted_Connection=False;";
+                    result = datos.validar_cupon_ruleta_bata(cod_tda, codigo);
+
+
+                    if (result.Columns[0].ColumnName == "codigo")
+                    {
+                        /*transaccione de tiendas*/
+                        String tip_error = "04";
+                        Dat_Error_Transac error_transac = new Dat_Error_Transac();
+                        error_transac.insertar_errores_transac(tip_error, result.Rows[0][1].ToString(), cod_tda);
+                    }
+                }
+                else
+                {
+
+                    result = new DataTable();
+                    result.Columns.Add("codigo");
+                    result.Columns.Add("descripcion");
+                    result.Rows.Add("1", "Conexión sin exito");
+                }
+            }
+            catch (Exception ex)
+            {
+
+                result = new DataTable();
+                result.Columns.Add("codigo");
+                result.Columns.Add("descripcion");
+                result.Rows.Add("1", ex.ToString() + " ==> Error");
+            }
+            //_result = new string[] { msg_transac.codigo, msg_transac.descripcion };
+            ds = new DataSet();
+            ds.Tables.Add(result.Copy());
+            return ds;
         }
 
         #endregion

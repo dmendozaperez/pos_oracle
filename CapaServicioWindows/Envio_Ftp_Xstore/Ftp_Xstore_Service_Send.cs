@@ -680,7 +680,7 @@ namespace CapaServicioWindows.Envio_Ftp_Xstore
                                             str_cadena = str.ToString();
 
 
-                                            name_file = "Product_Location_" + DateTime.Today.ToString("yyyyMMdd") + ".TXT";
+                                            name_file = "PRODUCT_LOCATION_2000.TXT";// + DateTime.Today.ToString("yyyyMMdd") + ".TXT";
                                             in_maestros = _gen_ruta + "\\" + name_file;
 
                                             if (File.Exists(@in_maestros)) File.Delete(@in_maestros);
@@ -705,7 +705,7 @@ namespace CapaServicioWindows.Envio_Ftp_Xstore
 
 
 
-                                            name_file = "Product_" + DateTime.Today.ToString("yyyyMMdd") + ".TXT";
+                                            name_file = "PRODUCT_2000.TXT";// + DateTime.Today.ToString("yyyyMMdd") + ".TXT";
                                             in_maestros = _gen_ruta + "\\" + name_file;
 
                                             if (File.Exists(@in_maestros)) File.Delete(@in_maestros);

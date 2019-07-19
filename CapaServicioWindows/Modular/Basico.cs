@@ -721,6 +721,7 @@ namespace CapaServicioWindows.Modular
         public void eje_envio_stk_almacen(ref string _error_ws)
         {
             string _error_transac = "";
+            string cod_val = "";
             //List<BataTransac.Ent_Scdddes> _lista_guiasC = null;
 
             List<BataTransac.Ent_PathDBF> listar_location_dbf = null;
@@ -886,14 +887,34 @@ namespace CapaServicioWindows.Modular
 
                         for (Int32 i = 0; i < tabla.Rows.Count; i++)
                         {
-                            if (Convert.ToInt32(tabla.Rows[i]["Csal_med00"]) != 0 || Convert.ToInt32(tabla.Rows[i]["Csal_med01"]) != 0
-                                || Convert.ToInt32(tabla.Rows[i]["Csal_med02"]) != 0 || Convert.ToInt32(tabla.Rows[i]["Csal_med03"]) != 0
-                                || Convert.ToInt32(tabla.Rows[i]["Csal_med04"]) != 0 || Convert.ToInt32(tabla.Rows[i]["Csal_med05"]) != 0
-                                || Convert.ToInt32(tabla.Rows[i]["Csal_med06"]) != 0 || Convert.ToInt32(tabla.Rows[i]["Csal_med07"]) != 0
-                                || Convert.ToInt32(tabla.Rows[i]["Csal_med08"]) != 0 || Convert.ToInt32(tabla.Rows[i]["Csal_med09"]) != 0
-                                || Convert.ToInt32(tabla.Rows[i]["Csal_med10"]) != 0 || Convert.ToInt32(tabla.Rows[i]["Csal_med11"]) != 0)
+                            Int32 Csal_med00 = 0, Csal_med01 = 0, Csal_med02=0, Csal_med03=0, Csal_med04=0, Csal_med05=0, Csal_med06=0,
+                            Csal_med07 = 0, Csal_med08 = 0, Csal_med09 = 0, Csal_med10 = 0, Csal_med11 = 0;
+
+                            //Csal_med00
+                            /*agregando variables de tipo int32*/
+                            Int32.TryParse(tabla.Rows[i]["Csal_med00"].ToString(),out  Csal_med00);
+                            Int32.TryParse(tabla.Rows[i]["Csal_med01"].ToString(), out Csal_med01);
+                            Int32.TryParse(tabla.Rows[i]["Csal_med02"].ToString(), out Csal_med02);
+                            Int32.TryParse(tabla.Rows[i]["Csal_med03"].ToString(), out Csal_med03);
+                            Int32.TryParse(tabla.Rows[i]["Csal_med04"].ToString(), out Csal_med04);
+                            Int32.TryParse(tabla.Rows[i]["Csal_med05"].ToString(), out Csal_med05);
+                            Int32.TryParse(tabla.Rows[i]["Csal_med06"].ToString(), out Csal_med06);
+                            Int32.TryParse(tabla.Rows[i]["Csal_med07"].ToString(), out Csal_med07);
+                            Int32.TryParse(tabla.Rows[i]["Csal_med08"].ToString(), out Csal_med08);
+                            Int32.TryParse(tabla.Rows[i]["Csal_med09"].ToString(), out Csal_med09);
+                            Int32.TryParse(tabla.Rows[i]["Csal_med10"].ToString(), out Csal_med10);
+                            Int32.TryParse(tabla.Rows[i]["Csal_med11"].ToString(), out Csal_med11);                            
+
+
+                            // cod_val = tabla.Rows[i]["Csal_artic"].ToString();
+                            if (Csal_med00 != 0 || Csal_med01 != 0
+                                || Csal_med02 != 0 || Csal_med03 != 0
+                                || Csal_med04 != 0 || Csal_med05 != 0
+                                || Csal_med06 != 0 || Csal_med07 != 0
+                                || Csal_med08 != 0 || Csal_med09 != 0
+                                || Csal_med10 != 0 || Csal_med11 != 0)
                             {
-                                if (Convert.ToInt32(tabla.Rows[i]["Csal_med00"]) != 0)
+                                if (Csal_med00 != 0)
                                 {
                                     string Csal_secci = tabla.Rows[i]["Csal_secci"].ToString();
                                     string Csal_ano = tabla.Rows[i]["Csal_ano"].ToString();
@@ -902,7 +923,7 @@ namespace CapaServicioWindows.Modular
                                     string Csal_artic = tabla.Rows[i]["Csal_artic"].ToString();
                                     string Csal_calid = tabla.Rows[i]["Csal_calid"].ToString();
 
-                                    Int32 Csal_cantidad = Convert.ToInt32(tabla.Rows[i]["Csal_med00"]);// cantidad o valor de la posicion
+                                    Int32 Csal_cantidad = Csal_med00;//Convert.ToInt32(tabla.Rows[i]["Csal_med00"]);// cantidad o valor de la posicion
                                     string Csal_codRgmd = tabla.Rows[i]["Csal_rmed"].ToString(); //
                                     string Csal_MedPer = "00"; //nombre de columna (posicion)
                                     string Csal_MedLat = "01";
@@ -913,7 +934,7 @@ namespace CapaServicioWindows.Modular
                                     dtStock.Rows.Add(Csal_alm, centro_dis, Csal_artic, Csal_calid, Csal_codRgmd, Csal_MedPer, Csal_MedLat, Csal_cantidad, Csal_secci, Csal_ano, Csal_seman);                                    
                                 }
 
-                                if (Convert.ToInt32(tabla.Rows[i]["Csal_med01"]) != 0)
+                                if (Csal_med01 != 0)
                                 {
                                     string Csal_secci = tabla.Rows[i]["Csal_secci"].ToString();
                                     string Csal_ano = tabla.Rows[i]["Csal_ano"].ToString();
@@ -922,7 +943,7 @@ namespace CapaServicioWindows.Modular
                                     string Csal_artic = tabla.Rows[i]["Csal_artic"].ToString();
                                     string Csal_calid = tabla.Rows[i]["Csal_calid"].ToString();
 
-                                    Int32 Csal_cantidad = Convert.ToInt32(tabla.Rows[i]["Csal_med01"]);// cantidad o valor de la posicion
+                                    Int32 Csal_cantidad = Csal_med01;//Convert.ToInt32(tabla.Rows[i]["Csal_med01"]);// cantidad o valor de la posicion
                                     string Csal_codRgmd = tabla.Rows[i]["Csal_rmed"].ToString(); //
                                     string Csal_MedPer = "01"; //nombre de columna (posicion)
                                     string Csal_MedLat = "02";
@@ -932,7 +953,7 @@ namespace CapaServicioWindows.Modular
 
                                 }
 
-                                if (Convert.ToInt32(tabla.Rows[i]["Csal_med02"]) != 0)
+                                if (Csal_med02 != 0)
                                 {
                                     string Csal_secci = tabla.Rows[i]["Csal_secci"].ToString();
                                     string Csal_ano = tabla.Rows[i]["Csal_ano"].ToString();
@@ -941,7 +962,7 @@ namespace CapaServicioWindows.Modular
                                     string Csal_artic = tabla.Rows[i]["Csal_artic"].ToString();
                                     string Csal_calid = tabla.Rows[i]["Csal_calid"].ToString();
 
-                                    Int32 Csal_cantidad = Convert.ToInt32(tabla.Rows[i]["Csal_med02"]);// cantidad o valor de la posicion
+                                    Int32 Csal_cantidad = Csal_med02; ;//Convert.ToInt32(tabla.Rows[i]["Csal_med02"]);// cantidad o valor de la posicion
                                     string Csal_codRgmd = tabla.Rows[i]["Csal_rmed"].ToString(); //
                                     string Csal_MedPer = "02"; //nombre de columna (posicion)
                                     string Csal_MedLat = "03";
@@ -950,7 +971,7 @@ namespace CapaServicioWindows.Modular
                                     dtStock.Rows.Add(Csal_alm, centro_dis, Csal_artic, Csal_calid, Csal_codRgmd, Csal_MedPer, Csal_MedLat, Csal_cantidad, Csal_secci, Csal_ano, Csal_seman);
                                 }
 
-                                if (Convert.ToInt32(tabla.Rows[i]["Csal_med03"]) != 0)
+                                if (Csal_med03 != 0)
                                 {
                                     string Csal_secci = tabla.Rows[i]["Csal_secci"].ToString();
                                     string Csal_ano = tabla.Rows[i]["Csal_ano"].ToString();
@@ -959,7 +980,7 @@ namespace CapaServicioWindows.Modular
                                     string Csal_artic = tabla.Rows[i]["Csal_artic"].ToString();
                                     string Csal_calid = tabla.Rows[i]["Csal_calid"].ToString();
 
-                                    Int32 Csal_cantidad = Convert.ToInt32(tabla.Rows[i]["Csal_med03"]);// cantidad o valor de la posicion
+                                    Int32 Csal_cantidad = Csal_med03;//Convert.ToInt32(tabla.Rows[i]["Csal_med03"]);// cantidad o valor de la posicion
                                     string Csal_codRgmd = tabla.Rows[i]["Csal_rmed"].ToString(); //
                                     string Csal_MedPer = "03"; //nombre de columna (posicion)
                                     string Csal_MedLat = "04";
@@ -968,7 +989,7 @@ namespace CapaServicioWindows.Modular
                                     dtStock.Rows.Add(Csal_alm, centro_dis, Csal_artic, Csal_calid, Csal_codRgmd, Csal_MedPer, Csal_MedLat, Csal_cantidad, Csal_secci, Csal_ano, Csal_seman);
                                 }
 
-                                if (Convert.ToInt32(tabla.Rows[i]["Csal_med04"]) != 0)
+                                if (Csal_med04 != 0)
                                 {
                                     string Csal_secci = tabla.Rows[i]["Csal_secci"].ToString();
                                     string Csal_ano = tabla.Rows[i]["Csal_ano"].ToString();
@@ -977,7 +998,7 @@ namespace CapaServicioWindows.Modular
                                     string Csal_artic = tabla.Rows[i]["Csal_artic"].ToString();
                                     string Csal_calid = tabla.Rows[i]["Csal_calid"].ToString();
 
-                                    Int32 Csal_cantidad = Convert.ToInt32(tabla.Rows[i]["Csal_med04"]);// cantidad o valor de la posicion
+                                    Int32 Csal_cantidad = Csal_med04;//Convert.ToInt32(tabla.Rows[i]["Csal_med04"]);// cantidad o valor de la posicion
                                     string Csal_codRgmd = tabla.Rows[i]["Csal_rmed"].ToString(); //
                                     string Csal_MedPer = "04"; //nombre de columna (posicion)
                                     string Csal_MedLat = "05";
@@ -986,7 +1007,7 @@ namespace CapaServicioWindows.Modular
                                     dtStock.Rows.Add(Csal_alm, centro_dis, Csal_artic, Csal_calid, Csal_codRgmd, Csal_MedPer, Csal_MedLat, Csal_cantidad, Csal_secci, Csal_ano, Csal_seman);
                                 }
 
-                                if (Convert.ToInt32(tabla.Rows[i]["Csal_med05"]) != 0)
+                                if (Csal_med05 != 0)
                                 {
                                     string Csal_secci = tabla.Rows[i]["Csal_secci"].ToString();
                                     string Csal_ano = tabla.Rows[i]["Csal_ano"].ToString();
@@ -995,7 +1016,7 @@ namespace CapaServicioWindows.Modular
                                     string Csal_artic = tabla.Rows[i]["Csal_artic"].ToString();
                                     string Csal_calid = tabla.Rows[i]["Csal_calid"].ToString();
 
-                                    Int32 Csal_cantidad = Convert.ToInt32(tabla.Rows[i]["Csal_med05"]);// cantidad o valor de la posicion
+                                    Int32 Csal_cantidad = Csal_med05;//Convert.ToInt32(tabla.Rows[i]["Csal_med05"]);// cantidad o valor de la posicion
                                     string Csal_codRgmd = tabla.Rows[i]["Csal_rmed"].ToString(); //
                                     string Csal_MedPer = "05"; //nombre de columna (posicion)
                                     string Csal_MedLat = "06";
@@ -1005,7 +1026,7 @@ namespace CapaServicioWindows.Modular
                                 }
                                 //dtStock.Rows.Add();
 
-                                if (Convert.ToInt32(tabla.Rows[i]["Csal_med06"]) != 0)
+                                if (Csal_med06 != 0)
                                 {
                                     string Csal_secci = tabla.Rows[i]["Csal_secci"].ToString();
                                     string Csal_ano = tabla.Rows[i]["Csal_ano"].ToString();
@@ -1014,7 +1035,7 @@ namespace CapaServicioWindows.Modular
                                     string Csal_artic = tabla.Rows[i]["Csal_artic"].ToString();
                                     string Csal_calid = tabla.Rows[i]["Csal_calid"].ToString();
 
-                                    Int32 Csal_cantidad = Convert.ToInt32(tabla.Rows[i]["Csal_med06"]);// cantidad o valor de la posicion
+                                    Int32 Csal_cantidad = Csal_med06;//Convert.ToInt32(tabla.Rows[i]["Csal_med06"]);// cantidad o valor de la posicion
                                     string Csal_codRgmd = tabla.Rows[i]["Csal_rmed"].ToString(); //
                                     string Csal_MedPer = "06"; //nombre de columna (posicion)
                                     string Csal_MedLat = "07";
@@ -1022,7 +1043,7 @@ namespace CapaServicioWindows.Modular
                                     //FuncionInsertar(Csal_secci, Csal_ano, Csal_seman, Csal_alm, Csal_artic, Csal_calid, Csal_cantidad, Csal_codRgmd, Csal_MedPer, Csal_MedLat);
                                     dtStock.Rows.Add(Csal_alm, centro_dis, Csal_artic, Csal_calid, Csal_codRgmd, Csal_MedPer, Csal_MedLat, Csal_cantidad, Csal_secci, Csal_ano, Csal_seman);
                                 }
-                                if (Convert.ToInt32(tabla.Rows[i]["Csal_med07"]) != 0)
+                                if (Csal_med07 != 0)
                                 {
                                     string Csal_secci = tabla.Rows[i]["Csal_secci"].ToString();
                                     string Csal_ano = tabla.Rows[i]["Csal_ano"].ToString();
@@ -1031,7 +1052,7 @@ namespace CapaServicioWindows.Modular
                                     string Csal_artic = tabla.Rows[i]["Csal_artic"].ToString();
                                     string Csal_calid = tabla.Rows[i]["Csal_calid"].ToString();
 
-                                    Int32 Csal_cantidad = Convert.ToInt32(tabla.Rows[i]["Csal_med07"]);// cantidad o valor de la posicion
+                                    Int32 Csal_cantidad = Csal_med07;//Convert.ToInt32(tabla.Rows[i]["Csal_med07"]);// cantidad o valor de la posicion
                                     string Csal_codRgmd = tabla.Rows[i]["Csal_rmed"].ToString(); //
                                     string Csal_MedPer = "07"; //nombre de columna (posicion)
                                     string Csal_MedLat = "08";
@@ -1040,7 +1061,7 @@ namespace CapaServicioWindows.Modular
                                     dtStock.Rows.Add(Csal_alm, centro_dis, Csal_artic, Csal_calid, Csal_codRgmd, Csal_MedPer, Csal_MedLat, Csal_cantidad, Csal_secci, Csal_ano, Csal_seman);
                                 }
 
-                                if (Convert.ToInt32(tabla.Rows[i]["Csal_med08"]) != 0)
+                                if (Csal_med08 != 0)
                                 {
                                     string Csal_secci = tabla.Rows[i]["Csal_secci"].ToString();
                                     string Csal_ano = tabla.Rows[i]["Csal_ano"].ToString();
@@ -1049,7 +1070,7 @@ namespace CapaServicioWindows.Modular
                                     string Csal_artic = tabla.Rows[i]["Csal_artic"].ToString();
                                     string Csal_calid = tabla.Rows[i]["Csal_calid"].ToString();
 
-                                    Int32 Csal_cantidad = Convert.ToInt32(tabla.Rows[i]["Csal_med08"]);// cantidad o valor de la posicion
+                                    Int32 Csal_cantidad = Csal_med08;//Convert.ToInt32(tabla.Rows[i]["Csal_med08"]);// cantidad o valor de la posicion
                                     string Csal_codRgmd = tabla.Rows[i]["Csal_rmed"].ToString(); //
                                     string Csal_MedPer = "08"; //nombre de columna (posicion)
                                     string Csal_MedLat = "09";
@@ -1058,7 +1079,7 @@ namespace CapaServicioWindows.Modular
                                     dtStock.Rows.Add(Csal_alm, centro_dis, Csal_artic, Csal_calid, Csal_codRgmd, Csal_MedPer, Csal_MedLat, Csal_cantidad, Csal_secci, Csal_ano, Csal_seman);
                                 }
 
-                                if (Convert.ToInt32(tabla.Rows[i]["Csal_med09"]) != 0)
+                                if (Csal_med09 != 0)
                                 {
                                     string Csal_secci = tabla.Rows[i]["Csal_secci"].ToString();
                                     string Csal_ano = tabla.Rows[i]["Csal_ano"].ToString();
@@ -1067,7 +1088,7 @@ namespace CapaServicioWindows.Modular
                                     string Csal_artic = tabla.Rows[i]["Csal_artic"].ToString();
                                     string Csal_calid = tabla.Rows[i]["Csal_calid"].ToString();
 
-                                    Int32 Csal_cantidad = Convert.ToInt32(tabla.Rows[i]["Csal_med09"]);// cantidad o valor de la posicion
+                                    Int32 Csal_cantidad = Csal_med09;//Convert.ToInt32(tabla.Rows[i]["Csal_med09"]);// cantidad o valor de la posicion
                                     string Csal_codRgmd = tabla.Rows[i]["Csal_rmed"].ToString(); //
                                     string Csal_MedPer = "09"; //nombre de columna (posicion)
                                     string Csal_MedLat = "10";
@@ -1076,7 +1097,7 @@ namespace CapaServicioWindows.Modular
                                     dtStock.Rows.Add(Csal_alm, centro_dis, Csal_artic, Csal_calid, Csal_codRgmd, Csal_MedPer, Csal_MedLat, Csal_cantidad, Csal_secci, Csal_ano, Csal_seman);
                                 }
 
-                                if (Convert.ToInt32(tabla.Rows[i]["Csal_med10"]) != 0)
+                                if (Csal_med10 != 0)
                                 {
                                     string Csal_secci = tabla.Rows[i]["Csal_secci"].ToString();
                                     string Csal_ano = tabla.Rows[i]["Csal_ano"].ToString();
@@ -1085,7 +1106,7 @@ namespace CapaServicioWindows.Modular
                                     string Csal_artic = tabla.Rows[i]["Csal_artic"].ToString();
                                     string Csal_calid = tabla.Rows[i]["Csal_calid"].ToString();
 
-                                    Int32 Csal_cantidad = Convert.ToInt32(tabla.Rows[i]["Csal_med10"]);// cantidad o valor de la posicion
+                                    Int32 Csal_cantidad = Csal_med10;//Convert.ToInt32(tabla.Rows[i]["Csal_med10"]);// cantidad o valor de la posicion
                                     string Csal_codRgmd = tabla.Rows[i]["Csal_rmed"].ToString(); //
                                     string Csal_MedPer = "10"; //nombre de columna (posicion)
                                     string Csal_MedLat = "11";
@@ -1094,7 +1115,7 @@ namespace CapaServicioWindows.Modular
                                     dtStock.Rows.Add(Csal_alm, centro_dis, Csal_artic, Csal_calid, Csal_codRgmd, Csal_MedPer, Csal_MedLat, Csal_cantidad, Csal_secci, Csal_ano, Csal_seman);
                                 }
 
-                                if (Convert.ToInt32(tabla.Rows[i]["Csal_med11"]) != 0)
+                                if (Csal_med11 != 0)
                                 {
                                     string Csal_secci = tabla.Rows[i]["Csal_secci"].ToString();
                                     string Csal_ano = tabla.Rows[i]["Csal_ano"].ToString();
@@ -1103,7 +1124,7 @@ namespace CapaServicioWindows.Modular
                                     string Csal_artic = tabla.Rows[i]["Csal_artic"].ToString();
                                     string Csal_calid = tabla.Rows[i]["Csal_calid"].ToString();
 
-                                    Int32 Csal_cantidad = Convert.ToInt32(tabla.Rows[i]["Csal_med11"]);// cantidad o valor de la posicion
+                                    Int32 Csal_cantidad = Csal_med11;//Convert.ToInt32(tabla.Rows[i]["Csal_med11"]);// cantidad o valor de la posicion
                                     string Csal_codRgmd = tabla.Rows[i]["Csal_rmed"].ToString(); //
                                     string Csal_MedPer = "11"; //nombre de columna (posicion)
                                     string Csal_MedLat = "12";
@@ -1206,7 +1227,7 @@ namespace CapaServicioWindows.Modular
             catch (Exception exc)
             {
                 //dtStock = null;
-                _error_ws = exc.Message + " error de metodo";
+                _error_ws = exc.Message + " error de metodo " + cod_val.ToString(); ;
                 _error_transac = exc.Message + " error de metodo";
                 //_envio_guias = "";
             }

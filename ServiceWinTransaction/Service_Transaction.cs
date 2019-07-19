@@ -123,7 +123,7 @@ namespace ServiceWinTransaction
             /*PROCESO DE ENVIO DE STOCK DE ALMACEN*/
             //5 minutos
 
-            tmstock_alm = new Timer(1500000);
+            tmstock_alm = new Timer(5000);
             tmstock_alm.Elapsed += new ElapsedEventHandler(tmstock_alm_Elapsed);
         }
         #region <REGION DE STOCK DE ALMACEN>

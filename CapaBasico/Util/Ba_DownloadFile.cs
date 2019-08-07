@@ -1,4 +1,5 @@
 ﻿using CapaDato.Basico;
+using CapaDato.Util;
 using CapaEntidad.Util;
 using System;
 using System.Collections.Generic;
@@ -36,10 +37,14 @@ namespace CapaBasico.Util
                     /*envia el archivo hacia la carpeta destino */
                     Boolean valida = set_envio_file(file, name, rutadestino.file_destino);
                     /*si es que copa en el server entonces vamos a insertar en la bd*/
-                    if (valida)
-                    {
-                        Dat_File upd_file_bd = new Dat_File();
-                        upd_file_bd.insert_update_fileBD(tipofilecod, name,file_creacion,file_update);
+                    /*solo si es imagen, si el de un comunicado entonces no se graba en al BD*/
+                    if (tipofilecod=="01")
+                    { 
+                        if (valida)
+                        {
+                            Dat_File upd_file_bd = new Dat_File();
+                            upd_file_bd.insert_update_fileBD(tipofilecod, name,file_creacion,file_update);
+                        }
                     }
                 }
 
@@ -53,6 +58,48 @@ namespace CapaBasico.Util
             return error;
             //return valida;
         }
+
+        public string download_files_comunicado(Byte[] file,string ruta_server_comunicado ,string name,Ent_Comunicado obj_com)
+        {
+            //Boolean valida = false;
+            Dat_File path_dest = null;
+            string error = "";
+            try
+            {
+                /*verificar las archivos destinos*/
+                //path_dest = new Dat_File();
+                //Ent_File_Ruta rutadestino = path_dest.get_ruta_file(tipofilecod);
+
+                if (ruta_server_comunicado != null)
+                {
+                    /*envia el archivo hacia la carpeta destino */
+                    Boolean valida = set_envio_file(file, name, ruta_server_comunicado);
+                    /*si es que copa en el server entonces vamos a insertar en la bd*/
+                    if (valida)
+                    {
+                        /*en este caso voy a validar si hay datos en el objeto obj_com*/
+                        /*no grabare en la tabla si no existe en el dbf el nombre del archivo, pero tampoco lo tomare como error
+                         para que no se quede el arvhivo en proceso*/
+                        if (obj_com!=null)
+                        { 
+                            Dat_Comunicado dat_com = new Dat_Comunicado();
+                            error = dat_com.insert_comunicado(obj_com);
+                        }
+                    }
+                    
+                }
+
+
+            }
+            catch (Exception exc)
+            {
+                error = exc.Message;
+                //valida = false;                
+            }
+            return error;
+            //return valida;
+        }
+
         /// <summary>
         /// sube los archivos envia false si hay error
         /// </summary>

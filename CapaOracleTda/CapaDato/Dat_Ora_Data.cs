@@ -15,7 +15,7 @@ namespace CapaOracleTda.CapaDato
         public DataTable get_documento(string nro_doc)
         {
             DataTable dtdoc = null;
-            string sqlquery = "select * from trn_trans where trans_typcode='RETAIL_SALE' and fiscal_number like '%" + nro_doc + "%'";
+            string sqlquery = "select * from trn_trans where trans_typcode='RETAIL_SALE' and fiscal_number like '%" + nro_doc + "%' AND TRANS_STATCODE='COMPLETE'";
             try
             {
                 object results = new object[1];

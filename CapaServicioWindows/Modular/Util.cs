@@ -75,6 +75,40 @@ namespace CapaServicioWindows.Modular
 
             }
         }
+        public string update_vendedor()
+        {
+            string error = "";
+            string sqlquery = "USP_ACTUALIZAR_VENDEDOR";
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(ConexionSQL.conexion))
+                {
+                    try
+                    {
+                        if (cn.State == 0) cn.Open();
+                        using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                        {
+                            cmd.CommandTimeout = 0;
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.ExecuteNonQuery();
+                        }
+
+                    }
+                    catch (Exception exc)
+                    {
+                        error = exc.Message;   
+                    }
+                    if (cn != null)
+                        if (cn.State == ConnectionState.Open) cn.Close();
+                }
+            }
+            catch (Exception exc)
+            {
+
+                error = exc.Message;
+            }
+            return error;
+        }
         public string get_ruta_locationProcesa_dbf(string name)
         {
             string ruta = "";

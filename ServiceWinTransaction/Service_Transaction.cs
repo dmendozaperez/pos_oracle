@@ -76,6 +76,9 @@ namespace ServiceWinTransaction
         Timer tmstock_alm = null;
         private Int32 _valida_stk = 0;
 
+        Timer tmvendedor = null;
+        private Int32 _valida_ven = 0;
+
         #endregion
 
         public Service_Transaction()
@@ -125,7 +128,75 @@ namespace ServiceWinTransaction
 
             tmstock_alm = new Timer(5000);
             tmstock_alm.Elapsed += new ElapsedEventHandler(tmstock_alm_Elapsed);
+
+            /*PROCESO DE VENDEDOR*/
+            tmvendedor= new Timer(5000);
+            tmvendedor.Elapsed += new ElapsedEventHandler(tmvendedor_Elapsed);
         }
+
+        #region<REGION DE VENDEDOR>
+        void tmvendedor_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            Int32 _valor = 0;
+
+            string _ruta_erro_file = @"D:\BataTransaction\log_vendedor.txt";
+            string str = "";
+            Boolean proceso_venta = false;
+            try
+            {
+
+                #region<region solo almacen ecuador>
+                if (!File.Exists(@file_almace_ecu)) return;
+                #endregion
+
+
+                if (_valida_ven == 0)
+                {
+                    //string _error = "ing";
+                    _valor = 1;
+                    _valida_ven = 1;
+
+
+                    string _error = "";
+                    Util  act_vendedor = new Util();
+                    _error=act_vendedor.update_vendedor();                    
+                    if (_error.Length > 0)
+                    {
+                        TextWriter tw = new StreamWriter(_ruta_erro_file, true);
+                        tw = new StreamWriter(_ruta_erro_file, true);
+                        str = DateTime.Today.ToString() + " " + DateTime.Now.ToString("HH:mm:ss") + "==>genera_miembro_bataclub==>" + _error;
+                        tw.WriteLine(str);
+                        tw.Flush();
+                        tw.Close();
+                        tw.Dispose();
+                    }                  
+
+                    _valida_ven = 0;
+
+                }
+                //****************************************************************************
+            }
+            catch (Exception exc)
+            {
+                TextWriter tw = new StreamWriter(_ruta_erro_file, true);
+                tw = new StreamWriter(_ruta_erro_file, true);
+                str = DateTime.Today.ToString() + " " + DateTime.Now.ToString("HH:mm:ss") + "==> catch ==>" + exc.Message;
+                tw.WriteLine(str);
+                tw.Flush();
+                tw.Close();
+                tw.Dispose();
+                _valida_ven = 0;
+            }
+
+            if (_valor == 1)
+            {
+                _valida_ven = 0;
+            }
+
+
+        }
+        #endregion
+
         #region <REGION DE STOCK DE ALMACEN>
         void tmstock_alm_Elapsed(object sender, ElapsedEventArgs e)
         {
@@ -1068,6 +1139,7 @@ namespace ServiceWinTransaction
             tmpprescripcion.Start();
             tmbataclub.Start();
             tmstock_alm.Start();
+            tmvendedor.Start();
             //tmservicioScactcoDBF.Start();
         }
 
@@ -1085,6 +1157,7 @@ namespace ServiceWinTransaction
             tmpprescripcion.Stop();
             tmbataclub.Stop();
             tmstock_alm.Stop();
+            tmvendedor.Stop();
             //tmservicioScactcoDBF.Stop();
         }       
               

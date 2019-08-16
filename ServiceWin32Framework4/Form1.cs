@@ -413,5 +413,12 @@ namespace ServiceWin32Framework4
         {
             
         }
+
+        private void BTNVENDE_Click(object sender, EventArgs e)
+        {
+            string _error = "";
+            Util act_vendedor = new Util();
+            _error = act_vendedor.update_vendedor();
+        }
     }
 }

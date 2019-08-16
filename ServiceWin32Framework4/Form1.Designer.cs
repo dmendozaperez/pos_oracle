@@ -47,6 +47,7 @@
             this.btn_item_deal = new System.Windows.Forms.Button();
             this.btnsk_almacen = new System.Windows.Forms.Button();
             this.btnpaperless = new System.Windows.Forms.Button();
+            this.BTNVENDE = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn_servicewin
@@ -224,7 +225,7 @@
             // btn_item_deal
             // 
             this.btn_item_deal.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_item_deal.Location = new System.Drawing.Point(734, 16);
+            this.btn_item_deal.Location = new System.Drawing.Point(734, 9);
             this.btn_item_deal.Name = "btn_item_deal";
             this.btn_item_deal.Size = new System.Drawing.Size(264, 81);
             this.btn_item_deal.TabIndex = 20;
@@ -254,11 +255,23 @@
             this.btnpaperless.UseVisualStyleBackColor = true;
             this.btnpaperless.Click += new System.EventHandler(this.btnpaperless_Click);
             // 
+            // BTNVENDE
+            // 
+            this.BTNVENDE.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BTNVENDE.Location = new System.Drawing.Point(844, 113);
+            this.BTNVENDE.Name = "BTNVENDE";
+            this.BTNVENDE.Size = new System.Drawing.Size(154, 23);
+            this.BTNVENDE.TabIndex = 23;
+            this.BTNVENDE.Text = "VENDEDOR";
+            this.BTNVENDE.UseVisualStyleBackColor = true;
+            this.BTNVENDE.Click += new System.EventHandler(this.BTNVENDE_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1031, 313);
+            this.Controls.Add(this.BTNVENDE);
             this.Controls.Add(this.btnpaperless);
             this.Controls.Add(this.btnsk_almacen);
             this.Controls.Add(this.btn_item_deal);
@@ -306,6 +319,7 @@
         private System.Windows.Forms.Button btn_item_deal;
         private System.Windows.Forms.Button btnsk_almacen;
         private System.Windows.Forms.Button btnpaperless;
+        private System.Windows.Forms.Button BTNVENDE;
     }
 }
 

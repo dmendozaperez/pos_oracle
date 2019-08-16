@@ -40,7 +40,7 @@ namespace CapaServicioWindows.Modular
             {
 
             }
-        }
+        }       
         /// <summary>
         /// verificar las guias cerradas
         /// </summary>

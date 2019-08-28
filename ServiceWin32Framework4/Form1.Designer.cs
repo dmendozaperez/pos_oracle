@@ -48,6 +48,7 @@
             this.btnsk_almacen = new System.Windows.Forms.Button();
             this.btnpaperless = new System.Windows.Forms.Button();
             this.BTNVENDE = new System.Windows.Forms.Button();
+            this.orce_exclud_interface = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn_servicewin
@@ -227,7 +228,7 @@
             this.btn_item_deal.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_item_deal.Location = new System.Drawing.Point(734, 9);
             this.btn_item_deal.Name = "btn_item_deal";
-            this.btn_item_deal.Size = new System.Drawing.Size(264, 81);
+            this.btn_item_deal.Size = new System.Drawing.Size(264, 61);
             this.btn_item_deal.TabIndex = 20;
             this.btn_item_deal.Text = "ITEM_DEAL_PROPERTY (INTERFACE)";
             this.btn_item_deal.UseVisualStyleBackColor = true;
@@ -266,11 +267,23 @@
             this.BTNVENDE.UseVisualStyleBackColor = true;
             this.BTNVENDE.Click += new System.EventHandler(this.BTNVENDE_Click);
             // 
+            // orce_exclud_interface
+            // 
+            this.orce_exclud_interface.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.orce_exclud_interface.Location = new System.Drawing.Point(12, 307);
+            this.orce_exclud_interface.Name = "orce_exclud_interface";
+            this.orce_exclud_interface.Size = new System.Drawing.Size(264, 58);
+            this.orce_exclud_interface.TabIndex = 24;
+            this.orce_exclud_interface.Text = "ORCE EXCLUD (INTERFACE)";
+            this.orce_exclud_interface.UseVisualStyleBackColor = true;
+            this.orce_exclud_interface.Click += new System.EventHandler(this.orce_exclud_interface_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1031, 313);
+            this.ClientSize = new System.Drawing.Size(1031, 371);
+            this.Controls.Add(this.orce_exclud_interface);
             this.Controls.Add(this.BTNVENDE);
             this.Controls.Add(this.btnpaperless);
             this.Controls.Add(this.btnsk_almacen);
@@ -320,6 +333,7 @@
         private System.Windows.Forms.Button btnsk_almacen;
         private System.Windows.Forms.Button btnpaperless;
         private System.Windows.Forms.Button BTNVENDE;
+        private System.Windows.Forms.Button orce_exclud_interface;
     }
 }
 

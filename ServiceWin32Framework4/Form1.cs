@@ -385,12 +385,38 @@ namespace ServiceWin32Framework4
                 }
             }
             catch 
-            {
-
-                
+            {                
             }
             return dt;
         }
+
+        private DataTable get_tienda_orce()
+        {
+            DataTable dt = null;
+            string sqlquery = "SELECT ORC_DET_TDA FROM ORCE_INTERFACE_DET_TDA  WHERE ORC_DET_TDA_COD = 3";
+            //string sqlquery = "select cod_entid,OUTLET=dbo.FTIENDA_OUTLET(cod_entid) from tentidad_tienda where cod_pais='PE' and cod_entid='50102'";
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(conexion))
+                {
+                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        cmd.CommandType = CommandType.Text;
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            dt = new DataTable();
+                            da.Fill(dt);
+                        }
+                    }
+                }
+            }
+            catch
+            {
+            }
+            return dt;
+        }
+
 
         private void btnsk_almacen_Click(object sender, EventArgs e)
         {
@@ -419,6 +445,16 @@ namespace ServiceWin32Framework4
             string _error = "";
             Util act_vendedor = new Util();
             _error = act_vendedor.update_vendedor();
+        }
+
+        private void orce_exclud_interface_Click(object sender, EventArgs e)
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            string _error = "";
+            Xstore_Genera_Inter ejecuta_procesos = new Xstore_Genera_Inter();
+            ejecuta_procesos.generar_orce_exclud(ref _error);
+            MessageBox.Show(_error +  Environment.NewLine + "Terminado");
+            Cursor.Current = Cursors.Default;
         }
     }
 }

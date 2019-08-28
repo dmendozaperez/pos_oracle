@@ -680,7 +680,9 @@ namespace CapaServicioWindows.Envio_Ftp_Xstore
                                             str_cadena = str.ToString();
 
 
-                                            name_file = "PRODUCT_LOCATION_2000.TXT";// + DateTime.Today.ToString("yyyyMMdd") + ".TXT";
+                                            //name_file = "PRODUCT_LOCATION_2000.TXT";// + DateTime.Today.ToString("yyyyMMdd") + ".TXT";
+                                            name_file = "PRODUCT_LOCATION_LOGFIRE2K.TXT";
+
                                             in_maestros = _gen_ruta + "\\" + name_file;
 
                                             if (File.Exists(@in_maestros)) File.Delete(@in_maestros);
@@ -705,11 +707,23 @@ namespace CapaServicioWindows.Envio_Ftp_Xstore
 
 
 
-                                            name_file = "PRODUCT_2000.TXT";// + DateTime.Today.ToString("yyyyMMdd") + ".TXT";
+                                            //name_file = "PRODUCT_2000.TXT";// + DateTime.Today.ToString("yyyyMMdd") + ".TXT";
+                                            name_file = "PRODUCT_LOGFIRE2K.TXT";
                                             in_maestros = _gen_ruta + "\\" + name_file;
 
                                             if (File.Exists(@in_maestros)) File.Delete(@in_maestros);
                                             File.WriteAllText(@in_maestros, str_cadena);
+
+                                            name_file = "PRODUCT_2000.TXT";// + DateTime.Today.ToString("yyyyMMdd") + ".TXT";
+                                            //name_file = "PRODUCT_LOGFIRE2K.TXT";
+                                            in_maestros = _gen_ruta + "\\" + name_file;
+
+                                            str_cadena = str_cadena.Replace("LOGFIRE2K", "2000");
+
+                                            if (File.Exists(@in_maestros)) File.Delete(@in_maestros);
+                                            File.WriteAllText(@in_maestros, str_cadena);
+
+
                                         }
 
                                     }

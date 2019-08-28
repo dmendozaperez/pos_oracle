@@ -152,6 +152,43 @@ namespace CapaServicioWindows.CapaDato.Interfaces
         #region<XOFICCE>
 
         #region<PROCEDURE DE PERU>
+        public DataSet XSTORE_GET_ORCE_EXCLUD()
+        {
+            string sqlquery = "[USP_XSTORE_GET_ORCE_EXCLUD]";
+            DataSet ds = null;
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(ConexionSQL.conexion))
+                {
+                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        //cmd.Parameters.AddWithValue("@", cod_tda);
+                        
+
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            ds = new DataSet();
+                            da.Fill(ds);
+
+                            ds.Tables[0].TableName = "ORCE_EXCLUD_RUTA";
+                            ds.Tables[1].TableName = "ORCE_EXCLUD_ART";
+                            ds.Tables[2].TableName = "ORCE_EXCLUD_TDA";
+
+                        }
+                    }
+                }
+            }
+            catch (Exception exc)
+            {
+                ds = null;
+            }
+            return ds;
+        }
+
+
+
 
         public DataTable get_item_PE_AUTO(string pais, string codtda)
         {

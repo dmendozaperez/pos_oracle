@@ -61,6 +61,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CapaOracleTda", "CapaOracle
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceWinBataClub", "ServiceWinBataClub\ServiceWinBataClub.csproj", "{BBEE12F2-169E-48BC-AE3A-EC3EC24CDF03}"
 EndProject
+Project("{6141683F-8A12-4E36-9623-2EB02B2C2303}") = "InstaladorBataClub", "InstaladorBataClub\InstaladorBataClub.isproj", "{F776F4F3-8E5A-4A93-BA63-C70AE2603401}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BBEE12F2-169E-48BC-AE3A-EC3EC24CDF03} = {BBEE12F2-169E-48BC-AE3A-EC3EC24CDF03}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		CD_ROM|Any CPU = CD_ROM|Any CPU
@@ -370,6 +375,20 @@ Global
 		{BBEE12F2-169E-48BC-AE3A-EC3EC24CDF03}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BBEE12F2-169E-48BC-AE3A-EC3EC24CDF03}.SingleImage|Any CPU.ActiveCfg = Release|Any CPU
 		{BBEE12F2-169E-48BC-AE3A-EC3EC24CDF03}.SingleImage|Any CPU.Build.0 = Release|Any CPU
+		{F776F4F3-8E5A-4A93-BA63-C70AE2603401}.CD_ROM|Any CPU.ActiveCfg = CD_ROM
+		{F776F4F3-8E5A-4A93-BA63-C70AE2603401}.CD_ROM|Any CPU.Build.0 = CD_ROM
+		{F776F4F3-8E5A-4A93-BA63-C70AE2603401}.Debug|Any CPU.ActiveCfg = DVD-5
+		{F776F4F3-8E5A-4A93-BA63-C70AE2603401}.Debug|Any CPU.Build.0 = DVD-5
+		{F776F4F3-8E5A-4A93-BA63-C70AE2603401}.DebugLocal|Any CPU.ActiveCfg = DVD-5
+		{F776F4F3-8E5A-4A93-BA63-C70AE2603401}.DebugLocal|Any CPU.Build.0 = DVD-5
+		{F776F4F3-8E5A-4A93-BA63-C70AE2603401}.Development|Any CPU.ActiveCfg = DVD-5
+		{F776F4F3-8E5A-4A93-BA63-C70AE2603401}.Development|Any CPU.Build.0 = DVD-5
+		{F776F4F3-8E5A-4A93-BA63-C70AE2603401}.DVD-5|Any CPU.ActiveCfg = DVD-5
+		{F776F4F3-8E5A-4A93-BA63-C70AE2603401}.DVD-5|Any CPU.Build.0 = DVD-5
+		{F776F4F3-8E5A-4A93-BA63-C70AE2603401}.Release|Any CPU.ActiveCfg = SingleImage
+		{F776F4F3-8E5A-4A93-BA63-C70AE2603401}.Release|Any CPU.Build.0 = SingleImage
+		{F776F4F3-8E5A-4A93-BA63-C70AE2603401}.SingleImage|Any CPU.ActiveCfg = SingleImage
+		{F776F4F3-8E5A-4A93-BA63-C70AE2603401}.SingleImage|Any CPU.Build.0 = SingleImage
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

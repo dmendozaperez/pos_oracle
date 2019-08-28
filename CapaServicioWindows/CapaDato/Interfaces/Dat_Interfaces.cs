@@ -186,7 +186,40 @@ namespace CapaServicioWindows.CapaDato.Interfaces
             }
             return ds;
         }
+        public int ORCE_INTERFACE_EXCLUD_ACT(int codigo, string estado_orce, decimal usu_id, int operacion, ref string mensaje)
+        {
+            string sqlquery = "USP_ORCE_INTERFACE_EXCLUD_ACT";
+            int f = 0;
+            DataTable TMP_ORCE_INTERFACE_ART = null;
+            DataTable TMP_ORCE_INTERFACE_DET_TDA = null;
 
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(ConexionSQL.conexion))
+                {
+                    if (cn.State == 0) cn.Open();
+                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@ORC_COD", codigo);
+                        cmd.Parameters.AddWithValue("@ORC_EST_ID", estado_orce);
+                        cmd.Parameters.AddWithValue("@USUID_ING", usu_id);
+                        cmd.Parameters.AddWithValue("@ESTAOD", operacion);
+                        cmd.Parameters.AddWithValue("@TMP_ORCE_INTERFACE_ART", TMP_ORCE_INTERFACE_ART);
+                        cmd.Parameters.AddWithValue("@TMP_ORCE_INTERFACE_DET_TDA", TMP_ORCE_INTERFACE_DET_TDA);
+                        cmd.ExecuteNonQuery();
+                        f = 1;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                f = 0;
+                mensaje = ex.Message;
+            }
+            return f;
+        }
 
 
 

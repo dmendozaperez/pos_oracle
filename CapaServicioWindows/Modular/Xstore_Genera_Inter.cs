@@ -1412,7 +1412,7 @@ namespace CapaServicioWindows.Modular
                     {
                         foreach (DataRow fila in dt_ORCE_EXCLUD_TDA.Rows)
                         {                            
-                            _error += DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " INICIANDO GENERACION DE INTERFACE ORCE EXCLUD - TDA: " + fila["ORC_DET_TDA"].ToString() + " (generar_orce_exclud)";                         
+                            //_error += DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " INICIANDO GENERACION DE INTERFACE ORCE EXCLUD - TDA: " + fila["ORC_DET_TDA"].ToString() + " (generar_orce_exclud)";                         
                             #region<GET_ITEM_DEAL_PROPERTY>
                             StringBuilder str = null;
                             string str_cadena = "";
@@ -1447,10 +1447,25 @@ namespace CapaServicioWindows.Modular
                                 }
                             }
                             #endregion
-                            _error = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " TERMINANDO GENERACION DE INTERFACE ORCE EXCLUD - TDA: " + fila["ORC_DET_TDA"].ToString() + " (generar_orce_exclud)";                            
+                            //_error += DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " TERMINANDO GENERACION DE INTERFACE ORCE EXCLUD - TDA: " + fila["ORC_DET_TDA"].ToString() + " (generar_orce_exclud)";                                           
                         }
-                    }                    
-                }
+                        string mensaje = "";
+                        int f = 0;
+                        f = datInt.ORCE_INTERFACE_EXCLUD_ACT(Convert.ToInt32(dt_ORCE_EXCLUD_RUTA.Rows[0]["COD_ORCE"]), "N", 296, 4, ref mensaje);
+                        if (f > 0)
+                        {
+                            _error += DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " ORCE COD: " + dt_ORCE_EXCLUD_RUTA.Rows[0]["COD_ORCE"].ToString() + " ACTUALIZADO A ESTADO ENVIADO (generar_orce_exclud)";
+                        }
+                        if (mensaje != "")
+                        {
+                            _error += DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " (generar_orce_exclud) ERROR AL ACTUALIZAR ESTADO " + mensaje;
+                        }
+                    }
+                    else
+                    {
+                        _error += DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " NO HAY INTERFACES PENDIENTES (generar_orce_exclud) ";
+                    }
+                }                
             }
             catch (Exception ex)
             {

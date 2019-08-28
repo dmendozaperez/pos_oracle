@@ -26,8 +26,8 @@ namespace ServiceWinTransaction
         Timer tmservicioVentaXstore = null;
        
         #region<REGION PARA BATACLUB VARIABLES>
-        Timer tmbataclub = null;
-        private Int32 _valida_bataclub = 0;
+        //Timer tmbataclub = null;
+        //private Int32 _valida_bataclub = 0;
         #endregion
 
         Timer tmpprescripcion = null;
@@ -120,8 +120,8 @@ namespace ServiceWinTransaction
             tmpprescripcion.Elapsed += new ElapsedEventHandler(tmpprescripcion_Elapsed);
 
             /*PROCESO DE BATACLUB*/
-            tmbataclub = new Timer(5000);
-            tmbataclub.Elapsed += new ElapsedEventHandler(tmpbataclub_Elapsed);
+            //tmbataclub = new Timer(5000);
+            //tmbataclub.Elapsed += new ElapsedEventHandler(tmpbataclub_Elapsed);
 
             /*PROCESO DE ENVIO DE STOCK DE ALMACEN*/
             //5 minutos
@@ -279,80 +279,80 @@ namespace ServiceWinTransaction
         }
         #endregion
         #region<REGION DE BATACLUB METODOS>
-        void tmpbataclub_Elapsed(object sender, ElapsedEventArgs e)
-        {           
-            Int32 _valor = 0;
+        //void tmpbataclub_Elapsed(object sender, ElapsedEventArgs e)
+        //{           
+        //    Int32 _valor = 0;
 
-            string _ruta_erro_file = @"D:\BataTransaction\log_bataclub.txt";
-            string str = "";
-            Boolean proceso_venta = false;
-            try
-            {                  
+        //    string _ruta_erro_file = @"D:\BataTransaction\log_bataclub.txt";
+        //    string str = "";
+        //    Boolean proceso_venta = false;
+        //    try
+        //    {                  
 
-                #region<region solo almacen ecuador>
-                if (!File.Exists(@file_almace_ecu)) return;
-                #endregion
-
-
-                if (_valida_bataclub == 0)
-                {
-                    //string _error = "ing";
-                    _valor = 1;
-                    _valida_bataclub = 1;
+        //        #region<region solo almacen ecuador>
+        //        if (!File.Exists(@file_almace_ecu)) return;
+        //        #endregion
 
 
-                    string _error_ws = "";
-                    BataClub batacl = new BataClub();
-                    _error_ws = batacl.genera_miembro_bataclub();
+        //        if (_valida_bataclub == 0)
+        //        {
+        //            //string _error = "ing";
+        //            _valor = 1;
+        //            _valida_bataclub = 1;
+
+
+        //            string _error_ws = "";
+        //            BataClub batacl = new BataClub();
+        //            _error_ws = batacl.genera_miembro_bataclub();
                     
-                    if (_error_ws.Length > 0)
-                    {                        
-                        TextWriter tw = new StreamWriter(_ruta_erro_file, true);
-                        tw = new StreamWriter(_ruta_erro_file, true);
-                        str = DateTime.Today.ToString() + " " + DateTime.Now.ToString("HH:mm:ss") + "==>genera_miembro_bataclub==>" + _error_ws;
-                        tw.WriteLine(str);
-                        tw.Flush();
-                        tw.Close();
-                        tw.Dispose();
-                    }
-                    _error_ws = batacl.genera_envio_correo_bataclub();
-                    if (_error_ws.Length > 0)
-                    {
-                        TextWriter tw = new StreamWriter(_ruta_erro_file, true);
-                        tw = new StreamWriter(_ruta_erro_file, true);
-                        str = DateTime.Today.ToString() + " " + DateTime.Now.ToString("HH:mm:ss") + "==> genera_miembro_bataclub==>" + _error_ws;
-                        tw.WriteLine(str);
-                        tw.Flush();
-                        tw.Close();
-                        tw.Dispose();
-                    }
+        //            if (_error_ws.Length > 0)
+        //            {                        
+        //                TextWriter tw = new StreamWriter(_ruta_erro_file, true);
+        //                tw = new StreamWriter(_ruta_erro_file, true);
+        //                str = DateTime.Today.ToString() + " " + DateTime.Now.ToString("HH:mm:ss") + "==>genera_miembro_bataclub==>" + _error_ws;
+        //                tw.WriteLine(str);
+        //                tw.Flush();
+        //                tw.Close();
+        //                tw.Dispose();
+        //            }
+        //            _error_ws = batacl.genera_envio_correo_bataclub();
+        //            if (_error_ws.Length > 0)
+        //            {
+        //                TextWriter tw = new StreamWriter(_ruta_erro_file, true);
+        //                tw = new StreamWriter(_ruta_erro_file, true);
+        //                str = DateTime.Today.ToString() + " " + DateTime.Now.ToString("HH:mm:ss") + "==> genera_miembro_bataclub==>" + _error_ws;
+        //                tw.WriteLine(str);
+        //                tw.Flush();
+        //                tw.Close();
+        //                tw.Dispose();
+        //            }
 
-                    //_error = CapaServicioWindows.Modular.Basico.retornar();
+        //            //_error = CapaServicioWindows.Modular.Basico.retornar();
 
-                    _valida_bataclub = 0;
+        //            _valida_bataclub = 0;
                    
-                }
-                //****************************************************************************
-            }
-            catch (Exception exc)
-            {
-                TextWriter tw = new StreamWriter(_ruta_erro_file, true);
-                tw = new StreamWriter(_ruta_erro_file, true);
-                str = DateTime.Today.ToString() + " " + DateTime.Now.ToString("HH:mm:ss") + "==> catch ==>" + exc.Message;
-                tw.WriteLine(str);
-                tw.Flush();
-                tw.Close();
-                tw.Dispose();
-                _valida_bataclub = 0;
-            }
+        //        }
+        //        //****************************************************************************
+        //    }
+        //    catch (Exception exc)
+        //    {
+        //        TextWriter tw = new StreamWriter(_ruta_erro_file, true);
+        //        tw = new StreamWriter(_ruta_erro_file, true);
+        //        str = DateTime.Today.ToString() + " " + DateTime.Now.ToString("HH:mm:ss") + "==> catch ==>" + exc.Message;
+        //        tw.WriteLine(str);
+        //        tw.Flush();
+        //        tw.Close();
+        //        tw.Dispose();
+        //        _valida_bataclub = 0;
+        //    }
 
-            if (_valor == 1)
-            {
-                _valida_bataclub = 0;
-            }
+        //    if (_valor == 1)
+        //    {
+        //        _valida_bataclub = 0;
+        //    }
 
 
-        }
+        //}
         #endregion
 
         #region<PROCESO DE PRESCRIPCION>
@@ -1147,7 +1147,7 @@ namespace ServiceWinTransaction
             tmservicio_ecu_guia.Start();
             tmservicioAQ.Start();
             tmpprescripcion.Start();
-            tmbataclub.Start();
+            //tmbataclub.Start();
             tmstock_alm.Start();
             tmvendedor.Start();
             //tmservicioScactcoDBF.Start();
@@ -1165,7 +1165,7 @@ namespace ServiceWinTransaction
             tmservicio_ecu_guia.Stop();
             tmservicioAQ.Stop();
             tmpprescripcion.Stop();
-            tmbataclub.Stop();
+            //tmbataclub.Stop();
             tmstock_alm.Stop();
             tmvendedor.Stop();
             //tmservicioScactcoDBF.Stop();

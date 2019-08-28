@@ -1,6 +1,6 @@
 ﻿namespace ServiceWinBataClub
 {
-    partial class Service1
+    partial class Service_Transaction_BataClub
     {
         /// <summary> 
         /// Variable del diseñador necesaria.

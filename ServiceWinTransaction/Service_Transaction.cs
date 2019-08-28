@@ -708,6 +708,16 @@ namespace ServiceWinTransaction
                         tw1.Close();
                         tw1.Dispose();
 
+                        /**/
+                        ejecuta_procesos.generar_orce_exclud(ref _error);
+                        tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                        tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " SALIENDO DEL SERVICIO DE GENERACION DE INTERFACE METODO (ejecutar_genera_file_xstore_auto) PERU");
+                        tw1.Flush();
+                        tw1.Close();
+                        tw1.Dispose();
+
+
+
                         Ftp_Xstore_Service_Send upd_item = new Ftp_Xstore_Service_Send();
                         if (_error.Length == 0)
                         {

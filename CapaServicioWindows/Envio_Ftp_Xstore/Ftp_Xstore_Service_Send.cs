@@ -72,6 +72,89 @@ namespace CapaServicioWindows.Envio_Ftp_Xstore
                 
             }
         }
+
+        #region<GENERACION DE INTERFACE ORCE EXCLUD>
+        public void generar_orce_exclud(ref string _error)
+        {
+            Dat_Interfaces datInt = new Dat_Interfaces();
+            DataSet ds = null;
+            DataTable dt_ORCE_EXCLUD_RUTA = new DataTable();
+            DataTable dt_ORCE_EXCLUD_ART = new DataTable();
+            DataTable dt_ORCE_EXCLUD_TDA = new DataTable();
+            try
+            {
+                ds = datInt.XSTORE_GET_ORCE_EXCLUD();
+                if (ds != null && (ds != null && ds.Tables.Count == 3))
+                {
+                    dt_ORCE_EXCLUD_RUTA = ds.Tables[0];
+                    dt_ORCE_EXCLUD_ART = ds.Tables[1];
+                    dt_ORCE_EXCLUD_TDA = ds.Tables[2];
+                    if (dt_ORCE_EXCLUD_TDA.Rows.Count > 0)
+                    {
+                        foreach (DataRow fila in dt_ORCE_EXCLUD_TDA.Rows)
+                        {
+                            _error += DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " INICIANDO GENERACION DE INTERFACE ORCE EXCLUD - TDA: " + fila["ORC_DET_TDA"].ToString() + " (generar_orce_exclud)";
+                            #region<GET_ITEM_DEAL_PROPERTY>
+                            StringBuilder str = null;
+                            string str_cadena = "";
+                            string str_cab = "";
+                            string name_maestros = ""; string in_maestros = "";
+
+                            if (dt_ORCE_EXCLUD_ART != null)
+                            {
+                                str_cab = dt_ORCE_EXCLUD_ART.Rows[0][0].ToString();
+                                str_cab = str_cab.Replace("XXXXX", fila["ORC_DET_TDA"].ToString());
+                                dt_ORCE_EXCLUD_ART.Rows[0][0] = str_cab;
+                                string ruta_interface = dt_ORCE_EXCLUD_RUTA.Rows[0]["X_RUTA"].ToString();
+                                if (!Directory.Exists(@ruta_interface)) Directory.CreateDirectory(@ruta_interface);
+                                if (dt_ORCE_EXCLUD_ART.Rows.Count > 0)
+                                {
+                                    str = new StringBuilder();
+                                    for (Int32 i = 0; i < dt_ORCE_EXCLUD_ART.Rows.Count; ++i)
+                                    {
+                                        str.Append(dt_ORCE_EXCLUD_ART.Rows[i]["ITEM_DEAL_PROPERTY"].ToString());
+
+                                        if (i < dt_ORCE_EXCLUD_ART.Rows.Count - 1)
+                                        {
+                                            str.Append("\r\n");
+                                        }
+                                    }
+                                    str_cadena = str.ToString();
+                                    name_maestros += "ITEM_DEAL_PROPERTY_" + fila["ORC_DET_TDA"].ToString() + "_" + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
+                                    in_maestros = ruta_interface + "\\" + name_maestros;
+
+                                    if (File.Exists(@in_maestros)) File.Delete(@in_maestros);
+                                    File.WriteAllText(@in_maestros, str_cadena);
+                                }
+                            }
+                            #endregion
+                            _error += DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " TERMINANDO GENERACION DE INTERFACE ORCE EXCLUD - TDA: " + fila["ORC_DET_TDA"].ToString() + " (generar_orce_exclud)";
+                        }
+                        string mensaje = "";
+                        int f = 0;
+                        f = datInt.ORCE_INTERFACE_EXCLUD_ACT(Convert.ToInt32(dt_ORCE_EXCLUD_RUTA.Rows[0]["COD_ORCE"]), "N", 296, 4, ref mensaje);
+                        if (f > 0)
+                        {
+                            _error += DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " ORCE COD: " + dt_ORCE_EXCLUD_RUTA.Rows[0]["COD_ORCE"].ToString() + " ACTUALIZADO A ESTADO ENVIADO (generar_orce_exclud)";
+                        }
+                        if (mensaje != "")
+                        {
+                            _error += DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " (generar_orce_exclud) ERROR AL ACTUALIZAR ESTADO " + mensaje;
+                        }
+                    }
+                    else
+                    {
+                        //_error += DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " NO HAY INTERFACES PENDIENTES (generar_orce_exclud) ";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _error = ex.Message;
+            }
+        }
+        #endregion
+
         public void ejecutar_genera_file_xstore_auto(string _pais,ref string error,ref Boolean gen_per_item,ref Boolean gen_ecu_item)
         {
             StreamWriter tw1 = null;

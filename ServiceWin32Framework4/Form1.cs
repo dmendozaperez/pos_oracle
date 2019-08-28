@@ -451,7 +451,11 @@ namespace ServiceWin32Framework4
         {
             Cursor.Current = Cursors.WaitCursor;
             string _error = "";
-            Xstore_Genera_Inter ejecuta_procesos = new Xstore_Genera_Inter();
+            //Xstore_Genera_Inter ejecuta_procesos = new Xstore_Genera_Inter();
+
+            Ftp_Xstore_Service_Send ejecuta_procesos = null;
+            ejecuta_procesos = new Ftp_Xstore_Service_Send();
+
             ejecuta_procesos.generar_orce_exclud(ref _error);
             MessageBox.Show(_error +  Environment.NewLine + "Terminado");
             Cursor.Current = Cursors.Default;

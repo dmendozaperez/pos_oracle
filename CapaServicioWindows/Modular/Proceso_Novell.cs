@@ -39,8 +39,8 @@ namespace CapaServicioWindows.Modular
                 {
                     foreach(DataRow fila in dt_tda.Rows)
                     {
-                        string cod_tda = fila["tienda"].ToString();
-                        DateTime fec_cie =Convert.ToDateTime(fila["fecha"]);
+                        string cod_tda =fila["tienda"].ToString();
+                        DateTime fec_cie =  Convert.ToDateTime(fila["fecha"]);
 
 
 
@@ -62,6 +62,10 @@ namespace CapaServicioWindows.Modular
                                 tabla_FMD(ds.Tables[7]);
                                 /**/
 
+                                /*FCACB & FDECB*/
+                                tabla_FCACB(ds.Tables[8]);
+                                tabla_FDECB(ds.Tables[9]);
+
                                 string archivo = "";
                                 byte[] file_bytes = null;
                                 _comprimir_archivo(cod_tda, fec_cie, ref archivo,ref file_bytes);
@@ -69,10 +73,10 @@ namespace CapaServicioWindows.Modular
                                 string envio_paquete = enviar_paquete(cod_tda, file_bytes, archivo);
 
                                 /*si el envio es exitoso entonces modificamos el envio*/
-                                if (envio_paquete.Length==0)
+                                if (envio_paquete.Length == 0)
                                 {
                                     proc_nov.update_system_envio(cod_tda, fec_cie);
-                                }    
+                                }
 
                             }
                         }
@@ -583,6 +587,132 @@ namespace CapaServicioWindows.Modular
 
                 FMD.creardbf(_path_envia);
                 FMD.Insertar_tabla(dt, _path_envia);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+        private void tabla_FCACB(DataTable dt)
+        {
+            try
+            {
+                string _path_envia = ruta_temp_DBF;
+                DBFNET FCACB = new DBFNET();
+                FCACB.tabla = "FCACB";
+                FCACB.addcol("F_SUCU",Tipo.Caracter,"3");
+                FCACB.addcol("F_ANOS",Tipo.Caracter,"4");
+                FCACB.addcol("F_SEMA",Tipo.Caracter,"2");
+                FCACB.addcol("F_TANE",Tipo.Caracter,"2");
+                FCACB.addcol("F_CODI",Tipo.Caracter,"5");
+                FCACB.addcol("F_TTRA",Tipo.Caracter,"1");
+                FCACB.addcol("F_CTRA",Tipo.Caracter,"2");
+                FCACB.addcol("F_STRA",Tipo.Caracter,"4");
+                FCACB.addcol("F_NTRA",Tipo.Caracter,"7");
+                FCACB.addcol("F_FTRA",Tipo.Fecha);
+                FCACB.addcol("F_DETA",Tipo.Caracter,"40");
+                FCACB.addcol("F_TDAS",Tipo.Caracter,"3");
+                FCACB.addcol("F_JTDA",Tipo.Caracter,"8");
+                FCACB.addcol("F_NJEF",Tipo.Caracter,"30");
+                FCACB.addcol("F_GRUP",Tipo.Caracter,"2");
+                FCACB.addcol("F_CCTA",Tipo.Caracter,"12");
+                FCACB.addcol("F_CTAC",Tipo.Caracter,"20");
+                FCACB.addcol("F_ACCI",Tipo.Caracter,"1");
+                FCACB.addcol("F_TURN",Tipo.Caracter,"2");
+                FCACB.addcol("F_CAJE",Tipo.Caracter,"8");
+                FCACB.addcol("F_MONE",Tipo.Caracter,"2");
+                FCACB.addcol("F_IMPN",Tipo.Numerico,"17,2");
+                FCACB.addcol("F_IMPD",Tipo.Numerico, "17,2");
+                FCACB.addcol("F_ESTA",Tipo.Caracter,"1");
+                FCACB.addcol("F_NCOM",Tipo.Caracter,"7");
+                FCACB.addcol("F_FCOM",Tipo.Fecha);
+                FCACB.addcol("F_ITEM",Tipo.Caracter,"4");
+                FCACB.addcol("F_FTRX",Tipo.Caracter,"8");
+                FCACB.addcol("F_USEC",Tipo.Caracter,"3");
+                FCACB.addcol("F_FCRE",Tipo.Fecha);
+                FCACB.addcol("F_FMOD",Tipo.Fecha);
+                FCACB.addcol("F_USEM",Tipo.Caracter,"3");
+                FCACB.addcol("F_FLAG",Tipo.Caracter,"1");
+                FCACB.addcol("F_TTDA",Tipo.Caracter,"2");
+                FCACB.addcol("F_STDA",Tipo.Caracter,"4");
+                FCACB.addcol("F_NTDA",Tipo.Caracter,"7");
+                FCACB.addcol("F_TANC",Tipo.Caracter,"2");
+                FCACB.addcol("F_ANEC",Tipo.Caracter,"11");
+                
+                FCACB.creardbf(_path_envia);
+                FCACB.Insertar_tabla(dt, _path_envia);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+        private void tabla_FDECB(DataTable dt)
+        {
+            try
+            {
+                string _path_envia = ruta_temp_DBF;
+                DBFNET FDECB = new DBFNET();
+                FDECB.tabla = "FDECB";
+
+                FDECB.addcol("D_SUCU",Tipo.Caracter, "3");
+                FDECB.addcol("D_ANOS",Tipo.Caracter, "4");
+                FDECB.addcol("D_SEMA",Tipo.Caracter, "2");
+                FDECB.addcol("D_TCOD",Tipo.Caracter, "2");
+                FDECB.addcol("D_CODI",Tipo.Caracter, "5");
+                FDECB.addcol("D_TTRA",Tipo.Caracter, "1");
+                FDECB.addcol("D_CTRA",Tipo.Caracter, "2");
+                FDECB.addcol("D_STRA",Tipo.Caracter, "4");
+                FDECB.addcol("D_NTRA",Tipo.Caracter, "7");
+                FDECB.addcol("D_FTRA",Tipo.Fecha);
+                FDECB.addcol("D_CONC",Tipo.Caracter, "4");
+                FDECB.addcol("D_TCON",Tipo.Caracter, "2");
+                FDECB.addcol("D_TANE",Tipo.Caracter, "2");
+                FDECB.addcol("D_ANEX",Tipo.Caracter, "11");
+                FDECB.addcol("D_RAZ1",Tipo.Caracter, "40");
+                FDECB.addcol("D_TDOC",Tipo.Caracter, "2");
+                FDECB.addcol("D_SDOC",Tipo.Caracter, "4");
+                FDECB.addcol("D_NDOC",Tipo.Caracter);
+                FDECB.addcol("D_FDOC",Tipo.Fecha);
+                FDECB.addcol("D_FCON",Tipo.Fecha);
+                FDECB.addcol("D_FEMI",Tipo.Fecha);
+                FDECB.addcol("D_ACCC",Tipo.Caracter, "1");
+                FDECB.addcol("D_TPAG",Tipo.Caracter, "2");
+                FDECB.addcol("D_SPAG",Tipo.Caracter, "4");
+                FDECB.addcol("D_NPAG",Tipo.Caracter);
+                FDECB.addcol("D_NTAR",Tipo.Caracter, "20");
+                FDECB.addcol("D_TENR",Tipo.Caracter, "2");
+                FDECB.addcol("D_CENR",Tipo.Caracter, "11");
+                FDECB.addcol("D_COST",Tipo.Caracter, "3");
+                FDECB.addcol("D_GRUP",Tipo.Caracter, "2");
+                FDECB.addcol("D_CCTA",Tipo.Caracter, "12");
+                FDECB.addcol("D_DETA",Tipo.Caracter, "40");
+                FDECB.addcol("D_TURN",Tipo.Caracter, "2");
+                FDECB.addcol("D_CAJE",Tipo.Caracter, "8");
+                FDECB.addcol("D_MONE",Tipo.Caracter, "2");
+                FDECB.addcol("D_TTAS",Tipo.Caracter, "1");
+                FDECB.addcol("D_TASA",Tipo.Numerico, "14,4");
+                FDECB.addcol("D_ACCI",Tipo.Caracter, "1");
+                FDECB.addcol("D_IMPN",Tipo.Numerico, "17,2");
+                FDECB.addcol("D_IMPD",Tipo.Numerico, "17,2");
+                FDECB.addcol("D_ITEM",Tipo.Caracter, "4");
+                FDECB.addcol("D_FTRX",Tipo.Fecha);
+                FDECB.addcol("D_USEC",Tipo.Caracter, "3");
+                FDECB.addcol("D_ESTA",Tipo.Caracter, "1");
+                FDECB.addcol("D_FCRE",Tipo.Fecha);
+                FDECB.addcol("D_USEM",Tipo.Caracter, "3");
+                FDECB.addcol("D_FMOD",Tipo.Fecha);
+                FDECB.addcol("D_NCOM",Tipo.Caracter, "7");
+                FDECB.addcol("D_FLAG",Tipo.Caracter, "1");
+                FDECB.addcol("D_TTDA",Tipo.Caracter, "2");
+                FDECB.addcol("D_CREF",Tipo.Caracter, "2");
+                FDECB.addcol("D_SREF",Tipo.Caracter, "4");
+                FDECB.addcol("D_NREF",Tipo.Caracter, "7");
+                FDECB.addcol("D_STDA",Tipo.Caracter, "4");
+                FDECB.addcol("D_NTDA",Tipo.Caracter, "7");
+
+                FDECB.creardbf(_path_envia);
+                FDECB.Insertar_tabla(dt, _path_envia);
             }
             catch
             {

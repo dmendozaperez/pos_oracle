@@ -89,7 +89,7 @@ namespace CapaServicioWindows.CapaDato.Novell
         }
         public DataSet GET_OBTENER_VENTA_XSTORE(string cod_tda, DateTime fecha)
         {
-            string sqlquery = "USP_EXTRAER_VENTAS_TDA";
+            string sqlquery = "USP_EXTRAER_VENTAS_TDA_PRUEBA_01";
             DataSet ds = null;
             try
             {
@@ -115,7 +115,8 @@ namespace CapaServicioWindows.CapaDato.Novell
                             ds.Tables[5].TableName = "FFLASH";
                             ds.Tables[6].TableName = "FMC";
                             ds.Tables[7].TableName = "FMD";
-
+                            ds.Tables[8].TableName = "FCACB";
+                            ds.Tables[9].TableName = "FDECB";
                         }
                     }
                 }

@@ -122,6 +122,9 @@
     <None Include="Service References\BataTransac\ServiceWin32Framework4.BataTransac.Ent_MsgTransac.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\BataTransac\ServiceWin32Framework4.BataTransac.Ent_Paperless_Return.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\BataTransac\ServiceWin32Framework4.BataTransac.Ent_PathDBF.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

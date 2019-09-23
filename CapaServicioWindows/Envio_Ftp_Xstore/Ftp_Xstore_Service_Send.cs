@@ -102,9 +102,12 @@ namespace CapaServicioWindows.Envio_Ftp_Xstore
 
                             if (dt_ORCE_EXCLUD_ART != null)
                             {
-                                str_cab = dt_ORCE_EXCLUD_ART.Rows[0][0].ToString();
-                                str_cab = str_cab.Replace("XXXXX", fila["ORC_DET_TDA"].ToString());
-                                dt_ORCE_EXCLUD_ART.Rows[0][0] = str_cab;
+                                //str_cab = dt_ORCE_EXCLUD_ART.Rows[0][0].ToString();
+                                //str_cab = str_cab.Replace("XXXXX", fila["ORC_DET_TDA"].ToString());
+
+
+
+                                //dt_ORCE_EXCLUD_ART.Rows[0][0] = str_cab;
                                 string ruta_interface = dt_ORCE_EXCLUD_RUTA.Rows[0]["X_RUTA"].ToString();
                                 if (!Directory.Exists(@ruta_interface)) Directory.CreateDirectory(@ruta_interface);
                                 if (dt_ORCE_EXCLUD_ART.Rows.Count > 0)
@@ -112,7 +115,9 @@ namespace CapaServicioWindows.Envio_Ftp_Xstore
                                     str = new StringBuilder();
                                     for (Int32 i = 0; i < dt_ORCE_EXCLUD_ART.Rows.Count; ++i)
                                     {
-                                        str.Append(dt_ORCE_EXCLUD_ART.Rows[i]["ITEM_DEAL_PROPERTY"].ToString());
+                                        str_cab = (i == 0) ? dt_ORCE_EXCLUD_ART.Rows[i]["ITEM_DEAL_PROPERTY"].ToString().Replace("XXXXX", fila["ORC_DET_TDA"].ToString()) : dt_ORCE_EXCLUD_ART.Rows[i]["ITEM_DEAL_PROPERTY"].ToString();
+
+                                        str.Append(str_cab/*dt_ORCE_EXCLUD_ART.Rows[i]["ITEM_DEAL_PROPERTY"].ToString()*/);
 
                                         if (i < dt_ORCE_EXCLUD_ART.Rows.Count - 1)
                                         {
@@ -767,6 +772,15 @@ namespace CapaServicioWindows.Envio_Ftp_Xstore
                                             name_file = "PRODUCT_LOCATION_LOGFIRE2K.TXT";
 
                                             in_maestros = _gen_ruta + "\\" + name_file;
+
+                                            //string ruta_bata_orob = _gen_ruta + "\\BATA";
+
+                                            //if (!Directory.Exists(@ruta_bata_orob)) Directory.CreateDirectory(@ruta_bata_orob);
+
+                                            //String file_bata_orob= ruta_bata_orob + "\\" + name_file;
+
+                                            //if (File.Exists(@file_bata_orob)) File.Delete(@file_bata_orob);
+                                            //File.WriteAllText(@file_bata_orob, str_cadena);
 
                                             if (File.Exists(@in_maestros)) File.Delete(@in_maestros);
                                             File.WriteAllText(@in_maestros, str_cadena);

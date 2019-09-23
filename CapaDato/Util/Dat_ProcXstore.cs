@@ -45,6 +45,13 @@ namespace CapaDato.Util
                                     upl.ftp_port=Convert.ToInt32(dr["FTP_PORT"]);
                                     upl.ftp_folder= dr["FTP_FOLDER"].ToString();
                                     upl.ftp_send= dr["FTP_SEND"].ToString();
+
+                                    upl.bata_sftp_server = dr["BATA_SFTP_SERVER"].ToString();
+                                    upl.bata_sftp_user = dr["BATA_SFTP_USER"].ToString();
+                                    upl.bata_sftp_passwrod = dr["BATA_SFTP_PASSWORD"].ToString();
+                                    upl.bata_sftp_port = Convert.ToInt32(dr["BATA_SFTP_PORT"]);
+                                    upl.bata_sftp_folder = dr["BATA_SFTP_FOLDER"].ToString();
+
                                     list.Add(upl);
                                 }
                             }

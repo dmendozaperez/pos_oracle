@@ -18,5 +18,10 @@ namespace CapaEntidad.Util
         public Int32 ftp_port { get; set; }
         public string ftp_folder { get; set; }
         public string ftp_send { get; set; }
+        public string bata_sftp_server { get; set; }
+        public string bata_sftp_user { get; set; }
+        public string bata_sftp_passwrod { get; set; }        
+        public int bata_sftp_port { get; set; }
+        public string bata_sftp_folder { get; set; }
     }
 }

@@ -39,8 +39,8 @@ namespace CapaServicioWindows.Modular
                 {
                     foreach(DataRow fila in dt_tda.Rows)
                     {
-                        string cod_tda =fila["tienda"].ToString();
-                        DateTime fec_cie =  Convert.ToDateTime(fila["fecha"]);
+                        string cod_tda = fila["tienda"].ToString();
+                        DateTime fec_cie =Convert.ToDateTime(fila["fecha"]);
 
 
 
@@ -57,7 +57,7 @@ namespace CapaServicioWindows.Modular
                                 tabla_FCIERR(ds.Tables[4]);
                                 tabla_FFLASH(ds.Tables[5]);
 
-                                /*TABLA MOVIMIENTO*/
+                                ///*TABLA MOVIMIENTO*/
                                 tabla_FMC(ds.Tables[6]);
                                 tabla_FMD(ds.Tables[7]);
                                 /**/
@@ -78,6 +78,11 @@ namespace CapaServicioWindows.Modular
                                     proc_nov.update_system_envio(cod_tda, fec_cie);
                                 }
 
+                            }
+                            else
+                            {
+                                /*en este caso se actualiza si es que no tiene dato para que actualize el TMP_SYSTEM*/
+                                proc_nov.update_system_envio(cod_tda, fec_cie);
                             }
                         }
                     }
@@ -627,7 +632,8 @@ namespace CapaServicioWindows.Modular
                 FCACB.addcol("F_NCOM",Tipo.Caracter,"7");
                 FCACB.addcol("F_FCOM",Tipo.Fecha);
                 FCACB.addcol("F_ITEM",Tipo.Caracter,"4");
-                FCACB.addcol("F_FTRX",Tipo.Caracter,"8");
+                //FCACB.addcol("F_FTRX",Tipo.Caracter,"8");
+                FCACB.addcol("F_FTRX", Tipo.Fecha);
                 FCACB.addcol("F_USEC",Tipo.Caracter,"3");
                 FCACB.addcol("F_FCRE",Tipo.Fecha);
                 FCACB.addcol("F_FMOD",Tipo.Fecha);

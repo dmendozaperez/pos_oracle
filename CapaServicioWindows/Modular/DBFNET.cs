@@ -81,6 +81,7 @@ namespace CapaServicioWindows.Modular
 
         public void Insertar_tabla(DataTable dt, string strRuta)
         {
+            string columna = "";
             OleDbConnection cn = null;
             OleDbCommand cmd = null;
             string sqlquery = "INSERT INTO " + tabla + "(" + _campos_dbf + ")";
@@ -99,6 +100,7 @@ namespace CapaServicioWindows.Modular
                     cmd.CommandType = CommandType.Text;
                     for (Int32 col = 0; col < dt.Columns.Count; ++col)
                     {
+                        columna = dt.Columns[col].ColumnName.ToString();
                         cmd.Parameters.AddWithValue(dt.Columns[col].ColumnName.ToString(), dt.Rows[fila][col]);
                     }
                     cmd.ExecuteNonQuery();
@@ -106,6 +108,7 @@ namespace CapaServicioWindows.Modular
             }
             catch (Exception EX)
             {
+                string msg = EX.Message + " " + columna;
                 if (cn != null)
                     if (cn.State == ConnectionState.Open) cn.Close();
                 throw;

@@ -16,6 +16,7 @@ namespace CapaServicioWindows.CapaDato.Novell
         public DataTable dt_get_envio_novell()
         {
             string sqlquery = "USP_EXTRAER_LISTA_ENVIO_XSTORE";
+            //string sqlquery = "USP_EXTRAER_LISTA_ENVIO_XSTORE_CAJA_PRUEBA";
             //string sqlquery = "select tienda=Mc_Tda,fecha=Mc_FechaDoc from MOVIMIENTO_CAB group by Mc_Tda,Mc_FechaDoc order by Mc_FechaDoc asc";
             DataTable dt = null;
             try
@@ -89,7 +90,8 @@ namespace CapaServicioWindows.CapaDato.Novell
         }
         public DataSet GET_OBTENER_VENTA_XSTORE(string cod_tda, DateTime fecha)
         {
-            string sqlquery = "USP_EXTRAER_VENTAS_TDA_PRUEBA_01";
+            //string sqlquery = "USP_EXTRAER_VENTAS_TDA_PRUEBA_01";
+            string sqlquery = "USP_EXTRAER_VENTAS_TDA";
             DataSet ds = null;
             try
             {

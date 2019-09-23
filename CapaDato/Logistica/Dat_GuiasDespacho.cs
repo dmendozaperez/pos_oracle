@@ -187,7 +187,8 @@ namespace CapaDato.Logistica
                 dt_FVDESPC.Columns.Add("DESC_FDESP", typeof(DateTime));
                 dt_FVDESPC.Columns.Add("DESC_FEMI", typeof(DateTime));                
                 dt_FVDESPC.Columns.Add("DESC_FTRA", typeof(DateTime));
-                dt_FVDESPC.Columns.Add("DESC_NUME", typeof(string));                
+                dt_FVDESPC.Columns.Add("DESC_NUME", typeof(string));
+                dt_FVDESPC.Columns.Add("DESC_DBL_TRA", typeof(string));           
                 /*************************************/
                 /********TABLA DETALLE*****/
                 dt_FVDESPD.Columns.Add("DESD_GUDIS", typeof(string));
@@ -203,7 +204,7 @@ namespace CapaDato.Logistica
                 foreach(Ent_Fvdespc guias_cab in listar_guia)
                 {
                     dt_FVDESPC.Rows.Add(guias_cab.DESC_ALMAC, guias_cab.DESC_GUDIS, guias_cab.DESC_NDESP, guias_cab.DESC_TDES, guias_cab.DESC_FECHA,
-                                        guias_cab.DESC_FDESP, guias_cab.DESC_FEMI,  guias_cab.DESC_FTRA, guias_cab.DESC_NUME);
+                                        guias_cab.DESC_FDESP, guias_cab.DESC_FEMI,  guias_cab.DESC_FTRA, guias_cab.DESC_NUME,guias_cab.DESC_DBL_TRA);
 
                     foreach(Ent_Fvdespd guias_det in guias_cab.FVDESPD)
                     {
@@ -227,7 +228,8 @@ namespace CapaDato.Logistica
 
         public Ent_MsgTransac insertar_guias_traspaso_tda(string cod_tda,List<CapaEntidad.Interfaces.Ent_Fvdespc> listar_guia)
         {
-            string sqlquery = "USP_INSERTAR_TRASPASOS_TDA";
+            //string sqlquery = "USP_INSERTAR_TRASPASOS_TDA";
+            string sqlquery = "USP_INSERTAR_TRASPASOS_TDA_DBL_TRA";
             Ent_MsgTransac msg_error = null;
             try
             {
@@ -250,7 +252,8 @@ namespace CapaDato.Logistica
                                     cmd.CommandTimeout = 0;
                                     cmd.CommandType = CommandType.StoredProcedure;
                                     cmd.Parameters.AddWithValue("@COD_TDA", cod_tda);
-                                    cmd.Parameters.AddWithValue("@TMP_FVDESPC", dt_FVDESPC);
+                                    //cmd.Parameters.AddWithValue("@TMP_FVDESPC", dt_FVDESPC);
+                                    cmd.Parameters.AddWithValue("@TMP_FVDESPC_DBL_TRA", dt_FVDESPC);
                                     cmd.Parameters.AddWithValue("@TMP_FVDESPD", dt_FVDESPD);
                                     cmd.ExecuteNonQuery();
                                     msg_error.codigo = "0";

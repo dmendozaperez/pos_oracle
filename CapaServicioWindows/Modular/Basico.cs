@@ -2943,10 +2943,11 @@ namespace CapaServicioWindows.Modular
                 }
                 #endregion
 
-                #region<actualizacion de la tabla movimiento ventas y guias>
+                #region<actualizacion de la tabla movimiento ventas , guias y caja tienda>
 
                 venta_ing.procesar_ventas_movimiento();
                 venta_ing.procesar_guias_movimiento();
+                venta_ing.procesar_caja_tienda();
                     
                 #endregion
 

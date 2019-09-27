@@ -208,7 +208,15 @@ namespace CapaServicioWindows.Envio_Ftp_Xstore
 
                 Dat_Tienda get_tda = new Dat_Tienda();
 
-                DataTable dt_tienda = get_tda.get_tienda_xstore(_pais);
+                DataTable dt_tienda = new DataTable(); //get_tda.get_tienda_xstore(_pais);se cambio para enviar solo COUNTRY EN AUTOMATICO
+                dt_tienda.Columns.Add("cod_entid", typeof(string));
+                dt_tienda.Columns.Add("des_entid", typeof(string));
+                dt_tienda.Columns.Add("cod_distri", typeof(string));
+                dt_tienda.Columns.Add("xstore", typeof(Boolean));
+                dt_tienda.Columns.Add("outlet", typeof(Boolean));
+                dt_tienda.Rows.Add("PE", "COUNTRY", "", 0, 1);
+
+                /*solo country PE O EC*/
 
                 tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
                 tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " TERMINANDO DE EJECUTAR EL METODO (get_tienda_xstore)");

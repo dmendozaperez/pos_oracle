@@ -54,6 +54,7 @@
             this.btnenviar.TabIndex = 1;
             this.btnenviar.Text = "ENVIAR POSLOG";
             this.btnenviar.UseVisualStyleBackColor = true;
+            this.btnenviar.Click += new System.EventHandler(this.btnenviar_Click);
             // 
             // label1
             // 

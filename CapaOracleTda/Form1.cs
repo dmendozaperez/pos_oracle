@@ -74,5 +74,10 @@ namespace CapaOracleTda
 
 
         }
+
+        private void btnenviar_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

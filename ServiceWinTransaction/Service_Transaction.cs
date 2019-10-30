@@ -16,6 +16,7 @@ using ICSharpCode.SharpZipLib.Zip;
 using CapaServicioWindows.Envio_Ftp_Xstore;
 using CapaServicioWindows.CapaDato.Interfaces;
 using CapaServicioWindows.Bataclub;
+using CapaServicioWindows.CapaDato.WMS;
 
 namespace ServiceWinTransaction
 {
@@ -24,10 +25,19 @@ namespace ServiceWinTransaction
         Timer tmservicio = null;
         Timer tmservicioDBF = null;
         Timer tmservicioVentaXstore = null;
-       
+
         #region<REGION PARA BATACLUB VARIABLES>
         //Timer tmbataclub = null;
         //private Int32 _valida_bataclub = 0;
+        #endregion
+
+        #region<REGION DE PROCESOS DEL WMS AQ Y EC VARIABLES>
+        Timer tmpaq_wms = null;
+        private Int32 _valida_aq_wms = 0;
+
+        Timer tmpec_wms = null;
+        private Int32 _valida_ec_wms = 0;
+
         #endregion
 
         Timer tmpprescripcion = null;
@@ -132,7 +142,144 @@ namespace ServiceWinTransaction
             /*PROCESO DE VENDEDOR*/
             tmvendedor= new Timer(5000);
             tmvendedor.Elapsed += new ElapsedEventHandler(tmvendedor_Elapsed);
+
+            /*PROCESOS DEL WMS AQUARELLA Y ECCOMERCE*/
+            tmpaq_wms = new Timer(5000);
+            tmpaq_wms.Elapsed += new ElapsedEventHandler(tmpaq_wms_Elapsed);
+
+            tmpec_wms = new Timer(5000);
+            tmpec_wms.Elapsed += new ElapsedEventHandler(tmpec_wms_Elapsed);
+
         }
+
+        #region<REGION DEL WMS AQUARELLA Y ECOMMERCE PROCESOS>
+        void tmpaq_wms_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            Int32 _valor = 0;
+
+            string _ruta_erro_file = @"D:\BataTransaction\log_WMS_AQ.txt";
+            string str = "";
+            Boolean proceso_venta = false;
+            try
+            {
+
+                #region<region solo almacen ecuador>
+                if (!File.Exists(@file_almace_ecu)) return;
+                #endregion
+
+
+                if (_valida_aq_wms == 0)
+                {
+                    //string _error = "ing";
+                    _valor = 1;
+                    _valida_aq_wms = 1;
+
+
+                    string _error = "";                 
+
+                    WMS_AQ_EC wms_proc = new WMS_AQ_EC();
+
+                    _error = wms_proc.WMS_Proc_AQ_EC("AQ");
+                    if (_error.Length > 0)
+                    {
+                        TextWriter tw = new StreamWriter(_ruta_erro_file, true);
+                        tw = new StreamWriter(_ruta_erro_file, true);
+                        str = DateTime.Today.ToString() + " " + DateTime.Now.ToString("HH:mm:ss") + "==>WMS_Proc_AQ_EC==>" + _error;
+                        tw.WriteLine(str);
+                        tw.Flush();
+                        tw.Close();
+                        tw.Dispose();
+                    }
+
+                    _valida_aq_wms = 0;
+
+                }
+                //****************************************************************************
+            }
+            catch (Exception exc)
+            {
+                TextWriter tw = new StreamWriter(_ruta_erro_file, true);
+                tw = new StreamWriter(_ruta_erro_file, true);
+                str = DateTime.Today.ToString() + " " + DateTime.Now.ToString("HH:mm:ss") + "==> catch ==>" + exc.Message;
+                tw.WriteLine(str);
+                tw.Flush();
+                tw.Close();
+                tw.Dispose();
+                _valida_aq_wms = 0;
+            }
+
+            if (_valor == 1)
+            {
+                _valida_aq_wms = 0;
+            }
+
+
+        }
+
+        void tmpec_wms_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            Int32 _valor = 0;
+
+            string _ruta_erro_file = @"D:\BataTransaction\log_WMS_EC.txt";
+            string str = "";
+            Boolean proceso_venta = false;
+            try
+            {
+
+                #region<region solo almacen ecuador>
+                if (!File.Exists(@file_almace_ecu)) return;
+                #endregion
+
+
+                if (_valida_ec_wms == 0)
+                {
+                    //string _error = "ing";
+                    _valor = 1;
+                    _valida_ec_wms = 1;
+
+
+                    string _error = "";
+
+                    WMS_AQ_EC wms_proc = new WMS_AQ_EC();
+
+                    _error = wms_proc.WMS_Proc_AQ_EC("EC");
+                    if (_error.Length > 0)
+                    {
+                        TextWriter tw = new StreamWriter(_ruta_erro_file, true);
+                        tw = new StreamWriter(_ruta_erro_file, true);
+                        str = DateTime.Today.ToString() + " " + DateTime.Now.ToString("HH:mm:ss") + "==>WMS_Proc_AQ_EC==>" + _error;
+                        tw.WriteLine(str);
+                        tw.Flush();
+                        tw.Close();
+                        tw.Dispose();
+                    }
+
+                    _valida_ec_wms = 0;
+
+                }
+                //****************************************************************************
+            }
+            catch (Exception exc)
+            {
+                TextWriter tw = new StreamWriter(_ruta_erro_file, true);
+                tw = new StreamWriter(_ruta_erro_file, true);
+                str = DateTime.Today.ToString() + " " + DateTime.Now.ToString("HH:mm:ss") + "==> catch ==>" + exc.Message;
+                tw.WriteLine(str);
+                tw.Flush();
+                tw.Close();
+                tw.Dispose();
+                _valida_ec_wms = 0;
+            }
+
+            if (_valor == 1)
+            {
+                _valida_ec_wms = 0;
+            }
+
+
+        }
+
+        #endregion
 
         #region<REGION DE VENDEDOR>
         void tmvendedor_Elapsed(object sender, ElapsedEventArgs e)
@@ -1150,6 +1297,8 @@ namespace ServiceWinTransaction
             //tmbataclub.Start();
             tmstock_alm.Start();
             tmvendedor.Start();
+            tmpaq_wms.Start();
+            tmpec_wms.Start();
             //tmservicioScactcoDBF.Start();
         }
 
@@ -1168,6 +1317,9 @@ namespace ServiceWinTransaction
             //tmbataclub.Stop();
             tmstock_alm.Stop();
             tmvendedor.Stop();
+
+            tmpaq_wms.Stop();
+            tmpec_wms.Stop();
             //tmservicioScactcoDBF.Stop();
         }       
               

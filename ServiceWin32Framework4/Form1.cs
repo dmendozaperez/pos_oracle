@@ -15,6 +15,7 @@ using System.Windows.Forms;
 using Microsoft.Win32.TaskScheduler;
 using System.Data.SqlClient;
 using System.Reflection;
+using CapaServicioWindows.CapaDato.WMS;
 
 namespace ServiceWin32Framework4
 {
@@ -459,6 +460,12 @@ namespace ServiceWin32Framework4
             ejecuta_procesos.generar_orce_exclud(ref _error);
             MessageBox.Show(_error +  Environment.NewLine + "Terminado");
             Cursor.Current = Cursors.Default;
+        }
+
+        private void btn_wms_aqec_Click(object sender, EventArgs e)
+        {
+            WMS_AQ_EC wms_proc = new WMS_AQ_EC();
+            wms_proc.WMS_Proc_AQ_EC("EC");
         }
     }
 }

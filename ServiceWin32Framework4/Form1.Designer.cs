@@ -49,6 +49,7 @@
             this.btnpaperless = new System.Windows.Forms.Button();
             this.BTNVENDE = new System.Windows.Forms.Button();
             this.orce_exclud_interface = new System.Windows.Forms.Button();
+            this.btn_wms_aqec = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn_servicewin
@@ -278,11 +279,23 @@
             this.orce_exclud_interface.UseVisualStyleBackColor = true;
             this.orce_exclud_interface.Click += new System.EventHandler(this.orce_exclud_interface_Click);
             // 
+            // btn_wms_aqec
+            // 
+            this.btn_wms_aqec.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_wms_aqec.Location = new System.Drawing.Point(493, 316);
+            this.btn_wms_aqec.Name = "btn_wms_aqec";
+            this.btn_wms_aqec.Size = new System.Drawing.Size(268, 43);
+            this.btn_wms_aqec.TabIndex = 25;
+            this.btn_wms_aqec.Text = "WMS AQ Y EC";
+            this.btn_wms_aqec.UseVisualStyleBackColor = true;
+            this.btn_wms_aqec.Click += new System.EventHandler(this.btn_wms_aqec_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1031, 371);
+            this.Controls.Add(this.btn_wms_aqec);
             this.Controls.Add(this.orce_exclud_interface);
             this.Controls.Add(this.BTNVENDE);
             this.Controls.Add(this.btnpaperless);
@@ -334,6 +347,7 @@
         private System.Windows.Forms.Button btnpaperless;
         private System.Windows.Forms.Button BTNVENDE;
         private System.Windows.Forms.Button orce_exclud_interface;
+        private System.Windows.Forms.Button btn_wms_aqec;
     }
 }
 

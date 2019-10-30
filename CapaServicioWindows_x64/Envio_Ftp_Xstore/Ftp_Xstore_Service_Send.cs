@@ -8,36 +8,12 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WinSCP;
 
 namespace CapaServicioWindows_x64.Envio_Ftp_Xstore
 {
     public class Ftp_Xstore_Service_Send
     {
-        private Boolean valida_lun_ejec()
-        {
-            Boolean valida = false;
-            try
-            {
-                DateTime fechadesdesemana = DateTime.Now;
-
-                string nombredia = fechadesdesemana.ToString("dddd").ToUpper();
-
-                var list_str = new List<string>();
-                list_str.Add("MONDAY");
-                list_str.Add("LUNES");
-                //list_str.Add("VIERNES");
-                //list_str.Add("FRIDAY");
-
-                if (list_str.Contains(nombredia))
-                    valida = true;
-
-            }
-            catch
-            {
-                valida = false;
-            }
-            return valida;
-        }
         public void ejecutar_genera_file_xstore_auto(string _pais, ref string error, ref Boolean gen_per_item, ref Boolean gen_ecu_item)
         {
             StreamWriter tw1 = null;
@@ -256,6 +232,31 @@ namespace CapaServicioWindows_x64.Envio_Ftp_Xstore
                 error = exc.Message;
             }
         }
+        private Boolean valida_lun_ejec()
+        {
+            Boolean valida = false;
+            try
+            {
+                DateTime fechadesdesemana = DateTime.Now;
+
+                string nombredia = fechadesdesemana.ToString("dddd").ToUpper();
+
+                var list_str = new List<string>();
+                list_str.Add("MONDAY");
+                list_str.Add("LUNES");
+                //list_str.Add("VIERNES");
+                //list_str.Add("FRIDAY");
+
+                if (list_str.Contains(nombredia))
+                    valida = true;
+
+            }
+            catch
+            {
+                valida = false;
+            }
+            return valida;
+        }       
         private DataTable dt_replace_tda(DataTable dt, string cod_tda)
         {
             DataTable dt_replace = null;
@@ -800,7 +801,6 @@ namespace CapaServicioWindows_x64.Envio_Ftp_Xstore
 
             }
         }
-
         public void generar_orce_exclud(ref string _error)
         {
             Dat_Interfaces datInt = new Dat_Interfaces();
@@ -885,7 +885,6 @@ namespace CapaServicioWindows_x64.Envio_Ftp_Xstore
                 _error = ex.Message;
             }
         }
-
         public void update_articulo_end_xstore(string pais)
         {
             string sqlquery = "USP_UPD_ARTICULO_ENV_XSTORE";
@@ -921,5 +920,103 @@ namespace CapaServicioWindows_x64.Envio_Ftp_Xstore
             }
         }
 
+
+        public void proc_envio_ftp()
+        {
+            try
+            {
+                /*acceso header user y pass clave de acceso a ws*/
+                BataTransac.ValidateAcceso header_user = new BataTransac.ValidateAcceso();
+                header_user.Username = ConexionWS.user;
+                header_user.Password = ConexionWS.password;
+                /****************************************************************/
+
+                BataTransac.Bata_TransactionSoapClient bata_trans = new BataTransac.Bata_TransactionSoapClient();
+                var lista = bata_trans.ws_get_xstore_carpeta_upload(header_user);
+
+                string tipo_file = "";
+
+                foreach (var item in lista)
+                {
+                    //tipo_file = (item.entorno == "ORCE") ? "*.xml*" : "*.mnt*";
+                    switch (item.entorno)
+                    {
+                        case "ORCE":
+                            tipo_file = "*.xml*";
+                            break;
+                        case "XOFICCE":
+                            tipo_file = "*.mnt*";
+                            break;
+                        case "OROB":
+                            tipo_file = "*.txt*";
+                            break;
+                    }
+
+
+
+                    if (!Directory.Exists(@item.rut_upload)) Directory.CreateDirectory(@item.rut_upload);
+
+                    string[] files = Directory.GetFiles(@item.rut_upload, tipo_file);
+
+                    foreach (string str_item in files)
+                    {
+                        string _path_archivo = str_item;
+                        string _nombrearchivo = Path.GetFileNameWithoutExtension(@str_item);
+                        string _extension_archivo = Path.GetExtension(@_path_archivo);
+                        string _file_path_destino = item.ftp_folder + "/" + _nombrearchivo + _extension_archivo;
+                        Boolean envio_ftp = subida_server_ftp(item.ftp_server, item.ftp_user, item.ftp_pass, item.ftp_port, str_item, _file_path_destino);
+
+                        if (envio_ftp) File.Delete(@_path_archivo);
+
+                    }
+                }
+
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+        private Boolean subida_server_ftp(string gHostName, string gUserName, string gPassword,
+                                          Int32 gPortNumber, string file_origen, string file_destino)
+        {
+            Boolean valida_envio = false;
+            try
+            {
+                SessionOptions sessionOptions = new SessionOptions
+                {
+
+                    Protocol = 0,
+                    HostName = gHostName,
+                    UserName = gUserName,
+                    Password = gPassword,
+                    PortNumber = gPortNumber,
+                    GiveUpSecurityAndAcceptAnySshHostKey = true,
+                };
+
+                using (Session session = new Session())
+                {
+                    session.Open(sessionOptions);
+
+                    TransferOptions transferOptions = new TransferOptions();
+                    transferOptions.FilePermissions = null; // This is default
+                    transferOptions.PreserveTimestamp = false;
+                    transferOptions.TransferMode = TransferMode.Binary;
+                    TransferOperationResult transferResult;
+
+                    transferResult =
+                        session.PutFiles(file_origen, file_destino, false, transferOptions);
+
+                    transferResult.Check();
+
+                    valida_envio = true;
+                }
+            }
+            catch (Exception exc)
+            {
+                valida_envio = false;
+            }
+            return valida_envio;
+        }
     }
 }

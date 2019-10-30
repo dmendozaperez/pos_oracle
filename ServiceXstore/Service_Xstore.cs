@@ -18,11 +18,17 @@ namespace ServiceXstore
     {
         Timer tmgenera_interface = null;
         private Int32 _valida_genera_interface = 0;
+
+        Timer tmenvia_sftp = null;
+        private Int32 _valida_envia_sftp = 0;
         public Service_Xstore()
         {
             InitializeComponent();
             tmgenera_interface = new Timer(5000);
             tmgenera_interface.Elapsed += new ElapsedEventHandler(tmgenera_interface_Elapsed);
+
+            tmenvia_sftp = new Timer(5000);
+            tmenvia_sftp.Elapsed += new ElapsedEventHandler(tmenvia_sftp_Elapsed);
         }
 
         void tmgenera_interface_Elapsed(object sender, ElapsedEventArgs e)
@@ -186,6 +192,56 @@ namespace ServiceXstore
             if (_valor == 1)
             {
                 _valida_genera_interface = 0;
+            }
+        }
+        void tmenvia_sftp_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            Int32 _valor = 0;
+            try
+            {
+                #region<region solo almacen ecuador>
+                //if (File.Exists(@file_almace_ecu)) return;
+                #endregion
+
+                if (_valida_envia_sftp == 0)
+                {
+                    _valor = 1;
+                    _valida_envia_sftp = 1;
+                    string _valida_proc_guiaToXstore = @"D:\XSTORE\proc_xs.txt";
+                    Boolean proceso_guiaToXstore = false;
+
+                    if (File.Exists(_valida_proc_guiaToXstore)) proceso_guiaToXstore = true;
+
+                    if (proceso_guiaToXstore)
+                    {
+                        _valor = 1;
+                        string _error = "";
+                        _valida_envia_sftp = 1;
+
+                        Ftp_Xstore_Service_Send ejecuta_procesos = null;
+                        ejecuta_procesos = new Ftp_Xstore_Service_Send();
+
+
+                        ejecuta_procesos.proc_envio_ftp();
+                        //proc_envio_ftp
+                        //ejecuta_procesos.ejecutar_genera_file_xstore_auto(ref _error);
+
+                        //ejecuta_procesos.envio_Guias_ToxStore(ref _error);
+
+                        _valida_envia_sftp = 0;
+
+                    }
+                }
+
+            }
+            catch (Exception exc)
+            {
+                //string errSwc = "";
+                _valida_envia_sftp = 0;
+            }
+            if (_valor == 1)
+            {
+                _valida_envia_sftp = 0;
             }
         }
 

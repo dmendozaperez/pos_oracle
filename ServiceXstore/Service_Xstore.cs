@@ -148,7 +148,7 @@ namespace ServiceXstore
 
 
 
-                            if (gen_ecu_item)
+                            if (gen_ecu_item)   
                             {
                                 tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
                                 tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " ENTRANDO AL SERVICIO DE GENERACION DE INTERFACE METODO (update_articulo_end_xstore) ECUADOR");
@@ -172,7 +172,7 @@ namespace ServiceXstore
                             tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
                             tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " " + _error);
                             tw1.Flush();
-                            tw1.Close();
+                            tw1.Close();    
                             tw1.Dispose();
                         }
 

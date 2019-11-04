@@ -207,13 +207,13 @@ namespace ServiceXstore
                 {
                     _valor = 1;
                     _valida_envia_sftp = 1;
-                    string _valida_proc_guiaToXstore = @"D:\XSTORE\proc_xs.txt";
-                    Boolean proceso_guiaToXstore = false;
+                    //string _valida_proc_guiaToXstore = @"D:\XSTORE\proc_xs.txt";
+                    //Boolean proceso_guiaToXstore = false;
 
-                    if (File.Exists(_valida_proc_guiaToXstore)) proceso_guiaToXstore = true;
+                    //if (File.Exists(_valida_proc_guiaToXstore)) proceso_guiaToXstore = true;
 
-                    if (proceso_guiaToXstore)
-                    {
+                    //if (proceso_guiaToXstore)
+                    //{
                         _valor = 1;
                         string _error = "";
                         _valida_envia_sftp = 1;
@@ -230,7 +230,7 @@ namespace ServiceXstore
 
                         _valida_envia_sftp = 0;
 
-                    }
+                    //}
                 }
 
             }
@@ -249,11 +249,13 @@ namespace ServiceXstore
         protected override void OnStart(string[] args)
         {
             tmgenera_interface.Start();
+            tmenvia_sftp.Start();
         }
 
         protected override void OnStop()
         {
             tmgenera_interface.Stop();
+            tmenvia_sftp.Stop();
         }
     }
 }

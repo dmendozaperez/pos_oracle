@@ -147,6 +147,37 @@ namespace CapaServicioWindows_x64.CapaDato
             return lista;
         }
 
+        public DataTable get_item_xref_AUTO(string pais, string codtda)
+        {
+            DataTable dt = null;
+            string sqlquery = "USP_XSTORE_GET_ITEM_XREF_AUTO";
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(ConexionSQL.conexion))// Ent_Conexion.conexion_posperu))
+                {
+                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@PAIS", pais);
+                        cmd.Parameters.AddWithValue("@CODTIENDA", codtda);
+
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            dt = new DataTable();
+                            da.Fill(dt);
+                        }
+
+                    }
+                }
+            }
+            catch (Exception exc)
+            {
+                dt = null;
+            }
+            return dt;
+        }
+
         public DataTable get_item_xref(string pais, string codtda)
         {
             DataTable dt = null;

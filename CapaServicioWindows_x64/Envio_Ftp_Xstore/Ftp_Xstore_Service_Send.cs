@@ -356,7 +356,7 @@ namespace CapaServicioWindows_x64.Envio_Ftp_Xstore
                                 // DataTable dt = await Task.Run(() => dat_interface.get_item_xref(pais, codtda));
                                 if (dt_item_xref == null)
                                 {
-                                    dt = dat_geninter.get_item_xref(_pais,_codtda); //(_pais == "PE") ? dat_geninter.get_item_PE_AUTO(_pais, _codtda) : dat_geninter.get_item_EC_AUTO(_pais, _codtda);
+                                    dt = dat_geninter.get_item_xref_AUTO(_pais,_codtda); //(_pais == "PE") ? dat_geninter.get_item_PE_AUTO(_pais, _codtda) : dat_geninter.get_item_EC_AUTO(_pais, _codtda);
                                     dt_item_xref = dt;
                                 }
                                 else

@@ -30,9 +30,9 @@ namespace ServiceWin64Framework4_5
             Boolean gen_per_item = false;
             Boolean gen_ecu_item = false;
             string _error = "";
-            //Ftp_Xstore_Service_Send ejecuta_procesos = null;        
-            //ejecuta_procesos = new Ftp_Xstore_Service_Send();
-            //ejecuta_procesos.ejecutar_genera_file_xstore_auto(pais, ref _error, ref gen_per_item, ref gen_ecu_item);
+            Ftp_Xstore_Service_Send ejecuta_procesos = null;
+            ejecuta_procesos = new Ftp_Xstore_Service_Send();
+            ejecuta_procesos.ejecutar_genera_file_xstore_auto(pais, ref _error, ref gen_per_item, ref gen_ecu_item);
 
             Xstore_Genera_Inter ejecuta_procesos_inter = new Xstore_Genera_Inter();
             ejecuta_procesos_inter.ejecutar_genera_interface_xstore(ref _error);

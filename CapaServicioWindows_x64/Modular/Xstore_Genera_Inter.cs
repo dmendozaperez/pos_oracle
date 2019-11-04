@@ -253,6 +253,59 @@ namespace CapaServicioWindows_x64.Modular
                                 tw1.Close();
                                 tw1.Dispose();
                                 break;
+                            case "ITEM_XREF":
+                                tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                                tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " INICIANDO GENERACION DE INTERFACE ITEM_XREF");
+                                tw1.Flush();
+                                tw1.Close();
+                                tw1.Dispose();
+                                DataTable dt_item_xref = new DataTable();
+                                #region <ITEM_XREF>
+                                // DataTable dt = await Task.Run(() => dat_interface.get_item_xref(pais, codtda));
+                                //if (dt_item_xref == null)
+                                //{
+                                    dt = dat_geninter.get_item_xref(_pais, _codtda); //(_pais == "PE") ? dat_geninter.get_item_PE_AUTO(_pais, _codtda) : dat_geninter.get_item_EC_AUTO(_pais, _codtda);
+                                    //dt_item_xref = dt;
+                                //}
+                                //else
+                                //{
+                                //    dt = dt_replace_tda(dt_item_xref, _codtda);
+                                //}
+                                if (dt != null)
+                                {
+                                    if (dt.Rows.Count > 0)
+                                    {
+                                        str = new StringBuilder();
+                                        for (Int32 i = 0; i < dt.Rows.Count; ++i)
+                                        {
+                                            str.Append(dt.Rows[i]["ITEM_XREF"].ToString());
+
+                                            if (i < dt.Rows.Count - 1)
+                                            {
+                                                str.Append("\r\n");
+
+                                            }
+
+                                        }
+                                        str_cadena = str.ToString();
+
+
+
+                                        name_file = "ITEM_XREF_" + sufijoNombre + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
+                                        in_maestros = _gen_ruta + "\\" + name_file;
+
+                                        if (File.Exists(@in_maestros)) File.Delete(@in_maestros);
+                                        File.WriteAllText(@in_maestros, str_cadena);
+                                        valida_genera = true;
+                                    }
+                                }
+                                tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                                tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " TERMINANDO GENERACION DE INTERFACE ITEM_XREF");
+                                tw1.Flush();
+                                tw1.Close();
+                                tw1.Dispose();
+                                break;
+                            #endregion
                             case "PRICE_UPDATE":
                                 tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
                                 tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " INICIANDO GENERACION DE INTERFACE PRICE_UPDATE");

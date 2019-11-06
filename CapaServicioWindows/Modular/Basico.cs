@@ -248,10 +248,27 @@ namespace CapaServicioWindows.Modular
             /*fecha para traer los pedido cerrados desde una fecha*/
             List<SCCCGUD> _lista_scccgud = null;
             String sqlquery_scdddes = "SELECT cgud_gudis,cgud_tndcl,cgud_calid,cgud_empre,cgud_canal,cgud_caden " +
-                                      ", cgud_almac, cgud_secci, cgud_estad, cgud_ftnda, cgud_nomtc, cgud_ructc " +
-                                      ", cgud_vorca, cgud_vornc, cgud_unoca, cgud_unonc, cgud_uneca, cgud_unenc " +
+                                      ",cgud_almac" + 
+                                      ",cgud_secci" + 
+                                      ",cgud_estad" + 
+                                      ",cgud_ftnda" + 
+                                      ",cgud_nomtc" + 
+                                      ",cgud_ructc" +
+
+                                      ",STR(cgud_vorca) AS cgud_vorca" +
+                                      ",STR(cgud_vornc) AS cgud_vornc" + 
+                                      ",cgud_unoca" + 
+                                      ",cgud_unonc" + 
+                                      ",cgud_uneca" + 
+                                      ",cgud_unenc" +
+
                                       ", cgud_ftx, cgud_dspch, cgud_ssd, cgud_semre, cgud_anore, cgud_frect " +
-                                      ", cgud_fecre, cgud_scal, cgud_scalm, cgud_sacc, cgud_saccm, cgud_ccal " +
+                                      ",cgud_fecre" + 
+                                      ",cgud_scal" +
+                                      ",STR(cgud_scalm) AS cgud_scalm" +
+                                      ",STR(cgud_sacc) AS cgud_sacc " +
+                                      ",STR(cgud_saccm) AS cgud_saccm" +
+                                      ",STR(cgud_ccal) AS cgud_ccal" +
                                       ", cgud_ccalm, cgud_cacc, cgud_caccm, cgud_caj, cgud_cajm, cgud_ftda, cgud_subgr " +
                                       ", cgud_ftxtd, cgud_ftxan, cgud_ano, cgud_seman, cgud_user, cgud_femis, cgud_hemis " +
                                       ", cgud_conce, cgud_flsf, cgud_aorig, cgud_pedid, cgud_deliv, log_ultmod " +
@@ -261,7 +278,7 @@ namespace CapaServicioWindows.Modular
                 //Util dd = new Util();
                 //dd.get_location_dbf();
 
-                using (OleDbConnection cn = new OleDbConnection(ConexionDBF._conexion_fvdes_oledb(_path)))
+                using (OleDbConnection cn = new OleDbConnection(ConexionDBF._conexion_vfpoledb_1(_path)))
                 {
                     using (OleDbCommand cmd = new OleDbCommand(sqlquery_scdddes, cn))
                     {

@@ -32,6 +32,14 @@ namespace CapaOracleTda
                 Dat_Ora_Conexion dcon = new Dat_Ora_Conexion();
                 Ent_Ora_Conexion ora_conexion = dcon.get_conexion_ora(tienda);
 
+
+                if (ora_conexion==null)
+                {
+                    MessageBox.Show("No hay datos de conexion", "Administrador", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    Cursor.Current = Cursors.Default;
+                    return;
+                }
+
                 Ent_Acceso_BD.user = ora_conexion.user_ora;
                 Ent_Acceso_BD.password= ora_conexion.pas_ora;
                 Ent_Acceso_BD.server = ora_conexion.server_ora;
@@ -59,15 +67,21 @@ namespace CapaOracleTda
                         }
 
                         string _valida_error = insert_bd.InsertarTransac_Poslog(str_linea_pos_log, "PROD", "PE");
+                        MessageBox.Show("Se envio al PosPeru", "Administrador", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("No hay datos para enviar", "Administrador", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     }
 
                 }
-                MessageBox.Show("Aviso", "Se actualizo el poslog", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                
 
             }
             catch (Exception exc)
             {
-                MessageBox.Show("Aviso", exc.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(exc.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 
             }
             Cursor.Current = Cursors.Default;

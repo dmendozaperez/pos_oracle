@@ -48,7 +48,7 @@ namespace CapaOracleTda
                     }
                     catch (Exception)
                     {
-
+                        throw;
                         
                     }
                     if (cn != null)
@@ -57,6 +57,7 @@ namespace CapaOracleTda
             }
             catch (Exception)
             {
+                throw;
                 ora_conexion = null;                
             }
             return ora_conexion;

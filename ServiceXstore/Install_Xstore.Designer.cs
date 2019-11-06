@@ -28,9 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
+            this.serviceInstaller1 = new System.ServiceProcess.ServiceInstaller();
+            this.serviceProcessInstaller1 = new System.ServiceProcess.ServiceProcessInstaller();
+            // 
+            // serviceInstaller1
+            // 
+            this.serviceInstaller1.Description = "Service ProcXstore (Bata)";
+            this.serviceInstaller1.DisplayName = "Service ProcXstore (Bata)";
+            this.serviceInstaller1.ServiceName = "Service ProcXstore (Bata)";
+            this.serviceInstaller1.StartType = System.ServiceProcess.ServiceStartMode.Automatic;
+            // 
+            // serviceProcessInstaller1
+            // 
+            this.serviceProcessInstaller1.Account = System.ServiceProcess.ServiceAccount.LocalSystem;
+            this.serviceProcessInstaller1.Password = null;
+            this.serviceProcessInstaller1.Username = null;
+            // 
+            // Install_Xstore
+            // 
+            this.Installers.AddRange(new System.Configuration.Install.Installer[] {
+            this.serviceInstaller1});
+
         }
 
         #endregion
+
+        private System.ServiceProcess.ServiceInstaller serviceInstaller1;
+        private System.ServiceProcess.ServiceProcessInstaller serviceProcessInstaller1;
     }
 }

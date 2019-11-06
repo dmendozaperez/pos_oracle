@@ -72,6 +72,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceXstore", "ServiceXst
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceWin64Framework4_5", "ServiceWin64Framework4_5\ServiceWin64Framework4_5.csproj", "{5E6BB4E8-5AAF-44B2-A5BA-DF1D90AAAAD1}"
 EndProject
+Project("{6141683F-8A12-4E36-9623-2EB02B2C2303}") = "InstaladorProcXstore", "InstaladorProcXstore\InstaladorProcXstore.isproj", "{5B394721-7874-46A8-A36C-651C3A411B2E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4ABEDD7D-BD51-4455-95EA-F86ED258A78C} = {4ABEDD7D-BD51-4455-95EA-F86ED258A78C}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		CD_ROM|Any CPU = CD_ROM|Any CPU
@@ -437,6 +442,20 @@ Global
 		{5E6BB4E8-5AAF-44B2-A5BA-DF1D90AAAAD1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5E6BB4E8-5AAF-44B2-A5BA-DF1D90AAAAD1}.SingleImage|Any CPU.ActiveCfg = Release|Any CPU
 		{5E6BB4E8-5AAF-44B2-A5BA-DF1D90AAAAD1}.SingleImage|Any CPU.Build.0 = Release|Any CPU
+		{5B394721-7874-46A8-A36C-651C3A411B2E}.CD_ROM|Any CPU.ActiveCfg = CD_ROM
+		{5B394721-7874-46A8-A36C-651C3A411B2E}.CD_ROM|Any CPU.Build.0 = CD_ROM
+		{5B394721-7874-46A8-A36C-651C3A411B2E}.Debug|Any CPU.ActiveCfg = DVD-5
+		{5B394721-7874-46A8-A36C-651C3A411B2E}.Debug|Any CPU.Build.0 = DVD-5
+		{5B394721-7874-46A8-A36C-651C3A411B2E}.DebugLocal|Any CPU.ActiveCfg = DVD-5
+		{5B394721-7874-46A8-A36C-651C3A411B2E}.DebugLocal|Any CPU.Build.0 = DVD-5
+		{5B394721-7874-46A8-A36C-651C3A411B2E}.Development|Any CPU.ActiveCfg = DVD-5
+		{5B394721-7874-46A8-A36C-651C3A411B2E}.Development|Any CPU.Build.0 = DVD-5
+		{5B394721-7874-46A8-A36C-651C3A411B2E}.DVD-5|Any CPU.ActiveCfg = DVD-5
+		{5B394721-7874-46A8-A36C-651C3A411B2E}.DVD-5|Any CPU.Build.0 = DVD-5
+		{5B394721-7874-46A8-A36C-651C3A411B2E}.Release|Any CPU.ActiveCfg = SingleImage
+		{5B394721-7874-46A8-A36C-651C3A411B2E}.Release|Any CPU.Build.0 = SingleImage
+		{5B394721-7874-46A8-A36C-651C3A411B2E}.SingleImage|Any CPU.ActiveCfg = SingleImage
+		{5B394721-7874-46A8-A36C-651C3A411B2E}.SingleImage|Any CPU.Build.0 = SingleImage
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

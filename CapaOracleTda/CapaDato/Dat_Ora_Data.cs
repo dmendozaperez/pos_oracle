@@ -28,7 +28,7 @@ namespace CapaOracleTda.CapaDato
             }
             catch (Exception exc)
             {
-
+                throw;
                 dtdoc = null;
             }
             return dtdoc;

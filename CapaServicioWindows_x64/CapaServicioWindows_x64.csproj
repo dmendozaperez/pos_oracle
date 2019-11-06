@@ -51,7 +51,6 @@
   <ItemGroup>
     <Compile Include="CapaDato\Dat_Interfaces.cs" />
     <Compile Include="CapaDato\Venta\Dat_Venta.cs" />
-    <Compile Include="Class1.cs" />
     <Compile Include="Conexion\ConexionSQL.cs" />
     <Compile Include="Conexion\ConexionWS.cs" />
     <Compile Include="Entidad\Ent_InterAuto_PL.cs" />

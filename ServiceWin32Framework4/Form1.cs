@@ -467,5 +467,11 @@ namespace ServiceWin32Framework4
             WMS_AQ_EC wms_proc = new WMS_AQ_EC();
             wms_proc.WMS_Proc_AQ_EC("EC");
         }
+
+        private void btnorce_Click(object sender, EventArgs e)
+        {
+            CapaServicioWindows.Bataclub.BataClub d = new CapaServicioWindows.Bataclub.BataClub();
+            d.genera_update_orce_cupones();
+        }
     }
 }

@@ -60,7 +60,8 @@ namespace ServiceWin64Framework4_5
             Boolean gen_ecu_item = false;
             string _error = "Filanizado correcto";
             Basico ejecuta_procesos = null;
-            ejecuta_procesos = new Basico();      
+            ejecuta_procesos = new Basico();
+            ejecuta_procesos.envio_Guias_ToxStore(ref _error);
             MessageBox.Show(_error);
             Cursor.Current = Cursors.Default;
         }

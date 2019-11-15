@@ -272,15 +272,15 @@ namespace ServiceXstore
 
                 if (_valida_serviceGuiaToXstore == 0)
                 {
-                    _valor = 1;
-                    _valida_serviceGuiaToXstore = 1;
-                    string _valida_proc_guiaToXstore = @"D:\XSTORE\proc_xs.txt";
-                    Boolean proceso_guiaToXstore = false;
+                    //_valor = 1;
+                    //_valida_serviceGuiaToXstore = 1;
+                    //string _valida_proc_guiaToXstore = @"D:\XSTORE\proc_xs.txt";
+                    //Boolean proceso_guiaToXstore = false;
 
-                    if (File.Exists(_valida_proc_guiaToXstore)) proceso_guiaToXstore = true;
+                    //if (File.Exists(_valida_proc_guiaToXstore)) proceso_guiaToXstore = true;
 
-                    if (proceso_guiaToXstore)
-                    {
+                    //if (proceso_guiaToXstore)
+                    //{
                         _valor = 1;
                         string _error = "";
                         _valida_serviceGuiaToXstore = 1;
@@ -291,7 +291,7 @@ namespace ServiceXstore
 
                         _valida_serviceGuiaToXstore = 0;
 
-                    }
+                    //}
                 }
 
             }

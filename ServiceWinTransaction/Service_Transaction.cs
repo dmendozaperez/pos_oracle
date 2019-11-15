@@ -1254,8 +1254,8 @@ namespace ServiceWinTransaction
 
                     if (File.Exists(_valida_proc_ven)) proceso_insert_polog = true;
 
-                    string _valida_proc_guiaToXstore = @"D:\XSTORE\proc_xs.txt";
-                    if (File.Exists(_valida_proc_guiaToXstore)) proceso_insert_polog = false;
+                    //string _valida_proc_guiaToXstore = @"D:\XSTORE\proc_xs.txt";
+                    //if (File.Exists(_valida_proc_guiaToXstore)) proceso_insert_polog = false;
 
                     if (proceso_insert_polog)
                     {

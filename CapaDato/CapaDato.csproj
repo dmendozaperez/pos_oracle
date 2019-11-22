@@ -72,6 +72,7 @@
     <Compile Include="Transac\Dat_PosLog.cs" />
     <Compile Include="Util\Dat_Comunicado.cs" />
     <Compile Include="Util\Dat_ProcXstore.cs" />
+    <Compile Include="Venta\Dat_Tk_Return.cs" />
     <Compile Include="Venta\Dat_Venta.cs" />
     <Compile Include="Venta\DBF_NET.cs" />
     <Compile Include="Xoficce\StockAct.cs" />

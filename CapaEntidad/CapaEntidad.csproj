@@ -65,6 +65,7 @@
     <Compile Include="Venta\Ent_Ffactc.cs" />
     <Compile Include="Venta\Ent_Ffactd.cs" />
     <Compile Include="Venta\Ent_Fnotaa.cs" />
+    <Compile Include="Venta\Ent_Tk_Return.cs" />
     <Compile Include="Venta\Ent_Venta.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -838,6 +838,42 @@ namespace WS_Bata_Interfaces
             return msg_transac;
         }
 
+        [SoapHeader("Authentication", Required = true)]
+        [WebMethod(Description = "Get info de ticket de retorno")]
+        public Ent_Tk_Get_Valores ws_get_cupon_return(Ent_Tk_Get_Parametro param)
+        {
+            Ent_Tk_Get_Valores msg_transac = null;
+            autentication_ws = new Ba_WsConexion();
+            //Dat_GuiasDespacho update_guias_traspaso = null;
+            Dat_Tk_Return tk_return = null;
+            try
+            {
+                msg_transac = new Ent_Tk_Get_Valores();
+                Boolean valida_ws = autentication_ws.ckeckAuthentication_ws("01", Authentication.Username, Authentication.Password);
+                if (valida_ws)
+                {
+                    /*en esta validaion entonce sya verifico y va aconsumir la base de datos 
+                     para la inyeccion de la guias cerreadas*/
+                    //update_guias_traspaso = new Dat_GuiasDespacho();
+                    tk_return = new Dat_Tk_Return();
+                    msg_transac = tk_return.bata_get_tk_return(param);
+                    /*********************************************************/
+                }
+                else
+                {
+                    msg_transac.estado_error = "1";
+                    //msg_transac.descripcion = "Conexión sin exito";
+                }
+
+            }
+            catch (Exception exc)
+            {
+                msg_transac.estado_error = exc.Message;
+
+            }
+            return msg_transac;
+        }
+
         #region<SOSTIC>
         /*sostic 05/2019*/
         [WebMethod(Description = "Consultar disponibilidad de stock en otra tienda")]

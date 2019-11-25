@@ -38,16 +38,27 @@ namespace CapaDato.Venta
 
                             cmd.Parameters.Add("@GENERA_CUPON", SqlDbType.Decimal);
                             cmd.Parameters.Add("@CUPON_IMPRIMIR", SqlDbType.NVarChar, -1);
+                            cmd.Parameters.Add("@TEX1_CUP", SqlDbType.NVarChar, -1);
+                            cmd.Parameters.Add("@TEX2_CUP", SqlDbType.NVarChar, -1);
+                            cmd.Parameters.Add("@TEX3_CUP", SqlDbType.NVarChar, -1);
+                            cmd.Parameters.Add("@TEX4_CUP", SqlDbType.NVarChar, -1);
 
                             cmd.Parameters["@GENERA_CUPON"].Direction = ParameterDirection.Output;
-
                             cmd.Parameters["@CUPON_IMPRIMIR"].Direction = ParameterDirection.Output;
+                            cmd.Parameters["@TEX1_CUP"].Direction = ParameterDirection.Output;
+                            cmd.Parameters["@TEX2_CUP"].Direction = ParameterDirection.Output;
+                            cmd.Parameters["@TEX3_CUP"].Direction = ParameterDirection.Output;
+                            cmd.Parameters["@TEX4_CUP"].Direction = ParameterDirection.Output;
 
                             cmd.ExecuteNonQuery();
 
 
                             tk.genera_cupon =Convert.ToDecimal(cmd.Parameters["@GENERA_CUPON"].Value);
                             tk.cupon_imprimir = cmd.Parameters["@CUPON_IMPRIMIR"].Value.ToString();
+                            tk.text1_cup = cmd.Parameters["@TEX1_CUP"].Value.ToString();
+                            tk.text2_cup = cmd.Parameters["@TEX2_CUP"].Value.ToString();
+                            tk.text3_cup = cmd.Parameters["@TEX3_CUP"].Value.ToString();
+                            tk.text4_cup = cmd.Parameters["@TEX4_CUP"].Value.ToString();
 
                         }
                     }

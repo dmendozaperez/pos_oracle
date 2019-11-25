@@ -11,6 +11,11 @@ namespace CapaEntidad.Venta
         public string estado_error { get; set; }
         public decimal genera_cupon { get; set; }
         public string cupon_imprimir { get; set; }
+        public string text1_cup { get; set; }
+        public string text2_cup { get; set; }
+        public string text3_cup { get; set; }
+        public string text4_cup { get; set; }
+
     }
     public class Ent_Tk_Set_Parametro
     {

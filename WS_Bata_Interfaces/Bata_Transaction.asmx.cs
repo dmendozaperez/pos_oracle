@@ -907,7 +907,86 @@ namespace WS_Bata_Interfaces
             }
             return msg_transac;
         }
+        [SoapHeader("Authentication", Required = true)]
+        [WebMethod(Description = "update reimpresion de tickets retorno")]
+        public void ws_update_tk_return_reimprimir(string cod_tda, string barra)
+        {
+            Dat_Tk_Return tk_return = null;
+            autentication_ws = new Ba_WsConexion();
+            try
+            {
+                Boolean valida_ws = autentication_ws.ckeckAuthentication_ws("01", Authentication.Username, Authentication.Password);
+                if (valida_ws)
+                {
+                    /*en esta validaion entonce sya verifico y va aconsumir la base de datos 
+                     para la inyeccion de la guias cerreadas*/
+                    //update_guias_traspaso = new Dat_GuiasDespacho();
+                    tk_return = new Dat_Tk_Return();
+                    tk_return.bata_tk_return_imp_update(cod_tda, barra);
+                    /*********************************************************/
+                }
+            }
+            catch
+            {
 
+
+            }
+        }
+
+        [SoapHeader("Authentication", Required = true)]
+        [WebMethod(Description = "Get reimpresion de tickets retorno")]
+        public List<Ent_Tk_Return> ws_get_tk_return_reimprimir(string cod_tda)
+        {
+            List<Ent_Tk_Return> listar = null;
+            Dat_Tk_Return tk_return = null;
+            autentication_ws = new Ba_WsConexion();
+            try
+            {
+                Boolean valida_ws = autentication_ws.ckeckAuthentication_ws("01", Authentication.Username, Authentication.Password);
+                if (valida_ws)
+                {
+                    /*en esta validaion entonce sya verifico y va aconsumir la base de datos 
+                     para la inyeccion de la guias cerreadas*/
+                    //update_guias_traspaso = new Dat_GuiasDespacho();
+                    tk_return = new Dat_Tk_Return();
+                    listar = tk_return.bata_tk_return_reimpimir(cod_tda);
+                    /*********************************************************/
+                }
+            }
+            catch
+            {
+
+            }
+            return listar;
+        }
+
+
+        [SoapHeader("Authentication", Required = true)]
+        [WebMethod(Description = "Get conexion del xstore")]
+        public Ent_Conexion_Ora_Xstore ws_get_conexion_xstore()
+        {
+            Ent_Conexion_Ora_Xstore con = null;
+            Dat_Conexion_Ora_Xstore dat_con = null;
+            autentication_ws = new Ba_WsConexion();
+            try
+            {
+                Boolean valida_ws = autentication_ws.ckeckAuthentication_ws("01", Authentication.Username, Authentication.Password);
+                if (valida_ws)
+                {
+                    /*en esta validaion entonce sya verifico y va aconsumir la base de datos 
+                     para la inyeccion de la guias cerreadas*/
+                    //update_guias_traspaso = new Dat_GuiasDespacho();
+                    dat_con = new Dat_Conexion_Ora_Xstore();
+                    con = dat_con.get_conexion_ora();
+                    /*********************************************************/
+                }
+            }
+            catch
+            {
+
+            }
+            return con;
+        }
 
         #region<SOSTIC>
         /*sostic 05/2019*/

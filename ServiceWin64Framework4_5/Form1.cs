@@ -32,7 +32,13 @@ namespace ServiceWin64Framework4_5
             Boolean gen_ecu_item = false;
             string _error = "Filanizado correcto";
             Ftp_Xstore_Service_Send ejecuta_procesos = null;
+
+            
+
             ejecuta_procesos = new Ftp_Xstore_Service_Send();
+
+            ejecuta_procesos.generar_orce_exclud(ref _error);
+
             ejecuta_procesos.ejecutar_genera_file_xstore_auto(pais, ref _error, ref gen_per_item, ref gen_ecu_item);
 
             MessageBox.Show(_error);

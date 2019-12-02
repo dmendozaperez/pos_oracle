@@ -12,6 +12,90 @@ namespace CapaDato.Venta
 {
     public class Dat_Tk_Return
     {
+
+        public void bata_tk_return_imp_update(string cod_tda,string barra)
+        {
+            string sqlquery = "USP_USP_BATA_GET_TKRETURN_REIMPR_UPD";
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(Ent_Conexion.conexion))
+                {
+                    try
+                    {
+                        if (cn.State == 0) cn.Open();
+                        using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                        {
+                            cmd.CommandTimeout = 0;
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.Parameters.AddWithValue("@COD_TDA", cod_tda);
+                            cmd.Parameters.AddWithValue("@BARRA", barra);
+                            cmd.ExecuteNonQuery();
+
+                        }
+                    }
+                    catch 
+                    {
+                        
+                    }
+                    if (cn != null)
+                        if (cn.State == ConnectionState.Open) cn.Close();
+                }
+
+            }
+            catch 
+            {
+
+                
+            }
+        }
+
+        /// <summary>
+        /// reimprimir tickets retorno
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
+        /// 
+        public List<Ent_Tk_Return> bata_tk_return_reimpimir(string tda)
+        {
+            List<Ent_Tk_Return> listar = null;
+            string sqlquery = "USP_BATA_GET_TKRETURN_REIMPR";
+            
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(Ent_Conexion.conexion))
+                {
+                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@COD_TDA", tda);
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            DataTable dt = new DataTable();
+                            da.Fill(dt);
+                            listar = new List<Ent_Tk_Return>();
+                            listar = (from DataRow dr in dt.Rows
+                                      select new Ent_Tk_Return
+                                      {
+                                          cupon_imprimir = dr["CUP_RTN_BARRA"].ToString(),
+                                          text1_cup = dr["TEX1_CUP"].ToString(),
+                                          text2_cup = dr["TEX2_CUP"].ToString(),
+                                          text3_cup = dr["TEX3_CUP"].ToString(),
+                                          text4_cup = dr["TEX4_CUP"].ToString(),
+                                      }).ToList();
+
+                        }
+                    }
+                }
+            }
+            catch 
+            {
+
+                
+            }
+            return listar;
+
+        }
         public Ent_Tk_Return bata_genera_tk_return(Ent_Tk_Set_Parametro param)
         {
             Ent_Tk_Return tk = null;
@@ -64,7 +148,7 @@ namespace CapaDato.Venta
                     }
                     catch (Exception exc)
                     {
-                        tk.estado_error = exc.Message;   
+                        tk.estado_error = exc.Message + " ERROR DE WS ==> bata_genera_tk_return";   
                     }
                     if (cn!= null)
                         if (cn.State==ConnectionState.Open) cn.Close();
@@ -73,7 +157,7 @@ namespace CapaDato.Venta
             }
             catch (Exception exc)
             {
-                tk.estado_error = exc.Message;
+                tk.estado_error = exc.Message + " ERROR DE WS ==> bata_genera_tk_return";
                 
             }
             return tk;

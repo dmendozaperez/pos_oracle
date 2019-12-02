@@ -840,6 +840,7 @@ namespace CapaServicioWindows_x64.Envio_Ftp_Xstore
                                 if (dt_ORCE_EXCLUD_ART.Rows.Count > 0)
                                 {
                                     str = new StringBuilder();
+                                    string atributo = dt_ORCE_EXCLUD_ART.Rows[0]["atributo"].ToString();
                                     for (Int32 i = 0; i < dt_ORCE_EXCLUD_ART.Rows.Count; ++i)
                                     {
                                         str_cab = (i == 0) ? dt_ORCE_EXCLUD_ART.Rows[i]["ITEM_DEAL_PROPERTY"].ToString().Replace("XXXXX", fila["ORC_DET_TDA"].ToString()) : dt_ORCE_EXCLUD_ART.Rows[i]["ITEM_DEAL_PROPERTY"].ToString();
@@ -852,7 +853,7 @@ namespace CapaServicioWindows_x64.Envio_Ftp_Xstore
                                         }
                                     }
                                     str_cadena = str.ToString();
-                                    name_maestros += "ITEM_DEAL_PROPERTY_" + fila["ORC_DET_TDA"].ToString() + "_" + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
+                                    name_maestros += "ITEM_DEAL_PROPERTY_" + atributo + "_" + fila["ORC_DET_TDA"].ToString() + "_" + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
                                     in_maestros = ruta_interface + "\\" + name_maestros;
 
                                     if (File.Exists(@in_maestros)) File.Delete(@in_maestros);

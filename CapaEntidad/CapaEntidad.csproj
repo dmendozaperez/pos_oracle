@@ -55,6 +55,7 @@
     <Compile Include="Util\Ent_CarpetaUpload_Xstore.cs" />
     <Compile Include="Util\Ent_Comunicado.cs" />
     <Compile Include="Util\Ent_Conexion.cs" />
+    <Compile Include="Util\Ent_Conexion_Ora_Xstore.cs" />
     <Compile Include="Util\Ent_Config_Service.cs" />
     <Compile Include="Util\Ent_File.cs" />
     <Compile Include="Util\Ent_Msg.cs" />

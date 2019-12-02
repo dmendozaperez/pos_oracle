@@ -28,7 +28,7 @@ namespace CapaEntidad.Venta
 
         //public Ent_Tk_Return tk_return { get; set; }
     }
-    public class Ent_Tk_Get_Valores
+    public class Ent_Tk_Valores
     {
         public string CUP_RTN_BARRA         {get;set;}
         public string CUP_RTN_TDA_GEN       {get;set;}
@@ -53,8 +53,12 @@ namespace CapaEntidad.Venta
         public string CUP_RTN_LOG_UPD       {get;set;}
         public bool CUP_RTN_IMP           {get;set;}
         public string CUP_RTN_IMP_LOG       { get; set; }
+        public decimal MTO_USO_MIN { get; set; }
+        public decimal MTO_DCTO { get; set; }
         public string estado_error { get; set; }
         public string cupon_imprimir { get; set; }
+        public string valida_cupon { get; set; }
+
     }
     public class Ent_Tk_Get_Parametro
     {
@@ -63,6 +67,7 @@ namespace CapaEntidad.Venta
         public string FC_SUNA { get; set; }
         public string SERIE { get; set; }
         public string NUMERO { get; set; }
+        public string ESTADO { get; set; }
         public decimal MONTO { get; set; }
         public DateTime FECHA { get; set; }
 

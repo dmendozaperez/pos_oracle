@@ -78,13 +78,13 @@ namespace CapaDato.Venta
             }
             return tk;
         }
-        public Ent_Tk_Get_Valores bata_get_tk_return(Ent_Tk_Get_Parametro param)
+        public Ent_Tk_Valores bata_valida_tk_return(Ent_Tk_Get_Parametro param)
         {
-            Ent_Tk_Get_Valores tk = null;
-            string sqlquery = "USP_BATA_GET_TKRETURN";
+            Ent_Tk_Valores tk = null;
+            string sqlquery = "USP_BATA_VALIDA_CUPON_RETORNO";
             try
             {
-                tk = new Ent_Tk_Get_Valores();
+                tk = new Ent_Tk_Valores();
                 tk.estado_error = "";
                 using (SqlConnection cn = new SqlConnection(Ent_Conexion.conexion))
                 {
@@ -96,45 +96,43 @@ namespace CapaDato.Venta
                         {
                             cmd.CommandTimeout = 0;
                             cmd.CommandType = CommandType.StoredProcedure;
-                            cmd.Parameters.AddWithValue("@CODIGO_CUPON", param.COD_CUP);
+                            cmd.Parameters.AddWithValue("@CUPON", param.COD_CUP);
+                            cmd.Parameters.AddWithValue("@COD_TDA", param.COD_TDA);
+                            int valida_cupon = 0;
+                            string mensaje_cupon = "";
+                            cmd.Parameters.Add("@VALIDA_CUPON",SqlDbType.Int);
+                            cmd.Parameters.Add("@MENSAJE_CUPON",SqlDbType.VarChar,-1);
+                            cmd.Parameters["@VALIDA_CUPON"].Direction = ParameterDirection.Output;
+                            cmd.Parameters["@MENSAJE_CUPON"].Direction = ParameterDirection.Output;                           
+
                             SqlDataAdapter da = new SqlDataAdapter(cmd);
                             da.Fill(dt);
-                            if (dt.Rows.Count > 0)
-                            { 
-                                tk.CUP_RTN_BARRA            = dt.Rows[0]["CUP_RTN_BARRA"].ToString();
-                                tk.CUP_RTN_TDA_GEN          = dt.Rows[0]["CUP_RTN_TDA_GEN"].ToString();
-                                tk.CUP_RTN_FC_SUNA_GEN      = dt.Rows[0]["CUP_RTN_FC_SUNA_GEN"].ToString();
-                                tk.CUP_RTN_SERIE_GEN        = dt.Rows[0]["CUP_RTN_SERIE_GEN"].ToString();
-                                tk.CUP_RTN_NUMERO_GEN       = dt.Rows[0]["CUP_RTN_NUMERO_GEN"].ToString();
-                                tk.CUP_RTN_FECHA_GEN        = dt.Rows[0]["CUP_RTN_FECHA_GEN"].ToString();
-                                tk.CUP_RTN_MONTO_GEN        = Convert.ToDecimal(dt.Rows[0]["CUP_RTN_MONTO_GEN"]);
-                                tk.CUP_RTN_TDA_USO          = dt.Rows[0]["CUP_RTN_TDA_USO"].ToString();
-                                tk.CUP_RTN_FC_SUNA_USO      = dt.Rows[0]["CUP_RTN_FC_SUNA_USO"].ToString();
-                                tk.CUP_RTN_SERIE_USO        = dt.Rows[0]["CUP_RTN_SERIE_USO"].ToString();
-                                tk.CUP_RTN_NUMERO_USO       = dt.Rows[0]["CUP_RTN_NUMERO_USO"].ToString();
-                                tk.CUP_RTN_FECHA_USO        = dt.Rows[0]["CUP_RTN_FECHA_USO"].ToString();
-                                tk.CUP_RTN_TOTAL_USO        = Convert.ToDecimal(dt.Rows[0]["CUP_RTN_TOTAL_USO"]);
-                                tk.CUP_RTN_FEC_INI_USO      = dt.Rows[0]["CUP_RTN_FEC_INI_USO"].ToString();
-                                tk.CUP_RTN_FEC_FIN_USO      = dt.Rows[0]["CUP_RTN_FEC_FIN_USO"].ToString();
-                                tk.CUP_RTN_MONTO_USO        = Convert.ToDecimal(dt.Rows[0]["CUP_RTN_MONTO_USO"]);
-                                tk.CUP_RTN_ESTADO           = dt.Rows[0]["CUP_RTN_ESTADO"].ToString();
-                                tk.CUP_RTN_FEC_ING          = dt.Rows[0]["CUP_RTN_FEC_ING"].ToString();
-                                tk.CUP_RTN_FEC_ACT          = dt.Rows[0]["CUP_RTN_FEC_ACT"].ToString();
-                                tk.CUP_RTN_LOG_ING          = dt.Rows[0]["CUP_RTN_LOG_ING"].ToString();
-                                tk.CUP_RTN_LOG_UPD          = dt.Rows[0]["CUP_RTN_LOG_UPD"].ToString();
-                                tk.CUP_RTN_IMP              = Convert.ToBoolean(dt.Rows[0]["CUP_RTN_IMP"]);
-                                tk.CUP_RTN_IMP_LOG          = dt.Rows[0]["CUP_RTN_IMP_LOG"].ToString();
-                            }
-                            else
+
+                            valida_cupon = Convert.ToInt32(cmd.Parameters["@VALIDA_CUPON"].Value);
+                            mensaje_cupon = cmd.Parameters["@MENSAJE_CUPON"].Value.ToString();
+
+                            tk.valida_cupon = valida_cupon.ToString();
+                            tk.estado_error = mensaje_cupon;
+
+                            if (valida_cupon == 1)
                             {
-                                tk.estado_error = "No se encontró el cupon " + param.COD_CUP;
+                                if (dt.Rows.Count > 0)
+                                {
+                                    tk.CUP_RTN_BARRA = dt.Rows[0]["CUP_RTN_BARRA"].ToString();
+                                    tk.CUP_RTN_FEC_INI_USO = dt.Rows[0]["CUP_RTN_FEC_INI_USO"].ToString();
+                                    tk.CUP_RTN_FEC_FIN_USO = dt.Rows[0]["CUP_RTN_FEC_FIN_USO"].ToString();
+                                    tk.MTO_USO_MIN = Convert.ToDecimal(dt.Rows[0]["MTO_USO_MIN"]);
+                                    tk.MTO_DCTO = Convert.ToDecimal(dt.Rows[0]["MTO_DCTO"]);
+                                    tk.CUP_RTN_ESTADO = dt.Rows[0]["CUP_RTN_ESTADO"].ToString();
+                                }
                             }
                         }
                     }
                     catch (Exception exc)
                     {
-                        tk = new Ent_Tk_Get_Valores();
-                        tk.estado_error = exc.Message;
+                        tk = new Ent_Tk_Valores();
+                        tk.valida_cupon = "0";
+                        tk.estado_error = "Error catch0 ws => " + exc.Message;
                     }
                     if (cn != null)
                         if (cn.State == ConnectionState.Open) cn.Close();
@@ -143,9 +141,66 @@ namespace CapaDato.Venta
             }
             catch (Exception exc)
             {
-                tk = new Ent_Tk_Get_Valores();
-                tk.estado_error = exc.Message;
+                tk = new Ent_Tk_Valores();
+                tk.valida_cupon = "0";
+                tk.estado_error = "Error catch1 ws => " + exc.Message;
 
+            }
+            return tk;
+        }
+
+        public Ent_Tk_Valores bata_consumo_tk_return(Ent_Tk_Get_Parametro param)
+        {
+            Ent_Tk_Valores tk = null;
+            string sqlquery = "USP_BATA_UPDATE_CUPON_RETORNO";
+            try
+            {
+                tk = new Ent_Tk_Valores();
+                tk.estado_error = "";
+                using (SqlConnection cn = new SqlConnection(Ent_Conexion.conexion))
+                {
+                    try
+                    {
+                        if (cn.State == 0) cn.Open();
+                        using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                        {
+                            cmd.CommandTimeout = 0;
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.Parameters.AddWithValue("@CUPON", param.COD_CUP);
+                            cmd.Parameters.AddWithValue("@COD_TDA", param.COD_TDA);
+                            cmd.Parameters.AddWithValue("@FC_SUNA", param.FC_SUNA);
+                            cmd.Parameters.AddWithValue("@SERIE", param.SERIE);
+                            cmd.Parameters.AddWithValue("@NUMERO", param.NUMERO);
+                            cmd.Parameters.AddWithValue("@MONTO", param.MONTO);
+                            cmd.Parameters.AddWithValue("@FECHA", param.FECHA);
+
+                            int filas =  cmd.ExecuteNonQuery();
+
+                            if (filas > 0)
+                            {
+                                tk.valida_cupon = "1";
+                                tk.estado_error = "Cupon actualizado.";
+                            }else
+                            {
+                                tk.valida_cupon = "0";
+                                tk.estado_error = "Error al actualziar";
+                            }
+                        }
+                    }
+                    catch (Exception exc)
+                    {
+                        tk.valida_cupon = "0";
+                        tk.estado_error = "Error catch0 ws => " + exc.Message;
+                    }
+                    if (cn != null)
+                        if (cn.State == ConnectionState.Open) cn.Close();
+
+                }
+            }
+            catch (Exception exc)
+            {
+                tk.valida_cupon = "0";
+                tk.estado_error = "Error catch0 ws => " + exc.Message;
             }
             return tk;
         }

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,7 +38,7 @@ namespace ServiceWin64Framework4_5
 
             ejecuta_procesos = new Ftp_Xstore_Service_Send();
 
-            ejecuta_procesos.generar_orce_exclud(ref _error);
+            //ejecuta_procesos.generar_orce_exclud(ref _error);
 
             ejecuta_procesos.ejecutar_genera_file_xstore_auto(pais, ref _error, ref gen_per_item, ref gen_ecu_item);
 
@@ -83,6 +84,49 @@ namespace ServiceWin64Framework4_5
             ejecuta_procesos = new Ftp_Xstore_Service_Send();
             ejecuta_procesos.proc_envio_ftp();
             MessageBox.Show(_error);
+            Cursor.Current = Cursors.Default;
+        }
+        Ecommerce_Stock env = new Ecommerce_Stock();
+        private void btnstk_ec_Click(object sender, EventArgs e)
+        {
+            string enviando = "";
+            env.envio_stock(ref enviando);
+        }
+
+        private void btnupdate_bataweb_Click(object sender, EventArgs e)
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            try
+            {
+                string ruta_server = @"\\172.28.7.9\inetpub\wwwroot\BataWeb\bin";
+                string ruta_local = @"D:\Fuentes\SL_Web\SL_Web\CapaPresentacion\bin";
+
+                string _CapaDato = "CapaDato.dll";
+                string _CapaEntidad = "CapaEntidad.dll";
+                string _CapaOraDato = "CapaOraDato.dll";
+                string _CapaPresentacion = "CapaPresentacion.dll";
+
+                byte[] _bataweb_dll = null;
+                _bataweb_dll = File.ReadAllBytes(ruta_local + "\\" + _CapaDato);
+                File.WriteAllBytes(@ruta_server + "\\" + _CapaDato, _bataweb_dll);
+
+                _bataweb_dll = File.ReadAllBytes(ruta_local + "\\" + _CapaEntidad);
+                File.WriteAllBytes(@ruta_server + "\\" + _CapaEntidad, _bataweb_dll);
+
+                _bataweb_dll = File.ReadAllBytes(ruta_local + "\\" + _CapaOraDato);
+                File.WriteAllBytes(@ruta_server + "\\" + _CapaOraDato, _bataweb_dll);
+
+                _bataweb_dll = File.ReadAllBytes(ruta_local + "\\" + _CapaPresentacion);
+                File.WriteAllBytes(@ruta_server + "\\" + _CapaPresentacion, _bataweb_dll);
+
+                MessageBox.Show("Se Actualizo Dll en Produccion BATAWEB", "Admin", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            }
+            catch (Exception exc)
+            {
+
+                MessageBox.Show(exc.Message, "Admin", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             Cursor.Current = Cursors.Default;
         }
     }

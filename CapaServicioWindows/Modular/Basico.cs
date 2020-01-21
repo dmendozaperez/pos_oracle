@@ -2257,11 +2257,11 @@ namespace CapaServicioWindows.Modular
             try
             {
                 datUtil = new Util();
-                string carpetatienda = datUtil.get_ruta_locationProcesa_dbf("SQL");//@"D:\TiendaPaq"
-                string carpetadbf = carpetatienda + "\\DBF";
-
-                //string carpetatienda = @"D:\TiendaPaq";
+                //string carpetatienda = datUtil.get_ruta_locationProcesa_dbf("SQL");//@"D:\TiendaPaq"
                 //string carpetadbf = carpetatienda + "\\DBF";
+
+                string carpetatienda = @"D:\TiendaPaq";
+                string carpetadbf = carpetatienda + "\\DBF";
 
                 string strCodTienda = "";
                 if (!Directory.Exists(@carpetatienda)) Directory.CreateDirectory(@carpetatienda);

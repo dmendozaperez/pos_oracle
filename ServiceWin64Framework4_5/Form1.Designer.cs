@@ -32,6 +32,8 @@
             this.btnejecutar_genera_interface_xstore = new System.Windows.Forms.Button();
             this.btn_guias = new System.Windows.Forms.Button();
             this.btn_enviosftp = new System.Windows.Forms.Button();
+            this.btnstk_ec = new System.Windows.Forms.Button();
+            this.btnupdate_bataweb = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn_ejecutar_genera_file_xstore_auto
@@ -70,7 +72,7 @@
             // btn_enviosftp
             // 
             this.btn_enviosftp.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_enviosftp.Location = new System.Drawing.Point(12, 216);
+            this.btn_enviosftp.Location = new System.Drawing.Point(12, 204);
             this.btn_enviosftp.Name = "btn_enviosftp";
             this.btn_enviosftp.Size = new System.Drawing.Size(334, 51);
             this.btn_enviosftp.TabIndex = 3;
@@ -78,11 +80,35 @@
             this.btn_enviosftp.UseVisualStyleBackColor = true;
             this.btn_enviosftp.Click += new System.EventHandler(this.btn_enviosftp_Click);
             // 
+            // btnstk_ec
+            // 
+            this.btnstk_ec.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
+            this.btnstk_ec.Location = new System.Drawing.Point(12, 265);
+            this.btnstk_ec.Name = "btnstk_ec";
+            this.btnstk_ec.Size = new System.Drawing.Size(334, 41);
+            this.btnstk_ec.TabIndex = 4;
+            this.btnstk_ec.Text = "Generar Stock E-COMMERCE";
+            this.btnstk_ec.UseVisualStyleBackColor = true;
+            this.btnstk_ec.Click += new System.EventHandler(this.btnstk_ec_Click);
+            // 
+            // btnupdate_bataweb
+            // 
+            this.btnupdate_bataweb.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnupdate_bataweb.Location = new System.Drawing.Point(369, 12);
+            this.btnupdate_bataweb.Name = "btnupdate_bataweb";
+            this.btnupdate_bataweb.Size = new System.Drawing.Size(334, 51);
+            this.btnupdate_bataweb.TabIndex = 5;
+            this.btnupdate_bataweb.Text = "ACTUALIZAR BATAWEB DLL PRODUCCION";
+            this.btnupdate_bataweb.UseVisualStyleBackColor = true;
+            this.btnupdate_bataweb.Click += new System.EventHandler(this.btnupdate_bataweb_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(358, 290);
+            this.ClientSize = new System.Drawing.Size(718, 318);
+            this.Controls.Add(this.btnupdate_bataweb);
+            this.Controls.Add(this.btnstk_ec);
             this.Controls.Add(this.btn_enviosftp);
             this.Controls.Add(this.btn_guias);
             this.Controls.Add(this.btnejecutar_genera_interface_xstore);
@@ -102,6 +128,8 @@
         private System.Windows.Forms.Button btnejecutar_genera_interface_xstore;
         private System.Windows.Forms.Button btn_guias;
         private System.Windows.Forms.Button btn_enviosftp;
+        private System.Windows.Forms.Button btnstk_ec;
+        private System.Windows.Forms.Button btnupdate_bataweb;
     }
 }
 

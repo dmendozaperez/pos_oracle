@@ -280,7 +280,7 @@ namespace ServiceWin32Framework4
         private void btn_item_deal_Click(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;
-            string sqlquery = "USP_XSTORE_GET_ITEM_DEAL_PROPERTY";
+            string sqlquery = "USP_XSTORE_GET_STOCK_LEDGER_CHICHE";
             DataTable dt = null;
             try
             {
@@ -295,20 +295,20 @@ namespace ServiceWin32Framework4
                         {
                             cmd.CommandTimeout = 0;
                             cmd.CommandType = CommandType.StoredProcedure;
-                            cmd.Parameters.AddWithValue("@CODTIENDA", fila["cod_entid"].ToString());
-                            cmd.Parameters.AddWithValue("@OUTLET", Convert.ToBoolean(fila["OUTLET"]));
+                            cmd.Parameters.AddWithValue("@COD_tda", fila["cod_entid"].ToString());
+                            //cmd.Parameters.AddWithValue("@OUTLET", Convert.ToBoolean(fila["OUTLET"]));
 
                             using (SqlDataAdapter da = new SqlDataAdapter(cmd))
                             {
-                                if (dt==null)
-                                { 
+                                //if (dt==null)
+                                //{ 
                                     dt = new DataTable();
                                     da.Fill(dt);
-                                }
-                                else
-                                {
-                                    dt = dt_replace_tda(dt, fila["cod_entid"].ToString());
-                                }
+                                //}
+                                //else
+                                //{
+                                //    dt = dt_replace_tda(dt, fila["cod_entid"].ToString());
+                                //}
                                 #region<GET_ITEM_DEAL_PROPERTY>
                                 StringBuilder str = null;
                                 string str_cadena = "";
@@ -323,7 +323,7 @@ namespace ServiceWin32Framework4
                                                     str = new StringBuilder();
                                                     for (Int32 i = 0; i < dt.Rows.Count; ++i)
                                                     {
-                                                        str.Append(dt.Rows[i]["ITEM_DEAL_PROPERTY"].ToString());
+                                                        str.Append(dt.Rows[i]["stock_ledger"].ToString());
 
                                                         if (i < dt.Rows.Count - 1)
                                                         {
@@ -336,7 +336,7 @@ namespace ServiceWin32Framework4
 
 
 
-                                                    name_maestros = "ITEM_DEAL_PROPERTY_" + fila["cod_entid"].ToString() + "_" + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
+                                                    name_maestros = "STOCK_LEDGER_" + fila["cod_entid"].ToString() + "_" + DateTime.Today.ToString("yyyyMMdd") + ".MNT";
                                                     in_maestros = ruta_interface + "\\" + name_maestros;
 
                                                     if (File.Exists(@in_maestros)) File.Delete(@in_maestros);
@@ -367,7 +367,7 @@ namespace ServiceWin32Framework4
         private DataTable get_tienda()
         {
             DataTable dt = null;
-            string sqlquery = "select cod_entid,OUTLET=dbo.FTIENDA_OUTLET(cod_entid) from tentidad_tienda where xstore=1 and cod_pais='PE' and cod_cadena='BA' ";
+            string sqlquery = "SELECT rtl_loc_id as cod_entid  FROM OPENQUERY(XCENTER, 'SELECT distinct rtl_loc_id FROM INV_STOCK_LEDGER_ACCT WHERE organization_id=2000  and unitcount!=0 and to_char(update_date, ''YYYY-MM-DD'') = ''2018-09-13''')";
             //string sqlquery = "select cod_entid,OUTLET=dbo.FTIENDA_OUTLET(cod_entid) from tentidad_tienda where cod_pais='PE' and cod_entid='50102'";
             try
             {

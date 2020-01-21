@@ -3,12 +3,14 @@ using CapaDato.Basico;
 using CapaDato.Control;
 using CapaDato.Interfaces;
 using CapaDato.Logistica;
+using CapaDato.Poslog;
 using CapaDato.Tienda;
 using CapaDato.Util;
 using CapaDato.Venta;
 using CapaEntidad.FE;
 using CapaEntidad.Interfaces;
 using CapaEntidad.Logistica;
+using CapaEntidad.Poslog;
 using CapaEntidad.Util;
 using CapaEntidad.Venta;
 using System;
@@ -987,6 +989,36 @@ namespace WS_Bata_Interfaces
             }
             return con;
         }
+
+        #region<envio del poslog desde tienda>
+        [SoapHeader("Authentication", Required = true)]
+        [WebMethod(Description = "envio del poslog desde tienda")]
+        public string ws_envio_poslog_xstore_tda(Ent_PosLog_Tda param)
+        {
+            autentication_ws = new Ba_WsConexion();
+            Dat_PosLogTda dat_pos = null;
+            string error = "";
+            try
+            {
+                Boolean valida_ws = autentication_ws.ckeckAuthentication_ws("01", Authentication.Username, Authentication.Password);
+                if (valida_ws)
+                {
+                    dat_pos = new Dat_PosLogTda();
+                    error = dat_pos.inserta_poslog_tda(param);
+                    /*envio de poslog*/
+                    //update_guias_traspaso = new Dat_GuiasDespacho();
+
+                    /*********************************************************/
+                }
+            }
+            catch (Exception exc)
+            {
+                error = exc.Message;
+            }
+            return error;
+        }
+
+        #endregion
 
         #region<SOSTIC>
         /*sostic 05/2019*/

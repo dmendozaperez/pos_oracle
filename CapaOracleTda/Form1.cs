@@ -41,17 +41,25 @@ namespace CapaOracleTda
                 }
 
                 Ent_Acceso_BD.user = ora_conexion.user_ora;
-                Ent_Acceso_BD.password= ora_conexion.pas_ora;
+                Ent_Acceso_BD.password = ora_conexion.pas_ora;
                 Ent_Acceso_BD.server = ora_conexion.server_ora;
                 Ent_Acceso_BD.port = ora_conexion.port_ora;
                 Ent_Acceso_BD.sid = ora_conexion.sid_ora;
+
+
+                //Ent_Acceso_BD.user = "pos";
+                //Ent_Acceso_BD.password = "mPx3ahUEV6ez";
+                //Ent_Acceso_BD.server = "172.16.100.143";
+                //Ent_Acceso_BD.port = 1521;
+                //Ent_Acceso_BD.sid = "XSTOREDB";
 
                 Dat_Ora_Data dat_ora = new Dat_Ora_Data();
                 DataTable dt= dat_ora.get_documento(txtdoc.Text);
 
                 if (dt!=null)
                 {
-                    DataTable dt_poslog= dat_ora.get_poslog(dt.Rows[0]["wkstn_id"].ToString(), dt.Rows[0]["trans_seq"].ToString());
+                    //DataTable dt_poslog= dat_ora.get_poslog(dt.Rows[0]["wkstn_id"].ToString(), dt.Rows[0]["trans_seq"].ToString());
+                    DataTable dt_poslog = dat_ora.get_poslog(1.ToString(), 62.ToString());
 
                     if (dt_poslog!=null)
                     {
@@ -67,7 +75,14 @@ namespace CapaOracleTda
                         }
 
                         string _valida_error = insert_bd.InsertarTransac_Poslog(str_linea_pos_log, "PROD", "PE");
+                        if (_valida_error.Length>0)
+                        {
+                            MessageBox.Show(_valida_error, "Administrador", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        }
+                        else
+                        { 
                         MessageBox.Show("Se envio al PosPeru", "Administrador", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
                     }
                     else
                     {

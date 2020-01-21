@@ -49,14 +49,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CapaDato\Dat_Ecommerce_Stock.cs" />
     <Compile Include="CapaDato\Dat_Interfaces.cs" />
     <Compile Include="CapaDato\Venta\Dat_Venta.cs" />
     <Compile Include="Conexion\ConexionSQL.cs" />
     <Compile Include="Conexion\ConexionWS.cs" />
+    <Compile Include="Entidad\Ent_Ecommerce_Stock.cs" />
     <Compile Include="Entidad\Ent_InterAuto_PL.cs" />
     <Compile Include="Entidad\Ent_InterGenera_PL.cs" />
     <Compile Include="Envio_Ftp_Xstore\Ftp_Xstore_Service_Send.cs" />
     <Compile Include="Modular\Basico.cs" />
+    <Compile Include="Modular\Ecommerce_Stock.cs" />
     <Compile Include="Modular\Util.cs" />
     <Compile Include="Modular\Xstore_Genera_Inter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -185,6 +188,12 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CapaServicioWindows\CapaServicioWindows.csproj">
+      <Project>{371B33AD-399F-448E-9C58-FB07A742A61E}</Project>
+      <Name>CapaServicioWindows</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\WinSCP.5.15.5\build\WinSCP.targets" Condition="Exists('..\packages\WinSCP.5.15.5\build\WinSCP.targets')" />

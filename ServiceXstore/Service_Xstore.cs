@@ -23,6 +23,10 @@ namespace ServiceXstore
         Timer tmenvia_sftp = null;
         private Int32 _valida_envia_sftp = 0;
         #endregion
+        #region<generacion para ecommerce>
+        Timer tmgenera_stk_ec = null;
+        private Int32 _valida_stk_ec = 0;
+        #endregion
 
         #region <guia>
         Timer tmservicio_GuiaToXstore = null;
@@ -41,8 +45,55 @@ namespace ServiceXstore
 
             tmservicio_GuiaToXstore = new Timer(5000);
             tmservicio_GuiaToXstore.Elapsed += new ElapsedEventHandler(tmservicio_GuiaToXstore_Elapsed);
+
+            tmgenera_stk_ec = new Timer(5000);
+            tmgenera_stk_ec.Elapsed += new ElapsedEventHandler(tmgenera_stk_ec_Elapsed);
         }
 
+        #region<envio de stock ecommerce>
+        Ecommerce_Stock env = new Ecommerce_Stock();
+        void tmgenera_stk_ec_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            Int32 _valor = 0;
+            TextWriter tw1 = null;
+            try
+            {
+                
+
+                if (_valida_stk_ec == 0)
+                {
+                   
+                    _valor = 1;                   
+                    _valida_stk_ec = 1;
+
+                    string _enviando = "";
+                    env.envio_stock(ref _enviando);
+
+
+                    if (_enviando.Length > 0)
+                    {
+                        tw1 = new StreamWriter(@"D:\XSTORE\LOG_EC.txt", true);
+                        tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " " + _enviando);
+                        tw1.Flush();
+                        tw1.Close();
+                        tw1.Dispose();
+                    }
+
+                    _valida_stk_ec = 0;
+
+                }
+
+            }
+            catch (Exception exc)
+            {
+                _valida_stk_ec = 0;
+            }
+            if (_valor == 1)
+            {
+                _valida_stk_ec = 0;
+            }
+        }
+        #endregion
         #region<envio de interfaces automatico>
         void tmgenera_interface_Elapsed(object sender, ElapsedEventArgs e)
         {
@@ -313,6 +364,7 @@ namespace ServiceXstore
             tmenvia_sftp.Start();
 
             tmservicio_GuiaToXstore.Start();
+            tmgenera_stk_ec.Start();
         }
 
         protected override void OnStop()
@@ -321,6 +373,8 @@ namespace ServiceXstore
             tmenvia_sftp.Stop();
 
             tmservicio_GuiaToXstore.Stop();
+
+            tmgenera_stk_ec.Stop();
         }
     }
 }

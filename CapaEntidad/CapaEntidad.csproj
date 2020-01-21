@@ -51,6 +51,7 @@
     <Compile Include="Logistica\Ent_Alma_Ecu.cs" />
     <Compile Include="Logistica\Ent_GuiasDespacho.cs" />
     <Compile Include="Logistica\Ent_Stock.cs" />
+    <Compile Include="Poslog\Ent_PosLog_Tda.cs" />
     <Compile Include="Poslog\Ent_PosLog.cs" />
     <Compile Include="Util\Ent_CarpetaUpload_Xstore.cs" />
     <Compile Include="Util\Ent_Comunicado.cs" />

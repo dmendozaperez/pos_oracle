@@ -92,6 +92,7 @@ namespace CapaServicioWindows.CapaDato.Novell
         {
             //string sqlquery = "USP_EXTRAER_VENTAS_TDA_PRUEBA_01";
             string sqlquery = "USP_EXTRAER_VENTAS_TDA";
+            //string sqlquery = "[USP_EXTRAER_VENTAS_TDA_STOCK_SEMANA]";
             DataSet ds = null;
             try
             {
@@ -123,7 +124,7 @@ namespace CapaServicioWindows.CapaDato.Novell
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception exc)
             {
                 ds = null;
             }

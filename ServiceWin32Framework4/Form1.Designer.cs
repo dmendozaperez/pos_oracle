@@ -261,7 +261,7 @@
             // BTNVENDE
             // 
             this.BTNVENDE.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BTNVENDE.Location = new System.Drawing.Point(844, 113);
+            this.BTNVENDE.Location = new System.Drawing.Point(761, 77);
             this.BTNVENDE.Name = "BTNVENDE";
             this.BTNVENDE.Size = new System.Drawing.Size(154, 23);
             this.BTNVENDE.TabIndex = 23;

@@ -40,7 +40,7 @@ namespace CapaServicioWindows.Modular
                     foreach(DataRow fila in dt_tda.Rows)
                     {
                         string cod_tda = fila["tienda"].ToString();
-                        DateTime fec_cie =Convert.ToDateTime(fila["fecha"]);
+                        DateTime fec_cie = Convert.ToDateTime(fila["fecha"]);
 
 
 

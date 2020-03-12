@@ -168,7 +168,7 @@ namespace CapaServicioWindows.Envio_AQ
                                                                   "fc_vdcto,fc_pigv,fc_vigv,fc_vtotal,fc_valcob,fc_moneda,fc_valdol,fc_dcli,fc_ddir," +
                                                                   "fc_dloc,fc_cubi,fc_almcli,fc_flagc,fc_dcsg,fc_ddcsg,fc_dlocon,fc_cven,fc_tiketer," +
                                                                   "fc_flemb,fc_zona,fc_grupo,fc_compr,fc_grupov,fc_comprv,fc_cta,fc_pertc,fc_tipo,fc_pperc," +
-                                                                  "fc_vperc,fc_dua,fc_cuu,fc_trx,fc_glosa,fc_hash,fc_motivo,log_ultmod) " +
+                                                                  "fc_vperc,fc_dua,fc_cuu,fc_trx,fc_glosa,fc_hash,fc_motivo,log_ultmod,fc_trxqa,fc_trxaq) " +
                                                                   "VALUES(?,?,?,?,?,?,?,?,?," +
                                                                   "?,?,?,?,?,?,?,?,?," +
                                                                   "?,?,?,?,?,?,?,?,?," +

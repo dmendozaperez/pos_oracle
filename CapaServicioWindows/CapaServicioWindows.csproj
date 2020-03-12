@@ -55,6 +55,7 @@
     <Compile Include="CapaDato\Interfaces\Dat_Tienda.cs" />
     <Compile Include="CapaDato\Novell\Dat_Prescripcion.cs" />
     <Compile Include="CapaDato\Novell\Dat_Proc_Novell.cs" />
+    <Compile Include="CapaDato\Novell\Dat_Transito.cs" />
     <Compile Include="CapaDato\Venta\Dat_Venta.cs" />
     <Compile Include="CapaDato\WMS\WMS_AQ_EC.cs" />
     <Compile Include="Conexion\ConexionDBF.cs" />
@@ -63,6 +64,7 @@
     <Compile Include="Conexion\NetworkShare.cs" />
     <Compile Include="Entidad\Ent_InterAuto_PL.cs" />
     <Compile Include="Entidad\Ent_InterGenera_PL.cs" />
+    <Compile Include="Entidad\FPTRANC.cs" />
     <Compile Include="Entidad\SCACSAL.cs" />
     <Compile Include="Entidad\SCCCGUD.cs" />
     <Compile Include="Entidad\SCDDDES.cs" />

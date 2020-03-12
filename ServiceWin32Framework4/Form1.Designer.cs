@@ -51,6 +51,7 @@
             this.orce_exclud_interface = new System.Windows.Forms.Button();
             this.btn_wms_aqec = new System.Windows.Forms.Button();
             this.btnorce = new System.Windows.Forms.Button();
+            this.btn_transito = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn_servicewin
@@ -302,11 +303,23 @@
             this.btnorce.UseVisualStyleBackColor = true;
             this.btnorce.Click += new System.EventHandler(this.btnorce_Click);
             // 
+            // btn_transito
+            // 
+            this.btn_transito.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_transito.Location = new System.Drawing.Point(909, 114);
+            this.btn_transito.Name = "btn_transito";
+            this.btn_transito.Size = new System.Drawing.Size(196, 31);
+            this.btn_transito.TabIndex = 27;
+            this.btn_transito.Text = "FPTRANC (TRANSITO)";
+            this.btn_transito.UseVisualStyleBackColor = true;
+            this.btn_transito.Click += new System.EventHandler(this.btn_transito_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1031, 371);
+            this.ClientSize = new System.Drawing.Size(1117, 371);
+            this.Controls.Add(this.btn_transito);
             this.Controls.Add(this.btnorce);
             this.Controls.Add(this.btn_wms_aqec);
             this.Controls.Add(this.orce_exclud_interface);
@@ -362,6 +375,7 @@
         private System.Windows.Forms.Button orce_exclud_interface;
         private System.Windows.Forms.Button btn_wms_aqec;
         private System.Windows.Forms.Button btnorce;
+        private System.Windows.Forms.Button btn_transito;
     }
 }
 

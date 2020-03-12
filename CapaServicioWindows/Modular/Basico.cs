@@ -368,6 +368,213 @@ namespace CapaServicioWindows.Modular
         }
         #endregion
 
+        #region<METODO PARA LOS TRANSITOS>
+        private void edit_list_ftptranc(string cod_alm, List<string> listGuia, string _path, ref string _error_ws)
+        {
+
+            string strListGuia = "";
+            int limite = 20;
+            int contador = 0;
+            try
+            {
+                foreach (string strguia in listGuia)
+                {
+                    contador++;
+
+                    strListGuia += "'" + strguia + "',";
+
+                    if (contador == limite)
+                    {
+
+                        strListGuia = strListGuia.TrimEnd(',');
+
+                        string sqlquery = "UPDATE FPTRANC SET trac_sql='X' WHERE trac_tipo + trac_srem + trac_nrem + trac_tori in (" + strListGuia + ")";
+
+                        strListGuia = "";
+                        contador = 0;
+
+                        String error_cursor = "";
+
+                        update_list_scccgud(sqlquery, _path, ref error_cursor);
+
+
+
+                        if (error_cursor.Length > 0)
+                        {
+
+                            string _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " Error de update registros==>" + error_cursor;
+                            TextWriter tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                            tw.WriteLine(_hora);
+                            tw.Flush();
+                            tw.Close();
+                            tw.Dispose();
+
+
+                        }
+                        else
+                        {
+                            string _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " Update registros correctamente..";
+                            TextWriter tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                            tw.WriteLine(_hora);
+                            tw.Flush();
+                            tw.Close();
+                            tw.Dispose();
+                        }
+
+                    }
+
+
+                }
+
+                if (contador > 0)
+                {
+                    strListGuia = strListGuia.TrimEnd(',');
+
+                    //string sqlquery = "UPDATE SCDDDES SET DDES_FTXTD='X' WHERE DDES_ALMAC='" + cod_alm + "' AND DDES_GUIRE in (" + strListGuia + ")";
+                    //string sqlquery = "UPDATE SCDDDES SET DDES_FTXTD='X' WHERE DDES_ALMAC + DDES_GUIRE in (" + strListGuia + ")";
+                    //string sqlquery = "UPDATE scccgud SET flag_xstor='X' WHERE CGUD_GUDIS in (" + strListGuia + ")";
+                    string sqlquery = "UPDATE FPTRANC SET trac_sql='X' WHERE trac_tipo + trac_srem + trac_nrem + trac_tori in (" + strListGuia + ")";
+
+                    strListGuia = "";
+                    contador = 0;
+
+                    String error_cursor = "";
+
+                    update_list_scccgud(sqlquery, _path, ref error_cursor);
+                }
+
+            }
+            catch (Exception exc)
+            {
+                _error_ws = exc.Message;
+            }
+        }
+        private DataTable get_fptrand(string codalm, string nroguia, string _path, ref string error, string ruta_scccgud)
+        {
+            DataTable FPTRAND = null;
+            //string sqlquery_fvdespd = "SELECT DESD_TIPO,DESD_GUDIS,DESD_NDESP,DESD_ALMAC,DESD_ARTIC,DESD_CALID," +
+            //                           "DESD_ME00,DESD_ME01,DESD_ME02,DESD_ME03,DESD_ME04,DESD_ME05,DESD_ME06,DESD_ME07,DESD_ME08," + 
+            //                           "DESD_ME09,DESD_ME10,DESD_ME11,DESD_CLASE,DESD_MERC,DESD_CATEG,DESD_SUBCA," + 
+            //                           "DESD_MARCA,DESD_MERC3,DESD_CATE3,DESD_SUBC3,DESD_MARC3,DESD_CNDME," + 
+            //                           "DESD_EMPRE,DESD_SECCI,DESD_CANAL," +
+            //                           "DESD_CADEN,DESD_GGUIA,DESD_ESTAD,DESD_PRVTA,DESD_COSTO FROM FVDESPD WHERE DESD_GUDIS='" + nroguia + "'" +
+            //                           " AND DESD_ALMAC='" + codalm + "'";
+            string sqlquery_fvdespd = "SELECT trad_tipo,trad_ndesp,trad_nume,trad_gudis,trad_tori,trad_srem,trad_nrem,trad_artic," +
+                                      "trad_calid,trad_prvta,trad_preal,trad_costo,trad_total,trad_rctot,trad_me00,trad_me01," + 
+                                      "trad_me02,trad_me03,trad_me04,trad_me05,trad_me06,trad_me07,trad_me08,trad_me09,trad_me10," + 
+                                      "trad_me11,trad_rc00,trad_rc01,trad_rc02,trad_rc03,trad_rc04,trad_rc05,trad_rc06,trad_rc07," +
+                                      "trad_rc08,trad_rc09,trad_rc10,trad_rc11 FROM FPTRAND WHERE  " +
+                                      "trad_tipo + trad_srem + trad_nrem + trad_tori  IN (SELECT trac_tipo + trac_srem + trac_nrem + trac_tori  FROM " + ruta_scccgud + "/FPTRANC WHERE trac_fdoc>=CTOD('" + fecha_despacho.ToString("MM/dd/yy") + "')  AND EMPTY(trac_sql))";
+            try
+            {
+                using (OleDbConnection cn = new OleDbConnection(ConexionDBF._conexion_fvdes_oledb(_path)))
+                {
+                    using (OleDbCommand cmd = new OleDbCommand(sqlquery_fvdespd, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        using (OleDbDataAdapter da = new OleDbDataAdapter(cmd))
+                        {
+                            FPTRAND = new DataTable();
+                            da.Fill(FPTRAND);
+                            FPTRAND.TableName = "FPTRAND";
+                        }
+                    }
+                }
+            }
+            catch (Exception exc)
+            {
+                error = exc.Message;
+                FPTRAND = null;
+            }
+            return FPTRAND;
+        }
+        private List<FPTRANC> get_fptranc(string _path, ref string error, ref Boolean fila_existe)
+        {
+            /*fecha para traer los pedido cerrados desde una fecha*/
+            List<FPTRANC> _lista_fptranc = null;
+            String sqlquery_scdddes = "SELECT trac_tipo,trac_ndesp,trac_nume,trac_srem,trac_nrem,trac_tori," +
+                                      "trac_gudis,trac_estad,trac_motiv,trac_tdes,trac_semi,trac_srec,trac_fdoc," + 
+                                      "trac_ftra,trac_fori,trac_fdes,trac_festa,trac_user,trac_indi,trac_obs," + 
+                                      "trac_log,trac_tralm,trac_freco,trac_creco,trac_rucdv,trac_tramo,trac_trx," +
+                                      "trac_empre,trac_canal,trac_caden,trac_docrf,trac_auto " +
+                                      "FROM FPTRANC WHERE trac_fdoc>=CTOD('" + fecha_despacho.ToString("MM/dd/yy") + "')  AND  EMPTY(trac_docrf)  ";
+            try
+            {
+                //Util dd = new Util();
+                //dd.get_location_dbf();
+
+                using (OleDbConnection cn = new OleDbConnection(ConexionDBF._conexion_vfpoledb_1(_path)))
+                {
+                    using (OleDbCommand cmd = new OleDbCommand(sqlquery_scdddes, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        //cmd.Parameters.Add("DATE", OleDbType.Date).Value = fecha_despacho;
+                        using (OleDbDataAdapter da = new OleDbDataAdapter(cmd))
+                        {
+                            DataTable dt = new DataTable();
+                            da.Fill(dt);
+                            _lista_fptranc = new List<FPTRANC>();
+                            _lista_fptranc = (from DataRow dr in dt.Rows
+                                              select new FPTRANC()
+                                              {
+                                                  trac_tipo = dr["trac_tipo"].ToString(),
+                                                  trac_ndesp = dr["trac_ndesp"].ToString(),
+                                                  trac_nume = dr["trac_nume"].ToString(),
+                                                  trac_srem = dr["trac_srem"].ToString(),
+                                                  trac_nrem = dr["trac_nrem"].ToString(),
+                                                  trac_tori = dr["trac_tori"].ToString(),
+                                                  trac_gudis = dr["trac_gudis"].ToString(),
+                                                  trac_estad = dr["trac_estad"].ToString(),
+                                                  trac_motiv = dr["trac_motiv"].ToString(),
+                                                  trac_tdes = dr["trac_tdes"].ToString(),
+                                                  trac_semi = dr["trac_semi"].ToString(),
+                                                  trac_srec = dr["trac_srec"].ToString(),
+                                                  trac_fdoc = Convert.ToDateTime(dr["trac_fdoc"]),
+                                                  trac_ftra = Convert.ToDateTime(dr["trac_ftra"]),
+                                                  trac_fori = Convert.ToDateTime(dr["trac_fori"]),
+                                                  trac_fdes = Convert.ToDateTime(dr["trac_fdes"]),
+                                                  trac_festa = Convert.ToDateTime(dr["trac_festa"]),
+                                                  trac_user = Convert.ToString(dr["trac_user"]),
+                                                  trac_indi = dr["trac_indi"].ToString(),
+                                                  trac_obs = dr["trac_obs"].ToString(),
+                                                  trac_log = dr["trac_log"].ToString(),
+                                                  trac_tralm = dr["trac_tralm"].ToString(),
+                                                  trac_freco = Convert.ToDateTime(dr["trac_freco"]),
+                                                  trac_creco = Convert.ToString(dr["trac_creco"]),
+                                                  trac_rucdv = Convert.ToString(dr["trac_rucdv"]),
+                                                  trac_tramo = Convert.ToString(dr["trac_tramo"]),
+                                                  trac_trx = Convert.ToString(dr["trac_trx"]),
+                                                  trac_empre = Convert.ToString(dr["trac_empre"]),
+                                                  trac_canal = Convert.ToString(dr["trac_canal"]),
+                                                  trac_caden = Convert.ToString(dr["trac_caden"]),
+                                                  trac_docrf = Convert.ToString(dr["trac_docrf"]),
+                                                  trac_auto = Convert.ToString(dr["trac_auto"])                                                 
+                                              }).ToList();
+                        }
+
+                        if (_lista_fptranc.Count == 0)
+                        {
+                            fila_existe = false;
+                        }
+                        else
+                        {
+                            fila_existe = true;
+                        }
+                    }
+
+                }
+
+            }
+            catch (Exception exc)
+            {
+                throw;
+                //error = exc.Message;
+                _lista_fptranc = null;
+            }
+            return _lista_fptranc;
+        }
+        #endregion
+
         private List<BataTransac.Ent_Scdremb> get_scdremb(string _path, ref string error)
         {
             List<BataTransac.Ent_Scdremb> _lista_scdremb = null;
@@ -1666,6 +1873,391 @@ namespace CapaServicioWindows.Modular
             //return _error_transac;
         }
         #endregion
+        #region<ENVIO DE TRANSITO>
+        public void eje_envio_transito(ref string _error_ws)
+        {
+            string _error_transac = "";
+            List<FPTRANC> _lista_guiasC = null;
+
+            List<BataTransac.Ent_PathDBF> listar_location_dbf = null;
+
+            //string fecha_hora_actual = DateTime.Now.ToShortTimeString().Substring(0, 5);
+            //string fecha_hora_add = DateTime.Now.ToShortTimeString().Substring(0, 5);
+            //Int32 sum_horas = 4;
+
+            try
+            {
+                /*segundos para ejecutar*/
+                //_espera_ejecuta(20);
+                /***********************/
+                //if (fecha_hora_actual == fecha_hora_add)
+                //{
+                //    fecha_hora_add = DateTime.Now.AddHours(sum_horas).ToShortTimeString().Substring(0, 5);
+                //}
+               // fecha_despacho =Convert.ToDateTime("01-01-2019");
+
+                #region<CAPTURAR EL PATH DE LOS DBF>
+                Util locationdbf = new Util();
+                listar_location_dbf = locationdbf.get_location_dbf(ref _error_ws);
+                #endregion
+
+                if (listar_location_dbf == null) return;
+
+                /*VALIDACION DE EJECUCION */
+                #region<VALIDA ARCHIVO SI EXISTE PARA NO REALIZAR NINGUNA ACCCION POR SEGURIDAD DE REINDEXACION DEL FOX>
+                string name_txt = "NOPOS";
+                var _locatio_noservicio = listar_location_dbf.Where(x => x.rutloc_namedbf == name_txt).FirstOrDefault();
+
+                //Boolean valida_exists_txt = false;
+                string ruta_validacion = "";
+                if (_locatio_noservicio != null)
+                {
+
+                    ruta_validacion = _locatio_noservicio.rutloc_location + "\\" + _locatio_noservicio.rutloc_namedbf + ".txt";
+                    /* if (File.Exists(@ruta_validacion)) return;*/ //valida_exists_txt = true;
+
+                }
+                ruta_validacion = @"D:\FVT\SISTEMAS\NOPOS.TXT";
+                //forzar_delete_nopos(ruta_validacion);
+                #endregion
+
+                #region<EN ESTE PASO TRATAMOS DE ENTRAR AL NOVELL PARA TRAERME LA INFO>
+                if (valida_file_ecu())
+                {
+                    NetworkShare.ConnectToShare(_locatio_noservicio.rutloc_location, ConexionDBF.user_novell, ConexionDBF.password_novell);
+                }
+                #endregion
+
+                //if (valida_exists_txt) return;
+
+
+
+                string name_dbf = "FPTRANC";
+                var _locatio_scccgud = listar_location_dbf.Where(x => x.rutloc_namedbf == name_dbf).FirstOrDefault();
+
+                string _error = "";
+                /*ya no entra a consultar*/
+                if (File.Exists(@ruta_validacion)) return;
+                string _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "==>INGRESO PASO1";
+                TextWriter tw = new StreamWriter(@"D:\ALMACEN\log_trans.txt", true);
+                tw.WriteLine(_hora);
+                tw.Flush();
+                tw.Close();
+                tw.Dispose();
+                /**/
+
+
+                #region<EN ESTE PASO TRATAMOS DE ENTRAR AL NOVELL PARA TRAERME LA INFO>
+                if (valida_file_ecu())
+                {
+                    NetworkShare.ConnectToShare(_locatio_noservicio.rutloc_location, ConexionDBF.user_novell, ConexionDBF.password_novell);
+                }
+                else
+                {
+                    NetworkShare.ConnectToShare(_locatio_scccgud.rutloc_location, @".\Tareas", "tareas");
+                }
+                #endregion
+
+                _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "==> saliendo del objecto NetworkShare y entrando al metodo get_fptranc";
+                tw = new StreamWriter(@"D:\ALMACEN\log_trans.txt", true);
+                tw.WriteLine(_hora);
+                tw.Flush();
+                tw.Close();
+                tw.Dispose();
+                Boolean existe_data = false;
+                _lista_guiasC = get_fptranc(_locatio_scccgud.rutloc_location, ref _error, ref existe_data);
+
+
+                _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "==>get_fptranc ==>" + _error + _lista_guiasC.Count().ToString();
+                tw = new StreamWriter(@"D:\ALMACEN\log_trans.txt", true);
+                tw.WriteLine(_hora);
+                tw.Flush();
+                tw.Close();
+                tw.Dispose();
+
+                /*VERIFICAR SI HAY ERROR*/
+                if (_error.Length > 0)
+                {
+                    _error += " ==>TABLA [scccgud]";
+                    Util ws_error_transac = new Util();
+                    /*si hay un error entonces 03 error de lectura dbf*/
+                    ws_error_transac.control_errores_transac("03", _error, ref _error_ws);
+                }
+                /**/
+
+                if (_lista_guiasC != null)
+                {
+                    if (_lista_guiasC.Count == 0)
+                    {
+                        _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "ningun registro encontrado,  ";
+                        tw = new StreamWriter(@"D:\ALMACEN\log_trans.txt", true);
+                        tw.WriteLine(_hora);
+                        tw.Flush();
+                        tw.Close();
+                        tw.Dispose();
+                        return;
+                    }
+
+                    #region<METODO GRUPO CONSULTA>
+                    if (File.Exists(@ruta_validacion)) return;
+                    /*en este caso */
+                    _error = "";
+                    ////name_dbf = "FVDESPC";
+
+                    ////var _location_fvdespc = listar_location_dbf.Where(x => x.rutloc_namedbf == name_dbf).FirstOrDefault();
+
+                    ////_hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "inicio==>acceso dbf ";
+                    ////tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                    ////tw.WriteLine(_hora);
+                    ////tw.Flush();
+                    ////tw.Close();
+                    ////tw.Dispose();
+
+                    ////#region<EN ESTE PASO TRATAMOS DE ENTRAR AL NOVELL PARA TRAERME LA INFO>
+                    ////if (valida_file_ecu())
+                    ////{
+                    ////    NetworkShare.ConnectToShare(_location_fvdespc.rutloc_location, ConexionDBF.user_novell, ConexionDBF.password_novell);
+                    ////}
+                    ////#endregion
+
+                    ////List<BataTransac.Ent_Fvdespc> fvdespc_lista = get_fvdespc("", "", _location_fvdespc.rutloc_location, ref _error, ref existe_data, _locatio_scdddes.rutloc_location);
+                    ////_hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "get_fvdespc==>>" + _error + " " + fvdespc_lista.Count().ToString();
+                    ////tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                    ////tw.WriteLine(_hora);
+                    ////tw.Flush();
+                    ////tw.Close();
+                    ////tw.Dispose();
+
+                    name_dbf = "FPTRAND";
+                    var _location_scddgud = listar_location_dbf.Where(x => x.rutloc_namedbf == name_dbf).FirstOrDefault();
+                    if (File.Exists(@ruta_validacion)) return;
+                    #region<EN ESTE PASO TRATAMOS DE ENTRAR AL NOVELL PARA TRAERME LA INFO>
+                    if (valida_file_ecu())
+                    {
+                        NetworkShare.ConnectToShare(_location_scddgud.rutloc_location, ConexionDBF.user_novell, ConexionDBF.password_novell);
+                    }
+                    #endregion
+
+                    DataTable scddgud_lista =get_fptrand("", "", _location_scddgud.rutloc_location, ref _error, _location_scddgud.rutloc_location);
+                    _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "get_fptranc==>>" + _error + " " + scddgud_lista.Rows.Count.ToString();
+                    tw = new StreamWriter(@"D:\ALMACEN\log_trans.txt", true);
+                    tw.WriteLine(_hora);
+                    tw.Flush();
+                    tw.Close();
+                    tw.Dispose();
+
+
+                    _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "fin==>acceso dbf ";
+                    tw = new StreamWriter(@"D:\ALMACEN\log_trans.txt", true);
+                    tw.WriteLine(_hora);
+                    tw.Flush();
+                    tw.Close();
+                    tw.Dispose();
+
+                    _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "fin==>acceso dbf ";
+                    tw = new StreamWriter(@"D:\ALMACEN\log_trans.txt", true);
+                    tw.WriteLine(_hora);
+                    tw.Flush();
+                    tw.Close();
+                    tw.Dispose();
+                    #endregion
+                    /**/
+                    string DESC_ALMACEN = "";
+                    string rutloc_location = "";
+                    List<string> listGuias = new List<string>();
+
+                    #region<ENVIAMOS GUIAS POR WEBSERVICE>
+                    foreach (FPTRANC filaC in _lista_guiasC)
+                    {
+
+                        var fscccgud_tmp = _lista_guiasC.Where(d => d.trac_tipo==filaC.trac_tipo && d.trac_srem==filaC.trac_srem && d.trac_nrem==filaC.trac_nrem && d.trac_tori==filaC.trac_tori).ToList();
+
+                        FPTRANC scccgud = new FPTRANC();
+                        scccgud = fscccgud_tmp[0];
+
+
+                        _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "==>get_fptranc " + filaC.trac_tipo + "=" + filaC.trac_srem + "=" + filaC.trac_nrem + "=" + filaC.trac_tori;
+                        tw = new StreamWriter(@"D:\ALMACEN\log_trans.txt", true);
+                        tw.WriteLine(_hora);
+                        tw.Flush();
+                        tw.Close();
+                        tw.Dispose();
+                        /*si existe data entonces entra a la condicion*/
+                        if (existe_data)
+                        {
+                            /*validando fechas de despacho*/
+                            //if (fvdespc != null)
+                            //{
+                            //    fvdespc.DESC_FDESP = filaC.DDES_FDESP;
+                            //    fvdespc.DESC_FECHA = filaC.DDES_FECHA;
+                            //    fvdespc.DESC_FTRA = filaC.DDES_FECHA;
+                            //}
+
+                            /*VERIFICAR SI HAY ERROR*/
+                            if (_error.Length > 0)
+                            {
+                                _error += " ==>TABLA [FPTRANC]";
+                                Util ws_error_transac = new Util();
+                                /*si hay un error entonces 03 error de lectura dbf*/
+                                ws_error_transac.control_errores_transac("03", _error, ref _error_ws);
+                            }
+                            /**/
+
+                            /*captura la cebecera de la guia*/
+                            if (scccgud != null)
+                            {
+                                _error = "";
+                                name_dbf = "FPTRAND";
+
+
+
+                                //_hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "inicio==>get_SCDDGUD " + filaC.cgud_gudis;
+                                //tw = new StreamWriter(@"D:\ALMACEN\log_trans.txt", true);
+                                //tw.WriteLine(_hora);
+                                //tw.Flush();
+                                //tw.Close();
+                                //tw.Dispose();
+
+
+                                DataTable scddgud = new DataTable();
+                                scddgud = scddgud_lista.Clone();
+                                DataRow[] filas_scddgud = null;
+                                filas_scddgud = scddgud_lista.Select("trad_tipo='" + filaC.trac_tipo + "' and trad_srem='" + filaC.trac_srem + "' and trad_srem='" + filaC.trac_srem + "' and trad_nrem='" + filaC.trac_nrem + "'"); // get_fvdespd(filaC.DDES_ALMAC, filaC.DDES_GUIRE, _location_fvdespd.rutloc_location, ref _error);
+
+                                foreach (DataRow fila in filas_scddgud)
+                                {
+                                    scddgud.ImportRow(fila);
+                                }
+
+                                _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "fin==>get_fptranc "  +filaC.trac_tipo + "=" + filaC.trac_srem + "=" + filaC.trac_nrem + "=" + filaC.trac_tori;
+                                tw = new StreamWriter(@"D:\ALMACEN\log_trans.txt", true);
+                                tw.WriteLine(_hora);
+                                tw.Flush();
+                                tw.Close();
+                                tw.Dispose();
+
+                                /*VERIFICAR SI HAY ERROR*/
+                                if (_error.Length > 0)
+                                {
+                                    _error += " ==>TABLA [FPTRAND]";
+                                    Util ws_error_transac = new Util();
+                                    /*si hay un error entonces 03 error de lectura dbf*/
+                                    ws_error_transac.control_errores_transac("03", _error, ref _error_ws);
+                                }
+                                /**/
+
+                                /*verifica que el detalle de la guia tenga filas*/
+                                /*si la guias tiene detalle se envia por ws*/
+
+                                if (scddgud != null)
+                                {
+                                    if (scddgud.Rows.Count > 0)
+                                    {
+                                        /*enviar el datatable*/
+                                        scccgud.det_FPTRAND = scddgud;
+
+                                        FPTRANC scdddes = new FPTRANC();
+                                        scdddes = filaC;
+
+                                        _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "==>inicio de envio web service "  +filaC.trac_tipo + "=" + filaC.trac_srem + "=" + filaC.trac_nrem + "=" + filaC.trac_tori;
+                                        tw = new StreamWriter(@"D:\ALMACEN\log_trans.txt", true);
+                                        tw.WriteLine(_hora);
+                                        tw.Flush();
+                                        tw.Close();
+                                        tw.Dispose();
+                                        /***********************************/                                        
+
+                                        Dat_Transito envio_tran = new Dat_Transito();
+
+                                        string envio_guias_ws = envio_tran.insertar_transito(scdddes);
+
+                                        _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "==>envio web service " + filaC.trac_tipo + "=" + filaC.trac_srem + "=" + filaC.trac_nrem + "=" + filaC.trac_tori;
+                                        tw = new StreamWriter(@"D:\ALMACEN\log_trans.txt", true);
+                                        tw.WriteLine(_hora);
+                                        tw.Flush();
+                                        tw.Close();
+                                        tw.Dispose();
+
+                                        //si return es true entonces validamos los dbf
+                                        if (envio_guias_ws.Length == 0)
+                                        {
+                                            name_dbf = "FPTRANC";
+                                            var _locatio_scccgud_edit = listar_location_dbf.Where(x => x.rutloc_namedbf == name_dbf).FirstOrDefault();
+                                            /*si es que las guias se grabaron correctamente entonces vamos a setear el valor en el dbf*/
+
+                                            /*ya no entra a consultar*/
+                                            if (File.Exists(@ruta_validacion)) return;
+                                            /**/
+                                            _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "==>inicio de update FPTRANC " + filaC.trac_tipo + "=" + filaC.trac_srem + "=" + filaC.trac_nrem + "=" + filaC.trac_tori;
+                                            tw = new StreamWriter(@"D:\ALMACEN\log_trans.txt", true);
+                                            tw.WriteLine(_hora);
+                                            tw.Flush();
+                                            tw.Close();
+                                            tw.Dispose();
+
+                                            #region<EN ESTE PASO TRATAMOS DE ENTRAR AL NOVELL PARA TRAERME LA INFO>
+                                            if (valida_file_ecu())
+                                            {
+                                                NetworkShare.ConnectToShare(_locatio_scccgud_edit.rutloc_location, ConexionDBF.user_novell, ConexionDBF.password_novell);
+                                            }
+                                            #endregion
+
+                                            listGuias.Add(scdddes.trac_tipo+ scdddes.trac_srem + scdddes.trac_nrem + scdddes.trac_tori);
+                                            //listGuias.Add(scdddes.trac_tipo);
+
+                                            //DESC_ALMACEN = fvdespc.DESC_ALMAC;
+                                            rutloc_location = _locatio_scccgud_edit.rutloc_location;
+
+                                            //edit_scdddes(fvdespc.DESC_ALMAC, fvdespc.DESC_GUDIS, _locatio_scdddes_edit.rutloc_location,ref _error_ws);
+                                            _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "==>fin de update scccgud " + _error_ws + "  " + filaC.trac_tipo + "=" + filaC.trac_srem + "=" + filaC.trac_nrem + "=" + filaC.trac_tori;
+                                            tw = new StreamWriter(@"D:\ALMACEN\log_trans.txt", true);
+                                            tw.WriteLine(_hora);
+                                            tw.Flush();
+                                            tw.Close();
+                                            tw.Dispose();
+
+
+                                        }
+                                        else
+                                        {
+                                            Util ws_error_transac = new Util();
+                                            _error_ws = envio_guias_ws.ToString();
+                                            /*si hay un error entonces 02 error de transaction*/
+                                            ws_error_transac.control_errores_transac("02", envio_guias_ws, ref _error_ws);
+                                        }
+                                    }
+                                }
+
+                            }
+                        }
+                        //}
+                    }
+                    #endregion
+
+                    if (listGuias.Count > 0)
+                    {
+
+                        edit_list_ftptranc(DESC_ALMACEN, listGuias, rutloc_location, ref _error_ws);
+                        _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "==>fin de update list scccgud " + _error_ws;
+                        tw = new StreamWriter(@"D:\ALMACEN\log_trans.txt", true);
+                        tw.WriteLine(_hora);
+                        tw.Flush();
+                        tw.Close();
+                        tw.Dispose();
+                    }
+
+                }
+
+            }
+            catch (Exception exc)
+            {
+                _error_ws = exc.Message + " error de metodo";
+                _error_transac = exc.Message + " error de metodo";
+                //_envio_guias = "";
+            }
+            //return _error_transac;
+        }
+        #endregion
         /// <summary>
         ///ejecutar proceso de envios de guias
         /// </summary>
@@ -2257,11 +2849,11 @@ namespace CapaServicioWindows.Modular
             try
             {
                 datUtil = new Util();
-                //string carpetatienda = datUtil.get_ruta_locationProcesa_dbf("SQL");//@"D:\TiendaPaq"
-                //string carpetadbf = carpetatienda + "\\DBF";
-
-                string carpetatienda = @"D:\TiendaPaq";
+                string carpetatienda = datUtil.get_ruta_locationProcesa_dbf("SQL");//@"D:\TiendaPaq"
                 string carpetadbf = carpetatienda + "\\DBF";
+
+              //  string carpetatienda = @"D:\TiendaPaq";
+                //string carpetadbf = carpetatienda + "\\DBF";
 
                 string strCodTienda = "";
                 if (!Directory.Exists(@carpetatienda)) Directory.CreateDirectory(@carpetatienda);

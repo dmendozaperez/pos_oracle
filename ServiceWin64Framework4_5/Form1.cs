@@ -129,5 +129,42 @@ namespace ServiceWin64Framework4_5
             }
             Cursor.Current = Cursors.Default;
         }
+
+        private void btnact_aq_Click(object sender, EventArgs e)
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            try
+            {
+                string ruta_server = @"\\172.28.7.9\Aquarella\bin";
+                string ruta_local = @"D:\Fuentes\Aquarella\www.aquarella.com.pe\www.aquarella.com.pe\bin";
+
+                string _CapaAQ = "www.aquarella.com.pe.dll";
+                //string _CapaEntidad = "CapaEntidad.dll";
+                //string _CapaOraDato = "CapaOraDato.dll";
+                //string _CapaPresentacion = "CapaPresentacion.dll";
+
+                byte[] _aquarella_dll = null;
+                _aquarella_dll = File.ReadAllBytes(ruta_local + "\\" + _CapaAQ);
+                File.WriteAllBytes(@ruta_server + "\\" + _CapaAQ, _aquarella_dll);
+
+                //_bataweb_dll = File.ReadAllBytes(ruta_local + "\\" + _CapaEntidad);
+                //File.WriteAllBytes(@ruta_server + "\\" + _CapaEntidad, _bataweb_dll);
+
+                //_bataweb_dll = File.ReadAllBytes(ruta_local + "\\" + _CapaOraDato);
+                //File.WriteAllBytes(@ruta_server + "\\" + _CapaOraDato, _bataweb_dll);
+
+                //_bataweb_dll = File.ReadAllBytes(ruta_local + "\\" + _CapaPresentacion);
+                //File.WriteAllBytes(@ruta_server + "\\" + _CapaPresentacion, _bataweb_dll);
+
+                MessageBox.Show("Se Actualizo Dll en Produccion AQUARELLA", "Admin", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            }
+            catch (Exception exc)
+            {
+
+                MessageBox.Show(exc.Message, "Admin", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            Cursor.Current = Cursors.Default;
+        }
     }
 }

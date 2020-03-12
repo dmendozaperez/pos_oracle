@@ -34,6 +34,7 @@
             this.btn_enviosftp = new System.Windows.Forms.Button();
             this.btnstk_ec = new System.Windows.Forms.Button();
             this.btnupdate_bataweb = new System.Windows.Forms.Button();
+            this.btnact_aq = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn_ejecutar_genera_file_xstore_auto
@@ -94,7 +95,7 @@
             // btnupdate_bataweb
             // 
             this.btnupdate_bataweb.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnupdate_bataweb.Location = new System.Drawing.Point(369, 12);
+            this.btnupdate_bataweb.Location = new System.Drawing.Point(12, 312);
             this.btnupdate_bataweb.Name = "btnupdate_bataweb";
             this.btnupdate_bataweb.Size = new System.Drawing.Size(334, 51);
             this.btnupdate_bataweb.TabIndex = 5;
@@ -102,11 +103,23 @@
             this.btnupdate_bataweb.UseVisualStyleBackColor = true;
             this.btnupdate_bataweb.Click += new System.EventHandler(this.btnupdate_bataweb_Click);
             // 
+            // btnact_aq
+            // 
+            this.btnact_aq.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnact_aq.Location = new System.Drawing.Point(12, 380);
+            this.btnact_aq.Name = "btnact_aq";
+            this.btnact_aq.Size = new System.Drawing.Size(334, 45);
+            this.btnact_aq.TabIndex = 6;
+            this.btnact_aq.Text = "ACTUALIZAR AQUARELLA WEB";
+            this.btnact_aq.UseVisualStyleBackColor = true;
+            this.btnact_aq.Click += new System.EventHandler(this.btnact_aq_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(718, 318);
+            this.ClientSize = new System.Drawing.Size(350, 437);
+            this.Controls.Add(this.btnact_aq);
             this.Controls.Add(this.btnupdate_bataweb);
             this.Controls.Add(this.btnstk_ec);
             this.Controls.Add(this.btn_enviosftp);
@@ -130,6 +143,7 @@
         private System.Windows.Forms.Button btn_enviosftp;
         private System.Windows.Forms.Button btnstk_ec;
         private System.Windows.Forms.Button btnupdate_bataweb;
+        private System.Windows.Forms.Button btnact_aq;
     }
 }
 

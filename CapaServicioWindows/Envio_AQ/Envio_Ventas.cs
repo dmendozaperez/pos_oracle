@@ -176,7 +176,7 @@ namespace CapaServicioWindows.Envio_AQ
                                                                   "?,?,?,?,?,?,?,?,?," +
                                                                   "?,?,?,?,?,?,?,?,?," +
                                                                   "?,?,?,?,?,?,?,?,?,?," +
-                                                                  "?,?,?,?,?,?,?,?)";
+                                                                  "?,?,?,?,?,?,?,?,?,?)";
 
 
                         string sqlquery_insert_det = "INSERT INTO VMAFD(fd_tdoc,fd_ndoc,fd_nint,fd_empre,fd_secci,fd_canal,fd_almac,fd_cart,fd_cali,fd_cliart," +
@@ -313,6 +313,8 @@ namespace CapaServicioWindows.Envio_AQ
                             cmd_VMAFC.Parameters.Add("@fc_motivo", OleDbType.Char).Value = fc_motivo;
                             cmd_VMAFC.Parameters.Add("@log_ultmod", OleDbType.Char).Value = "";
 
+                            cmd_VMAFC.Parameters.Add("@fc_trxqa", OleDbType.Char).Value = "";
+                            cmd_VMAFC.Parameters.Add("@fc_trxaq", OleDbType.Char).Value = "";
 
                             tw = new StreamWriter(_ruta_erro_file, true);
                             str = DateTime.Today.ToString() + " " + DateTime.Now.ToString("HH:mm:ss") + "  entrando a insert VMAFC";
@@ -564,7 +566,7 @@ namespace CapaServicioWindows.Envio_AQ
 
                     using (OleDbConnection cn_dbf = new OleDbConnection(ConexionDBF._conexion_fmc_fmd_vfpoledb(ruta_VMAFC)))
                     {
-                        DateTime _fecha_ffac = DateTime.Today.AddDays(-7);
+                        DateTime _fecha_ffac = DateTime.Today.AddDays(-15);
                         string sqlquery_consulta = "SELECT FC_TDOC,FC_NDOC,FC_FFACT FROM VMAFC WHERE FC_CANAL='6' AND FC_CADEN='CA'  AND FC_FFACT>=?";
                         using (OleDbCommand cmd_query = new OleDbCommand(sqlquery_consulta, cn_dbf))
                         {

@@ -48,8 +48,8 @@ namespace CapaServicioWindows.Modular
 
                         if (ds!=null)
                         { 
-                            if (ds.Tables[0].Rows.Count>0)
-                            {
+                            //if (ds.Tables[0].Rows.Count>0) quitando condicion porque no hay venta
+                            //{
                                 tabla_FFACTC(ds.Tables[0]);
                                 tabla_FFACTD(ds.Tables[1]);
                                 tabla_FNOTAA(ds.Tables[2]);
@@ -78,7 +78,7 @@ namespace CapaServicioWindows.Modular
                                     proc_nov.update_system_envio(cod_tda, fec_cie);
                                 }
 
-                            }
+                            //}
                             else
                             {
                                 /*en este caso se actualiza si es que no tiene dato para que actualize el TMP_SYSTEM*/

@@ -83,17 +83,18 @@ namespace CapaServicioWindows_x64.CapaDato
                             }
                         }
                     }
-                    catch
+                    catch(Exception exc)
                     {
-                        
+                        throw;
                     }
                     if (cn != null)
                         if (cn.State == ConnectionState.Open) cn.Close();
                 }
             }
             catch (Exception)
-            {
-                rut = null;                
+            {                
+                rut = null;
+                throw;
             }
             return rut;
         }

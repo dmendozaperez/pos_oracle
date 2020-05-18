@@ -180,6 +180,9 @@ namespace ServiceWin32Framework4
         {
             Cursor.Current = Cursors.WaitCursor;
             CapaServicioWindows.Envio_AQ.Envio_Ventas env = new CapaServicioWindows.Envio_AQ.Envio_Ventas();
+
+            env.actualizar_cliente();
+
             env.envio_ventas_aq();
             Cursor.Current = Cursors.Default;
         }

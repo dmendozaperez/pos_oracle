@@ -12,6 +12,8 @@ namespace CapaServicioWindows.Envio_AQ
 {
     public class Envio_Ventas
     {
+
+       
         private void insertar_error_aq(string error)
         {
             string sqlquery = "USP_Insertar_Errores_Service";           
@@ -779,6 +781,7 @@ namespace CapaServicioWindows.Envio_AQ
                 
             }
         }
+        
         private List<Ruta_DBF> get_ruta()
         {
             List<Ruta_DBF> list;
@@ -825,6 +828,37 @@ namespace CapaServicioWindows.Envio_AQ
                 
             }
             return list;
+        }
+        public void actualizar_cliente()
+        {
+            string sqlquery = "USP_Crear_Cliente_Intranet";
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(ConexionSQL.conexion_aq))
+                {
+                    try
+                    {
+                        if (cn.State == 0) cn.Open();
+                        using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                        {
+                            cmd.CommandTimeout = 0;
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.ExecuteNonQuery();
+                        }
+
+                    }
+                    catch (Exception exc)
+                    {                      
+                    }
+                    if (cn != null)
+                        if (cn.State == ConnectionState.Open) cn.Close();
+                }
+            }
+            catch (Exception exc)
+            {
+
+
+            }
         }
     }
     public class Ruta_DBF

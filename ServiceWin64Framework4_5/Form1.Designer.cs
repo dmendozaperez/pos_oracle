@@ -106,7 +106,7 @@
             // btnact_aq
             // 
             this.btnact_aq.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnact_aq.Location = new System.Drawing.Point(12, 380);
+            this.btnact_aq.Location = new System.Drawing.Point(12, 372);
             this.btnact_aq.Name = "btnact_aq";
             this.btnact_aq.Size = new System.Drawing.Size(334, 45);
             this.btnact_aq.TabIndex = 6;
@@ -118,7 +118,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(350, 437);
+            this.ClientSize = new System.Drawing.Size(350, 462);
             this.Controls.Add(this.btnact_aq);
             this.Controls.Add(this.btnupdate_bataweb);
             this.Controls.Add(this.btnstk_ec);

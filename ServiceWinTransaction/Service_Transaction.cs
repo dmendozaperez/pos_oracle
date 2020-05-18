@@ -633,8 +633,14 @@ namespace ServiceWinTransaction
                     //if (!proceso_venta)
                     //{
 
+
+
                     CapaServicioWindows.Envio_AQ.Envio_Ventas envia = new CapaServicioWindows.Envio_AQ.Envio_Ventas();
+                    envia.actualizar_cliente();
+
                     _error_ws= envia.envio_ventas_aq();
+
+
                     //Basico ejecuta_procesos = null;
                     //ejecuta_procesos = new Basico();
                     //ejecuta_procesos.eje_envio_guias(ref _error_ws);

@@ -166,5 +166,116 @@ namespace ServiceWin64Framework4_5
             }
             Cursor.Current = Cursors.Default;
         }
+
+        private void btnaqmvc_Click(object sender, EventArgs e)
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            try
+            {
+                string ruta_server = @"\\192.168.2.6\CatalogoBata\bin";
+                string ruta_local = @"D:\Fuentes\Aquarella\AQUARELLA MVC 2018\AquarellaMVC\CapaPresentacion\bin";
+
+                string _CapaDato = "CapaDato.dll";
+                string _CapaEntidad = "CapaEntidad.dll";
+                //string _CapaOraDato = "CapaOraDato.dll";
+                string _CapaPresentacion = "CapaPresentacion.dll";
+
+                byte[] _bataweb_dll = null;
+                _bataweb_dll = File.ReadAllBytes(ruta_local + "\\" + _CapaDato);
+                File.WriteAllBytes(@ruta_server + "\\" + _CapaDato, _bataweb_dll);
+
+                _bataweb_dll = File.ReadAllBytes(ruta_local + "\\" + _CapaEntidad);
+                File.WriteAllBytes(@ruta_server + "\\" + _CapaEntidad, _bataweb_dll);
+
+                //_bataweb_dll = File.ReadAllBytes(ruta_local + "\\" + _CapaOraDato);
+                //File.WriteAllBytes(@ruta_server + "\\" + _CapaOraDato, _bataweb_dll);
+
+                _bataweb_dll = File.ReadAllBytes(ruta_local + "\\" + _CapaPresentacion);
+                File.WriteAllBytes(@ruta_server + "\\" + _CapaPresentacion, _bataweb_dll);
+
+                MessageBox.Show("Se Actualizo Dll en Produccion AQ MVC", "Admin", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            }
+            catch (Exception exc)
+            {
+
+                MessageBox.Show(exc.Message, "Admin", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            Cursor.Current = Cursors.Default;
+        }
+
+        private void btnwstransaction_Click(object sender, EventArgs e)
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            try
+            {
+                string ruta_server = @"\\192.168.2.6\inetpub\wwwroot\Ws_BataPOS\bin";
+                string ruta_local = @"D:\Fuentes\POS\IntegracionPos_Peru\IntegracionPos_Peru\WS_Bata_Interfaces\bin";
+
+                string _CapaDato = "CapaBasico.dll";
+                string _CapaEntidad = "CapaDato.dll";
+                string _CapaOraDato = "CapaEntidad.dll";
+                string _CapaPresentacion = "WS_Bata_Interfaces.dll";
+
+                byte[] _bataweb_dll = null;
+                _bataweb_dll = File.ReadAllBytes(ruta_local + "\\" + _CapaDato);
+                File.WriteAllBytes(@ruta_server + "\\" + _CapaDato, _bataweb_dll);
+
+                _bataweb_dll = File.ReadAllBytes(ruta_local + "\\" + _CapaEntidad);
+                File.WriteAllBytes(@ruta_server + "\\" + _CapaEntidad, _bataweb_dll);
+
+                _bataweb_dll = File.ReadAllBytes(ruta_local + "\\" + _CapaOraDato);
+                File.WriteAllBytes(@ruta_server + "\\" + _CapaOraDato, _bataweb_dll);
+
+                _bataweb_dll = File.ReadAllBytes(ruta_local + "\\" + _CapaPresentacion);
+                File.WriteAllBytes(@ruta_server + "\\" + _CapaPresentacion, _bataweb_dll);
+
+                MessageBox.Show("Se Actualizo Dll en Produccion WEB SERVICE Ws_BataPOS", "Admin", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            }
+            catch (Exception exc)
+            {
+
+                MessageBox.Show(exc.Message, "Admin", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            Cursor.Current = Cursors.Default;
+        }
+
+        private void btnwsbata_Click(object sender, EventArgs e)
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            try
+            {
+                string ruta_server = @"\\192.168.2.6\inetpub\wwwroot\web_site_tienda\bin";
+                string ruta_local = @"D:\Fuentes\Web Service Bata Tienda\WSDL Tienda\WSDL Tienda\WSDL Tienda\bin";
+
+                string _WSDL_Tienda = "WSDL Tienda.dll";
+                //string _CapaEntidad = "CapaDato.dll";
+                //string _CapaOraDato = "CapaEntidad.dll";
+                //string _CapaPresentacion = "WS_Bata_Interfaces.dll";
+
+                byte[] _bataweb_dll = null;
+                _bataweb_dll = File.ReadAllBytes(ruta_local + "\\" + _WSDL_Tienda);
+                File.WriteAllBytes(@ruta_server + "\\" + _WSDL_Tienda, _bataweb_dll);
+
+                //_bataweb_dll = File.ReadAllBytes(ruta_local + "\\" + _CapaEntidad);
+                //File.WriteAllBytes(@ruta_server + "\\" + _CapaEntidad, _bataweb_dll);
+
+                //_bataweb_dll = File.ReadAllBytes(ruta_local + "\\" + _CapaOraDato);
+                //File.WriteAllBytes(@ruta_server + "\\" + _CapaOraDato, _bataweb_dll);
+
+                //_bataweb_dll = File.ReadAllBytes(ruta_local + "\\" + _CapaPresentacion);
+                //File.WriteAllBytes(@ruta_server + "\\" + _CapaPresentacion, _bataweb_dll);
+
+                MessageBox.Show("Se Actualizo Dll en Produccion WEB SERVICE web_site_tienda", "Admin", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            }
+            catch (Exception exc)
+            {
+
+                MessageBox.Show(exc.Message, "Admin", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            Cursor.Current = Cursors.Default;
+        }
     }
 }

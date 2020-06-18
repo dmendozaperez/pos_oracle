@@ -949,7 +949,7 @@ namespace CapaServicioWindows_x64.Envio_Ftp_Xstore
                             tipo_file = "*.mnt*";
                             break;
                         case "OROB":
-                            tipo_file = "*.txt*";
+                            tipo_file = "*.*";
                             break;
                     }
 

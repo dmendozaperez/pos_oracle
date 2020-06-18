@@ -15,5 +15,6 @@ namespace CapaEntidad.Util
         public string rutloc_location { get; set; }
       
         public string rutloc_location_ecu { get; set; }
+        public string rutloc_location_lur { get; set; }
     }
 }

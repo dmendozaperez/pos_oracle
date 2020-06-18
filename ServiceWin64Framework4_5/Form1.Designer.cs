@@ -35,6 +35,9 @@
             this.btnstk_ec = new System.Windows.Forms.Button();
             this.btnupdate_bataweb = new System.Windows.Forms.Button();
             this.btnact_aq = new System.Windows.Forms.Button();
+            this.btnaqmvc = new System.Windows.Forms.Button();
+            this.btnwstransaction = new System.Windows.Forms.Button();
+            this.btnwsbata = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn_ejecutar_genera_file_xstore_auto
@@ -42,7 +45,7 @@
             this.btn_ejecutar_genera_file_xstore_auto.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_ejecutar_genera_file_xstore_auto.Location = new System.Drawing.Point(12, 12);
             this.btn_ejecutar_genera_file_xstore_auto.Name = "btn_ejecutar_genera_file_xstore_auto";
-            this.btn_ejecutar_genera_file_xstore_auto.Size = new System.Drawing.Size(334, 51);
+            this.btn_ejecutar_genera_file_xstore_auto.Size = new System.Drawing.Size(244, 51);
             this.btn_ejecutar_genera_file_xstore_auto.TabIndex = 0;
             this.btn_ejecutar_genera_file_xstore_auto.Text = "GENERA INTERFACE AUTOMATICA PROGRAMADO";
             this.btn_ejecutar_genera_file_xstore_auto.UseVisualStyleBackColor = true;
@@ -53,7 +56,7 @@
             this.btnejecutar_genera_interface_xstore.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnejecutar_genera_interface_xstore.Location = new System.Drawing.Point(12, 75);
             this.btnejecutar_genera_interface_xstore.Name = "btnejecutar_genera_interface_xstore";
-            this.btnejecutar_genera_interface_xstore.Size = new System.Drawing.Size(334, 51);
+            this.btnejecutar_genera_interface_xstore.Size = new System.Drawing.Size(244, 51);
             this.btnejecutar_genera_interface_xstore.TabIndex = 1;
             this.btnejecutar_genera_interface_xstore.Text = "GENERA INTERFACE AUTOMATICA DESDE APLICACION";
             this.btnejecutar_genera_interface_xstore.UseVisualStyleBackColor = true;
@@ -64,7 +67,7 @@
             this.btn_guias.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_guias.Location = new System.Drawing.Point(12, 141);
             this.btn_guias.Name = "btn_guias";
-            this.btn_guias.Size = new System.Drawing.Size(334, 51);
+            this.btn_guias.Size = new System.Drawing.Size(244, 51);
             this.btn_guias.TabIndex = 2;
             this.btn_guias.Text = "GENERA INTERFACE GUIAS";
             this.btn_guias.UseVisualStyleBackColor = true;
@@ -75,7 +78,7 @@
             this.btn_enviosftp.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_enviosftp.Location = new System.Drawing.Point(12, 204);
             this.btn_enviosftp.Name = "btn_enviosftp";
-            this.btn_enviosftp.Size = new System.Drawing.Size(334, 51);
+            this.btn_enviosftp.Size = new System.Drawing.Size(244, 51);
             this.btn_enviosftp.TabIndex = 3;
             this.btn_enviosftp.Text = "ENVIO DE SFTP";
             this.btn_enviosftp.UseVisualStyleBackColor = true;
@@ -84,9 +87,9 @@
             // btnstk_ec
             // 
             this.btnstk_ec.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
-            this.btnstk_ec.Location = new System.Drawing.Point(12, 265);
+            this.btnstk_ec.Location = new System.Drawing.Point(277, 12);
             this.btnstk_ec.Name = "btnstk_ec";
-            this.btnstk_ec.Size = new System.Drawing.Size(334, 41);
+            this.btnstk_ec.Size = new System.Drawing.Size(244, 50);
             this.btnstk_ec.TabIndex = 4;
             this.btnstk_ec.Text = "Generar Stock E-COMMERCE";
             this.btnstk_ec.UseVisualStyleBackColor = true;
@@ -95,9 +98,9 @@
             // btnupdate_bataweb
             // 
             this.btnupdate_bataweb.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnupdate_bataweb.Location = new System.Drawing.Point(12, 312);
+            this.btnupdate_bataweb.Location = new System.Drawing.Point(277, 74);
             this.btnupdate_bataweb.Name = "btnupdate_bataweb";
-            this.btnupdate_bataweb.Size = new System.Drawing.Size(334, 51);
+            this.btnupdate_bataweb.Size = new System.Drawing.Size(244, 51);
             this.btnupdate_bataweb.TabIndex = 5;
             this.btnupdate_bataweb.Text = "ACTUALIZAR BATAWEB DLL PRODUCCION";
             this.btnupdate_bataweb.UseVisualStyleBackColor = true;
@@ -106,19 +109,55 @@
             // btnact_aq
             // 
             this.btnact_aq.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnact_aq.Location = new System.Drawing.Point(12, 372);
+            this.btnact_aq.Location = new System.Drawing.Point(277, 136);
             this.btnact_aq.Name = "btnact_aq";
-            this.btnact_aq.Size = new System.Drawing.Size(334, 45);
+            this.btnact_aq.Size = new System.Drawing.Size(244, 51);
             this.btnact_aq.TabIndex = 6;
             this.btnact_aq.Text = "ACTUALIZAR AQUARELLA WEB";
             this.btnact_aq.UseVisualStyleBackColor = true;
             this.btnact_aq.Click += new System.EventHandler(this.btnact_aq_Click);
             // 
+            // btnaqmvc
+            // 
+            this.btnaqmvc.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnaqmvc.Location = new System.Drawing.Point(277, 202);
+            this.btnaqmvc.Name = "btnaqmvc";
+            this.btnaqmvc.Size = new System.Drawing.Size(244, 51);
+            this.btnaqmvc.TabIndex = 7;
+            this.btnaqmvc.Text = "ACTUALIZAR AQUARELLA WEB MVC";
+            this.btnaqmvc.UseVisualStyleBackColor = true;
+            this.btnaqmvc.Click += new System.EventHandler(this.btnaqmvc_Click);
+            // 
+            // btnwstransaction
+            // 
+            this.btnwstransaction.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
+            this.btnwstransaction.Location = new System.Drawing.Point(537, 13);
+            this.btnwstransaction.Name = "btnwstransaction";
+            this.btnwstransaction.Size = new System.Drawing.Size(244, 50);
+            this.btnwstransaction.TabIndex = 8;
+            this.btnwstransaction.Text = "Actualizar WS Ws_BataPOS (Bata Transaction)";
+            this.btnwstransaction.UseVisualStyleBackColor = true;
+            this.btnwstransaction.Click += new System.EventHandler(this.btnwstransaction_Click);
+            // 
+            // btnwsbata
+            // 
+            this.btnwsbata.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
+            this.btnwsbata.Location = new System.Drawing.Point(537, 75);
+            this.btnwsbata.Name = "btnwsbata";
+            this.btnwsbata.Size = new System.Drawing.Size(244, 50);
+            this.btnwsbata.TabIndex = 9;
+            this.btnwsbata.Text = "Actualizar WS web_site_tienda WSDL Tienda";
+            this.btnwsbata.UseVisualStyleBackColor = true;
+            this.btnwsbata.Click += new System.EventHandler(this.btnwsbata_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(350, 462);
+            this.ClientSize = new System.Drawing.Size(787, 264);
+            this.Controls.Add(this.btnwsbata);
+            this.Controls.Add(this.btnwstransaction);
+            this.Controls.Add(this.btnaqmvc);
             this.Controls.Add(this.btnact_aq);
             this.Controls.Add(this.btnupdate_bataweb);
             this.Controls.Add(this.btnstk_ec);
@@ -144,6 +183,9 @@
         private System.Windows.Forms.Button btnstk_ec;
         private System.Windows.Forms.Button btnupdate_bataweb;
         private System.Windows.Forms.Button btnact_aq;
+        private System.Windows.Forms.Button btnaqmvc;
+        private System.Windows.Forms.Button btnwstransaction;
+        private System.Windows.Forms.Button btnwsbata;
     }
 }
 

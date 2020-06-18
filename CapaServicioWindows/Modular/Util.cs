@@ -11,7 +11,7 @@ namespace CapaServicioWindows.Modular
 {
     public class Util
     {
-        public  List<BataTransac.Ent_PathDBF> get_location_dbf(ref string _error_ws)
+        public List<BataTransac.Ent_PathDBF> get_location_dbf(ref string _error_ws, Boolean valida_lurin = false)
         {
             List<BataTransac.Ent_PathDBF> list = null;
             Basico valida_ecu = null;
@@ -38,12 +38,23 @@ namespace CapaServicioWindows.Modular
 
                         //if (!valida_ecu.valida_file_ecu())
                        // {
-                         valor.rutloc_location = (!valida_ecu.valida_file_ecu()) ?listar.rutloc_location: listar.rutloc_location_ecu;
+                       if (!valida_lurin)
+                        {
+                            valor.rutloc_location = (!valida_ecu.valida_file_ecu()) ? listar.rutloc_location : listar.rutloc_location_ecu;
+                        }
+                       else
+                        {
+                            valor.rutloc_location = listar.rutloc_location_lur;// (!valida_ecu.valida_file_ecu()) ? listar.rutloc_location : listar.rutloc_location_ecu;
+                        }
+                         
                         //}
 
                         
 
                         valor.rutloc_location_ecu = listar.rutloc_location_ecu;
+
+                        valor.rutloc_location_lur = listar.rutloc_location_lur;
+
                         list.Add(valor);
                     }
                 }

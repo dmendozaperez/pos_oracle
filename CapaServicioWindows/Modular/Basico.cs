@@ -951,15 +951,18 @@ namespace CapaServicioWindows.Modular
             List<BataTransac.Ent_PathDBF> listar_location_dbf = null;
             DataTable dtStock = null;
             TextWriter tw = null;
+            string ruta_lurin= @"D:\BataTransaction\LURIN.txt";
             try
             {
+                Boolean fil_lurin = false;
                 /*segundos para ejecutar*/
                 //_espera_ejecuta(20);
                 /***********************/
+                if (File.Exists(ruta_lurin)) fil_lurin = true;
 
-                #region<CAPTURAR EL PATH DE LOS DBF>
+                    #region<CAPTURAR EL PATH DE LOS DBF>
                 Util locationdbf = new Util();
-                listar_location_dbf = locationdbf.get_location_dbf(ref _error_ws);
+                listar_location_dbf = locationdbf.get_location_dbf(ref _error_ws, fil_lurin);
                 #endregion
 
                 if (listar_location_dbf == null) return;
@@ -974,7 +977,7 @@ namespace CapaServicioWindows.Modular
                 if (_locatio_noservicio != null)
                 {
 
-                    ruta_validacion = _locatio_noservicio.rutloc_location + "\\" + _locatio_noservicio.rutloc_namedbf + ".txt";
+                    ruta_validacion =((fil_lurin) ? _locatio_noservicio.rutloc_location_lur : _locatio_noservicio.rutloc_location) + "\\" + _locatio_noservicio.rutloc_namedbf + ".txt";
                     /* if (File.Exists(@ruta_validacion)) return;*/ //valida_exists_txt = true;
 
                 }
@@ -1008,15 +1011,22 @@ namespace CapaServicioWindows.Modular
                 /**/
 
 
+                
                 #region<EN ESTE PASO TRATAMOS DE ENTRAR AL NOVELL PARA TRAERME LA INFO>
-                if (valida_file_ecu())
+
+                if (!fil_lurin)
                 {
-                    NetworkShare.ConnectToShare(_locatio_noservicio.rutloc_location, ConexionDBF.user_novell, ConexionDBF.password_novell);
+                    if (valida_file_ecu())
+                    {
+                        NetworkShare.ConnectToShare(_locatio_noservicio.rutloc_location, ConexionDBF.user_novell, ConexionDBF.password_novell);
+                    }
+                    else
+                    {
+                        NetworkShare.ConnectToShare(_locatio_scdddes.rutloc_location, @".\Tareas", "tareas");
+                    }
                 }
-                else
-                {
-                    NetworkShare.ConnectToShare(_locatio_scdddes.rutloc_location, @".\Tareas", "tareas");
-                }
+
+                
                 #endregion
 
                 #region<ENVIO DE STOCK DE ALMACEN>
@@ -1107,7 +1117,7 @@ namespace CapaServicioWindows.Modular
                         dtStock.Columns.Add("Csal_ano", typeof(string));
                         dtStock.Columns.Add("Csal_seman", typeof(string));
 
-                        string centro_dis = "50001";
+                        string centro_dis =(!fil_lurin)? "50001": "50003";
 
                         for (Int32 i = 0; i < tabla.Rows.Count; i++)
                         {

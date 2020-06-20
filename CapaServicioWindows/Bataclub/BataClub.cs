@@ -112,5 +112,39 @@ namespace CapaServicioWindows.Bataclub
             }
             return error;
         }
+
+        public string genera_procesos_compartir()
+        {
+            string sqlquery = "USP_BATA_PROCESOS_COMPARTIR";
+            string valida = "";
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(ConexionSQL.conexion))
+                {
+                    try
+                    {
+                        if (cn.State == 0) cn.Open();
+                        using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                        {
+                            cmd.CommandTimeout = 0;
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+                    catch (Exception exc)
+                    {
+                        valida = exc.Message;
+                    }
+                    if (cn != null)
+                        if (cn.State == ConnectionState.Open) cn.Close();
+                }
+            }
+            catch (Exception exc)
+            {
+
+                valida = exc.Message;
+            }
+            return valida;
+        }
     }
 }

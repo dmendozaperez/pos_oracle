@@ -38,6 +38,7 @@
             this.btnaqmvc = new System.Windows.Forms.Button();
             this.btnwstransaction = new System.Windows.Forms.Button();
             this.btnwsbata = new System.Windows.Forms.Button();
+            this.btncompartir = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn_ejecutar_genera_file_xstore_auto
@@ -109,7 +110,7 @@
             // btnact_aq
             // 
             this.btnact_aq.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnact_aq.Location = new System.Drawing.Point(277, 136);
+            this.btnact_aq.Location = new System.Drawing.Point(537, 11);
             this.btnact_aq.Name = "btnact_aq";
             this.btnact_aq.Size = new System.Drawing.Size(244, 51);
             this.btnact_aq.TabIndex = 6;
@@ -120,7 +121,7 @@
             // btnaqmvc
             // 
             this.btnaqmvc.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnaqmvc.Location = new System.Drawing.Point(277, 202);
+            this.btnaqmvc.Location = new System.Drawing.Point(537, 73);
             this.btnaqmvc.Name = "btnaqmvc";
             this.btnaqmvc.Size = new System.Drawing.Size(244, 51);
             this.btnaqmvc.TabIndex = 7;
@@ -131,7 +132,7 @@
             // btnwstransaction
             // 
             this.btnwstransaction.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
-            this.btnwstransaction.Location = new System.Drawing.Point(537, 13);
+            this.btnwstransaction.Location = new System.Drawing.Point(537, 141);
             this.btnwstransaction.Name = "btnwstransaction";
             this.btnwstransaction.Size = new System.Drawing.Size(244, 50);
             this.btnwstransaction.TabIndex = 8;
@@ -142,7 +143,7 @@
             // btnwsbata
             // 
             this.btnwsbata.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
-            this.btnwsbata.Location = new System.Drawing.Point(537, 75);
+            this.btnwsbata.Location = new System.Drawing.Point(537, 202);
             this.btnwsbata.Name = "btnwsbata";
             this.btnwsbata.Size = new System.Drawing.Size(244, 50);
             this.btnwsbata.TabIndex = 9;
@@ -150,11 +151,23 @@
             this.btnwsbata.UseVisualStyleBackColor = true;
             this.btnwsbata.Click += new System.EventHandler(this.btnwsbata_Click);
             // 
+            // btncompartir
+            // 
+            this.btncompartir.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btncompartir.Location = new System.Drawing.Point(277, 140);
+            this.btncompartir.Name = "btncompartir";
+            this.btncompartir.Size = new System.Drawing.Size(244, 51);
+            this.btncompartir.TabIndex = 10;
+            this.btncompartir.Text = "PROCESAR CUPONES COMPARTIR BATA";
+            this.btncompartir.UseVisualStyleBackColor = true;
+            this.btncompartir.Click += new System.EventHandler(this.btncompartir_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(787, 264);
+            this.Controls.Add(this.btncompartir);
             this.Controls.Add(this.btnwsbata);
             this.Controls.Add(this.btnwstransaction);
             this.Controls.Add(this.btnaqmvc);
@@ -186,6 +199,7 @@
         private System.Windows.Forms.Button btnaqmvc;
         private System.Windows.Forms.Button btnwstransaction;
         private System.Windows.Forms.Button btnwsbata;
+        private System.Windows.Forms.Button btncompartir;
     }
 }
 

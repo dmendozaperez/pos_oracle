@@ -52,6 +52,7 @@
             this.btn_wms_aqec = new System.Windows.Forms.Button();
             this.btnorce = new System.Windows.Forms.Button();
             this.btn_transito = new System.Windows.Forms.Button();
+            this.btncompartir = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn_servicewin
@@ -295,7 +296,7 @@
             // btnorce
             // 
             this.btnorce.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnorce.Location = new System.Drawing.Point(633, 327);
+            this.btnorce.Location = new System.Drawing.Point(588, 322);
             this.btnorce.Name = "btnorce";
             this.btnorce.Size = new System.Drawing.Size(269, 32);
             this.btnorce.TabIndex = 26;
@@ -314,11 +315,23 @@
             this.btn_transito.UseVisualStyleBackColor = true;
             this.btn_transito.Click += new System.EventHandler(this.btn_transito_Click);
             // 
+            // btncompartir
+            // 
+            this.btncompartir.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btncompartir.Location = new System.Drawing.Point(879, 307);
+            this.btncompartir.Name = "btncompartir";
+            this.btncompartir.Size = new System.Drawing.Size(217, 52);
+            this.btncompartir.TabIndex = 28;
+            this.btncompartir.Text = "PROCESAR CUPONES COMPARTIR BATA";
+            this.btncompartir.UseVisualStyleBackColor = true;
+            this.btncompartir.Click += new System.EventHandler(this.btncompartir_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1117, 371);
+            this.Controls.Add(this.btncompartir);
             this.Controls.Add(this.btn_transito);
             this.Controls.Add(this.btnorce);
             this.Controls.Add(this.btn_wms_aqec);
@@ -376,6 +389,7 @@
         private System.Windows.Forms.Button btn_wms_aqec;
         private System.Windows.Forms.Button btnorce;
         private System.Windows.Forms.Button btn_transito;
+        private System.Windows.Forms.Button btncompartir;
     }
 }
 

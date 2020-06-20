@@ -21,6 +21,12 @@ namespace ServiceWinBataClub
         //private string file_almace_ecu = @"D:\BataTransaction\ECU.txt";
         #endregion
 
+        #region<REGION DE PROCESOS COMPARTIR>
+        Timer tmcompartir = null;
+        private Int32 _valida_compartir = 0;
+        #endregion
+
+
         #region<REGION PARA CUPONES VARIABLES>
         Timer tmorce = null;
         private Int32 _valida_orce = 0;
@@ -36,7 +42,65 @@ namespace ServiceWinBataClub
 
             tmorce = new Timer(5000);
             tmorce.Elapsed += new ElapsedEventHandler(tmorce_Elapsed);
+
+            tmcompartir = new Timer(5000);
+            tmcompartir.Elapsed += new ElapsedEventHandler(tmcompartir_Elapsed);
         }
+
+        #region<region de compartir>
+        void tmcompartir_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            Int32 _valor = 0;
+
+            string _ruta_erro_file = @"D:\BataClub\log_bataclub.txt";
+            string str = "";
+            TextWriter tw = null;
+            try
+            {
+
+                if (_valida_compartir == 0)
+                {
+                    _valor = 1;
+                    _valida_compartir = 1;
+
+                    string _error_ws = "";
+                    BataClub batacl = new BataClub();
+                    _error_ws = batacl.genera_procesos_compartir();
+
+                    if (_error_ws.Length > 0)
+                    {
+
+                        tw = new StreamWriter(_ruta_erro_file, true);
+                        str = DateTime.Today.ToString() + " " + DateTime.Now.ToString("HH:mm:ss") + "==>genera_miembro_bataclub==>" + _error_ws;
+                        tw.WriteLine(str);
+                        tw.Flush();
+                        tw.Close();
+                        tw.Dispose();
+                    }
+                    _valida_compartir = 0;
+                }
+                //****************************************************************************
+            }
+            catch (Exception exc)
+            {
+                //tw = new StreamWriter(_ruta_erro_file, true);
+                tw = new StreamWriter(_ruta_erro_file, true);
+                str = DateTime.Today.ToString() + " " + DateTime.Now.ToString("HH:mm:ss") + "==> catch ==>" + exc.Message;
+                tw.WriteLine(str);
+                tw.Flush();
+                tw.Close();
+                tw.Dispose();
+                _valida_compartir = 0;
+            }
+
+            if (_valor == 1)
+            {
+                _valida_compartir = 0;
+            }
+
+
+        }
+        #endregion
 
         #region<REGION DE ORCE CUPONES UPDATE>
 
@@ -188,12 +252,14 @@ namespace ServiceWinBataClub
         {
             tmbataclub.Start();
             tmorce.Start();
+            tmcompartir.Start();
         }
 
         protected override void OnStop()
         {
             tmbataclub.Stop();
             tmorce.Stop();
+            tmcompartir.Stop();
         }
     }
 }

@@ -1390,6 +1390,26 @@ namespace WS_Bata_Interfaces
         }
         /*sostic 06.2018*/
         #endregion
+        #region<DESCUENTO PARA COMPARTIR>
+        [WebMethod(Description = "Descuentos para compartir")]
+        public string ws_inserta_compartir(string dni, string correo, decimal total, string cod_tda)
+        {
+            string result = "";
+            Dat_Compartir insertar_compartir = null;            
+            try
+            {
+                insertar_compartir = new Dat_Compartir();
+                result = insertar_compartir.insertar_enviar_compartir("01", dni, correo, total, cod_tda);
+            }
+            catch (Exception ex)
+            {
+                result = ex.Message ;
+              
+            }        
+            return result;
+        }
+
+        #endregion
 
         #region<consulta facturacion electronica PAPERLESS>
         [WebMethod(Description = "consultar facturacion electronica PAPERLESS")]

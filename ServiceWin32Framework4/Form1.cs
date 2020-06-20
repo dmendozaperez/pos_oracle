@@ -493,5 +493,11 @@ namespace ServiceWin32Framework4
             MessageBox.Show("termino");
             Cursor.Current = Cursors.Default;
         }
+
+        private void btncompartir_Click(object sender, EventArgs e)
+        {
+            CapaServicioWindows.Bataclub.BataClub d = new CapaServicioWindows.Bataclub.BataClub();
+            d.genera_procesos_compartir();
+        }
     }
 }

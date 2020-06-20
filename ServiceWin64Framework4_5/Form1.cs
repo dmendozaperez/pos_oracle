@@ -277,5 +277,10 @@ namespace ServiceWin64Framework4_5
             }
             Cursor.Current = Cursors.Default;
         }
+
+        private void btncompartir_Click(object sender, EventArgs e)
+        {
+         
+        }
     }
 }

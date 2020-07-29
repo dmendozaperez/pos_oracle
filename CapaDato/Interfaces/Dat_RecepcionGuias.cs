@@ -127,6 +127,80 @@ namespace CapaDato.Interfaces
             return msg_error;
         }
 
-       
+        public Ent_MsgTransac update_transaction_guias_recepcion(Ent_Fvdespc guias)
+        {
+            Ent_MsgTransac msg_error = null;
+            string sqlquery = "[USP_RECEPCION_GUIASTDA_ALMACEN_RECEPCION]";
+            try
+            {
+                msg_error = new Ent_MsgTransac();
+                using (SqlConnection cn = new SqlConnection(Ent_Conexion.conexion_posperu))
+                {
+                    try
+                    {
+                        if (cn.State == 0) cn.Open();
+
+                        using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                        {
+                            cmd.CommandTimeout = 0;
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.Parameters.AddWithValue("@DESC_ALMAC", guias.DESC_ALMAC);
+                            cmd.Parameters.AddWithValue("@DESC_GUDIS", guias.DESC_GUDIS);
+                            cmd.Parameters.AddWithValue("@DESC_NDESP", guias.DESC_NDESP);
+                            cmd.Parameters.AddWithValue("@DESC_TDES", guias.DESC_TDES);
+                            cmd.Parameters.AddWithValue("@DESC_FECHA", guias.DESC_FECHA);
+                            cmd.Parameters.AddWithValue("@DESC_FDESP", guias.DESC_FDESP);
+                            cmd.Parameters.AddWithValue("@DESC_ESTAD", guias.DESC_ESTAD);
+                            cmd.Parameters.AddWithValue("@DESC_TIPO", guias.DESC_TIPO);
+                            cmd.Parameters.AddWithValue("@DESC_TORI", guias.DESC_TORI);
+                            cmd.Parameters.AddWithValue("@DESC_FEMI", guias.DESC_FEMI);
+                            cmd.Parameters.AddWithValue("@DESC_SEMI", guias.DESC_SEMI);
+                            cmd.Parameters.AddWithValue("@DESC_FTRA", guias.DESC_FTRA);
+                            cmd.Parameters.AddWithValue("@DESC_NUME", guias.DESC_NUME);
+                            cmd.Parameters.AddWithValue("@DESC_CONCE", guias.DESC_CONCE);
+                            cmd.Parameters.AddWithValue("@DESC_NMOVC", guias.DESC_NMOVC);
+                            cmd.Parameters.AddWithValue("@DESC_EMPRE", guias.DESC_EMPRE);
+                            cmd.Parameters.AddWithValue("@DESC_SECCI", guias.DESC_SECCI);
+                            cmd.Parameters.AddWithValue("@DESC_CANAL", guias.DESC_CANAL);
+                            cmd.Parameters.AddWithValue("@DESC_CADEN", guias.DESC_CADEN);
+                            cmd.Parameters.AddWithValue("@DESC_FTX", guias.DESC_FTX);
+                            cmd.Parameters.AddWithValue("@DESC_TXPOS", guias.DESC_TXPOS);
+                            cmd.Parameters.AddWithValue("@DESC_UNCA", guias.DESC_UNCA);
+                            cmd.Parameters.AddWithValue("@DESC_UNNC", guias.DESC_UNNC);
+                            cmd.Parameters.AddWithValue("@DESC_CAJA", guias.DESC_CAJA);
+                            cmd.Parameters.AddWithValue("@DESC_VACA", guias.DESC_VACA);
+                            cmd.Parameters.AddWithValue("@DESC_VANC", guias.DESC_VANC);
+                            cmd.Parameters.AddWithValue("@DESC_VCAJ", guias.DESC_VCAJ);
+
+                          
+                            /*detalle del temporal de guias*/
+                            cmd.Parameters.AddWithValue("@TMP_DET", guias.DT_FVDESPD_TREGMEDIDA);
+
+                            cmd.ExecuteNonQuery();
+
+                            msg_error.codigo = "0";
+                            msg_error.descripcion = "Transaction existosa";
+
+                        }
+
+                    }
+                    catch (Exception exc)
+                    {
+                        msg_error.codigo = "1";
+                        msg_error.descripcion = exc.Message;
+                    }
+                    if (cn != null)
+                        if (cn.State == ConnectionState.Open) cn.Close();
+                }
+            }
+            catch (Exception exc)
+            {
+                msg_error.codigo = "1";
+                msg_error.descripcion = exc.Message;
+            }
+            return msg_error;
+        }
+
+
     }
 }

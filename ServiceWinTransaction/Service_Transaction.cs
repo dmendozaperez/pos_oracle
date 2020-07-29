@@ -40,6 +40,11 @@ namespace ServiceWinTransaction
 
         #endregion
 
+        #region<REGION DE RECEPCION DE ALMACEN>
+        Timer tmpalm_rece = null;
+        private Int32 _valida_alm_rece = 0;
+        #endregion
+
         Timer tmpprescripcion = null;
         private Int32 _valida_PRES = 0;
 
@@ -150,7 +155,92 @@ namespace ServiceWinTransaction
             tmpec_wms = new Timer(5000);
             tmpec_wms.Elapsed += new ElapsedEventHandler(tmpec_wms_Elapsed);
 
+            tmpalm_rece = new Timer(5000);
+            tmpalm_rece.Elapsed += new ElapsedEventHandler(tmpalm_rece_Elapsed);
+
         }
+
+        #region<REGION DE RECEPCION DE ALMACEN>
+        void tmpalm_rece_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            //string varchivov = "c://valida_hash.txt";
+            Int32 _valor = 0;
+
+            //string _ruta_erro_file = @"D:\ALMACEN\STOCK.txt";
+            string _valida_proc_venta = @"D:\venta.txt";
+            Boolean proceso_venta = false;
+            TextWriter tw = null;
+            string _hora = "";
+            try
+            {
+                #region<region solo almacen ecuador>
+                if (File.Exists(@file_almace_ecu)) return;
+                #endregion
+
+                /*si el archivo existe entonces ejecutar procesos de venta*/
+                if (File.Exists(@_valida_proc_venta)) proceso_venta = true;
+
+                string _valida_proc_guiaToXstore = @"D:\XSTORE\proc_xs.txt";
+                if (File.Exists(_valida_proc_guiaToXstore)) return; //proceso_venta = false;
+
+                if (_valida_alm_rece == 0)
+                {
+                    //string _error = "ing";
+                    _valor = 1;
+                    _valida_alm_rece = 1;
+
+                    string _error_ws = "";
+                    //_error = CapaServicioWindows.Modular.Basico.retornar();
+
+                    #region<SOLO PARA ALMACEN HABILITAR ESTE PROCESO>
+                    if (!proceso_venta)
+                    {
+                        Basico ejecuta_procesos = null;
+                        ejecuta_procesos = new Basico();
+                        ejecuta_procesos.eje_envio_guias_devolucion(ref _error_ws);
+                    }
+                    #endregion
+
+
+                    _valida_alm_rece = 0;
+
+                    if (_error_ws.Length > 0)
+                    {
+                        _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "==> (servicio windows)" + _error_ws;
+                        tw = new StreamWriter(@"D:\ALMACEN\STOCK.txt", true);
+                        tw.WriteLine(_hora);
+                        tw.Flush();
+                        tw.Close();
+                        tw.Dispose();
+                        //TextWriter tw = new StreamWriter(_ruta_erro_file, true);
+                        //tw.WriteLine(_error_ws);
+                        //tw.Flush();
+                        //tw.Close();
+                        //tw.Dispose();
+                    }
+                }
+                //****************************************************************************
+            }
+            catch (Exception exc)
+            {
+                _valida_alm_rece = 0;
+                _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "==> (servicio windows)" + exc.Message;
+                tw = new StreamWriter(@"D:\ALMACEN\STOCK.txt", true);
+                tw.WriteLine(_hora);
+                tw.Flush();
+                tw.Close();
+                tw.Dispose();
+
+            }
+
+            if (_valor == 1)
+            {
+                _valida_alm_rece = 0;
+            }
+
+
+        }
+        #endregion
 
         #region<REGION DEL WMS AQUARELLA Y ECOMMERCE PROCESOS>
         void tmpaq_wms_Elapsed(object sender, ElapsedEventArgs e)
@@ -1054,6 +1144,7 @@ namespace ServiceWinTransaction
             tmvendedor.Start();
             tmpaq_wms.Start();
             tmpec_wms.Start();
+            tmpalm_rece.Start();
             //tmservicioScactcoDBF.Start();
         }
 
@@ -1075,6 +1166,9 @@ namespace ServiceWinTransaction
 
             tmpaq_wms.Stop();
             tmpec_wms.Stop();
+
+            tmpalm_rece.Stop();
+
             //tmservicioScactcoDBF.Stop();
         }       
               

@@ -80,6 +80,9 @@
     <None Include="Service References\BataTransac\CapaServicioWindows_x64.BataTransac.Ent_CarpetaUpload_Xstore.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\BataTransac\CapaServicioWindows_x64.BataTransac.Ent_Conexion_Ora_Xstore.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\BataTransac\CapaServicioWindows_x64.BataTransac.Ent_Config_Service.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -104,7 +107,16 @@
     <None Include="Service References\BataTransac\CapaServicioWindows_x64.BataTransac.Ent_Scdddes.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\BataTransac\CapaServicioWindows_x64.BataTransac.Ent_Tk_Return.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\BataTransac\CapaServicioWindows_x64.BataTransac.Ent_Tk_Valores.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\BataTransac\CapaServicioWindows_x64.BataTransac.HelloWorldResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\BataTransac\CapaServicioWindows_x64.BataTransac.ws_consumo_cupon_returnResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\BataTransac\CapaServicioWindows_x64.BataTransac.ws_download_fileResponse.datasource">
@@ -134,10 +146,19 @@
     <None Include="Service References\BataTransac\CapaServicioWindows_x64.BataTransac.ws_envia_venta_tda_listResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\BataTransac\CapaServicioWindows_x64.BataTransac.ws_envio_poslog_xstore_tdaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\BataTransac\CapaServicioWindows_x64.BataTransac.ws_envio_traspaso_tdaResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\BataTransac\CapaServicioWindows_x64.BataTransac.ws_errores_transactionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\BataTransac\CapaServicioWindows_x64.BataTransac.ws_genera_cupon_returnResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\BataTransac\CapaServicioWindows_x64.BataTransac.ws_get_conexion_xstoreResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\BataTransac\CapaServicioWindows_x64.BataTransac.ws_get_file_pathResponse.datasource">
@@ -152,6 +173,9 @@
     <None Include="Service References\BataTransac\CapaServicioWindows_x64.BataTransac.ws_get_time_servicetransResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\BataTransac\CapaServicioWindows_x64.BataTransac.ws_get_tk_return_reimprimirResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\BataTransac\CapaServicioWindows_x64.BataTransac.ws_get_xstore_carpeta_uploadResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -161,7 +185,16 @@
     <None Include="Service References\BataTransac\CapaServicioWindows_x64.BataTransac.ws_transmision_ingreso_nubeResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\BataTransac\CapaServicioWindows_x64.BataTransac.ws_update_tk_return_reimprimirResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\BataTransac\CapaServicioWindows_x64.BataTransac.ws_update_transaction_guiasResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\BataTransac\CapaServicioWindows_x64.BataTransac.ws_update_transaction_guias_recepcionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\BataTransac\CapaServicioWindows_x64.BataTransac.ws_valida_cupon_returnResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\BataTransac\CapaServicioWindows_x64.BataTransac.ws_valida_traspaso_tdaResponse.datasource">

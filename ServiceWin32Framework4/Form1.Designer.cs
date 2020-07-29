@@ -53,6 +53,7 @@
             this.btnorce = new System.Windows.Forms.Button();
             this.btn_transito = new System.Windows.Forms.Button();
             this.btncompartir = new System.Windows.Forms.Button();
+            this.btnalm_recep = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn_servicewin
@@ -60,7 +61,7 @@
             this.btn_servicewin.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_servicewin.Location = new System.Drawing.Point(2, 12);
             this.btn_servicewin.Name = "btn_servicewin";
-            this.btn_servicewin.Size = new System.Drawing.Size(392, 51);
+            this.btn_servicewin.Size = new System.Drawing.Size(300, 51);
             this.btn_servicewin.TabIndex = 4;
             this.btn_servicewin.Text = "CAPA DE PRUEBA SERVIVIO WINDOWS";
             this.btn_servicewin.UseVisualStyleBackColor = true;
@@ -89,7 +90,7 @@
             // btnenvio_nov
             // 
             this.btnenvio_nov.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnenvio_nov.Location = new System.Drawing.Point(43, 212);
+            this.btnenvio_nov.Location = new System.Drawing.Point(2, 210);
             this.btnenvio_nov.Name = "btnenvio_nov";
             this.btnenvio_nov.Size = new System.Drawing.Size(185, 37);
             this.btnenvio_nov.TabIndex = 7;
@@ -111,7 +112,7 @@
             // btnposlog
             // 
             this.btnposlog.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnposlog.Location = new System.Drawing.Point(530, 47);
+            this.btnposlog.Location = new System.Drawing.Point(413, 45);
             this.btnposlog.Name = "btnposlog";
             this.btnposlog.Size = new System.Drawing.Size(166, 23);
             this.btnposlog.TabIndex = 9;
@@ -122,7 +123,7 @@
             // procesar_fcacb_SQL
             // 
             this.procesar_fcacb_SQL.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.procesar_fcacb_SQL.Location = new System.Drawing.Point(288, 212);
+            this.procesar_fcacb_SQL.Location = new System.Drawing.Point(217, 210);
             this.procesar_fcacb_SQL.Name = "procesar_fcacb_SQL";
             this.procesar_fcacb_SQL.Size = new System.Drawing.Size(207, 37);
             this.procesar_fcacb_SQL.TabIndex = 10;
@@ -132,7 +133,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(530, 74);
+            this.button3.Location = new System.Drawing.Point(413, 74);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(152, 23);
             this.button3.TabIndex = 11;
@@ -142,7 +143,7 @@
             // ws_get_xstore_carpeta_upload
             // 
             this.ws_get_xstore_carpeta_upload.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ws_get_xstore_carpeta_upload.Location = new System.Drawing.Point(73, 271);
+            this.ws_get_xstore_carpeta_upload.Location = new System.Drawing.Point(12, 258);
             this.ws_get_xstore_carpeta_upload.Name = "ws_get_xstore_carpeta_upload";
             this.ws_get_xstore_carpeta_upload.Size = new System.Drawing.Size(290, 30);
             this.ws_get_xstore_carpeta_upload.TabIndex = 12;
@@ -153,7 +154,7 @@
             // envio_Guias_ToxStore
             // 
             this.envio_Guias_ToxStore.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.envio_Guias_ToxStore.Location = new System.Drawing.Point(236, 95);
+            this.envio_Guias_ToxStore.Location = new System.Drawing.Point(149, 109);
             this.envio_Guias_ToxStore.Name = "envio_Guias_ToxStore";
             this.envio_Guias_ToxStore.Size = new System.Drawing.Size(259, 47);
             this.envio_Guias_ToxStore.TabIndex = 13;
@@ -164,7 +165,7 @@
             // ejecutar_genera_interface_xstore
             // 
             this.ejecutar_genera_interface_xstore.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ejecutar_genera_interface_xstore.Location = new System.Drawing.Point(512, 105);
+            this.ejecutar_genera_interface_xstore.Location = new System.Drawing.Point(433, 103);
             this.ejecutar_genera_interface_xstore.Name = "ejecutar_genera_interface_xstore";
             this.ejecutar_genera_interface_xstore.Size = new System.Drawing.Size(280, 39);
             this.ejecutar_genera_interface_xstore.TabIndex = 14;
@@ -186,7 +187,7 @@
             // get_fmc_insertar_fvdespc
             // 
             this.get_fmc_insertar_fvdespc.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.get_fmc_insertar_fvdespc.Location = new System.Drawing.Point(512, 211);
+            this.get_fmc_insertar_fvdespc.Location = new System.Drawing.Point(433, 213);
             this.get_fmc_insertar_fvdespc.Name = "get_fmc_insertar_fvdespc";
             this.get_fmc_insertar_fvdespc.Size = new System.Drawing.Size(196, 36);
             this.get_fmc_insertar_fvdespc.TabIndex = 16;
@@ -197,7 +198,7 @@
             // BTNENVIONOV
             // 
             this.BTNENVIONOV.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BTNENVIONOV.Location = new System.Drawing.Point(413, 278);
+            this.BTNENVIONOV.Location = new System.Drawing.Point(317, 262);
             this.BTNENVIONOV.Name = "BTNENVIONOV";
             this.BTNENVIONOV.Size = new System.Drawing.Size(283, 23);
             this.BTNENVIONOV.TabIndex = 17;
@@ -230,7 +231,7 @@
             // btn_item_deal
             // 
             this.btn_item_deal.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_item_deal.Location = new System.Drawing.Point(734, 9);
+            this.btn_item_deal.Location = new System.Drawing.Point(688, 24);
             this.btn_item_deal.Name = "btn_item_deal";
             this.btn_item_deal.Size = new System.Drawing.Size(264, 61);
             this.btn_item_deal.TabIndex = 20;
@@ -241,7 +242,7 @@
             // btnsk_almacen
             // 
             this.btnsk_almacen.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnsk_almacen.Location = new System.Drawing.Point(765, 165);
+            this.btnsk_almacen.Location = new System.Drawing.Point(735, 182);
             this.btnsk_almacen.Name = "btnsk_almacen";
             this.btnsk_almacen.Size = new System.Drawing.Size(194, 67);
             this.btnsk_almacen.TabIndex = 21;
@@ -252,7 +253,7 @@
             // btnpaperless
             // 
             this.btnpaperless.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnpaperless.Location = new System.Drawing.Point(734, 262);
+            this.btnpaperless.Location = new System.Drawing.Point(623, 262);
             this.btnpaperless.Name = "btnpaperless";
             this.btnpaperless.Size = new System.Drawing.Size(264, 39);
             this.btnpaperless.TabIndex = 22;
@@ -263,7 +264,7 @@
             // BTNVENDE
             // 
             this.BTNVENDE.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BTNVENDE.Location = new System.Drawing.Point(761, 77);
+            this.BTNVENDE.Location = new System.Drawing.Point(719, 109);
             this.BTNVENDE.Name = "BTNVENDE";
             this.BTNVENDE.Size = new System.Drawing.Size(154, 23);
             this.BTNVENDE.TabIndex = 23;
@@ -307,7 +308,7 @@
             // btn_transito
             // 
             this.btn_transito.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_transito.Location = new System.Drawing.Point(909, 114);
+            this.btn_transito.Location = new System.Drawing.Point(735, 145);
             this.btn_transito.Name = "btn_transito";
             this.btn_transito.Size = new System.Drawing.Size(196, 31);
             this.btn_transito.TabIndex = 27;
@@ -318,7 +319,7 @@
             // btncompartir
             // 
             this.btncompartir.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btncompartir.Location = new System.Drawing.Point(879, 307);
+            this.btncompartir.Location = new System.Drawing.Point(863, 307);
             this.btncompartir.Name = "btncompartir";
             this.btncompartir.Size = new System.Drawing.Size(217, 52);
             this.btncompartir.TabIndex = 28;
@@ -326,11 +327,23 @@
             this.btncompartir.UseVisualStyleBackColor = true;
             this.btncompartir.Click += new System.EventHandler(this.btncompartir_Click);
             // 
+            // btnalm_recep
+            // 
+            this.btnalm_recep.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnalm_recep.Location = new System.Drawing.Point(949, 109);
+            this.btnalm_recep.Name = "btnalm_recep";
+            this.btnalm_recep.Size = new System.Drawing.Size(146, 78);
+            this.btnalm_recep.TabIndex = 29;
+            this.btnalm_recep.Text = "RECEPCION DE AL,MACEN DE GUIAS DE TIENDA";
+            this.btnalm_recep.UseVisualStyleBackColor = true;
+            this.btnalm_recep.Click += new System.EventHandler(this.btnalm_recep_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1117, 371);
+            this.Controls.Add(this.btnalm_recep);
             this.Controls.Add(this.btncompartir);
             this.Controls.Add(this.btn_transito);
             this.Controls.Add(this.btnorce);
@@ -390,6 +403,7 @@
         private System.Windows.Forms.Button btnorce;
         private System.Windows.Forms.Button btn_transito;
         private System.Windows.Forms.Button btncompartir;
+        private System.Windows.Forms.Button btnalm_recep;
     }
 }
 

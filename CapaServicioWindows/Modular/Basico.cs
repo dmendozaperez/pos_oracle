@@ -19,6 +19,7 @@ namespace CapaServicioWindows.Modular
     public class Basico
     {
         private DateTime fecha_despacho = DateTime.Today.AddDays(-25);
+        private DateTime fecha_recepcion_alm= Convert.ToDateTime("01-01-2020");
         private string gHostName = "172.16.24.216";
         private string gUserName = "webposbpe";
         private string gPassword = "JU737CbDmJvu";
@@ -40,7 +41,88 @@ namespace CapaServicioWindows.Modular
             {
 
             }
-        }       
+        }
+
+        private List<BataTransac.Ent_Scdddes> get_SCCCDEV(string _path, ref string error)
+        {
+            /*fecha para traer los pedido cerrados desde una fecha*/
+            List<BataTransac.Ent_Scdddes> _lista_scdddes = null;
+            String sqlquery_scdddes = "SELECT  DDES_TIPO,DDES_ALMAC,DDES_GUIRE,DDES_NDESP,DDES_MFDES,DDES_DESTI," +
+                                      "DDES_N_INI,DDES_N_FIN,DDES_CPAGO,DDES_FEMBA,DDES_FECHA,DDES_FDESP,DDES_ESTAD," +
+                                      "DDES_GGUIA,DDES_CCOND,DDES_CALZ,DDES_NCALZ,DDES_TOCAJ,DDES_IMPRE,DDES_GVALO," +
+                                      "DDES_SUBGR,DDES_RUCTC,DDES_TRANS,DDES_TRAN2,DDES_OBSER,DDES_NOMTC,DDES_NGUIA," +
+                                      "DDES_NRLIQ,DDES_LIMPR,DDES_EMPRE,DDES_CANAL,DDES_CADEN,DDES_SECCI,DDES_FTX,DDES_FTXTD " +
+                                      "FROM SCDDDES WHERE DDES_FDESP>=CTOD('" + fecha_despacho.ToString("MM/dd/yy") + "') and DDES_TIPO='DES' and DDES_ESTAD<>'A' AND EMPTY(DDES_FTXTD) AND (NOT EMPTY(DDES_CADEN)) " + get_query_alm_ecu();
+            try
+            {
+                //Util dd = new Util();
+                //dd.get_location_dbf();
+
+                using (OleDbConnection cn = new OleDbConnection(ConexionDBF._conexion_fvdes_oledb(_path)))
+                {
+                    using (OleDbCommand cmd = new OleDbCommand(sqlquery_scdddes, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        //cmd.Parameters.Add("DATE", OleDbType.Date).Value = fecha_despacho;
+                        using (OleDbDataAdapter da = new OleDbDataAdapter(cmd))
+                        {
+                            DataTable dt = new DataTable();
+                            da.Fill(dt);
+                            _lista_scdddes = new List<BataTransac.Ent_Scdddes>();
+                            _lista_scdddes = (from DataRow dr in dt.Rows
+                                              select new BataTransac.Ent_Scdddes()
+                                              {
+                                                  DDES_TIPO = dr["DDES_TIPO"].ToString(),
+                                                  DDES_ALMAC = dr["DDES_ALMAC"].ToString(),
+                                                  DDES_GUIRE = dr["DDES_GUIRE"].ToString(),
+                                                  DDES_NDESP = dr["DDES_NDESP"].ToString(),
+                                                  DDES_MFDES = dr["DDES_MFDES"].ToString(),
+                                                  DDES_DESTI = dr["DDES_DESTI"].ToString(),
+                                                  DDES_N_INI = dr["DDES_N_INI"].ToString(),
+                                                  DDES_N_FIN = dr["DDES_N_FIN"].ToString(),
+                                                  DDES_CPAGO = dr["DDES_CPAGO"].ToString(),
+                                                  DDES_FEMBA = Convert.ToDateTime(dr["DDES_FEMBA"]),
+                                                  DDES_FECHA = Convert.ToDateTime(dr["DDES_FECHA"]),
+                                                  DDES_FDESP = Convert.ToDateTime(dr["DDES_FDESP"]),
+                                                  DDES_ESTAD = dr["DDES_ESTAD"].ToString(),
+                                                  DDES_GGUIA = dr["DDES_GGUIA"].ToString(),
+                                                  DDES_CCOND = dr["DDES_CCOND"].ToString(),
+                                                  DDES_CALZ = Convert.ToDecimal(dr["DDES_CALZ"]),
+                                                  DDES_NCALZ = Convert.ToDecimal(dr["DDES_NCALZ"]),
+                                                  DDES_TOCAJ = Convert.ToDecimal(dr["DDES_TOCAJ"]),
+                                                  DDES_IMPRE = dr["DDES_IMPRE"].ToString(),
+                                                  DDES_GVALO = dr["DDES_GVALO"].ToString(),
+                                                  DDES_SUBGR = dr["DDES_SUBGR"].ToString(),
+                                                  DDES_RUCTC = dr["DDES_RUCTC"].ToString(),
+                                                  DDES_TRANS = dr["DDES_TRANS"].ToString(),
+                                                  DDES_TRAN2 = dr["DDES_TRAN2"].ToString(),
+                                                  DDES_OBSER = dr["DDES_OBSER"].ToString(),
+                                                  DDES_NOMTC = dr["DDES_NOMTC"].ToString(),
+                                                  DDES_NGUIA = dr["DDES_NGUIA"].ToString(),
+                                                  DDES_NRLIQ = dr["DDES_NRLIQ"].ToString(),
+                                                  DDES_LIMPR = dr["DDES_LIMPR"].ToString(),
+                                                  DDES_EMPRE = dr["DDES_EMPRE"].ToString(),
+                                                  DDES_CANAL = dr["DDES_CANAL"].ToString(),
+                                                  DDES_CADEN = dr["DDES_CADEN"].ToString(),
+                                                  DDES_SECCI = dr["DDES_SECCI"].ToString(),
+                                                  DDES_FTX = dr["DDES_FTX"].ToString(),
+                                                  DDES_FTXTD = dr["DDES_FTXTD"].ToString(),
+                                              }).ToList();
+                        }
+                    }
+
+                }
+
+            }
+            catch (Exception exc)
+            {
+                throw;
+                //error = exc.Message;
+                _lista_scdddes = null;
+            }
+            return _lista_scdddes;
+        }
+
         /// <summary>
         /// verificar las guias cerradas
         /// </summary>
@@ -711,12 +793,8 @@ namespace CapaServicioWindows.Modular
             }
             return _lista_scactco;
         }
-        /// <summary>
-        /// cebezera de guias para enviar
-        /// </summary>
-        /// <param name="nroguia"></param>
-        /// <returns></returns>
-        private List<BataTransac.Ent_Fvdespc> get_fvdespc(string codalm, string nroguia,string _path, ref string error,ref Boolean fila_existe,string ruta_scdddes)
+
+        private List<BataTransac.Ent_Fvdespc> get_SCCCDEV(string codalm, string nroguia, string _path, ref string error, ref Boolean fila_existe, string ruta_scdddes)
         {
             List<BataTransac.Ent_Fvdespc> fvdespc = null;
             //String sqlquery_fvdespc = "SELECT DESC_ALMAC,DESC_GUDIS,DESC_NDESP,DESC_TDES,DESC_FECHA,DESC_FDESP," +
@@ -724,11 +802,14 @@ namespace CapaServicioWindows.Modular
             //                          "DESC_CONCE,DESC_NMOVC,DESC_EMPRE,DESC_SECCI,DESC_CANAL,DESC_CADEN,DESC_FTX," +
             //                          "DESC_TXPOS,DESC_UNCA,DESC_UNNC,DESC_CAJA,DESC_VACA,DESC_VANC,DESC_VCAJ " +
             //                          "FROM FVDESPC WHERE DESC_GUDIS='" + nroguia + "' AND DESC_ALMAC='" + codalm +"'";
-            String sqlquery_fvdespc = "SELECT DESC_ALMAC,DESC_GUDIS,DESC_NDESP,DESC_TDES,DESC_FECHA,DESC_FDESP," +
-                          "DESC_ESTAD,DESC_TIPO,DESC_TORI,DESC_FEMI,DESC_SEMI,DESC_FTRA,DESC_NUME," +
-                          "DESC_CONCE,DESC_NMOVC,DESC_EMPRE,DESC_SECCI,DESC_CANAL,DESC_CADEN,DESC_FTX," +
-                          "DESC_TXPOS,DESC_UNCA,DESC_UNNC,DESC_CAJA,DESC_VACA,DESC_VANC,DESC_VCAJ " +
-                          "FROM FVDESPC WHERE   DESC_GUDIS + DESC_ALMAC IN (SELECT DDES_GUIRE + DDES_ALMAC FROM " + ruta_scdddes + "/SCDDDES WHERE DDES_FDESP>=CTOD('" + fecha_despacho.ToString("MM/dd/yy") + "') and DDES_TIPO='DES' and DDES_ESTAD<>'A' AND EMPTY(DDES_FTXTD) AND (NOT EMPTY(DDES_CADEN))" + get_query_alm_ecu() + ")";
+            String sqlquery_fvdespc = "SELECT CDEV_ALMAC AS DESC_ALMAC,CDEV_NDOC1 AS DESC_GUDIS,CDEV_NDOC1 AS DESC_NDESP," + 
+                                      "CDEV_ENTID AS DESC_TDES,CDEV_FDEVO AS DESC_FECHA,CDEV_FDEVO AS DESC_FDESP,CDEV_ESTAD AS DESC_ESTAD," +
+                                      "'DEV' AS DESC_TIPO,'' AS DESC_TORI,CDEV_FDEVO AS DESC_FEMI,CDEV_ANO + CDEV_SEMAN AS DESC_SEMI," + 
+                                      "CDEV_FDEVO AS DESC_FTRA,CDEV_CODIG AS DESC_NUME,'34' AS DESC_CONCE,'' AS DESC_NMOVC," + 
+                                      "CDEV_EMPRE AS DESC_EMPRE,CDEV_SECCI AS DESC_SECCI,CDEV_CANAL AS DESC_CANAL,CDEV_CADEN AS DESC_CADEN," + 
+                                      "'' AS DESC_FTX,'' AS DESC_TXPOS,CDEV_TUCAL AS DESC_UNCA,CDEV_TUNCA AS DESC_UNNC,CDEV_TUEMB AS DESC_CAJA," +
+                                      "CDEV_VACAL AS DESC_VACA,CDEV_VANCA AS DESC_VANC,CDEV_VAEMB AS DESC_VCAJ " +
+                                      "FROM SCCCDEV WHERE CDEV_FDEVO>=CTOD('" + fecha_recepcion_alm.ToString("MM/dd/yy") + "') and CDEV_CONCE IN ('56','32','55','58') and CDEV_ESTAD<>'A' AND EMPTY(CDEV_TXPOS)";
             try
             {
                 //_path = @"D:\FVT\SISTEMAS";
@@ -736,43 +817,43 @@ namespace CapaServicioWindows.Modular
                 {
                     using (OleDbCommand cmd = new OleDbCommand(sqlquery_fvdespc, cn))
                     {
-                        cmd.CommandTimeout = 0;                       
+                        cmd.CommandTimeout = 0;
                         using (OleDbDataAdapter da = new OleDbDataAdapter(cmd))
                         {
                             DataTable dt = new DataTable();
                             da.Fill(dt);
                             //List<BataTransac.Ent_Fvdespc> fvdespc = new List<BataTransac.Ent_Fvdespc>();
                             List<BataTransac.Ent_Fvdespc> list_fvdespc = (from DataRow dr in dt.Rows
-                                       select new BataTransac.Ent_Fvdespc
-                                       {
-                                           DESC_ALMAC = dr["DESC_ALMAC"].ToString(),
-                                           DESC_GUDIS = dr["DESC_GUDIS"].ToString(),
-                                           DESC_NDESP = dr["DESC_NDESP"].ToString(),
-                                           DESC_TDES = dr["DESC_TDES"].ToString(),
-                                          // DESC_FECHA = Convert.ToDateTime(dr["DESC_FECHA"]),se comenta pq viene vacio
-                                          // DESC_FDESP = Convert.ToDateTime(dr["DESC_FDESP"]),se supone que es la fecha despacho/*
-                                           DESC_ESTAD = dr["DESC_ESTAD"].ToString(),
-                                           DESC_TIPO = dr["DESC_TIPO"].ToString(),
-                                           DESC_TORI = dr["DESC_TORI"].ToString(),
-                                           DESC_FEMI = Convert.ToDateTime(dr["DESC_FEMI"]),
-                                           DESC_SEMI = dr["DESC_SEMI"].ToString(),
-                                          // DESC_FTRA = Convert.ToDateTime(dr["DESC_FTRA"]),
-                                           DESC_NUME = dr["DESC_NUME"].ToString(),
-                                           DESC_CONCE = dr["DESC_CONCE"].ToString(),
-                                           DESC_NMOVC = dr["DESC_NMOVC"].ToString(),
-                                           DESC_EMPRE = dr["DESC_EMPRE"].ToString(),
-                                           DESC_SECCI = dr["DESC_SECCI"].ToString(),
-                                           DESC_CANAL = dr["DESC_CANAL"].ToString(),
-                                           DESC_CADEN = dr["DESC_CADEN"].ToString(),
-                                           DESC_FTX = dr["DESC_FTX"].ToString(),
-                                           DESC_TXPOS = dr["DESC_TXPOS"].ToString(),
-                                           DESC_UNCA =Convert.ToDecimal(dr["DESC_UNCA"]),
-                                           DESC_UNNC =Convert.ToDecimal(dr["DESC_UNNC"]),
-                                           DESC_CAJA =Convert.ToDecimal(dr["DESC_CAJA"]),
-                                           DESC_VACA =Convert.ToDecimal(dr["DESC_VACA"]),
-                                           DESC_VANC =Convert.ToDecimal(dr["DESC_VANC"]),
-                                           DESC_VCAJ =Convert.ToDecimal(dr["DESC_VCAJ"]),
-                                       }).ToList();
+                                                                          select new BataTransac.Ent_Fvdespc
+                                                                          {
+                                                                              DESC_ALMAC = dr["DESC_ALMAC"].ToString(),
+                                                                              DESC_GUDIS = dr["DESC_GUDIS"].ToString(),
+                                                                              DESC_NDESP = dr["DESC_NDESP"].ToString(),
+                                                                              DESC_TDES = dr["DESC_TDES"].ToString(),
+                                                                              DESC_FECHA = Convert.ToDateTime(dr["DESC_FECHA"]),//se comenta pq viene vacio
+                                                                              DESC_FDESP = Convert.ToDateTime(dr["DESC_FDESP"]),//,se supone que es la fecha despacho
+                                                                              DESC_ESTAD = dr["DESC_ESTAD"].ToString(),
+                                                                              DESC_TIPO = dr["DESC_TIPO"].ToString(),
+                                                                              DESC_TORI = dr["DESC_TORI"].ToString(),
+                                                                              DESC_FEMI = Convert.ToDateTime(dr["DESC_FEMI"]),
+                                                                              DESC_SEMI = dr["DESC_SEMI"].ToString(),
+                                                                             DESC_FTRA = Convert.ToDateTime(dr["DESC_FTRA"]),
+                                                                              DESC_NUME = dr["DESC_NUME"].ToString(),
+                                                                              DESC_CONCE = dr["DESC_CONCE"].ToString(),
+                                                                              DESC_NMOVC = dr["DESC_NMOVC"].ToString(),
+                                                                              DESC_EMPRE = dr["DESC_EMPRE"].ToString(),
+                                                                              DESC_SECCI = dr["DESC_SECCI"].ToString(),
+                                                                              DESC_CANAL = dr["DESC_CANAL"].ToString(),
+                                                                              DESC_CADEN = dr["DESC_CADEN"].ToString(),
+                                                                              DESC_FTX = dr["DESC_FTX"].ToString(),
+                                                                              DESC_TXPOS = dr["DESC_TXPOS"].ToString(),
+                                                                              DESC_UNCA = Convert.ToDecimal(dr["DESC_UNCA"]),
+                                                                              DESC_UNNC = Convert.ToDecimal(dr["DESC_UNNC"]),
+                                                                              DESC_CAJA = Convert.ToDecimal(dr["DESC_CAJA"]),
+                                                                              DESC_VACA = Convert.ToDecimal(dr["DESC_VACA"]),
+                                                                              DESC_VANC = Convert.ToDecimal(dr["DESC_VANC"]),
+                                                                              DESC_VCAJ = Convert.ToDecimal(dr["DESC_VCAJ"]),
+                                                                          }).ToList();
 
 
                             if (list_fvdespc.Count == 0)
@@ -798,7 +879,142 @@ namespace CapaServicioWindows.Modular
                 tw.Close();
                 tw.Dispose();
                 error = exc.Message;
-                fvdespc=null;
+                fvdespc = null;
+            }
+            return fvdespc;
+        }
+        private DataTable get_SCDEVALM(string codalm, string nroguia, string _path, ref string error, string ruta_scdddes)
+        {
+            DataTable fvdespd = null;
+            //string sqlquery_fvdespd = "SELECT DESD_TIPO,DESD_GUDIS,DESD_NDESP,DESD_ALMAC,DESD_ARTIC,DESD_CALID," +
+            //                           "DESD_ME00,DESD_ME01,DESD_ME02,DESD_ME03,DESD_ME04,DESD_ME05,DESD_ME06,DESD_ME07,DESD_ME08," + 
+            //                           "DESD_ME09,DESD_ME10,DESD_ME11,DESD_CLASE,DESD_MERC,DESD_CATEG,DESD_SUBCA," + 
+            //                           "DESD_MARCA,DESD_MERC3,DESD_CATE3,DESD_SUBC3,DESD_MARC3,DESD_CNDME," + 
+            //                           "DESD_EMPRE,DESD_SECCI,DESD_CANAL," +
+            //                           "DESD_CADEN,DESD_GGUIA,DESD_ESTAD,DESD_PRVTA,DESD_COSTO FROM FVDESPD WHERE DESD_GUDIS='" + nroguia + "'" +
+            //                           " AND DESD_ALMAC='" + codalm + "'";
+            string sqlquery_fvdespd = "SELECT 'DEV' AS DESD_TIPO,DVAL_GUDEV AS DESD_GUDIS,DVAL_GUDEV AS DESD_NDESP,DVAL_ALMAC AS DESD_ALMAC," +
+                                      "DVAL_ARTIC AS DESD_ARTIC,DVAL_CALID AS DESD_CALID,DVAL_MED00 AS DESD_ME00,DVAL_MED01 AS DESD_ME01," +
+                                      "DVAL_MED02 AS DESD_ME02,DVAL_MED03 AS DESD_ME03,DVAL_MED04 AS DESD_ME04,DVAL_MED05 AS DESD_ME05," +
+                                      "DVAL_MED06 AS DESD_ME06,DVAL_MED07 AS DESD_ME07,DVAL_MED08 AS DESD_ME08,DVAL_MED09 AS DESD_ME09," +
+                                      "DVAL_MED10 AS DESD_ME10,DVAL_MED11 AS DESD_ME11,'' AS DESD_CLASE,DVAL_MERC AS DESD_MERC," +
+                                      "DVAL_CATEG AS DESD_CATEG,DVAL_SUBCA AS DESD_SUBCA,DVAL_MARCA AS DESD_MARCA,DVAL_MERC3 AS DESD_MERC3," +
+                                      "DVAL_CATE3 AS DESD_CATE3,DVAL_SUBC3 AS DESD_SUBC3,DVAL_MARC3 AS DESD_MARC3,'' AS DESD_CNDME," +
+                                      "DVAL_EMPRE AS DESD_EMPRE,DVAL_SECCI AS DESD_SECCI,'' AS DESD_CANAL,'' AS DESD_CADEN,'' AS DESD_GGUIA,'' AS DESD_ESTAD," +
+                                      "DVAL_PREAL AS DESD_PRVTA,DVAL_COSDV AS DESD_COSTO " +
+                                      "FROM SCDEVALM WHERE  DVAL_GUDEV + DVAL_ALMAC IN (SELECT CDEV_NDOC1 + CDEV_ALMAC FROM " + ruta_scdddes + "/SCCCDEV WHERE CDEV_FDEVO>=CTOD('" + fecha_recepcion_alm.ToString("MM/dd/yy") + "') and CDEV_CONCE IN ('56','32','55','58') and CDEV_ESTAD<>'A' AND EMPTY(CDEV_TXPOS))";
+            try
+            {
+                using (OleDbConnection cn = new OleDbConnection(ConexionDBF._conexion_fvdes_oledb(_path)))
+                {
+                    using (OleDbCommand cmd = new OleDbCommand(sqlquery_fvdespd, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        using (OleDbDataAdapter da = new OleDbDataAdapter(cmd))
+                        {
+                            fvdespd = new DataTable();
+                            da.Fill(fvdespd);
+                            fvdespd.TableName = "fvdespd";
+                        }
+                    }
+                }
+            }
+            catch (Exception exc)
+            {
+                error = exc.Message;
+                fvdespd = null;
+            }
+            return fvdespd;
+        }
+
+        /// <summary>
+        /// cebezera de guias para enviar
+        /// </summary>
+        /// <param name="nroguia"></param>
+        /// <returns></returns>
+        private List<BataTransac.Ent_Fvdespc> get_fvdespc(string codalm, string nroguia, string _path, ref string error, ref Boolean fila_existe, string ruta_scdddes)
+        {
+            List<BataTransac.Ent_Fvdespc> fvdespc = null;
+            //String sqlquery_fvdespc = "SELECT DESC_ALMAC,DESC_GUDIS,DESC_NDESP,DESC_TDES,DESC_FECHA,DESC_FDESP," +
+            //                          "DESC_ESTAD,DESC_TIPO,DESC_TORI,DESC_FEMI,DESC_SEMI,DESC_FTRA,DESC_NUME," +
+            //                          "DESC_CONCE,DESC_NMOVC,DESC_EMPRE,DESC_SECCI,DESC_CANAL,DESC_CADEN,DESC_FTX," +
+            //                          "DESC_TXPOS,DESC_UNCA,DESC_UNNC,DESC_CAJA,DESC_VACA,DESC_VANC,DESC_VCAJ " +
+            //                          "FROM FVDESPC WHERE DESC_GUDIS='" + nroguia + "' AND DESC_ALMAC='" + codalm +"'";
+            String sqlquery_fvdespc = "SELECT DESC_ALMAC,DESC_GUDIS,DESC_NDESP,DESC_TDES,DESC_FECHA,DESC_FDESP," +
+                          "DESC_ESTAD,DESC_TIPO,DESC_TORI,DESC_FEMI,DESC_SEMI,DESC_FTRA,DESC_NUME," +
+                          "DESC_CONCE,DESC_NMOVC,DESC_EMPRE,DESC_SECCI,DESC_CANAL,DESC_CADEN,DESC_FTX," +
+                          "DESC_TXPOS,DESC_UNCA,DESC_UNNC,DESC_CAJA,DESC_VACA,DESC_VANC,DESC_VCAJ " +
+                          "FROM FVDESPC WHERE   DESC_GUDIS + DESC_ALMAC IN (SELECT DDES_GUIRE + DDES_ALMAC FROM " + ruta_scdddes + "/SCDDDES WHERE DDES_FDESP>=CTOD('" + fecha_despacho.ToString("MM/dd/yy") + "') and DDES_TIPO='DES' and DDES_ESTAD<>'A' AND EMPTY(DDES_FTXTD) AND (NOT EMPTY(DDES_CADEN))" + get_query_alm_ecu() + ")";
+            try
+            {
+                //_path = @"D:\FVT\SISTEMAS";
+                using (OleDbConnection cn = new OleDbConnection(ConexionDBF._conexion_fvdes_oledb(_path)))
+                {
+                    using (OleDbCommand cmd = new OleDbCommand(sqlquery_fvdespc, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        using (OleDbDataAdapter da = new OleDbDataAdapter(cmd))
+                        {
+                            DataTable dt = new DataTable();
+                            da.Fill(dt);
+                            //List<BataTransac.Ent_Fvdespc> fvdespc = new List<BataTransac.Ent_Fvdespc>();
+                            List<BataTransac.Ent_Fvdespc> list_fvdespc = (from DataRow dr in dt.Rows
+                                                                          select new BataTransac.Ent_Fvdespc
+                                                                          {
+                                                                              DESC_ALMAC = dr["DESC_ALMAC"].ToString(),
+                                                                              DESC_GUDIS = dr["DESC_GUDIS"].ToString(),
+                                                                              DESC_NDESP = dr["DESC_NDESP"].ToString(),
+                                                                              DESC_TDES = dr["DESC_TDES"].ToString(),
+                                                                              // DESC_FECHA = Convert.ToDateTime(dr["DESC_FECHA"]),se comenta pq viene vacio
+                                                                              // DESC_FDESP = Convert.ToDateTime(dr["DESC_FDESP"]),se supone que es la fecha despacho/*
+                                                                              DESC_ESTAD = dr["DESC_ESTAD"].ToString(),
+                                                                              DESC_TIPO = dr["DESC_TIPO"].ToString(),
+                                                                              DESC_TORI = dr["DESC_TORI"].ToString(),
+                                                                              DESC_FEMI = Convert.ToDateTime(dr["DESC_FEMI"]),
+                                                                              DESC_SEMI = dr["DESC_SEMI"].ToString(),
+                                                                              // DESC_FTRA = Convert.ToDateTime(dr["DESC_FTRA"]),
+                                                                              DESC_NUME = dr["DESC_NUME"].ToString(),
+                                                                              DESC_CONCE = dr["DESC_CONCE"].ToString(),
+                                                                              DESC_NMOVC = dr["DESC_NMOVC"].ToString(),
+                                                                              DESC_EMPRE = dr["DESC_EMPRE"].ToString(),
+                                                                              DESC_SECCI = dr["DESC_SECCI"].ToString(),
+                                                                              DESC_CANAL = dr["DESC_CANAL"].ToString(),
+                                                                              DESC_CADEN = dr["DESC_CADEN"].ToString(),
+                                                                              DESC_FTX = dr["DESC_FTX"].ToString(),
+                                                                              DESC_TXPOS = dr["DESC_TXPOS"].ToString(),
+                                                                              DESC_UNCA = Convert.ToDecimal(dr["DESC_UNCA"]),
+                                                                              DESC_UNNC = Convert.ToDecimal(dr["DESC_UNNC"]),
+                                                                              DESC_CAJA = Convert.ToDecimal(dr["DESC_CAJA"]),
+                                                                              DESC_VACA = Convert.ToDecimal(dr["DESC_VACA"]),
+                                                                              DESC_VANC = Convert.ToDecimal(dr["DESC_VANC"]),
+                                                                              DESC_VCAJ = Convert.ToDecimal(dr["DESC_VCAJ"]),
+                                                                          }).ToList();
+
+
+                            if (list_fvdespc.Count == 0)
+                            {
+                                fila_existe = false;
+                            }
+                            else
+                            {
+                                fila_existe = true;
+                                fvdespc = list_fvdespc;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception exc)
+            {
+
+                string _hora = DateTime.Now.ToLongTimeString() + exc.Message;
+                TextWriter tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                tw.WriteLine(_hora);
+                tw.Flush();
+                tw.Close();
+                tw.Dispose();
+                error = exc.Message;
+                fvdespc = null;
             }
             return fvdespc;
         }
@@ -807,7 +1023,7 @@ namespace CapaServicioWindows.Modular
         /// </summary>
         /// <param name="nroguia"></param>
         /// <returns></returns>
-        private DataTable get_fvdespd(string codalm,string nroguia, string _path, ref string error, string ruta_scdddes)
+        private DataTable get_fvdespd(string codalm, string nroguia, string _path, ref string error, string ruta_scdddes)
         {
             DataTable fvdespd = null;
             //string sqlquery_fvdespd = "SELECT DESD_TIPO,DESD_GUDIS,DESD_NDESP,DESD_ALMAC,DESD_ARTIC,DESD_CALID," +
@@ -829,12 +1045,12 @@ namespace CapaServicioWindows.Modular
                 {
                     using (OleDbCommand cmd = new OleDbCommand(sqlquery_fvdespd, cn))
                     {
-                        cmd.CommandTimeout = 0;                     
+                        cmd.CommandTimeout = 0;
                         using (OleDbDataAdapter da = new OleDbDataAdapter(cmd))
                         {
                             fvdespd = new DataTable();
                             da.Fill(fvdespd);
-                            fvdespd.TableName = "fvdespd";                            
+                            fvdespd.TableName = "fvdespd";
                         }
                     }
                 }
@@ -842,13 +1058,13 @@ namespace CapaServicioWindows.Modular
             catch (Exception exc)
             {
                 error = exc.Message;
-                fvdespd = null;                
+                fvdespd = null;
             }
             return fvdespd;
         }
 
 
-       
+
         public string get_query_alm_ecu()
         {
             string sqlquery = "";
@@ -864,35 +1080,35 @@ namespace CapaServicioWindows.Modular
 
                     var lista_almac = bata_trans.ws_lista_alma_Ecu(header_user);
 
-                    if (lista_almac!=null)
+                    if (lista_almac != null)
                     {
-                        
+
                         Int32 cur_alm = 1;
                         foreach (var item in lista_almac)
                         {
-                            if (cur_alm==1)
+                            if (cur_alm == 1)
                             {
-                                sqlquery = " and DDES_ALMAC in ('" + item.alma_ecu+ "'";
+                                sqlquery = " and DDES_ALMAC in ('" + item.alma_ecu + "'";
                             }
                             else
                             {
-                                sqlquery += ",'"+item.alma_ecu + "'" ;
+                                sqlquery += ",'" + item.alma_ecu + "'";
                             }
 
-                            if (lista_almac.Count()==cur_alm)
+                            if (lista_almac.Count() == cur_alm)
                             {
                                 sqlquery += ")";
                             }
-                            
+
 
                             cur_alm += 1;
                         }
                     }
                 }
             }
-            catch 
+            catch
             {
-                sqlquery = "";                
+                sqlquery = "";
             }
             return sqlquery;
         }
@@ -907,7 +1123,7 @@ namespace CapaServicioWindows.Modular
                     valida = true;
                 }
             }
-            catch 
+            catch
             {
                 valida = false;
             }
@@ -927,8 +1143,8 @@ namespace CapaServicioWindows.Modular
                     TimeSpan ts = factual - fcreacion;
 
                     Int32 max_num = 3;
-                    
-                    if (ts.Hours>= max_num)
+
+                    if (ts.Hours >= max_num)
                     {
                         File.Delete(@ruta_nopos);
                     }
@@ -937,7 +1153,7 @@ namespace CapaServicioWindows.Modular
             catch
             {
 
-               
+
             }
         }
 
@@ -951,11 +1167,11 @@ namespace CapaServicioWindows.Modular
             List<BataTransac.Ent_PathDBF> listar_location_dbf = null;
             DataTable dtStock = null;
             TextWriter tw = null;
-            string ruta_lurin= @"D:\BataTransaction\LURIN.txt";
+            string ruta_lurin = @"D:\BataTransaction\LURIN.txt";
             try
             {
                 Boolean fil_lurin = false;
-                /*segundos para ejecutar*/
+                /*segundos para ejecutar
                 //_espera_ejecuta(20);
                 /***********************/
                 if (File.Exists(ruta_lurin)) fil_lurin = true;
@@ -981,6 +1197,30 @@ namespace CapaServicioWindows.Modular
                     /* if (File.Exists(@ruta_validacion)) return;*/ //valida_exists_txt = true;
 
                 }
+                if (fil_lurin)
+                {
+                    NetworkShare.ConnectToShare(_locatio_noservicio.rutloc_location, @".\Administrator", "7dministr7dor*");
+
+                    if (Directory.Exists(@_locatio_noservicio.rutloc_location))
+                    {
+                        string _hora1 = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "==>EXISTE CARPETA LURIN " + _locatio_noservicio.rutloc_location;
+                        tw = new StreamWriter(@"D:\ALMACEN\STOCK.txt", true);
+                        tw.WriteLine(_hora1);
+                        tw.Flush();
+                        tw.Close();
+                        tw.Dispose();
+                    }
+                    else
+                    {
+                        string _hora1 = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "==>NO EXISTE CARPETA LURIN " + _locatio_noservicio.rutloc_location;
+                        tw = new StreamWriter(@"D:\ALMACEN\STOCK.txt", true);
+                        tw.WriteLine(_hora1);
+                        tw.Flush();
+                        tw.Close();
+                        tw.Dispose();
+                    }
+                }
+
                 //ruta_validacion = @"D:\FVT\SISTEMAS\NOPOS.TXT";
                 forzar_delete_nopos(ruta_validacion);
                 #endregion
@@ -2642,6 +2882,387 @@ namespace CapaServicioWindows.Modular
             //return _error_transac;
         }
 
+        public void eje_envio_guias_devolucion(ref string _error_ws)
+        {
+            string _error_transac = "";
+            List<BataTransac.Ent_Scdddes> _lista_guiasC = null;
+
+            List<BataTransac.Ent_PathDBF> listar_location_dbf = null;
+
+            string ruta_lurin = @"D:\BataTransaction\LURIN.txt";
+
+            try
+            {
+                Boolean fil_lurin = false;
+                if (File.Exists(ruta_lurin)) fil_lurin = true;
+
+                /*segundos para ejecutar*/
+                //_espera_ejecuta(20);
+                /***********************/
+
+                #region<CAPTURAR EL PATH DE LOS DBF>
+                Util locationdbf = new Util();
+                listar_location_dbf = locationdbf.get_location_dbf(ref _error_ws, fil_lurin);
+                #endregion
+
+                if (listar_location_dbf == null) return;
+
+                /*VALIDACION DE EJECUCION */
+                #region<VALIDA ARCHIVO SI EXISTE PARA NO REALIZAR NINGUNA ACCCION POR SEGURIDAD DE REINDEXACION DEL FOX>
+                string name_txt = "NOPOS";
+                var _locatio_noservicio = listar_location_dbf.Where(x => x.rutloc_namedbf == name_txt).FirstOrDefault();
+
+                //Boolean valida_exists_txt = false;
+                string ruta_validacion = "";
+                if (_locatio_noservicio != null)
+                {
+                    ruta_validacion = ((fil_lurin) ? _locatio_noservicio.rutloc_location_lur : _locatio_noservicio.rutloc_location) + "\\" + _locatio_noservicio.rutloc_namedbf + ".txt";
+                    //ruta_validacion = _locatio_noservicio.rutloc_location + "\\" + _locatio_noservicio.rutloc_namedbf + ".txt";
+                    /* if (File.Exists(@ruta_validacion)) return;*/ //valida_exists_txt = true;
+
+                }
+               // ruta_validacion = @"D:\FVT\SISTEMAS\NOPOS.TXT";
+
+                forzar_delete_nopos(ruta_validacion);
+                #endregion
+
+                #region<EN ESTE PASO TRATAMOS DE ENTRAR AL NOVELL PARA TRAERME LA INFO>
+                if (valida_file_ecu())
+                {
+                    NetworkShare.ConnectToShare(_locatio_noservicio.rutloc_location, ConexionDBF.user_novell, ConexionDBF.password_novell);
+                }
+                #endregion
+
+                //if (valida_exists_txt) return;
+
+
+
+                string name_dbf = "SCCCDEV";
+                var _locatio_scdddes = listar_location_dbf.Where(x => x.rutloc_namedbf == name_dbf).FirstOrDefault();
+
+                string _error = "";
+                /*ya no entra a consultar*/
+                if (File.Exists(@ruta_validacion)) return;
+                string _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "==>INGRESO PASO1";
+                TextWriter tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                tw.WriteLine(_hora);
+                tw.Flush();
+                tw.Close();
+                tw.Dispose();
+                /**/
+
+
+                #region<EN ESTE PASO TRATAMOS DE ENTRAR AL NOVELL PARA TRAERME LA INFO>
+                if (valida_file_ecu())
+                {
+                    NetworkShare.ConnectToShare(_locatio_noservicio.rutloc_location, ConexionDBF.user_novell, ConexionDBF.password_novell);
+                }
+                else
+                {
+                    NetworkShare.ConnectToShare(_locatio_scdddes.rutloc_location, @".\Tareas", "tareas");
+                }
+                #endregion
+
+                _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "==> saliendo del objecto NetworkShare y entrando al metodo get_scdddes";
+                tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                tw.WriteLine(_hora);
+                tw.Flush();
+                tw.Close();
+                tw.Dispose();
+
+                //_lista_guiasC = get_SCCCDEV(_locatio_scdddes.rutloc_location, ref _error);
+
+
+                //_hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "==>get_scdddes ==>" + _error + _lista_guiasC.Count().ToString();
+                //tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                //tw.WriteLine(_hora);
+                //tw.Flush();
+                //tw.Close();
+                //tw.Dispose();
+
+                /*VERIFICAR SI HAY ERROR*/
+                //if (_error.Length > 0)
+                //{
+                //    _error += " ==>TABLA [SCDDDES]";
+                //    Util ws_error_transac = new Util();
+                //    /*si hay un error entonces 03 error de lectura dbf*/
+                //    ws_error_transac.control_errores_transac("03", _error, ref _error_ws);
+                //}
+                /**/
+
+                //if (_lista_guiasC != null)
+                //{
+                    //if (_lista_guiasC.Count == 0)
+                    //{
+                    //    _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "ningun registro encontrado,  ";
+                    //    tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                    //    tw.WriteLine(_hora);
+                    //    tw.Flush();
+                    //    tw.Close();
+                    //    tw.Dispose();
+                    //    return;
+                    //}
+
+                    #region<METODO GRUPO CONSULTA>
+                    if (File.Exists(@ruta_validacion)) return;
+                    /*en este caso */
+                    _error = "";
+                    name_dbf = "SCCCDEV";
+                    Boolean existe_data = false;
+                    var _location_fvdespc = listar_location_dbf.Where(x => x.rutloc_namedbf == name_dbf).FirstOrDefault();
+
+                    _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "inicio==>acceso dbf ";
+                    tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                    tw.WriteLine(_hora);
+                    tw.Flush();
+                    tw.Close();
+                    tw.Dispose();
+
+                    #region<EN ESTE PASO TRATAMOS DE ENTRAR AL NOVELL PARA TRAERME LA INFO>
+                    if (valida_file_ecu())
+                    {
+                        NetworkShare.ConnectToShare(_location_fvdespc.rutloc_location, ConexionDBF.user_novell, ConexionDBF.password_novell);
+                    }
+                    #endregion
+
+                    List<BataTransac.Ent_Fvdespc> fvdespc_lista = get_SCCCDEV("", "", _location_fvdespc.rutloc_location, ref _error, ref existe_data, _locatio_scdddes.rutloc_location);
+
+                if (fvdespc_lista == null) return;
+
+
+                    _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "get_fvdespc==>>" + _error + " " + fvdespc_lista.Count().ToString();
+                    tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                    tw.WriteLine(_hora);
+                    tw.Flush();
+                    tw.Close();
+                    tw.Dispose();
+
+                    name_dbf = "SCDEVALM";
+                    var _location_fvdespd = listar_location_dbf.Where(x => x.rutloc_namedbf == name_dbf).FirstOrDefault();
+                    if (File.Exists(@ruta_validacion)) return;
+                    #region<EN ESTE PASO TRATAMOS DE ENTRAR AL NOVELL PARA TRAERME LA INFO>
+                    if (valida_file_ecu())
+                    {
+                        NetworkShare.ConnectToShare(_location_fvdespd.rutloc_location, ConexionDBF.user_novell, ConexionDBF.password_novell);
+                    }
+                    #endregion
+
+                    DataTable fvdespd_lista = get_SCDEVALM("", "", _location_fvdespd.rutloc_location, ref _error, _locatio_scdddes.rutloc_location);
+                    _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "get_fvdespd==>>" + _error + " " + fvdespd_lista.Rows.Count.ToString();
+                    tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                    tw.WriteLine(_hora);
+                    tw.Flush();
+                    tw.Close();
+                    tw.Dispose();
+
+
+                    _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "fin==>acceso dbf ";
+                    tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                    tw.WriteLine(_hora);
+                    tw.Flush();
+                    tw.Close();
+                    tw.Dispose();
+
+                    _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "fin==>acceso dbf ";
+                    tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                    tw.WriteLine(_hora);
+                    tw.Flush();
+                    tw.Close();
+                    tw.Dispose();
+                    #endregion
+                    /**/
+                    string DESC_ALMACEN = "";
+                    string rutloc_location = "";
+                    List<string> listGuias = new List<string>();
+
+                    #region<ENVIAMOS GUIAS POR WEBSERVICE>
+                    foreach (BataTransac.Ent_Fvdespc filaC in fvdespc_lista)
+                    {
+
+                        var fvdespc_tmp = fvdespc_lista.Where(d => d.DESC_ALMAC == filaC.DESC_ALMAC && d.DESC_GUDIS == filaC.DESC_GUDIS).ToList(); // get_fvdespc(filaC.DDES_ALMAC, filaC.DDES_GUIRE, _location_fvdespc.rutloc_location, ref _error, ref existe_data);
+
+                        BataTransac.Ent_Fvdespc fvdespc = new BataTransac.Ent_Fvdespc();
+                        fvdespc = fvdespc_tmp[0];
+
+
+                        _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "==>get_fvdespc " + filaC.DESC_GUDIS;
+                        tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                        tw.WriteLine(_hora);
+                        tw.Flush();
+                        tw.Close();
+                        tw.Dispose();
+                        /*si existe data entonces entra a la condicion*/
+                        if (existe_data)
+                        {
+                            /*validando fechas de despacho*/
+                            //if (fvdespc != null)
+                            //{
+                            //    fvdespc.DESC_FDESP = filaC.DESC_FECHA;
+                            //    fvdespc.DESC_FECHA = filaC.DESC_FECHA;
+                            //    fvdespc.DESC_FTRA = filaC.DESC_FECHA;
+                            //}
+
+                            /*VERIFICAR SI HAY ERROR*/
+                            if (_error.Length > 0)
+                            {
+                                _error += " ==>TABLA [FVDESPC]";
+                                Util ws_error_transac = new Util();
+                                /*si hay un error entonces 03 error de lectura dbf*/
+                                ws_error_transac.control_errores_transac("03", _error, ref _error_ws);
+                            }
+                            /**/
+
+                            /*captura la cebecera de la guia*/
+                            if (fvdespc != null)
+                            {
+                                _error = "";
+                                name_dbf = "FVDESPD";
+
+
+
+                                _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "inicio==>get_fvdespd " + filaC.DESC_GUDIS;
+                                tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                                tw.WriteLine(_hora);
+                                tw.Flush();
+                                tw.Close();
+                                tw.Dispose();
+
+
+                                DataTable fvdespd = new DataTable();
+                                fvdespd = fvdespd_lista.Clone();
+                                DataRow[] filas_fvdespd = null;
+                                filas_fvdespd = fvdespd_lista.Select("DESD_ALMAC='" + filaC.DESC_ALMAC + "' and DESD_GUDIS='" + filaC.DESC_GUDIS + "'"); // get_fvdespd(filaC.DDES_ALMAC, filaC.DDES_GUIRE, _location_fvdespd.rutloc_location, ref _error);
+
+                                foreach (DataRow fila in filas_fvdespd)
+                                {
+                                    fvdespd.ImportRow(fila);
+                                }
+
+                                _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "fin==>get_fvdespd " + filaC.DESC_GUDIS;
+                                tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                                tw.WriteLine(_hora);
+                                tw.Flush();
+                                tw.Close();
+                                tw.Dispose();
+
+                                /*VERIFICAR SI HAY ERROR*/
+                                if (_error.Length > 0)
+                                {
+                                    _error += " ==>TABLA [FVDESPD]";
+                                    Util ws_error_transac = new Util();
+                                    /*si hay un error entonces 03 error de lectura dbf*/
+                                    ws_error_transac.control_errores_transac("03", _error, ref _error_ws);
+                                }
+                                /**/
+
+                                /*verifica que el detalle de la guia tenga filas*/
+                                /*si la guias tiene detalle se envia por ws*/
+
+                                if (fvdespd != null)
+                                {
+                                    if (fvdespd.Rows.Count > 0)
+                                    {
+                                        /*enviar el datatable*/
+                                        fvdespc.DT_FVDESPD_TREGMEDIDA = fvdespd;
+
+                                        BataTransac.Ent_Scdddes scdddes = new BataTransac.Ent_Scdddes();
+                                        //scdddes = filaC;
+
+                                        _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "==>inicio de envio web service " + filaC.DESC_GUDIS;
+                                        tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                                        tw.WriteLine(_hora);
+                                        tw.Flush();
+                                        tw.Close();
+                                        tw.Dispose();
+                                        /***********************************/
+                                        Envio_Guias ws_envio = new Envio_Guias();
+                                        string envio_guias_ws = ws_envio.envio_ws_guias_recepcion(fvdespc);
+
+                                        _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "==>envio web service " + filaC.DESC_GUDIS;
+                                        tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                                        tw.WriteLine(_hora);
+                                        tw.Flush();
+                                        tw.Close();
+                                        tw.Dispose();
+
+                                        //si return es true entonces validamos los dbf
+                                        if (envio_guias_ws.Length == 0)
+                                        {
+                                            name_dbf = "SCCCDEV";
+                                            var _locatio_scdddes_edit = listar_location_dbf.Where(x => x.rutloc_namedbf == name_dbf).FirstOrDefault();
+                                            /*si es que las guias se grabaron correctamente entonces vamos a setear el valor en el dbf*/
+
+                                            /*ya no entra a consultar*/
+                                            if (File.Exists(@ruta_validacion)) return;
+                                            /**/
+                                            _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "==>inicio de update scddes " + filaC.DESC_GUDIS;
+                                            tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                                            tw.WriteLine(_hora);
+                                            tw.Flush();
+                                            tw.Close();
+                                            tw.Dispose();
+
+                                            #region<EN ESTE PASO TRATAMOS DE ENTRAR AL NOVELL PARA TRAERME LA INFO>
+                                            if (valida_file_ecu())
+                                            {
+                                                NetworkShare.ConnectToShare(_locatio_scdddes_edit.rutloc_location, ConexionDBF.user_novell, ConexionDBF.password_novell);
+                                            }
+                                            #endregion
+
+                                            listGuias.Add(fvdespc.DESC_ALMAC + fvdespc.DESC_GUDIS);
+                                            DESC_ALMACEN = fvdespc.DESC_ALMAC;
+                                            rutloc_location = _locatio_scdddes_edit.rutloc_location;
+
+                                            //edit_scdddes(fvdespc.DESC_ALMAC, fvdespc.DESC_GUDIS, _locatio_scdddes_edit.rutloc_location,ref _error_ws);
+                                            _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "==>fin de update scddes " + _error_ws + "  " + filaC.DESC_GUDIS;
+                                            tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                                            tw.WriteLine(_hora);
+                                            tw.Flush();
+                                            tw.Close();
+                                            tw.Dispose();
+
+
+                                        }
+                                        else
+                                        {
+                                            Util ws_error_transac = new Util();
+                                            _error_ws = envio_guias_ws.ToString();
+                                            /*si hay un error entonces 02 error de transaction*/
+                                            ws_error_transac.control_errores_transac("02", envio_guias_ws, ref _error_ws);
+                                        }
+                                    }
+                                }
+
+                            }
+                        }
+                        //}
+                    }
+                    #endregion
+
+                    if (listGuias.Count > 0)
+                    {
+
+                        edit_list_SCCCDEV(DESC_ALMACEN, listGuias, rutloc_location, ref _error_ws);
+                        _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "==>fin de update list scddes " + _error_ws;
+                        tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                        tw.WriteLine(_hora);
+                        tw.Flush();
+                        tw.Close();
+                        tw.Dispose();
+                    }
+
+                //}
+
+            }
+            catch (Exception exc)
+            {
+                _error_ws = exc.Message + " error de metodo";
+                _error_transac = exc.Message + " error de metodo";
+                //_envio_guias = "";
+            }
+            //return _error_transac;
+        }
+
         public static string retornar()
         {
             return "xxxx";
@@ -2676,6 +3297,85 @@ namespace CapaServicioWindows.Modular
 
             }
             catch(Exception exc)
+            {
+                _error_ws = exc.Message;
+            }
+        }
+
+        private void edit_list_SCCCDEV(string cod_alm, List<string> listGuia, string _path, ref string _error_ws)
+        {
+
+            string strListGuia = "";
+            int limite = 20;
+            int contador = 0;
+            try
+            {
+                foreach (string strguia in listGuia)
+                {
+                    contador++;
+
+                    strListGuia += "'" + strguia + "',";
+
+                    if (contador == limite)
+                    {
+
+                        strListGuia = strListGuia.TrimEnd(',');
+
+                        string sqlquery = "UPDATE SCCCDEV SET CDEV_TXPOS='X' WHERE CDEV_ALMAC + CDEV_NDOC1 in (" + strListGuia + ")";
+
+                        strListGuia = "";
+                        contador = 0;
+
+                        String error_cursor = "";
+
+                        update_list_scdddes(sqlquery, _path, ref error_cursor);
+
+
+
+                        if (error_cursor.Length > 0)
+                        {
+
+                            string _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " Error de update registros==>" + error_cursor;
+                            TextWriter tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                            tw.WriteLine(_hora);
+                            tw.Flush();
+                            tw.Close();
+                            tw.Dispose();
+
+
+                        }
+                        else
+                        {
+                            string _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " Update registros correctamente..";
+                            TextWriter tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+                            tw.WriteLine(_hora);
+                            tw.Flush();
+                            tw.Close();
+                            tw.Dispose();
+                        }
+
+                    }
+
+
+                }
+
+                if (contador > 0)
+                {
+                    strListGuia = strListGuia.TrimEnd(',');
+
+                    //string sqlquery = "UPDATE SCDDDES SET DDES_FTXTD='X' WHERE DDES_ALMAC='" + cod_alm + "' AND DDES_GUIRE in (" + strListGuia + ")";
+                    string sqlquery = "UPDATE SCCCDEV SET CDEV_TXPOS='X' WHERE CDEV_ALMAC + CDEV_NDOC1 in (" + strListGuia + ")";
+
+                    strListGuia = "";
+                    contador = 0;
+
+                    String error_cursor = "";
+
+                    update_list_scdddes(sqlquery, _path, ref error_cursor);
+                }
+
+            }
+            catch (Exception exc)
             {
                 _error_ws = exc.Message;
             }

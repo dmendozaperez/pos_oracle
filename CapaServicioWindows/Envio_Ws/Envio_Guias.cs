@@ -40,7 +40,33 @@ namespace CapaServicioWindows.Envio_Ws
             }
             return valida_envio;
         }
+        public string envio_ws_guias_recepcion(BataTransac.Ent_Fvdespc fvdespc)
+        {
+            string valida_envio = "";
 
+            try
+            {
+                /*acceso header user y pass clave de acceso a ws*/
+                BataTransac.ValidateAcceso header_user = new BataTransac.ValidateAcceso();
+                header_user.Username = ConexionWS.user;
+                header_user.Password = ConexionWS.password;
+                /****************************************************************/
+
+                BataTransac.Bata_TransactionSoapClient bata_trans = new BataTransac.Bata_TransactionSoapClient();
+                var envio = bata_trans.ws_update_transaction_guias_recepcion(header_user, fvdespc);
+
+                if (envio.codigo != "0")
+                {
+                    valida_envio = envio.descripcion;
+                }
+
+            }
+            catch (Exception exc)
+            {
+                valida_envio = exc.Message;
+            }
+            return valida_envio;
+        }
 
     }
 }

@@ -196,6 +196,42 @@ namespace WS_Bata_Interfaces
             return msg_transac;
         }
 
+        [SoapHeader("Authentication", Required = true)]
+        [WebMethod(Description = "Update de transaccion de guias de recepcion")]
+        public Ent_MsgTransac ws_update_transaction_guias_recepcion(Ent_Fvdespc fvdespc)
+        {
+            Ent_MsgTransac msg_transac = null;
+            autentication_ws = new Ba_WsConexion();
+            Dat_RecepcionGuias update_guias = null;
+            try
+            {
+                msg_transac = new Ent_MsgTransac();
+                /*valida acceso a web service*/
+                Boolean valida_ws = autentication_ws.ckeckAuthentication_ws("01", Authentication.Username, Authentication.Password);
+                if (valida_ws)
+                {
+                    /*en esta validaion entonce sya verifico y va aconsumir la base de datos 
+                     para la inyeccion de la guias cerreadas*/
+                    update_guias = new Dat_RecepcionGuias();
+                    msg_transac = update_guias.update_transaction_guias_recepcion(fvdespc);
+                    /*********************************************************/
+                }
+                else
+                {
+                    msg_transac.codigo = "1";
+                    msg_transac.descripcion = "Conexión sin exito";
+                }
+
+            }
+            catch (Exception exc)
+            {
+
+                msg_transac.codigo = "1";
+                msg_transac.descripcion = exc.Message;
+            }
+            return msg_transac;
+        }
+
         /// <summary>
         /// errores de transaccionnes a nivel dbf o sql
         /// </summary>

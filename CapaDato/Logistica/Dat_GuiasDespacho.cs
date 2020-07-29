@@ -190,6 +190,10 @@ namespace CapaDato.Logistica
                 dt_FVDESPC.Columns.Add("DESC_NUME", typeof(string));
                 dt_FVDESPC.Columns.Add("DESC_DBL_TRA", typeof(string));
                 dt_FVDESPC.Columns.Add("DESC_AUTO", typeof(string));
+                dt_FVDESPC.Columns.Add("DESC_CONCE", typeof(string));
+
+                dt_FVDESPC.Columns.Add("DESC_TORI", typeof(string));
+                dt_FVDESPC.Columns.Add("DESC_TIPO", typeof(string));
                 /*************************************/
                 /********TABLA DETALLE*****/
                 dt_FVDESPD.Columns.Add("DESD_GUDIS", typeof(string));
@@ -206,7 +210,7 @@ namespace CapaDato.Logistica
                 {
                     dt_FVDESPC.Rows.Add(guias_cab.DESC_ALMAC, guias_cab.DESC_GUDIS, guias_cab.DESC_NDESP, guias_cab.DESC_TDES, guias_cab.DESC_FECHA,
                                         guias_cab.DESC_FDESP, guias_cab.DESC_FEMI,  guias_cab.DESC_FTRA, guias_cab.DESC_NUME,guias_cab.DESC_DBL_TRA,
-                                        guias_cab.DESC_AUTO);
+                                        guias_cab.DESC_AUTO,guias_cab.DESC_CONCE,guias_cab.DESC_TORI,guias_cab.DESC_TIPO);
 
                     foreach(Ent_Fvdespd guias_det in guias_cab.FVDESPD)
                     {

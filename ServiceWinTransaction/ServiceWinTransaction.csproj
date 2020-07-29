@@ -89,6 +89,9 @@
     <None Include="Service References\BataTransac\ServiceWinTransaction.BataTransac.Ent_CarpetaUpload_Xstore.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\BataTransac\ServiceWinTransaction.BataTransac.Ent_Conexion_Ora_Xstore.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\BataTransac\ServiceWinTransaction.BataTransac.Ent_Config_Service.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -111,6 +114,12 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\BataTransac\ServiceWinTransaction.BataTransac.Ent_Scdddes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\BataTransac\ServiceWinTransaction.BataTransac.Ent_Tk_Return.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\BataTransac\ServiceWinTransaction.BataTransac.Ent_Tk_Valores.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\BataTrans\bata_transaccion.wsdl" />

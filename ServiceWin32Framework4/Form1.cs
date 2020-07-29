@@ -499,5 +499,22 @@ namespace ServiceWin32Framework4
             CapaServicioWindows.Bataclub.BataClub d = new CapaServicioWindows.Bataclub.BataClub();
             d.genera_procesos_compartir();
         }
+
+        private void btnalm_recep_Click(object sender, EventArgs e)
+        {
+            string _error = "ing";
+            TextWriter tw = new StreamWriter(@"D:\ALMACEN\ERROR.txt", true);
+            tw.WriteLine(_error);
+            tw.Flush();
+            tw.Close();
+            tw.Dispose();
+            Cursor.Current = Cursors.WaitCursor;
+            string _erro = "";
+            Basico cc = new Basico();
+            // cc.procesar_dbf_pos(ref _erro);
+            cc.eje_envio_guias_devolucion(ref _erro);
+            MessageBox.Show("termino");
+            Cursor.Current = Cursors.Default;
+        }
     }
 }

@@ -32,11 +32,11 @@ namespace ServiceWinTransaction
         #endregion
 
         #region<REGION DE PROCESOS DEL WMS AQ Y EC VARIABLES>
-        Timer tmpaq_wms = null;
-        private Int32 _valida_aq_wms = 0;
+        //Timer tmpaq_wms = null;
+        //private Int32 _valida_aq_wms = 0;
 
-        Timer tmpec_wms = null;
-        private Int32 _valida_ec_wms = 0;
+        //Timer tmpec_wms = null;
+        //private Int32 _valida_ec_wms = 0;
 
         #endregion
 
@@ -48,8 +48,8 @@ namespace ServiceWinTransaction
         Timer tmpprescripcion = null;
         private Int32 _valida_PRES = 0;
 
-        Timer tmservicioAQ = null;
-        private Int32 _valida_AQ = 0;
+        //Timer tmservicioAQ = null;
+        //private Int32 _valida_AQ = 0;
 
         Timer tmservicio_ecu_guia = null;
         private Int32 _valida_service_ecu_guia = 0;
@@ -128,8 +128,8 @@ namespace ServiceWinTransaction
             tmservicio_ecu_guia = new Timer(5000);
             tmservicio_ecu_guia.Elapsed += new ElapsedEventHandler(tmservicio_ecu_guia_Elapsed);
 
-            tmservicioAQ = new Timer(5000);
-            tmservicioAQ.Elapsed += new ElapsedEventHandler(tmservicioAQ_Elapsed);
+            //tmservicioAQ = new Timer(5000);
+            //tmservicioAQ.Elapsed += new ElapsedEventHandler(tmservicioAQ_Elapsed);
 
             tmpprescripcion = new Timer(5000);
             tmpprescripcion.Elapsed += new ElapsedEventHandler(tmpprescripcion_Elapsed);
@@ -149,11 +149,11 @@ namespace ServiceWinTransaction
             tmvendedor.Elapsed += new ElapsedEventHandler(tmvendedor_Elapsed);
 
             /*PROCESOS DEL WMS AQUARELLA Y ECCOMERCE*/
-            tmpaq_wms = new Timer(5000);
-            tmpaq_wms.Elapsed += new ElapsedEventHandler(tmpaq_wms_Elapsed);
+            //tmpaq_wms = new Timer(5000);
+            //tmpaq_wms.Elapsed += new ElapsedEventHandler(tmpaq_wms_Elapsed);
 
-            tmpec_wms = new Timer(5000);
-            tmpec_wms.Elapsed += new ElapsedEventHandler(tmpec_wms_Elapsed);
+            //tmpec_wms = new Timer(5000);
+            //tmpec_wms.Elapsed += new ElapsedEventHandler(tmpec_wms_Elapsed);
 
             tmpalm_rece = new Timer(5000);
             tmpalm_rece.Elapsed += new ElapsedEventHandler(tmpalm_rece_Elapsed);
@@ -243,131 +243,131 @@ namespace ServiceWinTransaction
         #endregion
 
         #region<REGION DEL WMS AQUARELLA Y ECOMMERCE PROCESOS>
-        void tmpaq_wms_Elapsed(object sender, ElapsedEventArgs e)
-        {
-            Int32 _valor = 0;
+        //void tmpaq_wms_Elapsed(object sender, ElapsedEventArgs e)
+        //{
+        //    Int32 _valor = 0;
 
-            string _ruta_erro_file = @"D:\BataTransaction\log_WMS_AQ.txt";
-            string str = "";
-            Boolean proceso_venta = false;
-            try
-            {
+        //    string _ruta_erro_file = @"D:\BataTransaction\log_WMS_AQ.txt";
+        //    string str = "";
+        //    Boolean proceso_venta = false;
+        //    try
+        //    {
 
-                #region<region solo almacen ecuador>
-                if (!File.Exists(@file_almace_ecu)) return;
-                #endregion
-
-
-                if (_valida_aq_wms == 0)
-                {
-                    //string _error = "ing";
-                    _valor = 1;
-                    _valida_aq_wms = 1;
+        //        #region<region solo almacen ecuador>
+        //        if (!File.Exists(@file_almace_ecu)) return;
+        //        #endregion
 
 
-                    string _error = "";                 
-
-                    WMS_AQ_EC wms_proc = new WMS_AQ_EC();
-
-                    _error = wms_proc.WMS_Proc_AQ_EC("AQ");
-                    if (_error.Length > 0)
-                    {
-                        TextWriter tw = new StreamWriter(_ruta_erro_file, true);
-                        tw = new StreamWriter(_ruta_erro_file, true);
-                        str = DateTime.Today.ToString() + " " + DateTime.Now.ToString("HH:mm:ss") + "==>WMS_Proc_AQ_EC==>" + _error;
-                        tw.WriteLine(str);
-                        tw.Flush();
-                        tw.Close();
-                        tw.Dispose();
-                    }
-
-                    _valida_aq_wms = 0;
-
-                }
-                //****************************************************************************
-            }
-            catch (Exception exc)
-            {
-                TextWriter tw = new StreamWriter(_ruta_erro_file, true);
-                tw = new StreamWriter(_ruta_erro_file, true);
-                str = DateTime.Today.ToString() + " " + DateTime.Now.ToString("HH:mm:ss") + "==> catch ==>" + exc.Message;
-                tw.WriteLine(str);
-                tw.Flush();
-                tw.Close();
-                tw.Dispose();
-                _valida_aq_wms = 0;
-            }
-
-            if (_valor == 1)
-            {
-                _valida_aq_wms = 0;
-            }
+        //        if (_valida_aq_wms == 0)
+        //        {
+        //            //string _error = "ing";
+        //            _valor = 1;
+        //            _valida_aq_wms = 1;
 
 
-        }
+        //            string _error = "";                 
 
-        void tmpec_wms_Elapsed(object sender, ElapsedEventArgs e)
-        {
-            Int32 _valor = 0;
+        //            WMS_AQ_EC wms_proc = new WMS_AQ_EC();
 
-            string _ruta_erro_file = @"D:\BataTransaction\log_WMS_EC.txt";
-            string str = "";
-            Boolean proceso_venta = false;
-            try
-            {
+        //            _error = wms_proc.WMS_Proc_AQ_EC("AQ");
+        //            if (_error.Length > 0)
+        //            {
+        //                TextWriter tw = new StreamWriter(_ruta_erro_file, true);
+        //                tw = new StreamWriter(_ruta_erro_file, true);
+        //                str = DateTime.Today.ToString() + " " + DateTime.Now.ToString("HH:mm:ss") + "==>WMS_Proc_AQ_EC==>" + _error;
+        //                tw.WriteLine(str);
+        //                tw.Flush();
+        //                tw.Close();
+        //                tw.Dispose();
+        //            }
 
-                #region<region solo almacen ecuador>
-                if (!File.Exists(@file_almace_ecu)) return;
-                #endregion
+        //            _valida_aq_wms = 0;
 
+        //        }
+        //        //****************************************************************************
+        //    }
+        //    catch (Exception exc)
+        //    {
+        //        TextWriter tw = new StreamWriter(_ruta_erro_file, true);
+        //        tw = new StreamWriter(_ruta_erro_file, true);
+        //        str = DateTime.Today.ToString() + " " + DateTime.Now.ToString("HH:mm:ss") + "==> catch ==>" + exc.Message;
+        //        tw.WriteLine(str);
+        //        tw.Flush();
+        //        tw.Close();
+        //        tw.Dispose();
+        //        _valida_aq_wms = 0;
+        //    }
 
-                if (_valida_ec_wms == 0)
-                {
-                    //string _error = "ing";
-                    _valor = 1;
-                    _valida_ec_wms = 1;
-
-
-                    string _error = "";
-
-                    WMS_AQ_EC wms_proc = new WMS_AQ_EC();
-
-                    _error = wms_proc.WMS_Proc_AQ_EC("EC");
-                    if (_error.Length > 0)
-                    {
-                        TextWriter tw = new StreamWriter(_ruta_erro_file, true);
-                        tw = new StreamWriter(_ruta_erro_file, true);
-                        str = DateTime.Today.ToString() + " " + DateTime.Now.ToString("HH:mm:ss") + "==>WMS_Proc_AQ_EC==>" + _error;
-                        tw.WriteLine(str);
-                        tw.Flush();
-                        tw.Close();
-                        tw.Dispose();
-                    }
-
-                    _valida_ec_wms = 0;
-
-                }
-                //****************************************************************************
-            }
-            catch (Exception exc)
-            {
-                TextWriter tw = new StreamWriter(_ruta_erro_file, true);
-                tw = new StreamWriter(_ruta_erro_file, true);
-                str = DateTime.Today.ToString() + " " + DateTime.Now.ToString("HH:mm:ss") + "==> catch ==>" + exc.Message;
-                tw.WriteLine(str);
-                tw.Flush();
-                tw.Close();
-                tw.Dispose();
-                _valida_ec_wms = 0;
-            }
-
-            if (_valor == 1)
-            {
-                _valida_ec_wms = 0;
-            }
+        //    if (_valor == 1)
+        //    {
+        //        _valida_aq_wms = 0;
+        //    }
 
 
-        }
+        //}
+
+        //void tmpec_wms_Elapsed(object sender, ElapsedEventArgs e)
+        //{
+        //    Int32 _valor = 0;
+
+        //    string _ruta_erro_file = @"D:\BataTransaction\log_WMS_EC.txt";
+        //    string str = "";
+        //    Boolean proceso_venta = false;
+        //    try
+        //    {
+
+        //        #region<region solo almacen ecuador>
+        //        if (!File.Exists(@file_almace_ecu)) return;
+        //        #endregion
+
+
+        //        if (_valida_ec_wms == 0)
+        //        {
+        //            //string _error = "ing";
+        //            _valor = 1;
+        //            _valida_ec_wms = 1;
+
+
+        //            string _error = "";
+
+        //            WMS_AQ_EC wms_proc = new WMS_AQ_EC();
+
+        //            _error = wms_proc.WMS_Proc_AQ_EC("EC");
+        //            if (_error.Length > 0)
+        //            {
+        //                TextWriter tw = new StreamWriter(_ruta_erro_file, true);
+        //                tw = new StreamWriter(_ruta_erro_file, true);
+        //                str = DateTime.Today.ToString() + " " + DateTime.Now.ToString("HH:mm:ss") + "==>WMS_Proc_AQ_EC==>" + _error;
+        //                tw.WriteLine(str);
+        //                tw.Flush();
+        //                tw.Close();
+        //                tw.Dispose();
+        //            }
+
+        //            _valida_ec_wms = 0;
+
+        //        }
+        //        //****************************************************************************
+        //    }
+        //    catch (Exception exc)
+        //    {
+        //        TextWriter tw = new StreamWriter(_ruta_erro_file, true);
+        //        tw = new StreamWriter(_ruta_erro_file, true);
+        //        str = DateTime.Today.ToString() + " " + DateTime.Now.ToString("HH:mm:ss") + "==> catch ==>" + exc.Message;
+        //        tw.WriteLine(str);
+        //        tw.Flush();
+        //        tw.Close();
+        //        tw.Dispose();
+        //        _valida_ec_wms = 0;
+        //    }
+
+        //    if (_valor == 1)
+        //    {
+        //        _valida_ec_wms = 0;
+        //    }
+
+
+        //}
 
         #endregion
 
@@ -690,88 +690,88 @@ namespace ServiceWinTransaction
         #endregion
 
         #region<PROCESOS DE AQUARELLA>
-        void tmservicioAQ_Elapsed(object sender, ElapsedEventArgs e)
-        {
-            //string varchivov = "c://valida_hash.txt";
-            Int32 _valor = 0;
+        //void tmservicioAQ_Elapsed(object sender, ElapsedEventArgs e)
+        //{
+        //    //string varchivov = "c://valida_hash.txt";
+        //    Int32 _valor = 0;
 
-            string _ruta_erro_file = @"D:\BataTransaction\ERROR_WS.txt";
-            //string _valida_proc_venta = @"D:\venta.txt";
-            Boolean proceso_venta = false;
-            try
-            {
+        //    string _ruta_erro_file = @"D:\BataTransaction\ERROR_WS.txt";
+        //    //string _valida_proc_venta = @"D:\venta.txt";
+        //    Boolean proceso_venta = false;
+        //    try
+        //    {
 
-                //Boolean valida_guia_ecu = false;
-                //Boolean valida_
+        //        //Boolean valida_guia_ecu = false;
+        //        //Boolean valida_
 
-                #region<region solo almacen ecuador>
-                if (!File.Exists(@file_almace_ecu)) return;
-                #endregion
-
-
-                if (_valida_AQ == 0)
-                {
-                    //string _error = "ing";
-                    _valor = 1;
-                    _valida_AQ = 1;
+        //        #region<region solo almacen ecuador>
+        //        if (!File.Exists(@file_almace_ecu)) return;
+        //        #endregion
 
 
-                    string _error_ws = "";
-                    //_error = CapaServicioWindows.Modular.Basico.retornar();
-
-                    #region<SOLO PARA AQUARELLA>
-                    //if (!proceso_venta)
-                    //{
-
+        //        if (_valida_AQ == 0)
+        //        {
+        //            //string _error = "ing";
+        //            _valor = 1;
+        //            _valida_AQ = 1;
 
 
-                    CapaServicioWindows.Envio_AQ.Envio_Ventas envia = new CapaServicioWindows.Envio_AQ.Envio_Ventas();
-                    envia.actualizar_cliente();
+        //            string _error_ws = "";
+        //            //_error = CapaServicioWindows.Modular.Basico.retornar();
 
-                    _error_ws= envia.envio_ventas_aq();
-
-
-                    //Basico ejecuta_procesos = null;
-                    //ejecuta_procesos = new Basico();
-                    //ejecuta_procesos.eje_envio_guias(ref _error_ws);
-                    //}
-                    #endregion
+        //            #region<SOLO PARA AQUARELLA>
+        //            //if (!proceso_venta)
+        //            //{
 
 
+
+        //            CapaServicioWindows.Envio_AQ.Envio_Ventas envia = new CapaServicioWindows.Envio_AQ.Envio_Ventas();
+        //            envia.actualizar_cliente();
+
+        //            _error_ws= envia.envio_ventas_aq();
+
+
+        //            //Basico ejecuta_procesos = null;
+        //            //ejecuta_procesos = new Basico();
+        //            //ejecuta_procesos.eje_envio_guias(ref _error_ws);
+        //            //}
+        //            #endregion
 
 
 
 
-                    _valida_AQ = 0;
-
-                    if (_error_ws.Length > 0)
-                    {
-                        TextWriter tw = new StreamWriter(_ruta_erro_file, true);
-                        tw.WriteLine(_error_ws);
-                        tw.Flush();
-                        tw.Close();
-                        tw.Dispose();
-                    }
-                }
-                //****************************************************************************
-            }
-            catch (Exception exc)
-            {
-                TextWriter tw = new StreamWriter(_ruta_erro_file, true);
-                tw.WriteLine(exc.Message);
-                tw.Flush();
-                tw.Close();
-                tw.Dispose();
-                _valida_AQ = 0;
-            }
-
-            if (_valor == 1)
-            {
-                _valida_AQ = 0;
-            }
 
 
-        }
+        //            _valida_AQ = 0;
+
+        //            if (_error_ws.Length > 0)
+        //            {
+        //                TextWriter tw = new StreamWriter(_ruta_erro_file, true);
+        //                tw.WriteLine(_error_ws);
+        //                tw.Flush();
+        //                tw.Close();
+        //                tw.Dispose();
+        //            }
+        //        }
+        //        //****************************************************************************
+        //    }
+        //    catch (Exception exc)
+        //    {
+        //        TextWriter tw = new StreamWriter(_ruta_erro_file, true);
+        //        tw.WriteLine(exc.Message);
+        //        tw.Flush();
+        //        tw.Close();
+        //        tw.Dispose();
+        //        _valida_AQ = 0;
+        //    }
+
+        //    if (_valor == 1)
+        //    {
+        //        _valida_AQ = 0;
+        //    }
+
+
+        //}
         #endregion
 
         #region<REGION DE ECUADOR Y ALMACEN LURIN>
@@ -1137,13 +1137,13 @@ namespace ServiceWinTransaction
             //tmgenera_interface.Start();4/11
             //tmenvia_sftp.Start();4/11
             tmservicio_ecu_guia.Start();
-            tmservicioAQ.Start();
+            //tmservicioAQ.Start();
             tmpprescripcion.Start();
             //tmbataclub.Start();
             tmstock_alm.Start();
             tmvendedor.Start();
-            tmpaq_wms.Start();
-            tmpec_wms.Start();
+            //tmpaq_wms.Start();
+            //tmpec_wms.Start();
             tmpalm_rece.Start();
             //tmservicioScactcoDBF.Start();
         }
@@ -1158,14 +1158,14 @@ namespace ServiceWinTransaction
             //tmgenera_interface.Stop();
             //tmenvia_sftp.Stop();
             tmservicio_ecu_guia.Stop();
-            tmservicioAQ.Stop();
+            //tmservicioAQ.Stop();
             tmpprescripcion.Stop();
             //tmbataclub.Stop();
             tmstock_alm.Stop();
             tmvendedor.Stop();
 
-            tmpaq_wms.Stop();
-            tmpec_wms.Stop();
+            //tmpaq_wms.Stop();
+            //tmpec_wms.Stop();
 
             tmpalm_rece.Stop();
 

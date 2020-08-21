@@ -230,7 +230,7 @@ namespace ServiceWinBataClub
             }
             catch (Exception exc)
             {
-                tw = new StreamWriter(_ruta_erro_file, true);
+                //tw = new StreamWriter(_ruta_erro_file, true);
                 tw = new StreamWriter(_ruta_erro_file, true);
                 str = DateTime.Today.ToString() + " " + DateTime.Now.ToString("HH:mm:ss") + "==> catch ==>" + exc.Message;
                 tw.WriteLine(str);

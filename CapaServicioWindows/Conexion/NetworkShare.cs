@@ -25,7 +25,7 @@ namespace CapaServicioWindows.Conexion
 
                     //Check for errors
                     if (ret == NO_ERROR)
-                        return null;
+                        return "OK";
                     else
                         return GetError(ret);
             }

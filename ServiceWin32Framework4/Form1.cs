@@ -181,9 +181,9 @@ namespace ServiceWin32Framework4
             Cursor.Current = Cursors.WaitCursor;
             CapaServicioWindows.Envio_AQ.Envio_Ventas env = new CapaServicioWindows.Envio_AQ.Envio_Ventas();
 
-            env.actualizar_cliente();
-
-            env.envio_ventas_aq();
+            // env.actualizar_cliente();
+            string CON = "";
+            env.envio_ventas_aq(ref CON);
             Cursor.Current = Cursors.Default;
         }
 
@@ -467,8 +467,22 @@ namespace ServiceWin32Framework4
 
         private void btn_wms_aqec_Click(object sender, EventArgs e)
         {
+            string _ruta_erro_file = @"D:\Catalogo\log_WMS_EC1.txt";
+            string str = "";
             WMS_AQ_EC wms_proc = new WMS_AQ_EC();
-            wms_proc.WMS_Proc_AQ_EC("EC");
+           
+            string _error = wms_proc.WMS_Proc_AQ_EC("EC");
+            if (_error.Length > 0)
+            {
+                TextWriter tw = new StreamWriter(_ruta_erro_file, true);
+               // tw = new StreamWriter(_ruta_erro_file, true);
+                str = DateTime.Today.ToString() + " " + DateTime.Now.ToString("HH:mm:ss") + "==>WMS_Proc_AQ_EC==>" + _error;
+                tw.WriteLine(str);
+                tw.Flush();
+                tw.Close();
+                tw.Dispose();
+            }
+
         }
 
         private void btnorce_Click(object sender, EventArgs e)

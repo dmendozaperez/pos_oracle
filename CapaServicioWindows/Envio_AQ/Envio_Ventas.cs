@@ -79,12 +79,78 @@ namespace CapaServicioWindows.Envio_AQ
             return ds;
         }
 
+        private Boolean delete_dbf(string fc_tdoc, string fc_ndoc, string ruta_VMAFC, string ruta_VMAFD)
+        {
+            Boolean valida = false;
+            string _ruta_erro_file = @"D:\Catalogo\log_Venta_Catalogo.txt";
+            string str = "";
+            TextWriter tw = null;
+            try
+            {
+                string sqlquery_borrar_cab = "DELETE FROM VMAFC WHERE FC_TDOC='" + fc_tdoc + "' AND FC_NDOC='" + fc_ndoc + "'";
+                string sqlquery_borrar_det = "DELETE FROM VMAFD WHERE FD_TDOC='" + fc_tdoc + "' AND FD_NDOC='" + fc_ndoc + "'";
+                using (OleDbConnection cn_dbf = new OleDbConnection(ConexionDBF._conexion_vfpoledb_1(ruta_VMAFC)))
+                {
+                    if (cn_dbf.State == 0) cn_dbf.Open();
+                    using (OleDbCommand cmd_VMAFC = new OleDbCommand(sqlquery_borrar_cab, cn_dbf))
+                    {
+                        tw = new StreamWriter(_ruta_erro_file, true);
+                        str = DateTime.Today.ToString() + " " + DateTime.Now.ToString("HH:mm:ss") + "  entrando delete VMAFC";
+                        tw.WriteLine(str);
+                        tw.Flush();
+                        tw.Close();
+                        tw.Dispose();
+
+                        cmd_VMAFC.CommandTimeout = 0;
+                        cmd_VMAFC.CommandType = CommandType.Text;
+                        cmd_VMAFC.ExecuteNonQuery();
+
+                        tw = new StreamWriter(_ruta_erro_file, true);
+                        str = DateTime.Today.ToString() + " " + DateTime.Now.ToString("HH:mm:ss") + "  saiendo delete VMAFC";
+                        tw.WriteLine(str);
+                        tw.Flush();
+                        tw.Close();
+                        tw.Dispose();
+                    }
+                    using (OleDbCommand cmd_VMAFD = new OleDbCommand(sqlquery_borrar_det, cn_dbf))
+                    {
+                        tw = new StreamWriter(_ruta_erro_file, true);
+                        str = DateTime.Today.ToString() + " " + DateTime.Now.ToString("HH:mm:ss") + "  entrando delete VMAFD";
+                        tw.WriteLine(str);
+                        tw.Flush();
+                        tw.Close();
+                        tw.Dispose();
+
+                        cmd_VMAFD.CommandTimeout = 0;
+                        cmd_VMAFD.CommandType = CommandType.Text;
+                        cmd_VMAFD.ExecuteNonQuery();
+                        valida = true;
+                        tw = new StreamWriter(_ruta_erro_file, true);
+                        str = DateTime.Today.ToString() + " " + DateTime.Now.ToString("HH:mm:ss") + "  saiendo delete VMAFD";
+                        tw.WriteLine(str);
+                        tw.Flush();
+                        tw.Close();
+                        tw.Dispose();
+                    }
+                    if (cn_dbf != null)
+                        if (cn_dbf.State == ConnectionState.Open) cn_dbf.Close();
+                }
+
+            }
+            catch (Exception)
+            {
+
+                
+            }
+            return valida;
+        }
+
         private Boolean update_dbf(string fc_tdoc,string fc_ndoc,DataTable dt_VMAFC,DataTable dt_VMAFD,
                                    /*OleDbConnection cn_dbf,*/string ruta_VMAFC,string ruta_VMAFD,
                                    ref string error,Boolean solo_detalle=false)
         {
             Boolean valida = false;
-            string _ruta_erro_file = @"D:\BataTransaction\LOG_AQ.txt";
+            string _ruta_erro_file = @"D:\Catalogo\log_Venta_Catalogo.txt";
             string str = "";
             TextWriter tw = null;
             try
@@ -480,6 +546,8 @@ namespace CapaServicioWindows.Envio_AQ
                             }
                         }
                         valida = true;
+                        if (cn_dbf_insert != null)
+                            if (cn_dbf_insert.State == ConnectionState.Open) cn_dbf_insert.Close();
 
                     }                                     
                 }
@@ -509,10 +577,10 @@ namespace CapaServicioWindows.Envio_AQ
             }
             return valida;
         }
-        public string envio_ventas_aq()
+        public string envio_ventas_aq(ref string con_novel)
         {
             string error = "";
-            string _ruta_erro_file = @"D:\BataTransaction\LOG_AQ.txt";
+            string _ruta_erro_file = @"D:\Catalogo\log_Venta_Catalogo.txt";
             string str = "";
             TextWriter tw = null;
             try
@@ -530,13 +598,13 @@ namespace CapaServicioWindows.Envio_AQ
                 var loc_vmafc = ruta_dbf.Where(p => p.dbf_name == "VMAFC").ToList();
                 var loc_vmafd = ruta_dbf.Where(p => p.dbf_name == "VMAFD").ToList();
 
-                
-
-                string ruta_VMAFC= loc_vmafc[0].dbf_ruta.ToString();
-                string ruta_VMAFD= loc_vmafd[0].dbf_ruta.ToString();
 
 
-              
+                string ruta_VMAFC = loc_vmafc[0].dbf_ruta.ToString(); // @"D:\AQVENTA"; //loc_vmafc[0].dbf_ruta.ToString();
+                string ruta_VMAFD= loc_vmafd[0].dbf_ruta.ToString();//@"D:\AQVENTA";//loc_vmafd[0].dbf_ruta.ToString();
+
+
+
 
                 DataSet ds = ds_ventas();
 
@@ -547,10 +615,11 @@ namespace CapaServicioWindows.Envio_AQ
                 {
                     if (dt_VMAFC.Rows.Count == 0) return error;
                     /*AUTOLOGEO NOVELL*/
-                    if (valida_file_ecu())
-                    {
-                        string cone= NetworkShare.ConnectToShare(ruta_VMAFC, ConexionDBF.user_novell, ConexionDBF.password_novell);
-                    }
+                    //if (valida_file_ecu())
+                    //{
+                        if (con_novel!="OK")
+                            con_novel = NetworkShare.ConnectToShare(ruta_VMAFC, ConexionDBF.user_novell, ConexionDBF.password_novell);
+                    //}
                     /**********************/
                     DataTable dt_update = new DataTable();
                     dt_update.Columns.Add("tipo", typeof(string));
@@ -600,7 +669,7 @@ namespace CapaServicioWindows.Envio_AQ
                     /*select al detalle*/
                     using (OleDbConnection cn_dbf = new OleDbConnection(ConexionDBF._conexion_fmc_fmd_vfpoledb(ruta_VMAFC)))
                     {
-                        DateTime _fecha_ffac = DateTime.Today.AddDays(-7);
+                        DateTime _fecha_ffac = DateTime.Today.AddDays(-15);
                         string sqlquery_consulta = "SELECT FC_TDOC,FC_NDOC FROM VMAFC WHERE FC_CANAL='6' AND FC_CADEN='CA'  AND FC_FFACT>=? AND " +                            
                                                    "FC_TDOC + FC_NDOC NOT IN (SELECT FD_TDOC + FD_NDOC FROM VMAFD)";
                         using (OleDbCommand cmd_query = new OleDbCommand(sqlquery_consulta, cn_dbf))
@@ -631,8 +700,58 @@ namespace CapaServicioWindows.Envio_AQ
                     }
 
 
+                    //DataTable dtTemp = dt1.Clone();
+                    //dtTemp.Columns.Add("DETAIL");
+
+                    #region<REGION PARA VERIFICAR SI HAY DUPLICADO EN LA TABLA>
+                        var query_duplicado = from row in dt_existe_cab.AsEnumerable()
+                                              group row by row.Field<string>("FC_TDOC") + row.Field<string>("FC_NDOC") into numdoc
+                                              where numdoc.Count() > 1
+                                              select new
+                                              {
+                                                numdoc = numdoc.Key                                   
+                                              };
+
+                        /*como este caso hay repetidos entonces */
+                        if (query_duplicado.Count()>0)
+                        {
+
+                            foreach(var it in query_duplicado)
+                            {
+                                dt_update.Rows.Clear();
+                                String str_tipo = it.numdoc.Substring(0,2);
+                                String str_numero = it.numdoc.Substring(2, it.numdoc.Length - 2);
+                                dt_update.Rows.Add(str_tipo, str_numero);
+                                if (delete_dbf(str_tipo, str_numero, ruta_VMAFC, ruta_VMAFD))
+                                    update_envio_sis_return_sql(dt_update);
+                              
+                            }
+                        dt_update.Clear();
+                    }
+                       
+                    #endregion
+
+
 
                     var result = dt_VMAFC.AsEnumerable().Select(row => (string)row["FC_TDOC"] + row["FC_NDOC"]).Except(dt_existe_cab.AsEnumerable().Select(row => (string)row["FC_TDOC"] + row["FC_NDOC"]));
+
+
+                    #region<SI EXISTE LA FACTURA EN EL SIS>
+
+                        foreach(DataRow fila in dt_VMAFC.Rows)
+                        {
+                            foreach(DataRow Fila_nov in dt_existe_cab.Select("fc_tdoc='" + fila["fc_tdoc"].ToString() + "' and fc_ndoc='" + fila["fc_ndoc"].ToString() + "'"))
+                            {
+                               dt_update.Rows.Add(Fila_nov["FC_TDOC"].ToString(), Fila_nov["FC_NDOC"].ToString());
+                            }
+                        }    
+
+
+                      
+                    #endregion
+
+                 
+
                     //var result = dt_VMAFC.AsEnumerable().Select(row => (string)row["FC_TDOC"] + row["FC_NDOC"]);
                     /*EN ESTE CASO VAMOS A INSERTAR LOS DATOS QUE YA EXISTE PARA NO REALIZAR CONSULTAS SOBRE DATOS QUE YA EXISTE */
                     //var result = dt_VMAFC.AsEnumerable().Select(row => (string)row["FC_TDOC"] + row["FC_NDOC"]).Except(dt_existe.AsEnumerable().Select(row => (string)row["FC_TDOC"] + row["FC_NDOC"]));
@@ -648,7 +767,7 @@ namespace CapaServicioWindows.Envio_AQ
                             string _FC_TDOC = fila.Substring(0,2);
                             String _FC_NDOC = fila.Substring(2,12);
                             tw = new StreamWriter(_ruta_erro_file, true);
-                            str = DateTime.Today.ToString() + "==>" + "entrando al metodo update_dbf";
+                            str = DateTime.Today.ToString() + " " + DateTime.Now.ToString("HH:mm:ss") + "==>" + "entrando al metodo update_dbf";
                             tw.WriteLine(str);
                             tw.Flush();
                             tw.Close();
@@ -659,7 +778,7 @@ namespace CapaServicioWindows.Envio_AQ
                             Boolean upd = update_dbf(_FC_TDOC, _FC_NDOC, dt_VMAFC, dt_VMAFD, /*cn_dbf,*/ ruta_VMAFC, ruta_VMAFD, ref error_proc);
 
                             tw = new StreamWriter(_ruta_erro_file, true);
-                            str = DateTime.Today.ToString() + "==> terminando update dbf";
+                            str = DateTime.Today.ToString() + " " + DateTime.Now.ToString("HH:mm:ss") +  "==> terminando update dbf";
                             tw.WriteLine(str);
                             tw.Flush();
                             tw.Close();
@@ -671,7 +790,7 @@ namespace CapaServicioWindows.Envio_AQ
                                 dt_update.Rows.Add(_FC_TDOC, _FC_NDOC);
                                 //string _ruta_erro_file = @"D:\BataTransaction\LOG_AQ.txt";
                                 tw = new StreamWriter(_ruta_erro_file, true);
-                                str = DateTime.Today.ToString() + "==>" + "insertando datos tipo:" + _FC_TDOC + " numero:" + _FC_NDOC;
+                                str = DateTime.Today.ToString() + " " + DateTime.Now.ToString("HH:mm:ss") +  "==>" + "insertando datos tipo:" + _FC_TDOC + " numero:" + _FC_NDOC;
                                 tw.WriteLine(str);
                                 tw.Flush();
                                 tw.Close();
@@ -695,7 +814,7 @@ namespace CapaServicioWindows.Envio_AQ
                         string _FC_TDOC = fila.Substring(0, 2);
                         String _FC_NDOC = fila.Substring(2, 12);
                         tw = new StreamWriter(_ruta_erro_file, true);
-                        str = DateTime.Today.ToString() + "==>" + "entrando al metodo update_dbf detalle";
+                        str = DateTime.Today.ToString() + " " + DateTime.Now.ToString("HH:mm:ss")  + "==>" + "entrando al metodo update_dbf detalle";
                         tw.WriteLine(str);
                         tw.Flush();
                         tw.Close();
@@ -706,7 +825,7 @@ namespace CapaServicioWindows.Envio_AQ
                         Boolean upd = update_dbf(_FC_TDOC, _FC_NDOC, dt_VMAFC, dt_VMAFD, /*cn_dbf,*/ ruta_VMAFC, ruta_VMAFD, ref error_proc,true);
 
                         tw = new StreamWriter(_ruta_erro_file, true);
-                        str = DateTime.Today.ToString() + "==> terminando update detalle dbf";
+                        str = DateTime.Today.ToString() + " " + DateTime.Now.ToString("HH:mm:ss")  + "==> terminando update detalle dbf";
                         tw.WriteLine(str);
                         tw.Flush();
                         tw.Close();
@@ -718,7 +837,7 @@ namespace CapaServicioWindows.Envio_AQ
                             dt_update.Rows.Add(_FC_TDOC, _FC_NDOC);
                             //string _ruta_erro_file = @"D:\BataTransaction\LOG_AQ.txt";
                             tw = new StreamWriter(_ruta_erro_file, true);
-                            str = DateTime.Today.ToString() + "==>" + "insertando datos detalle tipo:" + _FC_TDOC + " numero:" + _FC_NDOC;
+                            str = DateTime.Today.ToString() + " " + DateTime.Now.ToString("HH:mm:ss") + "==>" + "insertando datos detalle tipo:" + _FC_TDOC + " numero:" + _FC_NDOC;
                             tw.WriteLine(str);
                             tw.Flush();
                             tw.Close();
@@ -781,7 +900,40 @@ namespace CapaServicioWindows.Envio_AQ
                 
             }
         }
-        
+        private void update_envio_sis_return_sql(DataTable dt)
+        {
+            string sqlquery = "USP_UPDATE_ENVIO_SIS_RETURN";
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(ConexionSQL.conexion_aq))
+                {
+                    try
+                    {
+                        if (cn.State == 0) cn.Open();
+                        using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                        {
+                            cmd.CommandTimeout = 0;
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.Parameters.AddWithValue("@TMP", dt);
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+                    catch (Exception)
+                    {
+
+
+                    }
+                    if (cn != null)
+                        if (cn.State == ConnectionState.Open) cn.Close();
+                }
+            }
+            catch
+            {
+
+
+            }
+        }
+
         private List<Ruta_DBF> get_ruta()
         {
             List<Ruta_DBF> list;

@@ -1528,7 +1528,8 @@ namespace WS_Bata_Interfaces
         }
         /*sostic 07-2019*/
         [WebMethod(Description = "Actualizar el estado del cupon de ruleta bata")]
-        public string[] ws_actualizar_cupon_ruleta(string cod_tda, string codigo, string estado, string doc_vta)
+        public string[] ws_actualizar_cupon_ruleta(string cod_tda_venta, string barra, string fecha_doc, string tipo_doc, string serie_doc,
+                                                      string numerodoc, string fc_nin)
         {
             Ent_MsgTransac msg_transac = null;
             autentication_ws = new Ba_WsConexion();
@@ -1544,14 +1545,14 @@ namespace WS_Bata_Interfaces
                 {
                     update_venta = new Dat_Venta();
                    // Ent_Conexion.conexion_posperu = "Server=sostic.dyndns.org,10015;Database=BDPOS;User ID=sa;Password=S0stic04052011;Trusted_Connection=False;";
-                    msg_transac = update_venta.actualizar_cupon_ruleta(cod_tda, codigo, estado, doc_vta);
+                    msg_transac = update_venta.actualizar_cupon_ruleta(cod_tda_venta, barra, fecha_doc, tipo_doc, serie_doc, numerodoc, fc_nin);
 
                     if (msg_transac.codigo != "0")
                     {
                         /*transaccione de tiendas*/
                         String tip_error = "04";
                         Dat_Error_Transac error_transac = new Dat_Error_Transac();
-                        error_transac.insertar_errores_transac(tip_error, msg_transac.descripcion, cod_tda);
+                        error_transac.insertar_errores_transac(tip_error, msg_transac.descripcion, cod_tda_venta);
                     }
                 }
                 else

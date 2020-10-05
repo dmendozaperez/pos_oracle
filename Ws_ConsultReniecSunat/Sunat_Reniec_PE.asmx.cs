@@ -55,14 +55,15 @@ namespace Ws_ConsultReniecSunat
                         data.Valida_Reniec = valida;
                         return data;
                     }
-         
-                    string filePath = new Uri(System.Reflection.Assembly.GetExecutingAssembly().CodeBase).LocalPath;
-                    string _tessdata = Path.GetDirectoryName(filePath) + "\\tessdata";
+
+                    //string filePath = new Uri(System.Reflection.Assembly.GetExecutingAssembly().CodeBase).LocalPath; \\comentado porque reniec no funciona
+                    //string _tessdata = Path.GetDirectoryName(filePath) + "\\tessdata"; \\comentado porque reniec no funciona
 
                     myInfo = new PersonaReniec(true);
 
                     //_codigo_captcha = myInfo.UseTesseract(_tessdata);
-                    myInfo.GetInfo(nro_dni, _codigo_captcha);
+                    // myInfo.GetInfo(nro_dni, _codigo_captcha);\\comentado porque reniec no funciona
+
 
                     //if (myInfo.Nombres == null)
                     //{
@@ -75,13 +76,16 @@ namespace Ws_ConsultReniecSunat
                     //    _codigo_captcha = myInfo.UseTesseract( _tessdata);
                     //    myInfo.GetInfo(nro_dni, _codigo_captcha);
                     //}
+                    //myInfo.estado == "error";
 
-                    if (myInfo.estado=="error")
+                    if (myInfo.estado==null)
                     {
                         data = new DataReniec();
                         valida = new ReniecValida();
-                        valida.Estado = "3";
-                        valida.Descripcion = "El Numero de D.N.I no existe ó vuelve a intentarlo " + _tessdata;
+                        //valida.Estado = "3";
+                        //valida.Descripcion = "El Numero de D.N.I no existe ó vuelve a intentarlo ";// + _tessdata;
+                        valida.Estado = "4";
+                        valida.Descripcion = "Error de Conexion ";
                         data.Valida_Reniec = valida;
                     }
                     else

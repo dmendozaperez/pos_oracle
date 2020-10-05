@@ -98,7 +98,7 @@ namespace ServiceWin64Framework4_5
             Cursor.Current = Cursors.WaitCursor;
             try
             {
-                string ruta_server = @"\\192.168.2.6\inetpub\wwwroot\BataWeb\bin";
+                string ruta_server = @"\\192.168.2.6\BataWeb\bin";
                 string ruta_local = @"D:\Fuentes\SL_Web\SL_Web\CapaPresentacion\bin";
 
                 string _CapaDato = "CapaDato.dll";

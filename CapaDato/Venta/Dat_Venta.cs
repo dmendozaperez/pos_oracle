@@ -1110,7 +1110,8 @@ namespace CapaDato.Venta
             return dt;
         }
         /*sostic 07-2019*/
-        public Ent_MsgTransac actualizar_cupon_ruleta(string cod_tda, string codigo, string estado, string doc_vta)
+        public Ent_MsgTransac actualizar_cupon_ruleta(string cod_tda_venta, string barra, string fecha_doc, string tipo_doc,string serie_doc,
+                                                      string numerodoc,string fc_nint)
         {
             string sqlquery = "usp_actualizar_estado_ganador_ruleta_bata";
             Ent_MsgTransac msg = null;
@@ -1126,10 +1127,13 @@ namespace CapaDato.Venta
                         {
                             cmd.CommandTimeout = 120;
                             cmd.CommandType = CommandType.StoredProcedure;
-                            cmd.Parameters.AddWithValue("@cod_tda", cod_tda);
-                            cmd.Parameters.AddWithValue("@codigo", codigo);
-                            cmd.Parameters.AddWithValue("@estado", estado);
-                            cmd.Parameters.AddWithValue("@doc_vta", doc_vta);
+                            cmd.Parameters.AddWithValue("@cod_tda_venta", cod_tda_venta);
+                            cmd.Parameters.AddWithValue("@barra", barra);
+                            cmd.Parameters.AddWithValue("@fecha_doc", fecha_doc);
+                            cmd.Parameters.AddWithValue("@tipo_doc", tipo_doc);
+                            cmd.Parameters.AddWithValue("@serie_doc", serie_doc);
+                            cmd.Parameters.AddWithValue("@numero_doc", numerodoc);
+                            cmd.Parameters.AddWithValue("@fc_nint", fc_nint);
                             cmd.ExecuteNonQuery();
                             msg.codigo = "0";
                             msg.descripcion = "Se actualizo correctamente";

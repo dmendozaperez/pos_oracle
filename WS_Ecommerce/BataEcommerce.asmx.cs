@@ -3,11 +3,13 @@ using CapaBasico.Util;
 using CapaDato.Ecommerce;
 using CapaEntidad.Ecommerce;
 using CapaEntidad.Util;
+using DnsClient;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Drawing;
 using System.Linq;
+using System.Net.Mail;
 using System.Web;
 using System.Web.Services;
 using System.Web.Services.Protocols;
@@ -80,7 +82,8 @@ namespace WS_Ecommerce
             Dat_Cliente_Bata DaCliente = null; ;
             Ent_Conexion.conexion_posperu = ConfigurationManager.ConnectionStrings["SQL_PE"].ConnectionString; //ConfigurationManager.ConnectionStrings["SQL_PE"].ConnectionString;
             Ent_Conexion.conexion = ConfigurationManager.ConnectionStrings["SQL_PE"].ConnectionString; //ConfigurationManager.ConnectionStrings["SQL_PE"].ConnectionString;
-
+            MailAddress mailAddress = null;
+            LookupClient dnsClient = new LookupClient() { UseTcpOnly = true };
             try
             {
 
@@ -98,6 +101,20 @@ namespace WS_Ecommerce
                     Cliente.ubigeo_distrito = (Cliente.ubigeo_distrito == null) ? "" : Cliente.ubigeo_distrito;
                     Cliente.ubigeo = (Cliente.ubigeo == null) ? "" : Cliente.ubigeo;
                 }
+                #region<VALIDACION DE DOMINIO DE CORREO>
+                if (result.codigo != "-1")
+                {
+                    mailAddress = new MailAddress(Cliente.correo);
+                    var mxRecords = dnsClient.Query(mailAddress.Host, QueryType.MX).AllRecords.MxRecords().ToList();
+                    if (mxRecords.Count == 0)
+                    {
+                        result.codigo = "-1";
+                        result.descripcion = "El dominio " + mailAddress.Host + " no existe..";
+                    }
+
+                }
+                #endregion
+
                 //if (result.codigo=="-1")
                 //{
 

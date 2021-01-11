@@ -62,7 +62,7 @@ namespace Ws_ConsultReniecSunat
                     myInfo = new PersonaReniec(true);
 
                     //_codigo_captcha = myInfo.UseTesseract(_tessdata);
-                    // myInfo.GetInfo(nro_dni, _codigo_captcha);\\comentado porque reniec no funciona
+                    myInfo.GetInfo(nro_dni, _codigo_captcha);//comentado porque reniec no funciona
 
 
                     //if (myInfo.Nombres == null)
@@ -85,7 +85,7 @@ namespace Ws_ConsultReniecSunat
                         //valida.Estado = "3";
                         //valida.Descripcion = "El Numero de D.N.I no existe ó vuelve a intentarlo ";// + _tessdata;
                         valida.Estado = "4";
-                        valida.Descripcion = "Error de Conexion ";
+                        valida.Descripcion = "El Numero de D.N.I no existe ó vuelve a intentarlo ";
                         data.Valida_Reniec = valida;
                     }
                     else
@@ -134,7 +134,7 @@ namespace Ws_ConsultReniecSunat
             {
 
                 if (ckeckAuthentication(Authentication.Username, Authentication.Password, "demo") > 0)
-                { 
+                {
                     if (nro_ruc.Trim().Length == 0)
                         {
                             data = new DataSunat();
@@ -162,21 +162,21 @@ namespace Ws_ConsultReniecSunat
                     //_codigo_captcha = myInfo.UseTesseract(_tessdata);
                     myInfo.GetInfo(nro_ruc, _codigo_captcha);
 
-                    if (myInfo.Nombres == "Error!")
-                    {
-                        _codigo_captcha = myInfo.UseTesseract(_tessdata);
-                        myInfo.GetInfo(nro_ruc, _codigo_captcha);
-                    }
-                    if (myInfo.Nombres == "Error!")
-                    {
-                        _codigo_captcha = myInfo.UseTesseract(_tessdata);
-                        myInfo.GetInfo(nro_ruc, _codigo_captcha);
-                    }
-                    if (myInfo.Nombres == "Error!")
-                    {
-                        _codigo_captcha = myInfo.UseTesseract(_tessdata);
-                        myInfo.GetInfo(nro_ruc, _codigo_captcha);
-                    }
+                    //if (myInfo.Nombres == "Error!")
+                    //{
+                    //    //_codigo_captcha = myInfo.UseTesseract(_tessdata);
+                    //    myInfo.GetInfo(nro_ruc, _codigo_captcha);
+                    //}
+                    //if (myInfo.Nombres == "Error!")
+                    //{
+                    //    //_codigo_captcha = myInfo.UseTesseract(_tessdata);
+                    //    myInfo.GetInfo(nro_ruc, _codigo_captcha);
+                    //}
+                    //if (myInfo.Nombres == "Error!")
+                    //{
+                    //   // _codigo_captcha = myInfo.UseTesseract(_tessdata);
+                    //    myInfo.GetInfo(nro_ruc, _codigo_captcha);
+                    //}
 
 
                     if (myInfo.Nombres == "Error!")
@@ -202,7 +202,7 @@ namespace Ws_ConsultReniecSunat
                         valida.Descripcion = "Correcto";
                         data.Valida_Sunat = valida;
                     }
-                }   
+                }
                 else
                 {
                     data = new DataSunat();
@@ -210,7 +210,7 @@ namespace Ws_ConsultReniecSunat
                     valida.Estado = "4";
                     valida.Descripcion = "Error de Conexion";
                     data.Valida_Sunat = valida;
-                }             
+                }
             }
             catch
             {

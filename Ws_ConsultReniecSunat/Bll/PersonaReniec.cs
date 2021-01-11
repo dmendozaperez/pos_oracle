@@ -1,6 +1,7 @@
 ﻿using AForge;
 using AForge.Imaging.Filters;
 using HtmlAgilityPack;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -333,7 +334,48 @@ namespace Ws_ConsultReniecSunat.Bll
 
 
 
+
+
                 this._estado = null;
+
+                #region<API DE RENIEC CONSULTA DE DNI>
+                //string myUrl_API = String.Format("https://api.sunat.cloud/ruc/{0}",
+                //                       numDni);
+
+                string myUrl_API = "https://dniruc.apisperu.com/api/v1/dni/" + numDni + "?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImRhdmlkX21lbmRvemFwQGhvdG1haWwuY29tIn0.MkWKjhAArrvYhkjDzXcsZC_eaIs_vCzzVzL3AyVXSZE";
+
+                HttpWebRequest myWebRequest_API = (HttpWebRequest)WebRequest.Create(myUrl_API);
+                myWebRequest_API.UserAgent = "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:23.0) Gecko/20100101 Firefox/23.0";
+                myWebRequest_API.CookieContainer = myCookie;
+                myWebRequest_API.Credentials = CredentialCache.DefaultCredentials;
+                myWebRequest_API.Proxy = null;
+                HttpWebResponse myHttpWebResponse_API = (HttpWebResponse)myWebRequest_API.GetResponse();
+                Stream myStream_API = myHttpWebResponse_API.GetResponseStream();
+                Encoding encode_API = System.Text.Encoding.GetEncoding("utf-8");
+                StreamReader myStreamReader_API = new StreamReader(myStream_API, encode_API);
+
+                var jason = myStreamReader_API.ReadToEnd();
+                DataReniec_Jason ent_reniec;
+                ent_reniec = JsonConvert.DeserializeObject<DataReniec_Jason>(jason);
+
+                if (ent_reniec != null)
+                {
+                    this._Nombres = ent_reniec.nombres;
+                    this._ApePaterno =ent_reniec.apellidoPaterno;
+                    this._ApeMaterno = ent_reniec.apellidoPaterno;
+                    //_estado = (Left(ent_sunat.contribuyente_condicion, 1) == "H") ? "A" : "I";
+                    this._estado = "";
+                    //_estado = (Left(ent_sunat.condicion, 1) == "H") ? "A" : "I";
+                    return;
+                }
+
+
+                //Leemos los datos
+                string xDat_API = HttpUtility.HtmlDecode(myStreamReader_API.ReadToEnd());
+
+
+
+                #endregion
 
                 #region<NUEVA CONSULTA DNI>
                 string str =  this.getRawResponseAsync("http://clientes.reniec.gob.pe/padronElectoral2012/consulta.htm", (object)numDni);
@@ -496,7 +538,8 @@ namespace Ws_ConsultReniecSunat.Bll
             }
             catch (Exception ex)
             {
-                this._estado = "error";
+                this._estado=null;
+                //this._estado = "error";
             }
         }
     }

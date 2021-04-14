@@ -129,6 +129,26 @@ namespace CapaServicioWindows_x64.Envio_Ftp_Xstore
                                 tw1.Close();
                                 tw1.Dispose();
                             }
+
+                            /*en este caso se actualiza el PRECIO SOLO DE ECUADOR*/
+
+                            if (det_inter.inter_nom == "PRICE_UPDATE" && _pais=="EC")
+                            {
+                                tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                                tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " EMPEZANDO DE EJECUTAR EL METODO (genera_automatico_inter) PRICE_UPDATE XOFICCE");
+                                tw1.Flush();
+                                tw1.Close();
+                                tw1.Dispose();
+                                genera_automatico_inter(_pais, cod_tda, env_peru_det.rut_upload, det_inter.inter_nom, det_inter.entorno,
+                                                   ref dt_item, ref dt_images, ref dt_merch_hier, ref dt_price_update, ref dt_item_xref, ref gen_per_item, ref gen_ecu_item, out_let);
+                                tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
+                                tw1.WriteLine(DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + " TERMINANDO DE EJECUTAR EL METODO (genera_automatico_inter) PRICE_UPDATE XOFICCE");
+                                tw1.Flush();
+                                tw1.Close();
+                                tw1.Dispose();
+                            }
+                            /******************************************/
+
                             if (det_inter.inter_nom != "PRICE_UPDATE")
                             {
                                 tw1 = new StreamWriter(@"D:\XSTORE\ERROR_INTER.txt", true);
@@ -671,7 +691,7 @@ namespace CapaServicioWindows_x64.Envio_Ftp_Xstore
                             case "PRODUCT_LOCATION":
                                 DataSet ds_orb = null;
                                 #region<PRODUCT_LOCATION>
-                                ds_orb = dat_geninter.ds_orob();
+                                ds_orb = dat_geninter.ds_orob(_pais);
 
                                 if (ds_orb != null)
                                 {
@@ -681,7 +701,7 @@ namespace CapaServicioWindows_x64.Envio_Ftp_Xstore
                                         DataTable dt_production_location = ds_orb.Tables[0];
                                         DataTable dt_product = ds_orb.Tables[1];
 
-                                        if (dt_production_location.Rows.Count > 0)
+                                        if (dt_production_location.Rows.Count > 1)
                                         {
                                             str = new StringBuilder();
                                             for (Int32 i = 0; i < dt_production_location.Rows.Count; ++i)
@@ -716,7 +736,7 @@ namespace CapaServicioWindows_x64.Envio_Ftp_Xstore
                                             File.WriteAllText(@in_maestros, str_cadena);
                                         }
 
-                                        if (dt_product.Rows.Count > 0)
+                                        if (dt_product.Rows.Count >1)
                                         {
                                             str = new StringBuilder();
                                             for (Int32 i = 0; i < dt_product.Rows.Count; ++i)
@@ -735,21 +755,42 @@ namespace CapaServicioWindows_x64.Envio_Ftp_Xstore
 
 
                                             //name_file = "PRODUCT_2000.TXT";// + DateTime.Today.ToString("yyyyMMdd") + ".TXT";
-                                            name_file = "PRODUCT_LOGFIRE2K.TXT";
-                                            in_maestros = _gen_ruta + "\\" + name_file;
 
-                                            if (File.Exists(@in_maestros)) File.Delete(@in_maestros);
-                                            File.WriteAllText(@in_maestros, str_cadena);
+                                            if (_pais=="PE")
+                                            { 
+                                                name_file = "PRODUCT_LOGFIRE2K.TXT";
+                                                in_maestros = _gen_ruta + "\\" + name_file;
 
-                                            name_file = "PRODUCT_2000.TXT";// + DateTime.Today.ToString("yyyyMMdd") + ".TXT";
-                                            //name_file = "PRODUCT_LOGFIRE2K.TXT";
-                                            in_maestros = _gen_ruta + "\\" + name_file;
+                                                if (File.Exists(@in_maestros)) File.Delete(@in_maestros);
+                                                File.WriteAllText(@in_maestros, str_cadena);
 
-                                            str_cadena = str_cadena.Replace("LOGFIRE2K", "2000");
+                                                name_file = "PRODUCT_2000.TXT";// + DateTime.Today.ToString("yyyyMMdd") + ".TXT";
+                                                //name_file = "PRODUCT_LOGFIRE2K.TXT";
+                                                in_maestros = _gen_ruta + "\\" + name_file;
 
-                                            if (File.Exists(@in_maestros)) File.Delete(@in_maestros);
-                                            File.WriteAllText(@in_maestros, str_cadena);
+                                                string str_cadena_5007 = str_cadena;
 
+                                                str_cadena = str_cadena.Replace("LOGFIRE2K", "2000");
+
+                                                if (File.Exists(@in_maestros)) File.Delete(@in_maestros);
+                                                File.WriteAllText(@in_maestros, str_cadena);
+
+
+                                                name_file = "PRODUCT_5007.TXT";
+                                                in_maestros = _gen_ruta + "\\" + name_file;
+                                                str_cadena = str_cadena_5007.Replace("LOGFIRE2K", "5007");
+                                                if (File.Exists(@in_maestros)) File.Delete(@in_maestros);
+                                                File.WriteAllText(@in_maestros, str_cadena);
+
+                                            }
+                                            else
+                                            {
+                                                name_file = "PRODUCT_5000.TXT";// + DateTime.Today.ToString("yyyyMMdd") + ".TXT";
+                                                                               //name_file = "PRODUCT_LOGFIRE2K.TXT";
+                                                in_maestros = _gen_ruta + "\\" + name_file;
+                                                if (File.Exists(@in_maestros)) File.Delete(@in_maestros);
+                                                File.WriteAllText(@in_maestros, str_cadena);
+                                            }
 
                                         }
 

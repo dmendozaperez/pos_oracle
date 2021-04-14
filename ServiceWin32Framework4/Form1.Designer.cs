@@ -86,6 +86,7 @@
             this.btnbarra.TabIndex = 6;
             this.btnbarra.Text = "COD BARRA";
             this.btnbarra.UseVisualStyleBackColor = true;
+            this.btnbarra.Click += new System.EventHandler(this.btnbarra_Click_1);
             // 
             // btnenvio_nov
             // 

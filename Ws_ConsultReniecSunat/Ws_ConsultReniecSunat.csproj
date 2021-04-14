@@ -68,6 +68,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -128,6 +129,7 @@
     <Compile Include="Bll\Autenticacion.cs" />
     <Compile Include="Bll\Basico.cs" />
     <Compile Include="Bll\Conexion_WS.cs" />
+    <Compile Include="Bll\ConsultaSunatRucMbb.cs" />
     <Compile Include="Bll\PersonaReniec.cs" />
     <Compile Include="Bll\PersonaSunat.cs" />
     <Compile Include="Bll\Seguridad.cs">

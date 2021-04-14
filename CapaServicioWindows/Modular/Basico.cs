@@ -136,7 +136,7 @@ namespace CapaServicioWindows.Modular
                                       "DDES_GGUIA,DDES_CCOND,DDES_CALZ,DDES_NCALZ,DDES_TOCAJ,DDES_IMPRE,DDES_GVALO," +
                                       "DDES_SUBGR,DDES_RUCTC,DDES_TRANS,DDES_TRAN2,DDES_OBSER,DDES_NOMTC,DDES_NGUIA," +
                                       "DDES_NRLIQ,DDES_LIMPR,DDES_EMPRE,DDES_CANAL,DDES_CADEN,DDES_SECCI,DDES_FTX,DDES_FTXTD " +
-                                      "FROM SCDDDES WHERE DDES_FDESP>=CTOD('" + fecha_despacho.ToString("MM/dd/yy") + "') and DDES_TIPO='DES' and DDES_ESTAD<>'A' AND EMPTY(DDES_FTXTD) AND (NOT EMPTY(DDES_CADEN)) " + get_query_alm_ecu() ;            
+                                      "FROM SCDDDES WHERE DDES_FDESP>=CTOD('" + fecha_despacho.ToString("MM/dd/yy") + "') and DDES_TIPO='DES' and DDES_ESTAD='C' AND EMPTY(DDES_FTXTD) AND (NOT EMPTY(DDES_CADEN)) " + get_query_alm_ecu() ;            
             try
             {
                 //Util dd = new Util();

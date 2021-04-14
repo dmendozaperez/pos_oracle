@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Web;
 using Tesseract;
 
@@ -264,6 +265,19 @@ namespace Ws_ConsultReniecSunat.Bll
                     }
                 }
         }
+        private static async Task<string> buscar_ruc_new(string ruc)
+        {
+            try
+            {
+                return await ConsultaSunatRucMbb.obtenerInformacion(ruc);
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+
+        }
         public void GetInfo(string numDni, string ImgCapcha)
         {
             string xRazSoc = ""; string xEst = ""; string xCon = ""; string xDir = ""; string xAg = "";
@@ -274,35 +288,53 @@ namespace Ws_ConsultReniecSunat.Bll
                 //string myUrl_API = String.Format("https://api.sunat.cloud/ruc/{0}",
                 //                       numDni);
 
-                string myUrl_API = "https://dniruc.apisperu.com/api/v1/ruc/" + numDni.ToString() + "?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImRhdmlkX21lbmRvemFwQGhvdG1haWwuY29tIn0.MkWKjhAArrvYhkjDzXcsZC_eaIs_vCzzVzL3AyVXSZE";
+                //string myUrl_API = "https://dniruc.apisperu.com/api/v1/ruc/" + numDni.ToString() + "?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImRhdmlkX21lbmRvemFwQGhvdG1haWwuY29tIn0.MkWKjhAArrvYhkjDzXcsZC_eaIs_vCzzVzL3AyVXSZE";
 
-                HttpWebRequest myWebRequest_API = (HttpWebRequest)WebRequest.Create(myUrl_API);
-                myWebRequest_API.UserAgent = "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:23.0) Gecko/20100101 Firefox/23.0";
-                myWebRequest_API.CookieContainer = myCookie;
-                myWebRequest_API.Credentials = CredentialCache.DefaultCredentials;
-                myWebRequest_API.Proxy = null;
-                HttpWebResponse myHttpWebResponse_API = (HttpWebResponse)myWebRequest_API.GetResponse();
-                Stream myStream_API = myHttpWebResponse_API.GetResponseStream();
-                Encoding encode_API = System.Text.Encoding.GetEncoding("utf-8");
-                StreamReader myStreamReader_API = new StreamReader(myStream_API, encode_API);
+                //string myUrl_API = "https://dni.optimizeperu.com/api/company/" + numDni.ToString() + "?format=json";
+                //string response_str = "";
+                //HttpWebRequest request = null;
+                //string myUrl_API = "https://dni.optimizeperu.com/api/company/" + numDni.ToString() + "?format=json";
+                ////System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+                //request = (HttpWebRequest)WebRequest.Create(myUrl_API);
+                ////request.Headers["Authorization"] = "Bearer X-Trx-Api-Key";
+                //request.ContentType = "application/json";
+                ////request.Headers.Add("X-Trx-Api-Key", apiKey);
 
-                var jason = myStreamReader_API.ReadToEnd();
-                DataSunat_Jason ent_sunat;
-                ent_sunat = JsonConvert.DeserializeObject<DataSunat_Jason>(jason);
+                ////HttpWebResponse myHttpWebResponse1 = (HttpWebResponse)request.GetResponse();
 
-                if (ent_sunat != null)
-                {
-                    _Nombres = ent_sunat.razonSocial;
-                    _direccion = ent_sunat.direccion;
-                    _telefono = ent_sunat.telefono;
-                    //_estado = (Left(ent_sunat.contribuyente_condicion, 1) == "H") ? "A" : "I";
-                    _estado = (Left(ent_sunat.condicion, 1) == "H") ? "A" : "I";
-                    return;
-                }
+                //var response = (HttpWebResponse)request.GetResponse();
+                //response_str = new StreamReader(response.GetResponseStream()).ReadToEnd();
+
+                //System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+                //HttpWebRequest myWebRequest_API = (HttpWebRequest)WebRequest.Create(myUrl_API);
+                //myWebRequest_API.UserAgent = "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:23.0) Gecko/20100101 Firefox/23.0";
+                //myWebRequest_API.CookieContainer = myCookie;
+                //myWebRequest_API.Credentials = CredentialCache.DefaultCredentials;
+                //myWebRequest_API.Proxy = null;
+                //HttpWebResponse myHttpWebResponse_API = (HttpWebResponse)myWebRequest_API.GetResponse();
+                //Stream myStream_API = myHttpWebResponse_API.GetResponseStream();
+                //Encoding encode_API = System.Text.Encoding.GetEncoding("utf-8");
+                //StreamReader myStreamReader_API = new StreamReader(myStream_API, encode_API);
+
+                //var jason = myStreamReader_API.ReadToEnd();
+                //DataSunat_Jason ent_sunat=new DataSunat_Jason();
+                //ent_sunat.ruc = numDni;
+                //ent_sunat.n
+                //ent_sunat = JsonConvert.DeserializeObject<DataSunat_Jason>(jason);
+
+                //if (ent_sunat != null)
+                //{
+                //    _Nombres = ""; //(ent_sunat.razon_social== "******")?ent_sunat.nombre_comercial: ent_sunat.razon_social;
+                //    _direccion = ""; //ent_sunat.direccion;
+                //    _telefono = "";// ent_sunat.telefono;
+                //    //_estado = (Left(ent_sunat.contribuyente_condicion, 1) == "H") ? "A" : "I";
+                //    _estado = "A"; //(Left(ent_sunat.condicion, 1) == "H") ? "A" : "I";
+                //    return;
+                //}
 
 
                 //Leemos los datos
-                string xDat_API = HttpUtility.HtmlDecode(myStreamReader_API.ReadToEnd());
+                //string xDat_API = HttpUtility.HtmlDecode(myStreamReader_API.ReadToEnd());
 
 
 
@@ -312,20 +344,69 @@ namespace Ws_ConsultReniecSunat.Bll
                 //string myUrl = String.Format("http://www.sunat.gob.pe/cl-ti-itmrconsruc/jcrS00Alias?accion=consPorRuc&nroRuc={0}&codigo={1}",
                 //                        numDni, ImgCapcha);
 
-                string myUrl = String.Format("http://e-consultaruc.sunat.gob.pe/cl-ti-itmrconsruc/jcrS00Alias?accion=consPorRuc&nroRuc={0}&codigo={1}",
-                                       numDni, ImgCapcha);
+                //string myUrl = String.Format("http://e-consultaruc.sunat.gob.pe/cl-ti-itmrconsruc/jcrS03Alias?accion=consPorRuc&nroRuc={0}&codigo={1}",
+                //                       numDni, ImgCapcha);
 
-                HttpWebRequest myWebRequest = (HttpWebRequest)WebRequest.Create(myUrl);
-                myWebRequest.UserAgent = "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:23.0) Gecko/20100101 Firefox/23.0";
-                myWebRequest.CookieContainer = myCookie;
-                myWebRequest.Credentials = CredentialCache.DefaultCredentials;
-                myWebRequest.Proxy = null;
-                HttpWebResponse myHttpWebResponse = (HttpWebResponse)myWebRequest.GetResponse();
-                Stream myStream = myHttpWebResponse.GetResponseStream();
-                Encoding encode = System.Text.Encoding.GetEncoding("utf-8");
-                StreamReader myStreamReader = new StreamReader(myStream, encode);
+                //HttpWebRequest myWebRequest = (HttpWebRequest)WebRequest.Create(myUrl);
+                //myWebRequest.UserAgent = "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:23.0) Gecko/20100101 Firefox/23.0";
+                //myWebRequest.CookieContainer = myCookie;
+                //myWebRequest.Credentials = CredentialCache.DefaultCredentials;
+                //myWebRequest.Proxy = null;
+                //HttpWebResponse myHttpWebResponse = (HttpWebResponse)myWebRequest.GetResponse();
+                //Stream myStream = myHttpWebResponse.GetResponseStream();
+                //Encoding encode = System.Text.Encoding.GetEncoding("utf-8");
+                //StreamReader myStreamReader = new StreamReader(myStream, encode);
                 //Leemos los datos
-                string xDat = HttpUtility.HtmlDecode(myStreamReader.ReadToEnd());
+
+                
+
+                string xDat = buscar_ruc_new(numDni).Result;
+                string[] tabla;
+                tabla = Regex.Split(xDat, "|");
+
+                //xDat = xDat.Replace("\r\n", "");
+
+                string[] filas1 = xDat.Split(new string[1]
+                         {
+                " <div class=\"list-group-item\">"
+                         }, StringSplitOptions.None);
+
+
+                string nombre_comercial = filas1[3].ToString().Replace("\r\n","");
+                nombre_comercial = nombre_comercial.Replace("\t","").TrimEnd().TrimStart();
+                nombre_comercial = nombre_comercial.Replace("    ", "");
+                nombre_comercial = nombre_comercial.Replace("</div> </div>", "");
+                nombre_comercial = nombre_comercial.Replace("<div class=\"row\">", "");
+                nombre_comercial = nombre_comercial.Replace("<div class=\"col-sm-5\"> <h4 class=\"list-group-item-heading\">", "");
+                nombre_comercial = nombre_comercial.Replace("Nombre Comercial:", "");
+                nombre_comercial = nombre_comercial.Replace("</h4> </div> <div class=\"col-sm-7\">", "");
+                nombre_comercial = nombre_comercial.Replace("<p class=\"list-group-item-text\">","");
+                nombre_comercial = nombre_comercial.Replace("</p> </div>", "").Trim().TrimStart().TrimEnd();
+                nombre_comercial = nombre_comercial.Replace("</div>  </div>", "").Trim().TrimStart().TrimEnd();
+
+                Boolean valida_nom = nombre_comercial.Contains("Tipo de Documento: DNI");
+
+                if (nombre_comercial== "-" || valida_nom)
+                {
+                    nombre_comercial = "";
+                    nombre_comercial = filas1[1].ToString().Replace("\r\n", "");
+                    nombre_comercial = nombre_comercial.Replace("\t", "").TrimEnd().TrimStart();
+                    nombre_comercial = nombre_comercial.Replace("    ", "");
+                    nombre_comercial = nombre_comercial.Replace("</div> </div>", "");
+                    nombre_comercial = nombre_comercial.Replace("<div class=\"row\">", "");
+                    nombre_comercial = nombre_comercial.Replace("<div class=\"col-sm-5\"> <h4 class=\"list-group-item-heading\">", "");
+                    nombre_comercial = nombre_comercial.Replace("Nombre Comercial:", "");
+                    nombre_comercial = nombre_comercial.Replace("</h4> </div> <div class=\"col-sm-7\">", "");
+                    nombre_comercial = nombre_comercial.Replace("<p class=\"list-group-item-text\">", "");
+                    nombre_comercial = nombre_comercial.Replace("</p> </div>", "").Trim().TrimStart().TrimEnd();
+                    nombre_comercial = nombre_comercial.Replace("</div>  </div>", "").Trim().TrimStart().TrimEnd();
+                    nombre_comercial = nombre_comercial.Replace("N&uacute;mero de RUC: <h4 class=\"list-group-item-heading\">", "");
+                    nombre_comercial = nombre_comercial.Replace("</h4> </div>","").Trim().TrimStart().TrimEnd();
+                    nombre_comercial = nombre_comercial.Substring(13, nombre_comercial.Length - 13);
+                    nombre_comercial = nombre_comercial.Trim();
+                }
+
+                //string xDat = HttpUtility.HtmlDecode(myStreamReader.ReadToEnd());
 
                 var estado_sunat_I=xDat.Contains("NO HABIDO");
 
@@ -343,109 +424,116 @@ namespace Ws_ConsultReniecSunat.Bll
                     }
                 }
 
-                if (xDat.Length <= 635)
-                {
-                    return;
-                }
-                string[] tabla;
-                xDat = xDat.Replace("     ", " ");
-                xDat = xDat.Replace("    ", " ");
-                xDat = xDat.Replace("   ", " ");
-                xDat = xDat.Replace("  ", " ");
-                xDat = xDat.Replace("( ", "(");
-                xDat = xDat.Replace(" )", ")");
-                xDat = xDat.Replace("class", "");
-                xDat = xDat.Replace("colspan=1", "");
-                xDat = xDat.Replace("colspan=2", "");
-                xDat = xDat.Replace("colspan=3", "");
-                xDat = xDat.Replace("bgn", "");
-                xDat = xDat.Replace("bg", "");
-                xDat = xDat.Replace("=", "");
-                xDat = xDat.Replace("\"", "");
-                xDat = xDat.Replace("<td  >", "<td>");
-                xDat = xDat.Replace("</td>", "");
-                xDat = xDat.Replace("-->\r\n<!--", "");
-                xDat = xDat.Replace("\r\n", "");
-                xDat = xDat.Replace("</tr>", "");
-                xDat = xDat.Replace("<tr>", "");
-                xDat = xDat.Replace("      <td >", "<td>");
-                xDat = xDat.Replace("<td   >", "<td>");
-                xDat = xDat.Replace("<td width27%  >", "<td>");
-                xDat = xDat.Replace("\t", "");
-                xDat = xDat.Replace("     <td >", "");
-                xDat = xDat.Replace("<!-- SE COMENTO POR INDICACION DEL PASE PAS20134EA20000207", "");
-                xDat = xDat.Replace("--> <!--", "");
+                //if (xDat.Length <= 635)
+                //{
+                //    return;
+                //}
 
+              
 
+                //string[] tabla;
+                //xDat = xDat.Replace("     ", " ");
+                //xDat = xDat.Replace("    ", " ");
+                //xDat = xDat.Replace("   ", " ");
+                //xDat = xDat.Replace("  ", " ");
+                //xDat = xDat.Replace("( ", "(");
+                //xDat = xDat.Replace(" )", ")");
+                //xDat = xDat.Replace("class", "");
+                //xDat = xDat.Replace("colspan=1", "");
+                //xDat = xDat.Replace("colspan=2", "");
+                //xDat = xDat.Replace("colspan=3", "");
+                //xDat = xDat.Replace("bgn", "");
+                //xDat = xDat.Replace("bg", "");
+                //xDat = xDat.Replace("=", "");
+                //xDat = xDat.Replace("\"", "");
+                //xDat = xDat.Replace("<td  >", "<td>");
+                //xDat = xDat.Replace("</td>", "");
+                //xDat = xDat.Replace("-->\r\n<!--", "");
+                //xDat = xDat.Replace("\r\n", "");
+                //xDat = xDat.Replace("</tr>", "");
+                //xDat = xDat.Replace("<tr>", "");
+                //xDat = xDat.Replace("      <td >", "<td>");
+                //xDat = xDat.Replace("<td   >", "<td>");
+                //xDat = xDat.Replace("<td width27%  >", "<td>");
+                //xDat = xDat.Replace("\t", "");
+                //xDat = xDat.Replace("     <td >", "");
+                //xDat = xDat.Replace("<!-- SE COMENTO POR INDICACION DEL PASE PAS20134EA20000207", "");
+                //xDat = xDat.Replace("--> <!--", "");
+
+                //string[] filas = xDat.Split(new string[1]
+                //          {
+                //"list-group-item\""
+                //          }, StringSplitOptions.None);
 
                 //Lo convertimos a tabla o mejor dicho a un arreglo de string como se ve declarado arriba
                 //tabla = Regex.Split(xDat, "<td class");
-                tabla = Regex.Split(xDat, "<td>");
-                if (tabla.Length != 1 && tabla.Length != 5)
-                {
-                    for (int i = 0; i < tabla.Length; i++)
-                    {
-                        switch (tabla[i])
-                        {
-                            case "Número Ruc.":
-                                //_Info.RazonSocial = _resul[i + 2].Substring(14);
-                                break;
-                            case "Antiguo Ruc.":
-                                //_Info.AntiguoRuc = _resul[i + 5];
-                                break;
-                            case "Estado.":
-                                //_Info.Estado = _resul[i + 2];
-                                break;
-                            case "Agente Retención IGV.":
-                                //_Info.EsAgenteRetencion = _resul[i + 3];
-                                break;
-                            case "Tipo de Documento:  ":
-                                _Nombres = tabla[i + 1].ToString().Trim();
-                                //_Nombres=_Nombres.Replace("�", "Ñ");
-                                break;
-                            case "Nombre Comercial:  ":
-                                _Nombres = tabla[i + 1].ToString().Trim();
-                                //_Nombres=_Nombres.Replace("�", "Ñ");
-                                break;
-                            case "Dirección del Domicilio Fiscal: ":
-                                _direccion = tabla[i + 1].ToString().Trim();
-                                //_direccion=_direccion.Replace("�", "Ñ");
-                                break;
-                            case "Teléfono(s):  ":
-                                _telefono = tabla[i + 1].ToString().Trim();
-                                break;
-                            case "Dependencia.":
-                                //_Info.Dependencia = _resul[i + 3];
-                                break;
-                            case "Tipo.":
-                                //_Info.Tipo = _resul[i + 3];
-                                break;
-                        }
-                    }
+                //tabla = Regex.Split(xDat, "<td>");
+                //if (tabla.Length != 1 && tabla.Length != 5)
+                //{
+                //    for (int i = 0; i < tabla.Length; i++)
+                //    {
+                //        switch (tabla[i])
+                //        {
+                //            case "Número Ruc.":
+                //                //_Info.RazonSocial = _resul[i + 2].Substring(14);
+                //                break;
+                //            case "Antiguo Ruc.":
+                //                //_Info.AntiguoRuc = _resul[i + 5];
+                //                break;
+                //            case "Estado.":
+                //                //_Info.Estado = _resul[i + 2];
+                //                break;
+                //            case "Agente Retención IGV.":
+                //                //_Info.EsAgenteRetencion = _resul[i + 3];
+                //                break;
+                //            case "Tipo de Documento:  ":
+                //                _Nombres = tabla[i + 1].ToString().Trim();
+                //                //_Nombres=_Nombres.Replace("�", "Ñ");
+                //                break;
+                //            case "Nombre Comercial:  ":
+                //                _Nombres = tabla[i + 1].ToString().Trim();
+                //                //_Nombres=_Nombres.Replace("�", "Ñ");
+                //                break;
+                //            case "Dirección del Domicilio Fiscal: ":
+                //                _direccion = tabla[i + 1].ToString().Trim();
+                //                //_direccion=_direccion.Replace("�", "Ñ");
+                //                break;
+                //            case "Teléfono(s):  ":
+                //                _telefono = tabla[i + 1].ToString().Trim();
+                //                break;
+                //            case "Dependencia.":
+                //                //_Info.Dependencia = _resul[i + 3];
+                //                break;
+                //            case "Tipo.":
+                //                //_Info.Tipo = _resul[i + 3];
+                //                break;
+                //        }
+                //    }
+                    _Nombres = nombre_comercial;
 
-                    if (_Nombres.Length == 1)
-                    {
-                        _Nombres = tabla[1].ToString().Trim();
-                        _Nombres = _Nombres.Substring(_Nombres.IndexOf('-') + 1, _Nombres.Length - (_Nombres.IndexOf('-') + 1));
-                        //_Nombres = Nombres.Replace("�", "Ñ");
-                        _Nombres = _Nombres.Trim();
-                    }
+                    //if (_Nombres.Length == 1)
+                    //{
+                    //    _Nombres = tabla[1].ToString().Trim();
+                    //    _Nombres = _Nombres.Substring(_Nombres.IndexOf('-') + 1, _Nombres.Length - (_Nombres.IndexOf('-') + 1));
+                    //    //_Nombres = Nombres.Replace("�", "Ñ");
+                    //    _Nombres = _Nombres.Trim();
+                    //}
 
-                    //VERIFICAR SI ES QUE ES PERSONA NATURAL
-                    if (Left(numDni, 2) == "10")
-                    {
-                        _Nombres = tabla[1].ToString().Trim();
-                        _Nombres = _Nombres.Substring(_Nombres.IndexOf('-') + 1, _Nombres.Length - (_Nombres.IndexOf('-') + 1));
-                        //_Nombres = Nombres.Replace("�", "Ñ");
-                        _Nombres = _Nombres.Trim();
-                    }
+                    ////VERIFICAR SI ES QUE ES PERSONA NATURAL
+                    //if (Left(numDni, 2) == "10")
+                    //{
+                    //    _Nombres = tabla[1].ToString().Trim();
+                    //    _Nombres = _Nombres.Substring(_Nombres.IndexOf('-') + 1, _Nombres.Length - (_Nombres.IndexOf('-') + 1));
+                    //    //_Nombres = Nombres.Replace("�", "Ñ");
+                    //    _Nombres = _Nombres.Trim();
+                    //}
                     //**************************************** 
 
-                }
-                else
-                {
-                    _Nombres = "Error!";
-                }
+                //}
+                //else
+                //{
+                //    _Nombres = "Error!";
+                //}
 
                
             }
@@ -486,7 +574,7 @@ namespace Ws_ConsultReniecSunat.Bll
         public string ciiu { get; set; }
         public string fecha_actividad { get; set; }
         public string ruc { get; set; }
-        public string razonSocial { get; set; }
+        public string razon_social { get; set; }
         public string telefono { get; set; }
         public string contribuyente_condicion { get; set; }
         public string nombre_comercial { get; set; }
@@ -506,9 +594,9 @@ namespace Ws_ConsultReniecSunat.Bll
     public class DataReniec_Jason
     {
         public string dni { get; set; }
-        public string nombres { get; set; }
-        public string apellidoPaterno { get; set; }
-        public string apellidoMaterno { get; set; }
+        public string name { get; set; }
+        public string first_name { get; set; }
+        public string last_name { get; set; }
         public string codVerifica { get; set; }
     }
 }

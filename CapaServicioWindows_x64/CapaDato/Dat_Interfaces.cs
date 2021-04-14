@@ -1064,10 +1064,10 @@ namespace CapaServicioWindows_x64.CapaDato
             return dt;
         }
         #region<ORDER BROCKER>
-        public DataSet ds_orob()
+        public DataSet ds_orob(string pais="PE")
         {
             DataSet ds = null;
-            string sqlquery = "USP_OROB_PRODUCT_LOCATION";
+            string sqlquery =(pais=="PE")? "USP_OROB_PRODUCT_LOCATION": "USP_OROB_PRODUCT_LOCATION_ECU";
             try
             {
                 using (SqlConnection cn = new SqlConnection(ConexionSQL.conexion))

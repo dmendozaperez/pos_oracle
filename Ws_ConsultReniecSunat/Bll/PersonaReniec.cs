@@ -342,7 +342,10 @@ namespace Ws_ConsultReniecSunat.Bll
                 //string myUrl_API = String.Format("https://api.sunat.cloud/ruc/{0}",
                 //                       numDni);
 
-                string myUrl_API = "https://dniruc.apisperu.com/api/v1/dni/" + numDni + "?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImRhdmlkX21lbmRvemFwQGhvdG1haWwuY29tIn0.MkWKjhAArrvYhkjDzXcsZC_eaIs_vCzzVzL3AyVXSZE";
+                //string myUrl_API = "https://dniruc.apisperu.com/api/v1/dni/" + numDni + "?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImRhdmlkX21lbmRvemFwQGhvdG1haWwuY29tIn0.MkWKjhAArrvYhkjDzXcsZC_eaIs_vCzzVzL3AyVXSZE";
+                string myUrl_API = "https://dni.optimizeperu.com/api/persons/" + numDni + "?format=json";
+
+                System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
                 HttpWebRequest myWebRequest_API = (HttpWebRequest)WebRequest.Create(myUrl_API);
                 myWebRequest_API.UserAgent = "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:23.0) Gecko/20100101 Firefox/23.0";
@@ -360,9 +363,9 @@ namespace Ws_ConsultReniecSunat.Bll
 
                 if (ent_reniec != null)
                 {
-                    this._Nombres = ent_reniec.nombres;
-                    this._ApePaterno =ent_reniec.apellidoPaterno;
-                    this._ApeMaterno = ent_reniec.apellidoPaterno;
+                    this._Nombres = ent_reniec.name;
+                    this._ApePaterno =ent_reniec.first_name;
+                    this._ApeMaterno = ent_reniec.last_name;
                     //_estado = (Left(ent_sunat.contribuyente_condicion, 1) == "H") ? "A" : "I";
                     this._estado = "";
                     //_estado = (Left(ent_sunat.condicion, 1) == "H") ? "A" : "I";

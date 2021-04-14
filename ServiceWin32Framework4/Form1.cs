@@ -530,5 +530,10 @@ namespace ServiceWin32Framework4
             MessageBox.Show("termino");
             Cursor.Current = Cursors.Default;
         }
+
+        private void btnbarra_Click_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }

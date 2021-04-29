@@ -28,7 +28,7 @@ namespace ServiceWin64Framework4_5
         private void button1_Click(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;
-            string pais = "PE";
+            string pais = "EC";
             Boolean gen_per_item = false;
             Boolean gen_ecu_item = false;
             string _error = "Filanizado correcto";
@@ -103,7 +103,7 @@ namespace ServiceWin64Framework4_5
 
                 string _CapaDato = "CapaDato.dll";
                 string _CapaEntidad = "CapaEntidad.dll";
-                string _CapaOraDato = "CapaOraDato.dll";
+                //string _CapaOraDato = "CapaOraDato.dll";
                 string _CapaPresentacion = "CapaPresentacion.dll";
 
                 byte[] _bataweb_dll = null;
@@ -113,8 +113,8 @@ namespace ServiceWin64Framework4_5
                 _bataweb_dll = File.ReadAllBytes(ruta_local + "\\" + _CapaEntidad);
                 File.WriteAllBytes(@ruta_server + "\\" + _CapaEntidad, _bataweb_dll);
 
-                _bataweb_dll = File.ReadAllBytes(ruta_local + "\\" + _CapaOraDato);
-                File.WriteAllBytes(@ruta_server + "\\" + _CapaOraDato, _bataweb_dll);
+                //_bataweb_dll = File.ReadAllBytes(ruta_local + "\\" + _CapaOraDato);
+                //File.WriteAllBytes(@ruta_server + "\\" + _CapaOraDato, _bataweb_dll);
 
                 _bataweb_dll = File.ReadAllBytes(ruta_local + "\\" + _CapaPresentacion);
                 File.WriteAllBytes(@ruta_server + "\\" + _CapaPresentacion, _bataweb_dll);

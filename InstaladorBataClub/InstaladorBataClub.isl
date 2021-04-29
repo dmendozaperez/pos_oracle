@@ -1134,6 +1134,7 @@
 		<row><td>BATACLUB</td><td>DIRPROPERTY1</td><td>BataClub</td><td/><td>0</td><td/></row>
 		<row><td>BATACLUB1</td><td>DIRPROPERTY2</td><td>BataClub</td><td/><td>0</td><td/></row>
 		<row><td>BATACLUB2</td><td>DIRPROPERTY3</td><td>BataClub</td><td/><td>0</td><td/></row>
+		<row><td>BATACLUB3</td><td>DIRPROPERTY4</td><td>BataClub</td><td/><td>0</td><td/></row>
 		<row><td>BATA_PERU</td><td>ProgramFilesFolder</td><td>BATAPE~1|Bata Peru</td><td/><td>0</td><td/></row>
 		<row><td>CommonAppDataFolder</td><td>TARGETDIR</td><td>.:Common~1|CommonAppData</td><td/><td>0</td><td/></row>
 		<row><td>CommonFiles64Folder</td><td>TARGETDIR</td><td>.:Common64</td><td/><td>0</td><td/></row>
@@ -1142,11 +1143,12 @@
 		<row><td>DIRPROPERTY1</td><td>TARGETDIR</td><td>.</td><td/><td>0</td><td/></row>
 		<row><td>DIRPROPERTY2</td><td>TARGETDIR</td><td>.</td><td/><td>0</td><td/></row>
 		<row><td>DIRPROPERTY3</td><td>TARGETDIR</td><td>.</td><td/><td>0</td><td/></row>
+		<row><td>DIRPROPERTY4</td><td>TARGETDIR</td><td>.</td><td/><td>0</td><td/></row>
 		<row><td>DesktopFolder</td><td>TARGETDIR</td><td>.:Desktop</td><td/><td>3</td><td/></row>
 		<row><td>FavoritesFolder</td><td>TARGETDIR</td><td>.:FAVORI~1|Favorites</td><td/><td>0</td><td/></row>
 		<row><td>FontsFolder</td><td>TARGETDIR</td><td>.:Fonts</td><td/><td>0</td><td/></row>
 		<row><td>GlobalAssemblyCache</td><td>TARGETDIR</td><td>.:Global~1|GlobalAssemblyCache</td><td/><td>0</td><td/></row>
-		<row><td>INSTALLDIR</td><td>BATACLUB2</td><td>.</td><td/><td>0</td><td/></row>
+		<row><td>INSTALLDIR</td><td>BATACLUB3</td><td>.</td><td/><td>0</td><td/></row>
 		<row><td>ISCommonFilesFolder</td><td>CommonFilesFolder</td><td>Instal~1|InstallShield</td><td/><td>0</td><td/></row>
 		<row><td>ISMyCompanyDir</td><td>ProgramFilesFolder</td><td>MYCOMP~1|My Company Name</td><td/><td>0</td><td/></row>
 		<row><td>ISMyProductDir</td><td>ISMyCompanyDir</td><td>MYPROD~1|My Product Name</td><td/><td>0</td><td/></row>
@@ -2613,7 +2615,7 @@
 		<col def="I2">Encoded</col>
 		<col def="S0">Comment</col>
 		<col def="I4">TimeStamp</col>
-		<row><td>COMPANY_NAME</td><td>1034</td><td>Bata Peru</td><td>0</td><td/><td>-467194930</td></row>
+		<row><td>COMPANY_NAME</td><td>1034</td><td>Bata Peru</td><td>0</td><td/><td>1646883119</td></row>
 		<row><td>DN_AlwaysInstall</td><td>1034</td><td>Instalar siempre</td><td>0</td><td/><td>-467174898</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_COLOR</td><td>1034</td><td>La configuración de colores de su sistema no es adecuada para ejecutar [ProductName].</td><td>0</td><td/><td>-467174898</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_DOTNETVERSION40CLIENT</td><td>1033</td><td>Microsoft .NET Framework 4.0 Client Package or greater needs to be installed for this installation to continue.</td><td>0</td><td/><td>-467160210</td></row>
@@ -3716,8 +3718,8 @@
 		<row><td>IDS__TargetReq_DESC_RAM</td><td>1034</td><td>La cantidad de RAM no es la adecuada para ejecutar [ProductName].</td><td>0</td><td/><td>-467174898</td></row>
 		<row><td>IDS__TargetReq_DESC_RESOLUTION</td><td>1034</td><td>La resolución de pantalla no es la adecuada para ejecutar [ProductName].</td><td>0</td><td/><td>-467174898</td></row>
 		<row><td>ID_STRING1</td><td>1034</td><td/><td>0</td><td/><td>-467174898</td></row>
-		<row><td>ID_STRING2</td><td>1034</td><td>http://www.BataPeru.com</td><td>0</td><td/><td>-467194930</td></row>
-		<row><td>ID_STRING3</td><td>1034</td><td>Bata Peru</td><td>0</td><td/><td>-467194930</td></row>
+		<row><td>ID_STRING2</td><td>1034</td><td>http://www.BataPeru.com</td><td>0</td><td/><td>1646883119</td></row>
+		<row><td>ID_STRING3</td><td>1034</td><td>Bata Peru</td><td>0</td><td/><td>1646883119</td></row>
 		<row><td>ID_STRING4</td><td>1033</td><td>Service BataClub (Bata)</td><td>0</td><td/><td>-467147794</td></row>
 		<row><td>ID_STRING4</td><td>1034</td><td>Service BataClub (Bata)</td><td>0</td><td/><td>-467147794</td></row>
 		<row><td>ID_STRING5</td><td>1033</td><td>Service BataClub (Bata)</td><td>0</td><td/><td>-467205106</td></row>
@@ -3968,7 +3970,7 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<row><td>ISTheme</td><td>InstallShield Blue.theme</td></row>
 		<row><td>ISUSLock</td><td>{33ACEA13-CAA1-4985-83B5-56DF4CE96A59}</td></row>
 		<row><td>ISUSSignature</td><td>{643F9331-02E1-454A-88E5-FF76B580E480}</td></row>
-		<row><td>ISVisitedViews</td><td>viewAssistant,viewProject,viewServices,viewRelease</td></row>
+		<row><td>ISVisitedViews</td><td>viewAssistant,viewProject,viewServices,viewRelease,viewISToday</td></row>
 		<row><td>Limited</td><td>1</td></row>
 		<row><td>LockPermissionMode</td><td>1</td></row>
 		<row><td>MsiExecCmdLineOptions</td><td/></row>
@@ -4280,7 +4282,7 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<row><td>ARPURLINFOABOUT</td><td>##ID_STRING2##</td><td/></row>
 		<row><td>AgreeToLicense</td><td>No</td><td/></row>
 		<row><td>ApplicationUsers</td><td>AllUsers</td><td/></row>
-		<row><td>DIRPROPERTY3</td><td>D:\</td><td/></row>
+		<row><td>DIRPROPERTY4</td><td>D:\</td><td/></row>
 		<row><td>DWUSINTERVAL</td><td>30</td><td/></row>
 		<row><td>DWUSLINK</td><td>CEFCE7A89E6BB0AFEEACA0B88EAC978F0E6CD08FCE1CE78FCE9B90B8C9CBF0585E9BC05F5EAC</td><td/></row>
 		<row><td>DefaultUIFont</td><td>ExpressDefault</td><td/></row>

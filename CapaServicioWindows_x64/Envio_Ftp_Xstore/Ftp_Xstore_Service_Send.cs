@@ -68,7 +68,7 @@ namespace CapaServicioWindows_x64.Envio_Ftp_Xstore
                 dt_tienda.Columns.Add("cod_distri", typeof(string));
                 dt_tienda.Columns.Add("xstore", typeof(Boolean));
                 dt_tienda.Columns.Add("outlet", typeof(Boolean));
-                dt_tienda.Rows.Add("PE", "COUNTRY", "", 0, 1);
+                dt_tienda.Rows.Add(_pais, "COUNTRY", "", 0, 1);
 
                 /*solo country PE O EC*/
 

@@ -358,158 +358,174 @@ namespace Ws_ConsultReniecSunat.Bll
                 //StreamReader myStreamReader = new StreamReader(myStream, encode);
                 //Leemos los datos
 
-                
+                #region<region del consulta entidad sql>
+                DataEntidad obj=Basico.buscar_ruc_entidad(numDni);
 
-                string xDat = buscar_ruc_new(numDni).Result;
-                string[] tabla;
-                tabla = Regex.Split(xDat, "|");
-
-                //xDat = xDat.Replace("\r\n", "");
-
-                string[] filas1 = xDat.Split(new string[1]
-                         {
-                " <div class=\"list-group-item\">"
-                         }, StringSplitOptions.None);
-
-
-                string nombre_comercial = filas1[3].ToString().Replace("\r\n","");
-                nombre_comercial = nombre_comercial.Replace("\t","").TrimEnd().TrimStart();
-                nombre_comercial = nombre_comercial.Replace("    ", "");
-                nombre_comercial = nombre_comercial.Replace("</div> </div>", "");
-                nombre_comercial = nombre_comercial.Replace("<div class=\"row\">", "");
-                nombre_comercial = nombre_comercial.Replace("<div class=\"col-sm-5\"> <h4 class=\"list-group-item-heading\">", "");
-                nombre_comercial = nombre_comercial.Replace("Nombre Comercial:", "");
-                nombre_comercial = nombre_comercial.Replace("</h4> </div> <div class=\"col-sm-7\">", "");
-                nombre_comercial = nombre_comercial.Replace("<p class=\"list-group-item-text\">","");
-                nombre_comercial = nombre_comercial.Replace("</p> </div>", "").Trim().TrimStart().TrimEnd();
-                nombre_comercial = nombre_comercial.Replace("</div>  </div>", "").Trim().TrimStart().TrimEnd();
-
-                Boolean valida_nom = nombre_comercial.Contains("Tipo de Documento: DNI");
-
-                if (nombre_comercial== "-" || valida_nom)
+                if (obj!=null)
                 {
-                    nombre_comercial = "";
-                    nombre_comercial = filas1[1].ToString().Replace("\r\n", "");
-                    nombre_comercial = nombre_comercial.Replace("\t", "").TrimEnd().TrimStart();
-                    nombre_comercial = nombre_comercial.Replace("    ", "");
-                    nombre_comercial = nombre_comercial.Replace("</div> </div>", "");
-                    nombre_comercial = nombre_comercial.Replace("<div class=\"row\">", "");
-                    nombre_comercial = nombre_comercial.Replace("<div class=\"col-sm-5\"> <h4 class=\"list-group-item-heading\">", "");
-                    nombre_comercial = nombre_comercial.Replace("Nombre Comercial:", "");
-                    nombre_comercial = nombre_comercial.Replace("</h4> </div> <div class=\"col-sm-7\">", "");
-                    nombre_comercial = nombre_comercial.Replace("<p class=\"list-group-item-text\">", "");
-                    nombre_comercial = nombre_comercial.Replace("</p> </div>", "").Trim().TrimStart().TrimEnd();
-                    nombre_comercial = nombre_comercial.Replace("</div>  </div>", "").Trim().TrimStart().TrimEnd();
-                    nombre_comercial = nombre_comercial.Replace("N&uacute;mero de RUC: <h4 class=\"list-group-item-heading\">", "");
-                    nombre_comercial = nombre_comercial.Replace("</h4> </div>","").Trim().TrimStart().TrimEnd();
-                    nombre_comercial = nombre_comercial.Substring(13, nombre_comercial.Length - 13);
-                    nombre_comercial = nombre_comercial.Trim();
-                }
-
-                //string xDat = HttpUtility.HtmlDecode(myStreamReader.ReadToEnd());
-
-                var estado_sunat_I=xDat.Contains("NO HABIDO");
-
-                if (estado_sunat_I)
-                {
-                    _estado = "I";
+                    _estado = "A";
+                    _Nombres = obj.razon_social;
                 }
                 else
-                {  
-                    var estado_sunat_A = xDat.Contains("HABIDO");
-
-                    if (estado_sunat_A)
-                    {
-                        _estado = "A";
-                    }
+                {
+                    _estado = "A";
+                    _Nombres = "-";
                 }
 
-                //if (xDat.Length <= 635)
-                //{
-                //    return;
-                //}
+                #endregion
 
-              
+                    //if obj==
 
-                //string[] tabla;
-                //xDat = xDat.Replace("     ", " ");
-                //xDat = xDat.Replace("    ", " ");
-                //xDat = xDat.Replace("   ", " ");
-                //xDat = xDat.Replace("  ", " ");
-                //xDat = xDat.Replace("( ", "(");
-                //xDat = xDat.Replace(" )", ")");
-                //xDat = xDat.Replace("class", "");
-                //xDat = xDat.Replace("colspan=1", "");
-                //xDat = xDat.Replace("colspan=2", "");
-                //xDat = xDat.Replace("colspan=3", "");
-                //xDat = xDat.Replace("bgn", "");
-                //xDat = xDat.Replace("bg", "");
-                //xDat = xDat.Replace("=", "");
-                //xDat = xDat.Replace("\"", "");
-                //xDat = xDat.Replace("<td  >", "<td>");
-                //xDat = xDat.Replace("</td>", "");
-                //xDat = xDat.Replace("-->\r\n<!--", "");
-                //xDat = xDat.Replace("\r\n", "");
-                //xDat = xDat.Replace("</tr>", "");
-                //xDat = xDat.Replace("<tr>", "");
-                //xDat = xDat.Replace("      <td >", "<td>");
-                //xDat = xDat.Replace("<td   >", "<td>");
-                //xDat = xDat.Replace("<td width27%  >", "<td>");
-                //xDat = xDat.Replace("\t", "");
-                //xDat = xDat.Replace("     <td >", "");
-                //xDat = xDat.Replace("<!-- SE COMENTO POR INDICACION DEL PASE PAS20134EA20000207", "");
-                //xDat = xDat.Replace("--> <!--", "");
+                    //string xDat = buscar_ruc_new(numDni).Result;
+                    //string[] tabla;
+                    //tabla = Regex.Split(xDat, "|");
 
-                //string[] filas = xDat.Split(new string[1]
-                //          {
-                //"list-group-item\""
-                //          }, StringSplitOptions.None);
+                    ////xDat = xDat.Replace("\r\n", "");
 
-                //Lo convertimos a tabla o mejor dicho a un arreglo de string como se ve declarado arriba
-                //tabla = Regex.Split(xDat, "<td class");
-                //tabla = Regex.Split(xDat, "<td>");
-                //if (tabla.Length != 1 && tabla.Length != 5)
-                //{
-                //    for (int i = 0; i < tabla.Length; i++)
-                //    {
-                //        switch (tabla[i])
-                //        {
-                //            case "Número Ruc.":
-                //                //_Info.RazonSocial = _resul[i + 2].Substring(14);
-                //                break;
-                //            case "Antiguo Ruc.":
-                //                //_Info.AntiguoRuc = _resul[i + 5];
-                //                break;
-                //            case "Estado.":
-                //                //_Info.Estado = _resul[i + 2];
-                //                break;
-                //            case "Agente Retención IGV.":
-                //                //_Info.EsAgenteRetencion = _resul[i + 3];
-                //                break;
-                //            case "Tipo de Documento:  ":
-                //                _Nombres = tabla[i + 1].ToString().Trim();
-                //                //_Nombres=_Nombres.Replace("�", "Ñ");
-                //                break;
-                //            case "Nombre Comercial:  ":
-                //                _Nombres = tabla[i + 1].ToString().Trim();
-                //                //_Nombres=_Nombres.Replace("�", "Ñ");
-                //                break;
-                //            case "Dirección del Domicilio Fiscal: ":
-                //                _direccion = tabla[i + 1].ToString().Trim();
-                //                //_direccion=_direccion.Replace("�", "Ñ");
-                //                break;
-                //            case "Teléfono(s):  ":
-                //                _telefono = tabla[i + 1].ToString().Trim();
-                //                break;
-                //            case "Dependencia.":
-                //                //_Info.Dependencia = _resul[i + 3];
-                //                break;
-                //            case "Tipo.":
-                //                //_Info.Tipo = _resul[i + 3];
-                //                break;
-                //        }
-                //    }
-                    _Nombres = nombre_comercial;
+                    //string[] filas1 = xDat.Split(new string[1]
+                    //         {
+                    //" <div class=\"list-group-item\">"
+                    //         }, StringSplitOptions.None);
+
+
+                    //string nombre_comercial = filas1[3].ToString().Replace("\r\n","");
+                    //nombre_comercial = nombre_comercial.Replace("\t","").TrimEnd().TrimStart();
+                    //nombre_comercial = nombre_comercial.Replace("    ", "");
+                    //nombre_comercial = nombre_comercial.Replace("</div> </div>", "");
+                    //nombre_comercial = nombre_comercial.Replace("<div class=\"row\">", "");
+                    //nombre_comercial = nombre_comercial.Replace("<div class=\"col-sm-5\"> <h4 class=\"list-group-item-heading\">", "");
+                    //nombre_comercial = nombre_comercial.Replace("Nombre Comercial:", "");
+                    //nombre_comercial = nombre_comercial.Replace("</h4> </div> <div class=\"col-sm-7\">", "");
+                    //nombre_comercial = nombre_comercial.Replace("<p class=\"list-group-item-text\">","");
+                    //nombre_comercial = nombre_comercial.Replace("</p> </div>", "").Trim().TrimStart().TrimEnd();
+                    //nombre_comercial = nombre_comercial.Replace("</div>  </div>", "").Trim().TrimStart().TrimEnd();
+
+                    //Boolean valida_nom = nombre_comercial.Contains("Tipo de Documento: DNI");
+
+                    //if (nombre_comercial== "-" || valida_nom)
+                    //{
+                    //    nombre_comercial = "";
+                    //    nombre_comercial = filas1[1].ToString().Replace("\r\n", "");
+                    //    nombre_comercial = nombre_comercial.Replace("\t", "").TrimEnd().TrimStart();
+                    //    nombre_comercial = nombre_comercial.Replace("    ", "");
+                    //    nombre_comercial = nombre_comercial.Replace("</div> </div>", "");
+                    //    nombre_comercial = nombre_comercial.Replace("<div class=\"row\">", "");
+                    //    nombre_comercial = nombre_comercial.Replace("<div class=\"col-sm-5\"> <h4 class=\"list-group-item-heading\">", "");
+                    //    nombre_comercial = nombre_comercial.Replace("Nombre Comercial:", "");
+                    //    nombre_comercial = nombre_comercial.Replace("</h4> </div> <div class=\"col-sm-7\">", "");
+                    //    nombre_comercial = nombre_comercial.Replace("<p class=\"list-group-item-text\">", "");
+                    //    nombre_comercial = nombre_comercial.Replace("</p> </div>", "").Trim().TrimStart().TrimEnd();
+                    //    nombre_comercial = nombre_comercial.Replace("</div>  </div>", "").Trim().TrimStart().TrimEnd();
+                    //    nombre_comercial = nombre_comercial.Replace("N&uacute;mero de RUC: <h4 class=\"list-group-item-heading\">", "");
+                    //    nombre_comercial = nombre_comercial.Replace("</h4> </div>","").Trim().TrimStart().TrimEnd();
+                    //    nombre_comercial = nombre_comercial.Substring(13, nombre_comercial.Length - 13);
+                    //    nombre_comercial = nombre_comercial.Trim();
+                    //}
+
+                    ////string xDat = HttpUtility.HtmlDecode(myStreamReader.ReadToEnd());
+
+                    //var estado_sunat_I=xDat.Contains("NO HABIDO");
+
+                    //if (estado_sunat_I)
+                    //{
+                    //    _estado = "I";
+                    //}
+                    //else
+                    //{  
+                    //    var estado_sunat_A = xDat.Contains("HABIDO");
+
+                    //    if (estado_sunat_A)
+                    //    {
+                    //        _estado = "A";
+                    //    }
+                    //}
+
+                    //if (xDat.Length <= 635)
+                    //{
+                    //    return;
+                    //}
+
+
+
+                    //string[] tabla;
+                    //xDat = xDat.Replace("     ", " ");
+                    //xDat = xDat.Replace("    ", " ");
+                    //xDat = xDat.Replace("   ", " ");
+                    //xDat = xDat.Replace("  ", " ");
+                    //xDat = xDat.Replace("( ", "(");
+                    //xDat = xDat.Replace(" )", ")");
+                    //xDat = xDat.Replace("class", "");
+                    //xDat = xDat.Replace("colspan=1", "");
+                    //xDat = xDat.Replace("colspan=2", "");
+                    //xDat = xDat.Replace("colspan=3", "");
+                    //xDat = xDat.Replace("bgn", "");
+                    //xDat = xDat.Replace("bg", "");
+                    //xDat = xDat.Replace("=", "");
+                    //xDat = xDat.Replace("\"", "");
+                    //xDat = xDat.Replace("<td  >", "<td>");
+                    //xDat = xDat.Replace("</td>", "");
+                    //xDat = xDat.Replace("-->\r\n<!--", "");
+                    //xDat = xDat.Replace("\r\n", "");
+                    //xDat = xDat.Replace("</tr>", "");
+                    //xDat = xDat.Replace("<tr>", "");
+                    //xDat = xDat.Replace("      <td >", "<td>");
+                    //xDat = xDat.Replace("<td   >", "<td>");
+                    //xDat = xDat.Replace("<td width27%  >", "<td>");
+                    //xDat = xDat.Replace("\t", "");
+                    //xDat = xDat.Replace("     <td >", "");
+                    //xDat = xDat.Replace("<!-- SE COMENTO POR INDICACION DEL PASE PAS20134EA20000207", "");
+                    //xDat = xDat.Replace("--> <!--", "");
+
+                    //string[] filas = xDat.Split(new string[1]
+                    //          {
+                    //"list-group-item\""
+                    //          }, StringSplitOptions.None);
+
+                    //Lo convertimos a tabla o mejor dicho a un arreglo de string como se ve declarado arriba
+                    //tabla = Regex.Split(xDat, "<td class");
+                    //tabla = Regex.Split(xDat, "<td>");
+                    //if (tabla.Length != 1 && tabla.Length != 5)
+                    //{
+                    //    for (int i = 0; i < tabla.Length; i++)
+                    //    {
+                    //        switch (tabla[i])
+                    //        {
+                    //            case "Número Ruc.":
+                    //                //_Info.RazonSocial = _resul[i + 2].Substring(14);
+                    //                break;
+                    //            case "Antiguo Ruc.":
+                    //                //_Info.AntiguoRuc = _resul[i + 5];
+                    //                break;
+                    //            case "Estado.":
+                    //                //_Info.Estado = _resul[i + 2];
+                    //                break;
+                    //            case "Agente Retención IGV.":
+                    //                //_Info.EsAgenteRetencion = _resul[i + 3];
+                    //                break;
+                    //            case "Tipo de Documento:  ":
+                    //                _Nombres = tabla[i + 1].ToString().Trim();
+                    //                //_Nombres=_Nombres.Replace("�", "Ñ");
+                    //                break;
+                    //            case "Nombre Comercial:  ":
+                    //                _Nombres = tabla[i + 1].ToString().Trim();
+                    //                //_Nombres=_Nombres.Replace("�", "Ñ");
+                    //                break;
+                    //            case "Dirección del Domicilio Fiscal: ":
+                    //                _direccion = tabla[i + 1].ToString().Trim();
+                    //                //_direccion=_direccion.Replace("�", "Ñ");
+                    //                break;
+                    //            case "Teléfono(s):  ":
+                    //                _telefono = tabla[i + 1].ToString().Trim();
+                    //                break;
+                    //            case "Dependencia.":
+                    //                //_Info.Dependencia = _resul[i + 3];
+                    //                break;
+                    //            case "Tipo.":
+                    //                //_Info.Tipo = _resul[i + 3];
+                    //                break;
+                    //        }
+                    //    }
+                    //_Nombres = nombre_comercial;
 
                     //if (_Nombres.Length == 1)
                     //{
@@ -599,4 +615,10 @@ namespace Ws_ConsultReniecSunat.Bll
         public string last_name { get; set; }
         public string codVerifica { get; set; }
     }
+    public class DataEntidad
+    {
+        public string ruc { get; set; }
+        public string razon_social { get; set; }
+    }
+
 }

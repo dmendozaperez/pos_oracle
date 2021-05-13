@@ -141,7 +141,12 @@
       <SubType>Component</SubType>
     </Compile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\CapaServicioWindows_x64\CapaServicioWindows_x64.csproj">
+      <Project>{53e48853-4e33-400b-907f-bee054dcae50}</Project>
+      <Name>CapaServicioWindows_x64</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

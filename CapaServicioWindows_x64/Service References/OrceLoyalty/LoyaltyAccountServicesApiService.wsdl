@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:tns="http://v3_3.loyalty.webservices.csx.dtv.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" name="LoyaltyAccountServicesApiService" targetNamespace="http://v3_3.loyalty.webservices.csx.dtv.com/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema>
+      <xsd:import schemaLocation="https://172.24.20.183:8446/BPE/OrceWebServices/v3_3/LoyaltyAccountServicesApiService?xsd=1" namespace="http://v3_3.loyalty.webservices.csx.dtv.com/" />
+    </xsd:schema>
+  </types>
+  <message name="issuePoints">
+    <part name="parameters" element="tns:issuePoints" />
+  </message>
+  <message name="issuePointsResponse">
+    <part name="parameters" element="tns:issuePointsResponse" />
+  </message>
+  <message name="RelateProcessingException">
+    <part name="fault" element="tns:RelateProcessingException" />
+  </message>
+  <message name="calculateProformaPoints">
+    <part name="parameters" element="tns:calculateProformaPoints" />
+  </message>
+  <message name="calculateProformaPointsResponse">
+    <part name="parameters" element="tns:calculateProformaPointsResponse" />
+  </message>
+  <message name="redeemPointsForAward">
+    <part name="parameters" element="tns:redeemPointsForAward" />
+  </message>
+  <message name="redeemPointsForAwardResponse">
+    <part name="parameters" element="tns:redeemPointsForAwardResponse" />
+  </message>
+  <message name="getLoyaltyTransactionDetail">
+    <part name="parameters" element="tns:getLoyaltyTransactionDetail" />
+  </message>
+  <message name="getLoyaltyTransactionDetailResponse">
+    <part name="parameters" element="tns:getLoyaltyTransactionDetailResponse" />
+  </message>
+  <message name="recoverLoyaltyPoints">
+    <part name="parameters" element="tns:recoverLoyaltyPoints" />
+  </message>
+  <message name="recoverLoyaltyPointsResponse">
+    <part name="parameters" element="tns:recoverLoyaltyPointsResponse" />
+  </message>
+  <message name="getLoyaltyAccountHistory">
+    <part name="parameters" element="tns:getLoyaltyAccountHistory" />
+  </message>
+  <message name="getLoyaltyAccountHistoryResponse">
+    <part name="parameters" element="tns:getLoyaltyAccountHistoryResponse" />
+  </message>
+  <message name="moveLoyaltyLevel">
+    <part name="parameters" element="tns:moveLoyaltyLevel" />
+  </message>
+  <message name="moveLoyaltyLevelResponse">
+    <part name="parameters" element="tns:moveLoyaltyLevelResponse" />
+  </message>
+  <message name="getLoyaltyAwardRules">
+    <part name="parameters" element="tns:getLoyaltyAwardRules" />
+  </message>
+  <message name="getLoyaltyAwardRulesResponse">
+    <part name="parameters" element="tns:getLoyaltyAwardRulesResponse" />
+  </message>
+  <portType name="LoyaltyAccountServicesApi">
+    <operation name="issuePoints">
+      <input wsam:Action="http://v3_3.loyalty.webservices.csx.dtv.com/LoyaltyAccountServicesApi/issuePointsRequest" message="tns:issuePoints" />
+      <output wsam:Action="http://v3_3.loyalty.webservices.csx.dtv.com/LoyaltyAccountServicesApi/issuePointsResponse" message="tns:issuePointsResponse" />
+      <fault wsam:Action="http://v3_3.loyalty.webservices.csx.dtv.com/LoyaltyAccountServicesApi/issuePoints/Fault/RelateProcessingException" name="RelateProcessingException" message="tns:RelateProcessingException" />
+    </operation>
+    <operation name="calculateProformaPoints">
+      <input wsam:Action="http://v3_3.loyalty.webservices.csx.dtv.com/LoyaltyAccountServicesApi/calculateProformaPointsRequest" message="tns:calculateProformaPoints" />
+      <output wsam:Action="http://v3_3.loyalty.webservices.csx.dtv.com/LoyaltyAccountServicesApi/calculateProformaPointsResponse" message="tns:calculateProformaPointsResponse" />
+      <fault wsam:Action="http://v3_3.loyalty.webservices.csx.dtv.com/LoyaltyAccountServicesApi/calculateProformaPoints/Fault/RelateProcessingException" name="RelateProcessingException" message="tns:RelateProcessingException" />
+    </operation>
+    <operation name="redeemPointsForAward">
+      <input wsam:Action="http://v3_3.loyalty.webservices.csx.dtv.com/LoyaltyAccountServicesApi/redeemPointsForAwardRequest" message="tns:redeemPointsForAward" />
+      <output wsam:Action="http://v3_3.loyalty.webservices.csx.dtv.com/LoyaltyAccountServicesApi/redeemPointsForAwardResponse" message="tns:redeemPointsForAwardResponse" />
+      <fault wsam:Action="http://v3_3.loyalty.webservices.csx.dtv.com/LoyaltyAccountServicesApi/redeemPointsForAward/Fault/RelateProcessingException" name="RelateProcessingException" message="tns:RelateProcessingException" />
+    </operation>
+    <operation name="getLoyaltyTransactionDetail">
+      <input wsam:Action="http://v3_3.loyalty.webservices.csx.dtv.com/LoyaltyAccountServicesApi/getLoyaltyTransactionDetailRequest" message="tns:getLoyaltyTransactionDetail" />
+      <output wsam:Action="http://v3_3.loyalty.webservices.csx.dtv.com/LoyaltyAccountServicesApi/getLoyaltyTransactionDetailResponse" message="tns:getLoyaltyTransactionDetailResponse" />
+      <fault wsam:Action="http://v3_3.loyalty.webservices.csx.dtv.com/LoyaltyAccountServicesApi/getLoyaltyTransactionDetail/Fault/RelateProcessingException" name="RelateProcessingException" message="tns:RelateProcessingException" />
+    </operation>
+    <operation name="recoverLoyaltyPoints">
+      <input wsam:Action="http://v3_3.loyalty.webservices.csx.dtv.com/LoyaltyAccountServicesApi/recoverLoyaltyPointsRequest" message="tns:recoverLoyaltyPoints" />
+      <output wsam:Action="http://v3_3.loyalty.webservices.csx.dtv.com/LoyaltyAccountServicesApi/recoverLoyaltyPointsResponse" message="tns:recoverLoyaltyPointsResponse" />
+      <fault wsam:Action="http://v3_3.loyalty.webservices.csx.dtv.com/LoyaltyAccountServicesApi/recoverLoyaltyPoints/Fault/RelateProcessingException" name="RelateProcessingException" message="tns:RelateProcessingException" />
+    </operation>
+    <operation name="getLoyaltyAccountHistory">
+      <input wsam:Action="http://v3_3.loyalty.webservices.csx.dtv.com/LoyaltyAccountServicesApi/getLoyaltyAccountHistoryRequest" message="tns:getLoyaltyAccountHistory" />
+      <output wsam:Action="http://v3_3.loyalty.webservices.csx.dtv.com/LoyaltyAccountServicesApi/getLoyaltyAccountHistoryResponse" message="tns:getLoyaltyAccountHistoryResponse" />
+      <fault wsam:Action="http://v3_3.loyalty.webservices.csx.dtv.com/LoyaltyAccountServicesApi/getLoyaltyAccountHistory/Fault/RelateProcessingException" name="RelateProcessingException" message="tns:RelateProcessingException" />
+    </operation>
+    <operation name="moveLoyaltyLevel">
+      <input wsam:Action="http://v3_3.loyalty.webservices.csx.dtv.com/LoyaltyAccountServicesApi/moveLoyaltyLevelRequest" message="tns:moveLoyaltyLevel" />
+      <output wsam:Action="http://v3_3.loyalty.webservices.csx.dtv.com/LoyaltyAccountServicesApi/moveLoyaltyLevelResponse" message="tns:moveLoyaltyLevelResponse" />
+      <fault wsam:Action="http://v3_3.loyalty.webservices.csx.dtv.com/LoyaltyAccountServicesApi/moveLoyaltyLevel/Fault/RelateProcessingException" name="RelateProcessingException" message="tns:RelateProcessingException" />
+    </operation>
+    <operation name="getLoyaltyAwardRules">
+      <input wsam:Action="http://v3_3.loyalty.webservices.csx.dtv.com/LoyaltyAccountServicesApi/getLoyaltyAwardRulesRequest" message="tns:getLoyaltyAwardRules" />
+      <output wsam:Action="http://v3_3.loyalty.webservices.csx.dtv.com/LoyaltyAccountServicesApi/getLoyaltyAwardRulesResponse" message="tns:getLoyaltyAwardRulesResponse" />
+      <fault wsam:Action="http://v3_3.loyalty.webservices.csx.dtv.com/LoyaltyAccountServicesApi/getLoyaltyAwardRules/Fault/RelateProcessingException" name="RelateProcessingException" message="tns:RelateProcessingException" />
+    </operation>
+  </portType>
+  <binding name="LoyaltyAccountServicesApiPortBinding" type="tns:LoyaltyAccountServicesApi">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="issuePoints">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="RelateProcessingException">
+        <soap:fault use="literal" name="RelateProcessingException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="calculateProformaPoints">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="RelateProcessingException">
+        <soap:fault use="literal" name="RelateProcessingException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="redeemPointsForAward">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="RelateProcessingException">
+        <soap:fault use="literal" name="RelateProcessingException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="getLoyaltyTransactionDetail">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="RelateProcessingException">
+        <soap:fault use="literal" name="RelateProcessingException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="recoverLoyaltyPoints">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="RelateProcessingException">
+        <soap:fault use="literal" name="RelateProcessingException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="getLoyaltyAccountHistory">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="RelateProcessingException">
+        <soap:fault use="literal" name="RelateProcessingException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="moveLoyaltyLevel">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="RelateProcessingException">
+        <soap:fault use="literal" name="RelateProcessingException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="getLoyaltyAwardRules">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="RelateProcessingException">
+        <soap:fault use="literal" name="RelateProcessingException" namespace="" />
+      </fault>
+    </operation>
+  </binding>
+  <service name="LoyaltyAccountServicesApiService">
+    <port name="LoyaltyAccountServicesApiPort" binding="tns:LoyaltyAccountServicesApiPortBinding">
+      <soap:address location="https://172.24.20.183:8446/BPE/OrceWebServices/v3_3/LoyaltyAccountServicesApiService" />
+    </port>
+  </service>
+</definitions>

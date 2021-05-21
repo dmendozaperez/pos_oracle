@@ -37,8 +37,10 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Net" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -62,6 +64,7 @@
     <Compile Include="Conexion\ConexionSQL.cs" />
     <Compile Include="Conexion\ConexionWS.cs" />
     <Compile Include="Conexion\NetworkShare.cs" />
+    <Compile Include="Entidad\BataClub_Orce.cs" />
     <Compile Include="Entidad\Ent_InterAuto_PL.cs" />
     <Compile Include="Entidad\Ent_InterGenera_PL.cs" />
     <Compile Include="Entidad\FPTRANC.cs" />

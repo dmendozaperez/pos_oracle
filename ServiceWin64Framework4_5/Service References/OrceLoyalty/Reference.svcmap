@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="83b54bfe-5412-4371-834a-388b529eb81c" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="https://172.24.20.183:8446/BPE/OrceWebServices/v3_3/LoyaltyAccountServicesApiService?wsdl" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="LoyaltyAccountServicesApiService.xsd" MetadataType="Schema" ID="94abf90e-3f57-4b0a-ba9f-5ee01863ee60" SourceId="1" SourceUrl="https://172.24.20.183:8446/BPE/OrceWebServices/v3_3/LoyaltyAccountServicesApiService?xsd=1" />
+    <MetadataFile FileName="LoyaltyAccountServicesApiService.wsdl" MetadataType="Wsdl" ID="b1d4ad7d-d64c-438d-90b6-9e0a2521530a" SourceId="1" SourceUrl="https://172.24.20.183:8446/BPE/OrceWebServices/v3_3/LoyaltyAccountServicesApiService?wsdl" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

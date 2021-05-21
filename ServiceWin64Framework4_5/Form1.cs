@@ -1,5 +1,10 @@
-﻿using CapaServicioWindows_x64.Envio_Ftp_Xstore;
+﻿//using BataClub_Correo;
+using BataClub_Correo;
+using BataClub_DNI;
+using CapaServicioWindows_x64.Bataclub;
+using CapaServicioWindows_x64.Envio_Ftp_Xstore;
 using CapaServicioWindows_x64.Modular;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,6 +14,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Script.Serialization;
 using System.Windows.Forms;
 
 namespace ServiceWin64Framework4_5
@@ -282,5 +288,94 @@ namespace ServiceWin64Framework4_5
         {
          
         }
+
+        private void btn_crear_cliente_Click(object sender, EventArgs e)
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            BataClub clientes = new BataClub();
+            string error= clientes.creacion_actualizacion_clientes_orce();
+            MessageBox.Show(error, "Admin", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            Cursor.Current = Cursors.Default;
+        }
+
+        private void btn_valida_correo_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                ValidacionEmail verifica = new ValidacionEmail();
+                Boolean valida= verifica.sendEmail_verificar(txtcorreo.Text);
+
+                MessageBox.Show((valida) ? "El correo " + txtcorreo.Text + " es CORRECTO" : "El correo " + txtcorreo.Text + " es INCORRECTO", "Aviso", MessageBoxButtons.OK,MessageBoxIcon.Information);
+                Cursor.Current = Cursors.Default;
+
+            }
+            catch (Exception exc)
+            {
+
+                
+            }
+
+            
+
+            //ValidacionEmail verifica = new ValidacionEmail();
+            //verifica.sendEmail_verificar("david_mendozap@hotmail.com");
+        }
+
+        private void btndni_Click(object sender, EventArgs e)
+        {
+            ValidaDNI obj_valida = new ValidaDNI();
+            Boolean valida= obj_valida.ValidateDocument(txtdni.Text);
+
+            MessageBox.Show((valida) ? "El DNI " + txtdni.Text + " es INCORRECTO" : "El DNI " + txtdni.Text + " es CORRECTO", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+        }
+
+        private void btn_tarjeta_cliente_Click(object sender, EventArgs e)
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            BataClub clientes = new BataClub();
+            string error = clientes.asociar_tarjeta_cliente();
+
+            MessageBox.Show(error, "Admin", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            Cursor.Current = Cursors.Default;
+        }
+    }
+    public class objeto_json
+    {
+        public VerifyEmailJsonResult VerifyEmailJsonResult { get; set; }
+        //public string Message { get; set; }
+        //public string MessageDetail { get; set; }
+        //public Int32 StatusCode { get; set; }
+
+    }
+    public class VerifyEmailJsonResult
+    {
+        public Data Data { get; set; }
+        public string Message { get; set; }
+        public string MessageDetail { get; set; }
+        public Int32 StatusCode { get; set; }
+    }
+    public class Response_obj
+    {
+        public string result { get; set; }
+        public string reason { get; set; }
+        public string role { get; set; }
+        public string free { get; set; }
+        public string disposable { get; set; }
+        public string accept_all { get; set; }
+        public string did_you_mean { get; set; }
+        public string sendex { get; set; }
+        public string email { get; set; }
+        public string user { get; set; }
+        public string domain { get; set; }
+        public string success { get; set; }
+        public string message { get; set; }
+    }
+    public class Data
+    {
+        public string Response { get; set; }
+        public Response_obj Response_obj { get; set; }
+
     }
 }

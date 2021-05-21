@@ -1,5 +1,8 @@
 ﻿using BarcodeLib;
+using BataClub_Correo;
+using BataClub_DNI;
 using CapaBasico.Util;
+using CapaDato.Control;
 using CapaDato.Ecommerce;
 using CapaEntidad.Ecommerce;
 using CapaEntidad.Util;
@@ -88,6 +91,15 @@ namespace WS_Ecommerce
             {
 
                 if (Cliente.dni.Trim().Length == 0) { result.codigo = "-1"; result.descripcion = result.descripcion + "DNI es obligatorio."; };
+
+                #region<VALIDAR NUMERO DE DNI>
+                ValidaDNI obj_valida = new ValidaDNI();
+                Boolean valida = obj_valida.ValidateDocument(Cliente.dni.Trim());
+
+                if (valida) { result.codigo = "-1"; result.descripcion = result.descripcion + "El Numero de DNI no es Correcto."; };
+
+                #endregion
+
                 if (Cliente.canal.Trim().Length == 0) { result.codigo = "-1"; result.descripcion = result.descripcion + "Canal es obligatorio."; };
                 if (Cliente.correo.Trim().Length == 0) { result.codigo = "-1"; result.descripcion = result.descripcion + "Correo es obligatorio."; };
                 if (Cliente.primerNombre.Trim().Length == 0) { result.codigo = "-1"; result.descripcion = result.descripcion + "Nombre es obligatorio."; };
@@ -101,18 +113,27 @@ namespace WS_Ecommerce
                     Cliente.ubigeo_distrito = (Cliente.ubigeo_distrito == null) ? "" : Cliente.ubigeo_distrito;
                     Cliente.ubigeo = (Cliente.ubigeo == null) ? "" : Cliente.ubigeo;
                 }
-                #region<VALIDACION DE DOMINIO DE CORREO>
-                if (result.codigo != "-1")
+                #region<VALIDACION DE CORREO SI ES EXISTE>
+                Dat_Acceso dat_valida_correo = new Dat_Acceso();
+                Boolean valida_correo_bd = dat_valida_correo.valida_correo(Cliente.correo);
+                if (!valida_correo_bd)
                 {
-                    mailAddress = new MailAddress(Cliente.correo);
-                    var mxRecords = dnsClient.Query(mailAddress.Host, QueryType.MX).AllRecords.MxRecords().ToList();
-                    if (mxRecords.Count == 0)
+                    if (result.codigo != "-1")
                     {
-                        result.codigo = "-1";
-                        result.descripcion = "El dominio " + mailAddress.Host + " no existe..";
-                    }
+                        ValidacionEmail verifica = new ValidacionEmail();
+                        Boolean valida_correo = verifica.sendEmail_verificar(Cliente.correo);
 
+                        //mailAddress = new MailAddress(Cliente.correo);
+                        //var mxRecords = dnsClient.Query(mailAddress.Host, QueryType.MX).AllRecords.MxRecords().ToList();
+                        if (!valida_correo)
+                        {
+                            result.codigo = "-1";
+                            result.descripcion = "El Correo " + Cliente.correo + " no existe..";
+                        }
+
+                    }
                 }
+                
                 #endregion
 
                 //if (result.codigo=="-1")

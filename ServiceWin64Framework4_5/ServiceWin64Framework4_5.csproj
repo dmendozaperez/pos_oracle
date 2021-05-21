@@ -32,10 +32,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -47,6 +53,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BataClub\ValidacionEmail.cs" />
+    <Compile Include="BataClub\ValidaDNI.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -56,6 +64,16 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service References\BataTransac\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\OrceCliente\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\OrceLoyalty\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -72,6 +90,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\DataSources\System.Data.DataSet.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -176,6 +195,158 @@
     <None Include="Service References\BataTransac\ServiceWin64Framework4_5.BataTransac.ws_valida_traspaso_tdaResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\OrceCliente\CustomerServicesApiService.wsdl" />
+    <None Include="Service References\OrceCliente\CustomerServicesApiService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\OrceCliente\ServiceWin64Framework4_5.OrceCliente.addCustomerNoteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\OrceCliente\ServiceWin64Framework4_5.OrceCliente.addOrDeleteCustomerFranchiseesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\OrceCliente\ServiceWin64Framework4_5.OrceCliente.addOrUpdateCustomerResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\OrceCliente\ServiceWin64Framework4_5.OrceCliente.addOrUpdatePreferenceCenterResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\OrceCliente\ServiceWin64Framework4_5.OrceCliente.addWishlistItemsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\OrceCliente\ServiceWin64Framework4_5.OrceCliente.AssociateAssignmentResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\OrceCliente\ServiceWin64Framework4_5.OrceCliente.associateCardToCustomerResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\OrceCliente\ServiceWin64Framework4_5.OrceCliente.changeItemDisplayStatusResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\OrceCliente\ServiceWin64Framework4_5.OrceCliente.CustomerImageType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\OrceCliente\ServiceWin64Framework4_5.OrceCliente.CustomerNotesContainerReturnType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\OrceCliente\ServiceWin64Framework4_5.OrceCliente.CustomerResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\OrceCliente\ServiceWin64Framework4_5.OrceCliente.CustomersResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\OrceCliente\ServiceWin64Framework4_5.OrceCliente.deleteCustomerResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\OrceCliente\ServiceWin64Framework4_5.OrceCliente.deleteWishlistItemsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\OrceCliente\ServiceWin64Framework4_5.OrceCliente.getAssociateAssignmentResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\OrceCliente\ServiceWin64Framework4_5.OrceCliente.getCustomerImageResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\OrceCliente\ServiceWin64Framework4_5.OrceCliente.getCustomerNotesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\OrceCliente\ServiceWin64Framework4_5.OrceCliente.getItemHistoryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\OrceCliente\ServiceWin64Framework4_5.OrceCliente.getPreferenceCenterResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\OrceCliente\ServiceWin64Framework4_5.OrceCliente.getPreferenceTypesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\OrceCliente\ServiceWin64Framework4_5.OrceCliente.getPromotionHistoryWithDateRangeMaxResultResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\OrceCliente\ServiceWin64Framework4_5.OrceCliente.getPromotionHistoryWithDateRangeResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\OrceCliente\ServiceWin64Framework4_5.OrceCliente.getTransactionHistoryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\OrceCliente\ServiceWin64Framework4_5.OrceCliente.getVisualizerItemsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\OrceCliente\ServiceWin64Framework4_5.OrceCliente.ItemHistoryResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\OrceCliente\ServiceWin64Framework4_5.OrceCliente.mergeCustomersResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\OrceCliente\ServiceWin64Framework4_5.OrceCliente.PreferenceCenterReturnType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\OrceCliente\ServiceWin64Framework4_5.OrceCliente.PreferenceType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\OrceCliente\ServiceWin64Framework4_5.OrceCliente.PromotionEventReturnType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\OrceCliente\ServiceWin64Framework4_5.OrceCliente.retrieveCustomerResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\OrceCliente\ServiceWin64Framework4_5.OrceCliente.searchCustomersResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\OrceCliente\ServiceWin64Framework4_5.OrceCliente.TransactionReturnType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\OrceCliente\ServiceWin64Framework4_5.OrceCliente.updateAssociateAssignmentResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\OrceCliente\ServiceWin64Framework4_5.OrceCliente.VisualizerItemResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\OrceLoyalty\LoyaltyAccountServicesApiService.wsdl" />
+    <None Include="Service References\OrceLoyalty\LoyaltyAccountServicesApiService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\OrceLoyalty\ServiceWin64Framework4_5.OrceLoyalty.calculateProformaPointsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\OrceLoyalty\ServiceWin64Framework4_5.OrceLoyalty.CardInquiryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\OrceLoyalty\ServiceWin64Framework4_5.OrceLoyalty.getLoyaltyAccountHistoryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\OrceLoyalty\ServiceWin64Framework4_5.OrceLoyalty.getLoyaltyAwardRulesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\OrceLoyalty\ServiceWin64Framework4_5.OrceLoyalty.getLoyaltyTransactionDetailResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\OrceLoyalty\ServiceWin64Framework4_5.OrceLoyalty.issuePointsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\OrceLoyalty\ServiceWin64Framework4_5.OrceLoyalty.loyaltyActivity.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\OrceLoyalty\ServiceWin64Framework4_5.OrceLoyalty.loyaltyActivityList.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\OrceLoyalty\ServiceWin64Framework4_5.OrceLoyalty.LoyaltyAwardRuleType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\OrceLoyalty\ServiceWin64Framework4_5.OrceLoyalty.loyaltyTransactionSummary.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\OrceLoyalty\ServiceWin64Framework4_5.OrceLoyalty.moveLoyaltyLevelResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\OrceLoyalty\ServiceWin64Framework4_5.OrceLoyalty.POSLogType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\OrceLoyalty\ServiceWin64Framework4_5.OrceLoyalty.recoverLoyaltyPointsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\OrceLoyalty\ServiceWin64Framework4_5.OrceLoyalty.redeemPointsForAwardResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -191,6 +362,8 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\BataTransac\" />
+    <WCFMetadataStorage Include="Service References\OrceCliente\" />
+    <WCFMetadataStorage Include="Service References\OrceLoyalty\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\BataTransac\Bata_Transaction.disco" />
@@ -203,6 +376,30 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\BataTransac\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\OrceCliente\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\OrceCliente\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\OrceCliente\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\OrceLoyalty\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\OrceLoyalty\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\OrceLoyalty\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

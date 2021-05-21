@@ -1,9 +1,11 @@
 ﻿using CapaServicioWindows.Conexion;
+using CapaServicioWindows.Entidad;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Net;
 using System.Text;
 
 namespace CapaServicioWindows.Bataclub
@@ -146,5 +148,7 @@ namespace CapaServicioWindows.Bataclub
             }
             return valida;
         }
+
+        
     }
 }

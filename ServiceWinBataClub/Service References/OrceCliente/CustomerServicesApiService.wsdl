@@ -1,0 +1,550 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:tns="http://v3_0.customer.webservices.csx.dtv.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" name="CustomerServicesApiService" targetNamespace="http://v3_0.customer.webservices.csx.dtv.com/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema>
+      <xsd:import schemaLocation="https://172.24.20.183:8446/BPE/OrceWebServices/v3_0/CustomerServicesApiService?xsd=1" namespace="http://v3_0.customer.webservices.csx.dtv.com/" />
+    </xsd:schema>
+  </types>
+  <message name="getPromotionHistoryWithDateRange">
+    <part name="parameters" element="tns:getPromotionHistoryWithDateRange" />
+  </message>
+  <message name="getPromotionHistoryWithDateRangeResponse">
+    <part name="parameters" element="tns:getPromotionHistoryWithDateRangeResponse" />
+  </message>
+  <message name="RelateProcessingException">
+    <part name="fault" element="tns:RelateProcessingException" />
+  </message>
+  <message name="getTransactionHistory">
+    <part name="parameters" element="tns:getTransactionHistory" />
+  </message>
+  <message name="getTransactionHistoryResponse">
+    <part name="parameters" element="tns:getTransactionHistoryResponse" />
+  </message>
+  <message name="searchCustomers">
+    <part name="parameters" element="tns:searchCustomers" />
+  </message>
+  <message name="searchCustomersResponse">
+    <part name="parameters" element="tns:searchCustomersResponse" />
+  </message>
+  <message name="retrieveCustomer">
+    <part name="parameters" element="tns:retrieveCustomer" />
+  </message>
+  <message name="retrieveCustomerResponse">
+    <part name="parameters" element="tns:retrieveCustomerResponse" />
+  </message>
+  <message name="getPromotionHistoryWithDateRangeMaxResult">
+    <part name="parameters" element="tns:getPromotionHistoryWithDateRangeMaxResult" />
+  </message>
+  <message name="getPromotionHistoryWithDateRangeMaxResultResponse">
+    <part name="parameters" element="tns:getPromotionHistoryWithDateRangeMaxResultResponse" />
+  </message>
+  <message name="addOrUpdateCustomer">
+    <part name="parameters" element="tns:addOrUpdateCustomer" />
+  </message>
+  <message name="addOrUpdateCustomerResponse">
+    <part name="parameters" element="tns:addOrUpdateCustomerResponse" />
+  </message>
+  <message name="deleteCustomer">
+    <part name="parameters" element="tns:deleteCustomer" />
+  </message>
+  <message name="deleteCustomerResponse">
+    <part name="parameters" element="tns:deleteCustomerResponse" />
+  </message>
+  <message name="mergeCustomers">
+    <part name="parameters" element="tns:mergeCustomers" />
+  </message>
+  <message name="mergeCustomersResponse">
+    <part name="parameters" element="tns:mergeCustomersResponse" />
+  </message>
+  <message name="associateCardToCustomer">
+    <part name="parameters" element="tns:associateCardToCustomer" />
+  </message>
+  <message name="associateCardToCustomerResponse">
+    <part name="parameters" element="tns:associateCardToCustomerResponse" />
+  </message>
+  <message name="getCustomerNotes">
+    <part name="parameters" element="tns:getCustomerNotes" />
+  </message>
+  <message name="getCustomerNotesResponse">
+    <part name="parameters" element="tns:getCustomerNotesResponse" />
+  </message>
+  <message name="changeItemDisplayStatus">
+    <part name="parameters" element="tns:changeItemDisplayStatus" />
+  </message>
+  <message name="changeItemDisplayStatusResponse">
+    <part name="parameters" element="tns:changeItemDisplayStatusResponse" />
+  </message>
+  <message name="getPreferenceCenter">
+    <part name="parameters" element="tns:getPreferenceCenter" />
+  </message>
+  <message name="getPreferenceCenterResponse">
+    <part name="parameters" element="tns:getPreferenceCenterResponse" />
+  </message>
+  <message name="addOrUpdatePreferenceCenter">
+    <part name="parameters" element="tns:addOrUpdatePreferenceCenter" />
+  </message>
+  <message name="addOrUpdatePreferenceCenterResponse">
+    <part name="parameters" element="tns:addOrUpdatePreferenceCenterResponse" />
+  </message>
+  <message name="addOrDeleteCustomerFranchisees">
+    <part name="parameters" element="tns:addOrDeleteCustomerFranchisees" />
+  </message>
+  <message name="addOrDeleteCustomerFranchiseesResponse">
+    <part name="parameters" element="tns:addOrDeleteCustomerFranchiseesResponse" />
+  </message>
+  <message name="getAssociateAssignment">
+    <part name="parameters" element="tns:getAssociateAssignment" />
+  </message>
+  <message name="getAssociateAssignmentResponse">
+    <part name="parameters" element="tns:getAssociateAssignmentResponse" />
+  </message>
+  <message name="updateAssociateAssignment">
+    <part name="parameters" element="tns:updateAssociateAssignment" />
+  </message>
+  <message name="updateAssociateAssignmentResponse">
+    <part name="parameters" element="tns:updateAssociateAssignmentResponse" />
+  </message>
+  <message name="getItemHistory">
+    <part name="parameters" element="tns:getItemHistory" />
+  </message>
+  <message name="getItemHistoryResponse">
+    <part name="parameters" element="tns:getItemHistoryResponse" />
+  </message>
+  <message name="getVisualizerItems">
+    <part name="parameters" element="tns:getVisualizerItems" />
+  </message>
+  <message name="getVisualizerItemsResponse">
+    <part name="parameters" element="tns:getVisualizerItemsResponse" />
+  </message>
+  <message name="addWishlistItems">
+    <part name="parameters" element="tns:addWishlistItems" />
+  </message>
+  <message name="addWishlistItemsResponse">
+    <part name="parameters" element="tns:addWishlistItemsResponse" />
+  </message>
+  <message name="deleteWishlistItems">
+    <part name="parameters" element="tns:deleteWishlistItems" />
+  </message>
+  <message name="deleteWishlistItemsResponse">
+    <part name="parameters" element="tns:deleteWishlistItemsResponse" />
+  </message>
+  <message name="addCustomerNote">
+    <part name="parameters" element="tns:addCustomerNote" />
+  </message>
+  <message name="addCustomerNoteResponse">
+    <part name="parameters" element="tns:addCustomerNoteResponse" />
+  </message>
+  <message name="getCustomerImage">
+    <part name="parameters" element="tns:getCustomerImage" />
+  </message>
+  <message name="getCustomerImageResponse">
+    <part name="parameters" element="tns:getCustomerImageResponse" />
+  </message>
+  <message name="getPreferenceTypes">
+    <part name="parameters" element="tns:getPreferenceTypes" />
+  </message>
+  <message name="getPreferenceTypesResponse">
+    <part name="parameters" element="tns:getPreferenceTypesResponse" />
+  </message>
+  <portType name="CustomerServicesApi">
+    <operation name="getPromotionHistoryWithDateRange">
+      <input wsam:Action="http://v3_0.customer.webservices.csx.dtv.com/CustomerServicesApi/getPromotionHistoryWithDateRangeRequest" message="tns:getPromotionHistoryWithDateRange" />
+      <output wsam:Action="http://v3_0.customer.webservices.csx.dtv.com/CustomerServicesApi/getPromotionHistoryWithDateRangeResponse" message="tns:getPromotionHistoryWithDateRangeResponse" />
+      <fault wsam:Action="http://v3_0.customer.webservices.csx.dtv.com/CustomerServicesApi/getPromotionHistoryWithDateRange/Fault/RelateProcessingException" name="RelateProcessingException" message="tns:RelateProcessingException" />
+    </operation>
+    <operation name="getTransactionHistory">
+      <input wsam:Action="http://v3_0.customer.webservices.csx.dtv.com/CustomerServicesApi/getTransactionHistoryRequest" message="tns:getTransactionHistory" />
+      <output wsam:Action="http://v3_0.customer.webservices.csx.dtv.com/CustomerServicesApi/getTransactionHistoryResponse" message="tns:getTransactionHistoryResponse" />
+      <fault wsam:Action="http://v3_0.customer.webservices.csx.dtv.com/CustomerServicesApi/getTransactionHistory/Fault/RelateProcessingException" name="RelateProcessingException" message="tns:RelateProcessingException" />
+    </operation>
+    <operation name="searchCustomers">
+      <input wsam:Action="http://v3_0.customer.webservices.csx.dtv.com/CustomerServicesApi/searchCustomersRequest" message="tns:searchCustomers" />
+      <output wsam:Action="http://v3_0.customer.webservices.csx.dtv.com/CustomerServicesApi/searchCustomersResponse" message="tns:searchCustomersResponse" />
+      <fault wsam:Action="http://v3_0.customer.webservices.csx.dtv.com/CustomerServicesApi/searchCustomers/Fault/RelateProcessingException" name="RelateProcessingException" message="tns:RelateProcessingException" />
+    </operation>
+    <operation name="retrieveCustomer">
+      <input wsam:Action="http://v3_0.customer.webservices.csx.dtv.com/CustomerServicesApi/retrieveCustomerRequest" message="tns:retrieveCustomer" />
+      <output wsam:Action="http://v3_0.customer.webservices.csx.dtv.com/CustomerServicesApi/retrieveCustomerResponse" message="tns:retrieveCustomerResponse" />
+      <fault wsam:Action="http://v3_0.customer.webservices.csx.dtv.com/CustomerServicesApi/retrieveCustomer/Fault/RelateProcessingException" name="RelateProcessingException" message="tns:RelateProcessingException" />
+    </operation>
+    <operation name="getPromotionHistoryWithDateRangeMaxResult">
+      <input wsam:Action="http://v3_0.customer.webservices.csx.dtv.com/CustomerServicesApi/getPromotionHistoryWithDateRangeMaxResultRequest" message="tns:getPromotionHistoryWithDateRangeMaxResult" />
+      <output wsam:Action="http://v3_0.customer.webservices.csx.dtv.com/CustomerServicesApi/getPromotionHistoryWithDateRangeMaxResultResponse" message="tns:getPromotionHistoryWithDateRangeMaxResultResponse" />
+      <fault wsam:Action="http://v3_0.customer.webservices.csx.dtv.com/CustomerServicesApi/getPromotionHistoryWithDateRangeMaxResult/Fault/RelateProcessingException" name="RelateProcessingException" message="tns:RelateProcessingException" />
+    </operation>
+    <operation name="addOrUpdateCustomer">
+      <input wsam:Action="http://v3_0.customer.webservices.csx.dtv.com/CustomerServicesApi/addOrUpdateCustomerRequest" message="tns:addOrUpdateCustomer" />
+      <output wsam:Action="http://v3_0.customer.webservices.csx.dtv.com/CustomerServicesApi/addOrUpdateCustomerResponse" message="tns:addOrUpdateCustomerResponse" />
+      <fault wsam:Action="http://v3_0.customer.webservices.csx.dtv.com/CustomerServicesApi/addOrUpdateCustomer/Fault/RelateProcessingException" name="RelateProcessingException" message="tns:RelateProcessingException" />
+    </operation>
+    <operation name="deleteCustomer">
+      <input wsam:Action="http://v3_0.customer.webservices.csx.dtv.com/CustomerServicesApi/deleteCustomerRequest" message="tns:deleteCustomer" />
+      <output wsam:Action="http://v3_0.customer.webservices.csx.dtv.com/CustomerServicesApi/deleteCustomerResponse" message="tns:deleteCustomerResponse" />
+      <fault wsam:Action="http://v3_0.customer.webservices.csx.dtv.com/CustomerServicesApi/deleteCustomer/Fault/RelateProcessingException" name="RelateProcessingException" message="tns:RelateProcessingException" />
+    </operation>
+    <operation name="mergeCustomers">
+      <input wsam:Action="http://v3_0.customer.webservices.csx.dtv.com/CustomerServicesApi/mergeCustomersRequest" message="tns:mergeCustomers" />
+      <output wsam:Action="http://v3_0.customer.webservices.csx.dtv.com/CustomerServicesApi/mergeCustomersResponse" message="tns:mergeCustomersResponse" />
+      <fault wsam:Action="http://v3_0.customer.webservices.csx.dtv.com/CustomerServicesApi/mergeCustomers/Fault/RelateProcessingException" name="RelateProcessingException" message="tns:RelateProcessingException" />
+    </operation>
+    <operation name="associateCardToCustomer">
+      <input wsam:Action="http://v3_0.customer.webservices.csx.dtv.com/CustomerServicesApi/associateCardToCustomerRequest" message="tns:associateCardToCustomer" />
+      <output wsam:Action="http://v3_0.customer.webservices.csx.dtv.com/CustomerServicesApi/associateCardToCustomerResponse" message="tns:associateCardToCustomerResponse" />
+      <fault wsam:Action="http://v3_0.customer.webservices.csx.dtv.com/CustomerServicesApi/associateCardToCustomer/Fault/RelateProcessingException" name="RelateProcessingException" message="tns:RelateProcessingException" />
+    </operation>
+    <operation name="getCustomerNotes">
+      <input wsam:Action="http://v3_0.customer.webservices.csx.dtv.com/CustomerServicesApi/getCustomerNotesRequest" message="tns:getCustomerNotes" />
+      <output wsam:Action="http://v3_0.customer.webservices.csx.dtv.com/CustomerServicesApi/getCustomerNotesResponse" message="tns:getCustomerNotesResponse" />
+      <fault wsam:Action="http://v3_0.customer.webservices.csx.dtv.com/CustomerServicesApi/getCustomerNotes/Fault/RelateProcessingException" name="RelateProcessingException" message="tns:RelateProcessingException" />
+    </operation>
+    <operation name="changeItemDisplayStatus">
+      <input wsam:Action="http://v3_0.customer.webservices.csx.dtv.com/CustomerServicesApi/changeItemDisplayStatusRequest" message="tns:changeItemDisplayStatus" />
+      <output wsam:Action="http://v3_0.customer.webservices.csx.dtv.com/CustomerServicesApi/changeItemDisplayStatusResponse" message="tns:changeItemDisplayStatusResponse" />
+      <fault wsam:Action="http://v3_0.customer.webservices.csx.dtv.com/CustomerServicesApi/changeItemDisplayStatus/Fault/RelateProcessingException" name="RelateProcessingException" message="tns:RelateProcessingException" />
+    </operation>
+    <operation name="getPreferenceCenter">
+      <input wsam:Action="http://v3_0.customer.webservices.csx.dtv.com/CustomerServicesApi/getPreferenceCenterRequest" message="tns:getPreferenceCenter" />
+      <output wsam:Action="http://v3_0.customer.webservices.csx.dtv.com/CustomerServicesApi/getPreferenceCenterResponse" message="tns:getPreferenceCenterResponse" />
+      <fault wsam:Action="http://v3_0.customer.webservices.csx.dtv.com/CustomerServicesApi/getPreferenceCenter/Fault/RelateProcessingException" name="RelateProcessingException" message="tns:RelateProcessingException" />
+    </operation>
+    <operation name="addOrUpdatePreferenceCenter">
+      <input wsam:Action="http://v3_0.customer.webservices.csx.dtv.com/CustomerServicesApi/addOrUpdatePreferenceCenterRequest" message="tns:addOrUpdatePreferenceCenter" />
+      <output wsam:Action="http://v3_0.customer.webservices.csx.dtv.com/CustomerServicesApi/addOrUpdatePreferenceCenterResponse" message="tns:addOrUpdatePreferenceCenterResponse" />
+      <fault wsam:Action="http://v3_0.customer.webservices.csx.dtv.com/CustomerServicesApi/addOrUpdatePreferenceCenter/Fault/RelateProcessingException" name="RelateProcessingException" message="tns:RelateProcessingException" />
+    </operation>
+    <operation name="addOrDeleteCustomerFranchisees">
+      <input wsam:Action="http://v3_0.customer.webservices.csx.dtv.com/CustomerServicesApi/addOrDeleteCustomerFranchiseesRequest" message="tns:addOrDeleteCustomerFranchisees" />
+      <output wsam:Action="http://v3_0.customer.webservices.csx.dtv.com/CustomerServicesApi/addOrDeleteCustomerFranchiseesResponse" message="tns:addOrDeleteCustomerFranchiseesResponse" />
+      <fault wsam:Action="http://v3_0.customer.webservices.csx.dtv.com/CustomerServicesApi/addOrDeleteCustomerFranchisees/Fault/RelateProcessingException" name="RelateProcessingException" message="tns:RelateProcessingException" />
+    </operation>
+    <operation name="getAssociateAssignment">
+      <input wsam:Action="http://v3_0.customer.webservices.csx.dtv.com/CustomerServicesApi/getAssociateAssignmentRequest" message="tns:getAssociateAssignment" />
+      <output wsam:Action="http://v3_0.customer.webservices.csx.dtv.com/CustomerServicesApi/getAssociateAssignmentResponse" message="tns:getAssociateAssignmentResponse" />
+      <fault wsam:Action="http://v3_0.customer.webservices.csx.dtv.com/CustomerServicesApi/getAssociateAssignment/Fault/RelateProcessingException" name="RelateProcessingException" message="tns:RelateProcessingException" />
+    </operation>
+    <operation name="updateAssociateAssignment">
+      <input wsam:Action="http://v3_0.customer.webservices.csx.dtv.com/CustomerServicesApi/updateAssociateAssignmentRequest" message="tns:updateAssociateAssignment" />
+      <output wsam:Action="http://v3_0.customer.webservices.csx.dtv.com/CustomerServicesApi/updateAssociateAssignmentResponse" message="tns:updateAssociateAssignmentResponse" />
+      <fault wsam:Action="http://v3_0.customer.webservices.csx.dtv.com/CustomerServicesApi/updateAssociateAssignment/Fault/RelateProcessingException" name="RelateProcessingException" message="tns:RelateProcessingException" />
+    </operation>
+    <operation name="getItemHistory">
+      <input wsam:Action="http://v3_0.customer.webservices.csx.dtv.com/CustomerServicesApi/getItemHistoryRequest" message="tns:getItemHistory" />
+      <output wsam:Action="http://v3_0.customer.webservices.csx.dtv.com/CustomerServicesApi/getItemHistoryResponse" message="tns:getItemHistoryResponse" />
+      <fault wsam:Action="http://v3_0.customer.webservices.csx.dtv.com/CustomerServicesApi/getItemHistory/Fault/RelateProcessingException" name="RelateProcessingException" message="tns:RelateProcessingException" />
+    </operation>
+    <operation name="getVisualizerItems">
+      <input wsam:Action="http://v3_0.customer.webservices.csx.dtv.com/CustomerServicesApi/getVisualizerItemsRequest" message="tns:getVisualizerItems" />
+      <output wsam:Action="http://v3_0.customer.webservices.csx.dtv.com/CustomerServicesApi/getVisualizerItemsResponse" message="tns:getVisualizerItemsResponse" />
+      <fault wsam:Action="http://v3_0.customer.webservices.csx.dtv.com/CustomerServicesApi/getVisualizerItems/Fault/RelateProcessingException" name="RelateProcessingException" message="tns:RelateProcessingException" />
+    </operation>
+    <operation name="addWishlistItems">
+      <input wsam:Action="http://v3_0.customer.webservices.csx.dtv.com/CustomerServicesApi/addWishlistItemsRequest" message="tns:addWishlistItems" />
+      <output wsam:Action="http://v3_0.customer.webservices.csx.dtv.com/CustomerServicesApi/addWishlistItemsResponse" message="tns:addWishlistItemsResponse" />
+      <fault wsam:Action="http://v3_0.customer.webservices.csx.dtv.com/CustomerServicesApi/addWishlistItems/Fault/RelateProcessingException" name="RelateProcessingException" message="tns:RelateProcessingException" />
+    </operation>
+    <operation name="deleteWishlistItems">
+      <input wsam:Action="http://v3_0.customer.webservices.csx.dtv.com/CustomerServicesApi/deleteWishlistItemsRequest" message="tns:deleteWishlistItems" />
+      <output wsam:Action="http://v3_0.customer.webservices.csx.dtv.com/CustomerServicesApi/deleteWishlistItemsResponse" message="tns:deleteWishlistItemsResponse" />
+      <fault wsam:Action="http://v3_0.customer.webservices.csx.dtv.com/CustomerServicesApi/deleteWishlistItems/Fault/RelateProcessingException" name="RelateProcessingException" message="tns:RelateProcessingException" />
+    </operation>
+    <operation name="addCustomerNote">
+      <input wsam:Action="http://v3_0.customer.webservices.csx.dtv.com/CustomerServicesApi/addCustomerNoteRequest" message="tns:addCustomerNote" />
+      <output wsam:Action="http://v3_0.customer.webservices.csx.dtv.com/CustomerServicesApi/addCustomerNoteResponse" message="tns:addCustomerNoteResponse" />
+      <fault wsam:Action="http://v3_0.customer.webservices.csx.dtv.com/CustomerServicesApi/addCustomerNote/Fault/RelateProcessingException" name="RelateProcessingException" message="tns:RelateProcessingException" />
+    </operation>
+    <operation name="getCustomerImage">
+      <input wsam:Action="http://v3_0.customer.webservices.csx.dtv.com/CustomerServicesApi/getCustomerImageRequest" message="tns:getCustomerImage" />
+      <output wsam:Action="http://v3_0.customer.webservices.csx.dtv.com/CustomerServicesApi/getCustomerImageResponse" message="tns:getCustomerImageResponse" />
+      <fault wsam:Action="http://v3_0.customer.webservices.csx.dtv.com/CustomerServicesApi/getCustomerImage/Fault/RelateProcessingException" name="RelateProcessingException" message="tns:RelateProcessingException" />
+    </operation>
+    <operation name="getPreferenceTypes">
+      <input wsam:Action="http://v3_0.customer.webservices.csx.dtv.com/CustomerServicesApi/getPreferenceTypesRequest" message="tns:getPreferenceTypes" />
+      <output wsam:Action="http://v3_0.customer.webservices.csx.dtv.com/CustomerServicesApi/getPreferenceTypesResponse" message="tns:getPreferenceTypesResponse" />
+      <fault wsam:Action="http://v3_0.customer.webservices.csx.dtv.com/CustomerServicesApi/getPreferenceTypes/Fault/RelateProcessingException" name="RelateProcessingException" message="tns:RelateProcessingException" />
+    </operation>
+  </portType>
+  <binding name="CustomerServicesApiPortBinding" type="tns:CustomerServicesApi">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="getPromotionHistoryWithDateRange">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="RelateProcessingException">
+        <soap:fault use="literal" name="RelateProcessingException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="getTransactionHistory">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="RelateProcessingException">
+        <soap:fault use="literal" name="RelateProcessingException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="searchCustomers">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="RelateProcessingException">
+        <soap:fault use="literal" name="RelateProcessingException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="retrieveCustomer">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="RelateProcessingException">
+        <soap:fault use="literal" name="RelateProcessingException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="getPromotionHistoryWithDateRangeMaxResult">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="RelateProcessingException">
+        <soap:fault use="literal" name="RelateProcessingException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="addOrUpdateCustomer">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="RelateProcessingException">
+        <soap:fault use="literal" name="RelateProcessingException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="deleteCustomer">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="RelateProcessingException">
+        <soap:fault use="literal" name="RelateProcessingException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="mergeCustomers">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="RelateProcessingException">
+        <soap:fault use="literal" name="RelateProcessingException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="associateCardToCustomer">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="RelateProcessingException">
+        <soap:fault use="literal" name="RelateProcessingException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="getCustomerNotes">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="RelateProcessingException">
+        <soap:fault use="literal" name="RelateProcessingException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="changeItemDisplayStatus">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="RelateProcessingException">
+        <soap:fault use="literal" name="RelateProcessingException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="getPreferenceCenter">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="RelateProcessingException">
+        <soap:fault use="literal" name="RelateProcessingException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="addOrUpdatePreferenceCenter">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="RelateProcessingException">
+        <soap:fault use="literal" name="RelateProcessingException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="addOrDeleteCustomerFranchisees">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="RelateProcessingException">
+        <soap:fault use="literal" name="RelateProcessingException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="getAssociateAssignment">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="RelateProcessingException">
+        <soap:fault use="literal" name="RelateProcessingException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="updateAssociateAssignment">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="RelateProcessingException">
+        <soap:fault use="literal" name="RelateProcessingException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="getItemHistory">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="RelateProcessingException">
+        <soap:fault use="literal" name="RelateProcessingException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="getVisualizerItems">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="RelateProcessingException">
+        <soap:fault use="literal" name="RelateProcessingException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="addWishlistItems">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="RelateProcessingException">
+        <soap:fault use="literal" name="RelateProcessingException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="deleteWishlistItems">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="RelateProcessingException">
+        <soap:fault use="literal" name="RelateProcessingException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="addCustomerNote">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="RelateProcessingException">
+        <soap:fault use="literal" name="RelateProcessingException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="getCustomerImage">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="RelateProcessingException">
+        <soap:fault use="literal" name="RelateProcessingException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="getPreferenceTypes">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="RelateProcessingException">
+        <soap:fault use="literal" name="RelateProcessingException" namespace="" />
+      </fault>
+    </operation>
+  </binding>
+  <service name="CustomerServicesApiService">
+    <port name="CustomerServicesApiPort" binding="tns:CustomerServicesApiPortBinding">
+      <soap:address location="https://172.24.20.183:8446/BPE/OrceWebServices/v3_0/CustomerServicesApiService" />
+    </port>
+  </service>
+</definitions>

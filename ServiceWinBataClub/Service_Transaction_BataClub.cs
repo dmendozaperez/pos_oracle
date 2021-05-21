@@ -9,7 +9,8 @@ using System.ServiceProcess;
 using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
-using CapaServicioWindows.Bataclub;
+using CapaServicioWindows_x64.Bataclub;
+using System.Configuration;
 
 namespace ServiceWinBataClub
 {
@@ -33,6 +34,15 @@ namespace ServiceWinBataClub
         //private string file_almace_ecu = @"D:\BataTransaction\ECU.txt";
         #endregion
 
+        #region<REGION DE ENVIO AL ORCE CLIENTE>
+        Timer tmbataclub_cliente_orce = null;
+        private Int32 _valida_bataclub_cliente_orce = 0;
+        #endregion
+
+        #region<REGION DE ENVIO AL ORCE CLIENTE - TARJETA>
+        Timer tmbataclub_cliente_tarjeta_orce = null;
+        private Int32 _valida_bataclub_cliente_tarjeta_orce = 0;
+        #endregion
         public Service_Transaction_BataClub()
         {
             InitializeComponent();
@@ -45,7 +55,104 @@ namespace ServiceWinBataClub
 
             tmcompartir = new Timer(5000);
             tmcompartir.Elapsed += new ElapsedEventHandler(tmcompartir_Elapsed);
+
+            tmbataclub_cliente_orce = new Timer(5000);
+            tmbataclub_cliente_orce.Elapsed += new ElapsedEventHandler(tmbataclub_cliente_orce_Elapsed);
+
+            tmbataclub_cliente_tarjeta_orce = new Timer(5000);
+            tmbataclub_cliente_tarjeta_orce.Elapsed += new ElapsedEventHandler(tmbataclub_cliente_tarjeta_orce_Elapsed);
+
         }
+
+        #region<REGION DE ACTUALIZACION DE ORCE - CLIENTES Y TARJETAS>
+
+        void tmbataclub_cliente_tarjeta_orce_Elapsed(object sender, ElapsedEventArgs e)
+        {
+
+            string _ruta_erro_file = @"D:\BataClub\log_bataclub.txt";
+            string str = "";
+            bool GENERA_TARJETA = Convert.ToBoolean(ConfigurationManager.ConnectionStrings["GENERA_TARJETA"].ConnectionString);
+            TextWriter tw = null;
+            try
+            {
+                if (GENERA_TARJETA)
+                {                
+                    if (_valida_bataclub_cliente_tarjeta_orce == 0)
+                    {
+                        _valida_bataclub_cliente_tarjeta_orce = 1;
+                        string _error_ws = "";
+                        BataClub batacl = new BataClub();
+                        _error_ws = batacl.asociar_tarjeta_cliente();
+                        if (_error_ws.Length > 0)
+                        {
+                            tw = new StreamWriter(_ruta_erro_file, true);
+                            str = DateTime.Today.ToString() + " " + DateTime.Now.ToString("HH:mm:ss") + "==>genera_miembro_bataclub==>" + _error_ws;
+                            tw.WriteLine(str);
+                            tw.Flush();
+                            tw.Close();
+                            tw.Dispose();
+                        }
+
+                        _valida_bataclub_cliente_tarjeta_orce = 0;
+
+                    }
+                }
+                //****************************************************************************
+            }
+            catch (Exception exc)
+            {
+                tw = new StreamWriter(_ruta_erro_file, true);
+                str = DateTime.Today.ToString() + " " + DateTime.Now.ToString("HH:mm:ss") + "==> catch ==>" + exc.Message;
+                tw.WriteLine(str);
+                tw.Flush();
+                tw.Close();
+                tw.Dispose();
+                _valida_bataclub_cliente_tarjeta_orce = 0;
+            }
+        }
+        void tmbataclub_cliente_orce_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            
+            string _ruta_erro_file = @"D:\BataClub\log_bataclub.txt";
+            string str = "";
+            
+            TextWriter tw = null;
+            try
+            {
+               
+                if (_valida_bataclub_cliente_orce == 0)
+                {
+                    _valida_bataclub_cliente_orce = 1;                 
+                    string _error_ws = "";
+                    BataClub batacl = new BataClub();
+                    _error_ws = batacl.creacion_actualizacion_clientes_orce();
+                    if (_error_ws.Length > 0)
+                    {
+                        tw = new StreamWriter(_ruta_erro_file, true);
+                        str = DateTime.Today.ToString() + " " + DateTime.Now.ToString("HH:mm:ss") + "==>genera_miembro_bataclub==>" + _error_ws;
+                        tw.WriteLine(str);
+                        tw.Flush();
+                        tw.Close();
+                        tw.Dispose();
+                    }
+
+                    _valida_bataclub_cliente_orce = 0;
+
+                }
+                //****************************************************************************
+            }
+            catch (Exception exc)
+            {               
+                tw = new StreamWriter(_ruta_erro_file, true);
+                str = DateTime.Today.ToString() + " " + DateTime.Now.ToString("HH:mm:ss") + "==> catch ==>" + exc.Message;
+                tw.WriteLine(str);
+                tw.Flush();
+                tw.Close();
+                tw.Dispose();
+                _valida_bataclub_cliente_orce = 0;
+            }            
+        }
+        #endregion
 
         #region<region de compartir>
         void tmcompartir_Elapsed(object sender, ElapsedEventArgs e)
@@ -253,6 +360,8 @@ namespace ServiceWinBataClub
             tmbataclub.Start();
             tmorce.Start();
             tmcompartir.Start();
+            tmbataclub_cliente_orce.Start();
+            tmbataclub_cliente_tarjeta_orce.Start();
         }
 
         protected override void OnStop()
@@ -260,6 +369,8 @@ namespace ServiceWinBataClub
             tmbataclub.Stop();
             tmorce.Stop();
             tmcompartir.Stop();
+            tmbataclub_cliente_orce.Stop();
+            tmbataclub_cliente_tarjeta_orce.Stop();
         }
     }
 }

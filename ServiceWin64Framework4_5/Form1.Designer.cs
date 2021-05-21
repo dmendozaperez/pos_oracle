@@ -39,6 +39,16 @@
             this.btnwstransaction = new System.Windows.Forms.Button();
             this.btnwsbata = new System.Windows.Forms.Button();
             this.btncompartir = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btn_crear_cliente = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtdni = new System.Windows.Forms.TextBox();
+            this.btndni = new System.Windows.Forms.Button();
+            this.txtcorreo = new System.Windows.Forms.TextBox();
+            this.btn_valida_correo = new System.Windows.Forms.Button();
+            this.btn_tarjeta_cliente = new System.Windows.Forms.Button();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // btn_ejecutar_genera_file_xstore_auto
@@ -162,11 +172,96 @@
             this.btncompartir.UseVisualStyleBackColor = true;
             this.btncompartir.Click += new System.EventHandler(this.btncompartir_Click);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.btn_tarjeta_cliente);
+            this.groupBox1.Controls.Add(this.btn_crear_cliente);
+            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.Location = new System.Drawing.Point(12, 278);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(769, 76);
+            this.groupBox1.TabIndex = 11;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "ORCE";
+            // 
+            // btn_crear_cliente
+            // 
+            this.btn_crear_cliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_crear_cliente.Location = new System.Drawing.Point(4, 20);
+            this.btn_crear_cliente.Name = "btn_crear_cliente";
+            this.btn_crear_cliente.Size = new System.Drawing.Size(238, 38);
+            this.btn_crear_cliente.TabIndex = 0;
+            this.btn_crear_cliente.Text = "CREACION DE CLIENTES";
+            this.btn_crear_cliente.UseVisualStyleBackColor = true;
+            this.btn_crear_cliente.Click += new System.EventHandler(this.btn_crear_cliente_Click);
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.txtdni);
+            this.groupBox2.Controls.Add(this.btndni);
+            this.groupBox2.Controls.Add(this.txtcorreo);
+            this.groupBox2.Controls.Add(this.btn_valida_correo);
+            this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox2.Location = new System.Drawing.Point(16, 360);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(759, 71);
+            this.groupBox2.TabIndex = 12;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "CONSULTA API - VALIDA CORREO - VALIDA DNI";
+            // 
+            // txtdni
+            // 
+            this.txtdni.Location = new System.Drawing.Point(338, 20);
+            this.txtdni.Name = "txtdni";
+            this.txtdni.Size = new System.Drawing.Size(167, 21);
+            this.txtdni.TabIndex = 3;
+            // 
+            // btndni
+            // 
+            this.btndni.Location = new System.Drawing.Point(338, 41);
+            this.btndni.Name = "btndni";
+            this.btndni.Size = new System.Drawing.Size(167, 23);
+            this.btndni.TabIndex = 2;
+            this.btndni.Text = "Valida DNI";
+            this.btndni.UseVisualStyleBackColor = true;
+            this.btndni.Click += new System.EventHandler(this.btndni_Click);
+            // 
+            // txtcorreo
+            // 
+            this.txtcorreo.Location = new System.Drawing.Point(6, 20);
+            this.txtcorreo.Name = "txtcorreo";
+            this.txtcorreo.Size = new System.Drawing.Size(208, 21);
+            this.txtcorreo.TabIndex = 1;
+            // 
+            // btn_valida_correo
+            // 
+            this.btn_valida_correo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_valida_correo.Location = new System.Drawing.Point(6, 42);
+            this.btn_valida_correo.Name = "btn_valida_correo";
+            this.btn_valida_correo.Size = new System.Drawing.Size(208, 23);
+            this.btn_valida_correo.TabIndex = 0;
+            this.btn_valida_correo.Text = "Valida Correo";
+            this.btn_valida_correo.UseVisualStyleBackColor = true;
+            this.btn_valida_correo.Click += new System.EventHandler(this.btn_valida_correo_Click);
+            // 
+            // btn_tarjeta_cliente
+            // 
+            this.btn_tarjeta_cliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_tarjeta_cliente.Location = new System.Drawing.Point(265, 20);
+            this.btn_tarjeta_cliente.Name = "btn_tarjeta_cliente";
+            this.btn_tarjeta_cliente.Size = new System.Drawing.Size(191, 37);
+            this.btn_tarjeta_cliente.TabIndex = 1;
+            this.btn_tarjeta_cliente.Text = "TARJETA - CLIENTE";
+            this.btn_tarjeta_cliente.UseVisualStyleBackColor = true;
+            this.btn_tarjeta_cliente.Click += new System.EventHandler(this.btn_tarjeta_cliente_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(787, 264);
+            this.ClientSize = new System.Drawing.Size(787, 443);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btncompartir);
             this.Controls.Add(this.btnwsbata);
             this.Controls.Add(this.btnwstransaction);
@@ -183,6 +278,9 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -200,6 +298,14 @@
         private System.Windows.Forms.Button btnwstransaction;
         private System.Windows.Forms.Button btnwsbata;
         private System.Windows.Forms.Button btncompartir;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button btn_crear_cliente;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Button btn_valida_correo;
+        private System.Windows.Forms.TextBox txtcorreo;
+        private System.Windows.Forms.TextBox txtdni;
+        private System.Windows.Forms.Button btndni;
+        private System.Windows.Forms.Button btn_tarjeta_cliente;
     }
 }
 

@@ -56,6 +56,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.4.0\lib\netstandard1.1\System.Buffers.dll</HintPath>
       <Private>True</Private>
@@ -92,6 +96,9 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BataClub\ValidacionEmail.cs" />
+    <Compile Include="BataClub\ValidaDNI.cs" />
+    <Compile Include="BataClub\VerifyEmailJsonResult.cs" />
     <Compile Include="BataEcommerce.asmx.cs">
       <DependentUpon>BataEcommerce.asmx</DependentUpon>
       <SubType>Component</SubType>

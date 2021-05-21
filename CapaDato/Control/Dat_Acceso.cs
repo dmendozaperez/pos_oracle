@@ -11,6 +11,45 @@ namespace CapaDato.Control
 {
     public class Dat_Acceso
     {
+
+        public Boolean valida_correo(string correo)
+        {
+            string sqlquery = "USP_BATACLUB_CLIENTE_VALIDA_CORREO";
+            Boolean valida = false;
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(Ent_Conexion.conexion_posperu))
+                {
+                    try
+                    {
+                        if (cn.State ==0)  cn.Open();
+                        using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                        {
+                            cmd.CommandTimeout = 0;
+                            cmd.Parameters.AddWithValue("@CORREO", correo);
+
+                            cmd.Parameters.Add("@VALIDA_CORREO", SqlDbType.Bit);
+                            cmd.Parameters["@VALIDA_CORREO"].Direction = ParameterDirection.Output;
+                            cmd.ExecuteNonQuery();
+
+                            valida =Convert.ToBoolean(cmd.Parameters["@VALIDA_CORREO"].Value);
+
+                        }
+                    }
+                    catch 
+                    {
+                        valida = false;
+                    }
+                    if (cn.State == ConnectionState.Open) cn.Close();
+                }
+            }
+            catch 
+            {
+                valida = false;                
+            }
+            return valida;
+        }
+
         /// <summary>
         /// VALIDA EL ACCESO A LA WEB SERVICE
         /// </summary>

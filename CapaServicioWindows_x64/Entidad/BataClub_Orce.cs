@@ -21,5 +21,11 @@ namespace CapaServicioWindows_x64.Entidad
         public string cod_tda { get; set; }
         public Boolean miem_bataclub { get; set; }
         public string num_tarjeta { get; set; }
+        /*variables para sumar puntos*/
+        public string id { get; set; }
+        public string documento { get; set; }
+        public decimal total { get; set; }
+        public decimal monto_punto { get; set; }
+        public DateTime fecha_transac { get; set; }
     }
 }

@@ -40,13 +40,14 @@
             this.btnwsbata = new System.Windows.Forms.Button();
             this.btncompartir = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btn_puntos = new System.Windows.Forms.Button();
+            this.btn_tarjeta_cliente = new System.Windows.Forms.Button();
             this.btn_crear_cliente = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.txtdni = new System.Windows.Forms.TextBox();
             this.btndni = new System.Windows.Forms.Button();
             this.txtcorreo = new System.Windows.Forms.TextBox();
             this.btn_valida_correo = new System.Windows.Forms.Button();
-            this.btn_tarjeta_cliente = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -174,6 +175,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btn_puntos);
             this.groupBox1.Controls.Add(this.btn_tarjeta_cliente);
             this.groupBox1.Controls.Add(this.btn_crear_cliente);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -183,6 +185,28 @@
             this.groupBox1.TabIndex = 11;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "ORCE";
+            // 
+            // btn_puntos
+            // 
+            this.btn_puntos.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_puntos.Location = new System.Drawing.Point(481, 20);
+            this.btn_puntos.Name = "btn_puntos";
+            this.btn_puntos.Size = new System.Drawing.Size(176, 37);
+            this.btn_puntos.TabIndex = 2;
+            this.btn_puntos.Text = "ADD PUNTO EC";
+            this.btn_puntos.UseVisualStyleBackColor = true;
+            this.btn_puntos.Click += new System.EventHandler(this.btn_puntos_Click);
+            // 
+            // btn_tarjeta_cliente
+            // 
+            this.btn_tarjeta_cliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_tarjeta_cliente.Location = new System.Drawing.Point(265, 20);
+            this.btn_tarjeta_cliente.Name = "btn_tarjeta_cliente";
+            this.btn_tarjeta_cliente.Size = new System.Drawing.Size(191, 37);
+            this.btn_tarjeta_cliente.TabIndex = 1;
+            this.btn_tarjeta_cliente.Text = "TARJETA - CLIENTE";
+            this.btn_tarjeta_cliente.UseVisualStyleBackColor = true;
+            this.btn_tarjeta_cliente.Click += new System.EventHandler(this.btn_tarjeta_cliente_Click);
             // 
             // btn_crear_cliente
             // 
@@ -244,17 +268,6 @@
             this.btn_valida_correo.UseVisualStyleBackColor = true;
             this.btn_valida_correo.Click += new System.EventHandler(this.btn_valida_correo_Click);
             // 
-            // btn_tarjeta_cliente
-            // 
-            this.btn_tarjeta_cliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_tarjeta_cliente.Location = new System.Drawing.Point(265, 20);
-            this.btn_tarjeta_cliente.Name = "btn_tarjeta_cliente";
-            this.btn_tarjeta_cliente.Size = new System.Drawing.Size(191, 37);
-            this.btn_tarjeta_cliente.TabIndex = 1;
-            this.btn_tarjeta_cliente.Text = "TARJETA - CLIENTE";
-            this.btn_tarjeta_cliente.UseVisualStyleBackColor = true;
-            this.btn_tarjeta_cliente.Click += new System.EventHandler(this.btn_tarjeta_cliente_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -306,6 +319,7 @@
         private System.Windows.Forms.TextBox txtdni;
         private System.Windows.Forms.Button btndni;
         private System.Windows.Forms.Button btn_tarjeta_cliente;
+        private System.Windows.Forms.Button btn_puntos;
     }
 }
 

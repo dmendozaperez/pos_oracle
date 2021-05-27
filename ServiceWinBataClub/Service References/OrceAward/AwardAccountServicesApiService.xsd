@@ -1,0 +1,1021 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://v3_1.award.webservices.csx.dtv.com/" targetNamespace="http://v3_1.award.webservices.csx.dtv.com/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="RelateProcessingException" type="tns:RelateProcessingException" />
+  <xs:element name="automaticRedeem" type="tns:automaticRedeem" />
+  <xs:element name="automaticRedeemResponse" type="tns:automaticRedeemResponse" />
+  <xs:element name="expireCoupons" type="tns:expireCoupons" />
+  <xs:element name="expireCouponsResponse" type="tns:expireCouponsResponse" />
+  <xs:element name="getAwardAccountHistory" type="tns:getAwardAccountHistory" />
+  <xs:element name="getAwardAccountHistoryResponse" type="tns:getAwardAccountHistoryResponse" />
+  <xs:element name="inquiry" type="tns:inquiry" />
+  <xs:element name="inquiryResponse" type="tns:inquiryResponse" />
+  <xs:element name="issueCoupon" type="tns:issueCoupon" />
+  <xs:element name="issueCouponResponse" type="tns:issueCouponResponse" />
+  <xs:element name="redeemCoupons" type="tns:redeemCoupons" />
+  <xs:element name="redeemCouponsResponse" type="tns:redeemCouponsResponse" />
+  <xs:element name="reverse" type="tns:reverse" />
+  <xs:element name="reverseResponse" type="tns:reverseResponse" />
+  <xs:complexType name="inquiry">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="tranInfo" type="tns:awardTransactionRequestInfo" />
+      <xs:element minOccurs="0" name="instrumentData" type="tns:awardInstrumentData" />
+      <xs:element minOccurs="0" name="currencyId" type="xs:string" />
+      <xs:element name="ignoreExpirationDate" type="xs:boolean" />
+      <xs:element name="securityUserId" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="awardTransactionRequestInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="businessDate" type="xs:date" />
+      <xs:element minOccurs="0" name="awardTranId" type="xs:string" />
+      <xs:element minOccurs="0" name="registerId" type="xs:string" />
+      <xs:element minOccurs="0" name="sequenceNumber" type="xs:string" />
+      <xs:element minOccurs="0" name="storeId" type="xs:string" />
+      <xs:element minOccurs="0" name="userId" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="awardInstrumentData">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="authenticationData" type="xs:string" />
+      <xs:element minOccurs="0" name="cardNumber" type="xs:string" />
+      <xs:element name="cardSwiped" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="inquiryResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:AwardResponseType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AwardResponseType">
+    <xs:sequence>
+      <xs:element name="ResponseStatus" type="tns:ResponseStatusType" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AwardAccount" type="tns:AwardAccountType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ResponseStatusType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AwardTransactionID" type="xs:string" />
+      <xs:element minOccurs="0" name="DateTime" type="xs:string" />
+      <xs:element minOccurs="0" name="Error" type="tns:ErrorType" />
+    </xs:sequence>
+    <xs:attribute name="status" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="ErrorType">
+    <xs:sequence>
+      <xs:element name="Code" type="xs:string" />
+      <xs:element name="Description" type="xs:string" />
+      <xs:element name="FaultDetail" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AwardAccountType">
+    <xs:sequence>
+      <xs:element name="AwardAccountID" type="xs:string" />
+      <xs:element name="awardProgram" type="tns:AwardRespProgramType" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CouponList" type="tns:CouponListType" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="EntitlementCouponList" type="tns:EntitlementCouponListType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AwardRespProgramType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="Id" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="CouponListType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Coupon" type="tns:CouponType" />
+    </xs:sequence>
+    <xs:attribute name="Type" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="CouponType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Amount" type="xs:string" />
+      <xs:element minOccurs="0" name="ExpirationDate" type="xs:string" />
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="EntitlementCouponListType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="EntitlementCoupon" type="tns:EntitlementCouponType" />
+    </xs:sequence>
+    <xs:attribute name="Type" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="EntitlementCouponType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="RedeemCount" type="xs:int" />
+      <xs:element minOccurs="0" name="EffectiveDate" type="xs:string" />
+      <xs:element minOccurs="0" name="ExpiryDate" type="xs:string" />
+      <xs:element minOccurs="0" name="Redeemable" type="xs:boolean" />
+      <xs:element minOccurs="0" name="EntitlementDeal" type="tns:EntitlementDealType" />
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="EntitlementDealType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Name" type="xs:string" />
+      <xs:element minOccurs="0" name="Description" type="xs:string" />
+      <xs:element minOccurs="0" name="UnlimitedRedeemFlag" type="xs:boolean" />
+      <xs:element name="ActiveFlag" type="xs:boolean" />
+      <xs:element minOccurs="0" name="MaxRedeemCount" type="xs:int" />
+      <xs:element minOccurs="0" name="Deal" type="tns:ReferencedDealType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ReferencedDealType">
+    <xs:sequence>
+      <xs:element name="DealId" type="xs:string" />
+      <xs:element name="DealName" type="xs:string" />
+      <xs:element name="DealType" type="xs:string" />
+      <xs:element minOccurs="0" name="Comments" type="xs:string" />
+      <xs:element minOccurs="0" name="ExternalDealId" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RelateProcessingException">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="message" type="xs:string" />
+      <xs:element minOccurs="0" name="relateExceptionCode" type="tns:relateExceptionCode" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="issueCoupon">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="awardAccountId" type="xs:string" />
+      <xs:element minOccurs="0" name="tranInfo" type="tns:awardTransactionRequestInfo" />
+      <xs:element minOccurs="0" name="instrumentData" type="tns:awardInstrumentData" />
+      <xs:element minOccurs="0" name="currencyId" type="xs:string" />
+      <xs:element minOccurs="0" name="amount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="expirationDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="comments" type="xs:string" />
+      <xs:element minOccurs="0" name="reasonCode" type="xs:string" />
+      <xs:element minOccurs="0" name="couponPrefix" type="xs:string" />
+      <xs:element minOccurs="0" name="couponType" type="tns:IssueAwardCouponType" />
+      <xs:element name="dealId" type="xs:long" />
+      <xs:element name="securityUserId" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="issueCouponResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:AwardResponseType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="redeemCoupons">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="awardAccountId" type="xs:string" />
+      <xs:element minOccurs="0" name="tranInfo" type="tns:awardTransactionRequestInfo" />
+      <xs:element minOccurs="0" name="instrumentData" type="tns:awardInstrumentData" />
+      <xs:element minOccurs="0" name="currencyId" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="couponList" type="tns:awardCoupon" />
+      <xs:element minOccurs="0" name="comments" type="xs:string" />
+      <xs:element minOccurs="0" name="reasonCode" type="xs:string" />
+      <xs:element name="ignoreExpirationDate" type="xs:boolean" />
+      <xs:element name="securityUserId" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="awardCoupon">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="amount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="couponId" type="xs:string" />
+      <xs:element minOccurs="0" name="expirationDate" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="redeemCouponsResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:AwardResponseType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="reverse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="awardAccountId" type="xs:string" />
+      <xs:element minOccurs="0" name="tranInfo" type="tns:awardTransactionRequestInfo" />
+      <xs:element minOccurs="0" name="instrumentData" type="tns:awardInstrumentData" />
+      <xs:element minOccurs="0" name="comments" type="xs:string" />
+      <xs:element minOccurs="0" name="reasonCode" type="xs:string" />
+      <xs:element name="securityUserId" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="reverseResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:AwardResponseType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="automaticRedeem">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="awardAccountId" type="xs:string" />
+      <xs:element minOccurs="0" name="tranInfo" type="tns:awardTransactionRequestInfo" />
+      <xs:element minOccurs="0" name="instrumentData" type="tns:awardInstrumentData" />
+      <xs:element minOccurs="0" name="currencyId" type="xs:string" />
+      <xs:element minOccurs="0" name="amount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="comments" type="xs:string" />
+      <xs:element minOccurs="0" name="reasonCode" type="xs:string" />
+      <xs:element name="ignoreExpirationDate" type="xs:boolean" />
+      <xs:element name="securityUserId" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="automaticRedeemResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:AwardResponseType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="expireCoupons">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="awardAccountId" type="xs:string" />
+      <xs:element minOccurs="0" name="tranInfo" type="tns:awardTransactionRequestInfo" />
+      <xs:element minOccurs="0" name="instrumentData" type="tns:awardInstrumentData" />
+      <xs:element minOccurs="0" name="currencyId" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="couponList" type="xs:string" />
+      <xs:element minOccurs="0" name="comments" type="xs:string" />
+      <xs:element minOccurs="0" name="reasonCode" type="xs:string" />
+      <xs:element name="securityUserId" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="expireCouponsResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:AwardResponseType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getAwardAccountHistory">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="cardNumber" type="xs:string" />
+      <xs:element name="cardSwiped" type="xs:boolean" />
+      <xs:element minOccurs="0" name="authenticationData" type="xs:string" />
+      <xs:element minOccurs="0" name="currencyCode" type="xs:string" />
+      <xs:element minOccurs="0" name="historyStartDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="historyEndDate" type="xs:dateTime" />
+      <xs:element name="securityUserId" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getAwardAccountHistoryResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:CardInquiryResponse" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CardInquiryResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ResponseStatus" type="tns:CardInqResponseStatus" />
+      <xs:element minOccurs="0" name="Instrument" type="tns:CardInqInstrument" />
+      <xs:element minOccurs="0" name="Customer" type="tns:CardInqCustomer" />
+      <xs:element minOccurs="0" name="OtherAssociatedCustomers" type="tns:CardInqAssocCustomer" />
+      <xs:element minOccurs="0" name="PageResultType" type="tns:PageResultType" />
+    </xs:sequence>
+    <xs:attribute name="startIndex" type="xs:int" />
+    <xs:attribute name="morePages" type="xs:boolean" />
+    <xs:attribute name="pageSize" type="xs:int" />
+  </xs:complexType>
+  <xs:complexType name="CardInqResponseStatus">
+    <xs:sequence>
+      <xs:element name="DateTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Error" type="tns:CardInqError" />
+    </xs:sequence>
+    <xs:attribute name="status" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="CardInqError">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CardNumber" type="xs:string" />
+      <xs:element minOccurs="0" name="Code" type="xs:string" />
+      <xs:element minOccurs="0" name="Description" type="xs:string" />
+      <xs:element minOccurs="0" name="FaultDetail" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CardInqInstrument">
+    <xs:sequence>
+      <xs:element name="CardNumber" type="xs:string" />
+      <xs:element name="CardSerialNumber" type="xs:string" />
+      <xs:element minOccurs="0" name="CardExpirationDate" type="xs:date" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Attribute" type="tns:AttributeResponseType" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="LoyaltyAccount" type="tns:CardInqLoyaltyAccount" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AwardAccount" type="tns:CardInqAwardAccount" />
+      <xs:element minOccurs="0" name="TenderAccount" type="tns:CardInqTenderAccount" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AttributeResponseType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AttributeValue" type="xs:string" />
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string" />
+    <xs:attribute name="name" type="xs:string" />
+    <xs:attribute name="editable" type="xs:boolean" />
+    <xs:attribute name="unique" type="xs:boolean" />
+    <xs:attribute name="required" type="xs:boolean" />
+    <xs:attribute name="intendedUse" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="CardInqLoyaltyAccount">
+    <xs:sequence>
+      <xs:element name="LoyaltyAccountID" type="xs:string" />
+      <xs:element name="LoyaltyProgram" type="tns:CardInqLoyaltyProgram" />
+      <xs:element name="LoyaltyProgramLevel" type="tns:CardInqLoyaltyProgramLevel" />
+      <xs:element name="PointsBalance" type="tns:CardInqPointsBalance" />
+      <xs:element minOccurs="0" name="LoyaltyActivityList" type="tns:CardInqLoyaltyActivityList" />
+    </xs:sequence>
+    <xs:attribute name="TypeCode" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="CardInqLoyaltyProgram">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="Id" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="CardInqLoyaltyProgramLevel">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="Id" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="CardInqPointsBalance">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Points" type="tns:CardInqPointsEntry" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CardInqPointsEntry">
+    <xs:simpleContent>
+      <xs:extension base="xs:decimal">
+        <xs:attribute name="Type" type="tns:CardInqPoints" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="CardInqLoyaltyActivityList">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="LoyaltyActivity" type="tns:CardInqLoyaltyActivity" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CardInqLoyaltyActivity">
+    <xs:sequence>
+      <xs:element name="TransactionType" type="xs:string" />
+      <xs:element name="NumPoints" type="xs:decimal" />
+      <xs:element name="PendingFlag" type="xs:boolean" />
+      <xs:element name="AccountActivityId" type="xs:string" />
+      <xs:element minOccurs="0" name="LocationId" type="xs:string" />
+      <xs:element minOccurs="0" name="CreateUser" type="xs:string" />
+      <xs:element minOccurs="0" name="UpdateUser" type="xs:string" />
+      <xs:element minOccurs="0" name="VoidFlag" type="xs:boolean" />
+      <xs:element minOccurs="0" name="EscrowPointsBalance" type="xs:decimal" />
+      <xs:element minOccurs="0" name="EarnedPointsBalance" type="xs:decimal" />
+      <xs:element minOccurs="0" name="BonusPointsBalance" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ErrorCode" type="xs:string" />
+      <xs:element minOccurs="0" name="Comments" type="xs:string" />
+      <xs:element minOccurs="0" name="BusinessDate" type="xs:date" />
+      <xs:element minOccurs="0" name="RuleName" type="xs:string" />
+      <xs:element minOccurs="0" name="ReferencedTranId" type="xs:string" />
+      <xs:element minOccurs="0" name="EarnDate" type="xs:date" />
+      <xs:element minOccurs="0" name="RetailTransactionId" type="xs:string" />
+      <xs:element minOccurs="0" name="UpdateDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="RequestedAmount" type="xs:string" />
+      <xs:element minOccurs="0" name="RequestedCurrencyCode" type="xs:string" />
+      <xs:element minOccurs="0" name="ExchangeRate" type="xs:string" />
+      <xs:element minOccurs="0" name="ConvertedAmount" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CardInqAwardAccount">
+    <xs:sequence>
+      <xs:element name="AwardAccountID" type="xs:string" />
+      <xs:element name="AwardProgram" type="tns:AwardProgramType" />
+      <xs:element name="CouponList" type="tns:CardInqCouponList" />
+      <xs:element name="EntitlementCouponList" type="tns:CardInqEntitlementCouponList" />
+      <xs:element minOccurs="0" name="AwardAccountActivityList" type="tns:CardInqAwardAccountActivityList" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AwardProgramType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="Id" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="CardInqCouponList">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Coupon" type="tns:CardInqAwardCoupon" />
+    </xs:sequence>
+    <xs:attribute name="Type" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="CardInqAwardCoupon">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Amount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ExpirationDate" type="xs:date" />
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="CardInqEntitlementCouponList">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="EntitlementCoupon" type="tns:CardInqEntitlementCoupon" />
+    </xs:sequence>
+    <xs:attribute name="Type" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="CardInqEntitlementCoupon">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="RedeemCount" type="xs:int" />
+      <xs:element minOccurs="0" name="EffectiveDate" type="xs:string" />
+      <xs:element minOccurs="0" name="ExpiryDate" type="xs:string" />
+      <xs:element minOccurs="0" name="Redeemable" type="xs:string" />
+      <xs:element minOccurs="0" name="EntitlementDeal" type="tns:CardInqEntitlementDealType" />
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="CardInqEntitlementDealType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Name" type="xs:string" />
+      <xs:element minOccurs="0" name="Description" type="xs:string" />
+      <xs:element minOccurs="0" name="UnlimitedRedeemFlag" type="xs:boolean" />
+      <xs:element name="ActiveFlag" type="xs:boolean" />
+      <xs:element minOccurs="0" name="MaxRedeemCount" type="xs:int" />
+      <xs:element minOccurs="0" name="Deal" type="tns:CardInqReferencedDealType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CardInqReferencedDealType">
+    <xs:sequence>
+      <xs:element name="DealId" type="xs:string" />
+      <xs:element name="DealName" type="xs:string" />
+      <xs:element name="DealType" type="xs:string" />
+      <xs:element minOccurs="0" name="Comments" type="xs:string" />
+      <xs:element minOccurs="0" name="ExternalDealId" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CardInqAwardAccountActivityList">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AwardAccountActivity" type="tns:CardInqAwardAccountActivity" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CardInqAwardAccountActivity">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="TransactionType" type="xs:string" />
+      <xs:element minOccurs="0" name="AwardTranId" type="xs:string" />
+      <xs:element minOccurs="0" name="LocationId" type="xs:string" />
+      <xs:element minOccurs="0" name="CreateUser" type="xs:string" />
+      <xs:element minOccurs="0" name="UpdateUser" type="xs:string" />
+      <xs:element minOccurs="0" name="VoidFlag" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ErrorCode" type="xs:string" />
+      <xs:element minOccurs="0" name="Comments" type="xs:string" />
+      <xs:element minOccurs="0" name="BusinessDate" type="xs:date" />
+      <xs:element minOccurs="0" name="ReferencedTranId" type="xs:string" />
+      <xs:element minOccurs="0" name="RetailTransactionId" type="xs:string" />
+      <xs:element minOccurs="0" name="UpdateDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ActivityDateTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ActivityAmount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="OperatorId" type="xs:string" />
+      <xs:element minOccurs="0" name="WorkstationId" type="xs:string" />
+      <xs:element minOccurs="0" name="RequestedAmount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="RequestedCurrencyCode" type="xs:string" />
+      <xs:element minOccurs="0" name="ExchangeRate" type="xs:decimal" />
+      <xs:element minOccurs="0" name="CouponId" type="xs:string" />
+      <xs:element minOccurs="0" name="ReasonCode" type="xs:string" />
+      <xs:element minOccurs="0" name="ExpirationDate" type="xs:date" />
+      <xs:element minOccurs="0" name="SequenceNumber" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CardInqTenderAccount">
+    <xs:sequence>
+      <xs:element name="TenderAccountID" type="xs:string" />
+      <xs:element name="AccountStatusCode" type="xs:string" />
+      <xs:element name="Balance" type="tns:TenderBalanceType" />
+      <xs:element minOccurs="0" name="ExpirationDate" type="xs:string" />
+      <xs:element minOccurs="0" name="EffectiveDate" type="xs:string" />
+      <xs:element minOccurs="0" name="Program" type="tns:TenderProgramType" />
+      <xs:element minOccurs="0" name="TenderAccountActivityList" type="tns:CardInqTenderAccountActivityListType" />
+      <xs:element minOccurs="0" name="ReasonCode" type="xs:string" />
+      <xs:element minOccurs="0" name="FranchiseeID" type="xs:string" />
+      <xs:element minOccurs="0" name="CardSwiped" type="xs:string" />
+      <xs:element minOccurs="0" name="RtlTransSeq" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TenderBalanceType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Amount" type="xs:string" />
+      <xs:element minOccurs="0" name="Currency" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TenderProgramType">
+    <xs:sequence />
+    <xs:attribute name="Id" type="xs:string" />
+    <xs:attribute name="Name" type="xs:string" />
+    <xs:attribute name="Rechargeable" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="CardInqTenderAccountActivityListType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TenderAccountActivity" type="tns:CardInqTenderAccountActivityType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CardInqTenderAccountActivityType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="TransactionType" type="xs:string" />
+      <xs:element minOccurs="0" name="TenderTranId" type="xs:string" />
+      <xs:element minOccurs="0" name="LocationId" type="xs:string" />
+      <xs:element minOccurs="0" name="CreateUser" type="xs:string" />
+      <xs:element minOccurs="0" name="UpdateUser" type="xs:string" />
+      <xs:element minOccurs="0" name="VoidFlag" type="xs:string" />
+      <xs:element minOccurs="0" name="CardSwipedFlag" type="xs:string" />
+      <xs:element minOccurs="0" name="BusinessDate" type="xs:string" />
+      <xs:element minOccurs="0" name="ReferencedTranId" type="xs:string" />
+      <xs:element minOccurs="0" name="RetailTransactionId" type="xs:string" />
+      <xs:element minOccurs="0" name="UpdateDate" type="xs:string" />
+      <xs:element minOccurs="0" name="ActivityDateTime" type="xs:string" />
+      <xs:element minOccurs="0" name="ActivityAmount" type="xs:string" />
+      <xs:element minOccurs="0" name="OperatorId" type="xs:string" />
+      <xs:element minOccurs="0" name="WorkstationId" type="xs:string" />
+      <xs:element minOccurs="0" name="RequestedAmount" type="xs:string" />
+      <xs:element minOccurs="0" name="RequestedCurrencyCode" type="xs:string" />
+      <xs:element minOccurs="0" name="ExchangeRate" type="xs:string" />
+      <xs:element minOccurs="0" name="ReasonCode" type="xs:string" />
+      <xs:element minOccurs="0" name="ErrorCode" type="xs:string" />
+      <xs:element minOccurs="0" name="Comments" type="xs:string" />
+      <xs:element minOccurs="0" name="ExpirationDate" type="xs:date" />
+      <xs:element minOccurs="0" name="SequenceNumber" type="xs:string" />
+      <xs:element minOccurs="0" name="FranchiseeId" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CardInqCustomer">
+    <xs:sequence>
+      <xs:element name="CustomerID" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CardInqAssocCustomer">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CustomerID" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PageResultType">
+    <xs:sequence>
+      <xs:element name="StartIndex" type="xs:string" />
+      <xs:element name="MorePages" type="xs:string" />
+      <xs:element name="PageSize" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="relateExceptionCode">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="SESSION_EXPIRED" />
+      <xs:enumeration value="UNABLE_TO_LOAD_REQUEST_ATTRIBUTE" />
+      <xs:enumeration value="ATTRIBUTE_IN_USE" />
+      <xs:enumeration value="ATTRIBUTE_NOT_FOUND" />
+      <xs:enumeration value="ATTRIBUTE_DATA_TYPE_IS_NOT_LIST" />
+      <xs:enumeration value="NO_RETAILLOC_SEARCH_RESULTS" />
+      <xs:enumeration value="RETAILLOC_MAX_RECORDS_EXCEEDED" />
+      <xs:enumeration value="PROMOTION_HISTORY_NOT_FOUND" />
+      <xs:enumeration value="PROMOTION_HISTORY_MAX_RECORDS_EXCEEDED" />
+      <xs:enumeration value="UNREASONABLE_REQUEST_MAX_RECORD" />
+      <xs:enumeration value="CUSTOMER_ALREADY_EXISTS" />
+      <xs:enumeration value="CUSTOMER_ID_UNSPECIFIED" />
+      <xs:enumeration value="INVALID_LANGUAGE_CODE" />
+      <xs:enumeration value="NAME_POSITION_INVALID" />
+      <xs:enumeration value="ALTERNATE_KEY_VALUE_UNSPECIFIED" />
+      <xs:enumeration value="ALTERNATE_KEY_TYPECODE_UNSPECIFIED" />
+      <xs:enumeration value="ATTRIBUTE_NAME_UNSPECIFIED" />
+      <xs:enumeration value="ATTRIBUTE_NAME_UNDEFINED" />
+      <xs:enumeration value="ATTRIBUTE_NAME_DUPLICATES" />
+      <xs:enumeration value="ATTRIBUTE_TYPE_DUPLICATE" />
+      <xs:enumeration value="ATTRIBUTE_CAN_NOT_BE_EDITED_BY_THIS_USER" />
+      <xs:enumeration value="INSUFFICIENT_DATA_SUPPLIED" />
+      <xs:enumeration value="MULTIPLE_VALUES_ON_UNIQUE_ATTRIBUTE_TYPE" />
+      <xs:enumeration value="UNKNOWN_ATTRIBUTE_TYPE" />
+      <xs:enumeration value="CANNOT_ADD_ZERO_VALUES" />
+      <xs:enumeration value="INVALID_ATTRIBUTE_VALUE" />
+      <xs:enumeration value="ATTRIBUTE_VALUE_TOO_LARGE" />
+      <xs:enumeration value="INVALID_DATE_FORMAT" />
+      <xs:enumeration value="VALUE_NOT_IN_ENUMERATED_ATTRIBUTE_TYPE_VALUES" />
+      <xs:enumeration value="MERGE_TARGET_SET_UNSPECIFIED" />
+      <xs:enumeration value="MERGE_CUSTOMER_CREATION_EXCEPTION" />
+      <xs:enumeration value="DIFF_UTILITY_MISCONFIGURED" />
+      <xs:enumeration value="CUSTOMER_SET_OPERATION_ERROR" />
+      <xs:enumeration value="MAXIMUM_LOOKUP_RESULTS_ERROR" />
+      <xs:enumeration value="CUSTOMER_NOTE_EMPTY" />
+      <xs:enumeration value="CUSTOMER_LOOKUP_TIMEOUT_ERROR" />
+      <xs:enumeration value="INVALID_EMAIL_ADDRESS" />
+      <xs:enumeration value="MULTIPLE_CUSTS_ASSOCIATED_TO_CARD" />
+      <xs:enumeration value="NO_CUSTOMER_NOTES" />
+      <xs:enumeration value="COUPON_SERIAL_NUMBER_INVALID" />
+      <xs:enumeration value="COUPON_ALREADY_REDEEMED" />
+      <xs:enumeration value="COUPON_NOT_FOUND" />
+      <xs:enumeration value="LOYALTY_EXPIRE_POINTS_ERROR" />
+      <xs:enumeration value="EARN_ESCROW_POINTS_ERROR" />
+      <xs:enumeration value="DISTRIBUTE_LOYALTY_AWARDS_ERROR" />
+      <xs:enumeration value="CREATE_PENDING_AWARDS_ERROR" />
+      <xs:enumeration value="LOYALTY_ACTIVITY_NOT_FOUND" />
+      <xs:enumeration value="RETAIL_LOCATION_ID_UNSPECIFIED" />
+      <xs:enumeration value="RETAIL_LOCATION_ID_INVALID" />
+      <xs:enumeration value="RETAIL_LOCATION_NOT_FOUND" />
+      <xs:enumeration value="RETAIL_LOCATION_NOT_ACTIVE" />
+      <xs:enumeration value="RETAIL_LOCATION_ATTRIBUTE_NAME_UNSPECIFIED" />
+      <xs:enumeration value="MERCHANDISE_HIERARCHY_LEVEL_ID_UNSPECIFIED" />
+      <xs:enumeration value="MERCHANDISE_HIERARCHY_LEVEL_UNSPECIFIED" />
+      <xs:enumeration value="ITEM_ID_DUPLICATE_SPECIFIED" />
+      <xs:enumeration value="ITEM_ID_UNSPECIFIED" />
+      <xs:enumeration value="ITEM_ID_TYPE_UNSPECIFIED" />
+      <xs:enumeration value="NEGATIVE_ITEM_PRICE_SPECIFIED" />
+      <xs:enumeration value="ITEM_PRICE_DECIMAL_SPECIFIED" />
+      <xs:enumeration value="ITEM_PRICE_INVALID" />
+      <xs:enumeration value="ITEM_MSRP_INVALID" />
+      <xs:enumeration value="ITEM_UNIT_COST_INVALID" />
+      <xs:enumeration value="ITEM_TAX_INFORMATION_INVALID" />
+      <xs:enumeration value="ITEM_UPC_SPECIFIED_DATA_EMPTY" />
+      <xs:enumeration value="ITEM_UPC_UNSPECIFIED" />
+      <xs:enumeration value="ITEM_FRANCHISEE_UNSPECIFIED" />
+      <xs:enumeration value="ITEM_ACCESS_DENIED" />
+      <xs:enumeration value="ITEM_NOT_FOUND" />
+      <xs:enumeration value="ITEM_XREF_NOT_FOUND" />
+      <xs:enumeration value="INVALID_ITEM_ACTION_SPECIFIED" />
+      <xs:enumeration value="INVALID_INTENDED_INDUSTRY" />
+      <xs:enumeration value="GENERATE_CARD_ERROR_DUPLICATES_FOUND" />
+      <xs:enumeration value="ALL_CARDS_GENERATED" />
+      <xs:enumeration value="CARD_SERIES_UNSPECIFIED" />
+      <xs:enumeration value="CARD_BATCHES_UNSPECIFIED" />
+      <xs:enumeration value="CARD_BATCH_NOT_FOUND" />
+      <xs:enumeration value="CARD_PREFIX_UNSPECIFIED" />
+      <xs:enumeration value="CARD_PREFIX_NOT_FOUND" />
+      <xs:enumeration value="CARD_BATCH_CONTAINS_INACTIVE_CARD" />
+      <xs:enumeration value="CARD_SERIES_PREFIX_UNSPECIFIED" />
+      <xs:enumeration value="CARD_SERIES_SEQUENCE_UNSPECIFIED" />
+      <xs:enumeration value="CARD_SERIES_SEQUENCE_INVALID" />
+      <xs:enumeration value="CARD_SERIES_ALREADY_GENERATED" />
+      <xs:enumeration value="CARD_SERIES_NOT_FOUND" />
+      <xs:enumeration value="CARDS_NOT_GENERATED" />
+      <xs:enumeration value="CARD_GROUP_NOT_SPECIFIED" />
+      <xs:enumeration value="CARD_GROUP_NOT_IN_SAME_BATCH" />
+      <xs:enumeration value="CARD_GROUP_FROM_BEFORE_END" />
+      <xs:enumeration value="CARD_GROUP_RANGE_NOT_EXIST" />
+      <xs:enumeration value="CARD_EXPIRATION_DATE_MUST_BE_GREATER_THAN_ACTIVATION_DATE" />
+      <xs:enumeration value="CARD_EXPIRATION_TYPE_IS_FIXED" />
+      <xs:enumeration value="ACTIVATION_DATE_DOES_NOT_MEET_CARD_EXPIRATION_DATE_RANGE" />
+      <xs:enumeration value="CARD_CUST_ASSOCIATION_MULTIPLE_ACTIONS" />
+      <xs:enumeration value="CARD_CUST_ASSOCIATION_INVALID_ACTION" />
+      <xs:enumeration value="SEGMENT_ID_UNSPECIFIED" />
+      <xs:enumeration value="SEGMENT_ID_NOT_FOUND" />
+      <xs:enumeration value="SEGMENT_RUNID_UNSPECIFIED" />
+      <xs:enumeration value="USER_ID_REQUIRED" />
+      <xs:enumeration value="SEGMENT_NAME_REQUIRED" />
+      <xs:enumeration value="SEGMENT_NAME_LENGTH_EXCEEDS_MAXIMUM" />
+      <xs:enumeration value="SEGMENT_DESCRIPTION_REQUIRED" />
+      <xs:enumeration value="SEGMENT_DESCRIPTION_LENGTH_EXCEEDS_MAXIMUM" />
+      <xs:enumeration value="CLIENTELING_FLAG_REQUIRED" />
+      <xs:enumeration value="PRIVATE_FLAG_REQUIRED" />
+      <xs:enumeration value="PRIVATE_FLAG_SHOULD_BE_FALSE" />
+      <xs:enumeration value="NO_SEGMENTS_FOUND" />
+      <xs:enumeration value="UNKNOWN_SEGMENT_ID" />
+      <xs:enumeration value="JOB_ALREADY_IN_PROCESS" />
+      <xs:enumeration value="JOB_CREATION_FAILURE" />
+      <xs:enumeration value="JOB_DELETION_FAILURE" />
+      <xs:enumeration value="JOBMANAGER_FAILURE" />
+      <xs:enumeration value="JOB_SETUP_ERROR" />
+      <xs:enumeration value="TRANSACTION_ALREADY_EXISTS" />
+      <xs:enumeration value="TRANSACTION_DATA_UNSPECIFIED" />
+      <xs:enumeration value="TRANSACTION_DATA_INVALID" />
+      <xs:enumeration value="NON_UNIQUE_TRANSACTION_PROPERTY_CODES" />
+      <xs:enumeration value="RETAIL_TRANSACTION_ID_INVALID" />
+      <xs:enumeration value="RETAIL_TRANSACTION_ID_ILLEGAL" />
+      <xs:enumeration value="INVALID_BUSINESS_DATE" />
+      <xs:enumeration value="AWARD_PROGRAM_MISSING" />
+      <xs:enumeration value="CARD_SETUP_ERROR" />
+      <xs:enumeration value="ACCOUNT_SETUP_ERROR" />
+      <xs:enumeration value="POST_VOID_TRANSACTION_NOT_FOUND" />
+      <xs:enumeration value="INVALID_CURRENCY_CODE" />
+      <xs:enumeration value="INVALID_CURRENCY_DATE" />
+      <xs:enumeration value="TRANSACTION_CUSTID_ON_TRANS_NOT_FOUND" />
+      <xs:enumeration value="TRANSACTION_ALTKEY_ON_TRANS_NOT_FOUND" />
+      <xs:enumeration value="TRANSACTION_REQUEST_REPOST" />
+      <xs:enumeration value="ACCOUNT_PROCESSING_EXCEPTION" />
+      <xs:enumeration value="INVALID_START_INDEX" />
+      <xs:enumeration value="INVALID_PAGE_SIZE" />
+      <xs:enumeration value="USER_NOT_FOUND" />
+      <xs:enumeration value="CONFIGURATION_ERROR" />
+      <xs:enumeration value="PROGRAM_ALREADY_ASSOCIATED" />
+      <xs:enumeration value="UNEXPECTED_ERROR" />
+      <xs:enumeration value="DATABASE_COMMIT_EXCEPTION" />
+      <xs:enumeration value="XML_MESSAGE_REQUST_TYPE_INVALID" />
+      <xs:enumeration value="DEAL_ENGINE_SETUP_ERROR" />
+      <xs:enumeration value="DEAL_ENGINE_UNSUPPORTED_TYPE" />
+      <xs:enumeration value="DEAL_SETUP_ERROR" />
+      <xs:enumeration value="PROMOTION_SETUP_ERROR" />
+      <xs:enumeration value="PROMOTION_NOT_FOUND" />
+      <xs:enumeration value="PROMOTION_NOT_ACTIVE" />
+      <xs:enumeration value="PROMOTION_TERMINATED" />
+      <xs:enumeration value="PROMOTION_NOT_GENERATED" />
+      <xs:enumeration value="PROMOTION_NON_TARGETED" />
+      <xs:enumeration value="AWARD_TYPE_PROMOTION_NOT_ALLOWED" />
+      <xs:enumeration value="PROMOTION_INVALID_DATE_CONFIGURATION" />
+      <xs:enumeration value="PROMOTION_HAS_NO_ENABLED_DEALS" />
+      <xs:enumeration value="MESSAGE_UNSUPPORTED_FOR_WEB" />
+      <xs:enumeration value="MESSAGE_UNSUPPORTED_FOR_BATCH" />
+      <xs:enumeration value="SEQUENCE_NUMBER_GENERATION_ERROR" />
+      <xs:enumeration value="DUPLICATE_CUSTOMER_ALT_KEY_EXISTS" />
+      <xs:enumeration value="REQUEST_DATA_EMPTY" />
+      <xs:enumeration value="DATA_EXPORT_ERROR" />
+      <xs:enumeration value="RELATE_SERVICES_GENERAL_CONFIGURATION_ERROR" />
+      <xs:enumeration value="LOYALTY_SETUP_ERROR" />
+      <xs:enumeration value="LOYALTY_ROUNDING_SETUP_ERROR" />
+      <xs:enumeration value="HOUSEHOLD_IDENTIFY_UNSUPPORTED_TYPE" />
+      <xs:enumeration value="NO_CUSTOMERS_FOUND" />
+      <xs:enumeration value="CUSTOMER_NOT_FOUND" />
+      <xs:enumeration value="ACCOUNT_NOT_FOUND" />
+      <xs:enumeration value="NO_ACTIVE_ACCOUNTS_FOUND" />
+      <xs:enumeration value="CARD_NOT_FOUND" />
+      <xs:enumeration value="LINE_ITEM_NOT_FOUND_FROM_SEQ" />
+      <xs:enumeration value="PROGRAM_NOT_FOUND" />
+      <xs:enumeration value="PROGRAM_CURRENCY_UNKNOWN" />
+      <xs:enumeration value="CURRENCY_RATE_NOT_FOUND" />
+      <xs:enumeration value="ACCOUNT_INACTIVE" />
+      <xs:enumeration value="ACCOUNT_EXPIRED" />
+      <xs:enumeration value="ACCOUNT_ALREADY_ACTIVE" />
+      <xs:enumeration value="ACCOUNT_ALREADY_INACTIVE" />
+      <xs:enumeration value="ACCOUNT_BLOCKED" />
+      <xs:enumeration value="ACCOUNT_NOT_BLOCKED" />
+      <xs:enumeration value="ACCOUNT_NOT_EFFECTIVE" />
+      <xs:enumeration value="CARD_INACTIVE" />
+      <xs:enumeration value="CARD_EXPIRED" />
+      <xs:enumeration value="CARD_TYPE_ACCESS_RESTRICTED" />
+      <xs:enumeration value="CARD_ALREADY_ACTIVE" />
+      <xs:enumeration value="PROGRAM_EXPIRED" />
+      <xs:enumeration value="ALL_PROGRAMS_EXPIRED" />
+      <xs:enumeration value="PROGRAM_NOT_EFFECTIVE" />
+      <xs:enumeration value="PROGRAM_INACTIVE" />
+      <xs:enumeration value="CAN_NOT_ACTIVATE_ACCOUNT" />
+      <xs:enumeration value="INSUFFICIENT_FUNDS" />
+      <xs:enumeration value="ORIG_SVA_TRAN_NOT_FOUND" />
+      <xs:enumeration value="ORIG_AWARD_TRAN_NOT_FOUND" />
+      <xs:enumeration value="VALID_ORIGINAL_TRAN_REQUIRED" />
+      <xs:enumeration value="INVALID_PIN" />
+      <xs:enumeration value="NO_PHYSICAL_CARD" />
+      <xs:enumeration value="MAX_BALANCE_EXCEEDED" />
+      <xs:enumeration value="MIN_BALANCE_NOT_MET" />
+      <xs:enumeration value="MIN_ACTIVATION_AMT_NOT_MET" />
+      <xs:enumeration value="EXCEEDED_LIFETIME_USES" />
+      <xs:enumeration value="EXCEEDED_DAILY_USES" />
+      <xs:enumeration value="EXCEEDED_DAILY_REDEMPTION_AMT" />
+      <xs:enumeration value="CASHOUT_NOT_PERMITTED" />
+      <xs:enumeration value="CASHOUT_LIMIT_EXCEEDED" />
+      <xs:enumeration value="ORIGINAL_TRANSACTION_VOIDED" />
+      <xs:enumeration value="ORIGINAL_TRAN_ERROR" />
+      <xs:enumeration value="ORIGINAL_TRAN_WRONG_CARD" />
+      <xs:enumeration value="ORIGINAL_TRAN_WRONG_ACCOUNT" />
+      <xs:enumeration value="ORIGINAL_TRAN_WRONG_PROGRAM" />
+      <xs:enumeration value="REQUESTED_AMT_INCORRECT" />
+      <xs:enumeration value="DEBIT_REVERSALS_NOT_PERMITTED" />
+      <xs:enumeration value="CREDIT_REVERSALS_NOT_PERMITTED" />
+      <xs:enumeration value="CAN_NOT_REVERSE_TRAN_TYPE" />
+      <xs:enumeration value="TRANSACTION_ALREADY_REVERSED" />
+      <xs:enumeration value="TRANSACTION_NOT_FOUND" />
+      <xs:enumeration value="TRANSACTION_TYPE_INVALID" />
+      <xs:enumeration value="DEBIT_VOIDS_NOT_PERMITTED" />
+      <xs:enumeration value="CREDIT_VOIDS_NOT_PERMITTED" />
+      <xs:enumeration value="CAN_NOT_VOID_TRAN_TYPE" />
+      <xs:enumeration value="CAN_NOT_RELEASE_TRAN_TYPE" />
+      <xs:enumeration value="CAN_NOT_POSTAUTH_TRAN_TYPE" />
+      <xs:enumeration value="TRANSACTION_ALREADY_VOIDED" />
+      <xs:enumeration value="PREAUTH_TRANSACTION_ALREADY_VOIDED_OR_CLOSED" />
+      <xs:enumeration value="TRANSACTION_VOIDED" />
+      <xs:enumeration value="BALANCE_IS_NOW_ZERO" />
+      <xs:enumeration value="BALANCE_IS_LESS_THAN_ZERO" />
+      <xs:enumeration value="PREAUTH_ALREADY_POSTAUTHED_OR_RELEASE" />
+      <xs:enumeration value="CONTAINS_OUTSTANDING_PREAUTHS" />
+      <xs:enumeration value="ACCOUNT_ALREADY_MERGED" />
+      <xs:enumeration value="ACCOUNT_ALREADY_MERGED_CAN_NOT_PERFORM" />
+      <xs:enumeration value="CANNOT_MERGE_FROM_INACTIVE_TENDER_ACCOUNT" />
+      <xs:enumeration value="CANNOT_MERGE_FROM_INACTIVE_LOYALTY_ACCOUNT" />
+      <xs:enumeration value="CANNOT_MERGE_FROM_INACTIVE_AWARD_ACCOUNT" />
+      <xs:enumeration value="CANNOT_MERGE_FROM_INACTIVE_ACCOUNT" />
+      <xs:enumeration value="CANNOT_MERGE_CARDS_OF_DIFFERENT_CARD_TYPES" />
+      <xs:enumeration value="CANNOT_MERGE_CARDS_WITH_DIFFERENT_OWNERS" />
+      <xs:enumeration value="CANNOT_MERGE_CARDS_PROGRAM_BLOCKED_MERGE" />
+      <xs:enumeration value="MISSING_PIN_ERROR" />
+      <xs:enumeration value="MISSING_NEW_PIN_ERROR" />
+      <xs:enumeration value="ORIGINAL_TRANSACTION_NOT_LAST" />
+      <xs:enumeration value="ACTIVATION_NOT_VOIDABLE_WHEN_ACCT_HAS_ACTIVITY" />
+      <xs:enumeration value="PREAUTH_NOT_VOIDABLE" />
+      <xs:enumeration value="RELOADS_NOT_PERMITTED" />
+      <xs:enumeration value="INVALID_ORIG_AUTH_CODE" />
+      <xs:enumeration value="CARD_NUMBER_REQUIRED" />
+      <xs:enumeration value="CARD_NUMBER_OR_ATTR_REQUIRED" />
+      <xs:enumeration value="NEGATIVE_AMOUNT_ERROR" />
+      <xs:enumeration value="INVALID_AMOUNT_ERROR" />
+      <xs:enumeration value="INVALID_REDEEM_AMOUNT_ERROR" />
+      <xs:enumeration value="INVALID_ACTIVATE_AMOUNT_ERROR" />
+      <xs:enumeration value="INVALID_PREAUTH_AMOUNT_ERROR" />
+      <xs:enumeration value="INVALID_POSTAUTH_AMOUNT_ERROR" />
+      <xs:enumeration value="INVALID_RELEASEAUTH_AMOUNT_ERROR" />
+      <xs:enumeration value="INVALID_RECHARGE_AMOUNT_ERROR" />
+      <xs:enumeration value="INVALID_RETURN_AMOUNT_ERROR" />
+      <xs:enumeration value="INVALID_SERVICE_CHARGE_AMOUNT_ERROR" />
+      <xs:enumeration value="INVALID_VOID_AMOUNT_ERROR" />
+      <xs:enumeration value="TENDER_PROGRAM_DISALLOWS_PREAUTH" />
+      <xs:enumeration value="INVALID_DATA_FOR_REQUEST" />
+      <xs:enumeration value="ILLEGAL_PROGRAM_ACCOUNT_SETUP" />
+      <xs:enumeration value="INVALID_TRANSACTION_DATA" />
+      <xs:enumeration value="COUPON_IDENTIFIER_INVALID_OR_EXPIRED" />
+      <xs:enumeration value="COUPON_IDENTIFIER_INVALID_FOR_EXPIRE" />
+      <xs:enumeration value="COUPON_REQUEST_AMOUNT_INVALID" />
+      <xs:enumeration value="COUPON_REQUEST_DATE_INVALID" />
+      <xs:enumeration value="COUPON_REQUEST_NEGATIVE_AMOUNT_INVALID" />
+      <xs:enumeration value="COUPON_REQUEST_EXCEEDS_BALANCE" />
+      <xs:enumeration value="ILLEGAL_RETAIL_TRANSACTION_ID" />
+      <xs:enumeration value="AWARD_ACCOUNT_EXPIRED" />
+      <xs:enumeration value="AWARD_PROGRAM_EXPIRED" />
+      <xs:enumeration value="AWARD_PROGRAM_NOT_EFFECTIVE" />
+      <xs:enumeration value="LOYALTY_PROGRAM_EXPIRED" />
+      <xs:enumeration value="LOYALTY_PROGRAM_NOT_EFFECTIVE" />
+      <xs:enumeration value="LOYALTY_ACCOUNT_EXPIRED" />
+      <xs:enumeration value="LOYALTY_POINTS_ALREADY_AWARDED" />
+      <xs:enumeration value="LOYALTY_POINTS_NOT_AWARDED" />
+      <xs:enumeration value="LOYALTY_ACTIVITY_DOES_NOT_MATCH_CARD" />
+      <xs:enumeration value="LOYALTY_RULE_NOT_FOUND" />
+      <xs:enumeration value="LOYALTY_NEGATIVE_BALANCE_NOT_ALLOWED" />
+      <xs:enumeration value="LOYALTY_AWARD_COST_EXCEEDS_THRESHOLD" />
+      <xs:enumeration value="LOYALTY_INSUFFICIENT_POINTS_FOR_REDEEM" />
+      <xs:enumeration value="LOYALTY_INVALID_ESCROW_PERIOD" />
+      <xs:enumeration value="LOYALTY_INVALID_BONUS_FLAG" />
+      <xs:enumeration value="LOYALTY_INVALID_FORCE_EARNED_PTS_FLAG" />
+      <xs:enumeration value="LOYALTY_INVALID_POINTS_AMOUNT" />
+      <xs:enumeration value="LOYALTY_AWARD_ACCOUNT_ERROR" />
+      <xs:enumeration value="LOYALTY_ACCOUNT_AWARD_RULE_MISMATCH" />
+      <xs:enumeration value="CURRENCY_EXCHANGE_RATE_NOT_FOUND" />
+      <xs:enumeration value="CURRENCY_ID_MISSING_IN_REQUEST" />
+      <xs:enumeration value="CURRENCY_CODE_INVALID" />
+      <xs:enumeration value="FOREIGN_CURRENCY_NOT_ALLOWED" />
+      <xs:enumeration value="CONCURRENT_DATA_ACCESS" />
+      <xs:enumeration value="CARD_NOT_ASSOCIATED_TO_CUSTOMER" />
+      <xs:enumeration value="ANNIV_ECOUPON_REQUEST_EXCEEDS_LIMIT" />
+      <xs:enumeration value="SIGNUP_ECOUPON_REQUEST_CURRENT_YEAR" />
+      <xs:enumeration value="LOYALTY_PRGLVL_NOT_EXISTS" />
+      <xs:enumeration value="LOYALTY_PRGLVL_MOVE_REQUEST_EXCEEDS_BALANCE" />
+      <xs:enumeration value="LOYALTY_PRGLVL_MOVE_REQUEST_NEGATIVE_AMOUNT_INVALID" />
+      <xs:enumeration value="INSUFFICIENT_POINTS_FOR_AWARD" />
+      <xs:enumeration value="NEGATIVE_POINTS_NOT_ALLOWED" />
+      <xs:enumeration value="LOYALTY_ACCOUNT_ALREADY_ACTIVE" />
+      <xs:enumeration value="LOYALTY_ACCOUNT_ALREADY_INACTIVE" />
+      <xs:enumeration value="LOYALTY_TRANSACTION_ALREADY_VOIDED" />
+      <xs:enumeration value="LOYALTY_TRANSACTION_ALREADY_EARNED" />
+      <xs:enumeration value="POINTS_NOT_IN_ESCROW" />
+      <xs:enumeration value="LOYALTY_ACCOUNT_INACTIVE" />
+      <xs:enumeration value="NO_WRITE_PRIVILEGE_ON_CUSTOMER" />
+      <xs:enumeration value="NO_ACCESS_ON_CUSTOMER" />
+      <xs:enumeration value="INVALID_ASSOCIATE_ID" />
+      <xs:enumeration value="INVALID_ASSOCIATE_ROLE_ID" />
+      <xs:enumeration value="ASSOCIATE_ASSIGNMENT_EMPTY" />
+      <xs:enumeration value="WISHLIST_EMPTY" />
+      <xs:enumeration value="INVALID_USER" />
+      <xs:enumeration value="INVALID_VISUALIZER_FILTER" />
+      <xs:enumeration value="REQUIRED_PARAMETERS_MISSING" />
+      <xs:enumeration value="CUSTOMER_NOT_FOUND_IN_PROMOTION_TARGET" />
+      <xs:enumeration value="CUSTOMER_EXISTS_IN_PROMOTION_TARGET" />
+      <xs:enumeration value="NO_CUSTOMER_IMAGE_FOUND" />
+      <xs:enumeration value="INVALID_LINE_ITEM_TYPE_CODE" />
+      <xs:enumeration value="TASK_WITHOUT_START_END_DATE" />
+      <xs:enumeration value="INVALID_DATE_RANGE" />
+      <xs:enumeration value="MISSING_SUBJECT_LINE" />
+      <xs:enumeration value="INVALID_LOCATION_ID" />
+      <xs:enumeration value="TASKID_NOT_FOUND" />
+      <xs:enumeration value="TASK_NOTE_ALREADY_EXIST" />
+      <xs:enumeration value="REASON_CODE_REQUIRED" />
+      <xs:enumeration value="INVALID_DEFAULT_REASON_CODE" />
+      <xs:enumeration value="INVALID_STATUS_VALUE" />
+      <xs:enumeration value="INVALID_TASK_PRIORITY_VALUE" />
+      <xs:enumeration value="INVALID_TASK_TYPE_VALUE" />
+      <xs:enumeration value="EVENT_TASK_PROMOTION_REQUIRED" />
+      <xs:enumeration value="EVENT_TASK_CUSTOMER_REQUIRED" />
+      <xs:enumeration value="INVALID_REGISTRY_ITEM_ID_SPECIFIED" />
+      <xs:enumeration value="INVALID_REGISTRY_ADDRESS_TYPE_SPECIFIED" />
+      <xs:enumeration value="INVALID_REGISTRY_ADDRESS_SPECIFIED" />
+      <xs:enumeration value="INVALID_REGISTRY_ADDRESS_ACTION" />
+      <xs:enumeration value="INVALID_REGISTRY_OWNER_SPECIFIED" />
+      <xs:enumeration value="INVALID_REGISTRY_OWNER_ACTION" />
+      <xs:enumeration value="REGISTRY_OWNER_REQUIRED" />
+      <xs:enumeration value="REGISTRY_ID_REQUIRED" />
+      <xs:enumeration value="REGISTRY_NOT_FOUND" />
+      <xs:enumeration value="REGISTRY_IS_EXPIRED" />
+      <xs:enumeration value="INVALID_REGISTRY_ITEM_SPECIFIED" />
+      <xs:enumeration value="REGISTRY_ITEM_QUANTITY_REQUIRED" />
+      <xs:enumeration value="INVALID_REGISTRY_ITEM_QUANTITY" />
+      <xs:enumeration value="INVALID_REGISTRY_ITEM_QUANTITY_VALUE" />
+      <xs:enumeration value="INVALID_REGISTRY_ITEM_ACTION" />
+      <xs:enumeration value="INVALID_REGISTRY_ATTR_ACTION" />
+      <xs:enumeration value="ERROR_UPDATING_OWNER_CONTACT_INFO" />
+      <xs:enumeration value="ITEM_AND_ITEM_REF_ID_UNSPECIFIED" />
+      <xs:enumeration value="ACTION_CODE_IS_REQUIRED" />
+      <xs:enumeration value="QUANTITY_IS_NOT_VALID" />
+      <xs:enumeration value="CANNOT_PUBLISH_WITH_ZERO_ITEMS" />
+      <xs:enumeration value="REGISTRY_FIELD_REQUIRED" />
+      <xs:enumeration value="REGISTRY_OWNER_FIELD_REQUIRED" />
+      <xs:enumeration value="EVENT_DATE_BEFORE_EXPIRATION_DATE" />
+      <xs:enumeration value="INVALID_REGISTRY_EVENT_TYPECODE" />
+      <xs:enumeration value="ATTRIBUTE_GROUP_NOT_FOUND" />
+      <xs:enumeration value="ATTRIBUTE_GROUP_IS_NOT_VALID" />
+      <xs:enumeration value="REQUIRED_ATTRIBUTE_IS_UNSPECIFIED" />
+      <xs:enumeration value="ATTRIBUTE_IS_REQUIRED" />
+      <xs:enumeration value="REGISTRY_ATTRIBUTE_GROUPS_DO_NOT_MATCH" />
+      <xs:enumeration value="ESP_SUBSCRIBER_CSV_NOT_EXIST" />
+      <xs:enumeration value="ESP_FTP_CONFIGURATION_ERROR" />
+      <xs:enumeration value="ESP_FTP_GENERAL_ERROR" />
+      <xs:enumeration value="ESP_FTP_LOGIN_ERROR" />
+      <xs:enumeration value="ESP_FTP_INVALID_DIRECTORY" />
+      <xs:enumeration value="ESP_FTP_TRANSFER_ERROR" />
+      <xs:enumeration value="ESP_FTP_CONNECTION_TIMED_OUT" />
+      <xs:enumeration value="ESP_FTP_FILE_NOT_EXIST" />
+      <xs:enumeration value="UNABLE_TO_LOGIN_TO_BI_SERVER_ERROR" />
+      <xs:enumeration value="UNABLE_TO_PARSE_DATE_TO_XML_CALENDAR_ERROR" />
+      <xs:enumeration value="WISH_LIST_REGISTRY_DISABLED" />
+      <xs:enumeration value="INVALID_WISH_LIST_FIELD" />
+      <xs:enumeration value="PREFERENCE_TYPE_NOT_FOUND" />
+      <xs:enumeration value="PREFERENCE_CENTER_NOT_FOUND" />
+      <xs:enumeration value="PREFERENCE_CENTER_REQUIRED" />
+      <xs:enumeration value="FREQUENCY_CODE_INVALID" />
+      <xs:enumeration value="INVALID_PREFERENCE_CENTER_ACTION_SPECIFIED" />
+      <xs:enumeration value="INVALID_PREFERENCE_CHANNEL_SPECIFIED" />
+      <xs:enumeration value="INVALID_REQUEST_TYPE" />
+      <xs:enumeration value="PREFERENCE_CENTER_MODULE_DISABLED" />
+      <xs:enumeration value="INVALID_PREFERENCE_FREQUENCY_CODE" />
+      <xs:enumeration value="EMAIL_FORMAT_PREFERENCE_TYPECODE_INVALID" />
+      <xs:enumeration value="CURRENCY_CONVERSION_ROUNDING_SETUP_ERROR" />
+      <xs:enumeration value="PREFERENCE_TYPE_ASSIGNED_TO_CUSTOMER_PREFERENCE" />
+      <xs:enumeration value="ADMIN_TYPE_TASK_UNSUPPORTED" />
+      <xs:enumeration value="INVALID_RELATE_ROLE" />
+      <xs:enumeration value="INVALID_USER_ORGANIZATION" />
+      <xs:enumeration value="USER_ID_UNSPECIFIED" />
+      <xs:enumeration value="INVALID_USER_ACTION_SPECIFIED" />
+      <xs:enumeration value="USER_NAME_REQUIRED" />
+      <xs:enumeration value="USER_EMAIL_REQUIRED" />
+      <xs:enumeration value="USER_LANGUAGE_REQUIRED" />
+      <xs:enumeration value="USER_COUNTRY_REQUIRED" />
+      <xs:enumeration value="INVALID_COUNTRY_CODE" />
+      <xs:enumeration value="ATTRIBUTE_GROUP_NOT_SEGMENT_TYPE" />
+      <xs:enumeration value="SEGMENT_ATTRIBUTE_GROUPS_DO_NOT_MATCH" />
+      <xs:enumeration value="CONNECT_TO_PROMOTE_ERROR" />
+      <xs:enumeration value="EXPORT_TO_PROMOTE_ERROR" />
+      <xs:enumeration value="INVALID_SOCIAL_MEDIA" />
+      <xs:enumeration value="APPLICATION_KEY_UNSPECIFIED" />
+      <xs:enumeration value="APPLICATION_SECRET_UNSPECIFIED" />
+      <xs:enumeration value="SOCIAL_MEDIA_TYPE_DISABLED" />
+      <xs:enumeration value="ACCESS_TOKEN_UNSPECIFIED" />
+      <xs:enumeration value="NO_SOCIAL_MEDIA_REGISTRATION" />
+      <xs:enumeration value="INVALID_ACTION_SPECIFIED" />
+      <xs:enumeration value="INVALID_SEGMENT_ACTION_SPECIFIED" />
+      <xs:enumeration value="SOCIAL_MEDIA_TYPE_NOT_EXIST" />
+      <xs:enumeration value="SOCIAL_MEDIA_ACCOUNT_NOT_EXIST" />
+      <xs:enumeration value="INVALID_SOCIAL_ACCOUNT" />
+      <xs:enumeration value="CUSTOMER_SOCIAL_ACCOUNT_NOT_EXIST" />
+      <xs:enumeration value="SOCIAL_SEARCH_NOT_EXIST" />
+      <xs:enumeration value="SOCIAL_REQUEST_UNSPECIFIED" />
+      <xs:enumeration value="SOCIAL_ACTIVITY_NOT_FOUND" />
+      <xs:enumeration value="SOCIAL_NETWORK_LISTENING_ERROR" />
+      <xs:enumeration value="SOCIAL_MEDIA_ACCESS_DISABLED" />
+      <xs:enumeration value="CUSTOMER_SEARCH_REQUIRED_PARAMETERS" />
+      <xs:enumeration value="ACCESS_TOKEN_SECRET_UNSPECIFIED" />
+      <xs:enumeration value="SOCIAL_PROFILE_AUTHENTICATION_ERROR" />
+      <xs:enumeration value="USER_HAS_NO_RELATE_ROLE" />
+      <xs:enumeration value="USER_HAS_NO_REQUIRED_ROLE" />
+      <xs:enumeration value="INVALID_FRANCHISEE_ORGANIZATION" />
+      <xs:enumeration value="FRANCHISEE_NAME_ALREADY_EXISTS" />
+      <xs:enumeration value="FRANCHISEE_NAME_NOT_FOUND" />
+      <xs:enumeration value="FRANCHISEE_ASSIGNED_TO_CARD_TYPE" />
+      <xs:enumeration value="ACCESS_DENIED" />
+      <xs:enumeration value="FRANCHISEE_ASSIGNED_TO_USER" />
+      <xs:enumeration value="FRANCHISEE_ASSIGNED_TO_LOCATION" />
+      <xs:enumeration value="FRANCHISEE_ASSIGNED_TO_CUSTOMER" />
+      <xs:enumeration value="FRANCHISE_SUPPORT_DISABLED" />
+      <xs:enumeration value="FRANCHISEE_SEARCH_REQUIRED_PARAMETERS" />
+      <xs:enumeration value="FRANCHISEE_NOT_FOUND" />
+      <xs:enumeration value="FRANCHISEE_NAME_UNSPECIFIED" />
+      <xs:enumeration value="INVALID_FRANCHISEE_USER" />
+      <xs:enumeration value="RELATE_USER_NOT_FOUND" />
+      <xs:enumeration value="RELATE_USER_REQUIRED_PARAMETERS" />
+      <xs:enumeration value="LOCATION_REQUIRED_PARAMETERS" />
+      <xs:enumeration value="NO_WRITE_PRIVILEGE_ON_FRANCHISEE" />
+      <xs:enumeration value="LOCATION_NOT_ASSIGNED_TO_FRANCHISEE" />
+      <xs:enumeration value="PAST_X_PASSWORDS_NOT_ALLOWED" />
+      <xs:enumeration value="PASSWORD_TOO_COMMON" />
+      <xs:enumeration value="PASSWORD_NOT_COMPLEX" />
+      <xs:enumeration value="USER_NOT_EXIST" />
+      <xs:enumeration value="INVALID_PASSWORD" />
+      <xs:enumeration value="INVALID_USER_OR_PASSWORD" />
+      <xs:enumeration value="PASSWORD_EXPIRED" />
+      <xs:enumeration value="ACCOUNT_DISABLED" />
+      <xs:enumeration value="ACCOUNT_LOCKED_DUE_TO_INACTIVITY" />
+      <xs:enumeration value="ACCOUNT_LOCKED_MANY_PASSWORD_ERRORS" />
+      <xs:enumeration value="USER_LOGIN_FAILED" />
+      <xs:enumeration value="FILE_NOT_FOUND" />
+      <xs:enumeration value="CARD_CUSTOMER_AMOUNTS_DO_NOT_MATCH" />
+      <xs:enumeration value="INVALID_BUSINESS_DATE_FORMAT" />
+      <xs:enumeration value="INVALID_DEAL" />
+      <xs:enumeration value="INVALID_ENTITLEMENT_DEAL" />
+      <xs:enumeration value="INVALID_POINTS_COST" />
+      <xs:enumeration value="INVALID_BATCH_EXPORTER" />
+      <xs:enumeration value="INVALID_CSV_BEAN_MAPPING_CONFIGURATION" />
+      <xs:enumeration value="CONTACT_EVENT_DATA_PROCESSING_ERROR" />
+      <xs:enumeration value="INVALID_TRANSACTION_PROPERTY" />
+      <xs:enumeration value="ERROR_RETRIEVING_CREDENTIALS" />
+      <xs:enumeration value="INVALID_CREDENTIAL_STORE_MAP_KEY" />
+      <xs:enumeration value="UNABLE_TO_ACCESS_FILE" />
+      <xs:enumeration value="PROPERTY_IS_RESTRICTED" />
+      <xs:enumeration value="CANNOT_RETRIEVE_CONFIGURATION_FOR_NULL_DATA" />
+      <xs:enumeration value="CAN_NOT_PARSE_BOOLEAN" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="IssueAwardCouponType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="E-Award" />
+      <xs:enumeration value="Entitlement Coupon" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="CardInqPoints">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Earned" />
+      <xs:enumeration value="Escrow" />
+      <xs:enumeration value="Bonus" />
+      <xs:enumeration value="YTD" />
+      <xs:enumeration value="LTD" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

@@ -388,8 +388,13 @@ namespace CapaServicioWindows_x64.Bataclub
                 AlternateKeyLookupType[0].AlternateID = cliente.dni;
                 OrceCliente.CustomerResponseType respuesta = ws_clientes.retrieveCustomer("", AlternateKeyLookupType, "", ConexionOrce.USER);
 
-              
+               
+                //OrceCliente.InstrumentReturnType[] InstrumentReturnType= respuesta.CustomerCards;
 
+                //InstrumentReturnType.Where(b => b.Description.ToUpper().Contains("BATACLUB")).ToList();
+
+
+                // awardAccountId=respuesta.AlternateKey
                 tarjeta_asignada = (respuesta.CustomerCards.Length==0)?"": respuesta.CustomerCards[0].CardNumber;
 
                 var BC= respuesta.CustomAttribute.Where(a => a.name == "BATA_CLUB_ACEPTADO").ToList();
@@ -479,7 +484,7 @@ namespace CapaServicioWindows_x64.Bataclub
                 {
                     string error = "";
                     string tarjeta_asignada = "";
-                    
+                  
                     if (!Verifica_existe_cliente(cl, ref error,ref tarjeta_asignada))
                     {
                         update_cliente_tarjeta_orce(false, false, cl.dni, cl.num_tarjeta, "");
@@ -583,6 +588,168 @@ namespace CapaServicioWindows_x64.Bataclub
             return valida;
         }
         #endregion
+
+        #region<GENERACION DE PREMIOS SEGUN VENTA, SOLO ECOMMERCE>
+        #endregion
+        public string agregar_puntos_clientes_ecommerce_orce()
+        {
+            string valida = "";
+
+            try
+            {
+                List<BataClub_Cliente_Orce> lista_cliente = listar_cliente_puntos_ecommerce();
+
+                foreach (BataClub_Cliente_Orce cl in lista_cliente)
+                {
+                    string error = "";
+                    if (add_puntos_cliente_ecommerce_orce(cl, ref error)) update_cliente_punto_orce(cl);                    
+
+                    if (error.Length > 0) valida += error;
+                }
+
+            }
+            catch (Exception exc)
+            {
+                valida = valida + "=>" + exc.Message;
+            }
+            return valida;
+        }
+        private Boolean add_puntos_cliente_ecommerce_orce(BataClub_Cliente_Orce cliente, ref String error)
+        {
+            Boolean valida = false;
+            OrceAward.AwardAccountServicesApiClient ws_award = null;
+            OrceCliente.CustomerServicesApiClient ws_clientes = null;
+            try
+            {
+                ws_clientes = new OrceCliente.CustomerServicesApiClient();
+                ws_award = new OrceAward.AwardAccountServicesApiClient();
+                ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+                MessageBehavior messageBehavior = new MessageBehavior("Authorization", ConexionOrce.VALUE);
+
+                ws_award.Endpoint.EndpointBehaviors.Add(messageBehavior);
+                ws_clientes.Endpoint.EndpointBehaviors.Add(messageBehavior);
+
+                OrceAward.awardTransactionRequestInfo awardTransactionRequestInfo = new OrceAward.awardTransactionRequestInfo();
+
+                awardTransactionRequestInfo.storeId = "EC";
+                awardTransactionRequestInfo.sequenceNumber = cliente.documento;
+                awardTransactionRequestInfo.userId = "9999";
+                awardTransactionRequestInfo.businessDate = cliente.fecha_transac;
+                awardTransactionRequestInfo.registerId = "1";
+                
+
+                OrceAward.awardInstrumentData awardInstrumentData = new OrceAward.awardInstrumentData();
+                string awardAccountId = "";
+                #region <BUSCAR CLIENTE>
+                OrceCliente.AlternateKeyLookupType[] AlternateKeyLookupType = new OrceCliente.AlternateKeyLookupType[1];
+                AlternateKeyLookupType[0] = new OrceCliente.AlternateKeyLookupType();
+                AlternateKeyLookupType[0].TypeCode = "DNI";
+                AlternateKeyLookupType[0].AlternateID = cliente.dni;// cliente.dni;
+                OrceCliente.CustomerResponseType respuesta = ws_clientes.retrieveCustomer("", AlternateKeyLookupType, "", ConexionOrce.USER);
+
+                OrceCliente.InstrumentReturnType[] InstrumentReturnType = respuesta.CustomerCards;
+
+                //var s= InstrumentReturnType.Where(b=>b.AccountId.
+                var AccountIdType = InstrumentReturnType.Where(b => b.CardNumber == cliente.num_tarjeta).ToList(); 
+               
+                if (AccountIdType.Count>0)
+                {
+                    var AccountId = AccountIdType[0].AccountId.Where(b => b.Type == "Award").ToList();
+                    awardAccountId = AccountId[0].Value.ToString(); 
+
+                }               
+                    /**/
+               #endregion
+                   ///* string awardAccountId */= "56617";/*DE LA WEB SERVICE retrieveCustomer ,  <AccountId Type="Award">56617</AccountId>*/
+                awardInstrumentData.cardNumber = cliente.num_tarjeta;
+                awardInstrumentData.authenticationData = "";
+                awardInstrumentData.cardSwiped = false;
+
+                DateTime fec_caducidad = DateTime.Today.AddDays(365);
+
+                OrceAward.AwardResponseType AwardResponseType = ws_award.issueCoupon(awardAccountId, awardTransactionRequestInfo, awardInstrumentData, "PEN", cliente.monto_punto, fec_caducidad, "EC", null, null, OrceAward.IssueAwardCouponType.EAward, 0, ConexionOrce.USER);               
+
+                valida = true;
+            }
+            catch (Exception exc)
+            {
+                error = exc.Message;
+                valida = false;
+            }
+            return valida;
+        }
+        private List<BataClub_Cliente_Orce> listar_cliente_puntos_ecommerce()
+        {
+            List<BataClub_Cliente_Orce> listar = null;
+            string sqlquery = "USP_BATACLUB_ORCE_GET_EC_ADD_PUNTOS";
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(ConexionSQL.conexion))
+                {
+                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            DataTable dt = new DataTable();
+                            da.Fill(dt);
+                            listar = new List<BataClub_Cliente_Orce>();
+                            listar = (from DataRow fila in dt.Rows
+                                      select new BataClub_Cliente_Orce()
+                                      {
+                                          id = fila["id"].ToString(),
+                                          documento = fila["documento"].ToString(),
+                                          dni = fila["dni"].ToString(),
+                                          total =Convert.ToDecimal(fila["total"]),
+                                          monto_punto = Convert.ToDecimal(fila["monto_punto"]),
+                                          num_tarjeta= fila["num_tarjeta"].ToString(),
+                                          fecha_transac= Convert.ToDateTime(fila["fecha_transac"]),
+                                      }).ToList();
+                        }
+                    }
+                }
+            }
+            catch (Exception exc)
+            {
+                throw exc;
+                listar = new List<BataClub_Cliente_Orce>();
+            }
+            return listar;
+        }
+        private void update_cliente_punto_orce(BataClub_Cliente_Orce cliente)
+        {
+            string sqlquery = "USP_BATACLUB_ORCE_UPD_EC_ADD_PUNTO";
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(ConexionSQL.conexion))
+                {
+                    try
+                    {
+                        if (cn.State == 0) cn.Open();
+                        using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                        {
+                            cmd.CommandTimeout = 0;
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.Parameters.AddWithValue("@doc_tra_id", cliente.id);
+                            cmd.Parameters.AddWithValue("@monto_punto", cliente.monto_punto);
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+                    if (cn.State == ConnectionState.Open) cn.Close();
+                }
+            }
+            catch (Exception)
+            {
+
+
+            }
+        }
         #endregion
     }
 }

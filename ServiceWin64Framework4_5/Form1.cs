@@ -340,6 +340,16 @@ namespace ServiceWin64Framework4_5
             MessageBox.Show(error, "Admin", MessageBoxButtons.OK, MessageBoxIcon.Information);
             Cursor.Current = Cursors.Default;
         }
+
+        private void btn_puntos_Click(object sender, EventArgs e)
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            BataClub clientes = new BataClub();
+            string error = clientes.agregar_puntos_clientes_ecommerce_orce();
+
+            MessageBox.Show(error, "Admin", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            Cursor.Current = Cursors.Default;
+        }
     }
     public class objeto_json
     {

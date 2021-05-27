@@ -68,6 +68,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Service References\OrceAward\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Service References\OrceCliente\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -193,6 +198,37 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\BataTransac\ServiceWin64Framework4_5.BataTransac.ws_valida_traspaso_tdaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\OrceAward\AwardAccountServicesApiService.wsdl" />
+    <None Include="Service References\OrceAward\AwardAccountServicesApiService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\OrceAward\ServiceWin64Framework4_5.OrceAward.automaticRedeemResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\OrceAward\ServiceWin64Framework4_5.OrceAward.AwardResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\OrceAward\ServiceWin64Framework4_5.OrceAward.CardInquiryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\OrceAward\ServiceWin64Framework4_5.OrceAward.expireCouponsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\OrceAward\ServiceWin64Framework4_5.OrceAward.getAwardAccountHistoryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\OrceAward\ServiceWin64Framework4_5.OrceAward.inquiryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\OrceAward\ServiceWin64Framework4_5.OrceAward.issueCouponResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\OrceAward\ServiceWin64Framework4_5.OrceAward.redeemCouponsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\OrceAward\ServiceWin64Framework4_5.OrceAward.reverseResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\OrceCliente\CustomerServicesApiService.wsdl" />
@@ -362,6 +398,7 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\BataTransac\" />
+    <WCFMetadataStorage Include="Service References\OrceAward\" />
     <WCFMetadataStorage Include="Service References\OrceCliente\" />
     <WCFMetadataStorage Include="Service References\OrceLoyalty\" />
   </ItemGroup>
@@ -400,6 +437,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\OrceLoyalty\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\OrceAward\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\OrceAward\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\OrceAward\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

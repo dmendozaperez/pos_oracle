@@ -29,7 +29,7 @@ namespace BataClub_Correo
             }
             return jason_query;
         }
-        public  Boolean sendEmail_verificar(string email)
+        public  Boolean sendEmail_verificar(string email,ref string error_api)
         {
             string url = "https://api.icommarketing.com/TransactionalEmail/VerifyEmail.Json/";
             string apiKey = "MTM3OS0zNTQ1LWJhdGFwZV91c3I1";
@@ -57,17 +57,32 @@ namespace BataClub_Correo
                 objeto_json oRootObject = new objeto_json();
                 oRootObject = oJS.Deserialize<objeto_json>(responseString);
 
-                oJS = new JavaScriptSerializer();
-                Response_obj objeto_response_obj = new Response_obj();
-                objeto_response_obj = oJS.Deserialize<Response_obj>(oRootObject.VerifyEmailJsonResult.Data.Response);
-                oRootObject.VerifyEmailJsonResult.Data.Response_obj = objeto_response_obj;
-
-                if (objeto_response_obj.reason.ToUpper().ToString() == "accepted_email".ToUpper().ToString())
+                if (oRootObject.VerifyEmailJsonResult.StatusCode==200)
                 {
-                    valida = true;
-                }                
+                    oJS = new JavaScriptSerializer();
+                    Response_obj objeto_response_obj = new Response_obj();
+                    objeto_response_obj = oJS.Deserialize<Response_obj>(oRootObject.VerifyEmailJsonResult.Data.Response);
+                    oRootObject.VerifyEmailJsonResult.Data.Response_obj = objeto_response_obj;
+
+                    if (objeto_response_obj.result== "risky" && objeto_response_obj.disposable.ToUpper()=="FALSE".ToUpper())
+                    {
+                        valida = true;
+                    }
+                    else
+                    { 
+                        if (objeto_response_obj.reason.ToUpper().ToString() == "accepted_email".ToUpper().ToString())
+                        {
+                            valida = true;
+                        }
+                    }
+                }
+                else
+                {
+                    error_api = oRootObject.VerifyEmailJsonResult.Message;
+                }
+                                
             }
-            catch (WebException e)
+            catch (Exception e)
             {
                 valida = false;
             }

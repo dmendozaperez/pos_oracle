@@ -48,6 +48,12 @@ namespace ServiceWinBataClub
         Timer tmbataclub_cliente_bono_orce = null;
         private Int32 _valida_bataclub_cliente_bono_orce = 0;
         #endregion
+
+        #region<REGION DE SUMAR BONO>
+        Timer tmbataclub_cliente_bono_bienvenido_orce = null;
+        private Int32 _valida_bataclub_cliente_bono_bienvenido_orce = 0;
+        #endregion
+
         public Service_Transaction_BataClub()
         {
             InitializeComponent();
@@ -70,9 +76,57 @@ namespace ServiceWinBataClub
             tmbataclub_cliente_bono_orce = new Timer(5000);
             tmbataclub_cliente_bono_orce.Elapsed += new ElapsedEventHandler(tmbataclub_cliente_bono_orce_Elapsed);
 
+            tmbataclub_cliente_bono_bienvenido_orce = new Timer(5000);
+            tmbataclub_cliente_bono_bienvenido_orce.Elapsed += new ElapsedEventHandler(tmbataclub_cliente_bono_bienvenido_orce_Elapsed);
+
         }
 
         #region<REGION DE ACTUALIZACION DE ORCE - CLIENTES Y TARJETAS>
+
+        void tmbataclub_cliente_bono_bienvenido_orce_Elapsed(object sender, ElapsedEventArgs e)
+        {
+
+            string _ruta_erro_file = @"D:\BataClub\log_bataclub.txt";
+            string str = "";
+            bool GENERA_BIENVENIDA = Convert.ToBoolean(ConfigurationManager.ConnectionStrings["GENERA_BIENVENIDA"].ConnectionString);
+            TextWriter tw = null;
+            try
+            {
+                if (GENERA_BIENVENIDA)
+                {
+                    if (_valida_bataclub_cliente_bono_bienvenido_orce == 0)
+                    {
+                        _valida_bataclub_cliente_bono_bienvenido_orce = 1;
+                        string _error_ws = "";
+                        BataClub batacl = new BataClub();
+                        _error_ws = batacl.agregar_puntos_clientes_bataclub_bienvenida_orce();
+                        if (_error_ws.Length > 0)
+                        {
+                            tw = new StreamWriter(_ruta_erro_file, true);
+                            str = DateTime.Today.ToString() + " " + DateTime.Now.ToString("HH:mm:ss") + "==>genera_miembro_bataclub==>" + _error_ws;
+                            tw.WriteLine(str);
+                            tw.Flush();
+                            tw.Close();
+                            tw.Dispose();
+                        }
+
+                        _valida_bataclub_cliente_bono_bienvenido_orce = 0;
+
+                    }
+                }
+                //****************************************************************************
+            }
+            catch (Exception exc)
+            {
+                tw = new StreamWriter(_ruta_erro_file, true);
+                str = DateTime.Today.ToString() + " " + DateTime.Now.ToString("HH:mm:ss") + "==> catch ==>" + exc.Message;
+                tw.WriteLine(str);
+                tw.Flush();
+                tw.Close();
+                tw.Dispose();
+                _valida_bataclub_cliente_bono_bienvenido_orce = 0;
+            }
+        }
 
         void tmbataclub_cliente_bono_orce_Elapsed(object sender, ElapsedEventArgs e)
         {
@@ -419,6 +473,7 @@ namespace ServiceWinBataClub
             tmbataclub_cliente_orce.Start();
             tmbataclub_cliente_tarjeta_orce.Start();
             tmbataclub_cliente_bono_orce.Start();
+            tmbataclub_cliente_bono_bienvenido_orce.Start();
         }
 
         protected override void OnStop()
@@ -429,6 +484,7 @@ namespace ServiceWinBataClub
             tmbataclub_cliente_orce.Stop();
             tmbataclub_cliente_tarjeta_orce.Stop();
             tmbataclub_cliente_bono_orce.Stop();
+            tmbataclub_cliente_bono_bienvenido_orce.Stop();
         }
     }
 }

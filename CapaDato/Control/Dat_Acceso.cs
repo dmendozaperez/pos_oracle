@@ -26,6 +26,7 @@ namespace CapaDato.Control
                         using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
                         {
                             cmd.CommandTimeout = 0;
+                            cmd.CommandType = CommandType.StoredProcedure;
                             cmd.Parameters.AddWithValue("@CORREO", correo);
 
                             cmd.Parameters.Add("@VALIDA_CORREO", SqlDbType.Bit);
@@ -36,16 +37,18 @@ namespace CapaDato.Control
 
                         }
                     }
-                    catch 
+                    catch(Exception exc) 
                     {
                         valida = false;
+                       // throw;
                     }
                     if (cn.State == ConnectionState.Open) cn.Close();
                 }
             }
             catch 
             {
-                valida = false;                
+                valida = false;
+                //throw;
             }
             return valida;
         }

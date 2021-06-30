@@ -62,10 +62,17 @@ namespace BataClub_Correo
                 objeto_response_obj = oJS.Deserialize<Response_obj>(oRootObject.VerifyEmailJsonResult.Data.Response);
                 oRootObject.VerifyEmailJsonResult.Data.Response_obj = objeto_response_obj;
 
-                if (objeto_response_obj.reason.ToUpper().ToString() == "accepted_email".ToUpper().ToString())
+                if (objeto_response_obj.result == "risky" && objeto_response_obj.disposable.ToUpper() == "False".ToUpper())
                 {
                     valida = true;
-                }                
+                }
+                else
+                { 
+                    if (objeto_response_obj.reason.ToUpper().ToString() == "accepted_email".ToUpper().ToString())
+                    {
+                        valida = true;
+                    }
+                }
             }
             catch (WebException e)
             {

@@ -48,6 +48,7 @@
             this.btndni = new System.Windows.Forms.Button();
             this.txtcorreo = new System.Windows.Forms.TextBox();
             this.btn_valida_correo = new System.Windows.Forms.Button();
+            this.btnpuntoBC = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -175,6 +176,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnpuntoBC);
             this.groupBox1.Controls.Add(this.btn_puntos);
             this.groupBox1.Controls.Add(this.btn_tarjeta_cliente);
             this.groupBox1.Controls.Add(this.btn_crear_cliente);
@@ -189,9 +191,9 @@
             // btn_puntos
             // 
             this.btn_puntos.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_puntos.Location = new System.Drawing.Point(481, 20);
+            this.btn_puntos.Location = new System.Drawing.Point(420, 20);
             this.btn_puntos.Name = "btn_puntos";
-            this.btn_puntos.Size = new System.Drawing.Size(176, 37);
+            this.btn_puntos.Size = new System.Drawing.Size(148, 37);
             this.btn_puntos.TabIndex = 2;
             this.btn_puntos.Text = "ADD PUNTO EC";
             this.btn_puntos.UseVisualStyleBackColor = true;
@@ -200,9 +202,9 @@
             // btn_tarjeta_cliente
             // 
             this.btn_tarjeta_cliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_tarjeta_cliente.Location = new System.Drawing.Point(265, 20);
+            this.btn_tarjeta_cliente.Location = new System.Drawing.Point(238, 20);
             this.btn_tarjeta_cliente.Name = "btn_tarjeta_cliente";
-            this.btn_tarjeta_cliente.Size = new System.Drawing.Size(191, 37);
+            this.btn_tarjeta_cliente.Size = new System.Drawing.Size(174, 37);
             this.btn_tarjeta_cliente.TabIndex = 1;
             this.btn_tarjeta_cliente.Text = "TARJETA - CLIENTE";
             this.btn_tarjeta_cliente.UseVisualStyleBackColor = true;
@@ -213,7 +215,7 @@
             this.btn_crear_cliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_crear_cliente.Location = new System.Drawing.Point(4, 20);
             this.btn_crear_cliente.Name = "btn_crear_cliente";
-            this.btn_crear_cliente.Size = new System.Drawing.Size(238, 38);
+            this.btn_crear_cliente.Size = new System.Drawing.Size(230, 38);
             this.btn_crear_cliente.TabIndex = 0;
             this.btn_crear_cliente.Text = "CREACION DE CLIENTES";
             this.btn_crear_cliente.UseVisualStyleBackColor = true;
@@ -268,6 +270,17 @@
             this.btn_valida_correo.UseVisualStyleBackColor = true;
             this.btn_valida_correo.Click += new System.EventHandler(this.btn_valida_correo_Click);
             // 
+            // btnpuntoBC
+            // 
+            this.btnpuntoBC.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnpuntoBC.Location = new System.Drawing.Point(572, 13);
+            this.btnpuntoBC.Name = "btnpuntoBC";
+            this.btnpuntoBC.Size = new System.Drawing.Size(189, 50);
+            this.btnpuntoBC.TabIndex = 3;
+            this.btnpuntoBC.Text = "ADD PUNTO CLIENTE BATACLUB";
+            this.btnpuntoBC.UseVisualStyleBackColor = true;
+            this.btnpuntoBC.Click += new System.EventHandler(this.btnpuntoBC_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -320,6 +333,7 @@
         private System.Windows.Forms.Button btndni;
         private System.Windows.Forms.Button btn_tarjeta_cliente;
         private System.Windows.Forms.Button btn_puntos;
+        private System.Windows.Forms.Button btnpuntoBC;
     }
 }
 

@@ -589,6 +589,108 @@ namespace CapaServicioWindows_x64.Bataclub
         }
         #endregion
 
+        #region<REGALO DE TARJETA PARA LOS CLIENTES BATACLUB DE BIENVENIDA>
+
+        private void update_cliente_punto_orce_bienvenido(BataClub_Cliente_Orce cliente)
+        {
+            string sqlquery = "USP_BATACLUB_ORCE_UPD_BC_BIENVENIDO_ADD_PUNTO";
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(ConexionSQL.conexion))
+                {
+                    try
+                    {
+                        if (cn.State == 0) cn.Open();
+                        using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                        {
+                            cmd.CommandTimeout = 0;
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.Parameters.AddWithValue("@DNI", cliente.dni);
+                            cmd.Parameters.AddWithValue("@MONTO", cliente.monto_punto);
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+                    if (cn.State == ConnectionState.Open) cn.Close();
+                }
+            }
+            catch (Exception)
+            {
+
+
+            }
+        }
+
+        private List<BataClub_Cliente_Orce> listar_cliente_puntos_bataclub_bienvenida()
+        {
+            List<BataClub_Cliente_Orce> listar = null;
+            string sqlquery = "USP_BATACLUB_ORCE_GET_REGALO_ADD_PUNTOS";
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(ConexionSQL.conexion))
+                {
+                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            DataTable dt = new DataTable();
+                            da.Fill(dt);
+                            listar = new List<BataClub_Cliente_Orce>();
+                            listar = (from DataRow fila in dt.Rows
+                                      select new BataClub_Cliente_Orce()
+                                      {
+                                          id = fila["id"].ToString(),
+                                          documento = fila["documento"].ToString(),
+                                          dni = fila["dni"].ToString(),
+                                          total = Convert.ToDecimal(fila["total"]),
+                                          monto_punto = Convert.ToDecimal(fila["monto_punto"]),
+                                          num_tarjeta = fila["num_tarjeta"].ToString(),
+                                          fecha_transac = Convert.ToDateTime(fila["fecha_transac"]),
+                                          cod_tda= fila["COD_TDA"].ToString(),
+                                      }).ToList();
+                        }
+                    }
+                }
+            }
+            catch (Exception exc)
+            {
+                throw exc;
+                listar = new List<BataClub_Cliente_Orce>();
+            }
+            return listar;
+        }
+
+        public string agregar_puntos_clientes_bataclub_bienvenida_orce()
+        {
+            string valida = "";
+
+            try
+            {
+                List<BataClub_Cliente_Orce> lista_cliente = listar_cliente_puntos_bataclub_bienvenida();
+
+                foreach (BataClub_Cliente_Orce cl in lista_cliente)
+                {
+                    string error = "";
+                    if (add_puntos_cliente_ecommerce_orce(cl, ref error)) update_cliente_punto_orce_bienvenido(cl);
+
+                    if (error.Length > 0) valida += error;
+                }
+
+            }
+            catch (Exception exc)
+            {
+                valida = valida + "=>" + exc.Message;
+            }
+            return valida;
+        }
+
+        #endregion
+
         #region<GENERACION DE PREMIOS SEGUN VENTA, SOLO ECOMMERCE>
         #endregion
         public string agregar_puntos_clientes_ecommerce_orce()
@@ -632,7 +734,7 @@ namespace CapaServicioWindows_x64.Bataclub
 
                 OrceAward.awardTransactionRequestInfo awardTransactionRequestInfo = new OrceAward.awardTransactionRequestInfo();
 
-                awardTransactionRequestInfo.storeId = "EC";
+                awardTransactionRequestInfo.storeId =(cliente.cod_tda==null)? "EC": cliente.cod_tda;
                 awardTransactionRequestInfo.sequenceNumber = cliente.documento;
                 awardTransactionRequestInfo.userId = "9999";
                 awardTransactionRequestInfo.businessDate = cliente.fecha_transac;

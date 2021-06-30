@@ -121,14 +121,25 @@ namespace WS_Ecommerce
                     if (result.codigo != "-1")
                     {
                         ValidacionEmail verifica = new ValidacionEmail();
-                        Boolean valida_correo = verifica.sendEmail_verificar(Cliente.correo);
+                        string error_api = "";
+
+                        Boolean valida_correo = verifica.sendEmail_verificar(Cliente.correo,ref error_api);
 
                         //mailAddress = new MailAddress(Cliente.correo);
                         //var mxRecords = dnsClient.Query(mailAddress.Host, QueryType.MX).AllRecords.MxRecords().ToList();
                         if (!valida_correo)
                         {
                             result.codigo = "-1";
-                            result.descripcion = "El Correo " + Cliente.correo + " no existe..";
+
+                            if (error_api.Length==0)
+                            {
+                                result.descripcion = "El Correo " + Cliente.correo + " no existe..";
+                            }
+                            else
+                            {
+                                result.descripcion =error_api;
+                            }
+                            
                         }
 
                     }
